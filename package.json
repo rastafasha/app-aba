@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:prod": "ng build && lite-server -p 8080 --baseDir dist/aba-angular",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -21,6 +22,7 @@
     "@angular/platform-browser": "^15.1.0",
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
+    "@angular/service-worker": "^15.1.0",
     "@fullcalendar/angular": "^6.1.4",
     "@fullcalendar/daygrid": "^6.1.4",
     "@fullcalendar/interaction": "^6.1.4",
@@ -29,6 +31,7 @@
     "bootstrap": "^5.2.3",
     "jquery": "^3.6.3",
     "lightgallery": "^2.7.1",
+    "lite-server": "^2.6.1",
     "ng-apexcharts": "^1.7.4",
     "ng-circle-progress": "^1.7.1",
     "ngx-bootstrap": "^10.2.0",
