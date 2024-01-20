@@ -1,0 +1,57 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+// import { AuthGuard } from './shared/gaurd/auth.guard';
+
+const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login',
+  },
+
+  {
+    path: '',
+    loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+  },
+  {
+    path: 'medical',
+    loadChildren: () => import('./medical/medical.module').then((m) => m.MedicalModule),
+  },
+  {
+    path: 'doctors',
+    loadChildren: () =>
+      import('./medical/doctors/doctors.module').then((m) => m.DoctorsModule),
+  },
+  {
+    path: 'patients',
+    loadChildren: () =>
+      import('./medical/patient-m/patient-m.module').then((m) => m.PatientMModule),
+  },
+  {
+    path: 'roles',
+    loadChildren: () => import('./medical/roles/roles.module').then((m) => m.RolesModule),
+  },
+  {
+    path: 'error',
+    loadChildren: () =>
+      import('./error/error.module').then((m) => m.ErrorModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'error/error404',
+    pathMatch: 'full',
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
