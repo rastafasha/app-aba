@@ -403,5 +403,8 @@ export class routes {
   public static get listadoRole(): string {
     return this.baseUrl + '/roles/list';
   }
+  public static get bip(): string {
+    return this.baseUrl + '/bip/';
+  }
  
 }

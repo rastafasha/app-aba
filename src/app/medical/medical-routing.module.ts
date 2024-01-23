@@ -32,6 +32,11 @@ const routes: Routes = [
       loadChildren: () =>
         import('./patient-m/patient-m.module').then((m) => m.PatientMModule),
     },
+    {
+      path: 'bip',
+      loadChildren: () =>
+        import('./bip/bip.module').then((m) => m.BipModule),
+    },
   ]  
 }
 ];

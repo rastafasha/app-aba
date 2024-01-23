@@ -41,7 +41,15 @@
                                                 </div>
                                                 <div class="names-profiles">
                                                     <h4>{{doctor_selected.full_name}}</h4>
-                                                    <h5>{{doctor_selected.speciality.name}}</h5>
+                                                    <span class="badge bg-danger"
+                                                        *ngIf="doctor_selected.status === 'inactive'">Inactive</span>
+                                                    <span class="badge bg-success"
+                                                        *ngIf="doctor_selected.status === 'active'">Active</span>
+                                                    <span class="badge bg-primary"
+                                                        *ngIf="doctor_selected.status === 'incoming'">Incoming</span>
+                                                    <span class="badge bg-dark"
+                                                        *ngIf="doctor_selected.status === 'black list'">Black list</span>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +88,7 @@
                                 <div class="card-body">
                                     <div class="heading-detail ">
                                         <h4 class="mb-3">About me</h4>
-                                        <p>Hello I am Smith Bruklin a Gynaecologist in Sanjivni Hospital Surat. I love to work with all my hospital staff and seniour doctors.</p>
+                                        <!-- <p>Hello I am Smith Bruklin a Gynaecologist in Sanjivni Hospital Surat. I love to work with all my hospital staff and seniour doctors.</p> -->
                                     </div>
                                     <div class="about-me-list">
                                         <ul class="list-space">
@@ -90,24 +98,6 @@
                                                 <span *ngIf="doctor_selected.gender == 1">Masculino</span>
                                             </li>
                                             <li>
-                                                <h4>Educación</h4>
-                                                <span>{{doctor_selected.education}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Designation</h4>
-                                                <span>{{doctor_selected.designation}}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="doctor-personals-grp">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="about-me-list">
-                                        <ul class="list-space">
-                                            <li>
                                                 <h4>Birth Day</h4>
                                                 <span>{{doctor_selected.birth_date}}</span>
                                             </li>
@@ -116,16 +106,12 @@
                                                 <span>{{doctor_selected.email}}</span>
                                             </li>
                                             <li>
-                                                <h4>Teléfono</h4>
-                                                <span>{{doctor_selected.mobile}}</span>
+                                                <h4>Phone</h4>
+                                                <span>{{doctor_selected.phone}}</span>
                                             </li>
                                             <li>
                                                 <h4>Role</h4>
                                                 <span>{{doctor_selected.roles.name}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Dias de Trabajo</h4>
-                                                <span>{{doctor_selected.days_name}}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -191,20 +177,20 @@
                                                     </div>
                                                     <div class="col-12 col-sm-12">  
                                                         <div class="form-group local-forms">
-                                                            <label >Name </label>
+                                                            <label >First Name </label>
                                                             <input class="form-control" type="text" name="name" [(ngModel)]="name" >
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-12">  
                                                         <div class="form-group local-forms">
-                                                            <label >Lastname </label>
+                                                            <label >Last Name </label>
                                                             <input class="form-control" type="text" name="surname" [(ngModel)]="surname" >
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-12">  
                                                         <div class="form-group local-forms">
-                                                            <label >Mobile </label>
-                                                            <input class="form-control" type="text" name="mobile" [(ngModel)]="mobile" >
+                                                            <label >Phone </label>
+                                                            <input class="form-control" type="text" name="phone" [(ngModel)]="phone" >
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-12">
@@ -262,7 +248,7 @@
                                                     </div>
                                                     <!-- validaciones -->
                                                     <div class="doctor-submit">
-                                                        <button type="button" (click)="update()" class="btn btn-primary submit-form me-2">Editar</button>
+                                                        <button type="button" (click)="update()" class="btn btn-primary submit-form me-2">Edit</button>
                                                     </div>
                                                 </div>
                                             </form>

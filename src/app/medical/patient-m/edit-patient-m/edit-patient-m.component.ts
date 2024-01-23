@@ -14,51 +14,67 @@ export class EditPatientMComponent {
 
   public patient_id: any;
   public f: string = '';
+  public pat_id: any;
 
   public first_name: string = '';
   public last_name: string = '';
+  public parent_guardian_name: string = '';
+  public relationship: any;
+  public language: string = '';
   public phone: string = '';
+  public cell_phone: string = '';
+  public work_phone: string = '';
+  public zip: string = '';
+  public state: string = '';
   public email: string = '';
+  public education: string = '';
+  public profession: string = '';
+  public school_name: string = '';
+  public school_number: string = '';
   public birth_date: string = '';
+  public age: number = 0;
   public gender: number = 1;
   public address: string = '';
-  public n_doc: any;
-  
+  public special_note: any;
   public city: any;
-  public eligibility: number = 1;
-  public pat_id: any;
-  public diagnosis_code: any;
-  public telehealth: any;
-  public insurer: any;
-  public compayment_per_visit: any;
   public patient_control: any;
-  public pa_assessment: any;
-  public pa_services: any;
-  public ba_services_start_date: string = '';
-  public current_auth_expires: string = '';
-  public need_cognitive_eval: any;
   public schedule: any;
-  public rst: any;
-  public an_wk_s: any;
-  public pt: any;
-  public school_bcba: any;
-  public analyst_bcba: any;
-  public data_report_and_rbt_correction: any;
-  public parent_comunication: any;
-  public notes: any;
-  public rst_wk_hr: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public welcome: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no';
-  public consent: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public insurance_card: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no';
-  public mnl: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public referral: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public ados: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public iep: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public asd_diagnosis: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public cde: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public submitted: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no';
+  public summer_schedule: any;
+  public diagnosis_code: any;
 
+  public insuranceId: any;
+  public insurer_secundary: any;
+  public insuranceId_secundary: any;
+  public elegibility_date: any;
+  public pos_covered: any;
+  public deductible_individual_I_F: any;
+  public balance: any;
+  public coinsurance: any;
+  public copayments: any;
+  public oop: any;
+  
+  public pa_assessment: any;
+  public pa_assessment_start_date: string = '';
+  public pa_assessment_end_date: string = '';
+  public pa_services: any = [];
+  public services:any = [];
+  public n_code: any;
+  public s_unit: any;
+  public pa_services_start_date: string = '';
+  public pa_services_end_date: string = '';
+  
+  public welcome: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public consent: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public insurance_card: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public mnl: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public referral: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public ados: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public iep: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public asd_diagnosis: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public cde: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public submitted: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
 
+ 
 
   public FILE_AVATAR:any;
   public IMAGE_PREVISUALIZA:any = 'assets/img/user-06.jpg';
@@ -95,34 +111,51 @@ showUser(){
 
         this.first_name = this.patient_selected.first_name;
         this.last_name = this.patient_selected.last_name;
+        this.parent_guardian_name = this.patient_selected.parent_guardian_name;
+        this.relationship = this.patient_selected.relationship;
+        this.language = this.patient_selected.language;
         this.phone = this.patient_selected.phone;
+        this.cell_phone = this.patient_selected.cell_phone;
+        this.work_phone = this.patient_selected.work_phone;
+        this.zip = this.patient_selected.zip;
         this.email = this.patient_selected.email;
+        this.education = this.patient_selected.education;
+        this.profession = this.patient_selected.profession;
+        this.school_name = this.patient_selected.school_name;
+        this.school_number = this.patient_selected.school_number;
+        this.age = this.patient_selected.age;
         this.birth_date = this.patient_selected.birth_date ? new Date(this.patient_selected.birth_date).toISOString(): '';       
         this.gender = this.patient_selected.gender;
-        this.address = this.patient_selected.address;
-        this.n_doc = this.patient_selected.n_doc;
-        this.city = this.patient_selected.city;
         this.pat_id = this.patient_selected.pat_id;
-        this.diagnosis_code = this.patient_selected.diagnosis_code;
-        this.telehealth = this.patient_selected.telehealth;
-        this.insurer = this.patient_selected.insurer;
-        this.compayment_per_visit = this.patient_selected.compayment_per_visit;
+        this.address = this.patient_selected.address;
+        this.city = this.patient_selected.city;
+        this.state = this.patient_selected.state;
         this.patient_control = this.patient_selected.patient_control;
-        this.pa_assessment = this.patient_selected.pa_assessment;
-        this.pa_services = this.patient_selected.pa_services;
-        this.ba_services_start_date = this.patient_selected.ba_services_start_date ? new Date(this.patient_selected.ba_services_start_date).toISOString(): '';
-        this.current_auth_expires = this.patient_selected.current_auth_expires ? new Date(this.patient_selected.current_auth_expires).toISOString(): '';
-        this.need_cognitive_eval = this.patient_selected.need_cognitive_eval;
+        this.special_note = this.patient_selected.special_note;
         this.schedule = this.patient_selected.schedule;
-        this.rst = this.patient_selected.rst;
-        this.an_wk_s = this.patient_selected.an_wk_s;
-        this.pt = this.patient_selected.pt;
-        this.school_bcba = this.patient_selected.school_bcba;
-        this.analyst_bcba = this.patient_selected.analyst_bcba;
-        this.data_report_and_rbt_correction = this.patient_selected.data_report_and_rbt_correction;
-        this.parent_comunication = this.patient_selected.parent_comunication;
-        this.notes = this.patient_selected.notes;
-        this.rst_wk_hr = this.patient_selected.rst_wk_hr;
+        this.summer_schedule = this.patient_selected.summer_schedule;
+        this.diagnosis_code = this.patient_selected.diagnosis_code;
+        
+        this.insuranceId = this.patient_selected.insuranceId;
+        this.insurer_secundary = this.patient_selected.insurer_secundary;
+        this.insuranceId_secundary = this.patient_selected.insuranceId_secundary;
+        this.elegibility_date = this.patient_selected.elegibility_date? new Date(this.patient_selected.elegibility_date).toISOString(): '';   
+        this.pos_covered = this.patient_selected.pos_covered;
+        this.deductible_individual_I_F = this.patient_selected.deductible_individual_I_F;
+        this.balance = this.patient_selected.balance;
+        this.coinsurance = this.patient_selected.coinsurance;
+        this.copayments = this.patient_selected.copayments;
+        this.oop = this.patient_selected.oop;
+        
+        
+        this.pa_assessment = this.patient_selected.pa_assessment;
+        this.pa_assessment_start_date = this.patient_selected.pa_assessment_start_date ? new Date(this.patient_selected.pa_assessment_start_date).toISOString(): '';
+        this.pa_assessment_end_date = this.patient_selected.pa_assessment_end_date ? new Date(this.patient_selected.pa_assessment_end_date).toISOString(): '';
+        this.pa_services = this.patient_selected.pa_services;
+        this.pa_services_start_date = this.patient_selected.pa_services_start_date ? new Date(this.patient_selected.pa_services_start_date).toISOString(): '';
+        this.pa_services_end_date = this.patient_selected.pa_services_end_date ? new Date(this.patient_selected.pa_services_end_date).toISOString(): '';
+        
+        
         this.welcome = this.patient_selected.welcome;
         this.consent = this.patient_selected.consent;
         this.insurance_card = this.patient_selected.insurance_card;
@@ -136,6 +169,19 @@ showUser(){
 
         this.IMAGE_PREVISUALIZA = this.patient_selected.avatar;
     })
+  }
+
+  addService(){
+    this.services.push({
+      n_code: this.n_code,
+      s_unit: this.s_unit
+    })
+    this.n_code = '';
+    this.s_unit = '';
+  }
+
+  deleteService(i:any){
+    this.services.splice(i,1);
   }
 
   loadFile($event:any){
@@ -152,7 +198,7 @@ showUser(){
 
   save(){
     this.text_validation = '';
-    if(!this.first_name ||!this.last_name || !this.n_doc ){
+    if(!this.first_name ||!this.last_name || !this.pat_id ){
       this.text_validation = 'Los campos con * son obligatorios';
       return;
     }
@@ -164,79 +210,117 @@ showUser(){
     formData.append('first_name', this.first_name);
     formData.append('last_name', this.last_name);
     formData.append('phone', this.phone);
+    formData.append('cell_phone', this.cell_phone);
+    formData.append('work_phone', this.work_phone);
     formData.append('gender', this.gender+'');
     formData.append('address', this.address);
-    formData.append('n_doc', this.n_doc);
-    formData.append('city', this.city);
+    formData.append('zip', this.zip);
     formData.append('pat_id', this.pat_id);
+    formData.append('city', this.city);
+    formData.append('state', this.state);
+    formData.append('education', this.education);
+    formData.append('profession', this.profession);
+    formData.append('school_name', this.school_name);
+    formData.append('school_number', this.school_number);
+    formData.append('diagnosis_code', this.diagnosis_code);
+    formData.append('age', this.age+'');
     
     if(this.diagnosis_code){
 
       formData.append('diagnosis_code', this.diagnosis_code);
     }
-    if(this.telehealth){
+    if(this.parent_guardian_name){
 
-      formData.append('telehealth', this.telehealth);
+      formData.append('parent_guardian_name', this.parent_guardian_name);
     }
-    if(this.insurer){
+    if(this.relationship){
 
-      formData.append('insurer', this.insurer);
+      formData.append('relationship', this.relationship);
     }
-    if(this.compayment_per_visit){
+    if(this.language){
 
-      formData.append('compayment_per_visit', this.compayment_per_visit);
+      formData.append('language', this.language);
     }
     if(this.patient_control){
 
       formData.append('patient_control', this.patient_control);
     }
-    if(this.pa_assessment){
-
-      formData.append('pa_assessment', this.pa_assessment);
+    if(this.special_note){
+      formData.append('special_note', this.special_note);
     }
-    if(this.ba_services_start_date){
-
-      formData.append('ba_services_start_date', this.ba_services_start_date);
-    }
-    if(this.current_auth_expires){
-
-      formData.append('current_auth_expires', this.current_auth_expires);
-    }
-    if(this.need_cognitive_eval){
-
-      formData.append('need_cognitive_eval', this.need_cognitive_eval);
-    }
+    
     if(this.schedule){
 
       formData.append('schedule', this.schedule);
     }
-    if(this.rst){
+    if(this.insuranceId){
 
-      formData.append('rst', this.rst);
+      formData.append('insuranceId', this.insuranceId);
+    }
+    if(this.insurer_secundary){
+
+      formData.append('insurer_secundary', this.insurer_secundary);
+    }
+    if(this.insuranceId_secundary){
+
+      formData.append('insuranceId_secundary', this.insuranceId_secundary);
     }
     
-    if(this.pt){
-      formData.append('pt', this.pt);
+    if(this.elegibility_date){
+
+      formData.append('elegibility_date', this.elegibility_date);
+    }
+    
+    if(this.pos_covered){
+      formData.append('pos_covered', this.pos_covered);
     
     }
-    if(this.school_bcba){
-      formData.append('school_bcba', this.school_bcba);
+    if(this.deductible_individual_I_F){
+      formData.append('deductible_individual_I_F', this.deductible_individual_I_F);
     }
-    if(this.analyst_bcba){
-      formData.append('analyst_bcba', this.analyst_bcba);
+    if(this.balance){
+      formData.append('balance', this.balance);
     }
-    if(this.data_report_and_rbt_correction){
-      formData.append('data_report_and_rbt_correction', this.data_report_and_rbt_correction);
+    if(this.coinsurance){
+      formData.append('coinsurance', this.coinsurance);
     }
-    if(this.parent_comunication){
-      formData.append('parent_comunication', this.parent_comunication);
+    if(this.copayments){
+      formData.append('copayments', this.copayments);
     }
-    if(this.notes){
-      formData.append('notes', this.notes);
+    
+    if(this.oop){
+      formData.append('oop', this.oop);
     }
-    if(this.rst_wk_hr){
-      formData.append('rst_wk_hr', this.rst_wk_hr);
+
+    if(this.pa_assessment){
+
+      formData.append('pa_assessment', this.pa_assessment);
     }
+    if(this.pa_assessment_start_date){
+
+      formData.append('pa_assessment_start_date', this.pa_assessment_start_date);
+    }
+    if(this.pa_assessment_end_date){
+
+      formData.append('pa_assessment_end_date', this.pa_assessment_end_date);
+    }
+    if(this.pa_assessment){
+
+      formData.append('pa_assessment', this.pa_assessment);
+    }
+    if(this.services){
+      formData.append('services', JSON.stringify(this.services));
+    }
+    if(this.pa_services_start_date){
+
+      formData.append('pa_services_start_date', this.pa_services_start_date);
+    }
+    if(this.pa_services_end_date){
+
+      formData.append('pa_services_end_date', this.pa_services_end_date);
+    }
+
+
     if(this.welcome){
       formData.append('welcome', this.welcome);
     }

@@ -17,45 +17,61 @@ export class AddPatientMComponent {
 
   public first_name: string = '';
   public last_name: string = '';
+  public parent_guardian_name: string = '';
+  public relationship: any;
+  public language: string = '';
   public phone: string = '';
+  public cell_phone: string = '';
+  public work_phone: string = '';
+  public zip: string = '';
+  public state: string = '';
   public email: string = '';
+  public education: string = '';
+  public profession: string = '';
+  public school_name: string = '';
+  public school_number: string = '';
   public birth_date: string = '';
+  public age: number = 0;
   public gender: number = 1;
   public address: string = '';
-  public n_doc: any;
-  
+  public special_note: any;
   public city: any;
-  public eligibility: number = 1;
-  public diagnosis_code: any;
-  public telehealth: any;
-  public insurer: any;
-  public compayment_per_visit: any;
   public patient_control: any;
-  public pa_assessment: any;
-  public pa_services: any;
-  public ba_services_start_date: string = '';
-  public current_auth_expires: string = '';
-  public need_cognitive_eval: any;
   public schedule: any;
-  public rst: any;
-  public an_wk_s: any;
-  public pt: any;
-  public school_bcba: any;
-  public analyst_bcba: any;
-  public data_report_and_rbt_correction: any;
-  public parent_comunication: any;
-  public notes: any;
-  public rst_wk_hr: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public welcome: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no';
-  public consent: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public insurance_card: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no';
-  public mnl: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public referral: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public ados: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public iep: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public asd_diagnosis: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public cde: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no'; 
-  public submitted: 'pending' | 'resquested' | 'need ne'| 'yes'| 'no';
+  public summer_schedule: any;
+  public diagnosis_code: any;
+
+  public insuranceId: any;
+  public insurer_secundary: any;
+  public insuranceId_secundary: any;
+  public elegibility_date: any;
+  public pos_covered: any;
+  public deductible_individual_I_F: any;
+  public balance: any;
+  public coinsurance: any;
+  public copayments: any;
+  public oop: any;
+  
+  public pa_assessment: any;
+  public pa_assessment_start_date: string = '';
+  public pa_assessment_end_date: string = '';
+  public pa_services: any;
+  public services:any = [];
+  public n_code: any;
+  public s_unit: any;
+  public pa_services_start_date: string = '';
+  public pa_services_end_date: string = '';
+  
+  public welcome: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public consent: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public insurance_card: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public mnl: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public referral: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public ados: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public iep: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public asd_diagnosis: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public cde: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public submitted: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
 
  
   public FILE_AVATAR:any;
@@ -78,7 +94,18 @@ export class AddPatientMComponent {
     this.doctorService.closeMenuSidebar();
   }
 
-  
+  addService(){
+    this.services.push({
+      n_code: this.n_code,
+      s_unit: this.s_unit
+    })
+    this.n_code = '';
+    this.s_unit = '';
+  }
+
+  deleteService(i:any){
+    this.services.splice(i,1);
+  }
 
   loadFile($event:any){
     if($event.target.files[0].type.indexOf("image")){
@@ -95,7 +122,7 @@ export class AddPatientMComponent {
 
   save(){
     this.text_validation = '';
-    if(!this.first_name ||!this.last_name || !this.n_doc ){
+    if(!this.first_name ||!this.last_name || !this.pat_id ){
       this.text_validation = 'Los campos con * son obligatorios';
       return;
     }
@@ -106,31 +133,48 @@ export class AddPatientMComponent {
 
     formData.append('first_name', this.first_name);
     formData.append('last_name', this.last_name);
+    formData.append('parent_guardian_name', this.parent_guardian_name);
+    formData.append('relationship', this.relationship);
+    formData.append('language', this.language);
+    formData.append('cell_phone', this.cell_phone);
+    formData.append('work_phone', this.work_phone);
     formData.append('phone', this.phone);
     formData.append('gender', this.gender+'');
+    formData.append('zip', this.zip);
+    formData.append('state', this.state);
     formData.append('address', this.address);
-    formData.append('n_doc', this.n_doc);
     formData.append('city', this.city);
+    formData.append('education', this.education);
+    formData.append('profession', this.profession);
+    formData.append('school_name', this.school_name);
+    formData.append('school_number', this.school_number);
+    formData.append('age', this.age+'');
     formData.append('pat_id', this.pat_id);
     formData.append('diagnosis_code', this.diagnosis_code);
-    formData.append('telehealth', this.telehealth);
-    formData.append('insurer', this.insurer);
-    formData.append('compayment_per_visit', this.compayment_per_visit);
-    formData.append('patient_control', this.patient_control);
-    formData.append('pa_assessment', this.pa_assessment);
-    formData.append('ba_services_start_date', this.ba_services_start_date);
-    formData.append('current_auth_expires', this.current_auth_expires);
-    formData.append('need_cognitive_eval', this.need_cognitive_eval);
     formData.append('schedule', this.schedule);
-    formData.append('rst', this.rst);
-    formData.append('an_wk_s', this.an_wk_s);
-    formData.append('pt', this.pt);
-    formData.append('school_bcba', this.school_bcba);
-    formData.append('analyst_bcba', this.analyst_bcba);
-    formData.append('data_report_and_rbt_correction', this.data_report_and_rbt_correction);
-    formData.append('parent_comunication', this.parent_comunication);
-    formData.append('notes', this.notes);
-    formData.append('rst_wk_hr', this.rst_wk_hr);
+    formData.append('summer_schedule', this.summer_schedule);
+    formData.append('patient_control', this.patient_control);
+    formData.append('special_note', this.special_note);
+    
+    formData.append('insuranceId', this.insuranceId);
+    formData.append('insurer_secundary', this.insurer_secundary);
+    formData.append('insuranceId_secundary', this.insuranceId_secundary);
+    formData.append('elegibility_date', this.elegibility_date);
+    formData.append('pos_covered', this.pos_covered);
+    formData.append('deductible_individual_I_F', this.deductible_individual_I_F);
+    formData.append('balance', this.balance);
+    formData.append('coinsurance', this.coinsurance);
+    formData.append('copayments', this.copayments);
+    formData.append('oop', this.oop);
+
+    formData.append('pa_assessment', this.pa_assessment);
+    formData.append('pa_assessment_start_date', this.pa_assessment_start_date);
+    formData.append('pa_assessment_end_date', this.pa_assessment_end_date);
+    formData.append('services', JSON.stringify(this.services));
+    formData.append('pa_services_start_date', this.pa_services_start_date);
+    formData.append('pa_services_end_date', this.pa_services_end_date);
+    
+    
     formData.append('welcome', this.welcome);
     formData.append('consent', this.consent);
     formData.append('insurance_card', this.insurance_card);

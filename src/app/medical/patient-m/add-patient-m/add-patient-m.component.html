@@ -23,7 +23,7 @@
                             <div class="row" >
                                 <div class="col-12">
                                     <div class="form-heading">
-                                        <h4>Patient Details</h4>
+                                        <h4>Patient Details(demographics)</h4>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">  
@@ -40,35 +40,16 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Document Id <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="n_doc" [(ngModel)]="n_doc" type="text"  >
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Patient ID <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="pat_id" [(ngModel)]="pat_id" type="text"  >
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Phone <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="phone" [(ngModel)]="phone" type="text"  >
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Email <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="email" [(ngModel)]="email" type="email"  >
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
                                         <label >Birth day <span class="login-danger">*</span></label>
                                         <input class="form-control datetimepicker" name="birth_date" [(ngModel)]="birth_date" type="text" matInput [matDatepicker]="picker"  >
                                         <mat-datepicker #picker></mat-datepicker>
                                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Age <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="age" [(ngModel)]="age" type="number"  >
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -88,24 +69,132 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
+                                        <label >Patient ID <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="pat_id" [(ngModel)]="pat_id" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Education <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="education" [(ngModel)]="education" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Profession <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="profession" [(ngModel)]="profession" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >School Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="school_name" [(ngModel)]="school_name" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >School Number <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="school_number" [(ngModel)]="school_number" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Parent/Guardian Name<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="parent_guardian_name" [(ngModel)]="parent_guardian_name" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Relationship <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="relationship" [(ngModel)]="relationship" type="text"  >
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Languange <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="language" [(ngModel)]="language" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Phone <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="phone" [(ngModel)]="phone" type="text"  >
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Cell Phone <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="cell_phone" [(ngModel)]="cell_phone" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Work Phone <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="work_phone" [(ngModel)]="work_phone" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Email <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="email" [(ngModel)]="email" type="email"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
                                         <label >City <span class="login-danger">*</span></label>
                                         <input class="form-control" name="city" [(ngModel)]="city" type="text"  >
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-12">
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >ZIP <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="zip" [(ngModel)]="zip" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >State <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="state" [(ngModel)]="state" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <div class="form-group local-forms">
                                         <label>Address  <span class="login-danger">*</span></label>
                                         <textarea class="form-control" name="address" [(ngModel)]="address" rows="3" cols="30"></textarea>
                                     </div>
                                 </div>
-                                
-                                
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group local-forms">
+                                        <label>Special Notes<span class="login-danger">*</span></label>
+                                        <textarea class="form-control" name="special_note" [(ngModel)]="special_note" rows="3" cols="30"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Diagnosis <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="diagnosis_code" [(ngModel)]="diagnosis_code" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Schedule <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="schedule" [(ngModel)]="schedule" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Summer Schedule <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="summer_schedule" [(ngModel)]="summer_schedule" type="text"  >
+                                    </div>
+                                </div>
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Picture <span class="login-danger">*</span></label>
                                         <div class="settings-btn upload-files-avator">
                                             <input type="file" accept="image/*" name="image" id="file" (change)="loadFile($event)" class="hide-input">
-                                            <label for="file" class="upload">Select Picture</label>
+                                            <label for="file" class="upload">Choose File</label>
                                         </div>
                                     </div>
                                     <div *ngIf="FILE_AVATAR">
@@ -133,9 +222,125 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                </div>
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>	
+                	
+            </div>
+            <!-- fin paciente -->
+            <!-- benefits -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row" >
+                                <div class="col-12">
+                                    <div class="form-heading">
+                                        <h4>Benefits</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Insurance Id <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="insuranceId" [(ngModel)]="insuranceId" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Insurer Secundary</label>
+                                        <input class="form-control" name="insurer_secundary" [(ngModel)]="insurer_secundary" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >insuranceId_secundary</label>
+                                        <input class="form-control" name="insuranceId_secundary" [(ngModel)]="insuranceId_secundary" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Elegibility date<span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" name="elegibility_date" [(ngModel)]="elegibility_date" type="text" matInput [matDatepicker]="picker2"  >
+                                        <mat-datepicker #picker2></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >POS Covered<span class="login-danger">*</span></label>
+                                        <select
+                                        class="form-control form-select-solid fw-bolder"
+                                        name="pos_covered" [(ngModel)]="pos_covered">
+                                        <option>-- Select --</option>
+                                          <option value="03">03 School</option>
+                                          <option value="12">12 Home</option>
+                                          <option value="02">02 Telehealth</option>
+                                          <option value="99">99 Other</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Deductible Individual I/F<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="deductible_individual_I_F" [(ngModel)]="deductible_individual_I_F" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Balance<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="balance" [(ngModel)]="balance" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Coinsurance<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="coinsurance" [(ngModel)]="coinsurance" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Copayments<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="copayments" [(ngModel)]="copayments" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >OOP<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="oop" [(ngModel)]="oop" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Patient Control #<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="patient_control" [(ngModel)]="patient_control" type="text"  >
+                                    </div>
+                                </div>
+
+                                <div class="col-12" *ngIf="valid_form">
+                                    <div class="form-group row" *ngIf="valid_form_success">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>Success!</strong> The Patient has been registered.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group row" *ngIf="text_validation">
                                         <div class="col-md-12">
-                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                                 <strong>!</strong> {{text_validation}}.
                                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                                     <span aria-hidden="true"> </span>
@@ -144,6 +349,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
@@ -155,11 +361,11 @@
                         </form>
                         
                     </div>
-                </div>	
+                </div>
                 	
             </div>
-            <!-- fin paciente -->	
-            <!-- antecedentes -->
+            <!-- fin benefits -->		
+            <!-- Intake -->
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
@@ -167,149 +373,7 @@
                             <div class="row" >
                                 <div class="col-12">
                                     <div class="form-heading">
-                                        <h4>Medical File</h4>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Diagnosis Code <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="diagnosis_code" [(ngModel)]="diagnosis_code" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Telehealth  <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="telehealth" [(ngModel)]="telehealth" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Insurer  <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="insurer" [(ngModel)]="insurer" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Compament per Visit <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="compayment_per_visit" [(ngModel)]="compayment_per_visit" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Patient Control <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="patient_control" [(ngModel)]="patient_control" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Patient Assesment <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="pa_assessment" [(ngModel)]="pa_assessment" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Patient Services <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="pa_services" [(ngModel)]="pa_services" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                               
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >BA Service Start Date<span class="login-danger">*</span></label>
-                                        <input class="form-control datetimepicker" name="ba_services_start_date" [(ngModel)]="ba_services_start_date" type="text" matInput [matDatepicker]="picker1"  >
-                                        <mat-datepicker #picker1></mat-datepicker>
-                                        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Current Auth Expires<span class="login-danger">*</span></label>
-                                        <input class="form-control datetimepicker" name="current_auth_expires" [(ngModel)]="current_auth_expires" type="text" matInput [matDatepicker]="picker2"  >
-                                        <mat-datepicker #picker2></mat-datepicker>
-                                        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Need Cognitive Eval<span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="need_cognitive_eval" [(ngModel)]="need_cognitive_eval">
-                                            <option value="">Select</option>
-                                              <option value="Yes">Yes</option>
-                                              <option value="No">No</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-8">
-                                    <div class="form-group local-forms">
-                                        <label>Schedule<span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="schedule" [(ngModel)]="schedule" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>RST <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="rst" [(ngModel)]="rst" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>AN WK S <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="an_wk_s" [(ngModel)]="an_wk_s" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>PT <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="pt" [(ngModel)]="pt" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group local-forms">
-                                        <label>School BCBA<span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="school_bcba" [(ngModel)]="school_bcba" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group local-forms">
-                                        <label>Analist BCBA<span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="analyst_bcba" [(ngModel)]="analyst_bcba" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group local-forms">
-                                        <label>Data Report and RBT Correction<span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="data_report_and_rbt_correction" [(ngModel)]="data_report_and_rbt_correction" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group local-forms">
-                                        <label>Parent Communication<span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="parent_comunication" [(ngModel)]="parent_comunication" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group local-forms">
-                                        <label>Notes<span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="notes" [(ngModel)]="notes" rows="3" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-3">
-                                    <div class="form-group local-forms">
-                                        <label>Need Cognitive Eval<span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="rst_wk_hr" [(ngModel)]="rst_wk_hr">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
-                                              <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
-                                              <option value="yes">Yes</option>
-                                              <option value="no">No</option>
-                                              </select>
+                                        <h4>Intake</h4>
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-3">
@@ -318,10 +382,13 @@
                                         <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="welcome" [(ngModel)]="welcome">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
+                                            <option>-- Select --</option>
+                                              <option value="waiting">Waiting</option>
                                               <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
+                                              <option value="reviewing">Reviewing</option>
+                                              <option value="psycho eval">Psycho Eval</option>
+                                              <option value="need new">Need New</option>
+                                              <option value="2 insurance">2 insurance</option>
                                               <option value="yes">Yes</option>
                                               <option value="no">No</option>
                                               </select>
@@ -333,12 +400,15 @@
                                         <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="consent" [(ngModel)]="consent">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
-                                              <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
-                                              <option value="yes">yes</option>
-                                              <option value="no">no</option>
+                                            <option>-- Select --</option>
+                                            <option value="waiting">Waiting</option>
+                                            <option value="resquested">Resquested</option>
+                                            <option value="reviewing">Reviewing</option>
+                                            <option value="psycho eval">Psycho Eval</option>
+                                            <option value="need new">Need New</option>
+                                            <option value="2 insurance">2 insurance</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
                                               </select>
                                     </div>
                                 </div>
@@ -348,12 +418,15 @@
                                         <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="insurance_card" [(ngModel)]="insurance_card">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
-                                              <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
-                                              <option value="yes">Yes</option>
-                                              <option value="no">No</option>
+                                            <option>-- Select --</option>
+                                            <option value="waiting">Waiting</option>
+                                            <option value="resquested">Resquested</option>
+                                            <option value="reviewing">Reviewing</option>
+                                            <option value="psycho eval">Psycho Eval</option>
+                                            <option value="need new">Need New</option>
+                                            <option value="2 insurance">2 insurance</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
                                               </select>
                                     </div>
                                 </div>
@@ -363,12 +436,15 @@
                                         <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="mnl" [(ngModel)]="mnl">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
-                                              <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
-                                              <option value="yes">Yes</option>
-                                              <option value="no">No</option>
+                                            <option>-- Select --</option>
+                                            <option value="waiting">Waiting</option>
+                                            <option value="resquested">Resquested</option>
+                                            <option value="reviewing">Reviewing</option>
+                                            <option value="psycho eval">Psycho Eval</option>
+                                            <option value="need new">Need New</option>
+                                            <option value="2 insurance">2 insurance</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
                                               </select>
                                     </div>
                                 </div>
@@ -378,12 +454,15 @@
                                         <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="referral" [(ngModel)]="referral">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
-                                              <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
-                                              <option value="yes">Yes</option>
-                                              <option value="no">No</option>
+                                            <option>-- Select --</option>
+                                            <option value="waiting">Waiting</option>
+                                            <option value="resquested">Resquested</option>
+                                            <option value="reviewing">Reviewing</option>
+                                            <option value="psycho eval">Psycho Eval</option>
+                                            <option value="need new">Need New</option>
+                                            <option value="2 insurance">2 insurance</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
                                               </select>
                                     </div>
                                 </div>
@@ -393,12 +472,15 @@
                                         <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="ados" [(ngModel)]="ados">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
-                                              <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
-                                              <option value="yes">Yes</option>
-                                              <option value="no">No</option>
+                                            <option>-- Select --</option>
+                                            <option value="waiting">Waiting</option>
+                                            <option value="resquested">Resquested</option>
+                                            <option value="reviewing">Reviewing</option>
+                                            <option value="psycho eval">Psycho Eval</option>
+                                            <option value="need new">Need New</option>
+                                            <option value="2 insurance">2 insurance</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
                                               </select>
                                     </div>
                                 </div>
@@ -408,12 +490,15 @@
                                         <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="iep" [(ngModel)]="iep">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
-                                              <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
-                                              <option value="yes">Yes</option>
-                                              <option value="no">No</option>
+                                            <option>-- Select --</option>
+                                            <option value="waiting">Waiting</option>
+                                            <option value="resquested">Resquested</option>
+                                            <option value="reviewing">Reviewing</option>
+                                            <option value="psycho eval">Psycho Eval</option>
+                                            <option value="need new">Need New</option>
+                                            <option value="2 insurance">2 insurance</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
                                               </select>
                                     </div>
                                 </div>
@@ -423,12 +508,15 @@
                                         <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="asd_diagnosis" [(ngModel)]="asd_diagnosis">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
-                                              <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
-                                              <option value="yes">Yes</option>
-                                              <option value="no">No</option>
+                                            <option>-- Select --</option>
+                                            <option value="waiting">Waiting</option>
+                                            <option value="resquested">Resquested</option>
+                                            <option value="reviewing">Reviewing</option>
+                                            <option value="psycho eval">Psycho Eval</option>
+                                            <option value="need new">Need New</option>
+                                            <option value="2 insurance">2 insurance</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
                                               </select>
                                     </div>
                                 </div>
@@ -438,12 +526,15 @@
                                         <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="cde" [(ngModel)]="cde">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
-                                              <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
-                                              <option value="yes">yes</option>
-                                              <option value="no">no</option>
+                                            <option>-- Select --</option>
+                                            <option value="waiting">Waiting</option>
+                                            <option value="resquested">Resquested</option>
+                                            <option value="reviewing">Reviewing</option>
+                                            <option value="psycho eval">Psycho Eval</option>
+                                            <option value="need new">Need New</option>
+                                            <option value="2 insurance">2 insurance</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
                                               </select>
                                     </div>
                                 </div>
@@ -453,12 +544,15 @@
                                         <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="submitted" [(ngModel)]="submitted">
-                                            <option value="">Select</option>
-                                              <option value="pending">Pending</option>
-                                              <option value="resquested">Resquested</option>
-                                              <option value="need ne">Need NE</option>
-                                              <option value="yes">yes</option>
-                                              <option value="no">no</option>
+                                            <option>-- Select --</option>
+                                            <option value="waiting">Waiting</option>
+                                            <option value="resquested">Resquested</option>
+                                            <option value="reviewing">Reviewing</option>
+                                            <option value="psycho eval">Psycho Eval</option>
+                                            <option value="need new">Need New</option>
+                                            <option value="2 insurance">2 insurance</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
                                               </select>
                                     </div>
                                 </div>
@@ -500,7 +594,278 @@
                 </div>
                 	
             </div>
-            <!-- fin antecedentes -->					
+            <!-- fin Intake -->	
+            
+            <!-- PAs -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row" >
+                                <div class="col-12">
+                                    <div class="form-heading">
+                                        <h4>PAs</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Patient Assesment <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="pa_assessment" [(ngModel)]="pa_assessment" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Patient Assesment Start Date<span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" name="pa_assessment_start_date" [(ngModel)]="pa_assessment_start_date" type="text" matInput [matDatepicker]="picker3"  >
+                                        <mat-datepicker #picker3></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Patient Assesment End Date<span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" name="pa_assessment_end_date" [(ngModel)]="pa_assessment_end_date" type="text" matInput [matDatepicker]="picker4"  >
+                                        <mat-datepicker #picker4></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <button class="btn btn-primary btn-sm" (click)="addService()">+</button>
+                                                <!-- <button class="btn btn-danger btn-sm">x</button> -->
+                                            </div>
+                                            <div class="col-12 ">  
+                                                <div class="form-group local-forms">
+                                                    <label >N. Code<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="n_code"  [(ngModel)]="n_code" type="text"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-12 ">
+                                                <div class="form-group local-forms">
+                                                    <label >Unit<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="s_unit"  [(ngModel)]="s_unit" type="text"  >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>N.Code</th>
+                                                        <th>Unit</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let serv of services; let i = index">
+                                                        <td>
+                                                            N.Code: {{serv.n_code}}
+                                                            <br>
+                                                            Unit: {{serv.s_unit}}
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-danger btn-sm" (click)="deleteService(i)">x</button>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Patient Services Start Date<span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" name="pa_services_start_date" [(ngModel)]="pa_services_start_date" type="text" matInput [matDatepicker]="picker5"  >
+                                        <mat-datepicker #picker5></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker5"></mat-datepicker-toggle>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Patient Services End Date<span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" name="pa_services_end_date" [(ngModel)]="pa_services_end_date" type="text" matInput [matDatepicker]="picker6"  >
+                                        <mat-datepicker #picker6></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker6"></mat-datepicker-toggle>
+                                    </div>
+                                </div>
+
+                                
+                                
+                                <div class="col-12" *ngIf="valid_form">
+                                    <div class="form-group row" *ngIf="valid_form_success">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>Success!</strong> The Patient has been registered.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" *ngIf="text_validation">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <strong>!</strong> {{text_validation}}.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+                	
+            </div>
+            <!-- fin PAs -->
+
+            <!-- PAs -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row" >
+                                <div class="col-12">
+                                    <div class="form-heading">
+                                        <h4>Add Specialist</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
+                                        <label>RBT<span class="login-danger">*</span></label>
+                                        <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="submitted" [(ngModel)]="submitted">
+                                            <option>-- Select --</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
+                                        <label>RBT 2<span class="login-danger">*</span></label>
+                                        <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="submitted" [(ngModel)]="submitted">
+                                            <option>-- Select --</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
+                                        <label>BCBA<span class="login-danger">*</span></label>
+                                        <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="submitted" [(ngModel)]="submitted">
+                                            <option>-- Select --</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
+                                        <label>BCBA 2<span class="login-danger">*</span></label>
+                                        <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="submitted" [(ngModel)]="submitted">
+                                            <option>-- Select --</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
+                                        <label>Clinical Director<span class="login-danger">*</span></label>
+                                        <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="submitted" [(ngModel)]="submitted">
+                                            <option>-- Select --</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              <option value="pending">First Name Last Name</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="col-12" *ngIf="valid_form">
+                                    <div class="form-group row" *ngIf="valid_form_success">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>Success!</strong> The Patient has been registered.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" *ngIf="text_validation">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <strong>!</strong> {{text_validation}}.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+                	
+            </div>
+            <!-- fin PAs -->
+            
             				
         </div>
     </div>

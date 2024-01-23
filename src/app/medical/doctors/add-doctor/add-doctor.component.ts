@@ -24,6 +24,44 @@ export class AddDoctorComponent {
   public designation: string = '';
   public address: string = '';
 
+  public currently_pay_through_company: string = '';
+  public llc: string = '';
+  public ien: string = '';
+  public wc: string = '';
+  public electronic_signature: string = '';
+  public agency_location: string = '';
+  public city: string = '';
+  public languages: string = '';
+  public dob: string = '';
+  public ss_number: string = '';
+  public date_of_hire: string = '';
+  public start_pay: string = '';
+  public driver_license_expiration: string = '';
+  public cpr_every_2_years: string = '';
+  public background_every_5_years: string = '';
+  public e_verify: string = '';
+  public national_sex_offender_registry: string = '';
+  public certificate_number: string = '';
+  public bacb_license_expiration: string = '';
+  public liability_insurance_annually: string = '';
+  public local_police_rec_every_5_years: string = '';
+  public npi: string = '';
+  public medicaid_provider: string = '';
+
+  public ceu_hippa_annually: string = '';
+  public ceu_security_awareness_annually: string = '';
+  public ceu_zero_tolerance_every_3_years: string = '';
+  public ceu_hiv_bloodborne_pathogens_infection_control_no_expiration: string = '';
+  public ceu_civil_rights_no_expiration: string = '';
+  
+  public school_badge: string = '';
+  public w_9_w_4_form: string = '';
+  public contract: string = '';
+  public two_four_week_notice_agreement: string = '';
+  public credentialing_package_bcbas_only: string = '';
+  public caqh_bcbas_only: string = '';
+  public contract_type: string = '';
+
   public roles:any = [];
   public FILE_AVATAR:any;
   public IMAGE_PREVISUALIZA:any = 'assets/img/user-06.jpg';

@@ -39,6 +39,10 @@ const routes: Routes = [
     loadChildren: () => import('./medical/roles/roles.module').then((m) => m.RolesModule),
   },
   {
+    path: 'bip',
+    loadChildren: () => import('./medical/bip/bip.module').then((m) => m.BipModule),
+  },
+  {
     path: 'error',
     loadChildren: () =>
       import('./error/error.module').then((m) => m.ErrorModule),

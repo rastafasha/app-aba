@@ -290,12 +290,7 @@ export class ListPatientMComponent {
     this.patientService.updateStatus(data, data.id).subscribe(
       resp =>{
         console.log(resp);
-        // Swal.fire('Actualizado', `actualizado correctamente`, 'success');
-        // this.toaster.open({
-        //   text:'Producto Actualizado!',
-        //   caption:'Mensaje de Validación',
-        //   type:'success',
-        // })
+        
         this.getTableData();
       }
     )
