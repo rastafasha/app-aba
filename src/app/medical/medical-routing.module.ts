@@ -37,6 +37,11 @@ const routes: Routes = [
       loadChildren: () =>
         import('./bip/bip.module').then((m) => m.BipModule),
     },
+    {
+      path: 'insurance',
+      loadChildren: () =>
+        import('./insurance/insurance.module').then((m) => m.InsuranceModule),
+    },
   ]  
 }
 ];

@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/patients/list">Patients </a></li>
+                        <li class="breadcrumb-item"><a routerLink="/patients/list">Clients </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Add Patient </li>
+                        <li class="breadcrumb-item active">Add Client </li>
                     </ul>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                             <div class="row" >
                                 <div class="col-12">
                                     <div class="form-heading">
-                                        <h4>Patient Details(demographics)</h4>
+                                        <h4>Client Details(demographics)</h4>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">  
@@ -125,8 +125,8 @@
                                 
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Cell Phone <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="cell_phone" [(ngModel)]="cell_phone" type="text"  >
+                                        <label >Home Phone <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="home_phone" [(ngModel)]="home_phone" type="text"  >
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -247,6 +247,12 @@
                                 <div class="col-12">
                                     <div class="form-heading">
                                         <h4>Benefits</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Insurer <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="insurer" [(ngModel)]="insurer" type="text"  >
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -384,7 +390,7 @@
                                             name="welcome" [(ngModel)]="welcome">
                                             <option>-- Select --</option>
                                               <option value="waiting">Waiting</option>
-                                              <option value="resquested">Resquested</option>
+                                              <option value="requested">Requested</option>
                                               <option value="reviewing">Reviewing</option>
                                               <option value="psycho eval">Psycho Eval</option>
                                               <option value="need new">Need New</option>
@@ -402,7 +408,7 @@
                                             name="consent" [(ngModel)]="consent">
                                             <option>-- Select --</option>
                                             <option value="waiting">Waiting</option>
-                                            <option value="resquested">Resquested</option>
+                                            <option value="requested">Requested</option>
                                             <option value="reviewing">Reviewing</option>
                                             <option value="psycho eval">Psycho Eval</option>
                                             <option value="need new">Need New</option>
@@ -420,7 +426,7 @@
                                             name="insurance_card" [(ngModel)]="insurance_card">
                                             <option>-- Select --</option>
                                             <option value="waiting">Waiting</option>
-                                            <option value="resquested">Resquested</option>
+                                            <option value="requested">Requested</option>
                                             <option value="reviewing">Reviewing</option>
                                             <option value="psycho eval">Psycho Eval</option>
                                             <option value="need new">Need New</option>
@@ -438,7 +444,7 @@
                                             name="mnl" [(ngModel)]="mnl">
                                             <option>-- Select --</option>
                                             <option value="waiting">Waiting</option>
-                                            <option value="resquested">Resquested</option>
+                                            <option value="requested">Requested</option>
                                             <option value="reviewing">Reviewing</option>
                                             <option value="psycho eval">Psycho Eval</option>
                                             <option value="need new">Need New</option>
@@ -456,7 +462,7 @@
                                             name="referral" [(ngModel)]="referral">
                                             <option>-- Select --</option>
                                             <option value="waiting">Waiting</option>
-                                            <option value="resquested">Resquested</option>
+                                            <option value="requested">Requested</option>
                                             <option value="reviewing">Reviewing</option>
                                             <option value="psycho eval">Psycho Eval</option>
                                             <option value="need new">Need New</option>
@@ -474,7 +480,7 @@
                                             name="ados" [(ngModel)]="ados">
                                             <option>-- Select --</option>
                                             <option value="waiting">Waiting</option>
-                                            <option value="resquested">Resquested</option>
+                                            <option value="requested">Requested</option>
                                             <option value="reviewing">Reviewing</option>
                                             <option value="psycho eval">Psycho Eval</option>
                                             <option value="need new">Need New</option>
@@ -492,7 +498,7 @@
                                             name="iep" [(ngModel)]="iep">
                                             <option>-- Select --</option>
                                             <option value="waiting">Waiting</option>
-                                            <option value="resquested">Resquested</option>
+                                            <option value="requested">Requested</option>
                                             <option value="reviewing">Reviewing</option>
                                             <option value="psycho eval">Psycho Eval</option>
                                             <option value="need new">Need New</option>
@@ -510,7 +516,7 @@
                                             name="asd_diagnosis" [(ngModel)]="asd_diagnosis">
                                             <option>-- Select --</option>
                                             <option value="waiting">Waiting</option>
-                                            <option value="resquested">Resquested</option>
+                                            <option value="requested">Requested</option>
                                             <option value="reviewing">Reviewing</option>
                                             <option value="psycho eval">Psycho Eval</option>
                                             <option value="need new">Need New</option>
@@ -528,7 +534,7 @@
                                             name="cde" [(ngModel)]="cde">
                                             <option>-- Select --</option>
                                             <option value="waiting">Waiting</option>
-                                            <option value="resquested">Resquested</option>
+                                            <option value="requested">Requested</option>
                                             <option value="reviewing">Reviewing</option>
                                             <option value="psycho eval">Psycho Eval</option>
                                             <option value="need new">Need New</option>
@@ -546,7 +552,7 @@
                                             name="submitted" [(ngModel)]="submitted">
                                             <option>-- Select --</option>
                                             <option value="waiting">Waiting</option>
-                                            <option value="resquested">Resquested</option>
+                                            <option value="requested">Requested</option>
                                             <option value="reviewing">Reviewing</option>
                                             <option value="psycho eval">Psycho Eval</option>
                                             <option value="need new">Need New</option>
@@ -610,8 +616,17 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
                                         <label>Patient Assesment <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="pa_assessment" [(ngModel)]="pa_assessment" type="text"  >
+                                        <mat-select [(ngModel)]="insurance_id" class="form-control select" (selectionChange)="selectInsurance()"  placeholder="Select Doctor">
+                                            <mat-option *ngFor="let data of insurances" [value]="data.id">
+                                              {{data.insurer_name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <!-- <input class="form-control" name="pa_assessment" [(ngModel)]="pa_assessment" type="text"  > -->
                                     </div>
+                                </div>
+                                <div class="col-12" *ngIf="insurance_id">
+                                    <h2>Datos insurance</h2>
+                                    {{insurer_name}}
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
@@ -628,54 +643,6 @@
                                         <mat-datepicker #picker4></mat-datepicker>
                                         <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
                                     </div>
-                                </div>
-                                <div class="row align-items-center" >
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="row">
-                                            <div class="col-12 mb-3">
-                                                <button class="btn btn-primary btn-sm" (click)="addService()">+</button>
-                                                <!-- <button class="btn btn-danger btn-sm">x</button> -->
-                                            </div>
-                                            <div class="col-12 ">  
-                                                <div class="form-group local-forms">
-                                                    <label >N. Code<span class="login-danger">*</span></label>
-                                                    <input class="form-control" name="n_code"  [(ngModel)]="n_code" type="text"  >
-                                                </div>
-                                            </div>
-                                            <div class="col-12 ">
-                                                <div class="form-group local-forms">
-                                                    <label >Unit<span class="login-danger">*</span></label>
-                                                    <input class="form-control" name="s_unit"  [(ngModel)]="s_unit" type="text"  >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>N.Code</th>
-                                                        <th>Unit</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let serv of services; let i = index">
-                                                        <td>
-                                                            N.Code: {{serv.n_code}}
-                                                            <br>
-                                                            Unit: {{serv.s_unit}}
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-danger btn-sm" (click)="deleteService(i)">x</button>
-                                                        </td>
-                                                    </tr>
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    
                                 </div>
 
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -747,86 +714,58 @@
                                         <h4>Add Specialist</h4>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-3">
+                                
+                                <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
-                                        <label>RBT<span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="submitted" [(ngModel)]="submitted">
-                                            <option>-- Select --</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              </select>
+                                        <label >RBT <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValue_rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
+                                            {{data.name}}
+                                            </mat-option>
+                                        </mat-select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-3">
+                                <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
-                                        <label>RBT 2<span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="submitted" [(ngModel)]="submitted">
-                                            <option>-- Select --</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              </select>
+                                        <label >RBT 2 <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValue_rbt2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
+                                            {{data.name}}
+                                            </mat-option>
+                                        </mat-select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-3">
+                                <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
-                                        <label>BCBA<span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="submitted" [(ngModel)]="submitted">
-                                            <option>-- Select --</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              </select>
+                                        <label >BCBA <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValue_bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
+                                            {{data.name}}
+                                            </mat-option>
+                                        </mat-select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-3">
+                                <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
-                                        <label>BCBA 2<span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="submitted" [(ngModel)]="submitted">
-                                            <option>-- Select --</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              </select>
+                                        <label >BCBA 2<span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValue_bcba2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
+                                            {{data.name}}
+                                            </mat-option>
+                                        </mat-select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-3">
+                                <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
-                                        <label>Clinical Director<span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="submitted" [(ngModel)]="submitted">
-                                            <option>-- Select --</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              <option value="pending">First Name Last Name</option>
-                                              </select>
+                                        <label >Clinical Director<span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValue_clind" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
+                                            {{data.name}}
+                                            </mat-option>
+                                        </mat-select>
                                     </div>
                                 </div>
+                                <!-- validaciones -->
                                 <div class="col-12" *ngIf="valid_form">
                                     <div class="form-group row" *ngIf="valid_form_success">
                                         <div class="col-md-12">
@@ -849,7 +788,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <!-- validaciones -->
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
@@ -865,6 +804,130 @@
                 	
             </div>
             <!-- fin PAs -->
+            <!-- Files -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row" >
+                                <div class="col-12">
+                                    <div class="form-heading">
+                                        <h4>Add Files</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-top-form">
+                                        <label class="local-top">Doctor Referral <span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileDoctorR($event)" class="hide-input">
+                                            <label for="signature" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="FILE_DOCTOR_REFERAL">
+                                        <img [src]="IMAGE_PREVISUALIZA_DOCTOR_REFERAL" style="width: 250px;" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-top-form">
+                                        <label class="local-top">Medical Notes <span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileMedicalNote($event)" class="hide-input">
+                                            <label for="signature" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="FILE_MEDICAL_NOTES">
+                                        <img [src]="IMAGE_PREVISUALIZA_MEDICAL_NOTES" style="width: 250px;" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-top-form">
+                                        <label class="local-top">CDE <span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileMedicalNote($event)" class="hide-input">
+                                            <label for="signature" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="FILE_CDE">
+                                        <img [src]="IMAGE_PREVISUALIZA_CDE" style="width: 250px;" alt="">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-top-form">
+                                        <label class="local-top">IEP<span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileMedicalNote($event)" class="hide-input">
+                                            <label for="signature" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="FILE_IEP">
+                                        <img [src]="IMAGE_PREVISUALIZA_IEP" style="width: 250px;" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-top-form">
+                                        <label class="local-top">MNL<span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileMedicalNote($event)" class="hide-input">
+                                            <label for="signature" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="FILE_MNL">
+                                        <img [src]="IMAGE_PREVISUALIZA_MNL" style="width: 250px;" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-top-form">
+                                        <label class="local-top">Referral <span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileMedicalNote($event)" class="hide-input">
+                                            <label for="signature" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="FILE_REFERAL">
+                                        <img [src]="IMAGE_PREVISUALIZA_REFERAL" style="width: 250px;" alt="">
+                                    </div>
+                                </div>
+                                <!-- validaciones -->
+                                <div class="col-12" *ngIf="valid_form">
+                                    <div class="form-group row" *ngIf="valid_form_success">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>Success!</strong> The Patient has been registered.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" *ngIf="text_validation">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <strong>!</strong> {{text_validation}}.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- validaciones -->
+                                
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+                	
+            </div>
+            <!-- fin Files -->
             
             				
         </div>

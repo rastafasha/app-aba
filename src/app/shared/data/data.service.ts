@@ -251,21 +251,23 @@ export class DataService {
         },
         
         {
-          menuValue: 'Doctors',
+          menuValue: 'Employeers',
           hasSubRoute: true,
           showSubRoute: false,
           base: 'doctor',
           img: 'assets/img/icons/menu-icon-02.svg',
           subMenus: [
             {
-              menuValue: 'Doctor List',
+              menuValue: 'Employeer List',
               route: routes.doctorsList,
               base: routes.doctorsList,
+              permision: 'list_doctor',
             },
             {
-              menuValue: 'Add Doctor',
+              menuValue: 'Add Employeer',
               route: routes.addDoctor,
               base: routes.addDoctor,
+              permision: 'register_doctor',
             },
             // {
             //   menuValue: 'Edit Doctor',
@@ -280,36 +282,49 @@ export class DataService {
           ],
         },
         {
-          menuValue: 'Patients',
+          menuValue: 'Clients',
           hasSubRoute: true,
           showSubRoute: false,
           base: 'patient',
           img: 'assets/img/icons/menu-icon-03.svg',
           subMenus: [
             {
-              menuValue: 'Patients List',
+              menuValue: 'Clients List',
               route: routes.patientsList,
               base: routes.patientsList,
+              permision: 'list_patient',
               show_nav: true,
             },
             {
-              menuValue: 'Add Patients',
+              menuValue: 'Add Clients',
               route: routes.addPatient,
               base: routes.addPatient,
+              permision: 'register_patient',
               show_nav: true,
             },
-            // {
-            //   menuValue: 'Edit Patients',
-            //   route: routes.editPatient,
-            //   base: routes.editPatient,
-            //   show_nav: false,
-            // },
-            // {
-            //   menuValue: 'Patients Profile',
-            //   route: routes.patientProfile,
-            //   base: routes.patientProfile,
-            //   show_nav: false,
-            // },
+          ],
+        },
+        {
+          menuValue: 'Insurance',
+          hasSubRoute: true,
+          showSubRoute: false,
+          base: 'insurance',
+          img: 'assets/img/icons/menu-icon-03.svg',
+          subMenus: [
+            {
+              menuValue: 'Insurance List',
+              route: routes.insuranceList,
+              base: routes.insuranceList,
+              permision: 'list_insurance',
+              show_nav: true,
+            },
+            {
+              menuValue: 'Add Insurance',
+              route: routes.addInsurance,
+              base: routes.addInsurance,
+              permision: 'register_insurance',
+              show_nav: true,
+            },
           ],
         },
         // {
@@ -650,161 +665,8 @@ export class DataService {
         // },
       ],
     },
-    {
-      tittle: 'UI Elements',
-      showAsTab: false,
-      separateRoute: false,
-      menu: [
-        {
-          menuValue: 'Components',
-          hasSubRoute: true,
-          showSubRoute: false,
-          base: 'components',
-          img: 'assets/img/icons/menu-icon-02.svg',
-          subMenus: [
-            {
-              menuValue: 'UI Kit',
-              route: routes.uikit,
-              base: routes.uikit,
-            },
-            {
-              menuValue: 'Typography',
-              route: routes.typography,
-              base: routes.typography,
-            },
-            {
-              menuValue: 'Tabs',
-              route: routes.tabs,
-              base: routes.tabs,
-            },
-          ],
-        },
-        {
-          menuValue: 'Forms',
-          hasSubRoute: true,
-          showSubRoute: false,
-          base: 'forms',
-          icon: 'fa-edit',
-          faIcon: true,
-          subMenus: [
-            {
-              menuValue: 'Basic Inputs',
-              route: routes.formBasicInputs,
-              base: routes.formBasicInputs,
-            },
-            {
-              menuValue: 'Input Groups',
-              route: routes.formInputGroups,
-              base: routes.formInputGroups,
-            },
-            {
-              menuValue: 'Horizontal Form',
-              route: routes.formHorizontal,
-              base: routes.formHorizontal,
-            },
-            {
-              menuValue: 'Vertical Form',
-              route: routes.formVertical,
-              base: routes.formVertical,
-            },
-          ],
-        },
-        {
-          menuValue: 'Tables',
-          hasSubRoute: true,
-          showSubRoute: false,
-          base: 'tables',
-          icon: 'fa-table',
-          faIcon: true,
-          subMenus: [
-            {
-              menuValue: 'Basic Tables',
-              route: routes.tablesBasic,
-              base: routes.tablesBasic,
-            },
-            {
-              menuValue: 'Data Table',
-              route: routes.tablesDataTables,
-              base: routes.tablesDataTables,
-            },
-          ],
-        },
-        {
-          menuValue: 'Calendar',
-          route: routes.calendar,
-          hasSubRoute: false,
-          showSubRoute: false,
-          icon: 'fa-calendar',
-          faIcon: true,
-          base: 'calendar',
-          subMenus: [],
-        },
-      ],
-    },
-    {
-      tittle: 'Extras',
-      showAsTab: false,
-      separateRoute: false,
-      menu: [
-        {
-          menuValue: 'Pages',
-          hasSubRoute: true,
-          showSubRoute: false,
-          base: 'gallery',
-          base2: 'profile',
-          icon: 'fa-columns',
-          faIcon: true,
-          subMenus: [
-            {
-              menuValue: 'Login',
-              route: routes.login,
-              base: routes.login,
-            },
-            {
-              menuValue: 'Register',
-              route: routes.register,
-              base: routes.register,
-            },
-            {
-              menuValue: 'Forgot Password',
-              route: routes.forgotPassword,
-              base: routes.forgotPassword,
-            },
-            {
-              menuValue: 'Change Password',
-              route: routes.changePassword,
-              base: routes.changePassword,
-            },
-            {
-              menuValue: 'Lock Screen',
-              route: routes.lockScreen,
-              base: routes.lockScreen,
-            },
-            {
-              menuValue: 'Profile',
-              route: routes.profile,
-              base: routes.profile,
-            },
-            {
-              menuValue: 'Gallery',
-              route: routes.gallery,
-              base: routes.gallery,
-            },
-            {
-              menuValue: '404 Error',
-              route: routes.error404,
-              base: routes.error404,
-            },
-            {
-              menuValue: '500 Error',
-              route: routes.error500,
-              base: routes.error500,
-            },
-          ],
-        },
-        
-      ],
-    },
+    
+    
   ];
   public carousel1 = [
     {

@@ -3,6 +3,7 @@ import { routes } from 'src/app/shared/routes/routes';
 import { Router } from '@angular/router';
 import { PatientMService } from '../service/patient-m.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
+import { InsuranceService } from '../../insurance/service/insurance.service';
 
 @Component({
   selector: 'app-add-patient-m',
@@ -11,7 +12,6 @@ import { DoctorService } from '../../doctors/service/doctor.service';
 })
 export class AddPatientMComponent {
   public routes = routes;
-  public selectedValue!: string;
   public patient_id: any;
   public pat_id: any;
 
@@ -21,7 +21,7 @@ export class AddPatientMComponent {
   public relationship: any;
   public language: string = '';
   public phone: string = '';
-  public cell_phone: string = '';
+  public home_phone: string = '';
   public work_phone: string = '';
   public zip: string = '';
   public state: string = '';
@@ -41,6 +41,7 @@ export class AddPatientMComponent {
   public summer_schedule: any;
   public diagnosis_code: any;
 
+  public insurer: any;
   public insuranceId: any;
   public insurer_secundary: any;
   public insuranceId_secundary: any;
@@ -51,7 +52,7 @@ export class AddPatientMComponent {
   public coinsurance: any;
   public copayments: any;
   public oop: any;
-  
+
   public pa_assessment: any;
   public pa_assessment_start_date: string = '';
   public pa_assessment_end_date: string = '';
@@ -73,9 +74,40 @@ export class AddPatientMComponent {
   public cde: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public submitted: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
 
+  public specialists:any = [];
+  public insurances:any = [];
+  public insurance:any = [];
+  public selectedValue_rbt!: string;
+  public selectedValue_rbt2!: string;
+  public selectedValue_bcba!: string;
+  public selectedValue_bcba2!: string;
+  public selectedValue_clind!: string;
+  public rbt: any;
+  public rbt2: any;
+  public bcba: any;
+  public bcba2: any;
+  public clin_director: any;
+
+  public insurance_id: any;
  
   public FILE_AVATAR:any;
   public IMAGE_PREVISUALIZA:any = 'assets/img/user-06.jpg';
+  
+  
+  public FILE_DOCTOR_REFERAL:any;
+  public IMAGE_PREVISUALIZA_DOCTOR_REFERAL:any = 'assets/img/user-06.jpg';
+  public FILE_MEDICAL_NOTES:any;
+  public IMAGE_PREVISUALIZA_MEDICAL_NOTES:any = 'assets/img/user-06.jpg';
+  public FILE_CDE:any;
+  public IMAGE_PREVISUALIZA_CDE:any = 'assets/img/user-06.jpg';
+  public FILE_IEP:any;
+  public IMAGE_PREVISUALIZA_IEP:any = 'assets/img/user-06.jpg';
+  public FILE_MNL:any;
+  public IMAGE_PREVISUALIZA_MNL:any = 'assets/img/user-06.jpg';
+  public FILE_REFERAL:any;
+  public IMAGE_PREVISUALIZA_REFERAL:any = 'assets/img/user-06.jpg';
+
+  
 
   valid_form:boolean = false;
   valid_form_success:boolean = false;
@@ -84,6 +116,7 @@ export class AddPatientMComponent {
   constructor(
     public patientService:PatientMService,
     public doctorService:DoctorService,
+    public insuranceService:InsuranceService,
     public router: Router,
   ){
 
@@ -92,6 +125,28 @@ export class AddPatientMComponent {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
+    this.getConfig();
+  }
+
+  getConfig(){
+    this.patientService.listConfig().subscribe((resp:any)=>{
+      // console.log(resp);
+      this.specialists = resp.specialists;
+      this.insurances = resp.insurances;
+    })
+  }
+  insuranceData(){
+    let data ={
+      insurance_id:this.insurance_id
+    }
+    this.insuranceService.showInsurance(data).subscribe((resp:any)=>{
+      console.log(resp);
+      this.insurance = resp;
+
+    })
+  }
+  selectInsurance(){
+    this.insuranceData();
   }
 
   addService(){
@@ -118,6 +173,28 @@ export class AddPatientMComponent {
     reader.readAsDataURL(this.FILE_AVATAR);
     reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
   }
+  loadFileDoctorR($event:any){
+    if($event.target.files[0].type.indexOf("image")){
+      this.text_validation = 'Solamente pueden ser archivos de tipo pdf';
+      return;
+    }
+    this.text_validation = '';
+    this.FILE_AVATAR = $event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.FILE_AVATAR);
+    reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
+  }
+  loadFileMedicalNote($event:any){
+    if($event.target.files[0].type.indexOf("image")){
+      this.text_validation = 'Solamente pueden ser archivos de tipo pdf';
+      return;
+    }
+    this.text_validation = '';
+    this.FILE_AVATAR = $event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.FILE_AVATAR);
+    reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
+  }
  
 
   save(){
@@ -136,7 +213,7 @@ export class AddPatientMComponent {
     formData.append('parent_guardian_name', this.parent_guardian_name);
     formData.append('relationship', this.relationship);
     formData.append('language', this.language);
-    formData.append('cell_phone', this.cell_phone);
+    formData.append('home_phone', this.home_phone);
     formData.append('work_phone', this.work_phone);
     formData.append('phone', this.phone);
     formData.append('gender', this.gender+'');
@@ -156,6 +233,7 @@ export class AddPatientMComponent {
     formData.append('patient_control', this.patient_control);
     formData.append('special_note', this.special_note);
     
+    formData.append('insurer', this.insurer);
     formData.append('insuranceId', this.insuranceId);
     formData.append('insurer_secundary', this.insurer_secundary);
     formData.append('insuranceId_secundary', this.insuranceId_secundary);
@@ -185,6 +263,12 @@ export class AddPatientMComponent {
     formData.append('asd_diagnosis', this.asd_diagnosis);
     formData.append('cde', this.cde);
     formData.append('submitted', this.submitted);
+
+    formData.append('rbt', this.selectedValue_rbt);
+    formData.append('rbt2', this.selectedValue_rbt2);
+    formData.append('bcba', this.selectedValue_bcba);
+    formData.append('bcba2', this.selectedValue_bcba2);
+    formData.append('clin_director', this.selectedValue_clind);
     
     if(this.birth_date){
       formData.append('birth_date', this.birth_date);

@@ -1,0 +1,206 @@
+<div class="page-wrapper">
+    <div class="content">
+    
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/insurance/list">Insurances </a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item active">Add Insurance </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        <div class="row">
+            <div class="col-sm-12">
+            
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row" >
+                                <div class="col-12">
+                                    <div class="form-heading">
+                                        <h4>Insurance Detail</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">  
+                                    <div class="form-group local-forms">
+                                        <label >Insurer Name<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="insurer_name" [(ngModel)]="insurer_name" type="text"  >
+                                    </div>
+                                </div>
+                                
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="row">
+                                            
+                                            <div class="col-xs-12 col-sm-6">  
+                                                <div class="form-group local-forms">
+                                                    <label >Code<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="code"  [(ngModel)]="code" type="text"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label >Provider<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="provider"  [(ngModel)]="provider" type="text"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-12 ">
+                                                <div class="form-group local-forms">
+                                                    <label >Description<span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="description" [(ngModel)]="description" rows="3" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label >Unit Prize<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="unit_prize"  [(ngModel)]="unit_prize" type="text"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label >Hourly Fee<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="hourly_fee"  [(ngModel)]="hourly_fee" type="text"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-12 ">
+                                                <div class="form-group local-forms">
+                                                    <label >Max Allowed<span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="max_allowed" [(ngModel)]="max_allowed" rows="3" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <button class="btn btn-primary btn-sm" (click)="addService()">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Code</th>
+                                                        <th>Provider</th>
+                                                        <th>Description</th>
+                                                        <th>Unit Prize</th>
+                                                        <th>Hourly Fee</th>
+                                                        <th>Max Allowed</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let serv of services; let i = index">
+                                                        <td>
+                                                            {{serv.code}}
+                                                        </td>
+                                                        <td>
+                                                             {{serv.provider}}
+                                                        </td>
+                                                        <td>
+                                                            {{serv.description}}
+                                                        </td>
+                                                        <td>
+                                                           {{serv.unit_prize}}
+                                                        </td>
+                                                        <td>
+                                                             {{serv.hourly_fee}}
+                                                        </td>
+                                                        <td>
+                                                            {{serv.max_allowed}}
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-danger btn-sm" (click)="deleteService(i)">x</button>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row">
+                                            
+                                            <div class="col-12 ">  
+                                                <div class="form-group local-forms">
+                                                    <label >Note<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="note"  [(ngModel)]="note" type="text"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <button class="btn btn-primary btn-sm" (click)="addNotes()">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Note</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let note of notes; let i = index">
+                                                        <td>
+                                                            Note: {{note.note}}
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-danger btn-sm" (click)="deleteNote(i)">x</button>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                               
+                                <div class="col-12" *ngIf="valid_form">
+                                    <div class="form-group row" *ngIf="text_success">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>Success!</strong> The user has been created sucessfully.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" *ngIf="text_validation">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <strong>!</strong> {{text_validation}}.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>							
+            </div>
+            <!-- fin basico					 -->
+        </div>
+    </div>
+</div>
+ 

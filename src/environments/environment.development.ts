@@ -5,8 +5,8 @@ export const environment = {
     url_frontend: 'http://localhost:4300/',
     url_media: 'http://127.0.0.1:8000/storage/',
     //remoto v2
-    // url_backend: 'https://citasmedicasv1.malcolmcordova.com/backend-api-citas/',
-    // url_servicios: 'https://citasmedicasv1.malcolmcordova.com/backend-api-citas/public/api',
-    // url_frontend: 'https://citasmedicasv1.malcolmcordova.com/',
-    // url_media: 'https://citasmedicasv1.malcolmcordova.com/backend-api-citas/storage/app/public/',
+    // url_backend: 'https://abatheraphy.malcolmcordova.com/backend-api-aba/',
+    // url_servicios: 'https://abatheraphy.malcolmcordova.com/backend-api-aba/public/api',
+    // url_frontend: 'https://abatheraphy.malcolmcordova.com/',
+    // url_media: 'https://abatheraphy.malcolmcordova.com/backend-api-aba/storage/app/public/',
 };

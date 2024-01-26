@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/doctors/list">Doctors </a></li>
+                        <li class="breadcrumb-item"><a routerLink="/doctors/list">Employees </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Add Doctor </li>
+                        <li class="breadcrumb-item active">Add Employee </li>
                     </ul>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                             <div class="row" >
                                 <div class="col-12">
                                     <div class="form-heading">
-                                        <h4>Doctor Detail</h4>
+                                        <h4>Employee Detail</h4>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">  
@@ -186,9 +186,15 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Electronic Signature<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="electronic_signature" [(ngModel)]="electronic_signature" type="text"  >
+                                    <div class="form-group local-top-form">
+                                        <label class="local-top">Electronic Signature <span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="image/*" name="signature" id="signature" (change)="loadFileSignature($event)" class="hide-input">
+                                            <label for="signature" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="FILE_SIGNATURE">
+                                        <img [src]="IMAGE_PREVISUALIZA_SIGNATURE" style="width: 250px;" alt="">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -367,6 +373,18 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
+                                        <label >CEU Domestic Violence (no expiration )<span class="login-danger">*</span></label>
+                                        <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="ceu_domestic_violence_no_expiration" [(ngModel)]="ceu_domestic_violence_no_expiration">
+                                            <option>-- Select --</option>
+                                              <option value="yes">yes</option>
+                                              <option value="no">no</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
                                         <label >CEU Security Awarence Annually<span class="login-danger">*</span></label>
                                         <input class="form-control" name="ceu_security_awareness_annually" [(ngModel)]="ceu_security_awareness_annually" type="text"  >
                                     </div>
@@ -380,7 +398,13 @@
                                 <div class="col-12 col-md-8 ">
                                     <div class="form-group local-forms">
                                         <label >CEU- HIV/bloodborne pathogens/infection control (no expiration)<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="ceu_hiv_bloodborne_pathogens_infection_control_no_expiration" [(ngModel)]="ceu_hiv_bloodborne_pathogens_infection_control_no_expiration" type="text"  >
+                                        <select
+                                        class="form-control form-select-solid fw-bolder"
+                                        name="ceu_hiv_bloodborne_pathogens_infection_control_no_expiration" [(ngModel)]="ceu_hiv_bloodborne_pathogens_infection_control_no_expiration">
+                                        <option>-- Select --</option>
+                                          <option value="yes">yes</option>
+                                          <option value="no">no</option>
+                                          </select>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-4 ">
@@ -501,6 +525,7 @@
                                         <input class="form-control" name="caqh_bcbas_only" [(ngModel)]="caqh_bcbas_only" type="text"  >
                                     </div>
                                 </div>
+                                
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Contract Type<span class="login-danger">*</span></label>
@@ -511,6 +536,12 @@
                                               <option value="1099">1099</option>
                                               <option value="w2">W2</option>
                                               </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Salary</label>
+                                        <input class="form-control" name="salary" [(ngModel)]="salary" type="number"  >
                                     </div>
                                 </div>
 

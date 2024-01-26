@@ -22,7 +22,7 @@ export class EditPatientMComponent {
   public relationship: any;
   public language: string = '';
   public phone: string = '';
-  public cell_phone: string = '';
+  public home_phone: string = '';
   public work_phone: string = '';
   public zip: string = '';
   public state: string = '';
@@ -42,6 +42,7 @@ export class EditPatientMComponent {
   public summer_schedule: any;
   public diagnosis_code: any;
 
+  public insurer: any;
   public insuranceId: any;
   public insurer_secundary: any;
   public insuranceId_secundary: any;
@@ -74,10 +75,33 @@ export class EditPatientMComponent {
   public cde: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public submitted: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
 
- 
-
+  public specialists:any = [];
+  public insurances:any = [];
+  public selectedValue_rbt!: string;
+  public selectedValue_rbt2!: string;
+  public selectedValue_bcba!: string;
+  public selectedValue_bcba2!: string;
+  public selectedValue_clind!: string;
+  public rbt: any;
+  public rbt2: any;
+  public bcba: any;
+  public bcba2: any;
+  public clin_director: any;
   public FILE_AVATAR:any;
   public IMAGE_PREVISUALIZA:any = 'assets/img/user-06.jpg';
+
+  public FILE_DOCTOR_REFERAL:any;
+  public IMAGE_PREVISUALIZA_DOCTOR_REFERAL:any = 'assets/img/user-06.jpg';
+  public FILE_MEDICAL_NOTES:any;
+  public IMAGE_PREVISUALIZA_MEDICAL_NOTES:any = 'assets/img/user-06.jpg';
+  public FILE_CDE:any;
+  public IMAGE_PREVISUALIZA_CDE:any = 'assets/img/user-06.jpg';
+  public FILE_IEP:any;
+  public IMAGE_PREVISUALIZA_IEP:any = 'assets/img/user-06.jpg';
+  public FILE_MNL:any;
+  public IMAGE_PREVISUALIZA_MNL:any = 'assets/img/user-06.jpg';
+  public FILE_REFERAL:any;
+  public IMAGE_PREVISUALIZA_REFERAL:any = 'assets/img/user-06.jpg';
 
   valid_form:boolean = false;
   valid_form_success:boolean = false;
@@ -102,6 +126,15 @@ export class EditPatientMComponent {
       this.patient_id = resp.id;
      })
      this.showUser();
+     this.getConfig();
+  }
+
+  getConfig(){
+    this.patientService.listConfig().subscribe((resp:any)=>{
+      // console.log(resp);
+      this.specialists = resp.specialists;
+      this.insurances = resp.insurances;
+    })
   }
   
 showUser(){
@@ -115,7 +148,7 @@ showUser(){
         this.relationship = this.patient_selected.relationship;
         this.language = this.patient_selected.language;
         this.phone = this.patient_selected.phone;
-        this.cell_phone = this.patient_selected.cell_phone;
+        this.home_phone = this.patient_selected.home_phone;
         this.work_phone = this.patient_selected.work_phone;
         this.zip = this.patient_selected.zip;
         this.email = this.patient_selected.email;
@@ -136,6 +169,7 @@ showUser(){
         this.summer_schedule = this.patient_selected.summer_schedule;
         this.diagnosis_code = this.patient_selected.diagnosis_code;
         
+        this.insurer = this.patient_selected.insurer;
         this.insuranceId = this.patient_selected.insuranceId;
         this.insurer_secundary = this.patient_selected.insurer_secundary;
         this.insuranceId_secundary = this.patient_selected.insuranceId_secundary;
@@ -196,6 +230,29 @@ showUser(){
     reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
   }
 
+  loadFileDoctorR($event:any){
+    if($event.target.files[0].type.indexOf("image")){
+      this.text_validation = 'Solamente pueden ser archivos de tipo pdf';
+      return;
+    }
+    this.text_validation = '';
+    this.FILE_AVATAR = $event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.FILE_AVATAR);
+    reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
+  }
+  loadFileMedicalNote($event:any){
+    if($event.target.files[0].type.indexOf("image")){
+      this.text_validation = 'Solamente pueden ser archivos de tipo pdf';
+      return;
+    }
+    this.text_validation = '';
+    this.FILE_AVATAR = $event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.FILE_AVATAR);
+    reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
+  }
+
   save(){
     this.text_validation = '';
     if(!this.first_name ||!this.last_name || !this.pat_id ){
@@ -210,7 +267,7 @@ showUser(){
     formData.append('first_name', this.first_name);
     formData.append('last_name', this.last_name);
     formData.append('phone', this.phone);
-    formData.append('cell_phone', this.cell_phone);
+    formData.append('home_phone', this.home_phone);
     formData.append('work_phone', this.work_phone);
     formData.append('gender', this.gender+'');
     formData.append('address', this.address);
@@ -252,6 +309,10 @@ showUser(){
     if(this.schedule){
 
       formData.append('schedule', this.schedule);
+    }
+    if(this.insurer){
+
+      formData.append('insurer', this.insurer);
     }
     if(this.insuranceId){
 

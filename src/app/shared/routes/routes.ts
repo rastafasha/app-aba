@@ -403,6 +403,12 @@ export class routes {
   public static get listadoRole(): string {
     return this.baseUrl + '/roles/list';
   }
+  public static get addInsurance(): string {
+    return this.baseUrl + '/insurance/register';
+  }
+  public static get insuranceList(): string {
+    return this.baseUrl + '/insurance/list';
+  }
   public static get bip(): string {
     return this.baseUrl + '/bip/';
   }
