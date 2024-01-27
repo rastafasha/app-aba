@@ -1,11 +1,14 @@
 {
+  "dir": "ltr",
   "name": "ABA Therapy",
   "short_name": "aba-therapy",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
-  "start_url": "./",
+  "start_url": "index.html",
+  "orientation": "landscape",
+  "description": "Administracion medica",
   "icons": [
     {
       "src": "assets/icons/72.png",
@@ -22,12 +25,6 @@
     {
       "src": "assets/icons/128.png",
       "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "assets/icons/144.png",
-      "sizes": "144x144",
       "type": "image/png",
       "purpose": "maskable any"
     },

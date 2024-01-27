@@ -102,8 +102,8 @@
                                                 <span>{{doctor_selected.birth_date}}</span>
                                             </li>
                                             <li>
-                                                <h4>Email</h4>
-                                                <span>{{doctor_selected.email}}</span>
+                                                <h4>Languages</h4>
+                                                <span>{{doctor_selected.languages}}</span>
                                             </li>
                                             <li>
                                                 <h4>Phone</h4>
@@ -126,14 +126,79 @@
                                     <div class="tab-content-set">
                                         <ul class="nav">
                                             <li>
-                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 1}" (click)="optionSelected(1)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>List Appointments </a>
+                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 1}" (click)="optionSelected(1)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>About me</a>
                                             </li>
                                             <li>
-                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-16.svg" alt=""></span>Settings</a>
+                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>List Appointments </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 3}" (click)="optionSelected(3)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-16.svg" alt=""></span>Settings</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <ng-container *ngIf="option_selected == 1">
+                                        <div class="personal-list-out">
+                                            <div class="row">
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Full Name</h2>
+                                                        <h3>{{doctor_selected.full_name}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Mobile </h2>
+                                                        <h3>{{doctor_selected.phone}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Email</h2>
+                                                        <h3>{{doctor_selected.email}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Address</h2>
+                                                        <h3>{{doctor_selected.address}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="col-xl-3 col-md-6">
+                                                        <div class="detail-personal">
+                                                            <h2>Currently Pay Throught Company </h2>
+                                                            <h3>{{doctor_selected.currently_pay_through_company}}</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="detail-personal">
+                                                        <h2>languages</h2>
+                                                        <h3>{{doctor_selected.languages}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>contract</h2>
+                                                        <h3>{{doctor_selected.contract}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>contract_type</h2>
+                                                        <h3>{{doctor_selected.contract_type}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="hello-park">
+                                            <p><b>Antecedente Familiar:</b> {{doctor_selected.antecedent_family}}</p>
+                                            <p><b>Antecedente Personal:</b> {{doctor_selected.antecedent_personal}}</p>
+                                            <p><b>Antecedente Alergico:</b> {{doctor_selected.antecedent_alerg}}</p>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="option_selected == 2">
                                         <div class="activity scrooldiv">
                                             <div class="activity-box">
                                                 <ul class="activity-list">
@@ -166,7 +231,7 @@
                                             </div>
                                         </div>
                                     </ng-container>
-                                    <ng-container *ngIf="option_selected == 2">
+                                    <ng-container *ngIf="option_selected == 3">
                                         <div class="setting-form-blk">
                                             <form>
                                                 <div class="row">

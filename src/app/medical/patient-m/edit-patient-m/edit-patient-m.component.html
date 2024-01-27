@@ -249,10 +249,15 @@
                                         <h4>Benefits</h4>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label >Insurer <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="insurer" [(ngModel)]="insurer" type="text"  >
+                                        <label>Insurer <span class="login-danger">*</span></label>
+                                        <!-- <mat-select [(ngModel)]="selectedValue_insurer" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectInsurance()"  placeholder="Select Insurer"> -->
+                                        <mat-select [(ngModel)]="selectedValue_insurer" [ngModelOptions]="{standalone: true}" class="form-control select"   placeholder="Select Insurer">
+                                            <mat-option *ngFor="let data of insurances" [value]="data.id">
+                                              {{data.insurer_name}}
+                                            </mat-option>
+                                        </mat-select>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -613,9 +618,9 @@
                                         <h4>PAs</h4>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-4">
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label>Patient Assesment <span class="login-danger">*</span></label>
+                                        <label >PA Assessment <span class="login-danger">*</span></label>
                                         <input class="form-control" name="pa_assessment" [(ngModel)]="pa_assessment" type="text"  >
                                     </div>
                                 </div>
@@ -635,13 +640,16 @@
                                         <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
                                     </div>
                                 </div>
-                                <div class="row align-items-center" >
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >PA Services <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="pa_services" [(ngModel)]="pa_services" type="text"  >
+                                    </div>
+                                </div>
+                                <!-- <div class="row align-items-center" >
                                     <div class="col-xs-12 col-sm-6">
                                         <div class="row">
-                                            <div class="col-12 mb-3">
-                                                <button class="btn btn-primary btn-sm" (click)="addService()">+</button>
-                                                <!-- <button class="btn btn-danger btn-sm">x</button> -->
-                                            </div>
+                                            
                                             <div class="col-12 ">  
                                                 <div class="form-group local-forms">
                                                     <label >N. Code<span class="login-danger">*</span></label>
@@ -653,6 +661,9 @@
                                                     <label >Unit<span class="login-danger">*</span></label>
                                                     <input class="form-control" name="s_unit"  [(ngModel)]="s_unit" type="text"  >
                                                 </div>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <button class="btn btn-primary btn-sm" (click)="addService()">+</button>
                                             </div>
                                         </div>
                                     </div>
@@ -682,7 +693,7 @@
                                         </div>
                                     </div>
                                     
-                                </div>
+                                </div> -->
 
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
@@ -742,8 +753,8 @@
             </div>
             <!-- fin PAs -->
 
-            <!-- PAs -->
-            <div class="col-sm-12">
+             <!-- Specialists -->
+             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
                         <form>
@@ -842,7 +853,7 @@
                 </div>
                 	
             </div>
-            <!-- fin PAs -->
+            <!-- fin Specialist -->
             <!-- Files -->
             <div class="col-sm-12">
                 <div class="card">

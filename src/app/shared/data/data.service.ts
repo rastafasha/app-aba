@@ -218,7 +218,7 @@ export class DataService {
               base: routes.doctorDashboard,
             },
             {
-              menuValue: 'Patient Dashboard',
+              menuValue: 'Client Dashboard',
               route: routes.patientDashboard,
               base: routes.patientDashboard,
             },

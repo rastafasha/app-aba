@@ -13,8 +13,8 @@ import { InsuranceService } from '../../insurance/service/insurance.service';
 export class AddPatientMComponent {
   public routes = routes;
   public patient_id: any;
+  
   public pat_id: any;
-
   public first_name: string = '';
   public last_name: string = '';
   public parent_guardian_name: string = '';
@@ -41,6 +41,8 @@ export class AddPatientMComponent {
   public summer_schedule: any;
   public diagnosis_code: any;
 
+  
+
   public insurer: any;
   public insuranceId: any;
   public insurer_secundary: any;
@@ -57,7 +59,6 @@ export class AddPatientMComponent {
   public pa_assessment_start_date: string = '';
   public pa_assessment_end_date: string = '';
   public pa_services: any;
-  public services:any = [];
   public n_code: any;
   public s_unit: any;
   public pa_services_start_date: string = '';
@@ -76,12 +77,13 @@ export class AddPatientMComponent {
 
   public specialists:any = [];
   public insurances:any = [];
-  public insurance:any = [];
+  public insurance:any;
   public selectedValue_rbt!: string;
   public selectedValue_rbt2!: string;
   public selectedValue_bcba!: string;
   public selectedValue_bcba2!: string;
   public selectedValue_clind!: string;
+  public selectedValue_insurer!: string;
   public rbt: any;
   public rbt2: any;
   public bcba: any;
@@ -89,6 +91,7 @@ export class AddPatientMComponent {
   public clin_director: any;
 
   public insurance_id: any;
+  public id: any;
  
   public FILE_AVATAR:any;
   public IMAGE_PREVISUALIZA:any = 'assets/img/user-06.jpg';
@@ -107,6 +110,9 @@ export class AddPatientMComponent {
   public FILE_REFERAL:any;
   public IMAGE_PREVISUALIZA_REFERAL:any = 'assets/img/user-06.jpg';
 
+  public insurer_name: any;
+  public notes: any= [];
+  public services: any= [];
   
 
   valid_form:boolean = false;
@@ -136,17 +142,26 @@ export class AddPatientMComponent {
     })
   }
   insuranceData(){
-    let data ={
-      insurance_id:this.insurance_id
-    }
-    this.insuranceService.showInsurance(data).subscribe((resp:any)=>{
+    this.insurance_id=this.insurance_id
+    this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
       console.log(resp);
       this.insurance = resp;
-
+      this.insurer_name = resp.insurer_name;
+      this.notes = resp.notes;
+      this.services = resp.services;
     })
   }
-  selectInsurance(){
-    this.insuranceData();
+  selectInsurance(id:any){debugger
+    // this.insuranceData();
+    this.insurance_id=id;
+    this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.insurance = resp;
+      this.insurer_name = resp.insurer_name;
+      this.notes = resp.notes;
+      this.services = resp.services;
+    })
+    
   }
 
   addService(){
@@ -197,7 +212,7 @@ export class AddPatientMComponent {
   }
  
 
-  save(){
+  save(){debugger
     this.text_validation = '';
     if(!this.first_name ||!this.last_name || !this.pat_id ){
       this.text_validation = 'Los campos con * son obligatorios';
@@ -233,7 +248,7 @@ export class AddPatientMComponent {
     formData.append('patient_control', this.patient_control);
     formData.append('special_note', this.special_note);
     
-    formData.append('insurer', this.insurer);
+    formData.append('insurer', this.selectedValue_insurer);
     formData.append('insuranceId', this.insuranceId);
     formData.append('insurer_secundary', this.insurer_secundary);
     formData.append('insuranceId_secundary', this.insuranceId_secundary);
@@ -248,7 +263,7 @@ export class AddPatientMComponent {
     formData.append('pa_assessment', this.pa_assessment);
     formData.append('pa_assessment_start_date', this.pa_assessment_start_date);
     formData.append('pa_assessment_end_date', this.pa_assessment_end_date);
-    formData.append('services', JSON.stringify(this.services));
+    formData.append('pa_services', this.pa_services);
     formData.append('pa_services_start_date', this.pa_services_start_date);
     formData.append('pa_services_end_date', this.pa_services_end_date);
     

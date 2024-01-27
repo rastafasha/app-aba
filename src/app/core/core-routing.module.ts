@@ -75,23 +75,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./email/email.module').then((m) => m.EmailModule),
       },
-      {
-        path: 'blogs',
-        loadChildren: () =>
-          import('./blogs/blogs.module').then((m) => m.BlogsModule),
-      },
+      
       {
         path: 'assets',
         loadChildren: () =>
           import('./assets/assets.module').then((m) => m.AssetsModule),
       },
-      {
-        path: 'activities',
-        loadChildren: () =>
-          import('./activities/activities.module').then(
-            (m) => m.ActivitiesModule
-          ),
-      },
+      
       {
         path: 'reports',
         loadChildren: () =>
@@ -114,11 +104,7 @@ const routes: Routes = [
             (m) => m.ComponentsModule
           ),
       },
-      {
-        path: 'forms',
-        loadChildren: () =>
-          import('./forms/forms.module').then((m) => m.FormsModule),
-      },
+      
       {
         path: 'tables',
         loadChildren: () =>

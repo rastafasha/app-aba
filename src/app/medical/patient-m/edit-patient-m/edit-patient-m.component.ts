@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routes } from 'src/app/shared/routes/routes';
 import { PatientMService } from '../service/patient-m.service';
+import { InsuranceService } from '../../insurance/service/insurance.service';
 
 @Component({
   selector: 'app-edit-patient-m',
@@ -14,8 +15,8 @@ export class EditPatientMComponent {
 
   public patient_id: any;
   public f: string = '';
+  
   public pat_id: any;
-
   public first_name: string = '';
   public last_name: string = '';
   public parent_guardian_name: string = '';
@@ -57,7 +58,8 @@ export class EditPatientMComponent {
   public pa_assessment: any;
   public pa_assessment_start_date: string = '';
   public pa_assessment_end_date: string = '';
-  public pa_services: any = [];
+  // public pa_services: any = [];
+  public pa_services: any ;
   public services:any = [];
   public n_code: any;
   public s_unit: any;
@@ -82,6 +84,7 @@ export class EditPatientMComponent {
   public selectedValue_bcba!: string;
   public selectedValue_bcba2!: string;
   public selectedValue_clind!: string;
+  public selectedValue_insurer!: string;
   public rbt: any;
   public rbt2: any;
   public bcba: any;
@@ -110,11 +113,17 @@ export class EditPatientMComponent {
 
   public patient_selected:any;
 
+  public insurance:any;
+  public insurance_id:any;
+  public insurer_name: any;
+  public notes: any= [];
+
   
   constructor(
     public patientService:PatientMService,
     public router: Router,
     public ativatedRoute: ActivatedRoute,
+    public insuranceService: InsuranceService,
 
   ){
 
@@ -169,7 +178,7 @@ showUser(){
         this.summer_schedule = this.patient_selected.summer_schedule;
         this.diagnosis_code = this.patient_selected.diagnosis_code;
         
-        this.insurer = this.patient_selected.insurer;
+        
         this.insuranceId = this.patient_selected.insuranceId;
         this.insurer_secundary = this.patient_selected.insurer_secundary;
         this.insuranceId_secundary = this.patient_selected.insuranceId_secundary;
@@ -201,8 +210,32 @@ showUser(){
         this.cde = this.patient_selected.cde;
         this.submitted = this.patient_selected.submitted;
 
+        this.selectedValue_rbt = this.patient_selected.rbt;
+        this.selectedValue_rbt2 = this.patient_selected.rbt2;
+        this.selectedValue_bcba = this.patient_selected.bcba;
+        this.selectedValue_bcba2 = this.patient_selected.bcba2;
+        this.selectedValue_clind = this.patient_selected.clin_director;
+        this.selectedValue_insurer = this.patient_selected.insurer;
+
         this.IMAGE_PREVISUALIZA = this.patient_selected.avatar;
     })
+  }
+
+  insuranceData(){
+    this.insurance_id=this.insurance_id
+    this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.insurance = resp;
+      this.insurer_name = resp.insurer_name;
+      this.insurer = resp.id;
+      // this.notes = resp.notes;
+      // this.services = resp.services;
+    })
+  }
+
+  selectInsurance(){
+    this.insuranceData();
+    
   }
 
   addService(){
@@ -310,10 +343,7 @@ showUser(){
 
       formData.append('schedule', this.schedule);
     }
-    if(this.insurer){
-
-      formData.append('insurer', this.insurer);
-    }
+    
     if(this.insuranceId){
 
       formData.append('insuranceId', this.insuranceId);
@@ -369,8 +399,9 @@ showUser(){
 
       formData.append('pa_assessment', this.pa_assessment);
     }
-    if(this.services){
-      formData.append('services', JSON.stringify(this.services));
+    if(this.pa_services){
+      formData.append('pa_services', this.pa_services);
+      // formData.append('services', JSON.stringify(this.services));
     }
     if(this.pa_services_start_date){
 
@@ -418,6 +449,32 @@ showUser(){
     if(this.email){
       formData.append('email', this.email);
     }
+
+    if(this.rbt){
+      formData.append('rbt', this.selectedValue_rbt);
+    }
+    if(this.rbt2){
+      formData.append('rbt2', this.selectedValue_rbt2);
+    }
+    if(this.bcba){
+      formData.append('bcba', this.selectedValue_bcba);
+    }
+    if(this.bcba2){
+      formData.append('bcba2', this.selectedValue_bcba2);
+    }
+    if(this.clin_director){
+      formData.append('clin_director', this.selectedValue_clind);
+    }
+
+    if(this.insurer){
+      formData.append('insurer', this.selectedValue_insurer);
+    }
+
+    
+    
+    
+    
+    
     if(this.FILE_AVATAR){
       formData.append('imagen', this.FILE_AVATAR);
     }

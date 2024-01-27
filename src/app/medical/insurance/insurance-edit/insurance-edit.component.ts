@@ -61,7 +61,7 @@ export class InsuranceEditComponent {
   getConfig(){
     this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
       // console.log(resp);
-      this.insurance_selected = resp.insurance;
+      this.insurance_selected = resp;
 
       this.insurer_name = this.insurance_selected.insurer_name;
       this.notes = this.insurance_selected.notes;

@@ -106,10 +106,19 @@
                 </span>
             </a>
             <div class="dropdown-menu">
-                <a *ngIf="user.roles =='DOCTOR'" class="dropdown-item" [routerLink]="['/doctors/profile/', user.id]">Mi Perfil</a>
                 <a *ngIf="user.roles =='SUPERADMIN'" class="dropdown-item" [routerLink]="['/doctors/profile/', user.id]">Mi Perfil</a>
-                <a *ngIf="user.roles =='DOCTOR'" class="dropdown-item" [routerLink]="['/doctors/list/edit/', user.id]">Editar Perfil</a>
+                <a *ngIf="user.roles =='MANAGER'" class="dropdown-item" [routerLink]="['/doctors/profile/', user.id]">Mi Perfil</a>
+                <a *ngIf="user.roles =='DOCTOR'" class="dropdown-item" [routerLink]="['/doctors/profile/', user.id]">Mi Perfil</a>
+                <a *ngIf="user.roles =='LM'" class="dropdown-item" [routerLink]="['/doctors/profile/', user.id]">Mi Perfil</a>
+                <a *ngIf="user.roles =='BCBA'" class="dropdown-item" [routerLink]="['/doctors/profile/', user.id]">Mi Perfil</a>
+                <a *ngIf="user.roles =='RBT'" class="dropdown-item" [routerLink]="['/doctors/profile/', user.id]">Mi Perfil</a>
+                
                 <a *ngIf="user.roles =='SUPERADMIN'" class="dropdown-item" [routerLink]="['/doctors/list/edit/', user.id]">Editar Perfil</a>
+                <a *ngIf="user.roles =='MANAGER'" class="dropdown-item" [routerLink]="['/doctors/list/edit/', user.id]">Editar Perfil</a>
+                <a *ngIf="user.roles =='DOCTOR'" class="dropdown-item" [routerLink]="['/doctors/list/edit/', user.id]">Editar Perfil</a>
+                <!-- <a *ngIf="user.roles =='LM'" class="dropdown-item" [routerLink]="['/doctors/list/edit/', user.id]">Editar Perfil</a> -->
+                <!-- <a *ngIf="user.roles =='BCBA'" class="dropdown-item" [routerLink]="['/doctors/list/edit/', user.id]">Editar Perfil</a> -->
+                <!-- <a *ngIf="user.roles =='RBT'" class="dropdown-item" [routerLink]="['/doctors/list/edit/', user.id]">Editar Perfil</a> -->
                 
                 <a class="dropdown-item" style="cursor: pointer;"(click)="logout()">Salir</a>
             </div>

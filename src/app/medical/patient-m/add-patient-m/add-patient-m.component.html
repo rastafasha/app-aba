@@ -113,7 +113,7 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Languange <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="language" [(ngModel)]="language" type="text"  >
+                                        <input class="form-control" name="language" [(ngModel)]="language" type="text" placeholder="English, Spanish, Italian..."  >
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -249,10 +249,16 @@
                                         <h4>Benefits</h4>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                
+                                <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label >Insurer <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="insurer" [(ngModel)]="insurer" type="text"  >
+                                        <label>Insurer <span class="login-danger">*</span></label>
+                                        <!-- <mat-select [(ngModel)]="selectedValue_insurer" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectInsurance(id)"  placeholder="Select Insurer"> -->
+                                        <mat-select [(ngModel)]="selectedValue_insurer" [ngModelOptions]="{standalone: true}" class="form-control select" placeholder="Select Insurer">
+                                            <mat-option *ngFor="let data of insurances" [value]="data.id">
+                                              {{data.insurer_name}}
+                                            </mat-option>
+                                        </mat-select>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -299,31 +305,31 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Deductible Individual I/F<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="deductible_individual_I_F" [(ngModel)]="deductible_individual_I_F" type="text"  >
+                                        <input class="form-control" name="deductible_individual_I_F" [(ngModel)]="deductible_individual_I_F" type="text" placeholder="3000 / 5000"  >
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Balance<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="balance" [(ngModel)]="balance" type="text"  >
+                                        <input class="form-control" name="balance" [(ngModel)]="balance" type="text"  placeholder="2500 / 3500">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Coinsurance<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="coinsurance" [(ngModel)]="coinsurance" type="text"  >
+                                        <input class="form-control" name="coinsurance" [(ngModel)]="coinsurance" type="text" placeholder="20% / 20%" >
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Copayments<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="copayments" [(ngModel)]="copayments" type="text"  >
+                                        <input class="form-control" name="copayments" [(ngModel)]="copayments" type="text"  placeholder="10 / 10">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >OOP<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="oop" [(ngModel)]="oop" type="text"  >
+                                        <input class="form-control" name="oop" [(ngModel)]="oop" type="text" placeholder="5000 / 8000" >
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -613,21 +619,13 @@
                                         <h4>PAs</h4>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-4">
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label>Patient Assesment <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="insurance_id" class="form-control select" (selectionChange)="selectInsurance()"  placeholder="Select Doctor">
-                                            <mat-option *ngFor="let data of insurances" [value]="data.id">
-                                              {{data.insurer_name}}
-                                            </mat-option>
-                                        </mat-select>
-                                        <!-- <input class="form-control" name="pa_assessment" [(ngModel)]="pa_assessment" type="text"  > -->
+                                        <label >PA Assessment <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="pa_assessment" [(ngModel)]="pa_assessment" type="text"  >
                                     </div>
                                 </div>
-                                <div class="col-12" *ngIf="insurance_id">
-                                    <h2>Datos insurance</h2>
-                                    {{insurer_name}}
-                                </div>
+                                
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Patient Assesment Start Date<span class="login-danger">*</span></label>
@@ -644,7 +642,12 @@
                                         <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
                                     </div>
                                 </div>
-
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >PA Services <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="pa_services" [(ngModel)]="pa_services" type="text"  >
+                                    </div>
+                                </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Patient Services Start Date<span class="login-danger">*</span></label>
@@ -662,6 +665,33 @@
                                     </div>
                                 </div>
 
+                                <!-- <div class="col-12" *ngIf="insurance_id">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h2>Datos insurance</h2>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p><b>Insurer Name</b>{{insurance.insurer_name}}</p>
+                                                <p><b>Services:</b></p>
+                                                <ul *ngFor="let service of services">
+                                                    <li>
+                                                        {{service.code}}
+                                                        {{service.provider}}
+                                                        {{service.description}}
+                                                        {{service.hourly_fee}}
+                                                        {{service.unit_prize}}
+                                                        {{service.max_allowed}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p><b>Notes:</b></p>
+                                                <ul *ngFor="let item of notes">
+                                                    <li>{{item.note}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                                 
                                 
                                 <div class="col-12" *ngIf="valid_form">
@@ -703,7 +733,7 @@
             </div>
             <!-- fin PAs -->
 
-            <!-- PAs -->
+            <!-- Specialists -->
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
@@ -803,7 +833,7 @@
                 </div>
                 	
             </div>
-            <!-- fin PAs -->
+            <!-- fin Specialist -->
             <!-- Files -->
             <div class="col-sm-12">
                 <div class="card">
