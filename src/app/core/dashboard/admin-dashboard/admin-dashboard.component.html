@@ -38,7 +38,7 @@
                         <img src="assets/img/icons/calendar.svg" alt="">
                     </div>
                     <div class="dash-content dash-count">
-                        <h4>Appointments.</h4>
+                        <h4>bips.</h4>
                         <h3 style="color: #2e37a4;"><span class="counter-up" >{{num_appointments_current}}/<small>{{num_appointments_before}}</small></span></h3>
                         <p *ngIf="porcentaje_d >= 0"><span class="passive-view"><i class="feather icon-arrow-up-right me-1"></i>{{porcentaje_d}}%</span> vs last month</p>
                         <p *ngIf="porcentaje_d < 0"><span class="negative-view"><i class="feather icon-arrow-down-right me-1"></i>{{porcentaje_d}}%</span> vs last month</p>
@@ -176,7 +176,7 @@
             <div class="col-12 col-md-12  col-xl-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title ">Citas Pendientes</h4>
+                        <h4 class="card-title ">bips</h4>
                     </div>
                     <div class="card-body p-0 table-dash">
                         <div class="table-responsive">
@@ -193,7 +193,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let data of appointments">
+                                    <tr *ngFor="let data of bips">
                                         
                                         <td >{{data.date_appointment_format}}</td>
                                         <td >{{data.doctor.full_name}}</td>

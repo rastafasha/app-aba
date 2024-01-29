@@ -76,7 +76,7 @@ export class AdminDashboardComponent {
   public upcomingAppointments: Array<upcomingAppointments> = [];
  
   //datos reales
-  public appointments:any = [];
+  public bips:any = [];
   public appointment_pendings:any = [];
 
   public num_appointments_current: number = 0;
@@ -284,7 +284,7 @@ export class AdminDashboardComponent {
     this.dashboardService.dashboardAdmin({}).subscribe((resp:any)=>{
       // console.log(resp);
 
-      this.appointments = resp.appointments.data;
+      this.bips = resp.bips.data;
 
       this.num_appointments_current = resp.num_appointments_current;
       this.num_appointments_before = resp.num_appointments_before;

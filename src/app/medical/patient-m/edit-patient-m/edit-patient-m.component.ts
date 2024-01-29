@@ -16,7 +16,7 @@ export class EditPatientMComponent {
   public patient_id: any;
   public f: string = '';
   
-  public pat_id: any;
+  public client_id: any;
   public first_name: string = '';
   public last_name: string = '';
   public parent_guardian_name: string = '';
@@ -168,7 +168,7 @@ showUser(){
         this.age = this.patient_selected.age;
         this.birth_date = this.patient_selected.birth_date ? new Date(this.patient_selected.birth_date).toISOString(): '';       
         this.gender = this.patient_selected.gender;
-        this.pat_id = this.patient_selected.pat_id;
+        this.client_id = this.patient_selected.client_id;
         this.address = this.patient_selected.address;
         this.city = this.patient_selected.city;
         this.state = this.patient_selected.state;
@@ -288,7 +288,7 @@ showUser(){
 
   save(){
     this.text_validation = '';
-    if(!this.first_name ||!this.last_name || !this.pat_id ){
+    if(!this.first_name ||!this.last_name || !this.client_id ){
       this.text_validation = 'Los campos con * son obligatorios';
       return;
     }
@@ -305,7 +305,7 @@ showUser(){
     formData.append('gender', this.gender+'');
     formData.append('address', this.address);
     formData.append('zip', this.zip);
-    formData.append('pat_id', this.pat_id);
+    formData.append('client_id', this.client_id);
     formData.append('city', this.city);
     formData.append('state', this.state);
     formData.append('education', this.education);

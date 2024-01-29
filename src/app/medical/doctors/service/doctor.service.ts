@@ -79,4 +79,5 @@ export class DoctorService {
     let URL = url_servicios+"/doctors/update/status/"+doctor_id;
     return this.http.put(URL,data,{headers:headers});
   }
+
 }

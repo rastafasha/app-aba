@@ -327,6 +327,43 @@ export class DataService {
             },
           ],
         },
+        {
+          menuValue: 'BIP',
+          hasSubRoute: true,
+          showSubRoute: false,
+          base: 'bip',
+          img: 'assets/img/icons/menu-icon-03.svg',
+          subMenus: [
+            {
+              menuValue: 'BIP List',
+              route: routes.bipList,
+              base: routes.bipList,
+              permision: 'list_bip',
+              show_nav: true,
+            },
+            {
+              menuValue: 'Add BIP',
+              route: routes.registerBip,
+              base: routes.registerBip,
+              permision: 'attention_bip',
+              show_nav: false,
+            },
+            {
+              menuValue: 'Add BIP',
+              route: routes.registerBip,
+              base: routes.registerBip,
+              permision: 'register_bip',
+              show_nav: false,
+            },
+            {
+              menuValue: 'Edit BIP',
+              route: routes.editBip,
+              base: routes.editBip,
+              permision: 'edit_bip',
+              show_nav: false,
+            },
+          ],
+        },
         // {
         //   menuValue: 'Staff',
         //   hasSubRoute: true,

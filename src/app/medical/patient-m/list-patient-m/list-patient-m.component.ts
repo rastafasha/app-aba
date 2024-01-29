@@ -54,7 +54,7 @@ export class ListPatientMComponent {
     this.patientList = [];
     this.serialNumberArray = [];
 
-    this.patientService.listPatients(page, this.searchDataValue).subscribe((resp:any)=>{
+    this.patientService.listPatients().subscribe((resp:any)=>{
       // console.log(resp);
 
       this.totalDataPatient = resp.total;
@@ -210,7 +210,7 @@ export class ListPatientMComponent {
 
     const blobData = new Blob([excelBuffer],{type: EXCEL_TYPE});
 
-    this.fileSaver.save(blobData, "patients_db_aba_project",)
+    this.fileSaver.save(blobData, "clients_db_aba_therapy",)
 
   }
   csvExport(){
@@ -233,7 +233,7 @@ export class ListPatientMComponent {
 
     const blobData = new Blob([excelBuffer],{type: CSV_TYPE});
 
-    this.fileSaver.save(blobData, "patients_db_aba_project", CSV_EXTENSION)
+    this.fileSaver.save(blobData, "clients_db_aba_therapy", CSV_EXTENSION)
 
   }
 
@@ -258,7 +258,7 @@ export class ListPatientMComponent {
 
     const blobData = new Blob([excelBuffer],{type: TXT_TYPE});
 
-    this.fileSaver.save(blobData, "patients_db_aba_project", TXT_EXTENSION)
+    this.fileSaver.save(blobData, "clients_db_aba_therapy", TXT_EXTENSION)
 
   }
 

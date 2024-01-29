@@ -13,7 +13,13 @@ export class PatientMService {
     public authService:AuthService
   ) { }
 
-  listPatients(page:number=1, search:string=''){
+  listPatients(){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/patients';
+    return this.http.get(URL, {headers:headers});
+  }
+
+  configPatients(page:number=1, search:string=''){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
     let URL = url_servicios+'/patients?page='+page+"&search="+search;
     return this.http.get(URL, {headers:headers});

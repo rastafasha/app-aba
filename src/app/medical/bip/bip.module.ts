@@ -15,7 +15,7 @@ import { BipListComponent } from './bip-list/bip-list.component';
   declarations: [
     BipComponent,
     BipattentionComponent,
-    BipListComponent
+    BipListComponent,
   ],
   exports: [
     BipComponent,

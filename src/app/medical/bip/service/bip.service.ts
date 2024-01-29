@@ -13,48 +13,48 @@ export class BipService {
     public authService:AuthService
   ) { }
 
-  listPatients(page:number=1, search:string=''){
+  listBips(){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/patients?page='+page+"&search="+search;
+    let URL = url_servicios+'/bip';
     return this.http.get(URL, {headers:headers});
   }
   
-  getPatient(user_id:any){
+  getBip(user_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/patients/show/'+user_id;
+    let URL = url_servicios+'/bip/show/'+user_id;
     return this.http.get(URL, {headers:headers});
   }
-  createPatient(data){
+  createBip(data){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/patients/store';
+    let URL = url_servicios+'/bip/store';
     return this.http.post(URL,data, {headers:headers});
   }
-  editPatient( data:any, user_id:any,){
+  editBip( data:any, user_id:any,){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/patients/update/'+user_id;
+    let URL = url_servicios+'/bip/update/'+user_id;
     return this.http.post(URL,data,{headers:headers});
   }
-  deletePatient(user_id:any){
+  deleteBip(user_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/patients/destroy/'+user_id;
+    let URL = url_servicios+'/bip/destroy/'+user_id;
     return this.http.delete(URL, {headers:headers});
   }
 
-  showPatientProfile(user_id:any){
+  showBipProfile(user_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/patients/profile/"+user_id;
+    let URL = url_servicios+"/bip/profile/"+user_id;
     return this.http.get(URL,{headers:headers});
   }
 
   listConfig(){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/patients/config';
+    let URL = url_servicios+'/bip/config';
     return this.http.get(URL, {headers:headers});
   }
 
   updateStatus(data:any, patient_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/patients/update/eligibility/"+patient_id;
+    let URL = url_servicios+"/bip/update/eligibility/"+patient_id;
     return this.http.put(URL,data,{headers:headers});
   }
 }

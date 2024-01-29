@@ -1,1 +1,335 @@
-<p>bipattention works!</p>
+<div class="page-wrapper">
+    <div class="content">
+    
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/bip/list">Bip </a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item active">Edit/ Add: Behavior analisis Assestment </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        <div class="row">
+            <!-- paciente -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            
+                            <!-- paciente -->
+                            <div class="row align-items-center py-4" >
+                                <div class="col-12 py-4">
+                                    <h4>Data Client</h4>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Patient ID <span class="login-danger">*</span></label>
+                                        <input class="form-control"  name="client_id"  disabled [(ngModel)]="client_id" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">  
+                                    <div class="form-group local-forms">
+                                        <label >First Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="first_name"  disabled [(ngModel)]="first_name" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Last Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="last_name"  disabled [(ngModel)]="last_name" type="text"  >
+                                    </div>
+                                </div>
+                               
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Mobile <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="phone"  disabled [(ngModel)]="phone" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">  
+                                    <div class="form-group local-forms">
+                                        <label >Parent/Guardian Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="parent_guardian_name"  disabled [(ngModel)]="parent_guardian_name" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">  
+                                    <div class="form-group local-forms">
+                                        <label >Relationship <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="relationship"  disabled [(ngModel)]="relationship" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8">  
+                                    <div class="form-group local-forms">
+                                        <label >address <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="address"  disabled [(ngModel)]="address" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-2">  
+                                    <div class="form-group local-forms">
+                                        <label >age <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="age"  disabled [(ngModel)]="age" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-2">  
+                                    <div class="form-group local-forms">
+                                        <label >dob <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="dob"  disabled [(ngModel)]="dob" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Type of Assessment:<span class="login-danger">*</span></label>
+                                        <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="type_of_assessment" [(ngModel)]="type_of_assessment">
+                                            <option>-- Select --</option>
+                                              <option value="innital">innital</option>
+                                              <option value="reassestment">reassestment</option>
+                                              </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- paciente -->
+                        </form>
+                        
+                    </div>
+                </div>	
+                	
+            </div>
+            <!-- fin paciente -->	
+            <!-- other -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row" >
+
+                                <!-- documents -->
+                                <div class="col-12">
+                                    <div class="card-box">
+                                        <div class="card-block">
+                                            <h3 class="card-title">Behavior Analysis Assesstment</h3>
+                                            <h4 class="card-title">Documents Reviewed</h4>
+                                            <div class="row align-items-center" >
+                                                <div class="col-xs-12">
+                                                    <div class="row">
+                                                        
+                                                        <div class="col-xs-6 col-sm-4">  
+                                                            
+                                                            <div class="form-group">
+                                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
+                                                                    <h5 _ngcontent-rhp-c92="" class="card-title">Doctor Referal</h5>
+                                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
+                                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="doctor_referal" class="check" name="doctor_referal" [ngModelOptions]="{standalone: true}" [(ngModel)]="doctor_referal">
+                                                                        <label _ngcontent-rhp-c92="" for="doctor_referal" class="checktoggle" value="yes">checkbox</label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 col-sm-4">  
+                                                            
+                                                            <div class="form-group">
+                                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
+                                                                    <h5 _ngcontent-rhp-c92="" class="card-title">medical_notes</h5>
+                                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
+                                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="medical_notes" class="check" name="medical_notes" [ngModelOptions]="{standalone: true}" [(ngModel)]="medical_notes">
+                                                                        <label _ngcontent-rhp-c92="" for="medical_notes" class="checktoggle" value="yes">checkbox</label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 col-sm-4">  
+                                                            
+                                                            <div class="form-group">
+                                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
+                                                                    <h5 _ngcontent-rhp-c92="" class="card-title">cde</h5>
+                                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
+                                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="cde" class="check" name="cde" [ngModelOptions]="{standalone: true}" [(ngModel)]="cde">
+                                                                        <label _ngcontent-rhp-c92="" for="cde" class="checktoggle" value="yes">checkbox</label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 col-sm-4">  
+                                                            
+                                                            <div class="form-group">
+                                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
+                                                                    <h5 _ngcontent-rhp-c92="" class="card-title">iep</h5>
+                                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
+                                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="iep" class="check" name="iep" [ngModelOptions]="{standalone: true}" [(ngModel)]="iep">
+                                                                        <label _ngcontent-rhp-c92="" for="iep" class="checktoggle" value="yes">checkbox</label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 col-sm-4">  
+                                                            
+                                                            <div class="form-group">
+                                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
+                                                                    <h5 _ngcontent-rhp-c92="" class="card-title">mnl</h5>
+                                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
+                                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="mnl" class="check" name="mnl" [ngModelOptions]="{standalone: true}" [(ngModel)]="mnl">
+                                                                        <label _ngcontent-rhp-c92="" for="mnl" class="checktoggle" value="yes">checkbox</label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 col-sm-4">  
+                                                            
+                                                            <div class="form-group">
+                                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
+                                                                    <h5 _ngcontent-rhp-c92="" class="card-title">referal</h5>
+                                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
+                                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="referal" class="check" name="referal" [ngModelOptions]="{standalone: true}" [(ngModel)]="referal">
+                                                                        <label _ngcontent-rhp-c92="" for="referal" class="checktoggle" value="yes">checkbox</label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-12 mb-3">
+                                                            <button class="btn btn-primary btn-sm" (click)="addService()">+</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 ">
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Doctor Referal</th>
+                                                                    <th>Medical Notes</th>
+                                                                    <th>CDE</th>
+                                                                    <th>IEP </th>
+                                                                    <th>MNL </th>
+                                                                    <th>Referal </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let document of documents; let i = index">
+                                                                    <td>
+                                                                        {{document.doctor_referal}}
+                                                                    </td>
+                                                                    <td>
+                                                                         {{document.medical_notes}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{document.cde}}
+                                                                    </td>
+                                                                    <td>
+                                                                       {{document.iep}}
+                                                                    </td>
+                                                                    <td>
+                                                                         {{document.mnl}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{document.referal}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-danger btn-sm" (click)="deleteService(i)">x</button>
+                                                                    </td>
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- documents -->
+                                
+                                <div class="row align-items-center" >
+                                    <div class="col-12">
+                                        <div class="form-group local-forms">
+                                            <label>Background Information <span class="login-danger">*</span></label>
+                                            <textarea class="form-control" name="background_information" [(ngModel)]="background_information" rows="4" cols="30"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group local-forms">
+                                            <label>Previous treatments and results <span class="login-danger">*</span></label>
+                                            <textarea class="form-control" name="background_information" [(ngModel)]="background_information" rows="4" cols="30"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group local-forms">
+                                            <label>Current treatment and progress <span class="login-danger">*</span></label>
+                                            <textarea class="form-control" name="background_information" [(ngModel)]="background_information" rows="4" cols="30"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center" >
+                                    <div class="col-12 col-md-6 col-xl-3">  
+                                        <div class="form-group local-forms">
+                                            <label >Education status <span class="login-danger">*</span></label>
+                                            <textarea class="form-control" name="background_information" [(ngModel)]="background_information" rows="4" cols="30"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-9">
+                                        <div class="form-group local-forms">
+                                            <label>Physical and Medical Status <span class="login-danger">*</span></label>
+                                            <textarea class="form-control" name="background_information" [(ngModel)]="background_information" rows="4" cols="30"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <!-- validaciones -->
+                                <div class="form-group row" *ngIf="text_success">
+                                    <div class="col-12">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>Exito!</strong>{{text_success}}.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row" *ngIf="text_validation">
+                                    <div class="col-12">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>!</strong> {{ text_validation }}.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- validaciones -->
+                                
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+                	
+            </div>
+            <!-- fin other -->					
+        </div>
+    </div>
+</div>
+ 

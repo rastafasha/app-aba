@@ -204,7 +204,7 @@ export class ListDoctorComponent {
 
     const blobData = new Blob([excelBuffer],{type: EXCEL_TYPE});
 
-    this.fileSaver.save(blobData, "doctors_db_aba_project",)
+    this.fileSaver.save(blobData, "employers_db_aba_therapy",)
 
   }
   csvExport(){
@@ -227,7 +227,7 @@ export class ListDoctorComponent {
 
     const blobData = new Blob([excelBuffer],{type: CSV_TYPE});
 
-    this.fileSaver.save(blobData, "doctors_db_aba_project", CSV_EXTENSION)
+    this.fileSaver.save(blobData, "employers_db_aba_therapy", CSV_EXTENSION)
 
   }
 
@@ -252,7 +252,7 @@ export class ListDoctorComponent {
 
     const blobData = new Blob([excelBuffer],{type: TXT_TYPE});
 
-    this.fileSaver.save(blobData, "doctors_db_aba_project", TXT_EXTENSION)
+    this.fileSaver.save(blobData, "employers_db_aba_therapy", TXT_EXTENSION)
 
   }
 

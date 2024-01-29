@@ -412,5 +412,15 @@ export class routes {
   public static get bip(): string {
     return this.baseUrl + '/bip/';
   }
+
+  public static get bipList(): string {
+    return this.baseUrl + '/bip/list';
+  }
+  public static get registerBip(): string {
+    return this.baseUrl + '/bip/register';
+  }
+  public static get editBip(): string {
+    return this.baseUrl + '/bip/edit';
+  }
  
 }
