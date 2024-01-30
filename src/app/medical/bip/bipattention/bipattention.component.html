@@ -29,7 +29,7 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Patient ID <span class="login-danger">*</span></label>
-                                        <input class="form-control"  name="client_id"  disabled [(ngModel)]="client_id" type="text"  >
+                                        <input class="form-control"  name="patient_id"  disabled [(ngModel)]="patient_id" type="text"  >
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">  
@@ -81,18 +81,7 @@
                                         <input class="form-control" name="dob"  disabled [(ngModel)]="dob" type="text"  >
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-4 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Type of Assessment:<span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="type_of_assessment" [(ngModel)]="type_of_assessment">
-                                            <option>-- Select --</option>
-                                              <option value="innital">innital</option>
-                                              <option value="reassestment">reassestment</option>
-                                              </select>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <!-- paciente -->
                         </form>
@@ -101,11 +90,23 @@
                 </div>	
                 	
             </div>
-            <!-- fin paciente -->	
-            <!-- other -->
+            <!-- fin paciente -->
+            <div class="tab-content-set">
+                <ul class="nav">
+                    <li>
+                        <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 1}" (click)="optionSelected(1)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>BIP</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Reduction Goals </a>
+                    </li>
+                </ul>
+            </div>
+            <ng-container *ngIf="option_selected == 1">
+                <!-- other -->
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
+                        
                         <form>
                             <div class="row" >
 
@@ -114,6 +115,19 @@
                                     <div class="card-box">
                                         <div class="card-block">
                                             <h3 class="card-title">Behavior Analysis Assesstment</h3>
+                                            <div class="col-12 col-md-4 col-xl-4">
+                                                <div class="form-group local-forms">
+                                                    <label >Type of Assessment:<span class="login-danger">*</span></label>
+                                                    <select
+                                                        class="form-control form-select-solid fw-bolder"
+                                                        name="type_of_assessment" [(ngModel)]="type_of_assessment">
+                                                        <option>-- Select --</option>
+                                                          <option [value]="1">Pending</option>
+                                                          <option [value]="2">Innital</option>
+                                                          <option [value]="3">Reassestment</option>
+                                                          </select>
+                                                </div>
+                                            </div>
                                             <h4 class="card-title">Documents Reviewed</h4>
                                             <div class="row align-items-center" >
                                                 <div class="col-xs-12">
@@ -236,9 +250,7 @@
                                                                     <td>
                                                                         {{document.referal}}
                                                                     </td>
-                                                                    <td>
-                                                                        <button class="btn btn-danger btn-sm" (click)="deleteService(i)">x</button>
-                                                                    </td>
+                                                                    
                                                                 </tr>
                                                                 
                                                             </tbody>
@@ -265,13 +277,13 @@
                                     <div class="col-xs-12 col-sm-6">
                                         <div class="form-group local-forms">
                                             <label>Previous treatments and results <span class="login-danger">*</span></label>
-                                            <textarea class="form-control" name="background_information" [(ngModel)]="background_information" rows="4" cols="30"></textarea>
+                                            <textarea class="form-control" name="previus_treatment_and_result" [(ngModel)]="previus_treatment_and_result" rows="4" cols="30"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <div class="form-group local-forms">
                                             <label>Current treatment and progress <span class="login-danger">*</span></label>
-                                            <textarea class="form-control" name="background_information" [(ngModel)]="background_information" rows="4" cols="30"></textarea>
+                                            <textarea class="form-control" name="current_treatment_and_progress" [(ngModel)]="current_treatment_and_progress" rows="4" cols="30"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -279,13 +291,13 @@
                                     <div class="col-12 col-md-6 col-xl-3">  
                                         <div class="form-group local-forms">
                                             <label >Education status <span class="login-danger">*</span></label>
-                                            <textarea class="form-control" name="background_information" [(ngModel)]="background_information" rows="4" cols="30"></textarea>
+                                            <textarea class="form-control" name="education_status" [(ngModel)]="education_status" rows="4" cols="30"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-9">
                                         <div class="form-group local-forms">
                                             <label>Physical and Medical Status <span class="login-danger">*</span></label>
-                                            <textarea class="form-control" name="background_information" [(ngModel)]="background_information" rows="4" cols="30"></textarea>
+                                            <textarea class="form-control" name="phisical_and_medical_status" [(ngModel)]="phisical_and_medical_status" rows="4" cols="30"></textarea>
                                         </div>
                                     </div>
                                     
@@ -329,6 +341,625 @@
                 	
             </div>
             <!-- fin other -->					
+            <!-- maladaptives -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row" >
+
+                                <!-- maladaptives -->
+                                <div class="col-12">
+                                    <div class="card-box">
+                                        <div class="card-block">
+                                            <h3 class="card-title">Maladaptives</h3>
+                                            
+                                            <div class="row align-items-center" >
+                                                <div class="col-xs-12 ">
+                                                    <div class="row">
+                                                        
+                                                        <div class="col-xs-12 col-sm-6">  
+                                                            <div class="form-group local-forms">
+                                                                <label >Title<span class="login-danger">*</span></label>
+                                                                <input class="form-control" name="title"  [(ngModel)]="title" type="text"  >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >Definition<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="definition" [(ngModel)]="definition" rows="3" cols="30"></textarea>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >Unit<span class="login-danger">*</span></label>
+                                                                <input class="form-control" name="unit_malad"  [(ngModel)]="unit_malad" type="number"  >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mb-3">
+                                                            <button class="btn btn-primary btn-sm" (click)="addMaladaptive()">+</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Title</th>
+                                                                    <th>Definition</th>
+                                                                    <th>Unit</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let maladap of maladaptives; let i = index">
+                                                                    <td>
+                                                                        {{maladap.title}}
+                                                                    </td>
+                                                                    <td>
+                                                                         {{maladap.definition}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{maladap.unit_malad}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-danger btn-sm" (click)="deleteMaladaptive(i)">x</button>
+                                                                    </td>
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- maladaptives -->
+                                
+                                
+                                <!-- validaciones -->
+                                <div class="form-group row" *ngIf="text_success">
+                                    <div class="col-12">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>Exito!</strong>{{text_success}}.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row" *ngIf="text_validation">
+                                    <div class="col-12">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>!</strong> {{ text_validation }}.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- validaciones -->
+                                
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+                	
+            </div>
+            <!-- fin maladaptives -->					
+            <!-- Assestment -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row" >
+
+
+                                <h3 class="card-title">Assestment Conducted</h3>
+                                <div class="row align-items-center" >
+                                    <div class="col-12 ">  
+                                        <div class="form-group local-forms">
+                                            <label >Assestment Conducted <span class="login-danger">*</span></label>
+                                            <textarea class="form-control" name="assestment_conducted" [(ngModel)]="assestment_conducted" rows="4" cols="30"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            
+                                            <div class="col-xs-6 col-sm-4">  
+                                                
+                                                <div class="form-group">
+                                                    <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
+                                                        <h5 _ngcontent-rhp-c92="" class="card-title">Functional assessment interview completed</h5>
+                                                        <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
+                                                            <input _ngcontent-rhp-c92="" type="checkbox" id="functional_assessment_interview_completed" class="check" name="functional_assessment_interview_completed" [ngModelOptions]="{standalone: true}" [(ngModel)]="functional_assessment_interview_completed">
+                                                            <label _ngcontent-rhp-c92="" for="functional_assessment_interview_completed" class="checktoggle" value="yes">checkbox</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-4">  
+                                                
+                                                <div class="form-group">
+                                                    <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
+                                                        <h5 _ngcontent-rhp-c92="" class="card-title">Vineland behavior rating scale</h5>
+                                                        <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
+                                                            <input _ngcontent-rhp-c92="" type="checkbox" id="vineland_behavior_rating_scale" class="check" name="vineland_behavior_rating_scale" [ngModelOptions]="{standalone: true}" [(ngModel)]="vineland_behavior_rating_scale">
+                                                            <label _ngcontent-rhp-c92="" for="vineland_behavior_rating_scale" class="checktoggle" value="yes">checkbox</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-4">  
+                                                
+                                                <div class="form-group">
+                                                    <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
+                                                        <h5 _ngcontent-rhp-c92="" class="card-title">ADOS</h5>
+                                                        <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
+                                                            <input _ngcontent-rhp-c92="" type="checkbox" id="ados" class="check" name="ados" [ngModelOptions]="{standalone: true}" [(ngModel)]="ados">
+                                                            <label _ngcontent-rhp-c92="" for="ados" class="checktoggle" value="yes">checkbox</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="col-12 mb-3">
+                                                <button class="btn btn-primary btn-sm" (click)="addAssesstmentOption()">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 ">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Functional assessment interview completed</th>
+                                                        <th>Vineland behavior rating scale</th>
+                                                        <th>ADOS</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let assessmentopt of assesstmentsOptions; let i = index">
+                                                        <td>
+                                                            {{assessmentopt.functional_assessment_interview_completed}}
+                                                        </td>
+                                                        <td>
+                                                             {{assessmentopt.vineland_behavior_rating_scale}}
+                                                        </td>
+                                                        <td>
+                                                            {{assessmentopt.ados}}
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row align-items-center" >
+                                    <!-- Assestments -->
+                                <div class="col-12">
+                                    <div class="card-box">
+                                        <div class="card-block">
+                                            <h3 class="card-title">Prevalent Setting Events & Antecedents</h3>
+                                            
+                                            <div class="row align-items-center" >
+                                                <div class="col-xs-12 ">
+                                                    <div class="row">
+                                                        
+                                                        <div class="col-xs-12">  
+                                                            <div class="form-group local-forms">
+                                                                <label >Prevalent Setting Events & Antecedents<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="prevalent_setting_event_and_atecedent" [(ngModel)]="prevalent_setting_event_and_atecedent" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12">
+                                                            <div class="form-group local-forms">
+                                                                <label >Behavior<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="behavior" [(ngModel)]="behavior" rows="3" cols="30"></textarea>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-xs-12">
+                                                            <div class="form-group local-forms">
+                                                                <label >Hypothesized Function(s)<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="hypothesized_functions" [(ngModel)]="hypothesized_functions" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mb-3">
+                                                            <button class="btn btn-primary btn-sm" (click)="addAssesstment()">+</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Prevalent Setting Events & Antecedents</th>
+                                                                    <th>Behavior</th>
+                                                                    <th>Hypothesized Function(s)</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let assesstment of prevalent_setting_event_and_atecedents; let i = index">
+                                                                    <td>
+                                                                        {{assesstment.prevalent_setting_event_and_atecedents}}
+                                                                    </td>
+                                                                    <td>
+                                                                         {{assesstment.behavior}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{assesstment.hypothesized_functions}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-danger btn-sm" (click)="deleteAssesstment(i)">x</button>
+                                                                    </td>
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Assestments -->
+                                    
+                                </div>
+                                
+                                
+                                <!-- validaciones -->
+                                <div class="form-group row" *ngIf="text_success">
+                                    <div class="col-12">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>Exito!</strong>{{text_success}}.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row" *ngIf="text_validation">
+                                    <div class="col-12">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>!</strong> {{ text_validation }}.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- validaciones -->
+                                
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+                	
+            </div>
+            <!-- fin Assestment -->					
+            <!-- interventions -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row" >
+                                <div class="row align-items-center" >
+                                    <!-- Assestments -->
+                                <div class="col-12">
+                                    <div class="card-box">
+                                        <div class="card-block">
+                                            <h3 class="card-title">Interventions</h3>
+                                            
+                                            <div class="row align-items-center" >
+                                                <div class="col-xs-12 ">
+                                                    <div class="row">
+                                                        
+                                                        <div class="col-xs-12 col-sm-6">  
+                                                            <div class="form-group local-forms">
+                                                                <label >Pairing<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="pairing" [(ngModel)]="pairing" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >Premack principal<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="premack_principal" [(ngModel)]="premack_principal" rows="3" cols="30"></textarea>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >response block<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="response_block" [(ngModel)]="response_block" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >DRO<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="dro" [(ngModel)]="dro" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >DRA<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="dra" [(ngModel)]="dra" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >errorless teaching<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="errorless_teaching" [(ngModel)]="errorless_teaching" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >Redirection<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="redirection" [(ngModel)]="redirection" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >NCR<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="ncr" [(ngModel)]="ncr" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >shaping<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="shaping" [(ngModel)]="shaping" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="form-group local-forms">
+                                                                <label >chaining<span class="login-danger">*</span></label>
+                                                                <textarea class="form-control" name="chaining" [(ngModel)]="chaining" rows="3" cols="30"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mb-3">
+                                                            <button class="btn btn-primary btn-sm" (click)="addIntervention()">+</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Pairing</th>
+                                                                    <th>Premack principal</th>
+                                                                    <th>response block</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let intervention of interventions; let i = index">
+                                                                    <td>
+                                                                        {{intervention.pairing}}
+                                                                    </td>
+                                                                    <td>
+                                                                         {{intervention.premack_principal}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{intervention.response_block}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-success btn-sm" (click)="deleteAssesstment(i)"><i class="fa fa-eye"></i></button>
+                                                                        <button class="btn btn-danger btn-sm" (click)="deleteIntervention(i)">x</button>
+                                                                    </td>
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Assestments -->
+                                    
+                                </div>
+                                
+                                
+                                <!-- validaciones -->
+                                <div class="form-group row" *ngIf="text_success">
+                                    <div class="col-12">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>Exito!</strong>{{text_success}}.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row" *ngIf="text_validation">
+                                    <div class="col-12">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>!</strong> {{ text_validation }}.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- validaciones -->
+                                
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+                	
+            </div>
+            <!-- fin interventions -->
+            </ng-container>	
+            <ng-container *ngIf="option_selected == 2">
+                <!-- other -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        
+                        <form>
+                            <div class="row" >
+
+                                <!-- documents -->
+                                <div class="col-12">
+                                    <div class="card-box">
+                                        <div class="card-block">
+                                            <h3 class="card-title">Reduction Goals</h3>
+                                            
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- documents -->
+                                
+                                
+                                <div class="row align-items-center" >
+                                    <div class="col-12 col-md-6 col-xl-4">  
+                                        <div class="form-group local-forms">
+                                            <label >Goal #1:  <span class="login-danger">*</span></label>
+                                            <input class="form-control" name="maladaptive_name"  disabled [(ngModel)]="first_name" type="text" placeholder="maladaptive_name"  >
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 col-xl-4">
+                                        <div class="form-group local-forms">
+                                            <label>Curren Status <span class="login-danger">*</span></label>
+                                            <input class="form-control"  name="current_status"   [(ngModel)]="title" type="text"  >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12">
+                                        <div class="form-group local-forms">
+                                            <label>Description <span class="login-danger">*</span></label>
+                                            <textarea class="form-control" name="background_information" [(ngModel)]="background_information" rows="4" cols="30"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center" >
+                                    
+                                    <div class="col-12 col-md-6 col-xl-6">
+                                        <div class="form-group local-forms">
+                                            <label >Status:<span class="login-danger">*</span></label>
+                                            <select
+                                                class="form-control form-select-solid fw-bolder"
+                                                name="type_of_assessment" [(ngModel)]="type_of_assessment">
+                                                <option>-- Select --</option>
+                                                  <option value="inprogress">inprogress</option>
+                                                  <option value="initiated">initiated</option>
+                                                  <option value="mastered">mastered</option>
+                                                  <option value="on hold">on hold</option>
+                                                  <option value="discontinued">discontinued</option>
+                                                  <option value="maintenance">maintenance</option>
+                                                  </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-xl-6">
+                                        <div class="form-group local-forms">
+                                            <label >Date<span class="login-danger">*</span></label>
+                                            <input class="form-control datetimepicker" name="driver_license_expiration" [(ngModel)]="driver_license_expiration" type="text" matInput [matDatepicker]="picker3"  >
+                                            <mat-datepicker #picker3></mat-datepicker>
+                                            <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                
+                                
+                                <!-- validaciones -->
+                                <div class="form-group row" *ngIf="text_success">
+                                    <div class="col-12">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>Exito!</strong>{{text_success}}.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group row" *ngIf="text_validation">
+                                    <div class="col-12">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>!</strong> {{ text_validation }}.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- validaciones -->
+                                
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+                	
+            </div>
+            <!-- fin other -->	
+            </ng-container>	
+            					
         </div>
     </div>
 </div>

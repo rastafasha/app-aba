@@ -73,7 +73,7 @@
                                         <td>{{data.first_name + ' ' + (data.last_name ? data.last_name: '')}}</td>
                                         <td>{{data.email}}</td>
                                         <td>{{data.phone}}</td>
-                                        <td>{{data.client_id}}</td>
+                                        <td>{{data.patient_id}}</td>
                                         <td>
                                           <span class="badge bg-primary"
                                               *ngIf="data.eligibility === 'pending'">Pending</span>
@@ -121,7 +121,7 @@
                                               <div class="modal-content">
                                                   <div class="modal-body text-center">
                                                       <img src="assets/img/sent.png" alt="" width="50" height="46">
-                                                      <h3 *ngIf="patient_selected">Are you sure want to delete this patient {{patient_selected.email}}?</h3>
+                                                      <h3 *ngIf="patient_selected">Are you sure want to delete this patient {{patient_selected.patient_id}}?</h3>
                                                       <!-- validacion si esta en uso -->
                                                       <div class="form-group row" *ngIf="text_validation">
                                                         <div class="col-md-12">

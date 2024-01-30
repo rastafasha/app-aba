@@ -132,7 +132,7 @@ export class EditPatientMComponent {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
-      this.patient_id = resp.id;
+      this.client_id = resp.id;
      })
      this.showUser();
      this.getConfig();
@@ -147,7 +147,7 @@ export class EditPatientMComponent {
   }
   
 showUser(){
-    this.patientService.getPatient(this.patient_id).subscribe((resp:any)=>{
+    this.patientService.getPatient(this.client_id).subscribe((resp:any)=>{
       // console.log(resp);
       this.patient_selected = resp.patient;
 
@@ -168,7 +168,7 @@ showUser(){
         this.age = this.patient_selected.age;
         this.birth_date = this.patient_selected.birth_date ? new Date(this.patient_selected.birth_date).toISOString(): '';       
         this.gender = this.patient_selected.gender;
-        this.client_id = this.patient_selected.client_id;
+        this.patient_id = this.patient_selected.patient_id;
         this.address = this.patient_selected.address;
         this.city = this.patient_selected.city;
         this.state = this.patient_selected.state;

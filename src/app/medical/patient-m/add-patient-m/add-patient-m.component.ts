@@ -14,7 +14,6 @@ export class AddPatientMComponent {
   public routes = routes;
   public patient_id: any;
   
-  public client_id: any;
   public first_name: string = '';
   public last_name: string = '';
   public parent_guardian_name: string = '';
@@ -214,7 +213,7 @@ export class AddPatientMComponent {
 
   save(){debugger
     this.text_validation = '';
-    if(!this.first_name ||!this.last_name || !this.client_id ){
+    if(!this.first_name ||!this.last_name || !this.patient_id ){
       this.text_validation = 'Los campos con * son obligatorios';
       return;
     }
@@ -241,7 +240,7 @@ export class AddPatientMComponent {
     formData.append('school_name', this.school_name);
     formData.append('school_number', this.school_number);
     formData.append('age', this.age+'');
-    formData.append('client_id', this.client_id);
+    formData.append('patient_id', this.patient_id);
     formData.append('diagnosis_code', this.diagnosis_code);
     formData.append('schedule', this.schedule);
     formData.append('summer_schedule', this.summer_schedule);
