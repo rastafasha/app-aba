@@ -50,7 +50,7 @@ export class DoctorService {
   }
   editDoctorProfile(data:any, doctor_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/staffs/update/"+doctor_id;
+    let URL = url_servicios+"/doctors/update/"+doctor_id;
     return this.http.post(URL,data,{headers:headers});
   }
 

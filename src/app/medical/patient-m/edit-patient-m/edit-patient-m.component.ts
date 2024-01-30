@@ -305,7 +305,7 @@ showUser(){
     formData.append('gender', this.gender+'');
     formData.append('address', this.address);
     formData.append('zip', this.zip);
-    formData.append('client_id', this.client_id);
+    formData.append('patient_id', this.patient_id);
     formData.append('city', this.city);
     formData.append('state', this.state);
     formData.append('education', this.education);

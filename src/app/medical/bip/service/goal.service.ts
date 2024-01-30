@@ -18,6 +18,11 @@ export class GoalService {
     let URL = url_servicios+'/goal';
     return this.http.get(URL, {headers:headers});
   }
+  listMaladaptivesGoals(goal:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/goal/show/maladaptives/'+goal;
+    return this.http.get(URL, {headers:headers});
+  }
   
   getGoal(user_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})

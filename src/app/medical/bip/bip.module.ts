@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BipListComponent } from './bip-list/bip-list.component';
+import { ComponentsModule } from 'src/app/medical/bip/components/components.module';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { BipListComponent } from './bip-list/bip-list.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ComponentsModule
   ]
 })
 export class BipModule { }

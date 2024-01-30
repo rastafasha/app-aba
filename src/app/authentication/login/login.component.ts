@@ -111,18 +111,21 @@ export class LoginComponent implements OnInit {
 
     getuserRol(){
       
-      if(this.user.roles == 'DOCTOR' ){
-        this.router.navigate([routes.doctorDashboard]);
-      }
       if(this.user.roles == 'SUPERADMIN' ){
         this.router.navigate([routes.adminDashboard]);
       }
-      //roles secundarios
-      if(this.user.roles == 'DOCTOR ESPECIALISTA' ){
+      if(this.user.roles == 'MANAGER' ){
+        this.router.navigate([routes.adminDashboard]);
+      }
+      if(this.user.roles == 'LM' ){
         this.router.navigate([routes.doctorDashboard]);
       }
-      if(this.user.roles == 'DOCTOR ASISTENTE' ){
-        this.router.navigate([routes.doctorDashboard]);
+      //roles secundarios
+      if(this.user.roles == 'BCBA' ){
+        this.router.navigate([routes.patientDashboard]);
+      }
+      if(this.user.roles == 'RBT' ){
+        this.router.navigate([routes.patientDashboard]);
       }
    }
  
