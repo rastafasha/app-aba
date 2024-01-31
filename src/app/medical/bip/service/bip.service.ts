@@ -19,14 +19,14 @@ export class BipService {
     return this.http.get(URL, {headers:headers});
   }
   
-  getBip(user_id:any){
+  getBip(client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/bip/show/'+user_id;
+    let URL = url_servicios+'/bip/show/'+client_id;
     return this.http.get(URL, {headers:headers});
   }
-  getBipByUser(user_id:any){
+  getBipByUser(client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/bip/show/byuser/'+user_id;
+    let URL = url_servicios+'/bip/show/byuser/'+client_id;
     return this.http.get(URL, {headers:headers});
   }
   createBip(data){
@@ -34,20 +34,20 @@ export class BipService {
     let URL = url_servicios+'/bip/store';
     return this.http.post(URL,data, {headers:headers});
   }
-  editBip( data:any, user_id:any,){
+  editBip( data:any, client_id:any,){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/bip/update/'+user_id;
+    let URL = url_servicios+'/bip/update/'+client_id;
     return this.http.post(URL,data,{headers:headers});
   }
-  deleteBip(user_id:any){
+  deleteBip(client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/bip/destroy/'+user_id;
+    let URL = url_servicios+'/bip/destroy/'+client_id;
     return this.http.delete(URL, {headers:headers});
   }
 
-  showBipProfile(user_id:any){
+  showBipProfile(client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/bip/profile/"+user_id;
+    let URL = url_servicios+"/bip/profile/"+client_id;
     return this.http.get(URL,{headers:headers});
   }
 
@@ -57,14 +57,14 @@ export class BipService {
     return this.http.get(URL, {headers:headers});
   }
 
-  update(data:any, patient_id:any){
+  update(data:any, client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/bip/update/"+patient_id;
-    return this.http.post(URL,data,{headers:headers});
+    let URL = url_servicios+"/bip/update/"+client_id;
+    return this.http.put(URL,data,{headers:headers});
   }
-  updateStatus(data:any, patient_id:any){
+  updateStatus(data:any, client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/bip/update/eligibility/"+patient_id;
+    let URL = url_servicios+"/bip/update/eligibility/"+client_id;
     return this.http.put(URL,data,{headers:headers});
   }
 }

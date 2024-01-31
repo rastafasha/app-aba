@@ -8,7 +8,7 @@
             <h3 class="card-title">Maladaptives Behaviors</h3>
             <div class="col-xs-12">
                 <!-- lista inicial -->
-                <div class="table-responsive">
+                <div class="table-responsive" *ngIf="!maladaptiveSelected">
                     <table class="table mb-0">
                         <thead>
                             <tr>
@@ -46,7 +46,7 @@
                 </div>
                 <!-- maladaptiveSelected -->
                 <div class="rbt-dashboard-table table-responsive mobile-table-750" *ngIf="maladaptiveSelected">
-                    <table class="rbt-table table table-borderless">
+                    <!-- <table class="rbt-table table table-borderless">
                         <thead>
                             <tr>
                                 <th>Maladaptives Behavior</th>
@@ -63,7 +63,7 @@
                             </tr>
                            
                         </tbody>
-                    </table>
+                    </table> -->
                     <!-- <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">Goals</h3>

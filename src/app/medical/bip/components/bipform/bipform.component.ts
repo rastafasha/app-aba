@@ -320,27 +320,35 @@ export class BipformComponent {
       interventions: this.interventions,
     }
 
-    if(this.client_id !== null && this.client_id !== undefined){
-      this.bipService.createBip(data).subscribe((resp:any)=>{
-        console.log(resp);
-        this.text_success = 'Se guardó la informacion de la cita médica'
-        this.ngOnInit();
-      })
+    this.bipService.createBip(data).subscribe((resp:any)=>{
+      console.log(resp);
+      this.text_success = 'Se guardó la informacion de la cita médica'
+      this.ngOnInit();
+    })
+    // if(this.client_id){
+
+    //   this.bipService.update(data, this.client_id).subscribe((resp:any)=>{
+    //     console.log(resp);
+    //     this.text_success = 'Bip Updated'
+    //     this.ngOnInit();
+    //   })
       
-      // if(this.bip_selected.client_id !== this.client_id){
-      //   //actualizar
+      
+    //   // if(this.bip_selected.client_id !== this.client_id){
+    //   //   //actualizar
         
   
         
-      // }
-    }else{
-      this.bipService.update(data, this.bip_selected.client_id).subscribe((resp:any)=>{
-        console.log(resp);
-        this.text_success = 'Bip Updated'
-        this.ngOnInit();
-      })
-      //crear
-    }
+    //   // }
+    // }else{
+      
+    //   //crear
+    //   this.bipService.createBip(data).subscribe((resp:any)=>{
+    //     console.log(resp);
+    //     this.text_success = 'Se guardó la informacion de la cita médica'
+    //     this.ngOnInit();
+    //   })
+    // }
     
     return false;
     

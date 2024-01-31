@@ -21,6 +21,7 @@ export class SidebarComponent {
 
   public routes = routes;
   public sidebarData: Array<SideBarData> = [];
+  public user:any;
 
   constructor(
     private data: DataService,
@@ -28,7 +29,40 @@ export class SidebarComponent {
     private sideBar: SideBarService,
     public authService:AuthService
   ) {
-    this.sidebarData = this.data.sideBar;
+    // this.user = this.authService.user;
+    let USER = localStorage.getItem("user");
+    this.user = JSON.parse(USER ? USER: '');
+    //inicio
+    if(this.user.roles.includes("SUPERADMIN")){
+      this.sidebarData = this.data.sideBar;
+
+    }else{
+      //vamos a filtrar y validar que opciones puede ver el rol
+      let permissions = this.user.permissions;
+      let SIDE_BAR_G:any = [];
+
+      this.data.sideBar.forEach((side:any)=>{
+        let SIDE_B:any = [];
+        side.menu.forEach((menu_s:any)=>{
+          let SUB_MENUS = menu_s.subMenus.filter((submenu:any)=> permissions.includes(submenu.permision) && submenu.show_nav);
+            if(SUB_MENUS.length > 0){
+              menu_s.subMenus = SUB_MENUS;
+              SIDE_B.push(menu_s);
+            }
+            if(permissions.includes(menu_s.permision)){
+              menu_s.subMenus = [];
+              SIDE_B.push(menu_s);
+            }
+        });
+        if(SIDE_B.length > 0){
+          side.menu = SIDE_B;
+          SIDE_BAR_G.push(side);
+        }
+      });
+      this.sidebarData = SIDE_BAR_G;
+    }
+
+    //fin
     router.events.subscribe((event: object) => {
       if (event instanceof NavigationEnd) {
         this.getRoutes(event);

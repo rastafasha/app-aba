@@ -40,23 +40,32 @@
                                                 </div>
                                                 <div class="names-profiles">
                                                     <h4>{{patient_selected.full_name}}</h4>
-                                                    <h5>Paciente</h5>
+                                                    <h5>Client</h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                             <div class="follow-group">
                                                 <div class="doctor-follows">
-                                                    <h5>Appointments</h5>
-                                                    <h4>{{num_appointment}}</h4>
+                                                    <h5>Patient ID</h5>
+                                                    <h4>{{patient_selected.patient_id}}</h4>
                                                 </div>
                                                 <div class="doctor-follows">
-                                                    <h5>Money</h5>
-                                                    <h4>{{money_of_appointments|currency}}</h4>
+                                                    <h5>diagnosis_code</h5>
+                                                    <h4>{{patient_selected.diagnosis_code}}</h4>
                                                 </div>
                                                 <div class="doctor-follows">
-                                                    <h5>Appointment Pending</h5>
-                                                    <h4>{{num_appointment_pendings}}</h4>
+                                                    <h5>Eligibility</h5>
+                                                    <!-- <h4>{{eligibility}}</h4> -->
+                                                    <span class="badge bg-danger"
+                                                        *ngIf="patient_selected.eligibility === 'inactive'">Inactive</span>
+                                                    <span class="badge bg-success"
+                                                        *ngIf="patient_selected.eligibility === 'active'">Active</span>
+                                                    <span class="badge bg-primary"
+                                                        *ngIf="patient_selected.eligibility === 'incoming'">Incoming</span>
+                                                    <span class="badge bg-dark"
+                                                        *ngIf="patient_selected.eligibility === 'black list'">Black list</span>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -85,35 +94,86 @@
                                         <ul class="list-space">
                                             <li>
                                                 <h4>Gender</h4>
-                                                <span *ngIf="patient_selected.gender == 2">Femenino</span>
-                                                <span *ngIf="patient_selected.gender == 1">Masculino</span>
+                                                <span *ngIf="patient_selected.gender == 2">Female</span>
+                                                <span *ngIf="patient_selected.gender == 1">Male</span>
                                             </li>
                                             <li>
                                                 <h4>Educación</h4>
                                                 <span>{{patient_selected.education}}</span>
                                             </li>
+                                            
                                             <li>
-                                                <h4>Birth Day</h4>
-                                                <span>{{patient_selected.birth_date}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Email</h4>
-                                                <span>{{patient_selected.email}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Teléfono</h4>
+                                                <h4>Mobile</h4>
                                                 <span>{{patient_selected.phone}}</span>
                                             </li>
                                             <li>
-                                                <h4>N.Documento</h4>
-                                                <span>{{patient_selected.n_doc}}</span>
+                                                <h4>Home phone</h4>
+                                                <span>{{patient_selected.home_phone}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Work phone</h4>
+                                                <span>{{patient_selected.work_phone}}</span>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="doctor-personals-grp" >
+                        <div class="doctor-personals-grp">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="heading-detail ">
+                                        <h4 class="mb-3">Intakes</h4>
+                                    </div>
+                                    <div class="about-me-list">
+                                        <ul class="list-space">
+                                            <li>
+                                                <h4>Welcome</h4>
+                                                <span>{{patient_selected.education}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Consent</h4>
+                                                <span>{{patient_selected.education}}</span>
+                                            </li>
+                                            
+                                            <li>
+                                                <h4>Insurance Card</h4>
+                                                <span>{{patient_selected.phone}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>MNL</h4>
+                                                <span>{{patient_selected.home_phone}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Referral</h4>
+                                                <span>{{patient_selected.work_phone}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>ADOS</h4>
+                                                <span>{{patient_selected.work_phone}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>iep</h4>
+                                                <span>{{patient_selected.work_phone}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>ASD Diagnosis</h4>
+                                                <span>{{patient_selected.work_phone}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CDE</h4>
+                                                <span>{{patient_selected.work_phone}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Submitted</h4>
+                                                <span>{{patient_selected.work_phone}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="doctor-personals-grp" >
                             
                             <div class="card">
                                 <div class="card-body">
@@ -170,7 +230,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="doctor-personals-grp" *ngIf="patient_selected.person && patient_selected.person.name_companion">
                             <div class="card">
                                 <div class="card-body">
@@ -178,16 +238,12 @@
                                         <ul class="list-space">
                                             
                                             <li>
-                                                <h4>Acompañante</h4>
-                                                <span>{{patient_selected.person.name_companion+' '+patient_selected.person.surname_companion}}</span>
+                                                <h4>Parent/Guardian Name</h4>
+                                                <span>{{patient_selected.person.parent_guardian_name+' '+patient_selected.person.surname_companion}}</span>
                                             </li>
                                             <li>
-                                                <h4>Teléfono Acompañante</h4>
-                                                <span>{{patient_selected.person.mobile_companion}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Relación Acompañante</h4>
-                                                <span>{{patient_selected.person.relationship_companion}}</span>
+                                                <h4>Relationship</h4>
+                                                <span>{{patient_selected.person.relationship}}</span>
                                             </li>
 
                                             
@@ -231,7 +287,10 @@
                                                 <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 1}" (click)="optionSelected(1)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>About me</a>
                                             </li>
                                             <li>
-                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-16.svg" alt=""></span>List Appointments</a>
+                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Specialist</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 3}" (click)="optionSelected(3)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Files</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -246,8 +305,14 @@
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
-                                                        <h2>Mobile </h2>
-                                                        <h3>{{patient_selected.phone}}</h3>
+                                                        <h2>Birth Day </h2>
+                                                        <h3>{{patient_selected.birth_date}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Age </h2>
+                                                        <h3>{{patient_selected.age}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
@@ -258,22 +323,113 @@
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
-                                                        <h2>Direccion</h2>
-                                                        <h3>{{patient_selected.address}}</h3>
+                                                        <h2>Language</h2>
+                                                        <h3>{{patient_selected.language}}</h3>
                                                     </div>
                                                 </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Education</h2>
+                                                        <h3>{{patient_selected.education}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Elegibility date</h2>
+                                                        <h3>{{patient_selected.elegibility_date}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Profession</h2>
+                                                        <h3>{{patient_selected.profession}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>School Name</h2>
+                                                        <h3>{{patient_selected.school_name}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>School Number</h2>
+                                                        <h3>{{patient_selected.school_number}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Diagnosis Code</h2>
+                                                        <h3>{{patient_selected.diagnosis_code}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Schedule</h2>
+                                                        <h3>{{patient_selected.schedule}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Summer Schedule</h2>
+                                                        <h3>{{patient_selected.summer_schedule}}</h3>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <div class="hello-park">
-                                            <p><b>Antecedente Familiar:</b> {{patient_selected.antecedent_family}}</p>
-                                            <p><b>Antecedente Personal:</b> {{patient_selected.antecedent_personal}}</p>
-                                            <p><b>Antecedente Alergico:</b> {{patient_selected.antecedent_alerg}}</p>
+                                            <p><b>Address:</b> {{patient_selected.address}}</p>
+                                            <p><b>City:</b> {{patient_selected.city}}</p>
+                                            <p><b>ZIP Code:</b> {{patient_selected.zip}}</p>
+                                        </div>
+                                        <div class="hello-park">
+                                            <p><b>Special Notes:</b> {{patient_selected.special_note}}</p>
+                                            
                                         </div>
                                     </ng-container>
                                     <ng-container *ngIf="option_selected == 2">
+                                        <div class="personal-list-out">
+                                            <div class="row">
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>RBT</h2>
+                                                        <h3>{{patient_selected.rbt}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>RBT 2 </h2>
+                                                        <h3>{{patient_selected.rbt2}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>BCBA </h2>
+                                                        <h3>{{patient_selected.bcba}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>BCBA 2</h2>
+                                                        <h3>{{patient_selected.bcba2}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Clinical Director</h2>
+                                                        <h3>{{patient_selected.clin_director}}</h3>
+                                                    </div>
+                                                </div>
+                                               
+                                                
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="option_selected == 3">
                                         <div class="activity scrooldiv">
                                             <div class="activity-box">
-                                                <ul class="activity-list">
+                                                <!-- <ul class="activity-list">
                                                     <ng-container *ngFor="let appointment of appointments">
                                                         <li>
                                                             <div class="activity-user">
@@ -299,11 +455,151 @@
                                                         </li>
                                                     </ng-container>
                                                     
-                                                </ul>
+                                                </ul> -->
                                             </div>
                                         </div>
                                     </ng-container>
                                     
+                                    
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title ">Benefits</h4>
+                                </div>
+                                <div class="card-body p-0 ">
+                                    <div class="personal-list-out">
+                                        <div class="container">
+                                            <div class="row">
+                                                
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Insurer </h2>
+                                                        <h3>{{patient_selected.insurer}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Insurance Id </h2>
+                                                        <h3>{{patient_selected.insuranceId}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Insurer Secundary </h2>
+                                                        <h3>{{patient_selected.insurer_secundary}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>insuranceId_secundary</h2>
+                                                        <h3>{{patient_selected.insuranceId_secundary}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Elegibility date</h2>
+                                                        <h3>{{patient_selected.elegibility_date}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>POS Covered</h2>
+                                                        <h3>{{patient_selected.pos_covered}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Deductible Individual I/F</h2>
+                                                        <h3>{{patient_selected.deductible_individual_I_F}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Balance</h2>
+                                                        <h3>{{patient_selected.balance}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Coinsurance</h2>
+                                                        <h3>{{patient_selected.coinsurance}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Copayments</h2>
+                                                        <h3>{{patient_selected.copayments}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>OOP</h2>
+                                                        <h3>{{patient_selected.oop}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Patient Control #</h2>
+                                                        <h3>{{patient_selected.patient_control}}</h3>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title ">PAs</h4>
+                                </div>
+                                <div class="card-body p-0 ">
+                                    <div class="personal-list-out">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>PA Assessment</h2>
+                                                        <h3>{{patient_selected.pa_assessment}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Patient Assesment Start Date </h2>
+                                                        <h3>{{patient_selected.pa_assessment_start_date}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Patient Assesment End Date</h2>
+                                                        <h3>{{patient_selected.pa_assessment_end_date}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>PA Services</h2>
+                                                        <h3>{{patient_selected.pa_services}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Patient Services Start Date</h2>
+                                                        <h3>{{patient_selected.pa_services_start_date}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6">
+                                                    <div class="detail-personal">
+                                                        <h2>Patient Services End Date</h2>
+                                                        <h3>{{patient_selected.pa_services_end_date}}</h3>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
                                     
                                 </div>
                             </div>

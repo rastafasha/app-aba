@@ -264,13 +264,13 @@ export class DataService {
               menuValue: 'Employeer List',
               route: routes.doctorsList,
               base: routes.doctorsList,
-              permision: 'list_doctor',
+              permision: 'list_employers',
             },
             {
               menuValue: 'Add Employeer',
               route: routes.addDoctor,
               base: routes.addDoctor,
-              permision: 'register_doctor',
+              permision: 'register_employer',
             },
             // {
             //   menuValue: 'Edit Doctor',

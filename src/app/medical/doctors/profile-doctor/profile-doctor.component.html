@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Doctors </a></li>
+                        <li class="breadcrumb-item"><a href="#">Employeers </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Doctor Profile</li>
+                        <li class="breadcrumb-item active">Employeer Profile</li>
                     </ul>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="about-info">
-                                    <h4>Doctor Profile  </h4>
+                                    <h4>Employeer Profile  </h4>
                                 </div>
                                 <div class="doctor-profile-head">
                                     <!-- <div class="profile-bg-img">
@@ -60,8 +60,8 @@
                                                     <h4>{{num_appointment}}</h4>
                                                 </div>
                                                 <div class="doctor-follows">
-                                                    <h5>Money</h5>
-                                                    <h4>{{money_of_appointments|currency}}</h4>
+                                                    <h5>Salary</h5>
+                                                    <h4>{{doctor_selected.salary|currency}}</h4>
                                                 </div>
                                                 <div class="doctor-follows">
                                                     <h5>Appointment Pending</h5>
@@ -94,8 +94,8 @@
                                         <ul class="list-space">
                                             <li>
                                                 <h4>Gender</h4>
-                                                <span *ngIf="doctor_selected.gender == 2">Femenino</span>
-                                                <span *ngIf="doctor_selected.gender == 1">Masculino</span>
+                                                <span *ngIf="doctor_selected.gender == 2">Female</span>
+                                                <span *ngIf="doctor_selected.gender == 1">Male</span>
                                             </li>
                                             <li>
                                                 <h4>Birth Day</h4>
@@ -118,6 +118,90 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="doctor-personals-grp">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="heading-detail ">
+                                        <h4 class="mb-3">CEU</h4>
+                                        <!-- <p>Hello I am Smith Bruklin a Gynaecologist in Sanjivni Hospital Surat. I love to work with all my hospital staff and seniour doctors.</p> -->
+                                    </div>
+                                    <div class="about-me-list">
+                                        <ul class="list-space">
+                                            <li>
+                                                <h4>CEU HIPPA Annually</h4>
+                                                <span>{{doctor_selected.ceu_hippa_annually}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CEU Domestic Violence (no expiration )</h4>
+                                                <span>{{doctor_selected.ceu_domestic_violence_no_expiration}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CEU Security Awarence Annually</h4>
+                                                <span>{{doctor_selected.ceu_security_awareness_annually}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CEU Zero Tolerance (every 3 years)</h4>
+                                                <span>{{doctor_selected.ceu_zero_tolerance_every_3_years}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CEU- HIV/bloodborne pathogens/infection control (no expiration)</h4>
+                                                <span>{{doctor_selected.ceu_hiv_bloodborne_pathogens_infection_control_no_expiration}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CEU Civil Rights (no expiration)</h4>
+                                                <span>{{doctor_selected.ceu_civil_rights_no_expiration}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doctor-personals-grp">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="heading-detail ">
+                                        <h4 class="mb-3">Others</h4>
+                                        <!-- <p>Hello I am Smith Bruklin a Gynaecologist in Sanjivni Hospital Surat. I love to work with all my hospital staff and seniour doctors.</p> -->
+                                    </div>
+                                    <div class="about-me-list">
+                                        <ul class="list-space">
+                                            <li>
+                                                <h4>School Badge</h4>
+                                                <span>{{doctor_selected.school_badge}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>W-9/W-4 form</h4>
+                                                <span>{{doctor_selected.w_9_w_4_form}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Contract</h4>
+                                                <span>{{doctor_selected.contract}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>2/4 Week Notice Agreement</h4>
+                                                <span>{{doctor_selected.two_four_week_notice_agreement}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Credentialing package (BCBAs only)</h4>
+                                                <span>{{doctor_selected.credentialing_package_bcbas_only}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CAQH# (BCBAs only)</h4>
+                                                <span>{{doctor_selected.caqh_bcbas_only}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Contract Type</h4>
+                                                <span>{{doctor_selected.contract_type}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Salary</h4>
+                                                <span>{{doctor_selected.salary}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="doctor-personals-grp">
@@ -128,6 +212,7 @@
                                             <li>
                                                 <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 1}" (click)="optionSelected(1)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>About me</a>
                                             </li>
+                                            
                                             <li>
                                                 <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>List Appointments </a>
                                             </li>
@@ -137,65 +222,209 @@
                                         </ul>
                                     </div>
                                     <ng-container *ngIf="option_selected == 1">
-                                        <div class="personal-list-out">
-                                            <div class="row">
-                                                <div class="col-xl-3 col-md-6">
-                                                    <div class="detail-personal">
-                                                        <h2>Full Name</h2>
-                                                        <h3>{{doctor_selected.full_name}}</h3>
+                                        <div class="card">
+                                            
+                                            <div class="card-body p-0 ">
+                                                <div class="personal-list-out">
+                                                    <div class="row">
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="detail-personal">
+                                                                <h2>Full Name</h2>
+                                                                <h3>{{doctor_selected.full_name}}</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="detail-personal">
+                                                                <h2>Mobile </h2>
+                                                                <h3>{{doctor_selected.phone}}</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="detail-personal">
+                                                                <h2>Email</h2>
+                                                                <h3>{{doctor_selected.email}}</h3>
+                                                            </div>
+                                                        </div>
+                                                        
                                                     </div>
-                                                </div>
-                                                <div class="col-xl-3 col-md-6">
-                                                    <div class="detail-personal">
-                                                        <h2>Mobile </h2>
-                                                        <h3>{{doctor_selected.phone}}</h3>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-3 col-md-6">
-                                                    <div class="detail-personal">
-                                                        <h2>Email</h2>
-                                                        <h3>{{doctor_selected.email}}</h3>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-3 col-md-6">
-                                                    <div class="detail-personal">
-                                                        <h2>Address</h2>
-                                                        <h3>{{doctor_selected.address}}</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-xl-3 col-md-6">
-                                                    <div class="col-xl-3 col-md-6">
-                                                        <div class="detail-personal">
-                                                            <h2>Currently Pay Throught Company </h2>
-                                                            <h3>{{doctor_selected.currently_pay_through_company}}</h3>
+        
+                                                    <div class="row">
+                                                        <div class="col-xl-3 col-md-6">
+                                                            
+                                                            <div class="detail-personal">
+                                                                <h2>languages</h2>
+                                                                <h3>{{doctor_selected.languages}}</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="detail-personal">
+                                                                <h2>contract</h2>
+                                                                <h3>{{doctor_selected.contract}}</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="detail-personal">
+                                                                <h2>contract_type</h2>
+                                                                <h3>{{doctor_selected.contract_type}}</h3>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="detail-personal">
-                                                        <h2>languages</h2>
-                                                        <h3>{{doctor_selected.languages}}</h3>
-                                                    </div>
                                                 </div>
-                                                <div class="col-xl-3 col-md-6">
-                                                    <div class="detail-personal">
-                                                        <h2>contract</h2>
-                                                        <h3>{{doctor_selected.contract}}</h3>
-                                                    </div>
+                                                <div class="hello-park">
+                                                    <p><b>Address:</b> {{doctor_selected.address}}</p>
                                                 </div>
-                                                <div class="col-xl-3 col-md-6">
-                                                    <div class="detail-personal">
-                                                        <h2>contract_type</h2>
-                                                        <h3>{{doctor_selected.contract_type}}</h3>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
-                                        <div class="hello-park">
-                                            <p><b>Antecedente Familiar:</b> {{doctor_selected.antecedent_family}}</p>
-                                            <p><b>Antecedente Personal:</b> {{doctor_selected.antecedent_personal}}</p>
-                                            <p><b>Antecedente Alergico:</b> {{doctor_selected.antecedent_alerg}}</p>
+                                        
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title ">Professional data</h4>
+                                            </div>
+                                            <div class="card-body p-0 ">
+                                                <div class="personal-list-out">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Currently Pay Throught Company  </h2>
+                                                                    <h3>{{doctor_selected.currently_pay_through_company}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>LLC </h2>
+                                                                    <h3>{{doctor_selected.llc}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>IEN</h2>
+                                                                    <h3>{{doctor_selected.ien}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>WC</h2>
+                                                                    <h3>{{doctor_selected.wc}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Electronic Signature</h2>
+                                                                    <h3>{{doctor_selected.electronic_signature}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Agency / Location</h2>
+                                                                    <h3>{{doctor_selected.agency_location}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>City</h2>
+                                                                    <h3>{{doctor_selected.city}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>DOB</h2>
+                                                                    <h3>{{doctor_selected.dob}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>SS Number</h2>
+                                                                    <h3>{{doctor_selected.ss_number}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Date of Hire</h2>
+                                                                    <h3>{{doctor_selected.date_of_hire}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Start Pay</h2>
+                                                                    <h3>{{doctor_selected.start_pay}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Driver License Expiration</h2>
+                                                                    <h3>{{doctor_selected.driver_license_expiration}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>CPR (every 2 years)</h2>
+                                                                    <h3>{{doctor_selected.cpr_every_2_years}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Background (every 5 years)</h2>
+                                                                    <h3>{{doctor_selected.background_every_5_years}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>E Verify</h2>
+                                                                    <h3>{{doctor_selected.e_verify}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>National Sex Offender Registry</h2>
+                                                                    <h3>{{doctor_selected.national_sex_offender_registry}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Certificate Number</h2>
+                                                                    <h3>{{doctor_selected.certificate_number}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>BACB License Expiration</h2>
+                                                                    <h3>{{doctor_selected.bacb_license_expiration}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Liability Insurance Annually</h2>
+                                                                    <h3>{{doctor_selected.liability_insurance_annually}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Local Police Rec(every 5 years)</h2>
+                                                                    <h3>{{doctor_selected.local_police_rec_every_5_years}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>NPI</h2>
+                                                                    <h3>{{doctor_selected.npi}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-md-6">
+                                                                <div class="detail-personal">
+                                                                    <h2>Medica Id Provider</h2>
+                                                                    <h3>{{doctor_selected.medicaid_provider}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
                                         </div>
                                     </ng-container>
                                     <ng-container *ngIf="option_selected == 2">

@@ -96,7 +96,7 @@ export class BipattentionComponent {
       this.relationship = this.client_selected.patient.relationship;
       this.address = this.client_selected.patient.address;
       this.age = this.client_selected.patient.age;
-      this.dob = this.client_selected.patient.dob;
+      this.dob = this.client_selected.patient.birth_date ? new Date(this.client_selected.patient.birth_date).toISOString(): ''; 
 
     });
   }
