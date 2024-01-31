@@ -293,7 +293,7 @@ export class BipformComponent {
 //fin listados
 
 
-  save(){
+  save(){debugger
     this.text_validation = '';
     // if(!this.documents || this.documents.length == 0){
     //   this.text_validation = 'Es requerido ingresar el diagnostico y una receta medica';
@@ -320,35 +320,35 @@ export class BipformComponent {
       interventions: this.interventions,
     }
 
-    this.bipService.createBip(data).subscribe((resp:any)=>{
-      console.log(resp);
-      this.text_success = 'Se guardó la informacion de la cita médica'
-      this.ngOnInit();
-    })
-    // if(this.client_id){
+    // this.bipService.createBip(data).subscribe((resp:any)=>{
+    //   console.log(resp);
+    //   this.text_success = 'Se guardó la informacion de la cita médica'
+    //   this.ngOnInit();
+    // })
+    if(this.bip_selected){
 
-    //   this.bipService.update(data, this.client_id).subscribe((resp:any)=>{
-    //     console.log(resp);
-    //     this.text_success = 'Bip Updated'
-    //     this.ngOnInit();
-    //   })
+      this.bipService.update(data, this.client_id).subscribe((resp:any)=>{
+        console.log(resp);
+        this.text_success = 'Bip Updated'
+        this.ngOnInit();
+      })
       
       
-    //   // if(this.bip_selected.client_id !== this.client_id){
-    //   //   //actualizar
+      // if(this.bip_selected.client_id !== this.client_id){
+      //   //actualizar
         
   
         
-    //   // }
-    // }else{
+      // }
+    }else{
       
-    //   //crear
-    //   this.bipService.createBip(data).subscribe((resp:any)=>{
-    //     console.log(resp);
-    //     this.text_success = 'Se guardó la informacion de la cita médica'
-    //     this.ngOnInit();
-    //   })
-    // }
+      //crear
+      this.bipService.createBip(data).subscribe((resp:any)=>{
+        console.log(resp);
+        this.text_success = 'Se guardó la informacion de la cita médica'
+        this.ngOnInit();
+      })
+    }
     
     return false;
     

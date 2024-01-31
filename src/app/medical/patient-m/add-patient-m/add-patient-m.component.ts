@@ -54,14 +54,15 @@ export class AddPatientMComponent {
   public copayments: any;
   public oop: any;
 
+  public pa_assessments: any = [];
   public pa_assessment: any;
   public pa_assessment_start_date: string = '';
   public pa_assessment_end_date: string = '';
   public pa_services: any;
-  public n_code: any;
-  public s_unit: any;
   public pa_services_start_date: string = '';
   public pa_services_end_date: string = '';
+  public s_unit: any;
+  public n_code: any;
   
   public welcome: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public consent: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
@@ -175,6 +176,26 @@ export class AddPatientMComponent {
   deleteService(i:any){
     this.services.splice(i,1);
   }
+  addPAAssestment(){
+    this.pa_assessments.push({
+      pa_assessment: this.pa_assessment,
+      pa_assessment_start_date: this.pa_assessment_start_date,
+      pa_assessment_end_date: this.pa_assessment_end_date,
+      pa_services: this.pa_services,
+      pa_services_start_date: this.pa_services_start_date,
+      pa_services_end_date: this.pa_services_end_date,
+    })
+    this.pa_assessment = '';
+    this.pa_assessment_start_date = '';
+    this.pa_assessment_end_date = '';
+    this.pa_services = '';
+    this.pa_services_start_date = '';
+    this.pa_services_end_date = '';
+  }
+
+  deletePAAssestment(i:any){
+    this.pa_assessments.splice(i,1);
+  }
 
   loadFile($event:any){
     if($event.target.files[0].type.indexOf("image")){
@@ -259,12 +280,14 @@ export class AddPatientMComponent {
     formData.append('copayments', this.copayments);
     formData.append('oop', this.oop);
 
-    formData.append('pa_assessment', this.pa_assessment);
-    formData.append('pa_assessment_start_date', this.pa_assessment_start_date);
-    formData.append('pa_assessment_end_date', this.pa_assessment_end_date);
-    formData.append('pa_services', this.pa_services);
-    formData.append('pa_services_start_date', this.pa_services_start_date);
-    formData.append('pa_services_end_date', this.pa_services_end_date);
+    formData.append('pa_assessments', JSON.stringify(this.pa_assessments));
+
+    // formData.append('pa_assessments', this.pa_assessments);
+    // formData.append('pa_assessment_start_date', this.pa_assessment_start_date);
+    // formData.append('pa_assessment_end_date', this.pa_assessment_end_date);
+    // formData.append('pa_services', this.pa_services);
+    // formData.append('pa_services_start_date', this.pa_services_start_date);
+    // formData.append('pa_services_end_date', this.pa_services_end_date);
     
     
     formData.append('welcome', this.welcome);

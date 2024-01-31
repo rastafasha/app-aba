@@ -23,7 +23,7 @@
                             <div class="row" >
                                 <div class="col-12">
                                     <div class="form-heading">
-                                        <h4>Client Edit: {{patient_selected.client_id}}</h4>
+                                        <h4>Client Edit: {{patient_id}}</h4>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">  
@@ -613,78 +613,103 @@
                     <div class="card-body">
                         <form>
                             <div class="row" >
-                                <div class="col-12">
-                                    <div class="form-heading">
-                                        <h4>PAs</h4>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >PA Assessment <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="pa_assessment" [(ngModel)]="pa_assessment" type="text"  >
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Patient Assesment Start Date<span class="login-danger">*</span></label>
-                                        <input class="form-control datetimepicker" name="pa_assessment_start_date" [(ngModel)]="pa_assessment_start_date" type="text" matInput [matDatepicker]="picker3"  >
-                                        <mat-datepicker #picker3></mat-datepicker>
-                                        <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Patient Assesment End Date<span class="login-danger">*</span></label>
-                                        <input class="form-control datetimepicker" name="pa_assessment_end_date" [(ngModel)]="pa_assessment_end_date" type="text" matInput [matDatepicker]="picker4"  >
-                                        <mat-datepicker #picker4></mat-datepicker>
-                                        <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >PA Services <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="pa_services" [(ngModel)]="pa_services" type="text"  >
-                                    </div>
-                                </div>
-                                <!-- <div class="row align-items-center" >
-                                    <div class="col-xs-12 col-sm-6">
+                                <!-- pas -->
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="card-block">
+                                <h3 class="card-title">PAs</h3>
+                                
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12 ">
                                         <div class="row">
                                             
-                                            <div class="col-12 ">  
+                                            <div class="col-12 col-md-6 col-xl-4">
                                                 <div class="form-group local-forms">
-                                                    <label >N. Code<span class="login-danger">*</span></label>
-                                                    <input class="form-control" name="n_code"  [(ngModel)]="n_code" type="text"  >
+                                                    <label >PA Assessment <span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="pa_assessment" [(ngModel)]="pa_assessment" type="text"  >
                                                 </div>
                                             </div>
-                                            <div class="col-12 ">
+                                            
+                                            <div class="col-12 col-md-6 col-xl-4">
                                                 <div class="form-group local-forms">
-                                                    <label >Unit<span class="login-danger">*</span></label>
-                                                    <input class="form-control" name="s_unit"  [(ngModel)]="s_unit" type="text"  >
+                                                    <label >Patient Assesment Start Date<span class="login-danger">*</span></label>
+                                                    <input class="form-control datetimepicker" name="pa_assessment_start_date" [(ngModel)]="pa_assessment_start_date" type="text" matInput [matDatepicker]="picker3"  >
+                                                    <mat-datepicker #picker3></mat-datepicker>
+                                                    <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
                                                 </div>
                                             </div>
-                                            <div class="col-12 mb-3">
-                                                <button class="btn btn-primary btn-sm" (click)="addService()">+</button>
+                                            <div class="col-12 col-md-6 col-xl-4">
+                                                <div class="form-group local-forms">
+                                                    <label >Patient Assesment End Date<span class="login-danger">*</span></label>
+                                                    <input class="form-control datetimepicker" name="pa_assessment_end_date" [(ngModel)]="pa_assessment_end_date" type="text" matInput [matDatepicker]="picker4"  >
+                                                    <mat-datepicker #picker4></mat-datepicker>
+                                                    <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6 col-xl-4">
+                                                <div class="form-group local-forms">
+                                                    <label >PA Services <span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="pa_services" [(ngModel)]="pa_services" type="text"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6 col-xl-4">
+                                                <div class="form-group local-forms">
+                                                    <label >Patient Services Start Date<span class="login-danger">*</span></label>
+                                                    <input class="form-control datetimepicker" name="pa_services_start_date" [(ngModel)]="pa_services_start_date" type="text" matInput [matDatepicker]="picker5"  >
+                                                    <mat-datepicker #picker5></mat-datepicker>
+                                                    <mat-datepicker-toggle matIconSuffix [for]="picker5"></mat-datepicker-toggle>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6 col-xl-4">
+                                                <div class="form-group local-forms">
+                                                    <label >Patient Services End Date<span class="login-danger">*</span></label>
+                                                    <input class="form-control datetimepicker" name="pa_services_end_date" [(ngModel)]="pa_services_end_date" type="text" matInput [matDatepicker]="picker6"  >
+                                                    <mat-datepicker #picker6></mat-datepicker>
+                                                    <mat-datepicker-toggle matIconSuffix [for]="picker6"></mat-datepicker-toggle>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="col-12 mb-3 doctor-submit text-end">
+                                                <button class="btn btn-primary btn-sm" (click)="addPAAssestment()">Add</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-6">
+                                    <div class="col-xs-12">
                                         <div class="table-responsive">
                                             <table class="table mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th>N.Code</th>
-                                                        <th>Unit</th>
+                                                        <th>PA Assessment</th>
+                                                        <th>Patient Assesment Start Date</th>
+                                                        <th>Patient Assesment End Date</th>
+                                                        <th>PA Services</th>
+                                                        <th>Patient Services Start Date</th>
+                                                        <th>Patient Services End Date</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr *ngFor="let serv of services; let i = index">
+                                                    <tr *ngFor="let pa_asses of assesstments; let i = index">
                                                         <td>
-                                                            N.Code: {{serv.n_code}}
-                                                            <br>
-                                                            Unit: {{serv.s_unit}}
+                                                            {{pa_asses.pa_assessment}}
                                                         </td>
                                                         <td>
-                                                            <button class="btn btn-danger btn-sm" (click)="deleteService(i)">x</button>
+                                                             {{pa_asses.pa_assessment_start_date}}
+                                                        </td>
+                                                        <td>
+                                                            {{pa_asses.pa_assessment_end_date}}
+                                                        </td>
+                                                        <td>
+                                                            {{pa_asses.pa_services}}
+                                                        </td>
+                                                        <td>
+                                                             {{pa_asses.pa_services_start_date}}
+                                                        </td>
+                                                        <td>
+                                                            {{pa_asses.pa_services_end_date}}
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-danger btn-sm" (click)="deletePAAssestment(i)">x</button>
                                                         </td>
                                                     </tr>
                                                     
@@ -693,25 +718,15 @@
                                         </div>
                                     </div>
                                     
-                                </div> -->
-
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Patient Services Start Date<span class="login-danger">*</span></label>
-                                        <input class="form-control datetimepicker" name="pa_services_start_date" [(ngModel)]="pa_services_start_date" type="text" matInput [matDatepicker]="picker5"  >
-                                        <mat-datepicker #picker5></mat-datepicker>
-                                        <mat-datepicker-toggle matIconSuffix [for]="picker5"></mat-datepicker-toggle>
-                                    </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Patient Services End Date<span class="login-danger">*</span></label>
-                                        <input class="form-control datetimepicker" name="pa_services_end_date" [(ngModel)]="pa_services_end_date" type="text" matInput [matDatepicker]="picker6"  >
-                                        <mat-datepicker #picker6></mat-datepicker>
-                                        <mat-datepicker-toggle matIconSuffix [for]="picker6"></mat-datepicker-toggle>
-                                    </div>
-                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- pas -->
+                                
 
+                                
                                 
                                 
                                 <div class="col-12" *ngIf="valid_form">
@@ -744,6 +759,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            
                             
                         </form>
                         

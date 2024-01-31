@@ -60,7 +60,7 @@ export class BipService {
   update(data:any, client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
     let URL = url_servicios+"/bip/update/"+client_id;
-    return this.http.put(URL,data,{headers:headers});
+    return this.http.post(URL,data,{headers:headers});
   }
   updateStatus(data:any, client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});

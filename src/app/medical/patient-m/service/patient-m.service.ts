@@ -25,9 +25,9 @@ export class PatientMService {
     return this.http.get(URL, {headers:headers});
   }
   
-  getPatient(user_id:any){
+  getPatient(client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/patients/show/'+user_id;
+    let URL = url_servicios+'/patients/show/'+client_id;
     return this.http.get(URL, {headers:headers});
   }
   createPatient(data){
@@ -35,20 +35,25 @@ export class PatientMService {
     let URL = url_servicios+'/patients/store';
     return this.http.post(URL,data, {headers:headers});
   }
-  editPatient( data:any, user_id:any,){
+  editPatient( data:any, client_id:any,){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/patients/update/'+user_id;
+    let URL = url_servicios+'/patients/update/'+client_id;
     return this.http.post(URL,data,{headers:headers});
   }
-  deletePatient(user_id:any){
+  patientUpdate( data:any, client_id:any,){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/patients/destroy/'+user_id;
+    let URL = url_servicios+'/patients/patientupdate/'+client_id;
+    return this.http.post(URL,data,{headers:headers});
+  }
+  deletePatient(client_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/patients/destroy/'+client_id;
     return this.http.delete(URL, {headers:headers});
   }
 
-  showPatientProfile(user_id:any){
+  showPatientProfile(client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/patients/profile/"+user_id;
+    let URL = url_servicios+"/patients/profile/"+client_id;
     return this.http.get(URL,{headers:headers});
   }
 
@@ -58,9 +63,9 @@ export class PatientMService {
     return this.http.get(URL, {headers:headers});
   }
 
-  updateStatus(data:any, patient_id:any){
+  updateStatus(data:any, client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/patients/update/eligibility/"+patient_id;
+    let URL = url_servicios+"/patients/update/eligibility/"+client_id;
     return this.http.put(URL,data,{headers:headers});
   }
   

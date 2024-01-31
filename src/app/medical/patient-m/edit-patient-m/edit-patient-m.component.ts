@@ -55,16 +55,17 @@ export class EditPatientMComponent {
   public copayments: any;
   public oop: any;
   
+
+  public pa_assessments: any = [];
+  public assesstments: any = [];
   public pa_assessment: any;
   public pa_assessment_start_date: string = '';
   public pa_assessment_end_date: string = '';
-  // public pa_services: any = [];
-  public pa_services: any ;
-  public services:any = [];
-  public n_code: any;
-  public s_unit: any;
+  public pa_services: any;
   public pa_services_start_date: string = '';
   public pa_services_end_date: string = '';
+
+  
   
   public welcome: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public consent: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
@@ -143,12 +144,13 @@ export class EditPatientMComponent {
       // console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
+      this.pa_assessments = resp.assesstments;
     })
   }
   
 showUser(){
     this.patientService.getPatient(this.client_id).subscribe((resp:any)=>{
-      // console.log(resp);
+      console.log(resp);
       this.patient_selected = resp.patient;
 
         this.first_name = this.patient_selected.first_name;
@@ -190,15 +192,6 @@ showUser(){
         this.copayments = this.patient_selected.copayments;
         this.oop = this.patient_selected.oop;
         
-        
-        this.pa_assessment = this.patient_selected.pa_assessment;
-        this.pa_assessment_start_date = this.patient_selected.pa_assessment_start_date ? new Date(this.patient_selected.pa_assessment_start_date).toISOString(): '';
-        this.pa_assessment_end_date = this.patient_selected.pa_assessment_end_date ? new Date(this.patient_selected.pa_assessment_end_date).toISOString(): '';
-        this.pa_services = this.patient_selected.pa_services;
-        this.pa_services_start_date = this.patient_selected.pa_services_start_date ? new Date(this.patient_selected.pa_services_start_date).toISOString(): '';
-        this.pa_services_end_date = this.patient_selected.pa_services_end_date ? new Date(this.patient_selected.pa_services_end_date).toISOString(): '';
-        
-        
         this.welcome = this.patient_selected.welcome;
         this.consent = this.patient_selected.consent;
         this.insurance_card = this.patient_selected.insurance_card;
@@ -210,6 +203,9 @@ showUser(){
         this.cde = this.patient_selected.cde;
         this.submitted = this.patient_selected.submitted;
 
+        this.pa_assessments =  JSON.parse(this.patient_selected.pa_assessments);
+        this.assesstments = this.pa_assessments;
+        console.log(this.pa_assessments);
         this.selectedValue_rbt = this.patient_selected.rbt;
         this.selectedValue_rbt2 = this.patient_selected.rbt2;
         this.selectedValue_bcba = this.patient_selected.bcba;
@@ -238,18 +234,32 @@ showUser(){
     
   }
 
-  addService(){
-    this.services.push({
-      n_code: this.n_code,
-      s_unit: this.s_unit
+  //listas
+  
+
+  addPAAssestment(){
+    this.assesstments.push({
+      pa_assessment: this.pa_assessment,
+      pa_assessment_start_date: this.pa_assessment_start_date,
+      pa_assessment_end_date: this.pa_assessment_end_date,
+      pa_services: this.pa_services,
+      pa_services_start_date: this.pa_services_start_date,
+      pa_services_end_date: this.pa_services_end_date,
     })
-    this.n_code = '';
-    this.s_unit = '';
+    this.pa_assessment = '';
+    this.pa_assessment_start_date = '';
+    this.pa_assessment_end_date = '';
+    this.pa_services = '';
+    this.pa_services_start_date = '';
+    this.pa_services_end_date = '';
   }
 
-  deleteService(i:any){
-    this.services.splice(i,1);
+  deletePAAssestment(i:any){
+    this.assesstments.splice(i,1);
   }
+
+  //listas
+  //files
 
   loadFile($event:any){
     if($event.target.files[0].type.indexOf("image")){
@@ -285,7 +295,8 @@ showUser(){
     reader.readAsDataURL(this.FILE_AVATAR);
     reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
   }
-
+//files
+//update function
   save(){
     this.text_validation = '';
     if(!this.first_name ||!this.last_name || !this.client_id ){
@@ -305,7 +316,7 @@ showUser(){
     formData.append('gender', this.gender+'');
     formData.append('address', this.address);
     formData.append('zip', this.zip);
-    formData.append('patient_id', this.patient_id);
+    
     formData.append('city', this.city);
     formData.append('state', this.state);
     formData.append('education', this.education);
@@ -315,6 +326,10 @@ showUser(){
     formData.append('diagnosis_code', this.diagnosis_code);
     formData.append('age', this.age+'');
     
+    if(this.patient_id){
+
+      formData.append('patient_id', this.patient_id);
+    }
     if(this.diagnosis_code){
 
       formData.append('diagnosis_code', this.diagnosis_code);
@@ -383,35 +398,13 @@ showUser(){
       formData.append('oop', this.oop);
     }
 
-    if(this.pa_assessment){
+    if(this.assesstments){
 
-      formData.append('pa_assessment', this.pa_assessment);
-    }
-    if(this.pa_assessment_start_date){
+      // formData.append('pa_assessments', this.pa_assessments);
 
-      formData.append('pa_assessment_start_date', this.pa_assessment_start_date);
+      formData.append('pa_assessments', JSON.stringify(this.assesstments));
     }
-    if(this.pa_assessment_end_date){
-
-      formData.append('pa_assessment_end_date', this.pa_assessment_end_date);
-    }
-    if(this.pa_assessment){
-
-      formData.append('pa_assessment', this.pa_assessment);
-    }
-    if(this.pa_services){
-      formData.append('pa_services', this.pa_services);
-      // formData.append('services', JSON.stringify(this.services));
-    }
-    if(this.pa_services_start_date){
-
-      formData.append('pa_services_start_date', this.pa_services_start_date);
-    }
-    if(this.pa_services_end_date){
-
-      formData.append('pa_services_end_date', this.pa_services_end_date);
-    }
-
+    
 
     if(this.welcome){
       formData.append('welcome', this.welcome);
@@ -482,15 +475,17 @@ showUser(){
     this.valid_form_success = false;
     this.text_validation = '';
 
-    this.patientService.editPatient(formData, this.patient_id).subscribe((resp:any)=>{
+    this.patientService.editPatient(formData, this.client_id).subscribe((resp:any)=>{
       // console.log(resp);
       if(resp.message == 403){
         this.text_validation = resp.message_text;
       }else{
         this.text_success = "El Paciente se ha actualizado";
+        this.router.navigate(['/patients/list']);
       }
     })
 
 
   }
+//update function
 }
