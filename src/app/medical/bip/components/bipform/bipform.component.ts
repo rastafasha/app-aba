@@ -35,6 +35,7 @@ export class BipformComponent {
   uso:any;
   
   client_id:any;
+  id:any;
   patient_id:any;
   doctor_id:any;
   user:any;
@@ -123,8 +124,7 @@ export class BipformComponent {
       console.log(this.client_id);
      })
      this.getProfileBip();
-    // this.getBip();
-    //  this.getConfig();
+     
     this.ativatedRoute.params.subscribe( ({id}) => this.getBip(id));
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
@@ -173,6 +173,7 @@ export class BipformComponent {
         console.log(resp);
   
         this.bip_selected = resp;
+        this.id = resp.id;
         
         this.type_of_assessment =this.bip_selected.type_of_assessment;
   
@@ -293,7 +294,7 @@ export class BipformComponent {
 //fin listados
 
 
-  save(){debugger
+  save(){
     this.text_validation = '';
     // if(!this.documents || this.documents.length == 0){
     //   this.text_validation = 'Es requerido ingresar el diagnostico y una receta medica';
@@ -301,6 +302,7 @@ export class BipformComponent {
     // }
 
     let data ={
+      id:this.id,
       client_id: this.client_selected.patient.id,
       patient_id: this.patient_id,
       doctor_id: this.doctor_id,
@@ -327,7 +329,7 @@ export class BipformComponent {
     // })
     if(this.bip_selected){
 
-      this.bipService.update(data, this.client_id).subscribe((resp:any)=>{
+      this.bipService.update(data, this.id).subscribe((resp:any)=>{
         console.log(resp);
         this.text_success = 'Bip Updated'
         this.ngOnInit();
