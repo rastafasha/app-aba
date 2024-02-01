@@ -46,8 +46,11 @@ export class ReductionGoalFormComponent {
   public maladaptives:any = [];
   public title: any;
   public maladaptive_title: any;
-  public definition: any;
-  public unit_malad: any;
+  
+  public behavior: any;
+  public topografical_definition: any;
+  public baseline_level: any;
+  public initial_interesting: any;
   
   //goals
   public current_status:any;
@@ -58,6 +61,10 @@ export class ReductionGoalFormComponent {
   public decription_goal:any;
   public goals:any = [];
   public goal_id:any;
+  public lto:any;
+  public description_lto:any;
+  public status_lto:any;
+  public date_lto:any;
   
   maladaptiveSelected:any;
   maladaptiveSelectedSon:any;
@@ -134,38 +141,14 @@ export class ReductionGoalFormComponent {
     });
 
   }
-  saveGoal(){
-    this.text_validation = '';
-    // if(!this.maladaptive_title || this.current_status || this.date){
-    //   this.text_validation = 'is required add a curren status and date to this maladaptive ';
-    //   return;
-    // }
-
-    let data ={
-      bip_id: this.bip_selected.id,
-      goal: this.maladaptiveSelected.title,
-      current_status: this.current_status,
-      status: this.status,
-      sto: this.sto,
-      decription_goal: this.decription_goal,
-      date: this.date,
-    }
-
-    this.goalService.createGoal(data).subscribe((resp:any)=>{
-      console.log(resp);
-      this.text_success = 'Goal created successfully!'
-      this.ngOnInit();
-      
-    })
-
-  }
+  
 
   
   getGoals(){
     this.goalService.listGoals().subscribe((resp:any)=>{
       console.log(resp);
       this.goals = resp.goals.data;
-      this.goal_id = resp.goals.data[0].id;
+      // this.goal_id = resp.goals.data[0].id;
 
     });
     // grafico
@@ -186,16 +169,17 @@ export class ReductionGoalFormComponent {
     this.maladaptiveSelected = maladap
     console.log(this.maladaptiveSelected);
     
-    this.getGoalsMaladaptives();
+    // this.getGoalsMaladaptives();
   }
 
   getGoalsMaladaptives(){
-    this.goalService.listMaladaptivesGoals(this.maladaptiveSelected.title).subscribe((resp:any)=>{
+    this.goalService.listMaladaptivesGoals(this.bip_selected.maladaptives.maladaptive_behavior).subscribe((resp:any)=>{
       console.log(resp);
       this.goalmaladaptives = resp;
       // this.goal_id = resp.goals.data[0].id;
       this.decription_goal = this.goalmaladaptives.decription_goal;
-      this.goal = this.goalmaladaptives.goal;
+      
+      this.current_status = this.goalmaladaptives.baseline_level;
       this.status = this.goalmaladaptives.status;
       this.sto = this.goalmaladaptives.sto;
 
@@ -203,8 +187,68 @@ export class ReductionGoalFormComponent {
 
   }
 
-  selectedMaladaptiveSon(goalm:any){
-    this.maladaptiveSelectedSon = goalm
+  selectedMaladaptiveSon(maladap:any){
+    this.maladaptiveSelectedSon = maladap
     console.log(this.maladaptiveSelectedSon);
+  }
+
+  deleteMaladaptiveSon(goalsto:any){debugger
+    // this.maladaptiveSelectedSon.splice(i,1);
+    this.goalService.deleteGoal(goalsto.id).subscribe((resp:any)=>{
+      // alert("Se elimino el objetivo");
+      this.getGoals();
+    })
+  }
+  deleteMaladaptiveSonLto(goallto:any){
+    // this.maladaptiveSelectedSon.splice(i,1);
+    this.goalService.deleteGoal(goallto.id).subscribe((resp:any)=>{
+      // alert("Se elimino el objetivo");
+      this.getGoals();
+    })
+  }
+  // selectedMaladaptiveSon(goalm:any){
+  //   this.maladaptiveSelectedSon = goalm
+  //   console.log(this.maladaptiveSelectedSon);
+  // }
+
+  saveGoal(){
+    this.text_validation = '';
+    // if(!this.maladaptive_title || this.current_status || this.date){
+    //   this.text_validation = 'is required add a curren status and date to this maladaptive ';
+    //   return;
+    // }
+
+    let data ={
+      bip_id: this.bip_selected.id,
+      goal: this.maladaptiveSelected.maladaptive_behavior,
+      goal_id: this.goal_id,
+      current_status: this.maladaptiveSelected.baseline_level,
+      status: this.status,
+      sto: this.sto,
+      decription_goal: this.decription_goal,
+      date: this.date,
+      lto: this.lto,
+      description_lto: this.description_lto,
+      status_lto: this.status_lto,
+      date_lto: this.date_lto,
+    }
+
+    this.goalService.createGoal(data).subscribe((resp:any)=>{
+      console.log(resp);
+      this.text_success = 'Goal created successfully!'
+      this.ngOnInit();
+      // this.getGoalsMaladaptives();
+
+      this.goal = '';
+      this.goal_id = '';
+      this.current_status = '';
+      this.status = '';
+      this.sto = '';
+      this.decription_goal = '';
+      this.description_lto = '';
+      this.date = '';
+      this.date_lto = '';
+    })
+
   }
 }

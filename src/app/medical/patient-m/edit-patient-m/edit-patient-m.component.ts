@@ -499,8 +499,9 @@ showUser(){
       if(resp.message == 403){
         this.text_validation = resp.message_text;
       }else{
-        this.text_success = "El Paciente se ha actualizado";
-        this.router.navigate(['/patients/list']);
+        this.text_success = "Patient Has updated";
+        this.ngOnInit();
+        // this.router.navigate(['/patients/list']);
       }
     })
 

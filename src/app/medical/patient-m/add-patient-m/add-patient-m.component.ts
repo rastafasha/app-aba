@@ -133,7 +133,7 @@ export class AddPatientMComponent {
   }
 
   ngOnInit(): void {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getConfig();
   }
@@ -332,7 +332,10 @@ export class AddPatientMComponent {
       if(resp.message == 403){
         this.text_validation = resp.message_text;
       }else{
-        this.router.navigate(['/patients/list']);
+        this.valid_form_success = true;
+        this.ngOnInit();
+        
+        // this.router.navigate(['/patients/list']);
         // this.ngOnInit();
       }
     })

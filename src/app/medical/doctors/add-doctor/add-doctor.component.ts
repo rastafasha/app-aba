@@ -87,7 +87,7 @@ export class AddDoctorComponent {
   }
 
   ngOnInit(): void {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getConfig();
   }
@@ -201,9 +201,9 @@ export class AddDoctorComponent {
       if(resp.message == 403){
         this.text_validation = resp.message_text;
       }else{
-        this.text_success = 'El usuario ha sido registrado correctamente';
-
-        this.router.navigate(['/doctors/list']);
+        this.text_success = 'Employer created';
+        this.ngOnInit();
+        // this.router.navigate(['/doctors/list']);
       }
     })
 

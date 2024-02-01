@@ -92,7 +92,7 @@ export class EditDoctorComponent {
   }
 
   ngOnInit(): void {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     this.activatedRoute.params.subscribe((resp:any)=>{
       // console.log(resp);
       this.doctor_id = resp.id;
@@ -360,6 +360,7 @@ export class EditDoctorComponent {
         this.text_validation = resp.message_text;
       }else{
         this.text_success = 'El usuario ha sido actualizado correctamente';
+        this.ngOnInit();
       }
     })
 

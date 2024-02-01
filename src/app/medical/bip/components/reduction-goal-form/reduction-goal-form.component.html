@@ -8,30 +8,35 @@
             <h3 class="card-title">Maladaptives Behaviors</h3>
             <div class="col-xs-12">
                 <!-- lista inicial -->
-                <div class="table-responsive" *ngIf="!maladaptiveSelected">
+                <div class="table-responsive" *ngIf="!maladaptiveSelected || !maladaptiveSelectedSon">
                     <table class="table mb-0">
                         <thead>
                             <tr>
-                                <th>Maladaptives Behavior</th>
-                                <th>Definition</th>
-                                <th>Unit</th>
+                                <th>Behavior</th>
+                                <th>Topographical Definition</th>
+                                <th>Baseline Level</th>
+                                <th>Initial Interesting</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let maladap of maladaptives; let i = index">
                                 <td>
-                                    {{maladap.title}}
+                                    {{maladap.maladaptive_behavior}}
                                 </td>
                                 <td>
-                                     {{maladap.definition}}
+                                     {{maladap.topografical_definition}}
                                 </td>
                                 <td>
-                                    {{maladap.unit_malad}}
+                                     {{maladap.baseline_level}}
+                                </td>
+                                <td>
+                                    {{maladap.initial_interesting}}
                                 </td>
                                 <td>
                                     
-                                    <button class="btn btn-success btn-sm" (click)="selectedMaladaptive(maladap)"><i class="fa-eye"></i></button>
-                                    <button class="btn btn-danger btn-sm" (click)="deleteMaladaptive(i)">x</button>
+                                    <button class="btn btn-success btn-sm" (click)="selectedMaladaptive(maladap)">Edit</button>
+                                    <button class="btn btn-success btn-sm" (click)="selectedMaladaptiveSon(maladap)">View Graphic</button>
+                                    <!-- <button class="btn btn-danger btn-sm" (click)="deleteMaladaptive(i)">x</button> -->
                                 </td>
                             </tr>
                             
@@ -46,80 +51,27 @@
                 </div>
                 <!-- maladaptiveSelected -->
                 <div class="rbt-dashboard-table table-responsive mobile-table-750" *ngIf="maladaptiveSelected">
-                    <!-- <table class="rbt-table table table-borderless">
+                    <table class="rbt-table table table-borderless">
                         <thead>
                             <tr>
                                 <th>Maladaptives Behavior</th>
-                                <th>Units</th>
-                                <th>definition</th>
+                                <th>Topografical Definition</th>
+                                <th>Baseline Level</th>
+                                <th>Initial Interesting</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                <th>{{maladaptiveSelected.title}}</th>
-                                <th>{{maladaptiveSelected.unit_malad}}</th>
-                                <th>{{maladaptiveSelected.definition}}</th>
+                                <th>{{maladaptiveSelected.maladaptive_behavior}}</th>
+                                <th>{{maladaptiveSelected.topografical_definition}}</th>
+                                <th>{{maladaptiveSelected.baseline_level}}</th>
+                                <th>{{maladaptiveSelected.initial_interesting}}</th>
                             </tr>
                            
                         </tbody>
-                    </table> -->
-                    <!-- <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title">Goals</h3>
-                            <div class="col-xs-12">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>STO</th>
-                                                <th>goal</th>
-                                                <th>decription_goal</th>
-                                                <th>status</th>
-                                                <th>date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let goalm of goalmaladaptives; let i = index">
-                                                <td>
-                                                    {{goalm.sto}}
-                                                </td>
-                                                <td>
-                                                     {{goalm.goal}}
-                                                </td>
-                                                <td>
-                                                    {{goalm.decription_goal}}
-                                                </td>
-                                                <td>
-                                                    {{goalm.status}}
-                                                </td>
-                                                <td>
-                                                    {{goalm.date}}
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-success btn-sm" (click)="selectedMaladaptiveSon(goalm)"><i class="fa-eye"></i></button>
-                                                </td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <maladaptiveSelectedSon>
-                                <div class="rbt-dashboard-table table-responsive mobile-table-750" *ngIf="maladaptiveSelectedSon">
-                                    
-                                    <h1>Grafico</h1>
-                                    {{goal.goal}}
-                                </div>
-                                <div *ngIf="maladaptiveSelectedSon">
-                                    <button class="btn btn-primary btn-sm" (click)="maladaptiveSelectedSon = null"><i class="fas fa-backspace    "></i></button>
-                                </div>
-                                <fin maladaptiveSelectedSon>
-                            </div>
-                            
-                        </div>
-                    </div> -->
+                    </table>
+                    
 
                     <form>
                         <div class="row" >
@@ -134,19 +86,19 @@
                             </div>
                             <!-- goals form -->
                             
-                            
+                            <!-- sto -->
                             <div class="row align-items-center" >
                                 
                                 <div class="col-12 col-md-6 col-xl-3">  
                                     <div class="form-group local-forms">
                                         <label >Goal #:  <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="goal_id"  disabled [(ngModel)]="goal_id" type="text" placeholder="goal_id"  >
+                                        <input class="form-control" name="goal_id"   [(ngModel)]="goal_id" type="number" placeholder="goal_id"  >
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-3">  
                                     <div class="form-group local-forms">
                                         <label >Goal:  <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="maladaptive_title"  disabled [(ngModel)]="maladaptiveSelected.title" type="text" placeholder="maladaptive_title"  >
+                                        <input class="form-control" name="maladaptive_title"  disabled [(ngModel)]="maladaptiveSelected.maladaptive_behavior" type="text" placeholder="maladaptive_title"  >
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-md-3 col-xl-3">
@@ -198,8 +150,53 @@
                                 </div>
                                 
                             </div>
+                            <!-- fin sto -->
                             
+                            <!-- lto -->
+                            <div class="row align-items-center" >
+                                
+                                
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="form-group local-forms">
+                                        <label>LTO <span class="login-danger">*</span></label>
+                                        <input class="form-control"  name="lto"   [(ngModel)]="lto" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group local-forms">
+                                        <label >Status LTO:<span class="login-danger">*</span></label>
+                                        <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="status_lto" [(ngModel)]="status_lto">
+                                            <option>-- Select --</option>
+                                              <option value="inprogress">inprogress</option>
+                                              <option value="initiated">initiated</option>
+                                              <option value="mastered">mastered</option>
+                                              <option value="on hold">on hold</option>
+                                              <option value="discontinued">discontinued</option>
+                                              <option value="maintenance">maintenance</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group local-forms">
+                                        <label >Date LTO<span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" name="date_lto" [(ngModel)]="date_lto" type="text" matInput [matDatepicker]="pickerDateLTO"  >
+                                        <mat-datepicker #pickerDateLTO></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="pickerDateLTO"></mat-datepicker-toggle>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center" >
+                                <div class="col-xs-12">
+                                    <div class="form-group local-forms">
+                                        <label>Description LTO <span class="login-danger">*</span></label>
+                                        <textarea class="form-control" name="description_lto" [(ngModel)]="description_lto" rows="4" cols="30"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                             
+                            <!-- fin lto -->
                             
                             
                             <!-- validaciones -->
@@ -235,14 +232,109 @@
                         </div>
                         
                     </form>
-        
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Goals STO</h3>
+                            <div class="col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>STO</th>
+                                                <th>goal</th>
+                                                <th>decription_goal</th>
+                                                <th>status</th>
+                                                <th>date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let goalsto of goals; let i = index">
+                                                <td>
+                                                    {{goalsto.sto}}
+                                                </td>
+                                                <td>
+                                                     {{goalsto.goal}}
+                                                </td>
+                                                <td>
+                                                    {{goalsto.decription_goal}}
+                                                </td>
+                                                <td>
+                                                    {{goalsto.status}}
+                                                </td>
+                                                <td>
+                                                    {{goalsto.date}}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-success btn-sm" (click)="selectedMaladaptiveSon(goalsto)"><i class="fa-eye"></i></button>
+                                                    <button class="btn btn-danger btn-sm" (click)="deleteMaladaptiveSon(goalsto)">x</button>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Goals LTO</h3>
+                            <div class="col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>LTO</th>
+                                                <th>decription</th>
+                                                <th>status</th>
+                                                <th>date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let goallto of goals; let i = index">
+                                                <td>
+                                                    {{goallto.lto}}
+                                                </td>
+                                                <td>
+                                                    {{goallto.description_lto}}
+                                                </td>
+                                                <td>
+                                                    {{goallto.status_lto}}
+                                                </td>
+                                                <td>
+                                                    {{goallto.date_lto}}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-success btn-sm" (click)="selectedMaladaptiveSon(goallto)"><i class="fa-eye"></i></button>
+                                                    <button class="btn btn-danger btn-sm" (click)="deleteMaladaptiveSonLto(goallto)">x</button>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
                     
                     
                 </div>
-
-                
-                
                 <!-- fin maladaptiveSelected -->
+                <hr>
+                <!-- maladaptiveSelectedSon -->
+                <div *ngIf="maladaptiveSelectedSon">
+                    <button class="btn btn-primary btn-sm" (click)="maladaptiveSelectedSon = null"><i class="fas fa-backspace    "></i></button>
+                </div>
+                <div class="col-xs-12" *ngIf="maladaptiveSelectedSon">
+                    <div class="rbt-dashboard-table table-responsive mobile-table-750" >
+                        
+                        <h1>Grafico</h1>
+                        <!-- {{goal.goal}} -->
+                    </div>
+                </div>
+                <!-- fin maladaptiveSelectedSon -->
             </div>
             
             
@@ -250,7 +342,7 @@
         </div>
         
     </div>
-    <div class="card">
+    <!-- <div class="card">
         <div class="card-body">
             <h3 class="card-title">Target Behavior to decrease</h3>
             <div class="col-xs-12">
@@ -294,18 +386,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-xs-12">
-                            <!-- maladaptiveSelectedSon -->
-                            <div class="rbt-dashboard-table table-responsive mobile-table-750" *ngIf="maladaptiveSelectedSon">
-                                
-                                <h1>Grafico</h1>
-                                {{goal.goal}}
-                            </div>
-                            <div *ngIf="maladaptiveSelectedSon">
-                                <button class="btn btn-primary btn-sm" (click)="maladaptiveSelectedSon = null"><i class="fas fa-backspace    "></i></button>
-                            </div>
-                            <!-- fin maladaptiveSelectedSon -->
-                        </div>
+                        
                         
                     </div>
                 </div>
@@ -315,7 +396,7 @@
             
         </div>
         
-    </div>
+    </div> -->
 
         
 </div>

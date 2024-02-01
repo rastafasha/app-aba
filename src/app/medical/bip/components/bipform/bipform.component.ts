@@ -62,26 +62,30 @@ export class BipformComponent {
 
   
   public documents:any = [];
-  public doctor_referal: any;
-  public medical_notes: any;
-  public cde: any;
-  public iep: any;
-  public mnl: any;
-  public referal: any;
+  public document_title: any;
+  public document_status: any;
   
   //maladaptives
   
   public maladaptives:any = [];
-  public title: any;
-  public maladaptive_title: any;
-  public definition: any;
-  public unit_malad: any;
-  
-  public assesstmentsOptions:any = [];
-  public functional_assessment_interview_completed: any;
-  public vineland_behavior_rating_scale: any;
-  public ados: any;
 
+  public maladaptive_behavior: any;
+  public topografical_definition: any;
+  public baseline_level: any;
+  public initial_interesting: any;
+  
+  
+  //assestments
+  public assesstments:any = [];
+  public assesstmentsDocuments:any = [];
+  public assestment_title: any;
+  public assestment_status: any;
+  
+  // public functional_assessment_interview_completed: any;
+  // public vineland_behavior_rating_scale: any;
+  // public ados: any;
+
+  //
   public prevalent_setting_event_and_atecedents: any = [];
   public prevalent_setting_event_and_atecedent: any;
   public behavior: any;
@@ -186,10 +190,12 @@ export class BipformComponent {
         
         this.documents =this.bip_selected.documents_reviewed;
         this.maladaptives =this.bip_selected.maladaptives;
-        this.maladaptive_title =this.bip_selected.maladaptives[0].title;
+        this.maladaptive_behavior =this.bip_selected.maladaptives[0].title;
         console.log(this.maladaptives);
-        console.log(this.maladaptive_title);
-        this.assesstmentsOptions =this.bip_selected.assestment_conducted_options;
+        console.log(this.maladaptive_behavior);
+
+        this.assesstments =this.bip_selected.assestment_conducted_options;
+        this.assesstmentsDocuments =this.bip_selected.assestment_conducted_options;
         this.prevalent_setting_event_and_atecedents =this.bip_selected.prevalent_setting_event_and_atecedents;
         this.interventions =this.bip_selected.interventions;
   
@@ -200,33 +206,30 @@ export class BipformComponent {
   }
 //listados
 
-  addService(){
+  addDocument(){
     this.documents.push({
-      doctor_referal: this.doctor_referal,
-      medical_notes: this.medical_notes,
-      cde: this.cde,
-      iep: this.iep,
-      mnl: this.mnl,
-      referal: this.referal,
+      document_title: this.document_title,
+      document_status: this.document_status,
     })
-    if(this.documents.length > 1){
-      this.documents.splice(this.documents,1);
-    }
+    this.document_title = '';
+    this.document_status = '';
   }
 
-  deleteService(i:any){
+  deleteDocument(i:any){
     this.documents.splice(i,1);
   }
 
   addMaladaptive(){
     this.maladaptives.push({
-      title: this.title,
-      definition: this.definition,
-      unit_malad: this.unit_malad,
+      maladaptive_behavior: this.maladaptive_behavior,
+      topografical_definition: this.topografical_definition,
+      baseline_level: this.baseline_level,
+      initial_interesting: this.initial_interesting,
     })
-    this.title = '';
-    this.definition = '';
-    this.unit_malad = '';
+    this.maladaptive_behavior = '';
+    this.topografical_definition = '';
+    this.baseline_level = '';
+    this.initial_interesting = '';
   }
 
   deleteMaladaptive(i:any){
@@ -234,20 +237,33 @@ export class BipformComponent {
     // this.ngOnInit();
   }
 
-  addAssesstmentOption(){
-    this.assesstmentsOptions.push({
-      functional_assessment_interview_completed: this.functional_assessment_interview_completed,
-      vineland_behavior_rating_scale: this.vineland_behavior_rating_scale,
-      ados: this.ados,
+  // addAssesstmentOption(){
+  //   this.assesstments.push({
+  //     assestment_title: this.assestment_title,
+  //     assestment_status: this.assestment_status,
+  //   })
+  //   if(this.assesstments.length > 1){
+  //     this.assesstments.splice(this.assesstments,1);
+  //   }
+  // }
+
+  // deleteAssesstmentOption(i:any){
+  //   this.assesstments.splice(i,1);
+  // }
+
+  addAssesstmentDocument(){debugger
+    this.assesstmentsDocuments.push({
+      assestment_title: this.assestment_title,
+      assestment_status: this.assestment_status,
     })
-    if(this.assesstmentsOptions.length > 1){
-      this.assesstmentsOptions.splice(this.assesstmentsOptions,1);
-    }
+    this.assestment_title = '';
+    this.assestment_status = '';
   }
 
-  deleteAssesstmentOption(i:any){
-    this.assesstmentsOptions.splice(i,1);
+  deleteAssesstmentDocument(i:any){
+    this.assesstmentsDocuments.splice(i,1);
   }
+
   addAssesstment(){
     this.prevalent_setting_event_and_atecedents.push({
       prevalent_setting_event_and_atecedent: this.prevalent_setting_event_and_atecedent,
@@ -317,7 +333,7 @@ export class BipformComponent {
 
       documents_reviewed: this.documents,
       maladaptives: this.maladaptives,
-      assestment_conducted_options  : this.assesstmentsOptions,
+      assestment_conducted_options  : this.assesstmentsDocuments,
       prevalent_setting_event_and_atecedents: this.prevalent_setting_event_and_atecedents,
       interventions: this.interventions,
     }

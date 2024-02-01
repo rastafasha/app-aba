@@ -28,87 +28,44 @@
                                     <div class="col-xs-12">
                                         <div class="row">
                                             
-                                            <div class="col-xs-6 col-sm-4">  
+                                            <!-- <div class="col-xs-6 col-sm-4">  
                                                 
                                                 <div class="form-group">
                                                     <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                        <h5 _ngcontent-rhp-c92="" class="card-title">Doctor Referal</h5>
+                                                        <h5 _ngcontent-rhp-c92="" class="card-title">Document Title</h5>
                                                         <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                            <input _ngcontent-rhp-c92="" type="checkbox" id="doctor_referal" class="check" name="doctor_referal" [ngModelOptions]="{standalone: true}" [(ngModel)]="doctor_referal">
+                                                            <input _ngcontent-rhp-c92="" type="checkbox" id="document_title" class="check" name="document_title" [ngModelOptions]="{standalone: true}" [(ngModel)]="document_title">
                                                             <label _ngcontent-rhp-c92="" for="doctor_referal" class="checktoggle" value="true">checkbox</label>
                                                         </div>
                                                     </div>
 
                                                 </div>
-                                            </div>
-                                            <div class="col-xs-6 col-sm-4">  
-                                                
-                                                <div class="form-group">
-                                                    <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                        <h5 _ngcontent-rhp-c92="" class="card-title">medical_notes</h5>
-                                                        <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                            <input _ngcontent-rhp-c92="" type="checkbox" id="medical_notes" class="check" name="medical_notes" [ngModelOptions]="{standalone: true}" [(ngModel)]="medical_notes">
-                                                            <label _ngcontent-rhp-c92="" for="medical_notes" class="checktoggle" value="true">checkbox</label>
-                                                        </div>
-                                                    </div>
-
+                                            </div> -->
+                                            <div class="col-xs-12 col-sm-9">  
+                                                <div class="form-group local-forms">
+                                                    <label >Document Title<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="document_title"  [(ngModel)]="document_title" type="text"  >
                                                 </div>
                                             </div>
-                                            <div class="col-xs-6 col-sm-4">  
-                                                
-                                                <div class="form-group">
-                                                    <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                        <h5 _ngcontent-rhp-c92="" class="card-title">cde</h5>
-                                                        <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                            <input _ngcontent-rhp-c92="" type="checkbox" id="cde" class="check" name="cde" [ngModelOptions]="{standalone: true}" [(ngModel)]="cde">
-                                                            <label _ngcontent-rhp-c92="" for="cde" class="checktoggle" value="true">checkbox</label>
-                                                        </div>
-                                                    </div>
-
+                                            <div class="col-xs-12 col-sm-9">  
+                                                <div class="form-group local-forms">
+                                                    <label >Status<span class="login-danger">*</span></label>
+                                                    <select class="form-control form-select-solid fw-bolder"
+                                                    name="document_status" [(ngModel)]="document_status" 
+                                                    placeholder="state">
+                                                    <option>-- Select --</option>
+                                                    <option value="pending">Pending</option>
+                                                    <option value="reviewing">Reviewing</option>
+                                                    <option value="yes">Yes</option>
+                                                    <option value="no">No</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-6 col-sm-4">  
-                                                
-                                                <div class="form-group">
-                                                    <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                        <h5 _ngcontent-rhp-c92="" class="card-title">iep</h5>
-                                                        <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                            <input _ngcontent-rhp-c92="" type="checkbox" id="iep" class="check" name="iep" [ngModelOptions]="{standalone: true}" [(ngModel)]="iep">
-                                                            <label _ngcontent-rhp-c92="" for="iep" class="checktoggle" value="true">checkbox</label>
-                                                        </div>
-                                                    </div>
 
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6 col-sm-4">  
-                                                
-                                                <div class="form-group">
-                                                    <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                        <h5 _ngcontent-rhp-c92="" class="card-title">mnl</h5>
-                                                        <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                            <input _ngcontent-rhp-c92="" type="checkbox" id="mnl" class="check" name="mnl" [ngModelOptions]="{standalone: true}" [(ngModel)]="mnl">
-                                                            <label _ngcontent-rhp-c92="" for="mnl" class="checktoggle" value="true">checkbox</label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6 col-sm-4">  
-                                                
-                                                <div class="form-group">
-                                                    <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                        <h5 _ngcontent-rhp-c92="" class="card-title">referal</h5>
-                                                        <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                            <input _ngcontent-rhp-c92="" type="checkbox" id="referal" class="check" name="referal" [ngModelOptions]="{standalone: true}" [(ngModel)]="referal">
-                                                            <label _ngcontent-rhp-c92="" for="referal" class="checktoggle" value="true">checkbox</label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
+                                            
                                             
                                             <div class="col-12 mb-3 doctor-submit text-end">
-                                                <button class="btn btn-primary btn-sm" (click)="addService()">Add</button>
+                                                <button class="btn btn-primary btn-sm" (click)="addDocument()">Update Document</button>
                                             </div>
                                         </div>
                                     </div>
@@ -117,33 +74,20 @@
                                             <table class="table mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th>Doctor Referal</th>
-                                                        <th>Medical Notes</th>
-                                                        <th>CDE</th>
-                                                        <th>IEP </th>
-                                                        <th>MNL </th>
-                                                        <th>Referal </th>
+                                                        <th>Document Title</th>
+                                                        <th>Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr *ngFor="let document of documents; let i = index">
                                                         <td>
-                                                            {{document.doctor_referal}}
+                                                            {{document.document_title}}
                                                         </td>
                                                         <td>
-                                                             {{document.medical_notes}}
+                                                             {{document.document_status}}
                                                         </td>
                                                         <td>
-                                                            {{document.cde}}
-                                                        </td>
-                                                        <td>
-                                                           {{document.iep}}
-                                                        </td>
-                                                        <td>
-                                                             {{document.mnl}}
-                                                        </td>
-                                                        <td>
-                                                            {{document.referal}}
+                                                            <button class="btn btn-danger btn-sm" (click)="deleteDocument(i)">x</button>
                                                         </td>
                                                         
                                                     </tr>
@@ -252,29 +196,35 @@
                                     <div class="col-xs-12 ">
                                         <div class="row">
                                             
-                                            <div class="col-xs-12 col-sm-9">  
+                                            <div class="col-xs-12 col-sm-5">  
                                                 <div class="form-group local-forms">
                                                     <label >Maladaptives Behavior<span class="login-danger">*</span></label>
-                                                    <input class="form-control" name="title"  [(ngModel)]="title" type="text"  >
+                                                    <input class="form-control" name="maladaptive_behavior"  [(ngModel)]="maladaptive_behavior" type="text"  >
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12 col-sm-5">  
                                                 <div class="form-group local-forms">
-                                                    <label >Unit<span class="login-danger">*</span></label>
-                                                    <input class="form-control" name="unit_malad"  [(ngModel)]="unit_malad" type="number"  >
+                                                    <label >Baseline Level<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="baseline_level"  [(ngModel)]="baseline_level" type="text"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-2">
+                                                <div class="form-group local-forms">
+                                                    <label >Initial Interesting<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="baseline_level"  [(ngModel)]="initial_interesting" type="number"  >
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 ">
                                                 <div class="form-group local-forms">
-                                                    <label >Definition<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="definition" [(ngModel)]="definition" rows="3" cols="30"></textarea>
+                                                    <label >Topografical Definition<span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="initial_interesting" [(ngModel)]="topografical_definition" rows="3" cols="30"></textarea>
                                                     
                                                 </div>
                                             </div>
                                             
                                             
                                             <div class="col-12 mb-3 doctor-submit text-end">
-                                                <button class="btn btn-primary btn-sm" (click)="addMaladaptive()">Add</button>
+                                                <button class="btn btn-primary btn-sm" (click)="addMaladaptive()">Add Maladaptive</button>
                                             </div>
                                         </div>
                                     </div>
@@ -284,20 +234,24 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Maladaptives Behavior</th>
-                                                        <th>Definition</th>
-                                                        <th>Unit</th>
+                                                        <th>Topografical Definition</th>
+                                                        <th>Baseline Level</th>
+                                                        <th>Initial Interesting</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr *ngFor="let maladap of maladaptives; let i = index">
                                                         <td>
-                                                            {{maladap.title}}
+                                                            {{maladap.maladaptive_behavior}}
                                                         </td>
                                                         <td>
-                                                             {{maladap.definition}}
+                                                            {{maladap.topografical_definition}}
                                                         </td>
                                                         <td>
-                                                            {{maladap.unit_malad}}
+                                                             {{maladap.baseline_level}}
+                                                        </td>
+                                                        <td>
+                                                            {{maladap.initial_interesting}}
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-danger btn-sm" (click)="deleteMaladaptive(i)">x</button>
@@ -373,8 +327,73 @@
                         </div>
                         
                     </div>
-
                     <div class="row align-items-center" >
+                        <h4 class="card-title">Documents Reviewed</h4>
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-9">  
+                                                <div class="form-group local-forms">
+                                                    <label >Document Title<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="assestment_title"  [(ngModel)]="assestment_title" type="text"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-9">  
+                                                <div class="form-group local-forms">
+                                                    <label >Status<span class="login-danger">*</span></label>
+                                                    <select class="form-control form-select-solid fw-bolder"
+                                                    name="assestment_status" [(ngModel)]="assestment_status" 
+                                                    placeholder="state">
+                                                    <option>-- Select --</option>
+                                                    <option value="pending">Pending</option>
+                                                    <option value="reviewing">Reviewing</option>
+                                                    <option value="yes">Yes</option>
+                                                    <option value="no">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            
+                                            
+                                            <div class="col-12 mb-3 doctor-submit text-end">
+                                                <button class="btn btn-primary btn-sm" (click)="addAssesstmentDocument()">Update Assestment Document</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-xs-12 ">
+                                            <div class="table-responsive">
+                                                <table class="table mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Assestment Document Title</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let assesstment of assesstmentsDocuments; let i = index">
+                                                            <td>
+                                                                {{assesstment.assestment_title}}
+                                                            </td>
+                                                            <td>
+                                                                 {{assesstment.assestment_status}}
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-danger btn-sm" (click)="deleteAssesstmentDocument(i)">x</button>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                        
+                    </div>
+                    <!-- checkbox -->
+                    <!-- <div class="row align-items-center" >
                         <div class="col-xs-12">
                             <div class="row">
                                 
@@ -453,7 +472,58 @@
                             </div>
                         </div>
                         
+                    </div> -->
+                    <!-- fin checkbox -->
+                    
+                    
+                    
+                    <!-- validaciones -->
+                    <div class="form-group row" *ngIf="text_success">
+                        <div class="col-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Exito!</strong>{{text_success}}.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"> </span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="form-group row" *ngIf="text_validation">
+                        <div class="col-12">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>!</strong> {{ text_validation }}.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"> </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- validaciones -->
+                    
+                    <div class="col-12">
+                        <div class="doctor-submit text-end">
+                            <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+            
+        </div>
+    </div>
+        
+</div>
+<!-- fin Assestment -->	
+
+<!-- Assestment2 -->
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="row" >
+
+
                     <div class="row align-items-center" >
                         <!-- Assestments -->
                     <div class="col-12">
@@ -568,7 +638,104 @@
     </div>
         
 </div>
-<!-- fin Assestment -->					
+<!-- fin Assestment2 -->	
+
+
+<!-- interventions -->
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="row" >
+                    <div class="row align-items-center" >
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="card-block">
+                                <h3 class="card-title">Interventions</h3>
+                                
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12 ">
+                                        <div class="row">
+                                            <p>The teaching strategies described will be used either through Discrete Trials interventions or Natural Environment
+                                                approaches:
+                                                </p>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <h4>Differential Reinforcement of Alternative Behaviors</h4>
+                                            <p>
+                                                Differential reinforcement of alternative behaviors will involve delivery of reinforcement each time the alternative
+                                                behavior occurs while extinguishing problem behavior. Initially, reinforcement (praise, small edibles, access to tangibles)
+                                                will be provided on a continuous schedule and then thinned to an intermittent schedule.
+                                                
+                                                </p>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <h4>Redirection</h4>
+                                                <p>
+                                                    This will be used to redirect the consumer to alternative activities when she engages in elopement, Physical
+                                                    aggression, etc. Redirection will be used either during precursor behaviors or after a period of no maladaptives if a
+                                                    maladaptive behavior has occurred.</p>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <h4>Response Block</h4>
+                                                <p>
+                                                    
+                                                    When Client attempts to engage in aggression, elopement, caregiver will use response block to prevent it, while
+                                                    minimizing eye contact and talking. The response block should not last for more than 15 seconds. This technique does not
+                                                    involve restraint. Problem behavior responses are blocked without grabbing the individual. The parent and behavior
+                                                    analyst will block by placing their arm or open hand between Client and the area being targeted.
+                                                    </p>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <h4>Premack Principle</h4>
+                                                    <p>
+                                                        
+                                                        Client will engage in high-probability behavior, contingent upon completing programming, or chores (less
+                                                        probability behavior). Restricting the high-probability activity to below baseline rates will increase its reinforcing
+                                                        efficacy. To ensure that the high-probability activity will function as a reinforcer, this activity will only be available
+                                                        contingent upon the completion of the low-probability activity.
+                                                        </p>
+                                                </div>
+                                                   <div class="col-xs-12 col-sm-6">
+                                                    <h4>Shaping</h4>
+                                                        <p>
+                                                            
+                                                            
+                                                            Will be used to build target behaviors that do not yet exist such as waiting for tangibles, requesting tangibles,
+                                                            sharing/taking turns, interacting with peers, etc. Approximations to the target behavior will be consistently reinforced.
+                                                            </p>
+                                                   </div> 
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <h4>Escape Extinction</h4>
+                                                        <p>
+                                                            As some of her behaviors are reinforced by escape from demands, extinction will be utilized to eliminate escape
+                                                            after the mentioned maladaptive behaviors. Client will be given a direction to complete a task, if maladaptive behaviors
+                                                            occur, then physical guidance (gently placing hand on her back and or hand over hand) will be used so that Client will not
+                                                            be able to escape from the demand or task. Regardless of how long Client engages in these behaviors caregivers will
+                                                            continue to present the demand and use physical guidance for two minutes maximum to prevent escape. Praise will be
+                                                            provided as Client completes each step of the task and a tangible when she completes all the steps.
+                                                            Escape independent response delivery</p>
+                                                    </div>
+                                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                        
+                    </div>
+                    
+                </div>
+                
+            </form>
+            
+        </div>
+    </div>
+        
+</div>
+<!-- fin interventions -->			
 <!-- interventions -->
 <!-- <div class="col-sm-12">
     <div class="card">
