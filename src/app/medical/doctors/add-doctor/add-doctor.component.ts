@@ -11,6 +11,7 @@ import { DoctorService } from '../service/doctor.service';
 export class AddDoctorComponent {
   public routes = routes;
   public selectedValue!: string;
+  public selectedValueLocation!: string;
 
   public name: string = '';
   public surname: string = '';
@@ -64,6 +65,8 @@ export class AddDoctorComponent {
   public salary: number = 0;
 
   public roles:any = [];
+  public locations:any = [];
+
   public FILE_AVATAR:any;
   public IMAGE_PREVISUALIZA:any = 'assets/img/user-06.jpg';
   public FILE_SIGNATURE:any;
@@ -93,6 +96,7 @@ export class AddDoctorComponent {
     this.doctorService.listConfig().subscribe((resp:any)=>{
       // console.log(resp);
       this.roles = resp.roles;
+      this.locations = resp.locations;
     })
   }
 
@@ -146,6 +150,7 @@ export class AddDoctorComponent {
     formData.append('designation', this.designation);
     formData.append('address', this.address);
     formData.append('role_id', this.selectedValue);
+    formData.append('location_id', this.selectedValueLocation);
     formData.append('imagen', this.FILE_AVATAR);
     formData.append('electronic_signature', this.FILE_SIGNATURE);
     
@@ -187,6 +192,8 @@ export class AddDoctorComponent {
     formData.append('caqh_bcbas_only', this.caqh_bcbas_only);
     formData.append('contract_type', this.contract_type);
     formData.append('salary', this.salary+'');
+    formData.append('location_id', this.selectedValueLocation);
+
     
     this.doctorService.storeDoctor(formData).subscribe((resp:any)=>{
       // console.log(resp);

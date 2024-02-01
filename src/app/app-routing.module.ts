@@ -48,6 +48,11 @@ const routes: Routes = [
     loadChildren: () => import('./medical/bip/bip.module').then((m) => m.BipModule),
   },
   {
+    path: 'location',
+    loadChildren: () =>
+      import('./medical/location/location.module').then((m) => m.LocationModule),
+  },
+  {
     path: 'error',
     loadChildren: () =>
       import('./error/error.module').then((m) => m.ErrorModule),

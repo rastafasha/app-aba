@@ -422,5 +422,12 @@ export class routes {
   public static get editBip(): string {
     return this.baseUrl + '/bip/edit';
   }
+  
+  public static get LocationList(): string {
+    return this.baseUrl + '/location/list';
+  }
+  public static get registerLocation(): string {
+    return this.baseUrl + '/location/register';
+  }
  
 }

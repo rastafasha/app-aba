@@ -42,6 +42,11 @@ const routes: Routes = [
       loadChildren: () =>
         import('./insurance/insurance.module').then((m) => m.InsuranceModule),
     },
+    {
+      path: 'location',
+      loadChildren: () =>
+        import('./location/location.module').then((m) => m.LocationModule),
+    },
   ]  
 }
 ];

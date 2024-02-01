@@ -13,6 +13,7 @@ import { InsuranceService } from '../../insurance/service/insurance.service';
 export class AddPatientMComponent {
   public routes = routes;
   public patient_id: any;
+  public selectedValueLocation!: string;
   
   public first_name: string = '';
   public last_name: string = '';
@@ -76,19 +77,22 @@ export class AddPatientMComponent {
   public submitted: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
 
   public specialists:any = [];
+  public locations:any = [];
   public insurances:any = [];
   public insurance:any;
+
   public selectedValue_rbt!: string;
   public selectedValue_rbt2!: string;
   public selectedValue_bcba!: string;
   public selectedValue_bcba2!: string;
   public selectedValue_clind!: string;
   public selectedValue_insurer!: string;
-  public rbt: any;
-  public rbt2: any;
-  public bcba: any;
-  public bcba2: any;
-  public clin_director: any;
+  
+  public rbt_id: any;
+  public rbt2_id: any;
+  public bcba_id: any;
+  public bcba2_id: any;
+  public clin_director_id: any;
 
   public insurance_id: any;
   public id: any;
@@ -139,6 +143,7 @@ export class AddPatientMComponent {
       // console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
+      this.locations = resp.locations;
     })
   }
   insuranceData(){
@@ -232,7 +237,7 @@ export class AddPatientMComponent {
   }
  
 
-  save(){debugger
+  save(){
     this.text_validation = '';
     if(!this.first_name ||!this.last_name || !this.patient_id ){
       this.text_validation = 'Los campos con * son obligatorios';
@@ -280,6 +285,8 @@ export class AddPatientMComponent {
     formData.append('copayments', this.copayments);
     formData.append('oop', this.oop);
 
+    formData.append('location_id', this.selectedValueLocation);
+
     formData.append('pa_assessments', JSON.stringify(this.pa_assessments));
 
     // formData.append('pa_assessments', this.pa_assessments);
@@ -301,11 +308,11 @@ export class AddPatientMComponent {
     formData.append('cde', this.cde);
     formData.append('submitted', this.submitted);
 
-    formData.append('rbt', this.selectedValue_rbt);
-    formData.append('rbt2', this.selectedValue_rbt2);
-    formData.append('bcba', this.selectedValue_bcba);
-    formData.append('bcba2', this.selectedValue_bcba2);
-    formData.append('clin_director', this.selectedValue_clind);
+    formData.append('rbt_id', this.selectedValue_rbt);
+    formData.append('rbt2_id', this.selectedValue_rbt2);
+    formData.append('bcba_id', this.selectedValue_bcba);
+    formData.append('bcba2_id', this.selectedValue_bcba2);
+    formData.append('clin_director_id', this.selectedValue_clind);
     
     if(this.birth_date){
       formData.append('birth_date', this.birth_date);
@@ -326,6 +333,7 @@ export class AddPatientMComponent {
         this.text_validation = resp.message_text;
       }else{
         this.router.navigate(['/patients/list']);
+        // this.ngOnInit();
       }
     })
 

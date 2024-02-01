@@ -13,6 +13,27 @@ export class PatientMService {
     public authService:AuthService
   ) { }
 
+  listConfigPatients(page:number=1, 
+    patient_id:string='', 
+    name_patient:string='', 
+    email_patient:string='',
+    ){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let LINK = "";
+    if(patient_id){
+    LINK+="&patient_id="+patient_id;
+    }
+    if(name_patient){
+    LINK+="&name_patient="+name_patient;
+    }
+    if(email_patient){
+    LINK+="&email_patient="+email_patient;
+    }
+    let URL = url_servicios+'/patients?page='+page+LINK;
+    return this.http.get(URL, {headers:headers});
+  }
+
+
   listPatients(){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
     let URL = url_servicios+'/patients';

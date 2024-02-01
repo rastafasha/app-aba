@@ -322,11 +322,6 @@ export class BipformComponent {
       interventions: this.interventions,
     }
 
-    // this.bipService.createBip(data).subscribe((resp:any)=>{
-    //   console.log(resp);
-    //   this.text_success = 'Se guardó la informacion de la cita médica'
-    //   this.ngOnInit();
-    // })
     if(this.bip_selected){
 
       this.bipService.update(data, this.id).subscribe((resp:any)=>{
@@ -335,13 +330,6 @@ export class BipformComponent {
         this.ngOnInit();
       })
       
-      
-      // if(this.bip_selected.client_id !== this.client_id){
-      //   //actualizar
-        
-  
-        
-      // }
     }else{
       
       //crear

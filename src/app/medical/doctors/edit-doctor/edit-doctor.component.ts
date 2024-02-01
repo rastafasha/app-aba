@@ -11,6 +11,7 @@ import { DoctorService } from '../service/doctor.service';
 export class EditDoctorComponent {
   public routes = routes;
   public selectedValue!: string;
+  public selectedValueLocation!: string;
 
   public name: string = '';
   public surname: string = '';
@@ -65,6 +66,7 @@ export class EditDoctorComponent {
   public salary: number = 0;
 
   public roles:any = [];
+  public locations:any = [];
   public FILE_AVATAR:any;
   public IMAGE_PREVISUALIZA:any = 'assets/img/user-06.jpg';
 
@@ -103,10 +105,12 @@ export class EditDoctorComponent {
     this.doctorService.listConfig().subscribe((resp:any)=>{
       // console.log(resp);
       this.roles = resp.roles;
+      this.locations = resp.locations;
 
       this.doctorService.showDoctor(this.doctor_id).subscribe((resp:any)=>{
         // console.log(resp);
         this.doctor_selected = resp.user;
+        this.selectedValueLocation = this.doctor_selected.location_id;
 
         this.selectedValue = this.doctor_selected.roles.id;
         this.name = this.doctor_selected.name;
@@ -218,6 +222,9 @@ export class EditDoctorComponent {
 
     if(this.selectedValue ){
       formData.append('role_id', this.selectedValue);
+    }
+    if(this.selectedValueLocation ){
+      formData.append('location_id', this.selectedValueLocation);
     }
     if(this.address ){
       formData.append('address', this.address);
@@ -335,6 +342,7 @@ export class EditDoctorComponent {
     if(this.salary ){
       formData.append('salary', this.salary+'');
     }    
+    
   
     this.FILE_AVATAR  = this.IMAGE_PREVISUALIZA;
     if(this.FILE_AVATAR ){
