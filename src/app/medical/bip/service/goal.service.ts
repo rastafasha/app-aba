@@ -29,6 +29,12 @@ export class GoalService {
     let URL = url_servicios+'/goal/show/'+user_id;
     return this.http.get(URL, {headers:headers});
   }
+
+  getGoalbyPatientId(patient_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/goal/showgbyPatientId/'+patient_id;
+    return this.http.get(URL, {headers:headers});
+  }
   createGoal(data){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
     let URL = url_servicios+'/goal/store';

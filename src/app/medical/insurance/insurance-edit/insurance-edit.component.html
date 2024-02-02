@@ -8,7 +8,7 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a routerLink="/insurance/list">Insurances </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Add Insurance </li>
+                        <li class="breadcrumb-item active">Edit Insurance </li>
                     </ul>
                 </div>
             </div>
@@ -26,24 +26,36 @@
                                         <h4>Insurance Detail</h4>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">  
+                                <div class="col-12 col-md-4 col-xl-4">  
                                     <div class="form-group local-forms">
                                         <label >Insurer Name<span class="login-danger">*</span></label>
                                         <input class="form-control" name="insurer_name" [(ngModel)]="insurer_name" type="text"  >
                                     </div>
                                 </div>
-                                
-                                <div class="row align-items-center" >
-                                    <div class="col-xs-12 col-sm-4">
+                                <div class="tab-content-set">
+                                    <ul class="nav">
+                                        <li>
+                                            <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 1}" (click)="optionSelected(1)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Services</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Notes</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ng-container *ngIf="option_selected == 1">
+                                   <!-- services -->
+                                   <div class="row align-items-center" >
+                                    <div class="col-xs-12 ">
                                         <div class="row">
                                             
-                                            <div class="col-xs-12 col-sm-6">  
+                                            
+                                            <div class="col-xs-12 col-md-6 col-xl-6">  
                                                 <div class="form-group local-forms">
                                                     <label >Code<span class="login-danger">*</span></label>
                                                     <input class="form-control" name="code"  [(ngModel)]="code" type="text"  >
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-6">
+                                            <div class="col-xs-12 col-md-6 col-xl-6">
                                                 <div class="form-group local-forms">
                                                     <label >Provider<span class="login-danger">*</span></label>
                                                     <input class="form-control" name="provider"  [(ngModel)]="provider" type="text"  >
@@ -73,12 +85,14 @@
                                                     <textarea class="form-control" name="max_allowed" [(ngModel)]="max_allowed" rows="3" cols="30"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-12 mb-3">
-                                                <button class="btn btn-primary btn-sm" (click)="addService()">+</button>
+                                            <div class="col-12">
+                                                <div class="doctor-submit text-end">
+                                                    <button class="btn btn-primary btn-sm" (click)="addService()">+ add info</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-8">
+                                    <div class="col-xs-12 mt-3 mb-3">
                                         <div class="table-responsive">
                                             <table class="table mb-0">
                                                 <thead>
@@ -122,47 +136,58 @@
                                     </div>
                                     
                                 </div>
-                                
-
-                                <div class="row align-items-center" >
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="row">
-                                            
-                                            <div class="col-12 ">  
-                                                <div class="form-group local-forms">
-                                                    <label >Note<span class="login-danger">*</span></label>
-                                                    <input class="form-control" name="note"  [(ngModel)]="note" type="text"  >
+                                   <!-- fin services -->
+                                </ng-container>	
+                                <ng-container *ngIf="option_selected == 2">
+                                    <!-- Notes -->
+                                    <div class="row align-items-center" >
+                                        <div class="col-xs-12">
+                                            <div class="row">
+                                                
+                                                <div class="col-12 ">  
+                                                    <div class="form-group local-forms">
+                                                        <label >Note<span class="login-danger">*</span></label>
+                                                        <textarea class="form-control" name="note" [(ngModel)]="note" rows="3" cols="30"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="doctor-submit text-end">
+                                                        <button class="btn btn-primary btn-sm" (click)="addNotes()">+ add note</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12 mb-3">
-                                                <button class="btn btn-primary btn-sm" (click)="addNotes()">+</button>
+                                        </div>
+                                        <div class="col-xs-12 mt-3">
+                                            <div class="table-responsive">
+                                                <table class="table mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Note</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let note of notes; let i = index">
+                                                            <td>
+                                                                Note: {{note.note}}
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-danger btn-sm" (click)="deleteNote(i)">x</button>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
+                                        
                                     </div>
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Note</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let note of notes; let i = index">
-                                                        <td>
-                                                            Note: {{note.note}}
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-danger btn-sm" (click)="deleteNote(i)">x</button>
-                                                        </td>
-                                                    </tr>
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
+                                    <!-- fin Notes -->	
+                                </ng-container>	
+                                
+                                
+                                
+
+                                
                                
                                 <div class="col-12" *ngIf="valid_form">
                                     <div class="form-group row" *ngIf="text_success">

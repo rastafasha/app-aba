@@ -121,6 +121,7 @@ export class EditPatientMComponent {
   public locations:any = [];
   public insurances:any = [];
   public notes: any= [];
+  public assesstmentlists: any= [];
   
   // public insurance:any;
   // public insurance_id:any;
@@ -214,7 +215,7 @@ showUser(){
         this.submitted = this.patient_selected.submitted;
 
         this.pa_assessments =  JSON.parse(this.patient_selected.pa_assessments);
-        this.assesstments = this.pa_assessments;
+        this.assesstmentlists = this.pa_assessments;
         // console.log(this.pa_assessments);
 
         this.selectedValue_rbt = this.patient_selected.rbt_id;
@@ -249,7 +250,7 @@ showUser(){
   
 
   addPAAssestment(){
-    this.assesstments.push({
+    this.assesstmentlists.push({
       pa_assessment: this.pa_assessment,
       pa_assessment_start_date: this.pa_assessment_start_date,
       pa_assessment_end_date: this.pa_assessment_end_date,
@@ -266,7 +267,7 @@ showUser(){
   }
 
   deletePAAssestment(i:any){
-    this.assesstments.splice(i,1);
+    this.assesstmentlists.splice(i,1);
   }
 
   //listas
@@ -308,6 +309,8 @@ showUser(){
   }
 //files
 //update function
+
+
   save(){
     this.text_validation = '';
     if(!this.first_name ||!this.last_name || !this.client_id ){
@@ -336,6 +339,15 @@ showUser(){
     formData.append('school_number', this.school_number);
     formData.append('diagnosis_code', this.diagnosis_code);
     formData.append('age', this.age+'');
+
+    formData.append('pa_assessments', JSON.stringify(this.assesstmentlists));
+    formData.append('rbt_id', this.selectedValue_rbt);
+    formData.append('rbt2_id', this.selectedValue_rbt2);
+    formData.append('bcba_id', this.selectedValue_bcba);
+    formData.append('bcba2_id', this.selectedValue_bcba2);
+    formData.append('clin_director_id', this.selectedValue_clind);
+    formData.append('insurer', this.selectedValue_insurer);
+
 
     if(this.selectedValueLocation ){
       formData.append('location_id', this.selectedValueLocation);
@@ -413,11 +425,11 @@ showUser(){
       formData.append('oop', this.oop);
     }
 
+    
     if(this.assesstments){
 
       // formData.append('pa_assessments', this.pa_assessments);
 
-      formData.append('pa_assessments', JSON.stringify(this.assesstments));
     }
 
     if(this.selectedValueLocation ){
@@ -462,25 +474,7 @@ showUser(){
       formData.append('email', this.email);
     }
 
-    if(this.rbt_id){
-      formData.append('rbt_id', this.selectedValue_rbt);
-    }
-    if(this.rbt2_id){
-      formData.append('rbt2_id', this.selectedValue_rbt2);
-    }
-    if(this.bcba_id){
-      formData.append('bcba_id', this.selectedValue_bcba);
-    }
-    if(this.bcba2_id){
-      formData.append('bcba2_id', this.selectedValue_bcba2);
-    }
-    if(this.clin_director_id){
-      formData.append('clin_director_id', this.selectedValue_clind);
-    }
-
-    if(this.insurer){
-      formData.append('insurer', this.selectedValue_insurer);
-    }
+    
 
     
     

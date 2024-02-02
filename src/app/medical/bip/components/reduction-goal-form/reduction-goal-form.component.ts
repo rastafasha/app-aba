@@ -28,6 +28,7 @@ export class ReductionGoalFormComponent {
   client_id:any;
   patient_id:any;
   doctor_id:any;
+  idPatient:any;
   user:any;
 
   client_selected:any;
@@ -69,6 +70,7 @@ export class ReductionGoalFormComponent {
   maladaptiveSelected:any;
   maladaptiveSelectedSon:any;
   goalmaladaptives:any = [];
+  goalReductionPatientIds:any = [];
 
   constructor(
     public bipService:BipService,
@@ -85,16 +87,18 @@ export class ReductionGoalFormComponent {
     window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.client_id = resp.id;
-      this.patient_id= resp.id
-      console.log(this.client_id);
+      
+      this.getProfileBip();
      })
-     this.getProfileBip();
+     
+
     this.ativatedRoute.params.subscribe( ({id}) => this.getBip(id));
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
 
-    this.getGoals();
+    // this.getGoals();
+    // this.getGoalProfile();
     
   }
 
@@ -105,20 +109,23 @@ export class ReductionGoalFormComponent {
   
   getProfileBip(){
     this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
-      console.log(resp);
+      console.log('profilebip', resp);
       this.client_selected = resp;
 
       this.patient_id = this.client_selected.patient.patient_id; 
+      // this.idPatient = this.client_selected.patient.patient_id;
+      console.log(this.patient_id);
+      if (this.patient_id != null) {
+        this.getPatientGoals(this.patient_id);
 
+      }
     });
-    // bip
-
 
   }
   getBip(id){
     if (id !== null && id !== undefined) {
       this.bipService.getBipByUser(+id).subscribe((resp:any)=>{
-        console.log(resp);
+        console.log('bip',resp);
   
         this.bip_selected = resp;
         this.maladaptives =this.bip_selected.maladaptives;
@@ -129,24 +136,20 @@ export class ReductionGoalFormComponent {
     
   }
 
-
-  //goals
-  getGoalProfile(){
-    this.goalService.showGoalProfile(this.client_id).subscribe((resp:any)=>{
-      console.log(resp);
-      this.client_selected = resp;
-
-      this.client_id = this.client_selected.patient.client_id; 
-
-    });
-
+  getPatientGoals(patient_id){
+    this.goalService.getGoalbyPatientId(patient_id).subscribe((resp:any)=>{
+      console.log('goals by patientid',resp);
+      this.goals = resp.goalReductionPatientIds;
+    })
   }
+
+
   
 
   
   getGoals(){
     this.goalService.listGoals().subscribe((resp:any)=>{
-      console.log(resp);
+      console.log('goals', resp);
       this.goals = resp.goals.data;
       // this.goal_id = resp.goals.data[0].id;
 
@@ -167,23 +170,23 @@ export class ReductionGoalFormComponent {
 
   selectedMaladaptive(maladap:any){
     this.maladaptiveSelected = maladap
-    console.log(this.maladaptiveSelected);
+    // console.log(this.maladaptiveSelected);
     
     // this.getGoalsMaladaptives();
   }
 
   getGoalsMaladaptives(){
-    this.goalService.listMaladaptivesGoals(this.bip_selected.maladaptives.maladaptive_behavior).subscribe((resp:any)=>{
-      console.log(resp);
-      this.goalmaladaptives = resp;
-      // this.goal_id = resp.goals.data[0].id;
-      this.decription_goal = this.goalmaladaptives.decription_goal;
+    // this.goalService.listMaladaptivesGoals(this.bip_selected.maladaptives.maladaptive_behavior).subscribe((resp:any)=>{
+    //   console.log('profilebip', resp);
+    //   this.goalmaladaptives = resp;
+    //   // this.goal_id = resp.goals.data[0].id;
+    //   this.decription_goal = this.goalmaladaptives.decription_goal;
       
-      this.current_status = this.goalmaladaptives.baseline_level;
-      this.status = this.goalmaladaptives.status;
-      this.sto = this.goalmaladaptives.sto;
+    //   this.current_status = this.goalmaladaptives.baseline_level;
+    //   this.status = this.goalmaladaptives.status;
+    //   this.sto = this.goalmaladaptives.sto;
 
-    });
+    // });
 
   }
 
@@ -211,7 +214,7 @@ export class ReductionGoalFormComponent {
   //   console.log(this.maladaptiveSelectedSon);
   // }
 
-  saveGoal(){
+  saveGoal(){debugger
     this.text_validation = '';
     // if(!this.maladaptive_title || this.current_status || this.date){
     //   this.text_validation = 'is required add a curren status and date to this maladaptive ';
@@ -222,6 +225,7 @@ export class ReductionGoalFormComponent {
       bip_id: this.bip_selected.id,
       goal: this.maladaptiveSelected.maladaptive_behavior,
       goal_id: this.goal_id,
+      patient_id: this.patient_id,
       current_status: this.maladaptiveSelected.baseline_level,
       status: this.status,
       sto: this.sto,

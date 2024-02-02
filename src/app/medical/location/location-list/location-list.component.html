@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                      <li class="breadcrumb-item"><a routerLink="/patients/list">Dashboard</a></li>
+                      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Clients List</li>
+                        <li class="breadcrumb-item active">Location List</li>
                     </ul>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="doctor-table-blk">
-                                        <h3>Clients List</h3>
+                                        <h3>Locations List</h3>
                                         <div class="doctor-search-blk">
                                             <div class="top-nav-search table-search-blk">
                                                     <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
@@ -34,7 +34,7 @@
                                                     <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
                                             </div>
                                             <div class="add-group">
-                                                <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a>
+                                                <a routerLink="/location/register" class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a>
                                                 <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
                                             </div>
                                         </div>
@@ -62,7 +62,6 @@
                                         <th mat-sort-header="phone1">phone1</th>
                                         <th mat-sort-header="phone2">phone2</th>
                                         <th mat-sort-header="zip">zip</th>
-                                        <th mat-sort-header="options">Options</th>
                                         
                                         <th mat-sort-header="created">Created At</th>
                                          <th ></th> <!--acciones -->

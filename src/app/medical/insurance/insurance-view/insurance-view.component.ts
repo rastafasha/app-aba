@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { routes } from 'src/app/shared/routes/routes';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import { InsuranceService } from '../service/insurance.service';
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-insurance-edit',
-  templateUrl: './insurance-edit.component.html',
-  styleUrls: ['./insurance-edit.component.scss']
+  selector: 'app-insurance-view',
+  templateUrl: './insurance-view.component.html',
+  styleUrls: ['./insurance-view.component.scss']
 })
-export class InsuranceEditComponent {
+export class InsuranceViewComponent {
   public routes = routes;
   public selectedValue!: string;
-  option_selected:number = 1;
 
   public insurer_name: string = '';
 
@@ -43,6 +43,7 @@ export class InsuranceEditComponent {
     public insuranceService:InsuranceService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
+    private location: Location,
     
   ){
 
@@ -69,10 +70,6 @@ export class InsuranceEditComponent {
       this.services = this.insurance_selected.services;
 
     })
-  }
-
-  optionSelected(value:number){
-    this.option_selected = value;
   }
 
   addService(){
@@ -135,5 +132,9 @@ export class InsuranceEditComponent {
     })
 
 
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 }

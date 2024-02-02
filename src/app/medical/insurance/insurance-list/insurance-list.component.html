@@ -64,14 +64,19 @@
                                 <tbody>
                                     <tr *ngFor="let data of insuranceList">
                                         
-                                        <td>{{data.insurer_name}}</td>
+                                      <td><a class="dropdown-item" [routerLink]="['/insurance/view/', data.id]">
+                                        {{data.insurer_name}}
+                                      </a>
+                                      </td>
                                         <td>{{data.created_at | date }}</td>
                                         
                                         <td class="text-end">
                                           <div class="dropdown dropdown-action" >
                                               <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                              
                                               <div class="dropdown-menu dropdown-menu-end">
                                                 <a class="dropdown-item" [routerLink]="['/insurance/list/edit/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" [routerLink]="['/insurance/view/', data.id]"><i class="fa-solid fa-eye m-r-5"></i> View</a>
                                                 
                                                   <a class="dropdown-item" href="javascript:void(0);" (click)="selectInsurance(data)" 
                                                   data-bs-toggle="modal" 

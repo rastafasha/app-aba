@@ -125,7 +125,7 @@ export class BipformComponent {
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.client_id = resp.id;
       this.patient_id= resp.id
-      console.log(this.client_id);
+      // console.log(this.client_id);
      })
      this.getProfileBip();
      
@@ -153,7 +153,7 @@ export class BipformComponent {
   
   getProfileBip(){
     this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.client_selected = resp;
 
       this.first_name = this.client_selected.patient.first_name;
@@ -174,7 +174,7 @@ export class BipformComponent {
   getBip(id){
     if (id !== null && id !== undefined) {
       this.bipService.getBipByUser(+id).subscribe((resp:any)=>{
-        console.log(resp);
+        // console.log(resp);
   
         this.bip_selected = resp;
         this.id = resp.id;
@@ -191,8 +191,8 @@ export class BipformComponent {
         this.documents =this.bip_selected.documents_reviewed;
         this.maladaptives =this.bip_selected.maladaptives;
         this.maladaptive_behavior =this.bip_selected.maladaptives[0].title;
-        console.log(this.maladaptives);
-        console.log(this.maladaptive_behavior);
+        // console.log(this.maladaptives);
+        // console.log(this.maladaptive_behavior);
 
         this.assesstments =this.bip_selected.assestment_conducted_options;
         this.assesstmentsDocuments =this.bip_selected.assestment_conducted_options;
@@ -341,7 +341,7 @@ export class BipformComponent {
     if(this.bip_selected){
 
       this.bipService.update(data, this.id).subscribe((resp:any)=>{
-        console.log(resp);
+        // console.log(resp);
         this.text_success = 'Bip Updated'
         this.ngOnInit();
       })
@@ -350,7 +350,7 @@ export class BipformComponent {
       
       //crear
       this.bipService.createBip(data).subscribe((resp:any)=>{
-        console.log(resp);
+        // console.log(resp);
         this.text_success = 'Se guardó la informacion de la cita médica'
         this.ngOnInit();
       })
@@ -363,7 +363,7 @@ export class BipformComponent {
 
   selectedIntervention(intervention:any){
     this.inteventionSelected = intervention
-    console.log(this.inteventionSelected);
+    // console.log(this.inteventionSelected);
   }
 
   

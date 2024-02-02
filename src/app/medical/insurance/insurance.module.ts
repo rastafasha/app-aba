@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { InsuranceViewComponent } from './insurance-view/insurance-view.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     InsuranceComponent,
     InsuranceListComponent,
     InsuranceEditComponent,
-    InsuranceAddComponent
+    InsuranceAddComponent,
+    InsuranceViewComponent
   ],
   imports: [
     CommonModule,
