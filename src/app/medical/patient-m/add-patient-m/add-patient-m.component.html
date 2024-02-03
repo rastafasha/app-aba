@@ -798,8 +798,8 @@
                                     <div class="form-group local-forms">
                                         <label >RBT <span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValue_rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
-                                            {{data.name}}
+                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
@@ -808,8 +808,8 @@
                                     <div class="form-group local-forms">
                                         <label >RBT 2 <span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValue_rbt2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
-                                            {{data.name}}
+                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
@@ -818,8 +818,8 @@
                                     <div class="form-group local-forms">
                                         <label >BCBA <span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValue_bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
-                                            {{data.name}}
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
@@ -828,8 +828,8 @@
                                     <div class="form-group local-forms">
                                         <label >BCBA 2<span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValue_bcba2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
-                                            {{data.name}}
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
@@ -839,7 +839,7 @@
                                         <label >Clinical Director<span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValue_clind" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of specialists" [value]="data.id">
-                                            {{data.name}}
+                                            {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
@@ -871,7 +871,6 @@
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
-                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
                                     </div>
                                 </div>
                             </div>

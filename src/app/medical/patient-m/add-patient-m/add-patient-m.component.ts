@@ -78,6 +78,8 @@ export class AddPatientMComponent {
 
   public specialists:any = [];
   public locations:any = [];
+  public roles_rbt:any = [];
+  public roles_bcba:any = [];
   public insurances:any = [];
   public insurance:any;
 
@@ -140,10 +142,12 @@ export class AddPatientMComponent {
 
   getConfig(){
     this.patientService.listConfig().subscribe((resp:any)=>{
-      // console.log(resp);
+      console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
       this.locations = resp.locations;
+      this.roles_rbt = resp.roles_rbt;
+      this.roles_bcba = resp.roles_bcba;
     })
   }
   insuranceData(){

@@ -120,6 +120,8 @@ export class EditPatientMComponent {
   public specialists:any = [];
   public locations:any = [];
   public insurances:any = [];
+  public roles_rbt:any = [];
+  public roles_bcba:any = [];
   public notes: any= [];
   public assesstmentlists: any= [];
   
@@ -154,6 +156,8 @@ export class EditPatientMComponent {
       this.insurances = resp.insurances;
       this.pa_assessments = resp.assesstments;
       this.locations = resp.locations;
+      this.roles_rbt = resp.roles_rbt;
+      this.roles_bcba = resp.roles_bcba;
     })
   }
   
