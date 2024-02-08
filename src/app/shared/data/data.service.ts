@@ -254,20 +254,20 @@ export class DataService {
         },
         
         {
-          menuValue: 'Employeers',
+          menuValue: 'Employers',
           hasSubRoute: true,
           showSubRoute: false,
           base: 'doctor',
           img: 'assets/img/icons/menu-icon-02.svg',
           subMenus: [
             {
-              menuValue: 'Employeer List',
+              menuValue: 'Employer List',
               route: routes.doctorsList,
               base: routes.doctorsList,
               permision: 'list_employers',
             },
             {
-              menuValue: 'Add Employeer',
+              menuValue: 'Add Employer',
               route: routes.addDoctor,
               base: routes.addDoctor,
               permision: 'register_employer',
@@ -352,10 +352,49 @@ export class DataService {
               show_nav: false,
             },
             {
-              menuValue: '',
+              menuValue: 'Edit Location',
               route: routes.registerLocation,
               base: routes.registerLocation,
               permision: 'edit_location',
+              show_nav: false,
+            }
+          ],
+        },
+        {
+          menuValue: 'Bip',
+          hasSubRoute: true,
+          showSubRoute: false,
+          base: 'bip',
+          img: 'assets/img/icons/menu-icon-03.svg',
+          show_nav: false,
+          subMenus: [
+            {
+              menuValue: 'Bip List',
+              route: routes.bipList,
+              base: routes.bipList,
+              permision: 'bip_list',
+              show_nav: false,
+            },
+            {
+              menuValue: 'Add Bip',
+              route: routes.registerBip,
+              base: routes.registerBip,
+              permision: 'bip_add',
+              show_nav: false,
+            },
+            {
+              menuValue: 'Edit Bip',
+              route: routes.editBip,
+              base: routes.editBip,
+              permision: 'bip_edit',
+              show_nav: false,
+            }
+            ,
+            {
+              menuValue: 'View Bip',
+              route: routes.editBip,
+              base: routes.editBip,
+              permision: 'bip_view',
               show_nav: false,
             }
           ],

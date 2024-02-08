@@ -4,7 +4,7 @@ import { BipService } from 'src/app/medical/bip/service/bip.service';
 import { GoalService } from 'src/app/medical/bip/service/goal.service';
 import { PatientMService } from 'src/app/medical/patient-m/service/patient-m.service';
 import { routes } from 'src/app/shared/routes/routes';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-reduction-goal-form',
   templateUrl: './reduction-goal-form.component.html',
@@ -57,6 +57,7 @@ export class ReductionGoalFormComponent {
   maladaptiveSelected:any;
   maladaptiveSelectedSon:any;
   goalmaladaptive:any = [];
+  goalmaladaptive_child:any = [];
   goalReductionPatientIds:any = [];
 
   public goals:any = []=[];
@@ -66,6 +67,8 @@ export class ReductionGoalFormComponent {
   public goalltos_added:any = [];
   public golsto:any = [{}];
   public gollto:any = [{}];
+  public golsto_child:any = [{}];
+  public gollto_child:any = [{}];
   
   public current_status!:any;
   public maladaptive:any;
@@ -84,6 +87,7 @@ export class ReductionGoalFormComponent {
   public goalpatient_selected:any;
   public bip_selectedId:any;
   public bip_selectedIdd:any;
+  public maladaptive_child:any;
 
 
   constructor(
@@ -230,7 +234,27 @@ export class ReductionGoalFormComponent {
 
   selectedMaladaptiveSon(maladap:any){
     this.maladaptiveSelectedSon = maladap
-    // console.log(this.maladaptiveSelectedSon);
+    console.log(this.maladaptiveSelectedSon);
+    this.getGoalsSonMaladaptives();
+  }
+
+  getGoalsSonMaladaptives(){
+    this.goalService.listMaladaptivesGoals(this.maladaptiveSelectedSon.maladaptive_behavior).subscribe((resp:any)=>{
+      console.log( resp);
+      
+      this.goalmaladaptive_child = resp.goalsmaladaptive.data;
+
+      this.maladaptive_child = resp.goalsmaladaptive.data[0].maladaptive;
+      console.log(this.maladaptive_child);
+
+      this.golsto_child = this.goalmaladaptive_child[0].goalstos;
+      console.log(this.golsto_child);
+
+      this.gollto_child = this.goalmaladaptive_child[0].goalltos;
+      console.log(this.gollto_child);
+      // this.ngOnInit();
+    },);
+
   }
 
   deleteMaladaptiveSon(goalsto:any){debugger
@@ -283,6 +307,7 @@ export class ReductionGoalFormComponent {
 
   back(){
     this.maladaptiveSelected = null;
+    this.maladaptiveSelectedSon = null;
     this.current_status = '';
     this.ngOnInit();
   }
@@ -309,7 +334,8 @@ export class ReductionGoalFormComponent {
 
       this.goalService.update(data, this.patient_id).subscribe((resp:any)=>{
         // console.log(resp);
-        this.text_success = 'Goal Updated'
+        // this.text_success = 'Goal Updated'
+        Swal.fire('Updated', `Goal Updated successfully!`, 'success');
         this.ngOnInit();
       })
       
@@ -318,7 +344,8 @@ export class ReductionGoalFormComponent {
       this.goalService.createGoal(data).subscribe((resp:any)=>{
         console.log(resp);
         this.goalid = resp.id;
-        this.text_success = 'Goal created successfully!'
+        // this.text_success = 'Goal created successfully!'
+        Swal.fire('Updated', `Goal Created successfully!`, 'success');
         this.ngOnInit();
         // this.getGoalsMaladaptives();
   

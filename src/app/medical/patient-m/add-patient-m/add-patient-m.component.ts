@@ -15,7 +15,7 @@ export class AddPatientMComponent {
   public patient_id: any;
   public selectedValueLocation!: string;
   public selectedValueCode!: string;
-  option_selected:number = 1;
+  option_selected:number = 0;
   
   public first_name: string = '';
   public last_name: string = '';
@@ -94,7 +94,7 @@ export class AddPatientMComponent {
   public selectedValue_bcba!: string;
   public selectedValue_bcba2!: string;
   public selectedValue_clind!: string;
-  public selectedValue_insurer!: string;
+  public selectedValueInsurer!: string;
   
   public rbt_id: any;
   public rbt2_id: any;
@@ -145,7 +145,7 @@ export class AddPatientMComponent {
     // window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getConfig();
-    this.insuranceData();
+    // this.insuranceData();
   }
 
   getConfig(){
@@ -160,28 +160,44 @@ export class AddPatientMComponent {
       // console.log(this.insurance_codes);
     })
   }
-  insuranceData(){
-    this.option_selected=this.option_selected
-    this.insuranceService.showInsurance(this.option_selected).subscribe((resp:any)=>{
+  // insuranceData(){
+  //   this.option_selected=this.option_selected
+  //   this.insuranceService.showInsurance(this.option_selected).subscribe((resp:any)=>{
+  //     console.log(resp);
+  //     this.insurance = resp;
+  //     this.insurer_name = resp.insurer_name;
+  //     this.notes = resp.notes;
+  //     this.services_code = resp.services;
+  //   })
+  // }
+  // selectInsurance(id:any){debugger
+  //   // this.insuranceData();
+  //   // this.insurance_id='1';
+  //   this.option_selected = id;
+  //   this.insuranceService.showInsurance(this.option_selected).subscribe((resp:any)=>{
+  //     console.log(resp);
+  //     this.insurance = resp;
+  //     this.insurer_name = resp.insurer_name;
+  //     this.notes = resp.notes;
+  //     this.services = resp.services;
+  //     this.insuranceData();
+  //   })
+    
+  // }
+
+
+  insuranceData(selectedValueInsurer){
+    this.insuranceService.showInsurance(selectedValueInsurer).subscribe((resp:any)=>{
       console.log(resp);
-      this.insurance = resp;
       this.insurer_name = resp.insurer_name;
-      this.notes = resp.notes;
-      this.services_code = resp.services;
+      // this.notes = resp.notes;
+      this.services = resp.services;
     })
   }
-  selectInsurance(id:any){debugger
-    // this.insuranceData();
-    // this.insurance_id='1';
-    this.option_selected = id;
-    this.insuranceService.showInsurance(this.option_selected).subscribe((resp:any)=>{
-      console.log(resp);
-      this.insurance = resp;
-      this.insurer_name = resp.insurer_name;
-      this.notes = resp.notes;
-      this.services = resp.services;
-      this.insuranceData();
-    })
+
+  selectInsurance(event:any){
+    event = this.selectedValueInsurer;
+    this.insuranceData(this.selectedValueInsurer);
     
   }
 
@@ -294,7 +310,7 @@ export class AddPatientMComponent {
     formData.append('patient_control', this.patient_control);
     formData.append('special_note', this.special_note);
     
-    formData.append('insurer', this.selectedValue_insurer);
+    formData.append('insurer', this.selectedValueInsurer);
     formData.append('insuranceId', this.insuranceId);
     formData.append('insurer_secundary', this.insurer_secundary);
     formData.append('insuranceId_secundary', this.insuranceId_secundary);

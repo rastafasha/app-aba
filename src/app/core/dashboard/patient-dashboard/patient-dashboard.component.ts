@@ -80,7 +80,7 @@ export class PatientDashboardComponent implements OnInit {
   selected!: Date | null;
   public selectedValue ! : string ;
   slideConfig = { slidesToShow: 3, slidesToScroll: 3, centerMode: true, centerPadding: '30px'
-};
+  };
 
 
 

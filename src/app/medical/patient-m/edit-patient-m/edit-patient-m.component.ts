@@ -16,7 +16,7 @@ export class EditPatientMComponent {
   public selectedValueLocation!: string;
   public selectedValueInsurer!: string;
   public selectedValueCode!: string;
-  option_selected:number = 1;
+  option_selected:number = 0;
 
   public patient_id: any;
   public f: string = '';
@@ -61,7 +61,8 @@ export class EditPatientMComponent {
   public oop: any;
   
 
-  public pa_assessments: any = [];
+  public pa_assessment_grup: any = [] = [{}];
+  public pa_assessments: any = [] = [{}];
   public pa_assessment: any;
   public pa_assessment_start_date: string = '';
   public pa_assessment_end_date: string = '';
@@ -127,14 +128,18 @@ export class EditPatientMComponent {
   public locations:any = [];
   public insurances:any = [];
   public notes: any= [];
+  public insurer_name: any= [];
   public assesstmentlists: any= [];
   public services_code: any= [];
+  public services: any= [];
 
   public roles_rbt:any = [];
   public roles_bcba:any = [];
   public insurance_codes:any = [];
   public insurance:any;
+  public insurances_name:any;
   public code:any;
+  public insuranceiddd:any;
   
   // public insurance:any;
   // public insurance_id:any;
@@ -168,7 +173,8 @@ export class EditPatientMComponent {
       console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
-      
+      this.insurances_name = resp.insurances[0].insurer_name;
+      // console.log(this.insurances_name);
       this.locations = resp.locations;
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
@@ -181,8 +187,20 @@ showUser(){
     this.patientService.getPatient(this.client_id).subscribe((resp:any)=>{
       console.log(resp);
       this.patient_selected = resp.patient;
+      // this.pa_assessment_grup = resp.pa_assessments;// ?
+      // console.log(this.pa_assessments);
 
       this.selectedValueLocation = this.patient_selected.location_id;
+      this.selectedValue_rbt = this.patient_selected.rbt_id;
+        this.selectedValue_rbt2 = this.patient_selected.rbt2_id;
+        this.selectedValue_bcba = this.patient_selected.bcba_id;
+        this.selectedValue_bcba2 = this.patient_selected.bcba2_id;
+        this.selectedValue_clind = this.patient_selected.clin_director_id;
+        this.selectedValueInsurer = this.patient_selected.insurer;
+        // console.log(this.selectedValueInsurer);
+
+        
+      
 
         this.first_name = this.patient_selected.first_name;
         this.last_name = this.patient_selected.last_name;
@@ -234,41 +252,27 @@ showUser(){
         this.cde = this.patient_selected.cde;
         this.submitted = this.patient_selected.submitted;
 
-        // this.pa_assessments =  this.patient_selected.pa_assessments;
-        // console.log(this.pa_assessments);
-        
-        // this.pa_assessments = resp.assesstments;
-        // this.pa_assessments = resp.patient.pa_assessments;
-
-        // this.pa_assessments =  JSON.parse(this.patient_selected.pa_assessments);
-        // this.pa_assessments = resp.pa_assessments;
-        console.log(this.pa_assessments);
-
-        this.selectedValue_rbt = this.patient_selected.rbt_id;
-        this.selectedValue_rbt2 = this.patient_selected.rbt2_id;
-        this.selectedValue_bcba = this.patient_selected.bcba_id;
-        this.selectedValue_bcba2 = this.patient_selected.bcba2_id;
-        this.selectedValue_clind = this.patient_selected.clin_director_id;
-        this.selectedValueInsurer = this.patient_selected.insurer;
 
         this.IMAGE_PREVISUALIZA = this.patient_selected.avatar;
+        this.insuranceData(this.selectedValueInsurer);
     })
   }
 
-  insuranceData(){
-    // this.insurance_id=this.insurance_id
-    // this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
-    //   console.log(resp);
-    //   this.insurance = resp;
-    //   this.insurer_name = resp.insurer_name;
-    //   this.insurer = resp.id;
-    //   // this.notes = resp.notes;
-    //   // this.services = resp.services;
-    // })
+  insuranceData(selectedValueInsurer){
+    this.insuranceService.showInsurance(selectedValueInsurer).subscribe((resp:any)=>{
+      console.log(resp);
+      this.insuranceiddd= resp.id;
+      console.log(this.insuranceiddd);
+      this.insurer_name = resp.insurer_name;
+      console.log(this.insurer_name);
+      // this.notes = resp.notes;
+      this.services = resp.services;
+    })
   }
 
-  selectInsurance(){
-    this.insuranceData();
+  selectInsurance(event:any){
+    event = this.selectedValueInsurer;
+    this.insuranceData(this.selectedValueInsurer);
     
   }
 
@@ -369,14 +373,12 @@ showUser(){
     formData.append('school_number', this.school_number);
     formData.append('diagnosis_code', this.diagnosis_code);
     formData.append('age', this.age+'');
-
-    formData.append('pa_assessments', JSON.stringify(this.assesstmentlists));
     formData.append('rbt_id', this.selectedValue_rbt);
     formData.append('rbt2_id', this.selectedValue_rbt2);
     formData.append('bcba_id', this.selectedValue_bcba);
     formData.append('bcba2_id', this.selectedValue_bcba2);
     formData.append('clin_director_id', this.selectedValue_clind);
-    formData.append('insurer', this.selectedValue_insurer);
+    formData.append('insurer', this.selectedValueInsurer);
 
 
     formData.append('pa_assessments', JSON.stringify(this.pa_assessments));
@@ -457,13 +459,6 @@ showUser(){
       formData.append('oop', this.oop);
     }
 
-    
-    // if(this.assesstments){
-
-    //   // formData.append('pa_assessments', this.pa_assessments);
-
-    // }
-
     if(this.selectedValueLocation ){
       formData.append('location_id', this.selectedValueLocation);
     }
@@ -506,12 +501,6 @@ showUser(){
       formData.append('email', this.email);
     }
 
-    
-
-    
-    
-    
-    
     
     if(this.FILE_AVATAR){
       formData.append('imagen', this.FILE_AVATAR);

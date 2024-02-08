@@ -4,7 +4,7 @@ import { BipService } from 'src/app/medical/bip/service/bip.service';
 import { GoalService } from 'src/app/medical/bip/service/goal.service';
 import { PatientMService } from 'src/app/medical/patient-m/service/patient-m.service';
 import { routes } from 'src/app/shared/routes/routes';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-bipform',
   templateUrl: './bipform.component.html',
@@ -333,7 +333,8 @@ export class BipformComponent {
 
       this.bipService.update(data, this.id).subscribe((resp:any)=>{
         // console.log(resp);
-        this.text_success = 'Bip Updated'
+        // this.text_success = 'Bip Updated'
+        Swal.fire('Updated', `Bip Updated successfully!`, 'success');
         this.ngOnInit();
       })
       
@@ -342,7 +343,8 @@ export class BipformComponent {
       //crear
       this.bipService.createBip(data).subscribe((resp:any)=>{
         // console.log(resp);
-        this.text_success = 'Se guardó la informacion de la cita médica'
+        // this.text_success = 'Se guardó la informacion de la cita médica'
+        Swal.fire('Updated', `Bip Created successfully!`, 'success');
         this.ngOnInit();
       })
     }
