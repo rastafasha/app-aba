@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routes } from 'src/app/shared/routes/routes';
 import { DoctorService } from '../service/doctor.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-doctor',
   templateUrl: './edit-doctor.component.html',
@@ -67,6 +67,7 @@ export class EditDoctorComponent {
 
   public roles:any = [];
   public locations:any = [];
+  
   public FILE_AVATAR:any;
   public IMAGE_PREVISUALIZA:any = 'assets/img/user-06.jpg';
 
@@ -348,10 +349,10 @@ export class EditDoctorComponent {
     if(this.FILE_AVATAR ){
       formData.append('imagen', this.FILE_AVATAR);
     }
-    this.FILE_SIGNATURE  = this.IMAGE_PREVISUALIZA_SIGNATURE;
-    if(this.FILE_SIGNATURE ){
-      formData.append('electronic_signature', this.FILE_SIGNATURE);
-    }
+    // this.FILE_SIGNATURE  = this.IMAGE_PREVISUALIZA_SIGNATURE;
+    // if(this.FILE_SIGNATURE ){
+    //   formData.append('electronic_signature', this.FILE_SIGNATURE);
+    // }
 
     this.doctorService.editDoctor(formData, this.doctor_id).subscribe((resp:any)=>{
       // console.log(resp);
@@ -359,7 +360,8 @@ export class EditDoctorComponent {
       if(resp.message == 403){
         this.text_validation = resp.message_text;
       }else{
-        this.text_success = 'El usuario ha sido actualizado correctamente';
+        // this.text_success = 'El usuario ha sido actualizado correctamente';
+        Swal.fire('Updated', ` Employee Has updated`, 'success');
         this.ngOnInit();
       }
     })

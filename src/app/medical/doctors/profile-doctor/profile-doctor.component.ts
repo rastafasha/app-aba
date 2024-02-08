@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { DataService } from 'src/app/shared/data/data.service';
 import { routes } from 'src/app/shared/routes/routes';
 import { DoctorService } from '../service/doctor.service';
 import { ActivatedRoute } from '@angular/router';
-
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-profile-doctor',
   templateUrl: './profile-doctor.component.html',
@@ -12,8 +13,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileDoctorComponent {
   public routes = routes;
-public doctorProfile: any[];
-option_selected:number = 1;
+  @ViewChild('contentToConvert') contentToConvert!: ElementRef;
+  option_selected:number = 1;
+  public doctorProfile: any[];
+
 public doctor_id: any;
 
 public num_appointment: number = 0;
@@ -111,4 +114,25 @@ getDoctor(){
       }
     })
   }
+
+  public convertToPdf(): void {
+    const data = this.contentToConvert.nativeElement;
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options
+      const imgWidth = 208;
+      const pageHeight = 295;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      const heightLeft = imgHeight;
+
+      // Create a new PDF document
+      const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+
+      // Add an image of the canvas to the PDF
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
+
+      // Save the PDF
+      pdf.save('employee.pdf');
+    });
+  }
+    
 }

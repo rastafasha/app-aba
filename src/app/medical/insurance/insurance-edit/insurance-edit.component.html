@@ -26,22 +26,27 @@
                                         <h4>Insurance Detail</h4>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-4 col-xl-4">  
-                                    <div class="form-group local-forms">
-                                        <label >Insurer Name<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="insurer_name" [(ngModel)]="insurer_name" type="text"  >
+                                <div class="row">
+                                    <div class="col-12 col-md-4 col-xl-4">  
+                                        <div class="form-group local-forms">
+                                            <label >Insurer Name<span class="login-danger">*</span></label>
+                                            <input class="form-control" name="insurer_name" [(ngModel)]="insurer_name" type="text"  >
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-8">  
+                                        <div class="tab-content-set">
+                                            <ul class="nav">
+                                                <li>
+                                                    <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 1}" (click)="optionSelected(1)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Services</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Notes</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="tab-content-set">
-                                    <ul class="nav">
-                                        <li>
-                                            <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 1}" (click)="optionSelected(1)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Services</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Notes</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
                                 <ng-container *ngIf="option_selected == 1">
                                    <!-- services -->
                                    <div class="row align-items-center" >
@@ -92,7 +97,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 mt-3 mb-3">
+                                    <div class="col-xs-12 mt-3 mb-3 scroll-table">
                                         <div class="table-responsive">
                                             <table class="table mb-0">
                                                 <thead>

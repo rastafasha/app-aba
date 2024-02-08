@@ -22,7 +22,7 @@ export class ListPatientMComponent {
   public searchDataValue = '';
   public lastIndex = 0;
   public pageSize = 10;
-  public totalDataPatient = 0;
+  public totalDatapatient = 0;
   public skip = 0;
   public limit: number = this.pageSize;
   public pageIndex = 0;
@@ -38,8 +38,8 @@ export class ListPatientMComponent {
   public text_validation:any;
 
   constructor(
-    public patientService: PatientMService,
     public doctorService: DoctorService,
+    public patientService: PatientMService,
     private fileSaver: FileSaverService
     ){
 
@@ -49,21 +49,20 @@ export class ListPatientMComponent {
     this.doctorService.closeMenuSidebar();
     this.getTableData();
   }
-
-  private getTableData(page=1): void {
+  private getTableData(): void {
     this.patientList = [];
     this.serialNumberArray = [];
 
     this.patientService.listPatients().subscribe((resp:any)=>{
-      // console.log(resp);
+      
+      console.log(resp);
 
-      this.totalDataPatient = resp.total;
-      this.patientList = resp.patients.data;
+      this.totalDatapatient = resp.patients.data.length;
+      this.patient_generals = resp.patients.data;
       this.patient_id = resp.patients.id;
-      // this.getTableDataGeneral();
-      this.dataSource = new MatTableDataSource<any>(this.patientList);
-      this.calculateTotalPages(this.totalDataPatient, this.pageSize);
+     this.getTableDataGeneral();
     })
+
   }
 
   getTableDataGeneral(){
@@ -79,13 +78,13 @@ export class ListPatientMComponent {
       }
     });
     this.dataSource = new MatTableDataSource<any>(this.patientList);
-    this.calculateTotalPages(this.totalDataPatient, this.pageSize);
+    this.calculateTotalPages(this.totalDatapatient, this.pageSize);
   }
-  selectUser(staff:any){
-    this.patient_selected = staff;
+  selectUser(patient:any){
+    this.patient_selected = patient;
   }
+  deleteRol(){
 
-  deletePatient(){
     this.patientService.deletePatient(this.patient_selected.id).subscribe((resp:any)=>{
       // console.log(resp);
 
@@ -103,21 +102,17 @@ export class ListPatientMComponent {
         $("body").removeClass();
         $("body").removeAttr("style");
         this.patient_selected = null;
-        this.getTableData();
       }
       }
+
+      
     })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public searchData() {
-    // this.dataSource.filter = value.trim().toLowerCase();
-    // this.patientList = this.dataSource.filteredData;
-    this.pageSelection = [];
-    this.limit = this.pageSize;
-    this.skip = 0;
-    this.currentPage = 1;
-    this.getTableData();
+  public searchData(value: any): void {
+    this.dataSource.filter = value.trim().toLowerCase();
+    this.patientList = this.dataSource.filteredData;
   }
 
   public sortData(sort: any) {
@@ -142,13 +137,13 @@ export class ListPatientMComponent {
       this.pageIndex = this.currentPage - 1;
       this.limit += this.pageSize;
       this.skip = this.pageSize * this.pageIndex;
-      this.getTableData(this.currentPage);
+      this.getTableDataGeneral();
     } else if (event == 'previous') {
       this.currentPage--;
       this.pageIndex = this.currentPage - 1;
       this.limit -= this.pageSize;
       this.skip = this.pageSize * this.pageIndex;
-      this.getTableData(this.currentPage);
+      this.getTableDataGeneral();
     }
   }
 
@@ -161,7 +156,7 @@ export class ListPatientMComponent {
     } else if (pageNumber < this.currentPage) {
       this.pageIndex = pageNumber + 1;
     }
-    this.getTableData(this.currentPage);
+    this.getTableDataGeneral();
   }
 
   public PageSize(): void {
@@ -169,13 +164,13 @@ export class ListPatientMComponent {
     this.limit = this.pageSize;
     this.skip = 0;
     this.currentPage = 1;
-    this.getTableData();
+    this.getTableDataGeneral();
     this.searchDataValue = '';
   }
 
-  private calculateTotalPages(totalDataPatient: number, pageSize: number): void {
+  private calculateTotalPages(totalDatapatient: number, pageSize: number): void {
     this.pageNumberArray = [];
-    this.totalPages = totalDataPatient / pageSize;
+    this.totalPages = totalDatapatient / pageSize;
     if (this.totalPages % 1 != 0) {
       this.totalPages = Math.trunc(this.totalPages + 1);
     }
@@ -188,16 +183,13 @@ export class ListPatientMComponent {
     }
   }
 
-
   excelExport(){
     const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8';
     const EXCLE_EXTENSION = '.xlsx';
 
     this.getTableDataGeneral();
-
-
     //custom code
-    const worksheet = XLSX.utils.json_to_sheet(this.patientList);
+    const worksheet = XLSX.utils.json_to_sheet(this.patient_generals);
 
     const workbook = {
       Sheets:{
@@ -220,7 +212,7 @@ export class ListPatientMComponent {
     this.getTableDataGeneral();
 
     //custom code
-    const worksheet = XLSX.utils.json_to_sheet(this.patientList);
+    const worksheet = XLSX.utils.json_to_sheet(this.patient_generals);
 
     const workbook = {
       Sheets:{
@@ -233,7 +225,7 @@ export class ListPatientMComponent {
 
     const blobData = new Blob([excelBuffer],{type: CSV_TYPE});
 
-    this.fileSaver.save(blobData, "clients_db_aba_therapy", CSV_EXTENSION)
+    this.fileSaver.save(blobData, "clients_db_aba_therapy_csv", CSV_EXTENSION)
 
   }
 
@@ -245,7 +237,7 @@ export class ListPatientMComponent {
 
 
     //custom code
-    const worksheet = XLSX.utils.json_to_sheet(this.patientList);
+    const worksheet = XLSX.utils.json_to_sheet(this.patient_generals);
 
     const workbook = {
       Sheets:{
@@ -265,7 +257,7 @@ export class ListPatientMComponent {
   pdfExport(){
     // var doc = new jspdf(); 
     
-    // const worksheet = XLSX.utils.json_to_sheet(this.patientList);
+    // const worksheet = XLSX.utils.json_to_sheet(this.patient_generals);
 
     // const workbook = {
     //   Sheets:{
@@ -276,12 +268,11 @@ export class ListPatientMComponent {
 
     // doc.html(document.body, {
     //   callback: function (doc) {
-    //     doc.save('patients_db_aba_project.pdf');
+    //     doc.save('clients_db_aba_therapy.pdf');
     //   }
     // });
 
   }
-
 
   cambiarStatus(data:any){
     let VALUE = data.eligibility;
@@ -289,11 +280,9 @@ export class ListPatientMComponent {
     
     this.patientService.updateStatus(data, data.id).subscribe(
       resp =>{
-        console.log(resp);
-        
+        // console.log(resp);
         this.getTableData();
       }
     )
   }
-
 }

@@ -52,11 +52,6 @@ export class BipformComponent {
   assestment_conducted:any;
   assestment_conducted_options:any;
 
-  // prevalent_setting_event_and_atecedents:any;
-  // behavior:any;
-  // hypothesized_functions:any;
-
-  
   reduction:any = [];
   maladaptive:any = [];
 
@@ -81,9 +76,9 @@ export class BipformComponent {
   public assestment_title: any;
   public assestment_status: any;
   
-  // public functional_assessment_interview_completed: any;
-  // public vineland_behavior_rating_scale: any;
-  // public ados: any;
+  // created comments by Malcolm Cordova at 4 feb 2004
+  // mercadocreativo@gmail.com
+  // @malcolmcordova
 
   //
   public prevalent_setting_event_and_atecedents: any = [];
@@ -121,63 +116,59 @@ export class BipformComponent {
 
   ngOnInit(): void {
     
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);//inicia la vista siempre desde arriba
+    //me subcribo al id recibido por el parametro de la url
     this.ativatedRoute.params.subscribe((resp:any)=>{
-      this.client_id = resp.id;
-      this.patient_id= resp.id
+      this.client_id = resp.id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
+      this.patient_id= resp.id // recibe el id del paciente que se esta consultando
       // console.log(this.client_id);
      })
-     this.getProfileBip();
+     this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
      
-    this.ativatedRoute.params.subscribe( ({id}) => this.getBip(id));
-    let USER = localStorage.getItem("user");
-    this.user = JSON.parse(USER ? USER: '');
-    this.doctor_id = this.user.id;
+    this.ativatedRoute.params.subscribe( ({id}) => this.getBip(id));//se pide el id del bip creado para traer la info necesaria
+    let USER = localStorage.getItem("user");// se solicita el usuario logueado
+    this.user = JSON.parse(USER ? USER: ''); //  si no hay un usuario en el localstorage retorna un objeto vacio
+    this.doctor_id = this.user.id;  //se asigna el doctor logueado a este campo para poderlo enviar en los
 
-    // if(this.option_selected == '2'){
-    // }
+
     
   }
 
-  optionSelected(value:number){
-    this.option_selected = value;
-  }
-
-  getConfig(){
-    // this.bipService.listConfig().subscribe((resp:any)=>{
-    //   console.log(resp);
-    //   this.documents_name = resp.documents.name;
-    //   // this.documents_name = resp.documents_recev;
-    // })
-  }
   
+
+  
+  //se obtiene el perfil del usuario, por el cliente_id  que seria igual al id de la url
   getProfileBip(){
     this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
       // console.log(resp);
-      this.client_selected = resp;
+      this.client_selected = resp;// asignamos el objeto a nuestra variable
 
-      this.first_name = this.client_selected.patient.first_name;
-      this.last_name = this.client_selected.patient.last_name;
-      this.patient_id = this.client_selected.patient.patient_id;  
-      this.phone = this.client_selected.patient.phone; 
-      this.parent_guardian_name = this.client_selected.patient.parent_guardian_name;
-      this.relationship = this.client_selected.patient.relationship;
-      this.address = this.client_selected.patient.address;
-      this.age = this.client_selected.patient.age;
-      this.dob = this.client_selected.patient.dob;
-
+      //traemos la info del usuario 
+      if (this.client_selected.type !== null){// si hay o no informacion del paciente
+        if (this.client_selected.eligibility == 'yes'){// si el status es positivo para proceder
+          this.first_name = this.client_selected.patient.first_name;
+          this.last_name = this.client_selected.patient.last_name;
+          this.patient_id = this.client_selected.patient.patient_id;  
+          this.phone = this.client_selected.patient.phone; 
+          this.parent_guardian_name = this.client_selected.patient.parent_guardian_name;
+          this.relationship = this.client_selected.patient.relationship;
+          this.address = this.client_selected.patient.address;
+          this.age = this.client_selected.patient.age;
+          this.dob = this.client_selected.patient.dob;
+        }
+      }
     });
-    // bip
 
 
   }
+  //obtenemos el bip por el id..
   getBip(id){
     if (id !== null && id !== undefined) {
       this.bipService.getBipByUser(+id).subscribe((resp:any)=>{
         // console.log(resp);
   
-        this.bip_selected = resp;
-        this.id = resp.id;
+        this.bip_selected = resp; //asigamos una variable a la respuesta
+        this.id = resp.id;//obtenemos de nuevo el bip pero para verificar si es actualizar o crear en la funcion
         
         this.type_of_assessment =this.bip_selected.type_of_assessment;
   
@@ -204,7 +195,7 @@ export class BipformComponent {
     
     
   }
-//listados
+//manejo de listas para json 
 
   addDocument(){
     this.documents.push({
@@ -234,22 +225,7 @@ export class BipformComponent {
 
   deleteMaladaptive(i:any){
     this.maladaptives.splice(i,1);
-    // this.ngOnInit();
   }
-
-  // addAssesstmentOption(){
-  //   this.assesstments.push({
-  //     assestment_title: this.assestment_title,
-  //     assestment_status: this.assestment_status,
-  //   })
-  //   if(this.assesstments.length > 1){
-  //     this.assesstments.splice(this.assesstments,1);
-  //   }
-  // }
-
-  // deleteAssesstmentOption(i:any){
-  //   this.assesstments.splice(i,1);
-  // }
 
   addAssesstmentDocument(){debugger
     this.assesstmentsDocuments.push({
@@ -306,14 +282,29 @@ export class BipformComponent {
   deleteIntervention(i:any){
     this.interventions.splice(i,1);
   }
+
+  // addAssesstmentOption(){
+  //   this.assesstments.push({
+  //     assestment_title: this.assestment_title,
+  //     assestment_status: this.assestment_status,
+  //   })
+  //    si existe un elemento actualiza ese elemento en la lista
+  //   if(this.assesstments.length > 1){
+  //     this.assesstments.splice(this.assesstments,1);
+  //   }
+  // }
+
+  // deleteAssesstmentOption(i:any){
+  //   this.assesstments.splice(i,1);
+  // }
   
 //fin listados
 
 
   save(){
     this.text_validation = '';
-    // if(!this.documents || this.documents.length == 0){
-    //   this.text_validation = 'Es requerido ingresar el diagnostico y una receta medica';
+    // if(!this.type_of_assessment || !this.maladaptives || !this.client_id){
+    //   this.text_validation = 'Is required this information ';
     //   return;
     // }
 
@@ -338,7 +329,7 @@ export class BipformComponent {
       interventions: this.interventions,
     }
 
-    if(this.bip_selected){
+    if(this.bip_selected){//si  tiene bip se agrega a la informacion de la consulta
 
       this.bipService.update(data, this.id).subscribe((resp:any)=>{
         // console.log(resp);
@@ -346,7 +337,7 @@ export class BipformComponent {
         this.ngOnInit();
       })
       
-    }else{
+    }else{ // si no viene crea el bip
       
       //crear
       this.bipService.createBip(data).subscribe((resp:any)=>{

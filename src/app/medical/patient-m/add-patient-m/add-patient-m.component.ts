@@ -14,6 +14,8 @@ export class AddPatientMComponent {
   public routes = routes;
   public patient_id: any;
   public selectedValueLocation!: string;
+  public selectedValueCode!: string;
+  option_selected:number = 1;
   
   public first_name: string = '';
   public last_name: string = '';
@@ -62,6 +64,8 @@ export class AddPatientMComponent {
   public pa_services: any;
   public pa_services_start_date: string = '';
   public pa_services_end_date: string = '';
+  public cpt: any;
+  public n_units: any;
   public s_unit: any;
   public n_code: any;
   
@@ -81,7 +85,9 @@ export class AddPatientMComponent {
   public roles_rbt:any = [];
   public roles_bcba:any = [];
   public insurances:any = [];
+  public insurance_codes:any = [];
   public insurance:any;
+  public code:any;
 
   public selectedValue_rbt!: string;
   public selectedValue_rbt2!: string;
@@ -119,6 +125,7 @@ export class AddPatientMComponent {
   public insurer_name: any;
   public notes: any= [];
   public services: any= [];
+  public services_code: any= [];
   
 
   valid_form:boolean = false;
@@ -138,6 +145,7 @@ export class AddPatientMComponent {
     // window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getConfig();
+    this.insuranceData();
   }
 
   getConfig(){
@@ -148,43 +156,48 @@ export class AddPatientMComponent {
       this.locations = resp.locations;
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
+      // this.insurance_id = resp.insurances[0].id;
+      // console.log(this.insurance_codes);
     })
   }
   insuranceData(){
-    this.insurance_id=this.insurance_id
-    this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
+    this.option_selected=this.option_selected
+    this.insuranceService.showInsurance(this.option_selected).subscribe((resp:any)=>{
       console.log(resp);
       this.insurance = resp;
       this.insurer_name = resp.insurer_name;
       this.notes = resp.notes;
-      this.services = resp.services;
+      this.services_code = resp.services;
     })
   }
   selectInsurance(id:any){debugger
     // this.insuranceData();
-    this.insurance_id=id;
-    this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
+    // this.insurance_id='1';
+    this.option_selected = id;
+    this.insuranceService.showInsurance(this.option_selected).subscribe((resp:any)=>{
       console.log(resp);
       this.insurance = resp;
       this.insurer_name = resp.insurer_name;
       this.notes = resp.notes;
       this.services = resp.services;
+      this.insuranceData();
     })
     
   }
 
-  addService(){
-    this.services.push({
-      n_code: this.n_code,
-      s_unit: this.s_unit
-    })
-    this.n_code = '';
-    this.s_unit = '';
-  }
+  // addService(){
+  //   this.services.push({
+  //     n_code: this.n_code,
+  //     s_unit: this.s_unit
+  //   })
+  //   this.n_code = '';
+  //   this.s_unit = '';
+  // }
 
-  deleteService(i:any){
-    this.services.splice(i,1);
-  }
+  // deleteService(i:any){
+  //   this.services.splice(i,1);
+  // }
+
   addPAAssestment(){
     this.pa_assessments.push({
       pa_assessment: this.pa_assessment,
@@ -193,6 +206,8 @@ export class AddPatientMComponent {
       pa_services: this.pa_services,
       pa_services_start_date: this.pa_services_start_date,
       pa_services_end_date: this.pa_services_end_date,
+      cpt: this.selectedValueCode,
+      n_units: this.n_units,
     })
     this.pa_assessment = '';
     this.pa_assessment_start_date = '';
@@ -200,6 +215,8 @@ export class AddPatientMComponent {
     this.pa_services = '';
     this.pa_services_start_date = '';
     this.pa_services_end_date = '';
+    this.selectedValueCode = null;
+    this.n_units = '';
   }
 
   deletePAAssestment(i:any){
@@ -337,9 +354,9 @@ export class AddPatientMComponent {
         this.text_validation = resp.message_text;
       }else{
         this.valid_form_success = true;
-        this.ngOnInit();
+        // this.ngOnInit();
         
-        // this.router.navigate(['/patients/list']);
+        this.router.navigate(['/patients/list']);
         // this.ngOnInit();
       }
     })

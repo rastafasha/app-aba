@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { LocationViewComponent } from './location-view/location-view.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     LocationComponent,
     LocationAddComponent,
     LocationEditComponent,
-    LocationListComponent
+    LocationListComponent,
+    LocationViewComponent
   ],
   imports: [
     CommonModule,

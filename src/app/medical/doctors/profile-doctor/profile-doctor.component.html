@@ -1,4 +1,4 @@
-<div class="page-wrapper">
+<div class="page-wrapper" id="contentToConvert" #contentToConvert>
     <div class="content">
     
         <!-- Page Header -->
@@ -56,23 +56,23 @@
                                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                             <div class="follow-group">
                                                 <div class="doctor-follows">
-                                                    <h5>Appointments</h5>
+                                                    <h5>Notes</h5>
                                                     <h4>{{num_appointment}}</h4>
                                                 </div>
                                                 <div class="doctor-follows">
-                                                    <h5>Salary</h5>
-                                                    <h4>{{doctor_selected.salary|currency}}</h4>
+                                                    <h5>Notes Pending</h5>
+                                                    <h4>{{num_appointment_pendings}}</h4>
                                                 </div>
                                                 <div class="doctor-follows">
-                                                    <h5>Appointment Pending</h5>
-                                                    <h4>{{num_appointment_pendings}}</h4>
+                                                    <h5>Salary</h5>
+                                                    <h4 >{{doctor_selected.salary|currency}}</h4>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                             <div class="follow-btn-group">
                                                 <a [routerLink]="['/doctors/list/edit/', doctor_id]" class="btn btn-info follow-btns">Edit</a>
-                                                <!-- <button type="submit" class="btn btn-info message-btns">Message</button> -->
+                                                <button class="btn btn-info follow-btns" (click)="convertToPdf()">Save PDF</button>
                                             </div>
                                         </div>
                                     </div>
@@ -94,8 +94,8 @@
                                         <ul class="list-space">
                                             <li>
                                                 <h4>Gender</h4>
-                                                <span *ngIf="doctor_selected.gender == 2">Female</span>
-                                                <span *ngIf="doctor_selected.gender == 1">Male</span>
+                                                <span *ngIf="doctor_selected.gender == 2" >Female</span>
+                                                <span *ngIf="doctor_selected.gender == 1" >Male</span>
                                             </li>
                                             <li>
                                                 <h4>Birth Day</h4>
@@ -214,7 +214,7 @@
                                             </li>
                                             
                                             <li>
-                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>List Appointments </a>
+                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>List Notes </a>
                                             </li>
                                             <li>
                                                 <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 3}" (click)="optionSelected(3)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-16.svg" alt=""></span>Settings</a>
@@ -490,7 +490,7 @@
                                                     <div class="col-12 col-sm-12">
                                                         <div class="form-group local-forms">
                                                             <label >Email </label>
-                                                            <input class="form-control" type="email" name="email" [(ngModel)]="email" >
+                                                            <input class="form-control" disabled type="email" name="email" [(ngModel)]="email" >
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-sm-12">
@@ -554,7 +554,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title ">Appointemt Pendings</h4>
+                                    <h4 class="card-title ">Notes Pendings</h4>
                                 </div>
                                 <div class="card-body p-0 table-dash">
                                     <div class="table-responsive scrooldiv2">
@@ -565,12 +565,12 @@
                                                     <th mat-sort-header="date">Date</th>
                                                     <th mat-sort-header="doctor">Patient</th>
                                                     <th mat-sort-header="status">Status</th>
-                                                    <th mat-sort-header="statuspayment">Status Payment</th>
-                                                    <th mat-sort-header="charges">Monto ($)</th>
+                                                    <!-- <th mat-sort-header="statuspayment">Status Payment</th> -->
+                                                    <!-- <th mat-sort-header="charges">Monto ($)</th> -->
                                                     <th></th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <!-- <tbody>
                                                 <tr *ngFor="let data of appointment_pendings">
                                                     
                                                     <td >{{data.date_appointment_format}}</td>
@@ -587,12 +587,12 @@
                                                             <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-end">
                                                                 <a class="dropdown-item" [routerLink]="['/appointments/cita-medica/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Edit</a>
-                                                                <!-- <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_appointment"><i class="fa fa-trash-alt m-r-5"></i> Delete</a> -->
+                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_appointment"><i class="fa fa-trash-alt m-r-5"></i> Delete</a>
                                                             </div>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </tbody>
+                                            </tbody> -->
                                         </table>
                                     </div>
                                 </div>

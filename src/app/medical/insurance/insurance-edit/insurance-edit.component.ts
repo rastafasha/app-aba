@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { routes } from 'src/app/shared/routes/routes';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import { InsuranceService } from '../service/insurance.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-insurance-edit',
   templateUrl: './insurance-edit.component.html',
@@ -128,8 +128,8 @@ export class InsuranceEditComponent {
       if(resp.message == 403){
         this.text_validation = resp.message_text;
       }else{
-        this.text_success = 'El insurance ha sido registrado correctamente';
-
+        // this.text_success = 'El insurance ha sido registrado correctamente';
+        Swal.fire('Updated', ` Insurance Has updated`, 'success');
         this.router.navigate(['/insurance/list']);
       }
     })

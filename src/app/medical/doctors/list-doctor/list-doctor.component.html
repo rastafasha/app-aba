@@ -45,6 +45,7 @@
                                      <a type="button" (click)="txtExport()" class=" me-2"><img src="assets/img/icons/pdf-icon-02.svg"   alt="Export to TXT" title="Export to TXT"></a>
                                      <a type="button" (click)="csvExport()" class=" me-2"><img src="assets/img/icons/pdf-icon-03.svg"    alt="Export to CSV" title="Export to CSV"></a>
                                      <a type="button" (click)="excelExport()" ><img src="assets/img/icons/pdf-icon-04.svg"   alt="Export to XLS" title="Export to XLS"></a>
+                                     <!-- <a type="button" (click)="pdfExport()" ><img src="assets/img/icons/pdf-icon-04.svg"   alt="Export to PDF" title="Export to PDF"></a> -->
                                     
                                 </div>
                             </div>
@@ -59,6 +60,7 @@
                                         <th mat-sort-header="name">Full Name</th>
                                         <th mat-sort-header="email">Email</th>
                                         <th mat-sort-header="telefono">Phone</th>
+                                        <th mat-sort-header="city">City</th>
                                         <th mat-sort-header="role">Role</th>
                                         <th mat-sort-header="status">Status</th>
                                         <th mat-sort-header="op">Options</th>
@@ -69,9 +71,14 @@
                                 <tbody>
                                     <tr *ngFor="let data of doctorList">
                                         
-                                        <td>{{data.name + ' ' + (data.surname ? data.surname: '')}}</td>
+                                        <td>
+                                          <a class="dropdown-item" [routerLink]="['/doctors/profile/', data.id]">
+                                            {{data.name + ' ' + (data.surname ? data.surname: '')}}
+                                          </a>
+                                        </td>
                                         <td>{{data.email}}</td>
                                         <td>{{data.phone}}</td>
+                                        <td>{{data.city}}</td>
                                         <td>{{data.roles.name}}</td>
                                         <td>
                                           <span class="badge bg-danger"

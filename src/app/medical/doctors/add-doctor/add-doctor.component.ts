@@ -152,7 +152,7 @@ export class AddDoctorComponent {
     formData.append('role_id', this.selectedValue);
     formData.append('location_id', this.selectedValueLocation);
     formData.append('imagen', this.FILE_AVATAR);
-    formData.append('electronic_signature', this.FILE_SIGNATURE);
+    // formData.append('electronic_signature', this.FILE_SIGNATURE);
     
     formData.append('currently_pay_through_company', this.currently_pay_through_company);
     formData.append('llc', this.llc);
@@ -202,8 +202,8 @@ export class AddDoctorComponent {
         this.text_validation = resp.message_text;
       }else{
         this.text_success = 'Employer created';
-        this.ngOnInit();
-        // this.router.navigate(['/doctors/list']);
+        // this.ngOnInit();
+        this.router.navigate(['/doctors/list']);
       }
     })
 

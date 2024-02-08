@@ -234,7 +234,7 @@ export class LocationListComponent {
 
     const blobData = new Blob([excelBuffer],{type: CSV_TYPE});
 
-    this.fileSaver.save(blobData, "clients_db_aba_therapy", CSV_EXTENSION)
+    this.fileSaver.save(blobData, "clients_db_aba_therapy_csv", CSV_EXTENSION)
 
   }
 

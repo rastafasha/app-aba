@@ -17,7 +17,6 @@ export class ReductionGoalFormComponent {
   valid_form_success: boolean = false;
   public text_validation:string = '';
   public text_success:string = '';
-  option_selected:number = 1;
 
 
   public medical:any = [];
@@ -37,10 +36,11 @@ export class ReductionGoalFormComponent {
   bip_id:any;
 
   reduction:any = [];
-  maladaptive:any = [];
   
 
-  
+  // created comments by Malcolm Cordova at 4 feb 2004
+  // mercadocreativo@gmail.com
+  // @malcolmcordova
   
   //maladaptives
   
@@ -54,23 +54,37 @@ export class ReductionGoalFormComponent {
   public initial_interesting: any;
   
   //goals
-  public current_status:any;
-  public status:any;
-  public goal:any;
-  public sto:any;
-  public date:any;
-  public decription_goal:any;
-  public goals:any = [];
-  public goal_id:any;
-  public lto:any;
-  public description_lto:any;
-  public status_lto:any;
-  public date_lto:any;
-  
   maladaptiveSelected:any;
   maladaptiveSelectedSon:any;
-  goalmaladaptives:any = [];
+  goalmaladaptive:any = [];
   goalReductionPatientIds:any = [];
+
+  public goals:any = []=[];
+  public goal_id:any;
+
+  public goalstos_added:any = [];
+  public goalltos_added:any = [];
+  public golsto:any = [{}];
+  public gollto:any = [{}];
+  
+  public current_status!:any;
+  public maladaptive:any;
+  public sto:any;
+  public decription_sto:any;
+  public lto:any;
+  public description_lto:any;
+  public status_sto:any;
+  public status_lto:any;
+  public date_sto:any;
+  public date_lto:any;
+  public decription_lto:any;
+  public goalid:any;
+  public goalsbybipid:any;
+  public goal_selected:any;
+  public goalpatient_selected:any;
+  public bip_selectedId:any;
+  public bip_selectedIdd:any;
+
 
   constructor(
     public bipService:BipService,
@@ -84,175 +98,237 @@ export class ReductionGoalFormComponent {
 
   ngOnInit(): void {
     
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);//inicia la vista siempre desde arriba
+    
+    //me subcribo al id recibido por el parametro de la url
     this.ativatedRoute.params.subscribe((resp:any)=>{
-      this.client_id = resp.id;
-      
-      this.getProfileBip();
-     })
-     
-
-    this.ativatedRoute.params.subscribe( ({id}) => this.getBip(id));
-    let USER = localStorage.getItem("user");
-    this.user = JSON.parse(USER ? USER: '');
-    this.doctor_id = this.user.id;
-
-    // this.getGoals();
-    // this.getGoalProfile();
+      this.client_id = resp.id;// la respuesta se comienza a relacionar  en este momento con un cliente especifico
+      this.getProfileBip(); // se solicita la info del perfil del usuario
+      // this.getGoalbyPatient(); // se solicita la info del perfil del usuario
+    })
+    
+    
+    this.ativatedRoute.params.subscribe( ({id}) => this.getBip(id)); // se solicita la info del perfil del bip
+    // this.ativatedRoute.params.subscribe( ({id}) => this.getGoal(id)); // se solicita la info del perfil del bip
+    // this.ativatedRoute.params.subscribe( ({id}) => this.getGoal(id)); // se solicita la info del perfil del goal
+    let USER = localStorage.getItem("user");// se solicita el usuario logueado
+    this.user = JSON.parse(USER ? USER: '');//  si no hay un usuario en el localstorage retorna un objeto vacio
+    this.doctor_id = this.user.id; //se asigna el doctor logueado a este campo para poderlo enviar en los
     
   }
 
-  optionSelected(value:number){
-    this.option_selected = value;
-  }
-
-  
-  getProfileBip(){
-    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
-      console.log('profilebip', resp);
-      this.client_selected = resp;
-
-      this.patient_id = this.client_selected.patient.patient_id; 
-      // this.idPatient = this.client_selected.patient.patient_id;
-      console.log(this.patient_id);
-      if (this.patient_id != null) {
-        this.getPatientGoals(this.patient_id);
-
-      }
-    });
-
-  }
+  //obtenemos el bip del paciente por el id 
   getBip(id){
     if (id !== null && id !== undefined) {
       this.bipService.getBipByUser(+id).subscribe((resp:any)=>{
-        console.log('bip',resp);
+        // console.log('bip',resp);
   
-        this.bip_selected = resp;
-        this.maladaptives =this.bip_selected.maladaptives;
+        this.bip_selected = resp; //convertimos la respuesta en un variable
+        this.bip_selectedId = resp.id; //convertimos la respuesta en un variable
+        this.bip_selectedIdd = this.bip_selected.bip.id; //convertimos la respuesta en un variable
+        this.maladaptives =this.bip_selected.maladaptives; //convertimos la respuesta en un variable 
   
       })
     }
     
     
   }
+  
 
+
+  //obtenemos el goal del paciente por el id 
+  getGoalbyPatient(){
+    
+    this.goalService.getGoalbyPatientId(this.client_id).subscribe((resp:any)=>{
+      console.log('goal', resp);
+      this.goalpatient_selected = resp;//convertimos la respuesta en un variable
+      this.goalid = resp.id; //convertimos la respuesta en un variable
+
+    })
+    
+    
+  }
+
+  //obtenemos el bip del paciente por el id 
+  getProfileBip(){
+    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
+      // console.log('profilebip', resp);
+      this.client_selected = resp;//convertimos la respuesta en un variable
+
+      this.patient_id = this.client_selected.patient.patient_id; 
+      // this.idPatient = this.client_selected.patient.patient_id;
+      // console.log(this.patient_id);
+      if (this.patient_id != null) {
+        this.getPatientGoals(this.patient_id);
+      }
+    });
+
+  }
+
+  //obtenemos los goals del paciente por el patient_id 
   getPatientGoals(patient_id){
     this.goalService.getGoalbyPatientId(patient_id).subscribe((resp:any)=>{
-      console.log('goals by patientid',resp);
-      this.goals = resp.goalReductionPatientIds;
+      // console.log('goals by patientid',resp);
+      this.goals = resp.goalReductionPatientIds.data[0];
+      // this.goals = resp.goalReductionPatientIds;
+      // console.log(this.goals);
+      
+      
     })
   }
 
 
-  
 
-  
-  getGoals(){
-    this.goalService.listGoals().subscribe((resp:any)=>{
-      console.log('goals', resp);
-      this.goals = resp.goals.data;
-      // this.goal_id = resp.goals.data[0].id;
+  //obtenemos los goals por el id del bip
+  getGoalsByBip(){
+    this.goalService.getGoalbyBipId(this.bip_selectedId).subscribe((resp:any)=>{
+      // console.log(resp);
+      this.goal_selected = resp.goalreductions;
+      // console.log(this.goal_selected);
+      this.goalsbybipid = resp.id;
+      
 
-    });
-    // grafico
-
-    // this.goalService.showCitamedica(this.client_id).subscribe((resp:any)=>{
-    //   // console.log(resp);
-
-    //   this.appointment_atention_selected = resp.appointment_attention;
-    //   this.medical =this.appointment_atention_selected.receta_medica;
-    //   this.description =this.appointment_atention_selected.description;
-
-
-    // })
-
+    })
+    
   }
+  
 
+  //obtenemos informacion de la seleccion
   selectedMaladaptive(maladap:any){
     this.maladaptiveSelected = maladap
     // console.log(this.maladaptiveSelected);
+    //llamamos la funcion del  servicio para obtener la informacion adicional que se va a mostrar en la ventana
+    this.getGoalsMaladaptives();
     
-    // this.getGoalsMaladaptives();
   }
 
   getGoalsMaladaptives(){
-    // this.goalService.listMaladaptivesGoals(this.bip_selected.maladaptives.maladaptive_behavior).subscribe((resp:any)=>{
-    //   console.log('profilebip', resp);
-    //   this.goalmaladaptives = resp;
-    //   // this.goal_id = resp.goals.data[0].id;
-    //   this.decription_goal = this.goalmaladaptives.decription_goal;
+    this.goalService.listMaladaptivesGoals(this.maladaptiveSelected.maladaptive_behavior).subscribe((resp:any)=>{
+      // console.log( resp);
       
-    //   this.current_status = this.goalmaladaptives.baseline_level;
-    //   this.status = this.goalmaladaptives.status;
-    //   this.sto = this.goalmaladaptives.sto;
+      this.goalmaladaptive = resp.goalsmaladaptive.data;
+      // this.goalmaladaptive = resp.goalsmaladaptive || null;
+      console.log('palabra maladaptive', this.goalmaladaptive);
+      this.current_status = this.goals.current_status;
 
-    // });
+      if (this.goalmaladaptive == undefined) {
+        this.current_status = '';
+        this.golsto = '';
+        this.gollto = '';
+      }else{
+        
+        this.golsto = this.goals.goalstos;
+        // console.log(this.golsto);
+        this.gollto = this.goals.goalltos;
+        // console.log(this.gollto);
+      }
+
+      this.ngOnInit();
+    },);
 
   }
 
   selectedMaladaptiveSon(maladap:any){
     this.maladaptiveSelectedSon = maladap
-    console.log(this.maladaptiveSelectedSon);
+    // console.log(this.maladaptiveSelectedSon);
   }
 
   deleteMaladaptiveSon(goalsto:any){debugger
     // this.maladaptiveSelectedSon.splice(i,1);
     this.goalService.deleteGoal(goalsto.id).subscribe((resp:any)=>{
       // alert("Se elimino el objetivo");
-      this.getGoals();
+      // this.getGoals();
     })
   }
-  deleteMaladaptiveSonLto(goallto:any){
-    // this.maladaptiveSelectedSon.splice(i,1);
-    this.goalService.deleteGoal(goallto.id).subscribe((resp:any)=>{
-      // alert("Se elimino el objetivo");
-      this.getGoals();
-    })
-  }
+  
   // selectedMaladaptiveSon(goalm:any){
   //   this.maladaptiveSelectedSon = goalm
   //   console.log(this.maladaptiveSelectedSon);
   // }
 
+
+  addSTOGoal(){
+    this.golsto.push({
+      maladaptive: this.maladaptiveSelected.maladaptive_behavior,
+      sto: this.sto,
+      status_sto: this.status_sto,
+      date_sto: this.date_sto,
+      decription_sto: this.decription_sto,
+    })
+    this.sto = '';
+    this.status_sto = '';
+    this.date_lto = '';
+    this.decription_sto = '';
+  }
+
+  deleteSTOGoal(i:any){
+    this.golsto.splice(i,1);
+  }
+  addLTOGoal(){
+    this.gollto.push({
+      lto: this.lto,
+      status_lto: this.status_lto,
+      date_lto: this.date_lto,
+      decription_lto: this.decription_lto,
+    })
+    this.lto = '';
+    this.status_lto = '';
+    this.date_lto = '';
+    this.decription_lto = '';
+  }
+
+  deleteLTOGoal(i:any){
+    this.gollto.splice(i,1);
+  }
+
+  back(){
+    this.maladaptiveSelected = null;
+    this.current_status = '';
+    this.ngOnInit();
+  }
+
   saveGoal(){debugger
     this.text_validation = '';
-    // if(!this.maladaptive_title || this.current_status || this.date){
-    //   this.text_validation = 'is required add a curren status and date to this maladaptive ';
+    // if(!this.maladaptive || !this.current_status || !this.golsto){
+    //   this.text_validation = 'Is required this information ';
     //   return;
     // }
 
     let data ={
-      bip_id: this.bip_selected.id,
-      goal: this.maladaptiveSelected.maladaptive_behavior,
-      goal_id: this.goal_id,
+      id:this.goalid,
+      bip_id: this.bip_selectedIdd,
+      maladaptive: this.maladaptiveSelected.maladaptive_behavior,
       patient_id: this.patient_id,
-      current_status: this.maladaptiveSelected.baseline_level,
-      status: this.status,
-      sto: this.sto,
-      decription_goal: this.decription_goal,
-      date: this.date,
-      lto: this.lto,
-      description_lto: this.description_lto,
-      status_lto: this.status_lto,
-      date_lto: this.date_lto,
+      current_status: this.current_status,
+      goalstos: this.golsto,
+      goalltos: this.gollto,
+      client_id: this.client_id,
     }
 
-    this.goalService.createGoal(data).subscribe((resp:any)=>{
-      console.log(resp);
-      this.text_success = 'Goal created successfully!'
-      this.ngOnInit();
-      // this.getGoalsMaladaptives();
+    if(this.goalid){
 
-      this.goal = '';
-      this.goal_id = '';
-      this.current_status = '';
-      this.status = '';
-      this.sto = '';
-      this.decription_goal = '';
-      this.description_lto = '';
-      this.date = '';
-      this.date_lto = '';
-    })
+      this.goalService.update(data, this.patient_id).subscribe((resp:any)=>{
+        // console.log(resp);
+        this.text_success = 'Goal Updated'
+        this.ngOnInit();
+      })
+      
+    }else{
+      
+      this.goalService.createGoal(data).subscribe((resp:any)=>{
+        console.log(resp);
+        this.goalid = resp.id;
+        this.text_success = 'Goal created successfully!'
+        this.ngOnInit();
+        // this.getGoalsMaladaptives();
+  
+        this.maladaptive = '';
+        this.goal_id = '';
+        this.current_status = '';
+      })
+    }
+
+   
 
   }
 }

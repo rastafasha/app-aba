@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { routes } from 'src/app/shared/routes/routes';
 import { FileSaverService } from 'ngx-filesaver';
 import * as XLSX from 'xlsx';
-
+import * as jsPDF from 'jspdf';
 
 declare var $:any;  
 @Component({
@@ -227,7 +227,7 @@ export class ListDoctorComponent {
 
     const blobData = new Blob([excelBuffer],{type: CSV_TYPE});
 
-    this.fileSaver.save(blobData, "employers_db_aba_therapy", CSV_EXTENSION)
+    this.fileSaver.save(blobData, "employers_db_aba_therapy_csv", CSV_EXTENSION)
 
   }
 
@@ -257,22 +257,22 @@ export class ListDoctorComponent {
   }
 
   pdfExport(){
-    // var doc = new jspdf(); 
+    var doc = new jsPDF.jsPDF(); 
     
-    // const worksheet = XLSX.utils.json_to_sheet(this.doctor_generals);
+    const worksheet = XLSX.utils.json_to_sheet(this.doctor_generals);
 
-    // const workbook = {
-    //   Sheets:{
-    //     'testingSheet': worksheet
-    //   },
-    //   SheetNames:['testingSheet']
-    // }
+    const workbook = {
+      Sheets:{
+        'testingSheet': worksheet
+      },
+      SheetNames:['testingSheet']
+    }
 
-    // doc.html(document.body, {
-    //   callback: function (doc) {
-    //     doc.save('doctors_db_aba_project.pdf');
-    //   }
-    // });
+    doc.html(document.body, {
+      callback: function (doc) {
+        doc.save('doctors_db_aba_project.pdf');
+      }
+    });
 
   }
 

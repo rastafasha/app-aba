@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { routes } from 'src/app/shared/routes/routes';
 import { PatientMService } from '../service/patient-m.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
-
+import Swal from 'sweetalert2';
+// declare function alertClose():any;
 @Component({
   selector: 'app-edit-patient-m',
   templateUrl: './edit-patient-m.component.html',
@@ -13,6 +14,9 @@ export class EditPatientMComponent {
   public routes = routes;
   public selectedValue!: string;
   public selectedValueLocation!: string;
+  public selectedValueInsurer!: string;
+  public selectedValueCode!: string;
+  option_selected:number = 1;
 
   public patient_id: any;
   public f: string = '';
@@ -58,14 +62,16 @@ export class EditPatientMComponent {
   
 
   public pa_assessments: any = [];
-  public assesstments: any = [];
   public pa_assessment: any;
   public pa_assessment_start_date: string = '';
   public pa_assessment_end_date: string = '';
   public pa_services: any;
   public pa_services_start_date: string = '';
   public pa_services_end_date: string = '';
-
+  public cpt: any;
+  public n_units: any;
+  public s_unit: any;
+  public n_code: any;
   
   
   public welcome: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
@@ -120,10 +126,15 @@ export class EditPatientMComponent {
   public specialists:any = [];
   public locations:any = [];
   public insurances:any = [];
-  public roles_rbt:any = [];
-  public roles_bcba:any = [];
   public notes: any= [];
   public assesstmentlists: any= [];
+  public services_code: any= [];
+
+  public roles_rbt:any = [];
+  public roles_bcba:any = [];
+  public insurance_codes:any = [];
+  public insurance:any;
+  public code:any;
   
   // public insurance:any;
   // public insurance_id:any;
@@ -141,25 +152,30 @@ export class EditPatientMComponent {
   }
 
   ngOnInit(): void {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.client_id = resp.id;
      })
      this.showUser();
      this.getConfig();
+    //  setTimeout(()=>{
+    //   alertClose();
+    // }, 50)
   }
 
   getConfig(){
     this.patientService.listConfig().subscribe((resp:any)=>{
-      // console.log(resp);
+      console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
-      this.pa_assessments = resp.assesstments;
+      
       this.locations = resp.locations;
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
     })
   }
+
+  
   
 showUser(){
     this.patientService.getPatient(this.client_id).subscribe((resp:any)=>{
@@ -218,16 +234,22 @@ showUser(){
         this.cde = this.patient_selected.cde;
         this.submitted = this.patient_selected.submitted;
 
-        this.pa_assessments =  JSON.parse(this.patient_selected.pa_assessments);
-        this.assesstmentlists = this.pa_assessments;
+        // this.pa_assessments =  this.patient_selected.pa_assessments;
         // console.log(this.pa_assessments);
+        
+        // this.pa_assessments = resp.assesstments;
+        // this.pa_assessments = resp.patient.pa_assessments;
+
+        // this.pa_assessments =  JSON.parse(this.patient_selected.pa_assessments);
+        // this.pa_assessments = resp.pa_assessments;
+        console.log(this.pa_assessments);
 
         this.selectedValue_rbt = this.patient_selected.rbt_id;
         this.selectedValue_rbt2 = this.patient_selected.rbt2_id;
         this.selectedValue_bcba = this.patient_selected.bcba_id;
         this.selectedValue_bcba2 = this.patient_selected.bcba2_id;
         this.selectedValue_clind = this.patient_selected.clin_director_id;
-        this.selectedValue_insurer = this.patient_selected.insurer;
+        this.selectedValueInsurer = this.patient_selected.insurer;
 
         this.IMAGE_PREVISUALIZA = this.patient_selected.avatar;
     })
@@ -254,13 +276,15 @@ showUser(){
   
 
   addPAAssestment(){
-    this.assesstmentlists.push({
+    this.pa_assessments.push({
       pa_assessment: this.pa_assessment,
       pa_assessment_start_date: this.pa_assessment_start_date,
       pa_assessment_end_date: this.pa_assessment_end_date,
       pa_services: this.pa_services,
       pa_services_start_date: this.pa_services_start_date,
       pa_services_end_date: this.pa_services_end_date,
+      cpt: this.selectedValueCode,
+      n_units: this.n_units,
     })
     this.pa_assessment = '';
     this.pa_assessment_start_date = '';
@@ -268,10 +292,12 @@ showUser(){
     this.pa_services = '';
     this.pa_services_start_date = '';
     this.pa_services_end_date = '';
+    this.selectedValueCode = null;
+    this.n_units = '';
   }
 
   deletePAAssestment(i:any){
-    this.assesstmentlists.splice(i,1);
+    this.pa_assessments.splice(i,1);
   }
 
   //listas
@@ -353,6 +379,8 @@ showUser(){
     formData.append('insurer', this.selectedValue_insurer);
 
 
+    formData.append('pa_assessments', JSON.stringify(this.pa_assessments));
+
     if(this.selectedValueLocation ){
       formData.append('location_id', this.selectedValueLocation);
     }
@@ -430,11 +458,11 @@ showUser(){
     }
 
     
-    if(this.assesstments){
+    // if(this.assesstments){
 
-      // formData.append('pa_assessments', this.pa_assessments);
+    //   // formData.append('pa_assessments', this.pa_assessments);
 
-    }
+    // }
 
     if(this.selectedValueLocation ){
       formData.append('location_id', this.selectedValueLocation);
@@ -496,8 +524,10 @@ showUser(){
       // console.log(resp);
       if(resp.message == 403){
         this.text_validation = resp.message_text;
+        // Swal.fire('Error al eliminar', `resp.message_text`, 'error');
       }else{
-        this.text_success = "Patient Has updated";
+        // this.text_success = "Patient Has updated";
+        Swal.fire('Updated', ` Patient Has updated`, 'success');
         this.ngOnInit();
         // this.router.navigate(['/patients/list']);
       }

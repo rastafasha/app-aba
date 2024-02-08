@@ -211,7 +211,7 @@
                                         </mat-select>
                                     </div>
                                 </div>
-                                <div class="col-12" *ngIf="valid_form">
+                                <!-- <div class="col-12" *ngIf="valid_form">
                                     <div class="form-group row" *ngIf="valid_form_success">
                                         <div class="col-md-12">
                                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -237,9 +237,9 @@
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
-                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                        
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </form>
                         
@@ -263,8 +263,8 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
                                         <label>Insurer <span class="login-danger">*</span></label>
-                                        <!-- <mat-select [(ngModel)]="selectedValue_insurer" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectInsurance(id)"  placeholder="Select Insurer"> -->
-                                        <mat-select [(ngModel)]="selectedValue_insurer" [ngModelOptions]="{standalone: true}" class="form-control select" placeholder="Select Insurer">
+                                        <mat-select [(ngModel)]="selectedValue_insurer" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectInsurance(id)"  placeholder="Select Insurer">
+                                        <!-- <mat-select [(ngModel)]="selectedValue_insurer" [ngModelOptions]="{standalone: true}" class="form-control select" placeholder="Select Insurer"> -->
                                             <mat-option *ngFor="let data of insurances" [value]="data.id">
                                               {{data.insurer_name}}
                                             </mat-option>
@@ -349,7 +349,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12" *ngIf="valid_form">
+                                <!-- <div class="col-12" *ngIf="valid_form">
                                     <div class="form-group row" *ngIf="valid_form_success">
                                         <div class="col-md-12">
                                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -375,9 +375,9 @@
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
-                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                       
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             
                         </form>
@@ -579,7 +579,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12" *ngIf="valid_form">
+                                <!-- <div class="col-12" *ngIf="valid_form">
                                     <div class="form-group row" *ngIf="valid_form_success">
                                         <div class="col-md-12">
                                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -605,9 +605,9 @@
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
-                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                        
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             
                         </form>
@@ -680,7 +680,22 @@
                                                     <mat-datepicker-toggle matIconSuffix [for]="picker6"></mat-datepicker-toggle>
                                                 </div>
                                             </div>
-                                            
+                                            <div class="col-12 col-md-4 ">
+                                                <div class="form-group local-forms">
+                                                    <label >CPT <span class="login-danger">*</span></label>
+                                                    <mat-select [(ngModel)]="selectedValueCode" name="code" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Code">
+                                                        <mat-option *ngFor="let data of services_code" [value]="data.code">
+                                                        {{data.code}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group local-forms">
+                                                    <label >No.Units<span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="n_units" [(ngModel)]="n_units" type="text"  >
+                                                </div>
+                                            </div>
                                             
                                             <div class="col-12 mb-3 doctor-submit text-end">
                                                 <button class="btn btn-primary btn-sm" (click)="addPAAssestment()">Add</button>
@@ -698,6 +713,8 @@
                                                         <th>PA Services</th>
                                                         <th>Patient Services Start Date</th>
                                                         <th>Patient Services End Date</th>
+                                                        <th>cpt</th>
+                                                        <th>n units</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -718,7 +735,13 @@
                                                              {{pa_asses.pa_services_start_date}}
                                                         </td>
                                                         <td>
-                                                            {{pa_asses.pa_services_end_date}}
+                                                             {{pa_asses.pa_services_end_date}}
+                                                        </td>
+                                                        <td>
+                                                            {{pa_asses.cpt}}
+                                                        </td>
+                                                        <td>
+                                                            {{pa_asses.n_units}}
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-danger btn-sm" (click)="deletePAAssestment(i)">x</button>
@@ -741,7 +764,7 @@
                                 
                                 
                                 
-                                <div class="col-12" *ngIf="valid_form">
+                                <!-- <div class="col-12" *ngIf="valid_form">
                                     <div class="form-group row" *ngIf="valid_form_success">
                                         <div class="col-md-12">
                                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -767,9 +790,9 @@
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
-                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+                                       
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                             
@@ -797,7 +820,7 @@
                                 <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
                                         <label >RBT <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValue_rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                        <mat-select [(ngModel)]="selectedValue_rbt" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
@@ -807,7 +830,7 @@
                                 <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
                                         <label >RBT 2 <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValue_rbt2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                        <mat-select [(ngModel)]="selectedValue_rbt2" name="rbt2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
@@ -817,7 +840,7 @@
                                 <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
                                         <label >BCBA <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValue_bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                        <mat-select [(ngModel)]="selectedValue_bcba" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
@@ -827,7 +850,7 @@
                                 <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
                                         <label >BCBA 2<span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValue_bcba2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                        <mat-select [(ngModel)]="selectedValue_bcba2" name="bcba2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
@@ -837,15 +860,14 @@
                                 <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
                                         <label >Clinical Director<span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValue_clind" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                        <mat-select [(ngModel)]="selectedValue_clind" name="clinical_director" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of specialists" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
                                 </div>
-                                <!-- validaciones -->
-                                <div class="col-12" *ngIf="valid_form">
+                                <!-- <div class="col-12" *ngIf="valid_form">
                                     <div class="form-group row" *ngIf="valid_form_success">
                                         <div class="col-md-12">
                                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -867,12 +889,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- validaciones -->
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             
                         </form>
@@ -994,7 +1015,7 @@
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
-                                        <!-- <button type="submit" class="btn btn-primary cancel-form">Cancel</button> -->
+
                                     </div>
                                 </div>
                             </div>

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { routes } from 'src/app/shared/routes/routes';
 import { InsuranceService } from '../../insurance/service/insurance.service';
-import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { LocationService } from '../services/location.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-location-edit',
@@ -149,7 +149,8 @@ showLocation(){
       if(resp.message == 403){
         this.text_validation = resp.message_text;
       }else{
-        this.text_success = "El location se ha actualizado";
+        // this.text_success = "El location se ha actualizado";
+        Swal.fire('Updated', ` Location Has updated`, 'success');
         this.router.navigate(['/location/list']);
       }
     })

@@ -29,6 +29,11 @@ export class BipService {
     let URL = url_servicios+'/bip/show/byuser/'+client_id;
     return this.http.get(URL, {headers:headers});
   }
+  getBipByPatient_id(patient_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/bip/show/byuserpatientid/'+patient_id;
+    return this.http.get(URL, {headers:headers});
+  }
   createBip(data){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
     let URL = url_servicios+'/bip/store';
@@ -48,6 +53,11 @@ export class BipService {
   showBipProfile(client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
     let URL = url_servicios+"/bip/profile/"+client_id;
+    return this.http.get(URL,{headers:headers});
+  }
+  showBipPatientId(patient_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let URL = url_servicios+"/bip/byuserpatientid/"+patient_id;
     return this.http.get(URL,{headers:headers});
   }
 

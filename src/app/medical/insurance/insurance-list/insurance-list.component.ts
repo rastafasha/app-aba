@@ -208,7 +208,7 @@ export class InsuranceListComponent {
 
   }
   csvExport(){
-    const CSV_TYPE = 'text/csv';
+    const CSV_TYPE = 'csv/csv';
     const CSV_EXTENSION = '.csv';
 
     this.getTableDataGeneral();
@@ -227,7 +227,7 @@ export class InsuranceListComponent {
 
     const blobData = new Blob([excelBuffer],{type: CSV_TYPE});
 
-    this.fileSaver.save(blobData, "insurance_db_aba_therapy", CSV_EXTENSION)
+    this.fileSaver.save(blobData, "insurance_db_aba_therapy_csv", CSV_EXTENSION)
 
   }
 

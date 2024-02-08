@@ -18,11 +18,16 @@ export class GoalService {
     let URL = url_servicios+'/goal';
     return this.http.get(URL, {headers:headers});
   }
-  listMaladaptivesGoals(goal:any){
+  listMaladaptivesGoals(maladaptive:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal/show/maladaptives/'+goal;
+    let URL = url_servicios+'/goal/show/goalsmaladaptives/'+maladaptive;
     return this.http.get(URL, {headers:headers});
   }
+  // listMaladaptivesGoals(maladaptive:any, patient_id:any){
+  //   let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+  //   let URL = url_servicios+'/goal/show/goalsmaladaptives/'+maladaptive+'/'+patient_id;
+  //   return this.http.get(URL, {headers:headers});
+  // }
   
   getGoal(user_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
@@ -33,6 +38,11 @@ export class GoalService {
   getGoalbyPatientId(patient_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
     let URL = url_servicios+'/goal/showgbyPatientId/'+patient_id;
+    return this.http.get(URL, {headers:headers});
+  }
+  getGoalbyBipId(bip_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/goal/showBipId/'+bip_id;
     return this.http.get(URL, {headers:headers});
   }
   createGoal(data){
@@ -63,6 +73,11 @@ export class GoalService {
     return this.http.get(URL, {headers:headers});
   }
 
+  update(data:any, patient_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let URL = url_servicios+"/goal/update/"+patient_id;
+    return this.http.post(URL,data,{headers:headers});
+  }
   updateStatus(data:any, patient_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
     let URL = url_servicios+"/goal/update/eligibility/"+patient_id;
