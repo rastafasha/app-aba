@@ -247,4 +247,10 @@ ngx-material-timepicker-content {
   font-size: 12px !important;
 }
 
+.sidebar-overlay.opened, .menu-opened .sidebar-overlay {
+  display: none;
+}
+
+
+
 

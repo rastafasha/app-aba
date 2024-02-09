@@ -6734,11 +6734,11 @@ a.voice-icon {
   overflow: hidden;
 }
 .sidebar-overlay.opened {
-  display: block;
+  display: none;
 }
 .menu-opened {
   .sidebar-overlay {
-    display: block;
+    display: none;
   }
   .message-view.chat-view {
     width: 100%;
