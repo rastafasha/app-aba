@@ -49,6 +49,7 @@ export class EditPatientMComponent {
   public diagnosis_code: any;
 
   public insurer: any;
+  public insurer_id: any;
   public insuranceId: any;
   public insurer_secundary: any;
   public insuranceId_secundary: any;
@@ -164,8 +165,8 @@ export class EditPatientMComponent {
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.client_id = resp.id;
      })
-     this.showUser();
      this.getConfig();
+     this.showUser();
     //  setTimeout(()=>{
     //   alertClose();
     // }, 50)
@@ -208,23 +209,25 @@ showUser(){
       this.patient_selected = resp.patient;
       this.pa_assessmentss = resp.pa_assessments;// ?
       let jsonObj = JSON.parse(this.pa_assessmentss);
-      console.log(jsonObj);
+      // console.log(jsonObj);
       this.pa_assessmentgroup = jsonObj;
-      console.log(this.pa_assessmentgroup);
+      // console.log(this.pa_assessmentgroup);
       
-
-      this.selectedValueLocation = this.patient_selected.location_id;
-      this.selectedValue_rbt = this.patient_selected.rbt_id;
+      //valores de los selectores
+        this.selectedValueLocation = this.patient_selected.location_id;
+        this.selectedValue_rbt = this.patient_selected.rbt_id;
         this.selectedValue_rbt2 = this.patient_selected.rbt2_id;
         this.selectedValue_bcba = this.patient_selected.bcba_id;
         this.selectedValue_bcba2 = this.patient_selected.bcba2_id;
         this.selectedValue_clind = this.patient_selected.clin_director_id;
-        this.selectedValueInsurer = this.patient_selected.insurer;
+
+        //traemos el valor del id del insurer  y lo asignamos a la variable de clase para que sea global
+        this.selectedValueInsurer = this.patient_selected.insurer_id;
         // console.log(this.selectedValueInsurer);
 
         
       
-
+        //valore iniciales
         this.first_name = this.patient_selected.first_name;
         this.last_name = this.patient_selected.last_name;
         this.parent_guardian_name = this.patient_selected.parent_guardian_name;
@@ -252,7 +255,7 @@ showUser(){
         this.summer_schedule = this.patient_selected.summer_schedule;
         this.diagnosis_code = this.patient_selected.diagnosis_code;
         
-        
+        //valores de isurance
         this.insuranceId = this.patient_selected.insuranceId;
         this.insurer_secundary = this.patient_selected.insurer_secundary;
         this.insuranceId_secundary = this.patient_selected.insuranceId_secundary;
@@ -263,7 +266,8 @@ showUser(){
         this.coinsurance = this.patient_selected.coinsurance;
         this.copayments = this.patient_selected.copayments;
         this.oop = this.patient_selected.oop;
-        
+
+        //valores de welcome
         this.welcome = this.patient_selected.welcome;
         this.consent = this.patient_selected.consent;
         this.insurance_card = this.patient_selected.insurance_card;
@@ -275,23 +279,27 @@ showUser(){
         this.cde = this.patient_selected.cde;
         this.submitted = this.patient_selected.submitted;
 
-
+        //valores de la imagen y archivos
         this.IMAGE_PREVISUALIZA = this.patient_selected.avatar;
-        this.insuranceData(this.selectedValueInsurer);
+
+
+        this.insuranceData(this.selectedValueInsurer);//pide el insurance guardado para el request de la lista inicial
     })
   }
 
-  insuranceData(selectedValueInsurer){
-    this.insuranceService.showInsurance(selectedValueInsurer).subscribe((resp:any)=>{
-      console.log(resp);
-      this.services = resp.services;
-    })
-  }
-
+  
+  // seleccionas otro si se quiere cambiar trayendo el event como id o como objeto y pasas el valor necesario
   selectInsurance(event:any){
     event = this.selectedValueInsurer;
-    this.insuranceData(this.selectedValueInsurer);
+    this.insuranceData(this.selectedValueInsurer);// se envia el insurer para traer los codigos de los servicios
     
+  }
+  //recibe el id y muestra la lista 
+  insuranceData(selectedValueInsurer){
+    this.insuranceService.showInsurance(selectedValueInsurer).subscribe((resp:any)=>{
+      console.log('desde el insurer seleccionado',resp);
+      this.services = resp.services;
+    })
   }
 
   //listas
@@ -396,19 +404,25 @@ showUser(){
     formData.append('bcba_id', this.selectedValue_bcba);
     formData.append('bcba2_id', this.selectedValue_bcba2);
     formData.append('clin_director_id', this.selectedValue_clind);
-    formData.append('insurer', this.selectedValueInsurer);
+    // formData.append('insurer', this.selectedValueInsurer);
 
 
-    formData.append('pa_assessments', JSON.stringify(this.pa_assessmentgroup));
+    formData.append('pa_assessments', JSON.stringify(this.pa_assessments));
 
     if(this.selectedValueLocation ){
       formData.append('location_id', this.selectedValueLocation);
     }
     
+    if(this.selectedValueLocation){
+
+      formData.append('insurer_id', this.selectedValueInsurer);
+    }
+
     if(this.patient_id){
 
       formData.append('patient_id', this.patient_id);
     }
+    
     if(this.diagnosis_code){
 
       formData.append('diagnosis_code', this.diagnosis_code);
