@@ -15,6 +15,7 @@ export class AddPatientMComponent {
   public patient_id: any;
   public selectedValueLocation!: string;
   public selectedValueCode!: string;
+  public selectedValueUnitPrize!: string;
   option_selected:number = 0;
   
   public first_name: string = '';
@@ -59,15 +60,13 @@ export class AddPatientMComponent {
 
   public pa_assessments: any = [];
   public pa_assessment: any;
-  public pa_assessment_start_date: string = '';
-  public pa_assessment_end_date: string = '';
+  public pa_assessment_start_date: Date ;
+  public pa_assessment_end_date: Date ;
   public pa_services: any;
-  public pa_services_start_date: string = '';
-  public pa_services_end_date: string = '';
+  public pa_services_start_date: Date ;
+  public pa_services_end_date: Date ;
   public cpt: any;
-  public n_units: any;
-  public s_unit: any;
-  public n_code: any;
+  public n_units: number = 0;
   
   public welcome: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public consent: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
@@ -226,13 +225,13 @@ export class AddPatientMComponent {
       n_units: this.n_units,
     })
     this.pa_assessment = '';
-    this.pa_assessment_start_date = '';
-    this.pa_assessment_end_date = '';
+    this.pa_assessment_start_date = null;
+    this.pa_assessment_end_date = null;
     this.pa_services = '';
-    this.pa_services_start_date = '';
-    this.pa_services_end_date = '';
+    this.pa_services_start_date = null;
+    this.pa_services_end_date = null;
     this.selectedValueCode = null;
-    this.n_units = '';
+    this.n_units = 0;
   }
 
   deletePAAssestment(i:any){
@@ -324,7 +323,7 @@ export class AddPatientMComponent {
 
     formData.append('location_id', this.selectedValueLocation);
 
-    formData.append('pa_assessments', JSON.stringify(this.pa_assessments));
+    
 
     // formData.append('pa_assessments', this.pa_assessments);
     // formData.append('pa_assessment_start_date', this.pa_assessment_start_date);
@@ -361,6 +360,8 @@ export class AddPatientMComponent {
       formData.append('imagen', this.FILE_AVATAR);
     }
 
+    formData.append('pa_assessments', JSON.stringify(this.pa_assessments));
+    
     this.valid_form_success = false;
     this.text_validation = '';
 

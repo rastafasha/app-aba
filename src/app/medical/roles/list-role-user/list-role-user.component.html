@@ -58,7 +58,8 @@
                                         
                                         <th mat-sort-header="name">Name</th>
                                         <th mat-sort-header="department">Permissions</th>
-                                        <th mat-sort-header="specialization">Created At</th>
+                                        <th mat-sort-header="created">Created At</th>
+                                        <!-- <th mat-sort-header="updated">Updated At</th> -->
                                         <th ></th> <!--acciones -->
                                     </tr>
                                 </thead>
@@ -71,7 +72,8 @@
                                             <li>{{data.permision_pluck.length > 0 ? data.permision_pluck: 'TODOS LOS PERMISOS' }}</li>
                                           </ul>
                                         </td>
-                                        <td>{{data.created_at}}</td>
+                                        <td>{{data.created_at | date}}</td>
+                                        <!-- <td>{{data.updated_at | date}}</td> -->
                                         
                                         <td class="text-end">
                                             <div class="dropdown dropdown-action" *ngIf="data.id !=1">

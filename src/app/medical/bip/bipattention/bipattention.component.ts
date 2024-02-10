@@ -26,7 +26,7 @@ export class BipattentionComponent {
   relationship:string = '';
   address:string = '';
   age:number = 0;
-  dob:string = '';
+  birth_date:string = '';
 
   
   client_id:any;
@@ -98,8 +98,8 @@ export class BipattentionComponent {
       this.relationship = this.client_selected.patient.relationship;
       this.address = this.client_selected.patient.address;
       this.age = this.client_selected.patient.age;
-      this.dob = this.client_selected.patient.birth_date ? new Date(this.client_selected.patient.birth_date).toISOString(): ''; 
-
+      this.birth_date = this.client_selected.patient.birth_date ? new Date(this.client_selected.patient.birth_date).toISOString(): ''; 
+      
     });
   }
   

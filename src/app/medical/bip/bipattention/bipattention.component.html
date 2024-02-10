@@ -76,9 +76,13 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-2">  
+                                    
                                     <div class="form-group local-forms">
-                                        <label >dob <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="dob"  disabled [(ngModel)]="dob" type="text"  >
+                                        <label >Birth day <span class="login-danger">*</span></label>
+                                        <!-- [matDatepicker]="picker" -->
+                                        <input class="form-control datetimepicker" disabled name="birth_date" [(ngModel)]="birth_date" type="text" matInput   >
+                                        <!-- <mat-datepicker #picker></mat-datepicker> -->
+                                        <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
                                     </div>
                                 </div>
                                 

@@ -262,9 +262,9 @@
                                     <div class="form-group local-forms">
                                         <label>Insurer <span class="login-danger">*</span></label>
                                         <!-- name="insurer" -->
-                                        <mat-select [(ngModel)]="selectedValueInsurer" name="selectedValueInsurer" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectInsurance($event)"  placeholder="Select Insurer">
-                                            <mat-option *ngFor="let data of insurances" [value]="data.id">
-                                                {{data.insurer_name}}
+                                        <mat-select [(ngModel)]="selectedValueInsurer" name="insurer_name" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectInsurance($event)"  placeholder="Select Insurer">
+                                            <mat-option *ngFor="let insuran of insurances" [value]="insuran.id">
+                                                {{insuran.insurer_name}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
@@ -688,7 +688,7 @@
                                             <div class="col-12 col-md-4">
                                                 <div class="form-group local-forms">
                                                     <label >No.Units<span class="login-danger">*</span></label>
-                                                    <input class="form-control" autocomplete="false" name="n_units" [(ngModel)]="n_units" type="text"  >
+                                                    <input class="form-control" autocomplete="false" name="n_units" [(ngModel)]="n_units" type="number"  >
                                                 </div>
                                             </div>
                                             
@@ -713,30 +713,30 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr *ngFor="let pa_asses of pa_assessments; let i = index">
+                                                    <tr *ngFor="let asses of pa_assessmentgroup; let i = index">
                                                         <td>
-                                                            {{pa_asses.pa_assessment}}
+                                                            {{asses.pa_assessment}}
                                                         </td>
                                                         <td>
-                                                             {{pa_asses.pa_assessment_start_date}}
+                                                             {{asses.pa_assessment_start_date | date}}
                                                         </td>
                                                         <td>
-                                                            {{pa_asses.pa_assessment_end_date}}
+                                                            {{asses.pa_assessment_end_date | date}}
                                                         </td>
                                                         <td>
-                                                            {{pa_asses.pa_services}}
+                                                            {{asses.pa_services}}
                                                         </td>
                                                         <td>
-                                                             {{pa_asses.pa_services_start_date}}
+                                                             {{asses.pa_services_start_date | date}}
                                                         </td>
                                                         <td>
-                                                             {{pa_asses.pa_services_end_date}}
+                                                             {{asses.pa_services_end_date | date}}
                                                         </td>
                                                         <td>
-                                                            {{pa_asses.cpt}}
+                                                            {{asses.cpt}}
                                                         </td>
                                                         <td>
-                                                            {{pa_asses.n_units}}
+                                                            {{asses.n_units}}
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-outline-danger btn-sm" (click)="deletePAAssestment(i)">x</button>

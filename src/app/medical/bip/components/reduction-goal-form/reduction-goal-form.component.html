@@ -141,6 +141,7 @@
                                                         <th>goal</th>
                                                         <th>decription</th>
                                                         <th>status</th>
+                                                        <th>update status</th>
                                                         <th>date</th>
                                                     </tr>
                                                 </thead>
@@ -159,7 +160,22 @@
                                                             {{goalsto.status_sto}}
                                                         </td>
                                                         <td>
-                                                            {{goalsto.date_sto}}
+                                                            <div class="form-group local-forms">
+                                                                <select
+                                                                    class="form-control form-select-solid fw-bolder"
+                                                                    name="status_sto" [(ngModel)]="status_sto">
+                                                                    <option>-- Select --</option>
+                                                                      <option value="inprogress">inprogress</option>
+                                                                      <option value="initiated">initiated</option>
+                                                                      <option value="mastered">mastered</option>
+                                                                      <option value="on hold">on hold</option>
+                                                                      <option value="discontinued">discontinued</option>
+                                                                      <option value="maintenance">maintenance</option>
+                                                                      </select>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            {{goalsto.date_sto | date}}
                                                         </td>
                                                         <td>
                                                             <!-- <button class="btn btn-outline-success btn-sm" (click)="selectedMaladaptiveSon(goalsto)"><i class="fa fa-bar-chart"></i></button> -->
@@ -239,6 +255,7 @@
                                                         <th>LTO</th>
                                                         <th>decription</th>
                                                         <th>status</th>
+                                                        <th>update status</th>
                                                         <th>date</th>
                                                     </tr>
                                                 </thead>
@@ -254,7 +271,20 @@
                                                             {{goallto.status_lto}}
                                                         </td>
                                                         <td>
-                                                            {{goallto.date_lto}}
+                                                            <select
+                                                    class="form-control form-select-solid fw-bolder"
+                                                    name="status_lto" [(ngModel)]="status_lto">
+                                                    <option>-- Select --</option>
+                                                      <option value="inprogress">inprogress</option>
+                                                      <option value="initiated">initiated</option>
+                                                      <option value="mastered">mastered</option>
+                                                      <option value="on hold">on hold</option>
+                                                      <option value="discontinued">discontinued</option>
+                                                      <option value="maintenance">maintenance</option>
+                                                      </select>
+                                                        </td>
+                                                        <td>
+                                                            {{goallto.date_lto | date}}
                                                         </td>
                                                         <td>
                                                             <!-- <button class="btn btn-outline-success btn-sm" (click)="selectedMaladaptiveSon(goallto)"><i class="fa fa-bar-chart"></i></button> -->
@@ -353,7 +383,7 @@
                                                             {{goalsto.status_sto}}
                                                         </td>
                                                         <td>
-                                                            {{goalsto.date_sto}}
+                                                            {{goalsto.date_sto | date}}
                                                         </td>
                                                         <!-- <td>
                                                             <button class="btn btn-outline-success btn-sm" (click)="selectedMaladaptiveSon(goalsto)"><i class="fa fa-bar-chart"></i></button>
@@ -397,7 +427,7 @@
                                                             {{goallto.status_lto}}
                                                         </td>
                                                         <td>
-                                                            {{goallto.date_lto}}
+                                                            {{goallto.date_lto | date}}
                                                         </td>
                                                         <!-- <td>
                                                             <button class="btn btn-outline-success btn-sm" (click)="selectedMaladaptiveSon(goallto)"><i class="fa fa-bar-chart"></i></button>

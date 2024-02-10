@@ -61,16 +61,17 @@ export class EditPatientMComponent {
   public oop: any;
   
 
-  public pa_assessment_grup: any = [] = [{}];
-  public pa_assessments: any = [] = [{}];
+  public pa_assessmentss: any = <any>[];
+  public pa_assessments: any = <any>[];
   public pa_assessment: any;
-  public pa_assessment_start_date: string = '';
-  public pa_assessment_end_date: string = '';
+  public pa_assessment_start_date: Date ;
+  public pa_assessment_end_date: Date ;
   public pa_services: any;
-  public pa_services_start_date: string = '';
-  public pa_services_end_date: string = '';
+  public pa_services_start_date: Date ;
+  public pa_services_end_date: Date ;
   public cpt: any;
-  public n_units: any;
+  public n_units: number = 0;
+
   public s_unit: any;
   public n_code: any;
   
@@ -132,6 +133,7 @@ export class EditPatientMComponent {
   public assesstmentlists: any= [];
   public services_code: any= [];
   public services: any= [];
+  public pa_assessmentgroup: any= [];
 
   public roles_rbt:any = [];
   public roles_bcba:any = [];
@@ -142,8 +144,9 @@ export class EditPatientMComponent {
   public insuranceiddd:any;
   
   // public insurance:any;
-  // public insurance_id:any;
   // public insurer_name: any;
+  public insurance_id:any;
+  public id:any;
 
   
   constructor(
@@ -173,11 +176,27 @@ export class EditPatientMComponent {
       console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
-      this.insurances_name = resp.insurances[0].insurer_name;
+      this.insurance_id = resp.insurances.length > 0 ? resp.insurances[0].id : '';
+      console.log(this.insurance_id);
+      // this.insurances_name = resp.insurances[0].insurer_name;
       // console.log(this.insurances_name);
       this.locations = resp.locations;
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
+
+
+      this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
+        console.log(resp);
+        this.insuranceiddd= resp.id;
+        
+        console.log(this.insuranceiddd);
+        this.insurer_name = resp.insurer_name;
+        console.log(this.insurer_name);
+        // this.notes = resp.notes;
+        // this.services = resp.services;
+  
+        
+      })
     })
   }
 
@@ -187,8 +206,12 @@ showUser(){
     this.patientService.getPatient(this.client_id).subscribe((resp:any)=>{
       console.log(resp);
       this.patient_selected = resp.patient;
-      // this.pa_assessment_grup = resp.pa_assessments;// ?
-      // console.log(this.pa_assessments);
+      this.pa_assessmentss = resp.pa_assessments;// ?
+      let jsonObj = JSON.parse(this.pa_assessmentss);
+      console.log(jsonObj);
+      this.pa_assessmentgroup = jsonObj;
+      console.log(this.pa_assessmentgroup);
+      
 
       this.selectedValueLocation = this.patient_selected.location_id;
       this.selectedValue_rbt = this.patient_selected.rbt_id;
@@ -261,11 +284,6 @@ showUser(){
   insuranceData(selectedValueInsurer){
     this.insuranceService.showInsurance(selectedValueInsurer).subscribe((resp:any)=>{
       console.log(resp);
-      this.insuranceiddd= resp.id;
-      console.log(this.insuranceiddd);
-      this.insurer_name = resp.insurer_name;
-      console.log(this.insurer_name);
-      // this.notes = resp.notes;
       this.services = resp.services;
     })
   }
@@ -280,7 +298,7 @@ showUser(){
   
 
   addPAAssestment(){
-    this.pa_assessments.push({
+    this.pa_assessmentgroup.push({
       pa_assessment: this.pa_assessment,
       pa_assessment_start_date: this.pa_assessment_start_date,
       pa_assessment_end_date: this.pa_assessment_end_date,
@@ -291,17 +309,17 @@ showUser(){
       n_units: this.n_units,
     })
     this.pa_assessment = '';
-    this.pa_assessment_start_date = '';
-    this.pa_assessment_end_date = '';
+    this.pa_assessment_start_date = null;
+    this.pa_assessment_end_date = null;
     this.pa_services = '';
-    this.pa_services_start_date = '';
-    this.pa_services_end_date = '';
+    this.pa_services_start_date = null;
+    this.pa_services_end_date = null;
     this.selectedValueCode = null;
-    this.n_units = '';
+    this.n_units = 0;
   }
 
   deletePAAssestment(i:any){
-    this.pa_assessments.splice(i,1);
+    this.pa_assessmentgroup.splice(i,1);
   }
 
   //listas
@@ -381,7 +399,7 @@ showUser(){
     formData.append('insurer', this.selectedValueInsurer);
 
 
-    formData.append('pa_assessments', JSON.stringify(this.pa_assessments));
+    formData.append('pa_assessments', JSON.stringify(this.pa_assessmentgroup));
 
     if(this.selectedValueLocation ){
       formData.append('location_id', this.selectedValueLocation);

@@ -78,8 +78,8 @@ export class ReductionGoalFormComponent {
   public description_lto:any;
   public status_sto:any;
   public status_lto:any;
-  public date_sto:any;
-  public date_lto:any;
+  public date_sto:Date ;
+  public date_lto:Date;
   public decription_lto:any;
   public goalid:any;
   public goalsbybipid:any;
@@ -281,7 +281,7 @@ export class ReductionGoalFormComponent {
     })
     this.sto = '';
     this.status_sto = '';
-    this.date_lto = '';
+    this.date_lto = null;
     this.decription_sto = '';
   }
 
@@ -297,7 +297,7 @@ export class ReductionGoalFormComponent {
     })
     this.lto = '';
     this.status_lto = '';
-    this.date_lto = '';
+    this.date_lto = null;
     this.decription_lto = '';
   }
 

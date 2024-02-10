@@ -693,9 +693,20 @@
                                             <div class="col-12 col-md-4">
                                                 <div class="form-group local-forms">
                                                     <label >No.Units<span class="login-danger">*</span></label>
-                                                    <input class="form-control" autocomplete="false" name="n_units" [(ngModel)]="n_units" type="text"  >
+                                                    <input class="form-control" autocomplete="false" name="n_units" [(ngModel)]="n_units" type="number"  >
                                                 </div>
                                             </div>
+                                            <!-- <div class="col-12 col-md-4">
+                                                <div class="form-group local-forms">
+                                                    <label >Unit Prize<span class="login-danger">*</span></label>
+                                                    <mat-select [(ngModel)]="selectedValueUnitPrize" name="unit_prize" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Code">
+                                                        <mat-option *ngFor="let data of services" [value]="data.code">
+                                                        {{data.code}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                    <input class="form-control" autocomplete="false" name="unit_prize" [(ngModel)]="unit_prize" type="number"  >
+                                                </div>
+                                            </div> -->
                                             
                                             <div class="col-12 mb-3 doctor-submit text-end">
                                                 <button class="btn btn-primary btn-sm" (click)="addPAAssestment()">Add</button>
@@ -713,8 +724,9 @@
                                                         <th>PA Services</th>
                                                         <th>Patient Services Start Date</th>
                                                         <th>Patient Services End Date</th>
-                                                        <th>cpt</th>
-                                                        <th>n units</th>
+                                                        <th>CPT</th>
+                                                        <th>N. Units</th>
+                                                        <!-- <th>Unit Prize</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -723,19 +735,19 @@
                                                             {{pa_asses.pa_assessment}}
                                                         </td>
                                                         <td>
-                                                             {{pa_asses.pa_assessment_start_date}}
+                                                             {{pa_asses.pa_assessment_start_date| date}}
                                                         </td>
                                                         <td>
-                                                            {{pa_asses.pa_assessment_end_date}}
+                                                            {{pa_asses.pa_assessment_end_date| date}}
                                                         </td>
                                                         <td>
                                                             {{pa_asses.pa_services}}
                                                         </td>
                                                         <td>
-                                                             {{pa_asses.pa_services_start_date}}
+                                                             {{pa_asses.pa_services_start_date| date}}
                                                         </td>
                                                         <td>
-                                                             {{pa_asses.pa_services_end_date}}
+                                                             {{pa_asses.pa_services_end_date| date}}
                                                         </td>
                                                         <td>
                                                             {{pa_asses.cpt}}
@@ -743,6 +755,9 @@
                                                         <td>
                                                             {{pa_asses.n_units}}
                                                         </td>
+                                                        <!-- <td>
+                                                            {{pa_asses.unit_prize}}
+                                                        </td> -->
                                                         <td>
                                                             <button class="btn btn-outline-danger btn-sm" (click)="deletePAAssestment(i)">x</button>
                                                         </td>
