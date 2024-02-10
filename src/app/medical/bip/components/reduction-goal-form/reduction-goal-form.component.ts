@@ -337,7 +337,7 @@ export class ReductionGoalFormComponent {
       client_id: this.client_id,
     }
 
-    if(this.client_id_goal){
+    if(this.client_id_goal && this.goalmaladaptiveid){
 
       this.goalService.update(data, this.goalmaladaptiveid).subscribe((resp:any)=>{
         // console.log(resp);
@@ -369,8 +369,13 @@ export class ReductionGoalFormComponent {
   cambiarStatus(goalsto:any){
     this.status_sto_edit = goalsto;
     console.log(this.status_sto_edit.status_sto);
+
+    let data ={
+      goalstos: this.golsto,
+      goalltos: this.gollto,
+    }
     
-    this.goalService.update(goalsto, this.goalmaladaptiveid).subscribe(
+    this.goalService.update(data, this.goalmaladaptiveid).subscribe(
       resp =>{
         // console.log(resp);
         // this.getTableData();

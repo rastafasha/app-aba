@@ -158,12 +158,12 @@
                                                         </td>
                                                         <td>
                                                             <!-- {{goalsto.status_sto}} -->
-                                                            <span class="badge bg-primary" *ngIf="goalsto.status_sto === 'inprogress'">In progress</span>
+                                                            <span class="badge bg-success" *ngIf="goalsto.status_sto === 'inprogress'">In progress</span>
                                                             <span class="badge bg-success" *ngIf="goalsto.status_sto === 'initiated'">Initiated</span>
                                                             <span class="badge bg-primary" *ngIf="goalsto.status_sto === 'mastered'">Mastered</span>
-                                                            <span class="badge bg-primary" *ngIf="goalsto.status_sto === 'on hold'">On Hold</span>
-                                                            <span class="badge bg-primary" *ngIf="goalsto.status_sto === 'discontinued'">Discontinued</span>
-                                                            <span class="badge bg-primary" *ngIf="goalsto.status_sto === 'maintenance'">Maintenance</span>
+                                                            <span class="badge bg-warning" *ngIf="goalsto.status_sto === 'on hold'">On Hold</span>
+                                                            <span class="badge bg-danger" *ngIf="goalsto.status_sto === 'discontinued'">Discontinued</span>
+                                                            <span class="badge bg-warning" *ngIf="goalsto.status_sto === 'maintenance'">Maintenance</span>
                                                         </td>
                                                         <td>
                                                             <div class="form-group local-forms">
@@ -275,19 +275,12 @@
                                                         </td>
                                                         <td>
                                                             {{goallto.status_lto}}
-                                                        </td>
-                                                        <td>
-                                                            <select
-                                                    class="form-control form-select-solid fw-bolder"
-                                                    name="status_lto" [(ngModel)]="status_lto">
-                                                    <option>-- Select --</option>
-                                                      <option value="inprogress">inprogress</option>
-                                                      <option value="initiated">initiated</option>
-                                                      <option value="mastered">mastered</option>
-                                                      <option value="on hold">on hold</option>
-                                                      <option value="discontinued">discontinued</option>
-                                                      <option value="maintenance">maintenance</option>
-                                                      </select>
+                                                            <!-- <span class="badge bg-success" *ngIf="goallto.status_lto === 'inprogress'">In progress</span>
+                                                            <span class="badge bg-success" *ngIf="goallto.status_lto === 'initiated'">Initiated</span>
+                                                            <span class="badge bg-primary" *ngIf="goallto.status_lto === 'mastered'">Mastered</span>
+                                                            <span class="badge bg-warning" *ngIf="goallto.status_lto === 'on hold'">On Hold</span>
+                                                            <span class="badge bg-danger" *ngIf="goallto.status_lto === 'discontinued'">Discontinued</span>
+                                                            <span class="badge bg-warning" *ngIf="goallto.status_lto === 'maintenance'">Maintenance</span> -->
                                                         </td>
                                                         <td>
                                                             {{goallto.date_lto | date}}

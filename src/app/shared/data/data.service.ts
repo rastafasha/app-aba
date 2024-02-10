@@ -351,54 +351,64 @@ export class DataService {
               permision: 'register_location',
               show_nav: false,
             },
-            {
-              menuValue: 'Edit Location',
-              route: routes.registerLocation,
-              base: routes.registerLocation,
-              permision: 'edit_location',
-              show_nav: false,
-            }
+            // {
+            //   menuValue: '',
+            //   route: '',
+            //   base: '',
+            //   // route: routes.registerLocation,
+            //   // base: routes.registerLocation,
+            //   permision: 'edit_location',
+            //   show_nav: false,
+            // }
           ],
         },
-        {
-          menuValue: 'Bip',
-          hasSubRoute: true,
-          showSubRoute: false,
-          base: 'bip',
-          img: 'assets/img/icons/menu-icon-03.svg',
-          show_nav: false,
-          subMenus: [
-            {
-              menuValue: 'Bip List',
-              route: routes.bipList,
-              base: routes.bipList,
-              permision: 'bip_list',
-              show_nav: false,
-            },
-            {
-              menuValue: 'Add Bip',
-              route: routes.registerBip,
-              base: routes.registerBip,
-              permision: 'bip_add',
-              show_nav: false,
-            },
-            {
-              menuValue: 'Edit Bip',
-              route: routes.editBip,
-              base: routes.editBip,
-              permision: 'bip_edit',
-              show_nav: false,
-            }
-            ,
-            {
-              menuValue: 'View Bip',
-              route: routes.editBip,
-              base: routes.editBip,
-              permision: 'bip_view',
-              show_nav: false,
-            }
-          ],
-        },
+        // {
+        //   menuValue: 'Bip Roles',
+        //   hasSubRoute: true,
+        //   showSubRoute: false,
+        //   base: 'bip',
+        //   img: 'assets/img/icons/menu-icon-03.svg',
+        //   show_nav: false,
+        //   subMenus: [
+        //     {
+        //       menuValue: '',
+        //       // route: routes.bipList,
+        //       // base: routes.bipList,
+        //       route: '',
+        //       base: '',
+        //       permision: 'bip_list',
+        //       show_nav: false,
+        //     },
+        //     {
+        //       menuValue: '',
+        //       // route: routes.registerBip,
+        //       // base: routes.registerBip,
+        //       route: '',
+        //       base: '',
+        //       permision: 'bip_add',
+        //       show_nav: false,
+        //     },
+        //     {
+        //       menuValue: '',
+        //       // route: routes.editBip,
+        //       // base: routes.editBip,
+        //       route: '',
+        //       base: '',
+        //       permision: 'bip_edit',
+        //       show_nav: false,
+        //     }
+        //     ,
+        //     {
+        //       menuValue: '',
+        //       // route: routes.editBip,
+        //       // base: routes.editBip,
+        //       route: '',
+        //       base: '',
+        //       permision: 'bip_view',
+        //       show_nav: false,
+        //     }
+        //   ],
+        // },
         // {
         //   menuValue: 'Staff',
         //   hasSubRoute: true,

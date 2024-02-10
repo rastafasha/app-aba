@@ -78,9 +78,9 @@ export class GoalService {
     let URL = url_servicios+"/goal/update/"+patient_id;
     return this.http.post(URL,data,{headers:headers});
   }
-  updateStatus(data:any, patient_id:any){
+  updateSto(data:any, goalmaladaptiveid:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/goal/update/eligibility/"+patient_id;
+    let URL = url_servicios+"/goal/update/sto/"+goalmaladaptiveid;
     return this.http.put(URL,data,{headers:headers});
   }
 }
