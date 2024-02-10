@@ -56,7 +56,7 @@ export class ReductionGoalFormComponent {
   //goals
   maladaptiveSelected:any;
   maladaptiveSelectedSon:any;
-  goalmaladaptive:any = [];
+  goalmaladaptive:any ;
   goalmaladaptive_child:any = [];
   goalReductionPatientIds:any = [];
 
@@ -77,6 +77,7 @@ export class ReductionGoalFormComponent {
   public lto:any;
   public description_lto:any;
   public status_sto:any;
+  public status_sto_edit:any;
   public status_lto:any;
   public date_sto:Date ;
   public date_lto:Date;
@@ -88,6 +89,8 @@ export class ReductionGoalFormComponent {
   public bip_selectedId:any;
   public bip_selectedIdd:any;
   public maladaptive_child:any;
+  public client_id_goal:any;
+  public goalmaladaptiveid:any;
 
 
   constructor(
@@ -144,7 +147,7 @@ export class ReductionGoalFormComponent {
   getGoalbyPatient(){
     
     this.goalService.getGoalbyPatientId(this.client_id).subscribe((resp:any)=>{
-      console.log('goal', resp);
+      // console.log('goal', resp);
       this.goalpatient_selected = resp;//convertimos la respuesta en un variable
       this.goalid = resp.id; //convertimos la respuesta en un variable
 
@@ -174,6 +177,7 @@ export class ReductionGoalFormComponent {
     this.goalService.getGoalbyPatientId(patient_id).subscribe((resp:any)=>{
       // console.log('goals by patientid',resp);
       this.goals = resp.goalReductionPatientIds.data[0];
+      this.client_id_goal = resp.goalReductionPatientIds.data[0].client_id;
       // this.goals = resp.goalReductionPatientIds;
       // console.log(this.goals);
       
@@ -211,6 +215,7 @@ export class ReductionGoalFormComponent {
       // console.log( resp);
       
       this.goalmaladaptive = resp.goalsmaladaptive.data;
+      this.goalmaladaptiveid = resp.goalsmaladaptive.data[0].id;
       // this.goalmaladaptive = resp.goalsmaladaptive || null;
       console.log('palabra maladaptive', this.goalmaladaptive);
       this.current_status = this.goals.current_status;
@@ -221,10 +226,10 @@ export class ReductionGoalFormComponent {
         this.gollto = '';
       }else{
         
-        this.golsto = this.goals.goalstos;
-        // console.log(this.golsto);
-        this.gollto = this.goals.goalltos;
-        // console.log(this.gollto);
+        this.golsto = this.goalmaladaptive[0].goalstos;
+        console.log(this.golsto);
+        this.gollto = this.goalmaladaptive[0].goalltos;
+        console.log(this.gollto);
       }
 
       this.ngOnInit();
@@ -276,11 +281,13 @@ export class ReductionGoalFormComponent {
       maladaptive: this.maladaptiveSelected.maladaptive_behavior,
       sto: this.sto,
       status_sto: this.status_sto,
+      status_sto_edit: this.status_sto,
       date_sto: this.date_sto,
       decription_sto: this.decription_sto,
     })
     this.sto = '';
     this.status_sto = '';
+    this.status_sto_edit = '';
     this.date_lto = null;
     this.decription_sto = '';
   }
@@ -320,7 +327,7 @@ export class ReductionGoalFormComponent {
     // }
 
     let data ={
-      id:this.goalid,
+      id:this.goalmaladaptiveid,
       bip_id: this.bip_selectedIdd,
       maladaptive: this.maladaptiveSelected.maladaptive_behavior,
       patient_id: this.patient_id,
@@ -330,9 +337,9 @@ export class ReductionGoalFormComponent {
       client_id: this.client_id,
     }
 
-    if(this.goalid){
+    if(this.client_id_goal){
 
-      this.goalService.update(data, this.patient_id).subscribe((resp:any)=>{
+      this.goalService.update(data, this.goalmaladaptiveid).subscribe((resp:any)=>{
         // console.log(resp);
         // this.text_success = 'Goal Updated'
         Swal.fire('Updated', `Goal Updated successfully!`, 'success');
@@ -345,7 +352,7 @@ export class ReductionGoalFormComponent {
         console.log(resp);
         this.goalid = resp.id;
         // this.text_success = 'Goal created successfully!'
-        Swal.fire('Updated', `Goal Created successfully!`, 'success');
+        Swal.fire('Created', `Goal Created successfully!`, 'success');
         this.ngOnInit();
         // this.getGoalsMaladaptives();
   
@@ -357,5 +364,19 @@ export class ReductionGoalFormComponent {
 
    
 
+  }
+
+  cambiarStatus(goalsto:any){
+    this.status_sto_edit = goalsto;
+    console.log(this.status_sto_edit.status_sto);
+    
+    this.goalService.update(goalsto, this.goalmaladaptiveid).subscribe(
+      resp =>{
+        // console.log(resp);
+        // this.getTableData();
+        Swal.fire('Updated', `Goal Updated successfully!`, 'success');
+        this.ngOnInit();
+      }
+    )
   }
 }
