@@ -407,8 +407,10 @@ showUser(){
     // formData.append('insurer', this.selectedValueInsurer);
 
 
-    formData.append('pa_assessments', JSON.stringify(this.pa_assessments));
-
+    
+    if(this.pa_assessmentgroup ){
+      formData.append('pa_assessments', JSON.stringify(this.pa_assessmentgroup));
+    }
     if(this.selectedValueLocation ){
       formData.append('location_id', this.selectedValueLocation);
     }

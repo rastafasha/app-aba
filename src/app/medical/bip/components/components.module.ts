@@ -7,18 +7,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
 import { ChartReductionComponent } from './charts/chart-reduction/chart-reduction.component';
+import { SustitutionGoalFormComponent } from './sustitution-goal-form/sustitution-goal-form.component';
 
 
 @NgModule({
   declarations: [
     BipformComponent,
     ReductionGoalFormComponent,
-    ChartReductionComponent
+    ChartReductionComponent,
+    SustitutionGoalFormComponent
   ],
   exports: [
     BipformComponent,
     ReductionGoalFormComponent,
-    ChartReductionComponent
+    ChartReductionComponent,
+    SustitutionGoalFormComponent
   ],
   imports: [
     CommonModule,

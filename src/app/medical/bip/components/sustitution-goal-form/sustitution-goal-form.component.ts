@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BipService } from 'src/app/medical/bip/service/bip.service';
-import { GoalService } from 'src/app/medical/bip/service/goal.service';
 import { PatientMService } from 'src/app/medical/patient-m/service/patient-m.service';
+import { BipService } from '../../service/bip.service';
+import { GoalSustitutionService } from '../../service/goal-sustitution.service';
 import { routes } from 'src/app/shared/routes/routes';
 import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-reduction-goal-form',
-  templateUrl: './reduction-goal-form.component.html',
-  styleUrls: ['./reduction-goal-form.component.scss']
+  selector: 'app-sustitution-goal-form',
+  templateUrl: './sustitution-goal-form.component.html',
+  styleUrls: ['./sustitution-goal-form.component.scss']
 })
-export class ReductionGoalFormComponent {
+export class SustitutionGoalFormComponent {
 
   // created comments by Malcolm Cordova at 10 feb 2004
   // mercadocreativo@gmail.com
@@ -45,8 +46,8 @@ export class ReductionGoalFormComponent {
   
   public goalmaladaptiveid:any;
   public current_status!:any;
-  public golsto:any = [{}];
-  public gollto:any = [{}];
+  public golstoSustiution:any = [{}];
+  public golltoSustiution:any = [{}];
   public golsto_child:any = [{}];
   public gollto_child:any = [{}];
 
@@ -70,18 +71,10 @@ export class ReductionGoalFormComponent {
   public date_sto:Date ;
   public date_lto:Date;
 
-
-  //revisar
-  goalpatient_selected:any;
-  goal_selected:any;
-  goalsbybipid:any;
-  goals:any = [];
-
-
   constructor(
     public bipService:BipService,
     public patientService:PatientMService,
-    public goalService:GoalService,
+    public goalSustitutionService:GoalSustitutionService,
     public router: Router,
     public ativatedRoute: ActivatedRoute
   ){
@@ -109,15 +102,16 @@ export class ReductionGoalFormComponent {
     
   }
 
+
   //obtenemos el perfil  del paciente por el id de la ruta
   getProfileBip(){
     this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
       // console.log('profilebip', resp);
       this.client_selected = resp;//convertimos la respuesta en un variable
 
-      this.patient_id = this.client_selected.patient.patient_id; 
+      this.patient_id = this.client_selected.patient.patient_id;
       if (this.patient_id != null) {
-        this.getPatientGoals(this.patient_id);
+        this.getPatientGoalSustitutions(this.patient_id);
       }
     });
 
@@ -139,14 +133,14 @@ export class ReductionGoalFormComponent {
     
     
   }
-  
-//obtenemos los tipo goals: reductions del paciente por el patient_id si existe, 
+
+  //obtenemos los tipo goals: sustituions del paciente por el patient_id si existe, 
   //si existe enviamos el client_id_goal para actualizar el goal del paciente
-  getPatientGoals(patient_id){
-    this.goalService.getGoalbyPatientId(patient_id).subscribe((resp:any)=>{
-      // console.log('goals by patientid',resp);
-      this.goals = resp.goalReductionPatientIds.data[0];
-      this.client_id_goal = resp.goalReductionPatientIds.data[0].client_id;
+  getPatientGoalSustitutions(patient_id){
+    this.goalSustitutionService.getGoalSustitutionbyPatientId(patient_id).subscribe((resp:any)=>{
+      console.log('goals sustition by patientid',resp);
+      this.goalSustitutions = resp.sustitutiongoalPatientIds.data[0];
+      this.client_id_goalSustitution = resp.sustitutiongoalPatientIds.data[0].client_id;
       // this.goals = resp.goalReductionPatientIds;
       // console.log(this.goals);
       
@@ -154,35 +148,7 @@ export class ReductionGoalFormComponent {
     })
   }
 
-  //obtenemos el goal del paciente por el id //revisar para que se usa
-  getGoalbyPatient(){
-    
-    this.goalService.getGoalbyPatientId(this.client_id).subscribe((resp:any)=>{
-      // console.log('goal', resp);
-      this.goalpatient_selected = resp;//convertimos la respuesta en un variable
-      this.goalid = resp.id; //convertimos la respuesta en un variable
 
-    })
-    
-    
-  }
-
-  
-
-
-  //obtenemos los goals por el id del bip //revisar
-  getGoalsByBip(){
-    this.goalService.getGoalbyBipId(this.bip_selectedId).subscribe((resp:any)=>{
-      // console.log(resp);
-      this.goal_selected = resp.goalreductions;
-      // console.log(this.goal_selected);
-      this.goalsbybipid = resp.id;
-    })
-    
-  }
-  
-  
-  
   //selectores 
   //seleccionamos el maladaptive de la lista
   //obtenemos informacion de la seleccion
@@ -197,25 +163,25 @@ export class ReductionGoalFormComponent {
   //obtenemos los goals del maladaptive por nombre
   //obtenemos los maladaptives iniciales para poder relacionarlos con los goals
   getGoalsMaladaptives(){
-    this.goalService.listMaladaptivesGoals(this.maladaptiveSelected.maladaptive_behavior).subscribe((resp:any)=>{
-      // console.log( resp);
+    this.goalSustitutionService.listMaladaptivesGoalSustitutions(this.maladaptiveSelected.maladaptive_behavior).subscribe((resp:any)=>{
+      console.log( resp);
       
-      this.goalmaladaptive = resp.goalsmaladaptive.data;
-      this.goalmaladaptiveid = resp.goalsmaladaptive.data[0].id;
+      this.goalmaladaptive = resp.sustitutiongoalmaladaptive.data;
+      this.goalmaladaptiveid = resp.sustitutiongoalmaladaptive.data[0].id;
       // this.goalmaladaptive = resp.goalsmaladaptive || null;
       console.log('palabra maladaptive', this.goalmaladaptive);
-      this.current_status = this.goals.current_status;
+      this.current_status = this.goalSustitutions.current_status;
 
       if (this.goalmaladaptive == undefined) {
         this.current_status = '';
-        this.golsto = '';
-        this.gollto = '';
+        this.golstoSustiution = '';
+        this.golltoSustiution = '';
       }else{
         
-        this.golsto = this.goalmaladaptive[0].goalstos;
-        console.log(this.golsto);
-        this.gollto = this.goalmaladaptive[0].goalltos;
-        console.log(this.gollto);
+        this.golstoSustiution = this.goalmaladaptive[0].goalstos;
+        console.log(this.golstoSustiution);
+        this.golltoSustiution = this.goalmaladaptive[0].goalltos;
+        console.log(this.golltoSustiution);
       }
 
       this.ngOnInit();
@@ -229,10 +195,10 @@ export class ReductionGoalFormComponent {
     // console.log(this.maladaptiveSelectedSon);
     this.getGoalsSonMaladaptives();
   }
-
+  
   deleteMaladaptiveSon(goalsto:any){debugger
     // this.maladaptiveSelectedSon.splice(i,1);
-    this.goalService.deleteGoal(goalsto.id).subscribe((resp:any)=>{
+    this.goalSustitutionService.deleteGoalSustitution(goalsto.id).subscribe((resp:any)=>{
       // alert("Se elimino el objetivo");
       // this.getGoals();
     })
@@ -240,11 +206,9 @@ export class ReductionGoalFormComponent {
 
   //fin selectores
 
-
-
   //listas
   addSTOGoal(){
-    this.golsto.push({
+    this.golstoSustiution.push({
       maladaptive: this.maladaptiveSelected.maladaptive_behavior,
       sto: this.sto,
       status_sto: this.status_sto,
@@ -260,11 +224,10 @@ export class ReductionGoalFormComponent {
   }
 
   deleteSTOGoal(i:any){
-    this.golsto.splice(i,1);
+    this.golstoSustiution.splice(i,1);
   }
-
   addLTOGoal(){
-    this.gollto.push({
+    this.golltoSustiution.push({
       lto: this.lto,
       status_lto: this.status_lto,
       date_lto: this.date_lto,
@@ -277,7 +240,7 @@ export class ReductionGoalFormComponent {
   }
 
   deleteLTOGoal(i:any){
-    this.gollto.splice(i,1);
+    this.golltoSustiution.splice(i,1);
   }
 
   cambiarStatus(goalsto:any){
@@ -285,11 +248,11 @@ export class ReductionGoalFormComponent {
     console.log(this.status_sto_edit.status_sto);
 
     let data ={
-      goalstos: this.golsto,
-      goalltos: this.gollto,
+      goalstos: this.golstoSustiution,
+      goalltos: this.golltoSustiution,
     }
     
-    this.goalService.editGoal(data, this.goalmaladaptiveid).subscribe(
+    this.goalSustitutionService.editGoalSustitution(data, this.goalmaladaptiveid).subscribe(
       resp =>{
         // console.log(resp);
         // this.getTableData();
@@ -301,7 +264,7 @@ export class ReductionGoalFormComponent {
 
   //listas
 
-  
+
 
   back(){
     this.maladaptiveSelected = null;
@@ -323,27 +286,27 @@ export class ReductionGoalFormComponent {
       maladaptive: this.maladaptiveSelected.maladaptive_behavior,
       patient_id: this.patient_id,
       current_status: this.current_status,
-      goalstos: this.golsto,
-      goalltos: this.gollto,
+      goalstos: this.golstoSustiution,
+      goalltos: this.golltoSustiution,
       client_id: this.client_id,
     }
 
     if(this.client_id_goal && this.goalmaladaptiveid){
 
-      this.goalService.editGoal(data, this.goalmaladaptiveid).subscribe((resp:any)=>{
+      this.goalSustitutionService.editGoalSustitution(data, this.goalmaladaptiveid).subscribe((resp:any)=>{
         // console.log(resp);
         // this.text_success = 'Goal Updated'
-        Swal.fire('Updated', `Goal Reduction Updated successfully!`, 'success');
+        Swal.fire('Updated', `Goal Sustitution Updated successfully!`, 'success');
         this.ngOnInit();
       })
       
     }else{
       
-      this.goalService.createGoal(data).subscribe((resp:any)=>{
+      this.goalSustitutionService.createGoalSustitution(data).subscribe((resp:any)=>{
         console.log(resp);
         this.goalid = resp.id;
         // this.text_success = 'Goal created successfully!'
-        Swal.fire('Created', `Goal Reduction Created successfully!`, 'success');
+        Swal.fire('Created', `Goal Sustitution Created successfully!`, 'success');
         this.ngOnInit();
         // this.getGoalsMaladaptives();
   
@@ -361,7 +324,7 @@ export class ReductionGoalFormComponent {
   //grafico
   //obtenemos los goals del maladaptive por nombre  para el grafico 
   getGoalsSonMaladaptives(){
-    this.goalService.listMaladaptivesGoals(this.maladaptiveSelectedSon.maladaptive_behavior).subscribe((resp:any)=>{
+    this.goalSustitutionService.listMaladaptivesGoalSustitutions(this.maladaptiveSelectedSon.maladaptive_behavior).subscribe((resp:any)=>{
       console.log( resp);
       
       this.goalmaladaptive_child = resp.goalsmaladaptive.data;
@@ -379,5 +342,7 @@ export class ReductionGoalFormComponent {
 
   }
 
-  
+
+
+
 }

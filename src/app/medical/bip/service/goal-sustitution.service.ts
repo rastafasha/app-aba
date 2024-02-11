@@ -6,21 +6,21 @@ import { AuthService } from 'src/app/shared/auth/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class GoalService {
+export class GoalSustitutionService {
 
   constructor(
     public http: HttpClient,
     public authService:AuthService
   ) { }
 
-  listGoals(){
+  listGoalSustitutions(){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal';
+    let URL = url_servicios+'/sustitutiongoal';
     return this.http.get(URL, {headers:headers});
   }
-  listMaladaptivesGoals(maladaptive:any){
+  listMaladaptivesGoalSustitutions(maladaptive:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal/show/goalsmaladaptives/'+maladaptive;
+    let URL = url_servicios+'/sustitutiongoal/show/goalsmaladaptives/'+maladaptive;
     return this.http.get(URL, {headers:headers});
   }
   // listMaladaptivesGoals(maladaptive:any, patient_id:any){
@@ -29,54 +29,53 @@ export class GoalService {
   //   return this.http.get(URL, {headers:headers});
   // }
   
-  getGoal(user_id:any){
+  getGoalSustitution(user_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal/show/'+user_id;
+    let URL = url_servicios+'/sustitutiongoal/show/'+user_id;
     return this.http.get(URL, {headers:headers});
   }
 
-  getGoalbyPatientId(patient_id:any){
+  getGoalSustitutionbyPatientId(patient_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal/showgbyPatientId/'+patient_id;
+    let URL = url_servicios+'/sustitutiongoal/showgbyPatientId/'+patient_id;
     return this.http.get(URL, {headers:headers});
   }
-  getGoalbyBipId(bip_id:any){
+  getGoalSustitutionbyBipId(bip_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal/showBipId/'+bip_id;
+    let URL = url_servicios+'/sustitutiongoal/showBipId/'+bip_id;
     return this.http.get(URL, {headers:headers});
   }
-  createGoal(data){
+  createGoalSustitution(data){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal/store';
+    let URL = url_servicios+'/sustitutiongoal/store';
     return this.http.post(URL,data, {headers:headers});
   }
-  editGoal( data:any, user_id:any,){
+  editGoalSustitution( data:any, user_id:any,){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal/update/'+user_id;
+    let URL = url_servicios+'/sustitutiongoal/update/'+user_id;
     return this.http.post(URL,data,{headers:headers});
   }
-  deleteGoal(user_id:any){
+  deleteGoalSustitution(user_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal/destroy/'+user_id;
+    let URL = url_servicios+'/sustitutiongoal/destroy/'+user_id;
     return this.http.delete(URL, {headers:headers});
   }
 
-  showGoalProfile(user_id:any){
+  showGoalSustitutionProfile(user_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/goal/profile/"+user_id;
+    let URL = url_servicios+"/sustitutiongoal/profile/"+user_id;
     return this.http.get(URL,{headers:headers});
   }
 
-  listConfig(){
+  listConfigSustitution(){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal/config';
+    let URL = url_servicios+'/sustitutiongoal/config';
     return this.http.get(URL, {headers:headers});
   }
 
-  
-  updateSto(data:any, goalmaladaptiveid:any){
+  updateStoSustitutionSto(data:any, goalmaladaptiveid:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/goal/update/sto/"+goalmaladaptiveid;
+    let URL = url_servicios+"/sustitutiongoal/update/sto/"+goalmaladaptiveid;
     return this.http.put(URL,data,{headers:headers});
   }
 }
