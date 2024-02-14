@@ -8,6 +8,13 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
 import { ChartReductionComponent } from './charts/chart-reduction/chart-reduction.component';
 import { SustitutionGoalFormComponent } from './sustitution-goal-form/sustitution-goal-form.component';
+import { FamilyInvolvementGoalFormComponent } from './family-involvement-goal-form/family-involvement-goal-form.component';
+import { MonitoringEvaluatingComponent } from './monitoring-evaluating/monitoring-evaluating.component';
+import { BehaviorAssistantComponent } from './behavior-assistant/behavior-assistant.component';
+import { GeneralizationTrainingComponent } from './generalization-training/generalization-training.component';
+import { CrisisPlanComponent } from './crisis-plan/crisis-plan.component';
+import { DeEscalationTecniquesComponent } from './de-escalation-tecniques/de-escalation-tecniques.component';
+import { ConsentTreatmentFormComponent } from './consent-treatment-form/consent-treatment-form.component';
 
 
 @NgModule({
@@ -15,13 +22,27 @@ import { SustitutionGoalFormComponent } from './sustitution-goal-form/sustitutio
     BipformComponent,
     ReductionGoalFormComponent,
     ChartReductionComponent,
-    SustitutionGoalFormComponent
+    SustitutionGoalFormComponent,
+    FamilyInvolvementGoalFormComponent,
+    MonitoringEvaluatingComponent,
+    BehaviorAssistantComponent,
+    GeneralizationTrainingComponent,
+    CrisisPlanComponent,
+    DeEscalationTecniquesComponent,
+    ConsentTreatmentFormComponent
   ],
   exports: [
     BipformComponent,
     ReductionGoalFormComponent,
     ChartReductionComponent,
-    SustitutionGoalFormComponent
+    SustitutionGoalFormComponent,
+    FamilyInvolvementGoalFormComponent,
+    MonitoringEvaluatingComponent,
+    BehaviorAssistantComponent,
+    GeneralizationTrainingComponent,
+    CrisisPlanComponent,
+    DeEscalationTecniquesComponent,
+    ConsentTreatmentFormComponent
   ],
   imports: [
     CommonModule,

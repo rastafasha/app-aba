@@ -106,6 +106,27 @@
                     <li>
                         <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 3}" (click)="optionSelected(3)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Sustitution Goals </a>
                     </li>
+                    <li>
+                        <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 4}" (click)="optionSelected(4)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Family Envolment</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 5}" (click)="optionSelected(5)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Monitoring & Evaluating</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 6}" (click)="optionSelected(6)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Behavior Assistant</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 7}" (click)="optionSelected(7)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Generalization Training </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 8}" (click)="optionSelected(8)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Crisis Plan</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 9}" (click)="optionSelected(9)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>De-escalation Techiques</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 10}" (click)="optionSelected(10)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Consent to Treatment</a>
+                    </li>
                 </ul>
             </div>
             <ng-container *ngIf="option_selected == 1">
@@ -120,6 +141,41 @@
             <ng-container *ngIf="option_selected == 3">
                 <!-- Reduction Goal -->
                 <app-sustitution-goal-form></app-sustitution-goal-form>
+                <!-- fin Reduction Goal -->	
+            </ng-container>	
+            <ng-container *ngIf="option_selected == 4">
+                <!-- Reduction Goal -->
+                <app-family-involvement-goal-form></app-family-involvement-goal-form>
+                <!-- fin Reduction Goal -->	
+            </ng-container>	
+            <ng-container *ngIf="option_selected == 5">
+                <!-- Reduction Goal -->
+                <app-monitoring-evaluating></app-monitoring-evaluating>
+                <!-- fin Reduction Goal -->	
+            </ng-container>	
+            <ng-container *ngIf="option_selected == 6">
+                <!-- Reduction Goal -->
+                <app-behavior-assistant></app-behavior-assistant>
+                <!-- fin Reduction Goal -->	
+            </ng-container>	
+            <ng-container *ngIf="option_selected == 7">
+                <!-- Reduction Goal -->
+                <app-generalization-training></app-generalization-training>
+                <!-- fin Reduction Goal -->	
+            </ng-container>	
+            <ng-container *ngIf="option_selected == 8">
+                <!-- Reduction Goal -->
+                <app-crisis-plan></app-crisis-plan>
+                <!-- fin Reduction Goal -->	
+            </ng-container>	
+            <ng-container *ngIf="option_selected == 9">
+                <!-- Reduction Goal -->
+                <app-de-escalation-tecniques></app-de-escalation-tecniques>
+                <!-- fin Reduction Goal -->	
+            </ng-container>	
+            <ng-container *ngIf="option_selected == 10">
+                <!-- Reduction Goal -->
+                <app-consent-treatment-form></app-consent-treatment-form>
                 <!-- fin Reduction Goal -->	
             </ng-container>	
             					

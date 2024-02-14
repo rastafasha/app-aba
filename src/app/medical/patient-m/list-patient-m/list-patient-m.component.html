@@ -61,7 +61,7 @@
                                     <th mat-sort-header="phonec">Phone</th>
                                     <th mat-sort-header="city">city</th>
                                     <th mat-sort-header="patient_id">Patient Id</th>
-                                    <th mat-sort-header="elegible">Elegible</th>
+                                    <th mat-sort-header="elegible">Status</th>
                                     <th mat-sort-header="ops">Options</th>
                                     <th mat-sort-header="created">Created At</th>
                                        <th ></th> <!--acciones -->
@@ -81,20 +81,20 @@
                                       
                                     <td>
                                       <span class="badge bg-primary"
-                                          *ngIf="data.eligibility === 'pending'">Pending</span>
+                                          *ngIf="data.status === 'pending'">Pending</span>
                                       <span class="badge bg-success"
-                                          *ngIf="data.eligibility === 'yes'">Yes</span>
+                                          *ngIf="data.status === 'yes'">Yes</span>
                                       <span class="badge bg-danger"
-                                          *ngIf="data.eligibility === 'no'">No</span>
+                                          *ngIf="data.status === 'no'">No</span>
 
-                                      <span *ngIf="data.eligibility === 'yes'">
+                                      <span *ngIf="data.status === 'yes'">
                                         <button class="btn btn-outline-success" [routerLink]="['/bip/attention/', data.id]">Access BIP</button>
                                       </span>
                                   </td>
                                   <td>
                                     <select
                                     class="form-control form-select-solid fw-bolder"
-                                    name="state" [(ngModel)]="data.eligibility" (change)="cambiarStatus(data)"
+                                    name="state" [(ngModel)]="data.status" (change)="cambiarStatus(data)"
                                     placeholder="state">
                                     <option>-- Select --</option>
                                     <option value="pending">Pending</option>

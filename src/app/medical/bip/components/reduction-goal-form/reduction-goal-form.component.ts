@@ -204,7 +204,7 @@ export class ReductionGoalFormComponent {
       this.goalmaladaptiveid = resp.goalsmaladaptive.data[0].id;
       // this.goalmaladaptive = resp.goalsmaladaptive || null;
       console.log('palabra maladaptive', this.goalmaladaptive);
-      this.current_status = this.goals.current_status;
+      this.current_status = this.goalmaladaptive[0].current_status;
 
       if (this.goalmaladaptive == undefined) {
         this.current_status = '';

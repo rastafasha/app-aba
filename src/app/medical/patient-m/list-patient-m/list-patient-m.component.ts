@@ -275,7 +275,7 @@ export class ListPatientMComponent {
   }
 
   cambiarStatus(data:any){
-    let VALUE = data.eligibility;
+    let VALUE = data.status;
     console.log(VALUE);
     
     this.patientService.updateStatus(data, data.id).subscribe(

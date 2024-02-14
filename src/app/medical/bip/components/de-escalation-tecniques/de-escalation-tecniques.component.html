@@ -1,0 +1,187 @@
+ <!-- other -->
+ <div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            
+            <form autocomplete="false">
+                <div class="row" >
+
+                    <!-- documents -->
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="card-block">
+                                <h3 class="card-title">De-escalation Tecniques</h3>
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            
+                                            <div class="col-xs-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label>Description <span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="description" [(ngModel)]="description" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label>Service Recomendation <span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="service_recomendation" [(ngModel)]="service_recomendation" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <h4 class="card-title">Recomendation List</h4>
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label>CPT <span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="cpt" [(ngModel)]="cpt" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label>Description Service <span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="description_service" [(ngModel)]="description_service" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4">  
+                                                <div class="form-group local-forms">
+                                                    <label ># of Units /180 day period <span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="num_units"  [(ngModel)]="num_units" type="number"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4">  
+                                                <div class="form-group local-forms">
+                                                    <label >Breakdown per Week <span class="login-danger">*</span></label>
+                                                    <input class="form-control" name="breakdown_per_week"  [(ngModel)]="breakdown_per_week" type="text"  >
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-xs-12 col-sm-4">  
+                                                <div class="form-group local-forms">
+                                                    <label >Location (Where Services are to be Delivered) <span class="login-danger">*</span></label>
+                                                    <select class="form-control form-select-solid fw-bolder"
+                                                    name="location" [(ngModel)]="location" 
+                                                    placeholder="state">
+                                                    <option>-- Select --</option>
+                                                    <option value="In Home/School/Community">In Home/School/Community</option>
+                                                    <option value="In Home/Community">In Home/Community</option>
+                                                    <option value="In Home/School">In Home/School</option>
+                                                    <option value="In Home">In Home</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            
+                                            
+                                            <div class="col-12 mb-3 doctor-submit text-end">
+                                                <button class="btn btn-primary btn-sm" (click)="addDocument()">Update List</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 ">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>CPT  </th>
+                                                        <th>Description Service </th>
+                                                        <th># of Units /180 day period</th>
+                                                        <th>Breakdown per Week</th>
+                                                        <th>Location (Where Services are to be Delivered)</th>
+                                                        <th>update Location</th>
+                                                        <!-- <th>Option</th> -->
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let escalation of deEscalationopts; let i = index">
+                                                        <td>
+                                                            {{escalation.cpt}}
+                                                        </td>
+                                                        <td>
+                                                             {{escalation.description_service}}
+                                                        </td>
+                                                        <td>
+                                                             {{escalation.num_units}}
+                                                        </td>
+                                                        <td>
+                                                             {{escalation.breakdown_per_week}}
+                                                        </td>
+                                                        <td>
+                                                             {{escalation.location}}
+                                                        </td>
+                                                        <td>
+                                                            <select
+                                                            class="form-control form-select-solid fw-bolder"
+                                                            name="location_edit" [(ngModel)]="escalation.location" (change)="cambiarStatus(escalation)">
+                                                            <option>-- Select --</option>
+                                                            <option value="In Home/School/Community">In Home/School/Community</option>
+                                                            <option value="In Home/Community">In Home/Community</option>
+                                                            <option value="In Home/School">In Home/School</option>
+                                                            <option value="In Home">In Home</option>
+                                                              </select>
+                                                        </td>
+                                                        <td>
+                                                            
+                                                            <button class="btn btn-outline-danger btn-sm" (click)="deleteDocument(i)">x</button>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- documents -->
+                    
+                        
+                    </div>
+                    <!-- validaciones -->
+                    <div class="form-group row" *ngIf="text_success">
+                        <div class="col-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Exito!</strong>{{text_success}}.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"> </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf="text_validation">
+                        <div class="col-12">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>!</strong> {{ text_validation }}.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"> </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- validaciones -->
+                    
+                    <div class="col-12">
+                        <div class="doctor-submit text-end">
+                            <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                        </div>
+                    </div>
+                
+            </form>
+            
+        </div>
+    </div>
+        
+</div>
+<!-- fin other -->					

@@ -45,8 +45,11 @@ export class SustitutionGoalFormComponent {
   public goalReductionPatientIds:any = [];
   
   public goalmaladaptiveid:any;
-  public current_status!:any;
+  public current_sustitution!:any;
+  public description!:any;
+
   public golstoSustiution:any = [{}];
+  public golstoSustiutions:any = [{}];
   public golltoSustiution:any = [{}];
   public golsto_child:any = [{}];
   public gollto_child:any = [{}];
@@ -170,16 +173,17 @@ export class SustitutionGoalFormComponent {
       this.goalmaladaptiveid = resp.sustitutiongoalmaladaptive.data[0].id;
       // this.goalmaladaptive = resp.goalsmaladaptive || null;
       console.log('palabra maladaptive', this.goalmaladaptive);
-      this.current_status = this.goalSustitutions.current_status;
+      this.current_sustitution = this.goalmaladaptive[0].current_sustitution;
+      this.description = this.goalmaladaptive[0].description;
 
       if (this.goalmaladaptive == undefined) {
-        this.current_status = '';
+        this.current_sustitution = '';
         this.golstoSustiution = '';
         this.golltoSustiution = '';
       }else{
         
-        this.golstoSustiution = this.goalmaladaptive[0].goalstos;
-        console.log(this.golstoSustiution);
+        this.golstoSustiutions = this.goalmaladaptive[0].goalstos;
+        console.log(this.golstoSustiutions);
         this.golltoSustiution = this.goalmaladaptive[0].goalltos;
         console.log(this.golltoSustiution);
       }
@@ -269,13 +273,13 @@ export class SustitutionGoalFormComponent {
   back(){
     this.maladaptiveSelected = null;
     this.maladaptiveSelectedSon = null;
-    this.current_status = '';
+    this.current_sustitution = '';
     this.ngOnInit();
   }
 
-  saveGoal(){debugger
+  saveGoal(){
     this.text_validation = '';
-    // if(!this.maladaptive || !this.current_status || !this.golsto){
+    // if(!this.maladaptive || !this.current_sustitution || !this.golsto){
     //   this.text_validation = 'Is required this information ';
     //   return;
     // }
@@ -285,7 +289,7 @@ export class SustitutionGoalFormComponent {
       bip_id: this.bip_selectedIdd,
       maladaptive: this.maladaptiveSelected.maladaptive_behavior,
       patient_id: this.patient_id,
-      current_status: this.current_status,
+      current_sustitution: this.current_sustitution,
       goalstos: this.golstoSustiution,
       goalltos: this.golltoSustiution,
       client_id: this.client_id,
@@ -312,7 +316,7 @@ export class SustitutionGoalFormComponent {
   
         this.maladaptive = '';
         this.goal_id = '';
-        this.current_status = '';
+        this.current_sustitution = '';
       })
     }
 

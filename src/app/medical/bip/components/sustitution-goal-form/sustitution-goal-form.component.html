@@ -56,8 +56,10 @@
                     <form autocomplete="false">
                         <div class="row" >
         
-                            <h3 class="card-title">Sustitution Goals</h3>
+                            <h3 class="card-title">Skill Acquisition/Replacement Goals</h3>
                             <!-- goals form -->
+
+                            
                             
                             <!-- sto -->
                             <div class="row align-items-center" >
@@ -71,8 +73,14 @@
                             
                             <div class="col-xs-12 col-md-3 col-xl-3">
                                 <div class="form-group local-forms">
-                                    <label>Curren Status <span class="login-danger">*</span></label>
-                                    <input class="form-control"  name="current_status"   [(ngModel)]="current_status" type="text"  >
+                                    <label>Curren Sustitution <span class="login-danger">*</span></label>
+                                    <input class="form-control"  name="current_sustitution"   [(ngModel)]="current_sustitution" type="text"  >
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group local-forms">
+                                    <label>Description <span class="login-danger">*</span></label>
+                                    <textarea class="form-control" name="description" [(ngModel)]="description" rows="4" cols="30"></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -145,8 +153,8 @@
                                                         <th>date</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody *ngIf="goalmaladaptive !== null && current_status ">
-                                                    <tr *ngFor="let goalsto of golstoSustiution; let i = index">
+                                                <tbody >
+                                                    <tr *ngFor="let goalsto of golstoSustiutions; let i = index">
                                                         <td>
                                                             {{goalsto.sto}}
                                                         </td>
@@ -265,7 +273,7 @@
                                                         <th>date</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody *ngIf="goalmaladaptive !== null && current_status  ">
+                                                <tbody >
                                                     <tr *ngFor="let goallto of golltoSustiution; let i = index">
                                                         <td>
                                                             {{goallto.lto}}

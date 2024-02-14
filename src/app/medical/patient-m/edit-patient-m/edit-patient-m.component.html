@@ -451,6 +451,24 @@
                                 </div>
                                 <div class="col-12 col-sm-3">
                                     <div class="form-group local-forms">
+                                        <label>Eligibility<span class="login-danger">*</span></label>
+                                        <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="eligibility" [(ngModel)]="eligibility">
+                                            <option>-- Select --</option>
+                                            <option value="waiting">Waiting</option>
+                                            <option value="requested">Requested</option>
+                                            <option value="reviewing">Reviewing</option>
+                                            <option value="psycho eval">Psycho Eval</option>
+                                            <option value="need new">Need New</option>
+                                            <option value="2 insurance">2 insurance</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
                                         <label>MNL<span class="login-danger">*</span></label>
                                         <select
                                             class="form-control form-select-solid fw-bolder"

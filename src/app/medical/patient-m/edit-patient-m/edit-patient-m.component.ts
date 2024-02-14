@@ -87,6 +87,7 @@ export class EditPatientMComponent {
   public asd_diagnosis: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public cde: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public submitted: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public eligibility: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
 
   
 
@@ -278,6 +279,7 @@ showUser(){
         this.asd_diagnosis = this.patient_selected.asd_diagnosis;
         this.cde = this.patient_selected.cde;
         this.submitted = this.patient_selected.submitted;
+        this.eligibility = this.patient_selected.eligibility;
 
         //valores de la imagen y archivos
         this.IMAGE_PREVISUALIZA = this.patient_selected.avatar;
@@ -500,6 +502,9 @@ showUser(){
 
     if(this.welcome){
       formData.append('welcome', this.welcome);
+    }
+    if(this.eligibility){
+      formData.append('eligibility', this.eligibility);
     }
     if(this.consent){
       formData.append('consent', this.consent);

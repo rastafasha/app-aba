@@ -78,6 +78,7 @@ export class AddPatientMComponent {
   public asd_diagnosis: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public cde: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public submitted: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public eligibility: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
 
   public specialists:any = [];
   public locations:any = [];
@@ -343,6 +344,7 @@ export class AddPatientMComponent {
     formData.append('asd_diagnosis', this.asd_diagnosis);
     formData.append('cde', this.cde);
     formData.append('submitted', this.submitted);
+    formData.append('eligibility', this.eligibility);
 
     formData.append('rbt_id', this.selectedValue_rbt);
     formData.append('rbt2_id', this.selectedValue_rbt2);
