@@ -254,20 +254,20 @@ export class DataService {
         },
         
         {
-          menuValue: 'Employers',
+          menuValue: 'Employees',
           hasSubRoute: true,
           showSubRoute: false,
           base: 'doctor',
           img: 'assets/img/icons/menu-icon-02.svg',
           subMenus: [
             {
-              menuValue: 'Employer List',
+              menuValue: 'Employees List',
               route: routes.doctorsList,
               base: routes.doctorsList,
               permision: 'list_employers',
             },
             {
-              menuValue: 'Add Employer',
+              menuValue: 'Add Employe',
               route: routes.addDoctor,
               base: routes.addDoctor,
               permision: 'register_employer',

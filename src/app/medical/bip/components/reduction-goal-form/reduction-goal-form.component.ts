@@ -347,9 +347,9 @@ export class ReductionGoalFormComponent {
         this.ngOnInit();
         // this.getGoalsMaladaptives();
   
-        this.maladaptive = '';
-        this.goal_id = '';
-        this.current_status = '';
+        // this.maladaptive = '';
+        // this.goal_id = '';
+        // this.current_status = '';
       })
     }
 

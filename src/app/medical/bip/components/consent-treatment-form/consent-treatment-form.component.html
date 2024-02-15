@@ -46,14 +46,14 @@
                                 <label for="file" class="upload">Choose File</label>
                             </div>
                         </div>
-                        <div *ngIf="FILE_AVATAR">
-                            <img [src]="IMAGE_PREVISUALIZA" style="width: 250px;" alt="">
+                        <div *ngIf="FILE_SIGNATURE_ANAYST">
+                            <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_ANAYST" style="width: 250px;" alt="">
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-xl-6">
                         <div class="form-group local-forms">
                             <label >Analyst Signature date<span class="login-danger">*</span></label>
-                            <input class="form-control datetimepicker" name="birth_date" [(ngModel)]="analist_signature_date" type="text" matInput [matDatepicker]="pickerAnalyst"  >
+                            <input class="form-control datetimepicker" name="analyst_signature_date" [(ngModel)]="analyst_signature_date" type="text" matInput [matDatepicker]="pickerAnalyst"  >
                             <mat-datepicker #pickerAnalyst></mat-datepicker>
                             <mat-datepicker-toggle matIconSuffix [for]="pickerAnalyst"></mat-datepicker-toggle>
                         </div>
@@ -64,19 +64,19 @@
                         <div class="form-group local-top-form">
                             <label class="local-top">Parent/Guardian/Caregiver Signature: <span class="login-danger">*</span></label>
                             <div class="settings-btn upload-files-avator">
-                                <input type="file" accept="image/*" name="image" id="file" (change)="loadFile($event)" class="hide-input">
-                                <label for="file" class="upload">Choose File</label>
+                                <input type="file" accept="image/*" name="image_parent" id="file_parent" (change)="loadFile1($event)" class="hide-input">
+                                <label for="file_parent" class="upload">Choose File</label>
                             </div>
                         </div>
-                        <div *ngIf="FILE_AVATAR">
-                            <img [src]="IMAGE_PREVISUALIZA" style="width: 250px;" alt="">
+                        <div *ngIf="FILE_SIGNATURE_PARENT">
+                            <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_PARENT" style="width: 250px;" alt="">
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6 col-xl-6">
                         <div class="form-group local-forms">
                             <label >Guardian Signature day<span class="login-danger">*</span></label>
-                            <input class="form-control datetimepicker" name="birth_date" [(ngModel)]="guardian_signature_date" type="text" matInput [matDatepicker]="pickerGuardian"  >
+                            <input class="form-control datetimepicker" name="parent_guardian_signature_date" [(ngModel)]="parent_guardian_signature_date" type="text" matInput [matDatepicker]="pickerGuardian"  >
                             <mat-datepicker #pickerGuardian></mat-datepicker>
                             <mat-datepicker-toggle matIconSuffix [for]="pickerGuardian"></mat-datepicker-toggle>
                         </div>

@@ -45,14 +45,17 @@ export class SustitutionGoalFormComponent {
   public goalReductionPatientIds:any = [];
   
   public goalmaladaptiveid:any;
+
+  public goalSustitutionId:any;
+  public goalsustitid:any;
   public current_sustitution!:any;
   public description!:any;
 
-  public golstoSustiution:any = [{}];
-  public golstoSustiutions:any = [{}];
-  public golltoSustiution:any = [{}];
-  public golsto_child:any = [{}];
-  public gollto_child:any = [{}];
+ 
+  public golstoSustiutions:any = [];
+  public golltoSustiution:any = [];
+  public golsto_child:any = [];
+  public gollto_child:any = [];
 
   public client_id_goal:any;
   public goalid:any;
@@ -63,16 +66,16 @@ export class SustitutionGoalFormComponent {
   public maladaptive_child:any;
 
   //listas
-  public sto:any;
-  public decription_sto:any;
-  public lto:any;
-  public decription_lto:any;
+  public sustitution_sto:any;
+  public sustitution_decription_sto:any;
+  public sustitution_lto:any;
+  public sustitution_decription_lto:any;
   
-  public status_sto:any;
-  public status_sto_edit:any;
-  public status_lto:any;
-  public date_sto:Date ;
-  public date_lto:Date;
+  public sustitution_status_sto:any;
+  public sustitution_status_sto_edit:any;
+  public sustitution_status_lto:any;
+  public sustitution_date_sto:Date ;
+  public sustitution_date_lto:Date;
 
   constructor(
     public bipService:BipService,
@@ -143,6 +146,7 @@ export class SustitutionGoalFormComponent {
     this.goalSustitutionService.getGoalSustitutionbyPatientId(patient_id).subscribe((resp:any)=>{
       console.log('goals sustition by patientid',resp);
       this.goalSustitutions = resp.sustitutiongoalPatientIds.data[0];
+      this.goalSustitutionId = resp.sustitutiongoalPatientIds.data[0].id;
       this.client_id_goalSustitution = resp.sustitutiongoalPatientIds.data[0].client_id;
       // this.goals = resp.goalReductionPatientIds;
       // console.log(this.goals);
@@ -178,7 +182,7 @@ export class SustitutionGoalFormComponent {
 
       if (this.goalmaladaptive == undefined) {
         this.current_sustitution = '';
-        this.golstoSustiution = '';
+        this.golstoSustiutions = '';
         this.golltoSustiution = '';
       }else{
         
@@ -212,35 +216,35 @@ export class SustitutionGoalFormComponent {
 
   //listas
   addSTOGoal(){
-    this.golstoSustiution.push({
+    this.golstoSustiutions.push({
       maladaptive: this.maladaptiveSelected.maladaptive_behavior,
-      sto: this.sto,
-      status_sto: this.status_sto,
-      status_sto_edit: this.status_sto,
-      date_sto: this.date_sto,
-      decription_sto: this.decription_sto,
+      sustitution_sto: this.sustitution_sto,
+      sustitution_status_sto: this.sustitution_status_sto,
+      sustitution_status_sto_edit: this.sustitution_status_sto,
+      sustitution_date_sto: this.sustitution_date_sto,
+      sustitution_decription_sto: this.sustitution_decription_sto,
     })
-    this.sto = '';
-    this.status_sto = '';
-    this.status_sto_edit = '';
-    this.date_lto = null;
-    this.decription_sto = '';
+    this.sustitution_sto = '';
+    this.sustitution_status_sto = '';
+    this.sustitution_status_sto_edit = '';
+    this.sustitution_date_lto = null;
+    this.sustitution_decription_sto = '';
   }
 
   deleteSTOGoal(i:any){
-    this.golstoSustiution.splice(i,1);
+    this.golstoSustiutions.splice(i,1);
   }
   addLTOGoal(){
     this.golltoSustiution.push({
-      lto: this.lto,
-      status_lto: this.status_lto,
-      date_lto: this.date_lto,
-      decription_lto: this.decription_lto,
+      sustitution_lto: this.sustitution_lto,
+      sustitution_status_lto: this.sustitution_status_lto,
+      sustitution_date_lto: this.sustitution_date_lto,
+      sustitution_decription_lto: this.sustitution_decription_lto,
     })
-    this.lto = '';
-    this.status_lto = '';
-    this.date_lto = null;
-    this.decription_lto = '';
+    this.sustitution_lto = '';
+    this.sustitution_status_lto = '';
+    this.sustitution_date_lto = null;
+    this.sustitution_decription_lto = '';
   }
 
   deleteLTOGoal(i:any){
@@ -248,11 +252,11 @@ export class SustitutionGoalFormComponent {
   }
 
   cambiarStatus(goalsto:any){
-    this.status_sto_edit = goalsto;
-    console.log(this.status_sto_edit.status_sto);
+    this.sustitution_status_sto_edit = goalsto;
+    console.log(this.sustitution_status_sto_edit.status_sto);
 
     let data ={
-      goalstos: this.golstoSustiution,
+      goalstos: this.golstoSustiutions,
       goalltos: this.golltoSustiution,
     }
     
@@ -285,19 +289,20 @@ export class SustitutionGoalFormComponent {
     // }
 
     let data ={
-      id:this.goalmaladaptiveid,
+      id:this.goalsustitid,
       bip_id: this.bip_selectedIdd,
       maladaptive: this.maladaptiveSelected.maladaptive_behavior,
       patient_id: this.patient_id,
       current_sustitution: this.current_sustitution,
-      goalstos: this.golstoSustiution,
+      goalstos: this.golstoSustiutions,
       goalltos: this.golltoSustiution,
       client_id: this.client_id,
+      description: this.description,
     }
 
-    if(this.client_id_goal && this.goalmaladaptiveid){
+    if(this.client_id_goalSustitution && this.goalSustitutionId){
 
-      this.goalSustitutionService.editGoalSustitution(data, this.goalmaladaptiveid).subscribe((resp:any)=>{
+      this.goalSustitutionService.editGoalSustitution(data, this.goalSustitutionId).subscribe((resp:any)=>{
         // console.log(resp);
         // this.text_success = 'Goal Updated'
         Swal.fire('Updated', `Goal Sustitution Updated successfully!`, 'success');
@@ -308,15 +313,11 @@ export class SustitutionGoalFormComponent {
       
       this.goalSustitutionService.createGoalSustitution(data).subscribe((resp:any)=>{
         console.log(resp);
-        this.goalid = resp.id;
+        this.goalsustitid = resp.id;
         // this.text_success = 'Goal created successfully!'
         Swal.fire('Created', `Goal Sustitution Created successfully!`, 'success');
         this.ngOnInit();
         // this.getGoalsMaladaptives();
-  
-        this.maladaptive = '';
-        this.goal_id = '';
-        this.current_sustitution = '';
       })
     }
 
