@@ -153,8 +153,8 @@
                                                         <th>date</th>
                                                     </tr>
                                                 </thead>
-                                                <!-- *ngIf="goalmaladaptive !== null && current_sustitution " -->
-                                                <tbody >
+                                                    <!-- -->
+                                                <tbody  *ngIf="goalmaladaptive !== null && current_sustitution ">
                                                     <tr *ngFor="let goalsto of golstoSustiutions; let i = index">
                                                         <td>
                                                             {{goalsto.sustitution_sto}}

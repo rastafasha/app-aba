@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BipListComponent } from './bip-list/bip-list.component';
 import { ComponentsModule } from 'src/app/medical/bip/components/components.module';
+import { BipProfileComponent } from './bip-profile/bip-profile.component';
 
 
 @NgModule({
@@ -17,10 +18,13 @@ import { ComponentsModule } from 'src/app/medical/bip/components/components.modu
     BipComponent,
     BipattentionComponent,
     BipListComponent,
+    BipProfileComponent,
   ],
   exports: [
     BipComponent,
-    BipattentionComponent
+    BipattentionComponent,
+    BipListComponent,
+    BipProfileComponent,
   ],
   imports: [
     CommonModule,

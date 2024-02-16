@@ -38,6 +38,8 @@
                             <h4>Confirmation</h4>
                         </div>
                     </div>
+                    
+                    <!-- foto 1 -->
                     <div class="col-12 col-md-6 col-xl-6">
                         <div class="form-group local-top-form">
                             <label class="local-top">Analyst Signature <span class="login-danger">*</span></label>
@@ -46,10 +48,17 @@
                                 <label for="file" class="upload">Choose File</label>
                             </div>
                         </div>
+
+                        <!-- previsualizacion de la foto -->
                         <div *ngIf="FILE_SIGNATURE_ANAYST">
                             <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_ANAYST" style="width: 250px;" alt="">
                         </div>
+                        <div *ngIf="IMAGE_PREVISUALIZA_SIGNATURE_ANAYST_CREATED">
+                            <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_ANAYST_CREATED" style="width: 250px;" alt="">
+                        </div>
+                        <!-- previsualizacion de la foto -->
                     </div>
+
                     <div class="col-12 col-md-6 col-xl-6">
                         <div class="form-group local-forms">
                             <label >Analyst Signature date<span class="login-danger">*</span></label>
@@ -59,18 +68,23 @@
                         </div>
                     </div>
                     
-                    
+                    <!-- foto 2 -->
                     <div class="col-12 col-md-6 col-xl-6">
                         <div class="form-group local-top-form">
                             <label class="local-top">Parent/Guardian/Caregiver Signature: <span class="login-danger">*</span></label>
                             <div class="settings-btn upload-files-avator">
-                                <input type="file" accept="image/*" name="image_parent" id="file_parent" (change)="loadFile1($event)" class="hide-input">
-                                <label for="file_parent" class="upload">Choose File</label>
+                                <input type="file" accept="image/*" name="imagenn"  id="file1" (change)="loadFile1($event)" class="hide-input">
+                                <label for="file1" class="upload">Choose File</label>
                             </div>
                         </div>
+                        <!-- previsualizacion de la foto -->
                         <div *ngIf="FILE_SIGNATURE_PARENT">
                             <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_PARENT" style="width: 250px;" alt="">
                         </div>
+                        <div *ngIf="IMAGE_PREVISUALIZA_SIGNATURE_PARENT_CREATED">
+                            <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_PARENT_CREATED" style="width: 250px;" alt="">
+                        </div>
+                        <!-- previsualizacion de la foto -->
                     </div>
 
                     <div class="col-12 col-md-6 col-xl-6">

@@ -31,12 +31,16 @@ export class ConsentTreatmentFormComponent {
 
   public FILE_SIGNATURE_ANAYST:any;
   public IMAGE_PREVISUALIZA_SIGNATURE_ANAYST:any = 'assets/img/user-06.jpg';
+  public IMAGE_PREVISUALIZA_SIGNATURE_ANAYST_CREATED:any = 'assets/img/user-06.jpg';
   public FILE_SIGNATURE_PARENT:any;
   public IMAGE_PREVISUALIZA_SIGNATURE_PARENT:any = 'assets/img/user-06.jpg';
+  public IMAGE_PREVISUALIZA_SIGNATURE_PARENT_CREATED:any = 'assets/img/user-06.jpg';
 
   public consentToTreatments:any;
   public client_id_consentToTreatment:any;
   public consentToTreatmentid:any;
+  public analyst_signature:any;
+  public parent_guardian_signature:any;
 
   constructor(
     public bipService:BipService,
@@ -114,19 +118,20 @@ export class ConsentTreatmentFormComponent {
       this.parent_guardian_signature_date = this.consentToTreatments.parent_guardian_signature_date; 
       console.log(this.parent_guardian_signature_date);
       
-      this.IMAGE_PREVISUALIZA_SIGNATURE_ANAYST = this.consentToTreatments.analyst_signature;
+      this.IMAGE_PREVISUALIZA_SIGNATURE_ANAYST_CREATED = this.consentToTreatments.analyst_signature;
       
       // this.analyst_signature_date = this.consentToTreatments.analyst_signature_date ? new Date(this.consentToTreatments.analyst_signature_date).toISOString(): ''; 
       this.analyst_signature_date = this.consentToTreatments.analyst_signature_date ; 
       console.log(this.analyst_signature_date);
       
-      this.IMAGE_PREVISUALIZA_SIGNATURE_PARENT = this.consentToTreatments.parent_guardian_signature;
-      
-      
+      this.IMAGE_PREVISUALIZA_SIGNATURE_PARENT_CREATED = this.consentToTreatments.parent_guardian_signature;
+
       
     })
   }
 
+  
+  //funcion para la primera imagen.. funciona
   loadFile($event:any){
     if($event.target.files[0].type.indexOf("image")){
       this.text_validation = 'Solamente pueden ser archivos de tipo imagen';
@@ -140,8 +145,9 @@ export class ConsentTreatmentFormComponent {
     
   }
 
+  //funcion para la segunda  imagen.. no funciona
   loadFile1($event:any){
-    if($event.target.files[0].type.indexOf("image_parent")){
+    if($event.target.files[0].type.indexOf("image")){
       this.text_validation = 'Solamente pueden ser archivos de tipo imagen';
       return;
     }
@@ -162,32 +168,30 @@ export class ConsentTreatmentFormComponent {
     //   this.text_validation = 'Los campos con * son obligatorios';
     //   return;
     // }
-    
-
     // this.valid_form = false;
     let formData = new FormData();
 
     formData.append('parent_guardian_signature_date', this.parent_guardian_signature_date);
     formData.append('analyst_signature_date', this.analyst_signature_date);
-    
-    
     formData.append('patient_id', this.patient_id);
     formData.append('client_id', this.client_id);
 
     if(this.bip_selectedIdd){
       formData.append('bip_id', this.bip_selectedIdd);
     }
-    if(this.FILE_SIGNATURE_ANAYST){
-      formData.append('analyst_signature', this.FILE_SIGNATURE_ANAYST);
-    }
-    if(this.FILE_SIGNATURE_PARENT){
-      formData.append('parent_guardian_signature', this.FILE_SIGNATURE_PARENT);
+
+    // condiciones para revisar si viene o no la foto
+    formData.append('imagen', this.FILE_SIGNATURE_ANAYST);
+    if(this.analyst_signature){
     }
 
-    
+    // condiciones para revisar si viene o no la foto... no funciona
+    formData.append('imagenn', this.FILE_SIGNATURE_PARENT);
+    if(this.parent_guardian_signature){
+    }
+
     this.valid_form_success = false;
     this.text_validation = '';
-
 
     if(this.client_id_consentToTreatment && this.consentToTreatmentid){
 

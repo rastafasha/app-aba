@@ -127,6 +127,9 @@
                     <li>
                         <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 10}" (click)="optionSelected(10)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Consent to Treatment</a>
                     </li>
+                    <li>
+                        <a [routerLink]="['/bip/profile/', patient_id]"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>View BIP</a>
+                    </li>
                 </ul>
             </div>
             <ng-container *ngIf="option_selected == 1">

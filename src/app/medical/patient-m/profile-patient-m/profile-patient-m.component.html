@@ -6,22 +6,22 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/patients/list">Patients </a></li>
+                        <li class="breadcrumb-item"><a routerLink="/patients/list">Clients </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Patient Profile</li>
+                        <li class="breadcrumb-item active">Client Profile</li>
                     </ul>
                 </div>
             </div>
         </div>
         <!-- /Page Header -->
-        <div class="row">
+        <div class="row" id="contentToConvert" #contentToConvert>
             <div class="col-sm-12" *ngIf="patient_selected">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="about-info mb-10">
-                                    <h4>Patients Profile </h4>
+                                    <h4>Client Profile </h4>
                                 </div>
                                 <div class="doctor-profile-head">
                                     <!-- <div class="profile-bg-img">
@@ -35,12 +35,12 @@
                                                         <img src="./assets/img/no-image.jpg" >
                                                     </div>
                                                     <div *ngIf="patient_selected.avatar">
-                                                        <img  [src]="patient_selected.avatar"  [alt]="patient_selected.name">
+                                                        <img  src="{{imagenSerUrl}}{{patient_selected.avatar}}"  [alt]="patient_selected.first_name">
                                                     </div>
                                                 </div>
                                                 <div class="names-profiles">
-                                                    <h4>{{patient_selected.full_name}}</h4>
                                                     <h5>Client</h5>
+                                                    <h4>{{patient_selected.first_name}}</h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -55,16 +55,14 @@
                                                     <h4>{{patient_selected.diagnosis_code}}</h4>
                                                 </div>
                                                 <div class="doctor-follows">
-                                                    <h5>Eligibility</h5>
+                                                    <h5>Status</h5>
                                                     <!-- <h4>{{eligibility}}</h4> -->
-                                                    <span class="badge bg-danger"
-                                                        *ngIf="patient_selected.eligibility === 'inactive'">Inactive</span>
-                                                    <span class="badge bg-success"
-                                                        *ngIf="patient_selected.eligibility === 'active'">Active</span>
                                                     <span class="badge bg-primary"
-                                                        *ngIf="patient_selected.eligibility === 'incoming'">Incoming</span>
+                                                        *ngIf="patient_selected.status === 'pending'">Pendig</span>
+                                                    <span class="badge bg-success"
+                                                        *ngIf="patient_selected.status === 'yes'">Yes</span>
                                                     <span class="badge bg-dark"
-                                                        *ngIf="patient_selected.eligibility === 'black list'">Black list</span>
+                                                        *ngIf="patient_selected.status === 'no'">No</span>
 
                                                 </div>
                                             </div>
@@ -301,7 +299,7 @@
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Full Name</h2>
-                                                        <h3>{{patient_selected.full_name}}</h3>
+                                                        <h3>{{patient_selected.first_name }} {{patient_selected.last_name }}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
@@ -395,31 +393,31 @@
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>RBT</h2>
-                                                        <h3>{{patient_selected.rbt}}</h3>
+                                                        <h3>{{patient_selected.rbt_id}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>RBT 2 </h2>
-                                                        <h3>{{patient_selected.rbt2}}</h3>
+                                                        <h3>{{patient_selected.rbt2_id}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>BCBA </h2>
-                                                        <h3>{{patient_selected.bcba}}</h3>
+                                                        <h3>{{patient_selected.bcba_id}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>BCBA 2</h2>
-                                                        <h3>{{patient_selected.bcba2}}</h3>
+                                                        <h3>{{patient_selected.bcba2_id}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Clinical Director</h2>
-                                                        <h3>{{patient_selected.clin_director}}</h3>
+                                                        <h3>{{patient_selected.clin_director_id}}</h3>
                                                     </div>
                                                 </div>
                                                
@@ -476,7 +474,7 @@
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Insurer </h2>
-                                                        <h3>{{patient_selected.insurer}}</h3>
+                                                        <h3>{{insurer_name}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
@@ -605,41 +603,41 @@
                                                     <table class="table mb-0">
                                                         <thead>
                                                             <tr>
-                                                                <th><h2 style="font-size: 13px;">PA Assessment</h2></th>
-                                                                <th><h2 style="font-size: 13px;">Patient Assesment Start Date</h2></th>
-                                                                <th><h2 style="font-size: 13px;">Patient Assesment End Date</h2></th>
-                                                                <th><h2 style="font-size: 13px;">PA Services</h2></th>
-                                                                <th><h2 style="font-size: 13px;">Patient Services Start Date</h2></th>
-                                                                <th><h2 style="font-size: 13px;">Patient Services End Date</h2></th>
-                                                                <th><h2 style="font-size: 13px;">cpt</h2></th>
-                                                                <th><h2 style="font-size: 13px;">n units</h2></th>
+                                                                <th><h2 style="font-size: 12px;font-weight: 500;">PA Assessment</h2></th>
+                                                                <th><h2 style="font-size: 12px;font-weight: 500;">Patient Assesment Start Date</h2></th>
+                                                                <th><h2 style="font-size: 12px;font-weight: 500;">Patient Assesment End Date</h2></th>
+                                                                <th><h2 style="font-size: 12px;font-weight: 500;">PA Services</h2></th>
+                                                                <th><h2 style="font-size: 12px;font-weight: 500;">Patient Services Start Date</h2></th>
+                                                                <th><h2 style="font-size: 12px;font-weight: 500;">Patient Services End Date</h2></th>
+                                                                <th><h2 style="font-size: 12px;font-weight: 500;">cpt</h2></th>
+                                                                <th><h2 style="font-size: 12px;font-weight: 500;">n units</h2></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr *ngFor="let pa_asses of pa_assessments; let i = index">
+                                                            <tr *ngFor="let pa_asses of pa_assessmentgroup; let i = index">
                                                                 <td>
-                                                                    {{pa_asses.pa_assessment}}
+                                                                    <h3 style="font-size: 12px;color:rgba(51, 53, 72, 0.5);font-weight: 500;">{{pa_asses.pa_assessment}}</h3>
                                                                 </td>
                                                                 <td>
-                                                                     {{pa_asses.pa_assessment_start_date}}
+                                                                     <h3 style="font-size: 12px;color:rgba(51, 53, 72, 0.5);font-weight: 500;">{{pa_asses.pa_assessment_start_date | date}}</h3>
                                                                 </td>
                                                                 <td>
-                                                                    {{pa_asses.pa_assessment_end_date}}
+                                                                    <h3 style="font-size: 12px;color:rgba(51, 53, 72, 0.5);font-weight: 500;">{{pa_asses.pa_assessment_end_date | date}}</h3>
                                                                 </td>
                                                                 <td>
-                                                                    {{pa_asses.pa_services}}
+                                                                    <h3 style="font-size: 12px;color:rgba(51, 53, 72, 0.5);font-weight: 500;">{{pa_asses.pa_services}}</h3>
                                                                 </td>
                                                                 <td>
-                                                                     {{pa_asses.pa_services_start_date}}
+                                                                     <h3 style="font-size: 12px;color:rgba(51, 53, 72, 0.5);font-weight: 500;">{{pa_asses.pa_services_start_date | date}}</h3>
                                                                 </td>
                                                                 <td>
-                                                                     {{pa_asses.pa_services_end_date}}
+                                                                     <h3 style="font-size: 12px;color:rgba(51, 53, 72, 0.5);font-weight: 500;">{{pa_asses.pa_services_end_date | date}}</h3>
                                                                 </td>
                                                                 <td>
-                                                                    {{pa_asses.cpt}}
+                                                                    <h3 style="font-size: 12px;color:rgba(51, 53, 72, 0.5);font-weight: 500;">{{pa_asses.cpt}}</h3>
                                                                 </td>
                                                                 <td>
-                                                                    {{pa_asses.n_units}}
+                                                                    <h3 style="font-size: 12px;color:rgba(51, 53, 72, 0.5);font-weight: 500;">{{pa_asses.n_units}}</h3>
                                                                 </td>
                                                             </tr>
                                                             
@@ -652,7 +650,7 @@
                                     
                                 </div>
                             </div>
-                            <div class="card">
+                            <!-- <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title ">Maladaptives</h4>
                                 </div>
@@ -668,7 +666,7 @@
                                                     <th></th>
                                                 </tr>
                                             </thead>
-                                            <!-- <tbody>
+                                            <tbody>
                                                 <tr *ngFor="let data of appointment_pendings">
                                                     
                                                     <td >{{data.date_appointment_format}}</td>
@@ -690,11 +688,11 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </tbody> -->
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

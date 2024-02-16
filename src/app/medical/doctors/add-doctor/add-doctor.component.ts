@@ -113,18 +113,18 @@ export class AddDoctorComponent {
   }
 
   loadFileSignature($event:any){
-    if($event.target.files[0].type.indexOf("signature")){
+    if($event.target.files[0].type.indexOf("image")){
       this.text_validation = 'Solamente pueden ser archivos de tipo imagen';
       return;
     }
     this.text_validation = '';
     this.FILE_SIGNATURE = $event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(this.FILE_SIGNATURE);
-    reader.onloadend = ()=> this.IMAGE_PREVISUALIZA_SIGNATURE = reader.result;
+    let reader2 = new FileReader();
+    reader2.readAsDataURL(this.FILE_SIGNATURE);
+    reader2.onloadend = ()=> this.IMAGE_PREVISUALIZA_SIGNATURE = reader2.result;
   }
 
-  save(){
+  save(){debugger
     this.text_validation = '';
     if(!this.name||!this.email ||!this.surname ){
       this.text_validation = 'Los campos con * son obligatorios';
@@ -152,7 +152,7 @@ export class AddDoctorComponent {
     formData.append('role_id', this.selectedValue);
     formData.append('location_id', this.selectedValueLocation);
     formData.append('imagen', this.FILE_AVATAR);
-    // formData.append('electronic_signature', this.FILE_SIGNATURE);
+    formData.append('imagenn', this.FILE_SIGNATURE);
     
     formData.append('currently_pay_through_company', this.currently_pay_through_company);
     formData.append('llc', this.llc);

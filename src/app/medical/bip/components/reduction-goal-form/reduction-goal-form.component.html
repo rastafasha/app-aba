@@ -145,7 +145,7 @@
                                                         <th>date</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody *ngIf="goalmaladaptive !== null && current_status ">
+                                                <tbody *ngIf="goalReductions !== null || goalReductionId !== undefined && current_status ">
                                                     <tr *ngFor="let goalsto of golsto; let i = index">
                                                         <td>
                                                             {{goalsto.sto}}

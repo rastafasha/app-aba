@@ -182,6 +182,7 @@ export class EditDoctorComponent {
     reader.readAsDataURL(this.FILE_AVATAR);
     reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
   }
+
   loadFileSignature($event:any){
     if($event.target.files[0].type.indexOf("image")){
       this.text_validation = 'Solamente pueden ser archivos de tipo imagen';
@@ -189,14 +190,14 @@ export class EditDoctorComponent {
     }
     this.text_validation = '';
     this.FILE_SIGNATURE = $event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(this.FILE_SIGNATURE);
-    reader.onloadend = ()=> this.IMAGE_PREVISUALIZA_SIGNATURE = reader.result;
+    let reader2 = new FileReader();
+    reader2.readAsDataURL(this.FILE_SIGNATURE);
+    reader2.onloadend = ()=> this.IMAGE_PREVISUALIZA_SIGNATURE = reader2.result;
   }
 
   
 
-  save(){
+  save(){debugger
     this.text_validation = '';
     this.text_success = '';
     if(!this.name||!this.email ||!this.surname ){
@@ -220,6 +221,15 @@ export class EditDoctorComponent {
     formData.append('email', this.email);
     formData.append('birth_date', this.birth_date);
     formData.append('gender', this.gender+'');
+
+    this.FILE_AVATAR  = this.IMAGE_PREVISUALIZA;
+    if(this.FILE_AVATAR ){
+      formData.append('imagen', this.FILE_AVATAR);
+    }
+    // this.FILE_SIGNATURE  = this.IMAGE_PREVISUALIZA_SIGNATURE;
+    formData.append('imagenn', this.FILE_SIGNATURE);
+    if(this.FILE_SIGNATURE ){
+    }
 
     if(this.selectedValue ){
       formData.append('role_id', this.selectedValue);
@@ -345,14 +355,7 @@ export class EditDoctorComponent {
     }    
     
   
-    this.FILE_AVATAR  = this.IMAGE_PREVISUALIZA;
-    if(this.FILE_AVATAR ){
-      formData.append('imagen', this.FILE_AVATAR);
-    }
-    // this.FILE_SIGNATURE  = this.IMAGE_PREVISUALIZA_SIGNATURE;
-    // if(this.FILE_SIGNATURE ){
-    //   formData.append('electronic_signature', this.FILE_SIGNATURE);
-    // }
+    
 
     this.doctorService.editDoctor(formData, this.doctor_id).subscribe((resp:any)=>{
       // console.log(resp);

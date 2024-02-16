@@ -45,6 +45,7 @@ export class SustitutionGoalFormComponent {
   public goalReductionPatientIds:any = [];
   
   public goalmaladaptiveid:any;
+  public goalmaladaptive_clientId:any;
 
   public goalSustitutionId:any;
   public goalsustitid:any;
@@ -76,6 +77,8 @@ export class SustitutionGoalFormComponent {
   public sustitution_status_lto:any;
   public sustitution_date_sto:Date ;
   public sustitution_date_lto:Date;
+  
+  public arrayFk:any;
 
   constructor(
     public bipService:BipService,
@@ -96,6 +99,7 @@ export class SustitutionGoalFormComponent {
       this.client_id = resp.id;// la respuesta se comienza a relacionar  en este momento con un cliente especifico
       this.getProfileBip(); // se solicita la info del perfil del usuario
       // this.getGoalbyPatient(); // se solicita la info del perfil del usuario
+      console.log(this.client_id);
     })
     
     
@@ -145,11 +149,16 @@ export class SustitutionGoalFormComponent {
   getPatientGoalSustitutions(patient_id){
     this.goalSustitutionService.getGoalSustitutionbyPatientId(patient_id).subscribe((resp:any)=>{
       console.log('goals sustition by patientid',resp);
-      this.goalSustitutions = resp.sustitutiongoalPatientIds.data[0];
-      this.goalSustitutionId = resp.sustitutiongoalPatientIds.data[0].id;
+      this.goalSustitutions = resp.sustitutiongoalPatientIds.data[0] ==""?[] : resp.sustitutiongoalPatientIds.data ;
+      this.goalSustitutionId = resp.sustitutiongoalPatientIds.data[0].id || undefined;
       this.client_id_goalSustitution = resp.sustitutiongoalPatientIds.data[0].client_id;
       // this.goals = resp.goalReductionPatientIds;
       // console.log(this.goals);
+
+      this.golstoSustiutions = this.goalSustitutions[0].goalstos;
+        console.log(this.golstoSustiutions);
+        this.golltoSustiution = this.goalSustitutions[0].goalltos;
+        console.log(this.golltoSustiution);
       
       
     })
@@ -170,32 +179,54 @@ export class SustitutionGoalFormComponent {
   //obtenemos los goals del maladaptive por nombre
   //obtenemos los maladaptives iniciales para poder relacionarlos con los goals
   getGoalsMaladaptives(){
-    this.goalSustitutionService.listMaladaptivesGoalSustitutions(this.maladaptiveSelected.maladaptive_behavior).subscribe((resp:any)=>{
-      console.log( resp);
+    this.goalSustitutionService.listMaladaptivesGoalSustitutions(this.maladaptiveSelected.maladaptive_behavior)
+    .subscribe((resp:any)=>{
+      // console.log( resp);
+      // console.log('palabra maladaptive', this.goalmaladaptive);
       
       this.goalmaladaptive = resp.sustitutiongoalmaladaptive.data;
       this.goalmaladaptiveid = resp.sustitutiongoalmaladaptive.data[0].id;
-      // this.goalmaladaptive = resp.goalsmaladaptive || null;
-      console.log('palabra maladaptive', this.goalmaladaptive);
+      this.goalmaladaptive_clientId = resp.sustitutiongoalmaladaptive.data[0].client_id;
+
+      
       this.current_sustitution = this.goalmaladaptive[0].current_sustitution;
       this.description = this.goalmaladaptive[0].description;
 
-      if (this.goalmaladaptive == undefined) {
+
+      console.log(this.goalmaladaptive_clientId); //devuelve el client_id guardado
+
+      //si el client_id guardado no es igual al que se esta viendo en este momento, 
+      //debe traer su informacion     
+      //comparamos si es igual al que tiene session activa, si no lo es 
+      if (this.client_id === this.goalmaladaptive_clientId  ) {
+        //si no existe no recibe nada..pero esta trayendo cosas de otras personas     
+        console.log('son iguales');
+
+      }else{
+        console.log('No son iguales');
+
+      }
+      // aqui si no hay goalmaladaptive o es undefined no traigas nada para evitar el error en consola
+      if (this.goalmaladaptive == undefined && this.client_id === this.goalmaladaptive_clientId ) {
         this.current_sustitution = '';
         this.golstoSustiutions = '';
         this.golltoSustiution = '';
       }else{
+        // this.golstoSustiutions = this.goalmaladaptive[0].goalstos;
+        // console.log(this.golstoSustiutions);
+        // this.golltoSustiution = this.goalmaladaptive[0].goalltos;
+        // console.log(this.golltoSustiution);
         
-        this.golstoSustiutions = this.goalmaladaptive[0].goalstos;
-        console.log(this.golstoSustiutions);
-        this.golltoSustiution = this.goalmaladaptive[0].goalltos;
-        console.log(this.golltoSustiution);
       }
+      
+      
+      
 
       this.ngOnInit();
     },);
 
   }
+
 
   //selectores seleccionamos el grafico del maladaptive de la lista
   selectedMaladaptiveSon(maladap:any){
@@ -204,7 +235,7 @@ export class SustitutionGoalFormComponent {
     this.getGoalsSonMaladaptives();
   }
   
-  deleteMaladaptiveSon(goalsto:any){debugger
+  deleteMaladaptiveSon(goalsto:any){
     // this.maladaptiveSelectedSon.splice(i,1);
     this.goalSustitutionService.deleteGoalSustitution(goalsto.id).subscribe((resp:any)=>{
       // alert("Se elimino el objetivo");

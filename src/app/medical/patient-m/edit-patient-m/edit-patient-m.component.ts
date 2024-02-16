@@ -208,11 +208,7 @@ showUser(){
     this.patientService.getPatient(this.client_id).subscribe((resp:any)=>{
       console.log(resp);
       this.patient_selected = resp.patient;
-      this.pa_assessmentss = resp.pa_assessments;// ?
-      let jsonObj = JSON.parse(this.pa_assessmentss);
-      // console.log(jsonObj);
-      this.pa_assessmentgroup = jsonObj;
-      // console.log(this.pa_assessmentgroup);
+      
       
       //valores de los selectores
         this.selectedValueLocation = this.patient_selected.location_id;
@@ -284,6 +280,9 @@ showUser(){
         //valores de la imagen y archivos
         this.IMAGE_PREVISUALIZA = this.patient_selected.avatar;
 
+        this.pa_assessmentss = resp.pa_assessments;// ?
+        let jsonObj = JSON.parse(this.pa_assessmentss) || '';
+        this.pa_assessmentgroup = jsonObj;
 
         this.insuranceData(this.selectedValueInsurer);//pide el insurance guardado para el request de la lista inicial
     })

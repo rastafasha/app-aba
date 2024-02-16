@@ -131,7 +131,7 @@ getDoctor(){
       pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
 
       // Save the PDF
-      pdf.save('employee.pdf');
+      pdf.save('employee_'+this.doctor_selected.name+'_'+this.doctor_selected.surname+".pdf");
     });
   }
     

@@ -1,13 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Sort } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from 'src/app/shared/data/data.service';
-import { patientProfile } from 'src/app/shared/models/models';
 import { routes } from 'src/app/shared/routes/routes';
 import { PatientMService } from '../service/patient-m.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { environment } from 'src/environments/environment';
+import { InsuranceService } from '../../insurance/service/insurance.service';
 @Component({
   selector: 'app-profile-patient-m',
   templateUrl: './profile-patient-m.component.html',
@@ -32,10 +31,30 @@ public pa_assessments: any =[];
 public text_success:string = '';
 public text_validation:string = '';
 
+imagenSerUrl = environment.url_media;
+public pa_assessmentgroup: any= [];
+public pa_assessmentss: any = <any>[];
+
+public specialists:any = [];
+  public locations:any = [];
+  public insurances:any = [];
+  public insurance_id:any ;
+  public roles_rbt:any ;
+  public roles_bcba:any ;
+  public insuranceiddd:any ;
+  public insurer_name:any ;
+
+  public rbt_id: any;
+  public rbt2_id: any;
+  public bcba_id: any;
+  public bcba2_id: any;
+  public clin_director_id: any;
+
 constructor(
   public patientService : PatientMService,
   public activatedRoute: ActivatedRoute,
   public doctorService: DoctorService,
+  public insuranceService: InsuranceService,
   )
 {
 }
@@ -47,6 +66,25 @@ ngOnInit(): void {
     this.patient_id = resp.id;
   });
   this.getPatient();
+  this.getConfig();
+}
+
+getConfig(){
+  this.patientService.listConfig().subscribe((resp:any)=>{
+    console.log(resp);
+    this.specialists = resp.specialists;
+    this.insurances = resp.insurances;
+    this.insurance_id = resp.insurances.length > 0 ? resp.insurances[0].id : '';
+    this.locations = resp.locations;
+    
+    this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
+      // console.log(resp);
+      this.insuranceiddd= resp.id;
+      this.insurer_name = resp.insurer_name;
+
+      
+    })
+  })
 }
 
 getPatient(){
@@ -57,8 +95,16 @@ getPatient(){
     this.money_of_appointments= resp.money_of_appointments;
     this.num_appointment_pendings= resp.num_appointment_pendings;
     this.patient_selected= resp.patient;
+
+    this.rbt_id = resp.specialists;
+    this.rbt2_id = resp.specialists;
+    this.bcba_id = resp.specialists;
+    this.bcba2_id = resp.specialists;
+    this.clin_director_id = resp.specialists;
     // this.appointment_pendings= resp.appointment_pendings.data;
-    this.pa_assessments= resp.patient.pa_assessments;
+    this.pa_assessmentss = resp.pa_assessments;
+        let jsonObj = JSON.parse(this.pa_assessmentss) || '';
+        this.pa_assessmentgroup = jsonObj;
 
 
   })
@@ -85,7 +131,7 @@ getPatient(){
       pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
 
       // Save the PDF
-      pdf.save('client.pdf');
+      pdf.save('client_'+this.patient_selected.first_name+'_'+this.patient_selected.last_name+".pdf");
     });
   }
 }

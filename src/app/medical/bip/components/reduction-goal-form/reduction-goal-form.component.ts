@@ -76,6 +76,10 @@ export class ReductionGoalFormComponent {
   goal_selected:any;
   goalsbybipid:any;
   goals:any = [];
+  goalReductions:any = [];
+
+  goalmaladaptive_clientId:any;
+  goalReductionId:any;
 
 
   constructor(
@@ -144,11 +148,17 @@ export class ReductionGoalFormComponent {
   //si existe enviamos el client_id_goal para actualizar el goal del paciente
   getPatientGoals(patient_id){
     this.goalService.getGoalbyPatientId(patient_id).subscribe((resp:any)=>{
-      // console.log('goals by patientid',resp);
-      this.goals = resp.goalReductionPatientIds.data[0];
+      console.log('goals by patientid',resp);
+      this.goalReductions = resp.goalReductionPatientIds.data[0] ==""?[] : resp.goalReductionPatientIds.data;
+      this.goalReductionId = resp.goalReductionPatientIds.data[0].id || undefined;
       this.client_id_goal = resp.goalReductionPatientIds.data[0].client_id;
       // this.goals = resp.goalReductionPatientIds;
       // console.log(this.goals);
+
+      this.golsto = this.goalReductions[0].goalstos;
+        console.log(this.golsto);
+        this.gollto = this.goalReductions[0].goalltos;
+        console.log(this.gollto);
       
       
     })
@@ -158,7 +168,7 @@ export class ReductionGoalFormComponent {
   getGoalbyPatient(){
     
     this.goalService.getGoalbyPatientId(this.client_id).subscribe((resp:any)=>{
-      // console.log('goal', resp);
+      
       this.goalpatient_selected = resp;//convertimos la respuesta en un variable
       this.goalid = resp.id; //convertimos la respuesta en un variable
 
@@ -200,28 +210,46 @@ export class ReductionGoalFormComponent {
     this.goalService.listMaladaptivesGoals(this.maladaptiveSelected.maladaptive_behavior).subscribe((resp:any)=>{
       // console.log( resp);
       
+      console.log('palabra maladaptive', this.goalmaladaptive);
       this.goalmaladaptive = resp.goalsmaladaptive.data;
       this.goalmaladaptiveid = resp.goalsmaladaptive.data[0].id;
-      // this.goalmaladaptive = resp.goalsmaladaptive || null;
-      console.log('palabra maladaptive', this.goalmaladaptive);
+      this.goalmaladaptive_clientId = resp.goalsmaladaptive.data[0].client_id;
+      
       this.current_status = this.goalmaladaptive[0].current_status;
+      
 
-      if (this.goalmaladaptive == undefined) {
+      console.log(this.goalmaladaptive_clientId); //devuelve el client_id guardado
+
+      //si el client_id guardado no es igual al que se esta viendo en este momento, 
+      //debe traer su informacion     
+      //comparamos si es igual al que tiene session activa, si no lo es 
+      if (this.client_id === this.goalmaladaptive_clientId  ) {
+        //si no existe no recibe nada..pero esta trayendo cosas de otras personas     
+        console.log('son iguales');
+
+      }else{
+        console.log('No son iguales');
+
+      }
+      // aqui si no hay goalmaladaptive o es undefined no traigas nada para evitar el error en consola
+      if (this.goalmaladaptive == undefined && this.client_id === this.goalmaladaptive_clientId ) {
         this.current_status = '';
         this.golsto = '';
         this.gollto = '';
       }else{
+        // this.golsto = this.goalmaladaptive[0].goalstos;
+        // console.log(this.golsto);
+        // this.gollto = this.goalmaladaptive[0].goalltos;
+        // console.log(this.gollto);
         
-        this.golsto = this.goalmaladaptive[0].goalstos;
-        console.log(this.golsto);
-        this.gollto = this.goalmaladaptive[0].goalltos;
-        console.log(this.gollto);
       }
+
 
       this.ngOnInit();
     },);
 
   }
+
 
   //selectores seleccionamos el grafico del maladaptive de la lista
   selectedMaladaptiveSon(maladap:any){

@@ -1,0 +1,328 @@
+<div class="page-wrapper" >
+    <div class="content">
+    
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/patients/list">Clients </a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item active">BIP Profile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        <div class="row" id="contentToConvert" #contentToConvert>
+            <div class="col-sm-12" *ngIf="patient_selected">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="about-info mb-10">
+                                    <h4>BIP Profile </h4>
+                                </div>
+                                <!-- tope -->
+                                <div class="doctor-profile-head">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="profile-user-box">
+                                                <div class="profile-user-img">
+                                                    <div *ngIf="!patient_selected.avatar || patient_selected.avatar == null ">
+                                                        <img src="./assets/img/no-image.jpg" >
+                                                    </div>
+                                                    <div *ngIf="patient_selected.avatar">
+                                                        <img  src="{{imagenSerUrl}}{{patient_selected.avatar}}"  [alt]="patient_selected.first_name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 d-flex align-items-center">
+                                            <!-- <div class="follow-group">
+                                                <div class="doctor-follows">
+                                                    <h5>Patient ID</h5>
+                                                    <h4>{{patient_selected.patient_id}}</h4>
+                                                </div>
+                                                <div class="doctor-follows">
+                                                    <h5>diagnosis_code</h5>
+                                                    <h4>{{patient_selected.diagnosis_code}}</h4>
+                                                </div>
+                                                <div class="doctor-follows">
+                                                    <h5>Status</h5>
+                                                    <h4>{{status}}</h4>
+                                                    <span class="badge bg-primary"
+                                                        *ngIf="patient_selected.status === 'pending'">Pendig</span>
+                                                    <span class="badge bg-success"
+                                                        *ngIf="patient_selected.status === 'yes'">Yes</span>
+                                                    <span class="badge bg-dark"
+                                                        *ngIf="patient_selected.status === 'no'">No</span>
+
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 d-flex align-items-center">
+                                            <div class="follow-btn-group">
+                                                <a [routerLink]="['/bip/attention/', patient_selected.id]" class="btn btn-info follow-btns">Edit</a>
+                                                <button class="btn btn-info follow-btns" (click)="convertToPdf()">Save PDF</button>
+                                                <!-- <button type="submit" class="btn btn-info message-btns">Message</button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- tope -->
+                            </div>								
+                        </div>
+                    </div>
+                </div>
+                <!-- data client -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="personal-list-out">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Name</h2>
+                                                <h3>{{patient_selected.first_name}} {{patient_selected.last_name}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Patient Id</h2>
+                                                <h3>{{patient_selected.patient_id}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Birth Day </h2>
+                                                <h3>{{patient_selected.birth_date}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Age </h2>
+                                                <h3>{{patient_selected.age}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Phone</h2>
+                                                <h3>{{patient_selected.phone}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Address</h2>
+                                                <h3>{{patient_selected.address}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Type of Assessment</h2>
+                                                <h3>
+                                                    <span 
+                                                        *ngIf="bip_selected.type_of_assessment === 1">Innitial</span>
+                                                    <span 
+                                                        *ngIf="bip_selected.type_of_assessment === 2">Reassestment</span>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- data client end-->
+                <!-- documents Reviewed-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="personal-list-out">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="about-info mb-10">
+                                        <h4>Documents Reviewed</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="detail-personal">
+                                                <h2>Document Title</h2>
+                                                <h3>{{bip_selected.documents_reviewed.document_title}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="detail-personal">
+                                                <h2>Document Status</h2>
+                                                <h3>{{bip_selected.documents_reviewed.document_status}}</h3>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- documents Reviewed end-->
+                <!-- Background Information-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="personal-list-out">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="about-info mb-10">
+                                        <h4>Information</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 ">
+                                            <div class="detail-personal">
+                                                <h2>Background Information</h2>
+                                                <h3>{{bip_selected.background_information}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Previous treatments and results</h2>
+                                                <h3>{{bip_selected.previus_treatment_and_result}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Current treatment and progress </h2>
+                                                <h3>{{bip_selected.current_treatment_and_progress}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Education status</h2>
+                                                <h3>{{bip_selected.education_status}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="detail-personal">
+                                                <h2>Physical and Medical Status</h2>
+                                                <h3>{{bip_selected.phisical_and_medical_status}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Background Information end-->
+
+                <!-- Maladaptives Behaviors-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="personal-list-out">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="about-info mb-10">
+                                        <h4>Maladaptives Behaviors</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="detail-personal">
+                                                <h2>Behavior</h2>
+                                                <h3>{{bip_selected.maladaptives.maladaptive_behavior}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="detail-personal">
+                                                <h2>Topografical Definition </h2>
+                                                <h3>{{bip_selected.maladaptives.topografical_definition}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="detail-personal">
+                                                <h2>Initial Interesting</h2>
+                                                <h3>{{bip_selected.maladaptives.initial_interesting}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Maladaptives Behaviors end-->
+
+                <!-- Assestment Conducted-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="personal-list-out">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="about-info mb-10">
+                                        <h4>Assestment Conducted</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="detail-personal">
+                                                <h2>Assestment Conducted</h2>
+                                                <h3>{{bip_selected.assestment_conducted}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="detail-personal">
+                                                <h2>Documents Reviewed </h2>
+                                                <h3>{{bip_selected.assestment_conducted}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Assestment Conducted end-->
+
+                <!-- Prevalent Setting Events & Antecedents-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="personal-list-out">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="about-info mb-10">
+                                        <h4>Prevalent Setting Events & Antecedents</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="detail-personal">
+                                                <h2>Prevalent Setting Events & Antecedents</h2>
+                                                <h3>{{patient_selected.birth_date}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="detail-personal">
+                                                <h2>Behavior </h2>
+                                                <h3>{{patient_selected.age}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="detail-personal">
+                                                <h2>Hypothesized Function(s)</h2>
+                                                <h3>{{patient_selected.email}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Prevalent Setting Events & Antecedents end-->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+ 
