@@ -10,5 +10,5 @@ export const environment = {
     // url_backend: 'https://abatheraphy.malcolmcordova.com/backend-api-aba/',
     // url_servicios: 'https://abatheraphy.malcolmcordova.com/backend-api-aba/public/api',
     // url_frontend: 'https://abatheraphy.malcolmcordova.com/',
-    // url_media: 'https://abatheraphy.malcolmcordova.com/backend-api-aba/storage/app/public/',
+    // url_media: 'https://abatheraphy.malcolmcordova.com/backend-api-aba/public/storage/',
 };

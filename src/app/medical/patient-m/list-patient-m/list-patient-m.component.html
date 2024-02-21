@@ -81,14 +81,15 @@
                                       
                                     <td>
                                       <span class="badge bg-primary"
-                                          *ngIf="data.status === 'pending'">Pending</span>
+                                          *ngIf="data.status === 'incoming'">Incoming</span>
                                       <span class="badge bg-success"
-                                          *ngIf="data.status === 'yes'">Yes</span>
+                                          *ngIf="data.status === 'active'">Active</span>
                                       <span class="badge bg-danger"
-                                          *ngIf="data.status === 'no'">No</span>
+                                          *ngIf="data.status === 'inactive'">Inactive</span>
 
-                                      <span *ngIf="data.status === 'yes'">
+                                      <span *ngIf="data.status === 'active'">
                                         <button class="btn btn-outline-success" [routerLink]="['/bip/attention/', data.id]">Access BIP</button>
+                                        <button class="btn btn-outline-success" [routerLink]="['/note/rbt/', data.id]">RBT Note</button>
                                       </span>
                                   </td>
                                   <td>
@@ -97,9 +98,9 @@
                                     name="state" [(ngModel)]="data.status" (change)="cambiarStatus(data)"
                                     placeholder="state">
                                     <option>-- Select --</option>
-                                    <option value="pending">Pending</option>
-                                      <option value="yes">Yes</option>
-                                      <option value="no">No</option>
+                                    <option value="incoming">Incoming</option>
+                                      <option value="active">Active</option>
+                                      <option value="inactive">Inactive</option>
                                       </select>
                                   </td>
                                       <!-- <td>{{data.permision_pluck.length > 0 ? data.permision_pluck: 'TODOS LOS PERMISOS' }}</td> -->

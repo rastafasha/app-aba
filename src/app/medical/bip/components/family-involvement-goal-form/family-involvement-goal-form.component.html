@@ -10,7 +10,7 @@
                     <div class="col-12">
                         <div class="card-box">
                             <div class="card-block">
-                                <h3 class="card-title">Family / Caregiver Envolvement</h3>
+                                <h3 class="card-title">Family / Caregiver Involvement</h3>
                                 <div class="col-12">
                                     <div class="form-group local-forms">
                                         <label>Description <span class="login-danger">*</span></label>
@@ -55,10 +55,10 @@
                                                     name="current_status" [(ngModel)]="current_status" 
                                                     placeholder="state">
                                                     <option>-- Select --</option>
-                                                    <option value="pending">Pending</option>
-                                                    <option value="reviewing">Reviewing</option>
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
+                                                    <option value="new">New</option>
+                                                    <option value="in progress">In Progress</option>
+                                                    <option value="mastered date">Mastered Date</option>
+                                                    <option value="initiate date">Initiate Date</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -94,7 +94,7 @@
                                                              {{caregiver.criteria}}
                                                         </td>
                                                         <td>
-                                                             {{caregiver.initiation}}
+                                                             {{caregiver.initiation | date}}
                                                         </td>
                                                         <td>
                                                              {{caregiver.current_status}}

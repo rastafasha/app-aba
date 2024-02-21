@@ -429,5 +429,11 @@ export class routes {
   public static get registerLocation(): string {
     return this.baseUrl + '/location/register';
   }
+  public static get editNoteRbt(): string {
+    return this.baseUrl + '/note/rbt';
+  }
+  public static get listNoteRbt(): string {
+    return this.baseUrl + '/note/listbyclient';
+  }
  
 }

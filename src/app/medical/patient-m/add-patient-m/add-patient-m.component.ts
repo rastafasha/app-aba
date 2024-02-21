@@ -109,8 +109,8 @@ export class AddPatientMComponent {
   public IMAGE_PREVISUALIZA:any = 'assets/img/user-06.jpg';
   
   
-  public FILE_DOCTOR_REFERAL:any;
-  public IMAGE_PREVISUALIZA_DOCTOR_REFERAL:any = 'assets/img/user-06.jpg';
+  public FILE_ADITIONAL_DOCS:any;
+  public IMAGE_PREVISUALIZA_ADITIONAL_DOCS:any = 'assets/img/user-06.jpg';
   public FILE_MEDICAL_NOTES:any;
   public IMAGE_PREVISUALIZA_MEDICAL_NOTES:any = 'assets/img/user-06.jpg';
   public FILE_CDE:any;

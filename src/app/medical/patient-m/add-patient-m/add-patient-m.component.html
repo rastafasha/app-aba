@@ -947,18 +947,7 @@
                                         <h4>Add Files</h4>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-top-form">
-                                        <label class="local-top">Doctor Referral <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileDoctorR($event)" class="hide-input">
-                                            <label for="signature" class="upload">Choose File</label>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="FILE_DOCTOR_REFERAL">
-                                        <img [src]="IMAGE_PREVISUALIZA_DOCTOR_REFERAL" style="width: 250px;" alt="">
-                                    </div>
-                                </div>
+                                
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Medical Notes <span class="login-danger">*</span></label>
@@ -1018,6 +1007,19 @@
                                     </div>
                                     <div *ngIf="FILE_REFERAL">
                                         <img [src]="IMAGE_PREVISUALIZA_REFERAL" style="width: 250px;" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-top-form">
+                                        <label class="local-top">Aditional Docs <span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileDoctorR($event)" class="hide-input">
+                                            <label for="signature" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="FILE_ADITIONAL_DOCS">
+                                        <img [src]="IMAGE_PREVISUALIZA_ADITIONAL_DOCS" style="width: 250px;" alt="">
                                     </div>
                                 </div>
                                 <!-- validaciones -->

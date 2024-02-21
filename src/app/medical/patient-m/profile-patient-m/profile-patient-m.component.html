@@ -56,13 +56,12 @@
                                                 </div>
                                                 <div class="doctor-follows">
                                                     <h5>Status</h5>
-                                                    <!-- <h4>{{eligibility}}</h4> -->
                                                     <span class="badge bg-primary"
-                                                        *ngIf="patient_selected.status === 'pending'">Pendig</span>
+                                                        *ngIf="patient_selected.status === 'incoming'">Incoming</span>
                                                     <span class="badge bg-success"
-                                                        *ngIf="patient_selected.status === 'yes'">Yes</span>
-                                                    <span class="badge bg-dark"
-                                                        *ngIf="patient_selected.status === 'no'">No</span>
+                                                        *ngIf="patient_selected.status === 'active'">Active</span>
+                                                    <span class="badge bg-danger"
+                                                        *ngIf="patient_selected.status === 'inactive'">Inactive</span>
 
                                                 </div>
                                             </div>
