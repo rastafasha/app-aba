@@ -38,7 +38,7 @@
                                                     <label >Status<span class="login-danger">*</span></label>
                                                     <select
                                                         class="form-control form-select-solid fw-bolder"
-                                                        name="status" [(ngModel)]="status">
+                                                        name="status" [(ngModel)]="status" [ngModelOptions]="{standalone: true}" >
                                                         <option>-- Select --</option>
                                                         <option value="inprogress">in progress</option>
                                                         <option value="initiated">Initiated</option>
@@ -97,7 +97,7 @@
                                                              {{caregiver.status}}
                                                         </td>
                                                         <td>
-                                                             {{caregiver.date}}
+                                                             {{caregiver.date | date}}
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-outline-danger btn-sm" (click)="deleteDocument(i)">x</button>

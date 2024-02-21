@@ -91,7 +91,7 @@
                                                 <label >Status<span class="login-danger">*</span></label>
                                                 <select
                                                     class="form-control form-select-solid fw-bolder"
-                                                    name="status_sto" [(ngModel)]="status_sto">
+                                                    name="status_sto" [(ngModel)]="status_sto" [ngModelOptions]="{standalone: true}" >
                                                     <option>-- Select --</option>
                                                     <option value="inprogress">in progress</option>
                                                     <option value="initiated">Initiated</option>
@@ -169,7 +169,7 @@
                                                             <div class="form-group local-forms">
                                                                 <select
                                                                     class="form-control form-select-solid fw-bolder"
-                                                                    name="status_sto_edit" [(ngModel)]="goalsto.status_sto" (change)="cambiarStatus(goalsto)">
+                                                                    name="status_sto_edit" [(ngModel)]="goalsto.status_sto" [ngModelOptions]="{standalone: true}"  (change)="cambiarStatus(goalsto)">
                                                                     <option>-- Select --</option>
                                                                       <option value="inprogress">in progress</option>
                                                                       <option value="initiated">Initiated</option>
@@ -215,7 +215,7 @@
                                                 <label >Status<span class="login-danger">*</span></label>
                                                 <select
                                                     class="form-control form-select-solid fw-bolder"
-                                                    name="status_lto" [(ngModel)]="status_lto">
+                                                    name="status_lto" [ngModelOptions]="{standalone: true}"  [(ngModel)]="status_lto">
                                                     <option>-- Select --</option>
                                                     <option value="inprogress">in progress</option>
                                                     <option value="initiated">Initiated</option>
