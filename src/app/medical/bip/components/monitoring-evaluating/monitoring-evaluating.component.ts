@@ -19,7 +19,6 @@ export class MonitoringEvaluatingComponent {
   public text_success:string = '';
 
 
-  public treatment_fidelity:any;
   public goal: any;
   public lto: any;
   public date: Date;
@@ -27,6 +26,7 @@ export class MonitoringEvaluatingComponent {
   public status: any;
   public rbt_training_goals: any = [];
   public training_goals: any = [];
+  public monitoring_status_sto_edit: any = [];
   
   public client_id: any;
   public user: any;
@@ -114,7 +114,6 @@ export class MonitoringEvaluatingComponent {
       console.log('goals sustition by patientid',resp);
       this.monitorings = resp.monitoringEvaluatingPatientIds.data;
       this.monitoringtid = resp.monitoringEvaluatingPatientIds.data[0].id;
-      this.treatment_fidelity = resp.monitoringEvaluatingPatientIds.data[0].treatment_fidelity;
       this.training_goals = resp.monitoringEvaluatingPatientIds.data[0].rbt_training_goals;
       this.client_id_monitorings = resp.monitoringEvaluatingPatientIds.data[0].client_id;
       // this.goals = resp.goalReductionPatientIds;
@@ -144,6 +143,25 @@ export class MonitoringEvaluatingComponent {
     this.training_goals.splice(i,1);
   }
 
+  cambiarStatusSto(goalsto:any){
+    this.monitoring_status_sto_edit = goalsto;
+    console.log(this.monitoring_status_sto_edit.status_sto);
+
+    let data ={
+      rbt_training_goals: this.training_goals,
+    }
+    
+    this.monitoringEvaluatingService.editMonitoringEvaluating(data, this.monitoringtid).subscribe(
+      resp =>{
+        // console.log(resp);
+        // this.getTableData();
+        Swal.fire('Updated', `Goal Updated successfully!`, 'success');
+        this.ngOnInit();
+      }
+    )
+  }
+
+
   save(){
     this.text_validation = '';
     // if(!this.maladaptive || !this.current_sustitution || !this.golsto){
@@ -156,7 +174,6 @@ export class MonitoringEvaluatingComponent {
       bip_id: this.bip_selectedIdd,
       patient_id: this.patient_id,
       client_id: this.client_id,
-      treatment_fidelity: this.treatment_fidelity,
       rbt_training_goals: this.training_goals,
     }
 
@@ -183,5 +200,8 @@ export class MonitoringEvaluatingComponent {
    
 
   }
+
+
+  
 
 }

@@ -56,26 +56,33 @@
                     <form autocomplete="false">
                         <div class="row" >
         
-                            <h3 class="card-title">Reduction Goals</h3>
+                            <h3 class="card-title">Skill Acquisition/Replacement Goals</h3>
                             <!-- goals form -->
+
+                            
                             
                             <!-- sto -->
                             <div class="row align-items-center" >
-                                <div class="col-xs-12 col-md-6 ">  
+                                <div class="col-12 col-md-6 col-xl-3">  
                                     <div class="form-group local-forms">
-                                        <label >Goal:  <span class="login-danger">*</span></label>
+                                        <label >Maladaptive:  <span class="login-danger">*</span></label>
                                         <input class="form-control" name="maladaptive_title"  disabled [(ngModel)]="maladaptiveSelected.maladaptive_behavior" type="text" placeholder="maladaptive_title"  >
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-md-6 ">
-                                    <div class="form-group local-forms">
-                                        <label>Curren Status <span class="login-danger">*</span></label>
-                                        <input class="form-control"  name="current_status"   [(ngModel)]="current_status" type="text"  >
                                     </div>
                                 </div>
                             </div>
                             
-                            
+                            <div class="col-xs-12 col-md-3 col-xl-3">
+                                <div class="form-group local-forms">
+                                    <label>Curren Sustitution <span class="login-danger">*</span></label>
+                                    <input class="form-control"  name="current_sustitution"   [(ngModel)]="current_sustitution" type="text"  >
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group local-forms">
+                                    <label>Description <span class="login-danger">*</span></label>
+                                    <textarea class="form-control" name="description" [(ngModel)]="description" rows="4" cols="30"></textarea>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="row align-items-center" >
@@ -84,7 +91,7 @@
                                         <div class="col-xs-12 col-md-4 col-xl-4">
                                             <div class="form-group local-forms">
                                                 <label>STO <span class="login-danger">*</span></label>
-                                                <input class="form-control"  name="sto"   [(ngModel)]="sto" type="text"  >
+                                                <input class="form-control"  name="sustitution_sto"   [(ngModel)]="sustitution_sto" type="text"  >
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-4 col-xl-4">
@@ -92,7 +99,7 @@
                                                 <label >Status<span class="login-danger">*</span></label>
                                                 <select
                                                     class="form-control form-select-solid fw-bolder"
-                                                    name="status_sto" [(ngModel)]="status_sto" [ngModelOptions]="{standalone: true}" >
+                                                    name="sustitution_status_sto" [(ngModel)]="sustitution_status_sto">
                                                     <option>-- Select --</option>
                                                     <option value="inprogress">in progress</option>
                                                     <option value="initiated">Initiated</option>
@@ -106,7 +113,7 @@
                                         <div class="col-12 col-md-4 col-xl-4">
                                             <div class="form-group local-forms">
                                                 <label >Date<span class="login-danger">*</span></label>
-                                                <input class="form-control datetimepicker" name="date_sto" [(ngModel)]="date_sto" type="text" matInput [matDatepicker]="pickerDateSTO"  >
+                                                <input class="form-control datetimepicker" name="sustitution_date_sto" [(ngModel)]="sustitution_date_sto" type="text" matInput [matDatepicker]="pickerDateSTO"  >
                                                 <mat-datepicker #pickerDateSTO></mat-datepicker>
                                                 <mat-datepicker-toggle matIconSuffix [for]="pickerDateSTO"></mat-datepicker-toggle>
                                             </div>
@@ -117,7 +124,7 @@
                                         <div class="col-xs-12">
                                             <div class="form-group local-forms">
                                                 <label>Description <span class="login-danger">*</span></label>
-                                                <textarea class="form-control" name="decription_sto" [(ngModel)]="decription_sto" rows="4" cols="30"></textarea>
+                                                <textarea class="form-control" name="decription_sto" [(ngModel)]="sustitution_decription_sto" rows="4" cols="30"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -146,31 +153,32 @@
                                                         <th>date</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody *ngIf="goalReductions !== null || goalReductionId !== undefined && current_status ">
-                                                    <tr *ngFor="let goalsto of golsto; let i = index">
+                                                    <!-- -->
+                                                <tbody  *ngIf="goalmaladaptive !== null && current_sustitution ">
+                                                    <tr *ngFor="let goalsto of golstoSustiutions; let i = index">
                                                         <td>
-                                                            {{goalsto.sto}}
+                                                            {{goalsto.sustitution_sto}}
                                                         </td>
                                                         <td>
                                                              {{goalsto.maladaptive}}
                                                         </td>
                                                         <td>
-                                                            {{goalsto.decription_sto}}
+                                                            {{goalsto.sustitution_decription_sto}}
                                                         </td>
                                                         <td>
                                                             <!-- {{goalsto.status_sto}} -->
-                                                            <span class="badge bg-success" *ngIf="goalsto.status_sto === 'inprogress'">In progress</span>
-                                                            <span class="badge bg-success" *ngIf="goalsto.status_sto === 'initiated'">Initiated</span>
-                                                            <span class="badge bg-primary" *ngIf="goalsto.status_sto === 'mastered'">Mastered</span>
-                                                            <span class="badge bg-warning" *ngIf="goalsto.status_sto === 'on hold'">On Hold</span>
-                                                            <span class="badge bg-danger" *ngIf="goalsto.status_sto === 'discontinued'">Discontinued</span>
-                                                            <span class="badge bg-warning" *ngIf="goalsto.status_sto === 'maintenance'">Maintenance</span>
+                                                            <span class="badge bg-success" *ngIf="goalsto.sustitution_status_sto === 'inprogress'">In progress</span>
+                                                            <span class="badge bg-success" *ngIf="goalsto.sustitution_status_sto === 'initiated'">Initiated</span>
+                                                            <span class="badge bg-primary" *ngIf="goalsto.sustitution_status_sto === 'mastered'">Mastered</span>
+                                                            <span class="badge bg-warning" *ngIf="goalsto.sustitution_status_sto === 'on hold'">On Hold</span>
+                                                            <span class="badge bg-danger" *ngIf="goalsto.sustitution_status_sto === 'discontinued'">Discontinued</span>
+                                                            <span class="badge bg-warning" *ngIf="goalsto.sustitution_status_sto === 'maintenance'">Maintenance</span>
                                                         </td>
                                                         <td>
                                                             <div class="form-group local-forms">
                                                                 <select
                                                                     class="form-control form-select-solid fw-bolder"
-                                                                    name="status_sto_edit" [(ngModel)]="goalsto.status_sto" [ngModelOptions]="{standalone: true}"  (change)="cambiarStatus(goalsto)">
+                                                                    name="sustitution_status_sto_edit" [(ngModel)]="goalsto.sustitution_status_sto" (change)="cambiarStatus(goalsto)">
                                                                     <option>-- Select --</option>
                                                                       <option value="inprogress">in progress</option>
                                                                       <option value="initiated">Initiated</option>
@@ -182,7 +190,7 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            {{goalsto.date_sto | date}}
+                                                            {{goalsto.sustitution_date_sto | date}}
                                                         </td>
                                                         <td>
                                                             <!-- <button class="btn btn-outline-success btn-sm" (click)="selectedMaladaptiveSon(goalsto)"><i class="fa fa-bar-chart"></i></button> -->
@@ -208,7 +216,7 @@
                                         <div class="col-xs-12 col-md-4">
                                             <div class="form-group local-forms">
                                                 <label>LTO <span class="login-danger">*</span></label>
-                                                <input class="form-control"  name="lto"   [(ngModel)]="lto" type="text"  >
+                                                <input class="form-control"  name="sustitution_lto"   [(ngModel)]="sustitution_lto" type="text"  >
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-4">
@@ -216,7 +224,7 @@
                                                 <label >Status<span class="login-danger">*</span></label>
                                                 <select
                                                     class="form-control form-select-solid fw-bolder"
-                                                    name="status_lto" [ngModelOptions]="{standalone: true}"  [(ngModel)]="status_lto">
+                                                    name="sustitution_status_lto" [(ngModel)]="sustitution_status_lto">
                                                     <option>-- Select --</option>
                                                     <option value="inprogress">in progress</option>
                                                     <option value="initiated">Initiated</option>
@@ -230,7 +238,7 @@
                                         <div class="col-12 col-md-4">
                                             <div class="form-group local-forms">
                                                 <label >Date<span class="login-danger">*</span></label>
-                                                <input class="form-control datetimepicker" name="date_lto" [(ngModel)]="date_lto" type="text" matInput [matDatepicker]="pickerDateLTO"  >
+                                                <input class="form-control datetimepicker" name="sustitution_date_lto" [(ngModel)]="sustitution_date_lto" type="text" matInput [matDatepicker]="pickerDateLTO"  >
                                                 <mat-datepicker #pickerDateLTO></mat-datepicker>
                                                 <mat-datepicker-toggle matIconSuffix [for]="pickerDateLTO"></mat-datepicker-toggle>
                                             </div>
@@ -240,7 +248,7 @@
                                         <div class="col-xs-12">
                                             <div class="form-group local-forms">
                                                 <label>Description LTO <span class="login-danger">*</span></label>
-                                                <textarea class="form-control" name="decription_lto" [(ngModel)]="decription_lto" rows="4" cols="30"></textarea>
+                                                <textarea class="form-control" name="sustitution_decription_lto" [(ngModel)]="sustitution_decription_lto" rows="4" cols="30"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -266,16 +274,16 @@
                                                         <th>date</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody *ngIf="goalmaladaptive !== null && current_status  ">
-                                                    <tr *ngFor="let goallto of gollto; let i = index">
+                                                <tbody >
+                                                    <tr *ngFor="let goallto of golltoSustiution; let i = index">
                                                         <td>
-                                                            {{goallto.lto}}
+                                                            {{goallto.sustitution_lto}}
                                                         </td>
                                                         <td>
-                                                            {{goallto.decription_lto}}
+                                                            {{goallto.sustitution_decription_lto}}
                                                         </td>
                                                         <td>
-                                                            {{goallto.status_lto}}
+                                                            {{goallto.sustitution_status_lto}}
                                                             <!-- <span class="badge bg-success" *ngIf="goallto.status_lto === 'inprogress'">In progress</span>
                                                             <span class="badge bg-success" *ngIf="goallto.status_lto === 'initiated'">Initiated</span>
                                                             <span class="badge bg-primary" *ngIf="goallto.status_lto === 'mastered'">Mastered</span>
@@ -284,7 +292,7 @@
                                                             <span class="badge bg-warning" *ngIf="goallto.status_lto === 'maintenance'">Maintenance</span> -->
                                                         </td>
                                                         <td>
-                                                            {{goallto.date_lto | date}}
+                                                            {{goallto.sustitution_date_lto | date}}
                                                         </td>
                                                         <td>
                                                             <!-- <button class="btn btn-outline-success btn-sm" (click)="selectedMaladaptiveSon(goallto)"><i class="fa fa-bar-chart"></i></button> -->
@@ -456,61 +464,7 @@
         </div>
         
     </div>
-    <!-- <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">Target Behavior to decrease</h3>
-            <div class="col-xs-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="col-xs-12">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>STO</th>
-                                            <th>goal</th>
-                                            <th>decription_goal</th>
-                                            <th>status</th>
-                                            <th>date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let goalm of goals; let i = index">
-                                            <td>
-                                                {{goalm.sto}}
-                                            </td>
-                                            <td>
-                                                 {{goalm.goal}}
-                                            </td>
-                                            <td>
-                                                {{goalm.decription_goal}}
-                                            </td>
-                                            <td>
-                                                {{goalm.status}}
-                                            </td>
-                                            <td>
-                                                {{goalm.date}}
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-success btn-sm" (click)="selectedMaladaptiveSon(goalm)"><i class="fa-eye"></i></button>
-                                            </td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            </div>
-            
-            
-            
-        </div>
-        
-    </div> -->
+    
 
         
 </div>

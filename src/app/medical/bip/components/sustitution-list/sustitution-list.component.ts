@@ -1,22 +1,17 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PatientMService } from 'src/app/medical/patient-m/service/patient-m.service';
-import { BipService } from '../../service/bip.service';
-import { GoalSustitutionService } from '../../service/goal-sustitution.service';
 import { routes } from 'src/app/shared/routes/routes';
 import Swal from 'sweetalert2';
-
+import { BipService } from '../../service/bip.service';
+import { GoalSustitutionService } from '../../service/goal-sustitution.service';
+declare var $:any;  
 @Component({
-  selector: 'app-sustitution-goal-form',
-  templateUrl: './sustitution-goal-form.component.html',
-  styleUrls: ['./sustitution-goal-form.component.scss']
+  selector: 'app-sustitution-list',
+  templateUrl: './sustitution-list.component.html',
+  styleUrls: ['./sustitution-list.component.scss']
 })
-export class SustitutionGoalFormComponent {
-
-  // created comments by Malcolm Cordova at 10 feb 2004
-  // mercadocreativo@gmail.com
-  // @malcolmcordova
-
+export class SustitutionListComponent {
   public routes = routes;
   valid_form_success: boolean = false;
   public text_validation:string = '';
@@ -38,8 +33,8 @@ export class SustitutionGoalFormComponent {
   public client_id_goalSustitution:any;
 
   //goals
-  public maladaptiveSelected:any;
-  public maladaptiveSelectedSon:any;
+  public goalSelected:any;
+  public goalSelectedSon:any;
   public goalmaladaptive:any ;
   public goalmaladaptive_child:any = [];
   public goalReductionPatientIds:any = [];
@@ -72,16 +67,38 @@ export class SustitutionGoalFormComponent {
   public sustitution_lto:any;
   public sustitution_decription_lto:any;
   
-  public sustitution_status_sto:any;
-  public sustitution_status_sto_edit:any;
-  public sustitution_status_lto:any;
   public sustitution_date_sto:Date ;
   public sustitution_date_lto:Date;
+  public sustitution_status_sto:any;
+  public sustitution_status_lto:any;
+  public sustitution_status_sto_edit:any;
+  public sustitution_status_lto_edit:any;
+  public sustitution_status_lto_edit2:any;
+  public sustitution_status_sto_edit2:any;
   
   public arrayFk:any;
 
   public goal:any;
+  public goals:any;
   public initial_interesting:any;
+
+  public createSelected:any;
+  public golltoCreateds:any;
+  public golstocreated:any;
+
+  createdgoal_sto :any;
+  createdgoal_initial_interesting :any;
+  createdgoal_status_sto :any;
+  createdgoal_status_sto_edit :any;
+  createdgoal_date_lto :Date;
+  createdgoal_decription_sto :any;
+  createdgoal_decription :any;
+  createdgoal_lto :any;
+  createdgoal_status_lto :any;
+  createdgoal_date_sto :Date;
+  createdgoal_decription_lto :any;
+  createdgoal_status_lto_edit2 :any;
+  createdgoal_status_sto_edit2 :any;
 
   constructor(
     public bipService:BipService,
@@ -95,7 +112,7 @@ export class SustitutionGoalFormComponent {
 
   ngOnInit(): void {
     
-    window.scrollTo(0, 0);//inicia la vista siempre desde arriba
+    // window.scrollTo(0, 0);//inicia la vista siempre desde arriba
     
     //me subcribo al id recibido por el parametro de la url
     this.ativatedRoute.params.subscribe((resp:any)=>{
@@ -155,14 +172,15 @@ export class SustitutionGoalFormComponent {
       this.goalSustitutions = resp.sustitutiongoalPatientIds.data[0] ==""?[] : resp.sustitutiongoalPatientIds.data ;
       this.goalSustitutionId = resp.sustitutiongoalPatientIds.data[0].id || undefined;
       this.client_id_goalSustitution = resp.sustitutiongoalPatientIds.data[0].client_id;
-      this.goal = resp.sustitutiongoalPatientIds.data[0].goal;
-      this.description = resp.sustitutiongoalPatientIds.data[0].description;
-      this.current_sustitution = resp.sustitutiongoalPatientIds.data[0].current_sustitution;
-      // this.goals = resp.goalReductionPatientIds;
-      // console.log(this.goals);
+      // this.goal = resp.sustitutiongoalPatientIds.data[0].goal;
+      this.goals = resp.sustitutiongoalPatientIds.data;
+      // this.description = resp.sustitutiongoalPatientIds.data[0].description;
+      // this.current_sustitution = resp.sustitutiongoalPatientIds.data[0].current_sustitution;
+      // // this.goals = resp.goalReductionPatientIds;
+      // // console.log(this.goals);
 
-      this.golstoSustiutions = this.goalSustitutions[0].goalstos;
-        this.golltoSustiution = this.goalSustitutions[0].goalltos;
+      // this.golstoSustiutions = this.goalSustitutions[0].goalstos;
+      // this.golltoSustiution = this.goalSustitutions[0].goalltos;
       
       
     })
@@ -170,26 +188,60 @@ export class SustitutionGoalFormComponent {
 
 
   //selectores 
+
+  createGoal(){
+    this.createSelected = true;
+
+    this.goal = '',
+    this.current_sustitution = '',
+    this.description = '',
+
+    this.sustitution_sto = '';
+    this.initial_interesting = '';
+    this.sustitution_status_sto = '';
+    this.sustitution_status_sto_edit = '';
+    this.sustitution_date_lto = null;
+    this.sustitution_decription_sto = '';
+
+    this.sustitution_lto = '';
+    this.sustitution_status_lto = '';
+    this.sustitution_date_lto = null;
+    this.sustitution_decription_lto = '';
+    
+  }
+
   //seleccionamos el maladaptive de la lista
   //obtenemos informacion de la seleccion
-  selectedMaladaptive(maladap:any){
-    this.maladaptiveSelected = maladap
-    // console.log(this.maladaptiveSelected);
+  selectedGoal(goal:any){
+    this.goalSelected = goal
+    console.log(this.goalSelected);
+
+      this.goal = this.goalSelected.goal;
+      this.goals = this.goalSelected.data;
+      this.description = this.goalSelected.description;
+      this.current_sustitution = this.goalSelected.current_sustitution;
+      // this.goals = resp.goalReductionPatientIds;
+      // console.log(this.goals);
+
+      this.golstoSustiutions = this.goalSelected.goalstos;
+        this.golltoSustiution = this.goalSelected.goalltos;
+
     //llamamos la funcion del  servicio para obtener la informacion adicional que se va a mostrar en la ventana
     // this.getGoalsMaladaptives();
     
   }
+  
 
 
   //selectores seleccionamos el grafico del maladaptive de la lista
-  selectedMaladaptiveSon(maladap:any){
-    this.maladaptiveSelectedSon = maladap
-    // console.log(this.maladaptiveSelectedSon);
+  selectedGoalSon(goal:any){
+    this.goalSelectedSon = goal
+    // console.log(this.goalSelectedSon);
     this.getGoalsSonMaladaptives();
   }
   
-  deleteMaladaptiveSon(goalsto:any){
-    // this.maladaptiveSelectedSon.splice(i,1);
+  deleteGoalSon(goalsto:any){
+    // this.goalSelectedSon.splice(i,1);
     this.goalSustitutionService.deleteGoalSustitution(goalsto.id).subscribe((resp:any)=>{
       // alert("Se elimino el objetivo");
       // this.getGoals();
@@ -237,7 +289,49 @@ export class SustitutionGoalFormComponent {
     this.golltoSustiution.splice(i,1);
   }
 
-  cambiarStatus(goalsto:any){
+
+  addCreateSTOGoal(){
+    this.golstocreated.push({
+      
+      createdgoal_sto: this.createdgoal_sto,
+      createdgoal_initial_interesting: this.createdgoal_initial_interesting,
+      createdgoal_status_sto: this.createdgoal_status_sto,
+      createdgoal_status_sto_edit: this.createdgoal_status_sto,
+      createdgoal_date_sto: this.createdgoal_date_sto,
+      createdgoal_decription_sto: this.createdgoal_decription_sto,
+    })
+    this.createdgoal_sto = '';
+    this.createdgoal_initial_interesting = '';
+    this.createdgoal_status_sto = '';
+    this.createdgoal_status_sto_edit = '';
+    this.createdgoal_date_sto = null;
+    this.createdgoal_decription_sto = '';
+  }
+
+  deleteCreatedSTOGoal(i:any){
+    this.golstocreated.splice(i,1);
+  }
+  addCreateLTOGoal(){
+    this.golltoCreateds.push({
+      createdgoal_lto: this.createdgoal_lto,
+      createdgoal_status_lto: this.createdgoal_status_lto,
+      createdgoal_date_lto: this.createdgoal_date_lto,
+      createdgoal_decription_lto: this.createdgoal_decription_lto,
+    })
+    this.createdgoal_lto = '';
+    this.createdgoal_status_lto = '';
+    this.createdgoal_date_lto = null;
+    this.createdgoal_decription_lto = '';
+  }
+
+  deleteCreatedLTOGoal(i:any){
+    this.golltoCreateds.splice(i,1);
+  }
+
+
+
+
+  cambiarStatusSto(goalsto:any){
     this.sustitution_status_sto_edit = goalsto;
     console.log(this.sustitution_status_sto_edit.status_sto);
 
@@ -256,14 +350,88 @@ export class SustitutionGoalFormComponent {
     )
   }
 
+  cambiarStatusLto(goallto:any){
+    this.sustitution_status_lto_edit = goallto;
+    console.log(this.sustitution_status_lto_edit.status_sto);
+
+    let data ={
+      goalstos: this.golstoSustiutions,
+      goalltos: this.golltoSustiution,
+    }
+    
+    this.goalSustitutionService.editGoalSustitution(data, this.goalmaladaptiveid).subscribe(
+      resp =>{
+        // console.log(resp);
+        // this.getTableData();
+        Swal.fire('Updated', `Goal Updated successfully!`, 'success');
+        this.ngOnInit();
+      }
+    )
+  }
+
+  cambiarStatusCreatedLto(goallto:any){
+    this.createdgoal_status_lto_edit2 = goallto;
+    console.log(this.createdgoal_status_lto_edit2.status_sto);
+
+    let data ={
+      goalltos: this.golltoCreateds,
+      goalstos: this.golstocreated,
+    }
+    
+    this.goalSustitutionService.editGoalSustitution(data, this.goalmaladaptiveid).subscribe(
+      resp =>{
+        // console.log(resp);
+        // this.getTableData();
+        Swal.fire('Updated', `Goal Updated successfully!`, 'success');
+        this.ngOnInit();
+      }
+    )
+  }
+  cambiarStatusCreatedSto(goalsto:any){
+    this.createdgoal_status_sto_edit2 = goalsto;
+    console.log(this.createdgoal_status_sto_edit2.status_sto);
+
+    let data ={
+      goalstos: this.golstoSustiutions,
+      goalltos: this.golltoSustiution,
+    }
+    
+    this.goalSustitutionService.editGoalSustitution(data, this.goalmaladaptiveid).subscribe(
+      resp =>{
+        // console.log(resp);
+        // this.getTableData();
+        Swal.fire('Updated', `Goal Updated successfully!`, 'success');
+        this.ngOnInit();
+      }
+    )
+  }
+  
+  
+
   //listas
 
 
 
   back(){
-    this.maladaptiveSelected = null;
-    this.maladaptiveSelectedSon = null;
+    this.goalSelected = null;
+    this.createSelected = null;
+    this.goalSelectedSon = null;
     this.current_sustitution = '';
+    this.goal = '',
+    this.current_sustitution = '',
+    this.description = '',
+
+    this.sustitution_sto = '';
+    this.initial_interesting = '';
+    this.sustitution_status_sto = '';
+    this.sustitution_status_sto_edit = '';
+    this.sustitution_date_lto = null;
+    this.sustitution_decription_sto = '';
+
+    this.sustitution_lto = '';
+    this.sustitution_status_lto = '';
+    this.sustitution_date_lto = null;
+    this.sustitution_decription_lto = '';
     this.ngOnInit();
   }
 
@@ -311,11 +479,42 @@ export class SustitutionGoalFormComponent {
 
   }
 
+  newGoal(){
+    this.text_validation = '';
+    // if(!this.maladaptive || !this.current_sustitution || !this.golsto){
+    //   this.text_validation = 'Is required this information ';
+    //   return;
+    // }
+
+    let data ={
+      id:this.goalsustitid,
+      bip_id: this.bip_selectedIdd,
+      patient_id: this.patient_id,
+      goal: this.goal,
+      current_sustitution: this.current_sustitution,
+      goalstos: this.golstoSustiutions,
+      goalltos: this.golltoSustiution,
+      client_id: this.client_id,
+      description: this.description,
+    }
+
+    this.goalSustitutionService.createGoalSustitution(data).subscribe((resp:any)=>{
+      console.log(resp);
+      this.goalsustitid = resp.id;
+      // this.text_success = 'Goal created successfully!'
+      Swal.fire('Created', `Goal Sustitution Created successfully!`, 'success');
+      this.ngOnInit();
+      // this.getGoalsMaladaptives();
+    })
+
+   
+
+  }
 
   //grafico
   //obtenemos los goals del maladaptive por nombre  para el grafico 
   getGoalsSonMaladaptives(){
-    this.goalSustitutionService.listMaladaptivesGoalSustitutions(this.maladaptiveSelectedSon.maladaptive_behavior).subscribe((resp:any)=>{
+    this.goalSustitutionService.listMaladaptivesGoalSustitutions(this.goalSelectedSon.maladaptive_behavior).subscribe((resp:any)=>{
       console.log( resp);
       
       this.goalmaladaptive_child = resp.goalsmaladaptive.data;
@@ -332,8 +531,4 @@ export class SustitutionGoalFormComponent {
     },);
 
   }
-
-
-
-
 }

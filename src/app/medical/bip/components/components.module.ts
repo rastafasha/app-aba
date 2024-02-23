@@ -15,6 +15,7 @@ import { GeneralizationTrainingComponent } from './generalization-training/gener
 import { CrisisPlanComponent } from './crisis-plan/crisis-plan.component';
 import { DeEscalationTecniquesComponent } from './de-escalation-tecniques/de-escalation-tecniques.component';
 import { ConsentTreatmentFormComponent } from './consent-treatment-form/consent-treatment-form.component';
+import { SustitutionListComponent } from './sustitution-list/sustitution-list.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ConsentTreatmentFormComponent } from './consent-treatment-form/consent-
     GeneralizationTrainingComponent,
     CrisisPlanComponent,
     DeEscalationTecniquesComponent,
-    ConsentTreatmentFormComponent
+    ConsentTreatmentFormComponent,
+    SustitutionListComponent
   ],
   exports: [
     BipformComponent,
@@ -42,7 +44,8 @@ import { ConsentTreatmentFormComponent } from './consent-treatment-form/consent-
     GeneralizationTrainingComponent,
     CrisisPlanComponent,
     DeEscalationTecniquesComponent,
-    ConsentTreatmentFormComponent
+    ConsentTreatmentFormComponent,
+    SustitutionListComponent
   ],
   imports: [
     CommonModule,

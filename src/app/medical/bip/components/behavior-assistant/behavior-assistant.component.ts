@@ -16,7 +16,6 @@ export class BehaviorAssistantComponent {
   public text_validation:string = '';
   public text_success:string = '';
 
-  public description: any;
 
   public monday:any;
   public tuesday: any;
@@ -113,7 +112,6 @@ export class BehaviorAssistantComponent {
       console.log('goals sustition by patientid',resp);
       this.goalFamilyEnvolments = resp.behaviorAsistantPatientIds.data;
       this.goalFamilyEnvolmentid = resp.behaviorAsistantPatientIds.data[0].id;
-      this.description = resp.behaviorAsistantPatientIds.data[0].description;
       this.behaviors = resp.behaviorAsistantPatientIds.data[0].behavior_assistant_work_schedule;
 
       this.client_id_goalFamilyEnvolments = resp.behaviorAsistantPatientIds.data[0].client_id;
@@ -158,7 +156,6 @@ export class BehaviorAssistantComponent {
       bip_id: this.bip_selectedIdd,
       patient_id: this.patient_id,
       client_id: this.client_id,
-      description: this.description,
       behavior_assistant_work_schedule: this.behaviors,
     }
 

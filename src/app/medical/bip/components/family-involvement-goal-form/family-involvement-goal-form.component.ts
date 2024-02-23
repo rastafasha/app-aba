@@ -16,7 +16,7 @@ export class FamilyInvolvementGoalFormComponent {
   public text_validation:string = '';
   public text_success:string = '';
 
-  public description: any;
+  
   public caregiver_goal: any;
   public outcome_measure: any;
   public criteria: any;
@@ -112,7 +112,6 @@ export class FamilyInvolvementGoalFormComponent {
       this.goalFamilyEnvolments = resp.familiEnvolmentPatientIds.data;
       this.goalFamilyEnvolmentid = resp.familiEnvolmentPatientIds.data[0].id;
       this.caregivers = resp.familiEnvolmentPatientIds.data[0].caregivers_training_goals;
-      this.description = resp.familiEnvolmentPatientIds.data[0].description;
       this.client_id_goalFamilyEnvolments = resp.familiEnvolmentPatientIds.data[0].client_id;
       // this.goals = resp.goalReductionPatientIds;
       // console.log(this.goals);
@@ -153,7 +152,6 @@ export class FamilyInvolvementGoalFormComponent {
       bip_id: this.bip_selectedIdd,
       patient_id: this.patient_id,
       client_id: this.client_id,
-      description: this.description,
       caregivers_training_goals: this.caregivers,
     }
 

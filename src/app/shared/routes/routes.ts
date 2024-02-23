@@ -435,5 +435,8 @@ export class routes {
   public static get listNoteRbt(): string {
     return this.baseUrl + '/note/listbyclient';
   }
+  public static get goalAdd(): string {
+    return this.baseUrl + '/bip/goal/add';
+  }
  
 }

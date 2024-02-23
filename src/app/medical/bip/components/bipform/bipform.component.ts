@@ -101,6 +101,7 @@ export class BipformComponent {
   
   patient_selected:any;
   bip_id:any;
+  bip_selectedid:any;
   
   inteventionSelected:any;
 
@@ -165,10 +166,10 @@ export class BipformComponent {
   getBip(id){
     if (id !== null && id !== undefined) {
       this.bipService.getBipByUser(+id).subscribe((resp:any)=>{
-        // console.log(resp);
+        console.log(resp);
   
         this.bip_selected = resp; //asigamos una variable a la respuesta
-        this.id = resp.id;//obtenemos de nuevo el bip pero para verificar si es actualizar o crear en la funcion
+        this.bip_selectedid = resp.bip.id;//obtenemos de nuevo el bip pero para verificar si es actualizar o crear en la funcion
         
         this.type_of_assessment =this.bip_selected.type_of_assessment;
   
@@ -301,7 +302,7 @@ export class BipformComponent {
 //fin listados
 
 
-  save(){
+  save(){debugger
     this.text_validation = '';
     // if(!this.type_of_assessment || !this.maladaptives || !this.client_id){
     //   this.text_validation = 'Is required this information ';
@@ -309,7 +310,7 @@ export class BipformComponent {
     // }
 
     let data ={
-      id:this.id,
+      id:this.bip_selectedid,
       client_id: this.client_selected.patient.id,
       patient_id: this.patient_id,
       doctor_id: this.doctor_id,
@@ -331,7 +332,7 @@ export class BipformComponent {
 
     if(this.bip_selected){//si  tiene bip se agrega a la informacion de la consulta
 
-      this.bipService.update(data, this.id).subscribe((resp:any)=>{
+      this.bipService.update(data, this.bip_selectedid).subscribe((resp:any)=>{
         // console.log(resp);
         // this.text_success = 'Bip Updated'
         Swal.fire('Updated', `Bip Updated successfully!`, 'success');
