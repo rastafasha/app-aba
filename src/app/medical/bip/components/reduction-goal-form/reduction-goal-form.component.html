@@ -275,13 +275,28 @@
                                                             {{goallto.decription_lto}}
                                                         </td>
                                                         <td>
-                                                            {{goallto.status_lto}}
-                                                            <!-- <span class="badge bg-success" *ngIf="goallto.status_lto === 'inprogress'">In progress</span>
+                                                            <!-- {{goallto.status_lto}} -->
+                                                            <span class="badge bg-success" *ngIf="goallto.status_lto === 'inprogress'">In progress</span>
                                                             <span class="badge bg-success" *ngIf="goallto.status_lto === 'initiated'">Initiated</span>
                                                             <span class="badge bg-primary" *ngIf="goallto.status_lto === 'mastered'">Mastered</span>
                                                             <span class="badge bg-warning" *ngIf="goallto.status_lto === 'on hold'">On Hold</span>
                                                             <span class="badge bg-danger" *ngIf="goallto.status_lto === 'discontinued'">Discontinued</span>
-                                                            <span class="badge bg-warning" *ngIf="goallto.status_lto === 'maintenance'">Maintenance</span> -->
+                                                            <span class="badge bg-warning" *ngIf="goallto.status_lto === 'maintenance'">Maintenance</span>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group local-forms">
+                                                                <select
+                                                                    class="form-control form-select-solid fw-bolder"
+                                                                    name="status_lto_edit" [(ngModel)]="goallto.status_lto" [ngModelOptions]="{standalone: true}"  (change)="cambiarStatusLto(goallto)">
+                                                                    <option>-- Select --</option>
+                                                                      <option value="inprogress">in progress</option>
+                                                                      <option value="initiated">Initiated</option>
+                                                                      <option value="mastered">mastered</option>
+                                                                      <option value="on hold">On Hold</option>
+                                                                      <option value="discontinued">Discontinued</option>
+                                                                      <option value="maintenance">Maintenance</option>
+                                                                      </select>
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             {{goallto.date_lto | date}}

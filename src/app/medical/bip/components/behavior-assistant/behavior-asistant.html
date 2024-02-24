@@ -1,0 +1,155 @@
+ <!-- other -->
+ <div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            
+            <form autocomplete="false">
+                <div class="row" >
+
+                    <!-- documents -->
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="card-block">
+                                <h3 class="card-title">Behavior Assistant Rationale</h3>
+                                <p>Specific duties and responsibilities: Collect data on target behaviors identified for reduction/acquisition/replacement, implement the behavior program and train the caregivers on data collection and implementation of the procedures outline within the plan. Work Schedule and Schedule of activities: Behavior assistant will work with consumer Monday-Saturday, times vary. During that time all programs will be implemented. Ongoing Assessment Responsibilities: Behavior Assistant will be responsible for collection of ongoing ABC data that will be used to assess the continued efficacy of the program/ interventions. Behavior Assistant will also record data sheets provided and attached to the program Training Procedures for Caregivers: Following competency based training by the behavior analyst of the caregivers with regards to the interventions outline within the behavior program, the behavior assistant will complete competency checks of the caregivers’ ability to collect data, implement replacement programs and follow through on the interventions. Competency checks will include demonstration/modeling of procedures, observation of caregiver implementing replacement/acquisition programs, as well as corrective feedback when warranted.
+                                </p>
+                                <h4 class="card-title">Behavior Assistant (RBT) Work schedule </h4>
+                                <div class="row align-items-center" >
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label>Monday <span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="monday" [(ngModel)]="monday" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label>Tuesday <span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="tuesday" [(ngModel)]="tuesday" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label>Wednesday <span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="wednesday" [(ngModel)]="wednesday" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label>Thursday <span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="thursday" [(ngModel)]="thursday" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label>Friday <span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="friday" [(ngModel)]="friday" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group local-forms">
+                                                    <label>Saturday <span class="login-danger">*</span></label>
+                                                    <textarea class="form-control" name="saturday" [(ngModel)]="saturday" rows="4" cols="30"></textarea>
+                                                </div>
+                                            </div>
+                                            
+
+                                            
+                                            
+                                            <div class="col-12 mb-3 doctor-submit text-end">
+                                                <button class="btn btn-primary btn-sm" (click)="addDocument()">Update List</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 ">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>monday  </th>
+                                                        <th>tuesday </th>
+                                                        <th>wednesday</th>
+                                                        <th>thursday</th>
+                                                        <th>friday </th>
+                                                        <th>saturday </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let behavior of behaviors; let i = index">
+                                                        <td>
+                                                            {{behavior.monday}}
+                                                        </td>
+                                                        <td>
+                                                             {{behavior.tuesday}}
+                                                        </td>
+                                                        <td>
+                                                             {{behavior.wednesday}}
+                                                        </td>
+                                                        <td>
+                                                             {{behavior.thursday}}
+                                                        </td>
+                                                        <td>
+                                                             {{behavior.friday}}
+                                                        </td>
+                                                        <td>
+                                                             {{behavior.saturday}}
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-outline-danger btn-sm" (click)="deleteDocument(i)">x</button>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- documents -->
+                    
+                        
+                    </div>
+                    <!-- validaciones -->
+                    <div class="form-group row" *ngIf="text_success">
+                        <div class="col-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Exito!</strong>{{text_success}}.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"> </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf="text_validation">
+                        <div class="col-12">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>!</strong> {{ text_validation }}.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"> </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- validaciones -->
+                    
+                    <div class="col-12">
+                        <div class="doctor-submit text-end">
+                            <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                        </div>
+                    </div>
+                
+            </form>
+            
+        </div>
+    </div>
+        
+</div>
+<!-- fin other -->					

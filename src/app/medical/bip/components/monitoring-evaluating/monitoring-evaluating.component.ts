@@ -43,6 +43,10 @@ export class MonitoringEvaluatingComponent {
   public monitoringtid: any;
   public client_id_monitorings: any;
   public monitorid: any;
+  public lto_edit: any;
+
+
+  public current_status: any;
 
   constructor(
     public bipService:BipService,
@@ -129,13 +133,13 @@ export class MonitoringEvaluatingComponent {
       goal: this.goal,
       lto: this.lto,
       date: this.date,
-      decription: this.decription,
+      current_status: this.current_status,
       status: this.status,
     })
     this.goal = '';
     this.lto = '';
     this.date = null;
-    this.decription ='';
+    this.current_status ='';
     this.status = '';
   }
 
@@ -146,6 +150,24 @@ export class MonitoringEvaluatingComponent {
   cambiarStatusSto(goalsto:any){
     this.monitoring_status_sto_edit = goalsto;
     console.log(this.monitoring_status_sto_edit.status_sto);
+
+    let data ={
+      rbt_training_goals: this.training_goals,
+    }
+    
+    this.monitoringEvaluatingService.editMonitoringEvaluating(data, this.monitoringtid).subscribe(
+      resp =>{
+        // console.log(resp);
+        // this.getTableData();
+        Swal.fire('Updated', `Goal Updated successfully!`, 'success');
+        this.ngOnInit();
+      }
+    )
+  }
+  cambiarLTO(goalsto:any){
+    this.lto_edit = goalsto;
+    console.log(this.lto_edit.lto);
+    console.log(this.lto_edit.lto);
 
     let data ={
       rbt_training_goals: this.training_goals,

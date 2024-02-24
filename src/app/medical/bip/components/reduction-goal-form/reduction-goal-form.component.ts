@@ -66,6 +66,7 @@ export class ReductionGoalFormComponent {
   
   public status_sto:any;
   public status_sto_edit:any;
+  public status_lto_edit:any;
   public status_lto:any;
   public date_sto:Date ;
   public date_lto:Date;
@@ -311,6 +312,24 @@ export class ReductionGoalFormComponent {
   cambiarStatus(goalsto:any){
     this.status_sto_edit = goalsto;
     console.log(this.status_sto_edit.status_sto);
+
+    let data ={
+      goalstos: this.golsto,
+      goalltos: this.gollto,
+    }
+    
+    this.goalService.editGoal(data, this.goalmaladaptiveid).subscribe(
+      resp =>{
+        // console.log(resp);
+        // this.getTableData();
+        Swal.fire('Updated', `Goal Updated successfully!`, 'success');
+        this.ngOnInit();
+      }
+    )
+  }
+  cambiarStatusLto(goallto:any){
+    this.status_sto_edit = goallto;
+    console.log(this.status_lto_edit.status_lto);
 
     let data ={
       goalstos: this.golsto,
