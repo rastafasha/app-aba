@@ -161,7 +161,6 @@ export class AddDoctorComponent {
     formData.append('agency_location', this.agency_location);
     formData.append('city', this.city);
     formData.append('languages', this.languages);
-    formData.append('dob', this.dob);
     formData.append('ss_number', this.ss_number);
     formData.append('date_of_hire', this.date_of_hire);
     formData.append('start_pay', this.start_pay);

@@ -135,7 +135,6 @@ export class EditDoctorComponent {
         this.agency_location = this.doctor_selected.agency_location;
         this.city = this.doctor_selected.city;
         this.languages = this.doctor_selected.languages;
-        this.dob = this.doctor_selected.dob;
         this.ss_number = this.doctor_selected.ss_number;
         this.date_of_hire = new Date(this.doctor_selected.date_of_hire).toISOString();
         this.start_pay = new Date(this.doctor_selected.start_pay).toISOString();
@@ -265,9 +264,6 @@ export class EditDoctorComponent {
     }
     if(this.languages ){
       formData.append('languages', this.languages);
-    }
-    if(this.dob ){
-      formData.append('dob', this.dob);
     }
     if(this.ss_number ){
       formData.append('ss_number', this.ss_number);
