@@ -19,6 +19,7 @@ export class NotesByClientComponent {
   patient_selected:any;
   client_selected:any;
   bip_id:any;
+  note_id:any;
   user:any;
 
   public notesPatientList: any = [];
@@ -53,11 +54,13 @@ export class NotesByClientComponent {
     // window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.patient_id = resp.id;
+      
       // this.patient_id= resp.patient_id;
       // console.log(this.client_id);
      })
      this.getNotesByPatient();
      this.getTableData();
+     
 
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
@@ -69,6 +72,8 @@ export class NotesByClientComponent {
       console.log(resp);
     })
   }
+
+  
 
   private getTableData(): void {
     this.notesPatientList = [];

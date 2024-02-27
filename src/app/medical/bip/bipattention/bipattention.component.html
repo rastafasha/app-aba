@@ -75,14 +75,13 @@
                                         <input class="form-control" name="age"  disabled [(ngModel)]="age" type="text"  >
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-2">  
-                                    
+                                
+                                <div class="col-12 col-md-6 col-xl-2">
                                     <div class="form-group local-forms">
                                         <label >Birth day <span class="login-danger">*</span></label>
-                                        <!-- [matDatepicker]="picker" -->
-                                        <input class="form-control datetimepicker" disabled name="birth_date" [(ngModel)]="birth_date" type="text" matInput   >
-                                        <!-- <mat-datepicker #picker></mat-datepicker> -->
-                                        <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
+                                        <input class="form-control datetimepicker" disabled name="birth_date" [(ngModel)]="birth_date" type="text" matInput [matDatepicker]="picker"  >
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                     </div>
                                 </div>
                                 

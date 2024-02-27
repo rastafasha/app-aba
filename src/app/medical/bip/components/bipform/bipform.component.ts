@@ -121,7 +121,7 @@ export class BipformComponent {
     //me subcribo al id recibido por el parametro de la url
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.client_id = resp.id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
-      this.patient_id= resp.id // recibe el id del paciente que se esta consultando
+      // this.patient_id= resp.id // recibe el id del paciente que se esta consultando
       // console.log(this.client_id);
      })
      this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado

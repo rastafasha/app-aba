@@ -3,12 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotesComponent } from './notes.component';
 import { NoteRbtComponent } from './note-rbt/note-rbt.component';
 import { NotesByClientComponent } from './notes-by-client/notes-by-client.component';
+import { EditNoteRbtComponent } from './edit-note-rbt/edit-note-rbt.component';
 
 const routes: Routes = [
   {path:'', component:NotesComponent,
   children:[
     {
       path:'rbt/:id', component:NoteRbtComponent
+    },
+    {
+      path:'edit/rbt/:id', component:EditNoteRbtComponent
     },
     {
       path:'listbyclient/:id', component:NotesByClientComponent

@@ -27,50 +27,6 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-md-4">
                                                 <div class="form-group local-forms">
-                                                    <label>Goal: <span class="login-danger">*</span></label>
-                                                    <input class="form-control" name="goal" [(ngModel)]="goal"
-                                                        type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-md-4">
-                                                <div class="form-group local-forms">
-                                                    <label>Current Status <span class="login-danger">*</span></label>
-                                                    <input class="form-control" name="current_status"
-                                                        [(ngModel)]="current_status" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-md-4">
-                                                <div class="form-group local-forms">
-                                                    <label>Status<span class="login-danger">*</span></label>
-                                                    <select class="form-control form-select-solid fw-bolder"
-                                                        name="status" [(ngModel)]="status"
-                                                        [ngModelOptions]="{standalone: true}">
-                                                        <option>-- Select --</option>
-                                                        <option value="inprogress">in progress</option>
-                                                        <option value="initiated">Initiated</option>
-                                                        <option value="mastered">mastered</option>
-                                                        <option value="on hold">On Hold</option>
-                                                        <option value="discontinued">Discontinued</option>
-                                                        <option value="maintenance">Maintenance</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-12 col-md-6">
-                                                <div class="form-group local-forms">
-                                                    <label>Date<span class="login-danger">*</span></label>
-                                                    <input class="form-control datetimepicker" name="date"
-                                                        [(ngModel)]="date" type="text" matInput
-                                                        [matDatepicker]="pickerDateLTO">
-                                                    <mat-datepicker #pickerDateLTO></mat-datepicker>
-                                                    <mat-datepicker-toggle matIconSuffix
-                                                        [for]="pickerDateLTO"></mat-datepicker-toggle>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-md-6">
-                                                <div class="form-group local-forms">
                                                     <label>LTO<span class="login-danger">*</span></label>
                                                     <select class="form-control form-select-solid fw-bolder" name="lto"
                                                         [(ngModel)]="lto" [ngModelOptions]="{standalone: true}">
@@ -97,6 +53,35 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            
+                                            <div class="col-xs-12 col-md-4">
+                                                <div class="form-group local-forms">
+                                                    <label>Status<span class="login-danger">*</span></label>
+                                                    <select class="form-control form-select-solid fw-bolder"
+                                                        name="status" [(ngModel)]="status"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                        <option>-- Select --</option>
+                                                        <option value="inprogress">in progress</option>
+                                                        <option value="initiated">Initiated</option>
+                                                        <option value="mastered">mastered</option>
+                                                        <option value="on hold">On Hold</option>
+                                                        <option value="discontinued">Discontinued</option>
+                                                        <option value="maintenance">Maintenance</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md-4">
+                                                <div class="form-group local-forms">
+                                                    <label>Date<span class="login-danger">*</span></label>
+                                                    <input class="form-control datetimepicker" name="date"
+                                                        [(ngModel)]="date" type="text" matInput
+                                                        [matDatepicker]="pickerDateLTO">
+                                                    <mat-datepicker #pickerDateLTO></mat-datepicker>
+                                                    <mat-datepicker-toggle matIconSuffix
+                                                        [for]="pickerDateLTO"></mat-datepicker-toggle>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
 
 
@@ -112,8 +97,6 @@
                                         <table class="table mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>Goal </th>
-                                                    <th>Current Status</th>
                                                     <th>LTO</th>
                                                     <th>Update LTO</th>
                                                     <th>Status</th>
@@ -123,12 +106,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let caregiver of training_goals; let i = index">
-                                                    <td>
-                                                        {{caregiver.goal}}
-                                                    </td>
-                                                    <td>
-                                                        {{caregiver.current_status}}
-                                                    </td>
+                                                    
                                                     <td>
                                                         {{caregiver.lto}}
                                                     </td>

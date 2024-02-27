@@ -68,7 +68,7 @@ export class BipattentionComponent {
     window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.client_id = resp.id;
-      this.patient_id= resp.id
+      // this.patient_id= resp.id
       // console.log(this.client_id);
      })
      this.getProfileBip();
@@ -98,6 +98,7 @@ export class BipattentionComponent {
       this.relationship = this.client_selected.patient.relationship;
       this.address = this.client_selected.patient.address;
       this.age = this.client_selected.patient.age;
+      
       this.birth_date = this.client_selected.patient.birth_date ? new Date(this.client_selected.patient.birth_date).toISOString(): ''; 
       
     });

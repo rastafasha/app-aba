@@ -130,17 +130,13 @@ export class MonitoringEvaluatingComponent {
 
   addDocument(){
     this.training_goals.push({
-      goal: this.goal,
       lto: this.lto,
-      date: this.date,
-      current_status: this.current_status,
       status: this.status,
+      date: this.date,
     })
-    this.goal = '';
     this.lto = '';
-    this.date = null;
-    this.current_status ='';
     this.status = '';
+    this.date = null;
   }
 
   deleteDocument(i:any){

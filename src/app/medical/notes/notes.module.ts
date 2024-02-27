@@ -10,13 +10,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ComponentsModule } from '../bip/components/components.module';
 import { NotesComponent } from './notes.component';
 import { NotesByClientComponent } from './notes-by-client/notes-by-client.component';
+import { EditNoteRbtComponent } from './edit-note-rbt/edit-note-rbt.component';
 
 
 @NgModule({
   declarations: [
     NotesComponent,
     NoteRbtComponent,
-    NotesByClientComponent
+    NotesByClientComponent,
+    EditNoteRbtComponent
   ],
   exports: [
     NotesComponent,

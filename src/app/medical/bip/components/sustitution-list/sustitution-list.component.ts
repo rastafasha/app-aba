@@ -45,6 +45,7 @@ export class SustitutionListComponent {
   public goalSustitutionId:any;
   public goalsustitid:any;
   public current_sustitution!:any;
+  public current_status!:any;
   public description!:any;
 
  
@@ -219,7 +220,7 @@ export class SustitutionListComponent {
       this.goal = this.goalSelected.goal;
       this.goals = this.goalSelected.data;
       this.description = this.goalSelected.description;
-      this.current_sustitution = this.goalSelected.current_sustitution;
+      this.current_status = this.goalSelected.current_status;
       // this.goals = resp.goalReductionPatientIds;
       // console.log(this.goals);
 
@@ -416,9 +417,9 @@ export class SustitutionListComponent {
     this.goalSelected = null;
     this.createSelected = null;
     this.goalSelectedSon = null;
-    this.current_sustitution = '';
+    this.current_status = '';
     this.goal = '',
-    this.current_sustitution = '',
+    this.current_status = '',
     this.description = '',
 
     this.sustitution_sto = '';
@@ -447,7 +448,7 @@ export class SustitutionListComponent {
       bip_id: this.bip_selectedIdd,
       patient_id: this.patient_id,
       goal: this.goal,
-      current_sustitution: this.current_sustitution,
+      current_status: this.current_status,
       goalstos: this.golstoSustiutions,
       goalltos: this.golltoSustiution,
       client_id: this.client_id,
@@ -491,7 +492,7 @@ export class SustitutionListComponent {
       bip_id: this.bip_selectedIdd,
       patient_id: this.patient_id,
       goal: this.goal,
-      current_sustitution: this.current_sustitution,
+      current_status: this.current_status,
       goalstos: this.golstoSustiutions,
       goalltos: this.golltoSustiution,
       client_id: this.client_id,

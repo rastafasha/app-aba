@@ -8,11 +8,11 @@ import { NoteRbtService } from '../services/note-rbt.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
 
 @Component({
-  selector: 'app-note-rbt',
-  templateUrl: './note-rbt.component.html',
-  styleUrls: ['./note-rbt.component.scss']
+  selector: 'app-edit-note-rbt',
+  templateUrl: './edit-note-rbt.component.html',
+  styleUrls: ['./edit-note-rbt.component.scss']
 })
-export class NoteRbtComponent {
+export class EditNoteRbtComponent {
   public routes = routes;
 
   valid_form:boolean = false;
@@ -37,6 +37,7 @@ export class NoteRbtComponent {
   doctor_id:any;
   patient_selected:any;
   client_selected:any;
+  note_selected:any;
   bip_id:any;
   user:any;
   
@@ -132,19 +133,17 @@ export class NoteRbtComponent {
     
     // window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
-      this.client_id = resp.id;
-      // this.patient_id= resp.patient_id;
-      // console.log(this.client_id);
+      this.note_id = resp.id;
      })
      this.getConfig();
-     this.getProfileBip();
+     this.getNote();
 
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
   }
 
-  
+ 
   getConfig(){
     this.noteRbtService.listConfigNote().subscribe((resp:any)=>{
       console.log(resp);
@@ -169,8 +168,40 @@ export class NoteRbtComponent {
     })
   }
 
+  getNote(){
+    this.noteRbtService.getNote(this.note_id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.note_selected = resp.noteRbt;
+      this.patient_id = this.note_selected.patient_id;
+
+      this.as_evidenced_by = this.note_selected.as_evidenced_by;
+      this.client_appeared = this.note_selected.client_appeared;
+      this.client_response_to_treatment_this_session = this.note_selected.client_response_to_treatment_this_session;
+      this.interventions = this.note_selected.interventions;
+      this.maladaptive = this.note_selected.maladaptive;
+      this.meet_with_client_at = this.note_selected.meet_with_client_at;
+      this.next_session_is_scheduled_for = this.note_selected.next_session_is_scheduled_for;
+      this.progress_noted_this_session_compared_to_previous_session = this.note_selected.progress_noted_this_session_compared_to_previous_session;
+      this.provider_name = this.note_selected.provider_name;
+      this.provider_signature = this.note_selected.provider_signature;
+      this.rbt_modeled_and_demonstrated_to_caregiver = this.note_selected.rbt_modeled_and_demonstrated_to_caregiver;
+      this.replacement = this.note_selected.replacement;
+      this.session_date = this.note_selected.session_date;
+      this.session_length_total = this.note_selected.session_length_total;
+      this.session_length_total2 = this.note_selected.session_length_total2;
+      this.supervisor_name = this.note_selected.supervisor_name;
+      this.supervisor_signature = this.note_selected.supervisor_signature;
+      this.time_in = this.note_selected.time_in;
+      this.time_in2 = this.note_selected.time_in2;
+      this.time_out = this.note_selected.time_out;
+      this.time_out2 = this.note_selected.time_out2;
+
+      this.getProfileBip();
+    })
+  }
+
   getProfileBip(){
-    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
+    this.bipService.showBipProfile(this.patient_id).subscribe((resp:any)=>{
       console.log(resp);
       this.client_selected = resp;
 
@@ -409,13 +440,9 @@ export class NoteRbtComponent {
     formData.append('maladaptive', JSON.stringify(this.maladaptives));
     formData.append('interventions', JSON.stringify(this.intervention_added));
 
-    formData.append('meet_with_client_at', this.meet_with_client_at);
-    formData.append('client_appeared', this.client_appeared);
     formData.append('as_evidenced_by', this.as_evidenced_by);
+    formData.append('client_appeared', this.client_appeared);
     formData.append('client_response_to_treatment_this_session', this.client_response_to_treatment_this_session);
-    formData.append('rbt_modeled_and_demonstrated_to_caregiver', this.rbt_modeled_and_demonstrated_to_caregiver);
-    formData.append('progress_noted_this_session_compared_to_previous_session', this.progress_noted_this_session_compared_to_previous_session);
-    formData.append('next_session_is_scheduled_for', this.next_session_is_scheduled_for);
     
     formData.append('imagen', this.FILE_SIGNATURE_RBT);
     formData.append('imagenn', this.FILE_SIGNATURE_BCBA);

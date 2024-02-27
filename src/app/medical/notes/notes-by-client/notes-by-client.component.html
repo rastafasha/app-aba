@@ -8,7 +8,7 @@
                     <ul class="breadcrumb">
                       <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Clients List</li>
+                        <li class="breadcrumb-item active">Rbt List by Client</li>
                     </ul>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                                                     <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
                                             </div>
                                             <div class="add-group">
-                                                <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a>
+                                                <!-- <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a> -->
                                                 <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
                                             </div>
                                         </div>
@@ -59,9 +59,9 @@
                                 <tbody>
                                     <tr *ngFor="let data of notesPatientList">
                                         
-                                      <td><a class="dropdown-item" [routerLink]="['/note/rbt/', data.id]">
+                                      <td>
                                         {{data.id }}
-                                      </a>
+                                        <!-- <a class="dropdown-item" [routerLink]="['/note/rbt/', data.id]"></a> -->
                                     </td>
                                       <td>{{data.patient_id}}</td>
                                     
@@ -72,8 +72,8 @@
                                             <div class="dropdown dropdown-action" *ngIf="data.id !=1">
                                                 <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" [routerLink]="['/note/rbt/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" [routerLink]="['/patients/profile/', data.id]"><i class="fa-solid fa-eye m-r-5"></i> View</a>
+                                                    <a class="dropdown-item" [routerLink]="['/note/edit/rbt/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Edit</a>
+                                                    <a class="dropdown-item" [routerLink]="['/note/rbt/view/', data.id]"><i class="fa-solid fa-eye m-r-5"></i> View</a>
                                                   
                                                     <a class="dropdown-item" href="javascript:void(0);" (click)="selectUser(data)" 
                                                     data-bs-toggle="modal" 
