@@ -60,6 +60,7 @@
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
+
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -85,7 +86,7 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Time In <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueTimeIn" name="time_in" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Hour">
+                                        <mat-select [(ngModel)]="selectedValueTimeIn" name="time_in" [ngModelOptions]="{standalone: true}" (onChange)="hourTimeInSelected($event)" class="form-control select"  placeholder="Select Hour">
                                             <mat-option *ngFor="let data of hours_days" [value]="data.id">
                                             {{data.name}}
                                             </mat-option>
@@ -97,7 +98,7 @@
                                     <div class="form-group local-forms">
                                         <label >Time Out <span class="login-danger">*</span></label>
                                         <!-- <input class="form-control" name="time_out"   [(ngModel)]="time_out" type="text"  > -->
-                                        <mat-select [(ngModel)]="selectedValueTimeOut" name="time_out" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Hour">
+                                        <mat-select [(ngModel)]="selectedValueTimeOut" name="time_out" [ngModelOptions]="{standalone: true}" (onChange)="hourTimeOutSelected($event)" class="form-control select"  placeholder="Select Hour">
                                             <mat-option *ngFor="let data of hours_days" [value]="data.id">
                                             {{data.name}}
                                             </mat-option>
@@ -130,6 +131,12 @@
                                     <div class="form-group local-forms">
                                         <label >Session Length Total<span class="login-danger">*</span></label>
                                         <input class="form-control" name="session_length_total"   [(ngModel)]="session_length_total" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Session Length Total<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="session_length_total2"   [(ngModel)]="session_length_total2" type="text"  >
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -168,16 +175,36 @@
                                                 <th># of  Occurrences   </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody *ngIf="!maladaptiveSelected">
                                             
                                             <tr *ngFor="let behavior of maladaptives; let i = index">
                                                 <td>
                                                     {{behavior.maladaptive}}
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}" (selectionChange)="selectMaladaptive($event)"   [(ngModel)]="selectedValueMaladaptive" type="number"  >
+                                                    {{behavior.number_of_occurrences}}
+                                                    <!-- <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}" (selectionChange)="selectMaladaptive(behavior)"   [(ngModel)]="selectedValueMaladaptive" type="number"  > -->
                                                 </td>
+                                                <td>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="selectMaladaptive(behavior)"><i class="fa fa-edit"></i></button>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                        <tbody *ngIf="maladaptiveSelected">
+                                            
+                                            <tr >
+                                                <td>
+                                                    {{maladaptiveSelected.maladaptive}}
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}"    [(ngModel)]="number_of_occurrences" type="number"  >
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="addMaladaptive()">Save</button>
                                                 
+                                                </td>
                                             </tr>
                                             
                                         </tbody>
@@ -203,7 +230,7 @@
                         <div class="container">
                             <form autocomplete="false">
                                 <!-- Replacements -->
-                                <div class="table-responsive">
+                                <div class="table-responsive" >
                                     <table class="table mb-0">
                                         <thead>
                                             <tr>
@@ -212,17 +239,39 @@
                                                 <th># of correct responses</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <!--  -->
+                                        <tbody *ngIf="!replacementSelected">
                                             <tr *ngFor="let replacemen of replacementGoals; let i = index">
-                                                <td>
+                                                <td >
                                                     {{replacemen.goal}}
+                                                </td>
+                                                <td *ngIf="replacemen.total_trials > 0">
+                                                    {{replacemen.total_trials}}
+                                                </td>
+                                                <td *ngIf="replacemen.number_of_correct_response > 0">
+                                                    {{replacemen.number_of_correct_response}}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="selectReplacement(replacemen)"><i class="fa fa-edit"></i></button>
+                                                </td>
+                                                
+                                            </tr>
+                                            
+                                        </tbody>
+                                        <tbody *ngIf="replacementSelected">
+                                            <!--  -->
+                                            <tr>
+                                                <td>
+                                                    {{replacementSelected.goal}}
                                                 </td>
                                                 <td>
                                                     <input class="form-control" name="total_trials " [ngModelOptions]="{standalone: true}"   [(ngModel)]="total_trials" type="number"  >
                                                 </td>
                                                 <td>
                                                     <input class="form-control" name="number_of_correct_response " [ngModelOptions]="{standalone: true}"   [(ngModel)]="number_of_correct_response" type="number"  >
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="addReplacement()">Save</button>
                                                 </td>
                                                 
                                             </tr>
@@ -249,34 +298,6 @@
                         </div>
                         <div class="container">
                             <form autocomplete="false">
-                                <!-- Interventions -->
-                                <!-- <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Interventions  </th>
-                                                <th># </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                            <tr >
-                                                <td>
-                                                    Pairing
-                                                </td>
-                                                <td>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        [checked]="pairing== true"
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="pairing"  class="check" name="pairing"  [ngModelOptions]="{standalone: true}" [(ngModel)]="pairing">
-                                                        <label _ngcontent-rhp-c92="" for="pairing" class="checktoggle"  value="true">checkbox</label>
-                                                    </div>
-                                                </td>
-                                                
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div> -->
 
                                 <div class="col-xs-12">  
                                     <div class="row">  

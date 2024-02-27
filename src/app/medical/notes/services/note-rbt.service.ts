@@ -34,6 +34,11 @@ export class NoteRbtService {
     let URL = url_servicios+'/note_rbt/store';
     return this.http.post(URL,data, {headers:headers});
   }
+  createReplacementNote(data){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/note_rbt/storeReplacemts';
+    return this.http.post(URL,data, {headers:headers});
+  }
   editNote( data:any, client_id:any,){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
     let URL = url_servicios+'/note_rbt/update/'+client_id;
