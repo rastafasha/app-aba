@@ -89,7 +89,7 @@
 
                                       <span *ngIf="data.status === 'active'">
                                         <button class="btn btn-outline-success" [routerLink]="['/bip/attention/', data.id]">Access BIP</button>
-                                        <button class="btn btn-outline-success" [routerLink]="['/note/rbt/', data.patient_id]">RBT Note</button>
+                                        <button class="btn btn-outline-success" [routerLink]="['/note/rbt/', data.id]">RBT Note</button>
                                         <button class="btn btn-outline-success" [routerLink]="['/note/listbyclient/', data.patient_id]">RBT Note list</button>
                                       </span>
                                   </td>

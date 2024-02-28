@@ -180,21 +180,25 @@ export class EditNoteRbtComponent {
       this.interventions = this.note_selected.interventions;
       this.maladaptive = this.note_selected.maladaptive;
       this.meet_with_client_at = this.note_selected.meet_with_client_at;
-      this.next_session_is_scheduled_for = this.note_selected.next_session_is_scheduled_for;
       this.progress_noted_this_session_compared_to_previous_session = this.note_selected.progress_noted_this_session_compared_to_previous_session;
       this.provider_name = this.note_selected.provider_name;
       this.provider_signature = this.note_selected.provider_signature;
       this.rbt_modeled_and_demonstrated_to_caregiver = this.note_selected.rbt_modeled_and_demonstrated_to_caregiver;
       this.replacement = this.note_selected.replacement;
+      
       this.session_date = this.note_selected.session_date;
+      // this.session_date = this.note_selected.session_date ? new Date(this.note_selected.session_date).toISOString(): '';
+      this.next_session_is_scheduled_for = this.note_selected.next_session_is_scheduled_for ;
+      // this.next_session_is_scheduled_for = this.note_selected.next_session_is_scheduled_for ? new Date(this.note_selected.next_session_is_scheduled_for).toISOString(): '';
+      
       this.session_length_total = this.note_selected.session_length_total;
       this.session_length_total2 = this.note_selected.session_length_total2;
       this.supervisor_name = this.note_selected.supervisor_name;
       this.supervisor_signature = this.note_selected.supervisor_signature;
-      this.time_in = this.note_selected.time_in;
-      this.time_in2 = this.note_selected.time_in2;
-      this.time_out = this.note_selected.time_out;
-      this.time_out2 = this.note_selected.time_out2;
+      this.selectedValueTimeIn = this.note_selected.time_in;
+      this.selectedValueTimeOut = this.note_selected.time_in2;
+      this.selectedValueTimeIn2 = this.note_selected.time_out;
+      this.selectedValueTimeOut2 = this.note_selected.time_out2;
 
       this.getProfileBip();
     })
