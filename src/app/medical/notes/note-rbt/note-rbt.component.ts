@@ -6,6 +6,7 @@ import { GoalService } from '../../bip/service/goal.service';
 import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { NoteRbtService } from '../services/note-rbt.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-note-rbt',
@@ -115,8 +116,9 @@ export class NoteRbtComponent {
 
   maladaptiveSelected:any =null;
   replacementSelected:any =null;
-  maladp_added:any =null;
-  replacement_added:any =null;
+  maladp_added:any =[];
+  replacement_added:any =[];
+  maladaptive_behavior:any =null;
 
   constructor(
     public bipService:BipService,
@@ -133,8 +135,6 @@ export class NoteRbtComponent {
     // window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.client_id = resp.id;
-      // this.patient_id= resp.patient_id;
-      // console.log(this.client_id);
      })
      this.getConfig();
      this.getProfileBip();
@@ -147,45 +147,47 @@ export class NoteRbtComponent {
   
   getConfig(){
     this.noteRbtService.listConfigNote().subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
 
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
       this.hours_days = resp.hours;
-      this.maladaptives = resp.maladaptives;
-      this.maladaptivename = resp.maladaptives.maladaptive;
-      this.replacementGoals = resp.replacementGoals;
-      this.replacementName = resp.replacementGoals.goal;
-      this.replacements = resp.replacements;
-      this.bip_id = resp.replacementGoals[0].bip_id;
       
-      if (this.bip_id == null){
-        alert('Selecione um BIP para continuar!')
-        // this.router.navigate(['     /profile-bip']);
-          }
-          // else{
-          //     this.getData()
-          //   }
     })
   }
 
   getProfileBip(){
     this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.client_selected = resp;
 
       this.first_name = this.client_selected.patient.first_name;
       this.last_name = this.client_selected.patient.last_name;
       this.patient_id = resp.patient.patient_id;
-      console.log(this.patient_id);  
+      // console.log(this.patient_id);  
       this.diagnosis_code = this.client_selected.patient.diagnosis_code;  
-
+      this.getMaladaptivesBipByPatientId();
+      this.getReplacementsByPatientId();
     });
+  }
+
+  getMaladaptivesBipByPatientId(){
+    this.bipService.getBipProfilePatient_id(this.patient_id).subscribe((resp:any)=>{
+      // console.log(resp);
+      this.maladaptives = resp.bip.maladaptives;
+      this.bip_id = resp.bip.id;
+    })
+  }
+  getReplacementsByPatientId(){
+    this.noteRbtService.showReplacementbyPatient(this.patient_id).subscribe((resp:any)=>{
+      // console.log(resp);
+      this.replacementGoals = resp.replacementGoals;
+    })
   }
 
   specialistData(selectedValueInsurer){
     this.doctorService.showDoctorProfile(selectedValueInsurer).subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.provider_credential = resp.doctor.certificate_number;
       // this.notes = resp.notes;
       // this.services = resp.services;
@@ -201,17 +203,17 @@ export class NoteRbtComponent {
 
   hourTimeInSelected(value:number){
     this.selectedValueTimeIn = value;
-    console.log(value);
+    // console.log(value);
   }
   hourTimeOutSelected(value:number){
     this.selectedValueTimeOut = value;
-    console.log(value);
+    // console.log(value);
 
   }
 
   selectMaladaptive(behavior:any){
     this.maladaptiveSelected = behavior;
-    console.log(behavior);
+    // console.log(behavior);
     // this.maladp_added.push({
     //   maladaptive : behavior
     // })
@@ -219,7 +221,7 @@ export class NoteRbtComponent {
 
   selectReplacement(replacemen:any){
     this.replacementSelected = replacemen;
-    console.log(this.replacementSelected);
+    // console.log(this.replacementSelected);
     // this.replacement_added.push({
     //   replacement : replacemen
     // })
@@ -243,43 +245,32 @@ export class NoteRbtComponent {
       total_trials: this.total_trials,
       number_of_correct_response: this.number_of_correct_response,
     })
+    if(this.replacementGoals.length > 1){
+      this.replacementGoals.splice(this.replacementGoals,1);
+    }
     this.replacementSelected = null;
     this.goal = '';
     this.total_trials = null;
     this.number_of_correct_response = null;
   }
+
   addMaladaptive(){
     this.maladaptives.push({
-      maladaptive: this.maladaptiveSelected.maladaptive,
+      maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
       number_of_occurrences: this.number_of_occurrences,
     })
+    if(this.maladaptives.length > 1){
+      this.maladaptives.splice(this.maladaptives,1);
+    }
     this.maladaptiveSelected = null;
-    this.maladaptive = '';
+    this.maladaptive_behavior = '';
     this.number_of_occurrences = null;
   }
 
-  deleteLTOGoal(i:any){
+  deleteMaladaptive(i:any){
     this.replacementGoals.splice(i,1);
   }
 
-  cambiarStatus(goalsto:any){
-    // this.status_sto_edit = goalsto;
-    // console.log(this.status_sto_edit.status_sto);
-
-    // let data ={
-    //   goalstos: this.golsto,
-    //   goalltos: this.gollto,
-    // }
-    
-    // this.goalService.editGoal(data, this.goalmaladaptiveid).subscribe(
-    //   resp =>{
-    //     // console.log(resp);
-    //     // this.getTableData();
-    //     Swal.fire('Updated', `Goal Updated successfully!`, 'success');
-    //     this.ngOnInit();
-    //   }
-    // )
-  }
 
   
 
@@ -302,6 +293,7 @@ export class NoteRbtComponent {
     if(this.intervention_added.length > 1){
       this.intervention_added.splice(this.intervention_added,1);
     }
+    Swal.fire('Updated', ` Interventions Added`, 'success');
   }
 
   //funcion para la primera imagen.. funciona
@@ -330,36 +322,7 @@ export class NoteRbtComponent {
   }
 
   
-
-
-  saveReplacement(){
-    this.text_validation = '';
-    let formData = new FormData();
-    formData.append('patient_id', this.patient_id);
-    formData.append('doctor_id', this.doctor_id);
-    // formData.append('note_rbt_id', this.note_rbt_id);
-
-    formData.append('replacement', this.replacementSelected.goal);
-    formData.append('total_trials', this.total_trials+'');
-    formData.append('number_of_correct_response', this.number_of_correct_response+'');
-
-    
-    
-    this.noteRbtService.createReplacementNote(formData).subscribe((resp:any)=>{
-      // console.log(resp);
-      
-      if(resp.message == 403){
-        this.text_validation = resp.message_text;
-      }else{
-        this.text_success = 'Employer created';
-        // this.ngOnInit();
-        // this.router.navigate(['/doctors/list']);
-      }
-    })
-
-
-  }
-  save(){debugger
+  save(){
     this.text_validation = '';
     // if(!this.name||!this.email ||!this.surname ){
     //   this.text_validation = 'Los campos con * son obligatorios';
@@ -391,22 +354,16 @@ export class NoteRbtComponent {
     formData.append('time_out', this.selectedValueTimeOut+'');
     formData.append('time_in2', this.selectedValueTimeIn2+'');
     formData.append('time_out2', this.selectedValueTimeOut2+'');
-    // formData.append('session_length_total',  this.selectedValueTimeIn + this.selectedValueTimeOut + this.selectedValueTimeIn2 + this.selectedValueTimeOut2);
+    
     formData.append('environmental_changes', this.environmental_changes);
     
-    // formData.append('maladaptive', this.maladaptiveSelected.maladaptive);
-    // formData.append('number_of_occurrences', this.number_of_occurrences+'');
-    // formData.append('replacement', this.replacementSelected.goal);
-    // formData.append('replacement', this.replacementSelected.goal);
-    // formData.append('total_trials', this.total_trials+'');
-    // formData.append('number_of_correct_response', this.number_of_correct_response+'');
 
     formData.append('provider_name_g', this.selectedValueProviderName);
     formData.append('provider_name', this.selectedValueRBT);
     formData.append('supervisor_name', this.selectedValueBCBA);
 
-    formData.append('replacement', JSON.stringify(this.replacementGoals));
-    formData.append('maladaptive', JSON.stringify(this.maladaptives));
+    formData.append('replacements', JSON.stringify(this.replacementGoals));
+    formData.append('maladaptives', JSON.stringify(this.maladaptives));
     formData.append('interventions', JSON.stringify(this.intervention_added));
 
     formData.append('meet_with_client_at', this.meet_with_client_at);
@@ -429,6 +386,7 @@ export class NoteRbtComponent {
       }else{
         this.text_success = 'Employer created';
         // this.ngOnInit();
+        Swal.fire('Created', ` Note Rbt Created`, 'success');
         this.router.navigate(['/note/listbyclient/',this.patient_id]);
       }
     })

@@ -55,6 +55,11 @@ export class NoteRbtService {
     let URL = url_servicios+"/note_rbt/byprofile/"+patient_id;
     return this.http.get(URL,{headers:headers});
   }
+  showReplacementbyPatient(patient_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let URL = url_servicios+"/note_rbt/showReplacementBypatient/"+patient_id;
+    return this.http.get(URL,{headers:headers});
+  }
   showNotebyClient(client_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
     let URL = url_servicios+"/note_rbt/byclient/"+client_id;

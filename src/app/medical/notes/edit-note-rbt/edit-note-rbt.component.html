@@ -6,7 +6,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/patients/list">Clients List </a></li>
+                        <li class="breadcrumb-item active"><a routerLink="/patients/list">Client List / </a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="['/note/listbyclient/', patient_id]">Note Rbt List </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active"> Edit RBT Note </li>
                     </ul>
@@ -177,13 +178,12 @@
                                         </thead>
                                         <tbody *ngIf="!maladaptiveSelected">
                                             
-                                            <tr *ngFor="let behavior of maladaptives; let i = index">
+                                            <tr *ngFor="let behavior of maladaptivegroup; let i = index">
                                                 <td>
-                                                    {{behavior.maladaptive}}
+                                                    {{behavior.maladaptive_behavior}}
                                                 </td>
                                                 <td>
                                                     {{behavior.number_of_occurrences}}
-                                                    <!-- <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}" (selectionChange)="selectMaladaptive(behavior)"   [(ngModel)]="selectedValueMaladaptive" type="number"  > -->
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="selectMaladaptive(behavior)"><i class="fa fa-edit"></i></button>
@@ -191,11 +191,12 @@
                                             </tr>
                                             
                                         </tbody>
+                                        
                                         <tbody *ngIf="maladaptiveSelected">
                                             
                                             <tr >
                                                 <td>
-                                                    {{maladaptiveSelected.maladaptive}}
+                                                    {{maladaptiveSelected.maladaptive_behavior}}
                                                 </td>
                                                 <td>
                                                     <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}"    [(ngModel)]="number_of_occurrences" type="number"  >
@@ -240,7 +241,7 @@
                                             </tr>
                                         </thead>
                                         <tbody *ngIf="!replacementSelected">
-                                            <tr *ngFor="let replacemen of replacementGoals; let i = index">
+                                            <tr *ngFor="let replacemen of replacementgroup; let i = index">
                                                 <td >
                                                     {{replacemen.goal}}
                                                 </td>

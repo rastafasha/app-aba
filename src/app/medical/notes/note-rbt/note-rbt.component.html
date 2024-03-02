@@ -179,7 +179,7 @@
                                             
                                             <tr *ngFor="let behavior of maladaptives; let i = index">
                                                 <td>
-                                                    {{behavior.maladaptive}}
+                                                    {{behavior.maladaptive_behavior}}
                                                 </td>
                                                 <td>
                                                     {{behavior.number_of_occurrences}}
@@ -191,11 +191,26 @@
                                             </tr>
                                             
                                         </tbody>
+                                        <!-- <tbody *ngIf="!maladaptiveSelected">
+                                            
+                                            <tr *ngFor="let behavior of maladp_added; let i = index">
+                                                <td>
+                                                    {{behavior.maladaptive_behavior}}
+                                                </td>
+                                                <td>
+                                                    {{behavior.number_of_occurrences}}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="selectMaladaptive(behavior)"><i class="fa fa-edit"></i></button>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody> -->
                                         <tbody *ngIf="maladaptiveSelected">
                                             
                                             <tr >
                                                 <td>
-                                                    {{maladaptiveSelected.maladaptive}}
+                                                    {{maladaptiveSelected.maladaptive_behavior}}
                                                 </td>
                                                 <td>
                                                     <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}"    [(ngModel)]="number_of_occurrences" type="number"  >
@@ -257,6 +272,24 @@
                                             </tr>
                                             
                                         </tbody>
+                                        <!-- <tbody *ngIf="!replacementSelected">
+                                            <tr *ngFor="let replacemen of replacement_added; let i = index">
+                                                <td >
+                                                    {{replacemen.goal}}
+                                                </td>
+                                                <td *ngIf="replacemen.total_trials > 0">
+                                                    {{replacemen.total_trials}}
+                                                </td>
+                                                <td *ngIf="replacemen.number_of_correct_response > 0">
+                                                    {{replacemen.number_of_correct_response}}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="selectReplacement(replacemen)"><i class="fa fa-edit"></i></button>
+                                                </td>
+                                                
+                                            </tr>
+                                            
+                                        </tbody> -->
                                         <tbody *ngIf="replacementSelected">
                                             <!--  -->
                                             <tr>

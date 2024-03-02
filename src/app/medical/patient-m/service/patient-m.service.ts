@@ -96,5 +96,33 @@ export class PatientMService {
     let URL = url_servicios+"/patients/update/eligibility/"+client_id;
     return this.http.put(URL,data,{headers:headers});
   }
+
+
+  //files
+
+
+  storeLaboratory(data:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let URL = url_servicios+"/patient_file/store";
+    return this.http.post(URL,data, {headers:headers});
+  }
+
+  getLaboratoryByPatient(patient_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let URL = url_servicios+"/patient_file/showBypatient/"+patient_id;
+    return this.http.get(URL,{headers:headers});
+  }
+
+  editLaboratory(data:any, laboratory_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let URL = url_servicios+"/patient_file/update/"+laboratory_id;
+    return this.http.post(URL,data,{headers:headers});
+  }
+
+  deleteLaboratory(laboratory_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let URL = url_servicios+"/patient_file/delete-file/"+laboratory_id;
+    return this.http.delete(URL, {headers:headers});
+  }
   
 }

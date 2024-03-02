@@ -6,9 +6,10 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+                      <li class="breadcrumb-item active"><a routerLink="/">Dashboard /</a></li>
+                      <li class="breadcrumb-item active"><a routerLink="/patients/list">Client List / </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Rbt List by Client</li>
+                        <li class="breadcrumb-item active">Rbt Notes List by Client</li>
                     </ul>
                 </div>
             </div>
@@ -26,7 +27,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="doctor-table-blk">
-                                        <h3>Clients List</h3>
+                                        <h3>Rbt Notes List by Client</h3>
                                         <div class="doctor-search-blk">
                                             <div class="top-nav-search table-search-blk">
                                                     <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
@@ -52,6 +53,10 @@
                                         
                                         <th mat-sort-header="Id">Id</th>
                                       <th mat-sort-header="patient_id">patient_id</th>
+                                      <th mat-sort-header="session_date">Session Date</th>
+                                      <th mat-sort-header="next_session">Next Session</th>
+                                      <th mat-sort-header="session_length_total">Session 1 total</th>
+                                      <th mat-sort-header="session_length_total2">Session 2 total</th>
                                       <th mat-sort-header="created">Created At</th>
                                          <th ></th> <!--acciones -->
                                     </tr>
@@ -64,12 +69,14 @@
                                         <!-- <a class="dropdown-item" [routerLink]="['/note/rbt/', data.id]"></a> -->
                                     </td>
                                       <td>{{data.patient_id}}</td>
-                                    
-                                        <!-- <td>{{data.permision_pluck.length > 0 ? data.permision_pluck: 'TODOS LOS PERMISOS' }}</td> -->
+                                      <td>{{data.session_date |date}}</td>
+                                      <td>{{data.next_session_is_scheduled_for|date}}</td>
+                                      <td>{{data.session_length_total}}</td>
+                                      <td>{{data.session_length_total2}}</td>
                                         <td>{{data.created_at | date }}</td>
                                         
                                         <td class="text-end">
-                                            <div class="dropdown dropdown-action" *ngIf="data.id !=1">
+                                            <div class="dropdown dropdown-action" >
                                                 <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item" [routerLink]="['/note/edit/rbt/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Edit</a>
@@ -90,7 +97,7 @@
                                               <div class="modal-content">
                                                   <div class="modal-body text-center">
                                                       <img src="assets/img/sent.png" alt="" width="50" height="46">
-                                                      <h3 *ngIf="patient_selected">Are you sure want to delete this patient {{patient_selected.email}}?</h3>
+                                                      <h3 *ngIf="note_selected">Are you sure want to delete this note rbt {{note_selected.session_date|date}}?</h3>
                                                       <!-- validacion si esta en uso -->
                                                       <div class="form-group row" *ngIf="text_validation">
                                                         <div class="col-md-12">

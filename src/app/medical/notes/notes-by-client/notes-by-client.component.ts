@@ -6,7 +6,7 @@ import { DoctorService } from '../../doctors/service/doctor.service';
 import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { NoteRbtService } from '../services/note-rbt.service';
 import { MatTableDataSource } from '@angular/material/table';
-
+declare var $:any;  
 @Component({
   selector: 'app-notes-by-client',
   templateUrl: './notes-by-client.component.html',
@@ -18,6 +18,7 @@ export class NotesByClientComponent {
   doctor_id:any;
   patient_selected:any;
   client_selected:any;
+  note_selected:any;
   bip_id:any;
   note_id:any;
   user:any;
@@ -38,6 +39,7 @@ export class NotesByClientComponent {
   public pageNumberArray: Array<number> = [];
   public pageSelection: Array<any> = [];
   public totalPages = 0;
+  public text_validation:any;
   
   constructor(
     public bipService:BipService,
@@ -178,6 +180,33 @@ export class NotesByClientComponent {
       this.pageNumberArray.push(i);
       this.pageSelection.push({ skip: skip, limit: limit });
     }
+  }
+  selectUser(note:any){
+    this.note_selected = note;
+  }
+  deleteRol(){
+    this.noteRbtService.deleteNote(this.note_selected.id).subscribe((resp:any)=>{
+      // console.log(resp);
+
+      if(resp.message == 403){
+        this.text_validation = resp.message_text;
+      }else{
+
+        let INDEX = this.notesPatientList.findIndex((item:any)=> item.id == this.note_selected.id);
+      if(INDEX !=-1){
+        this.notesPatientList.splice(INDEX,1);
+
+        $('#delete_patient').hide();
+        $("#delete_patient").removeClass("show");
+        $(".modal-backdrop").remove();
+        $("body").removeClass();
+        $("body").removeAttr("style");
+        this.note_selected = null;
+      }
+      }
+
+      
+    })
   }
 
 }

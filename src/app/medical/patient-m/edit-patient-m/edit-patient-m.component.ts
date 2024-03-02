@@ -150,6 +150,8 @@ export class EditPatientMComponent {
   public insurance_id:any;
   public id:any;
 
+  FILES:any = [];
+  FilesAdded:any = [];
   
   constructor(
     public patientService:PatientMService,
@@ -285,6 +287,11 @@ showUser(){
         this.pa_assessmentgroup = jsonObj;
 
         this.insuranceData(this.selectedValueInsurer);//pide el insurance guardado para el request de la lista inicial
+
+        this.patientService.getLaboratoryByPatient(this.patient_id).subscribe((resp:any)=>{
+          console.log(resp);
+          this.FilesAdded = resp.patientFiles.data;
+        })
     })
   }
 
@@ -346,31 +353,61 @@ showUser(){
     reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
   }
 
-  loadFileDoctorR($event:any){
-    if($event.target.files[0].type.indexOf("image")){
-      this.text_validation = 'Solamente pueden ser archivos de tipo pdf';
-      return;
+  
+  processFile($event:any){
+    for (const file of $event.target.files){
+      this.FILES.push(file);
     }
-    this.text_validation = '';
-    this.FILE_AVATAR = $event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(this.FILE_AVATAR);
-    reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
+    // console.log(this.FILES);
+  
   }
-  loadFileMedicalNote($event:any){
-    if($event.target.files[0].type.indexOf("image")){
-      this.text_validation = 'Solamente pueden ser archivos de tipo pdf';
-      return;
-    }
-    this.text_validation = '';
-    this.FILE_AVATAR = $event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(this.FILE_AVATAR);
-    reader.onloadend = ()=> this.IMAGE_PREVISUALIZA = reader.result;
+
+  deleteFile(FILE:any){
+    this.FilesAdded.splice(FILE,1);
+    this.patientService.deleteLaboratory(FILE.id).subscribe((resp:any)=>{
+      this.showUser();
+    })
   }
+  
 //files
 //update function
 
+
+saveFiles(){
+  this.text_validation = '';
+  // if(!this.first_name ||!this.last_name || !this.client_id ){
+  //   this.text_validation = 'Los campos con * son obligatorios';
+  //   return;
+  // }
+
+
+  // this.valid_form = false;
+  let formData = new FormData();
+
+  formData.append('patient_id', this.patient_id);
+  
+  this.FILES.forEach((file:any, index:number)=>{
+    formData.append("files["+index+"]", file);
+  });
+
+  this.valid_form_success = false;
+  this.text_validation = '';
+
+  this.patientService.storeLaboratory(formData).subscribe((resp:any)=>{
+    // console.log(resp);
+    if(resp.message == 403){
+      this.text_validation = resp.message_text;
+      // Swal.fire('Error al eliminar', `resp.message_text`, 'error');
+    }else{
+      // this.text_success = "Patient Has updated";
+      Swal.fire('Updated', ` Patient Has updated`, 'success');
+      this.ngOnInit();
+      // this.router.navigate(['/patients/list']);
+    }
+  })
+
+
+}
 
   save(){
     this.text_validation = '';
@@ -543,6 +580,8 @@ showUser(){
     if(this.FILE_AVATAR){
       formData.append('imagen', this.FILE_AVATAR);
     }
+
+   
 
     this.valid_form_success = false;
     this.text_validation = '';
