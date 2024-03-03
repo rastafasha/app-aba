@@ -51,8 +51,6 @@
                                 <thead>
                                     <tr>
                                         
-                                        <th mat-sort-header="Id">Id</th>
-                                      <th mat-sort-header="patient_id">patient_id</th>
                                       <th mat-sort-header="session_date">Session Date</th>
                                       <th mat-sort-header="next_session">Next Session</th>
                                       <th mat-sort-header="session_length_total">Session 1 total</th>
@@ -65,11 +63,10 @@
                                     <tr *ngFor="let data of notesPatientList">
                                         
                                       <td>
-                                        {{data.id }}
-                                        <!-- <a class="dropdown-item" [routerLink]="['/note/rbt/', data.id]"></a> -->
-                                    </td>
-                                      <td>{{data.patient_id}}</td>
-                                      <td>{{data.session_date |date}}</td>
+                                        <a class="dropdown-item" [routerLink]="['/note/rbt/view/', data.id]">
+                                          {{data.session_date |date}}
+                                        </a>
+                                      </td>
                                       <td>{{data.next_session_is_scheduled_for|date}}</td>
                                       <td>{{data.session_length_total}}</td>
                                       <td>{{data.session_length_total2}}</td>

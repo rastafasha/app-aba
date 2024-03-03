@@ -65,55 +65,66 @@ export class BipProfileComponent {
     this.option_selected = value;
   }
 
-  public convertToPdf(): void {
-    const data = this.contentToConvert.nativeElement;
-    html2canvas(data).then(canvas => {
-      // Few necessary setting options
-      const imgWidth = 208;
-      const pageHeight = 295;
-      const imgHeight = canvas.height * imgWidth / canvas.width;
-      const heightLeft = imgHeight;
+  // public convertToPdf(): void {
+  //   const data = this.contentToConvert.nativeElement;
+  //   html2canvas(data).then(canvas => {
+  //     // Few necessary setting options
+  //     const imgWidth = 208;
+  //     const pageHeight = 295;
+  //     const imgHeight = canvas.height * imgWidth / canvas.width;
+  //     const heightLeft = imgHeight;
 
-      const margins = {
-        top: 40,
-        bottom: 60,
-        left: 40,
-        width: 522
-      };
+  //     const margins = {
+  //       top: 40,
+  //       bottom: 60,
+  //       left: 40,
+  //       width: 522
+  //     };
 
-      // Create a new PDF document
-      const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-      // const pdf = new jspdf.jsPDF('p', 'pt', 'letter');
+  //     // Create a new PDF document
+  //     const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+  //     // const pdf = new jspdf.jsPDF('p', 'pt', 'letter');
 
-      // Add an image of the canvas to the PDF
-      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
+  //     // Add an image of the canvas to the PDF
+  //     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
 
-      // Save the PDF
-      pdf.save('bip_'+this.patient_selected.patient_id+".pdf");
-    });
-  }
+  //     // Save the PDF
+  //     pdf.save('bip_'+this.patient_selected.patient_id+".pdf");
+  //   });
+  // }
 
   
-  generatePdf() {
-    let jsPdf = new jspdf.jsPDF('p', 'pt', 'letter');
-    var htmlElement = document.getElementById('contentToConvert');
-    // you need to load html2canvas (and dompurify if you pass a string to html)
-    const options = {
-        callback: function (jsPdf) {
-            jsPdf.save('bip_'+this.patient_selected.patient_id+".pdf");
-            // to open the generated PDF in browser window
-            // window.open(jsPdf.output('bloburl'));
-        },
-        margin: [10, 10, 10, 10],
-        autoPaging: 'text',
-        html2canvas: {
-            allowTaint: true,
-            dpi: 300,
-            letterRendering: true,
-            logging: false,
-            scale: .8
-        }
-    };
+ 
 
+public convertToPdf(): void {
+  const data = this.contentToConvert.nativeElement;
+
+    html2canvas(data).then(canvas => {
+    // Few necessary setting options
+    const imgWidth = 210;
+    const pageHeight = 295;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+    var heightLeft = imgHeight;
+
+    // Create a new PDF document
+    const pdf = new jspdf.jsPDF('p', 'mm');
+    var position = 0;
+
+    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    // Save the PDF
+    pdf.save('bip_'+this.patient_selected.patient_id+".pdf");
+    // pdf.save('note_rbt_client_'+this.patient_selected.patient_id+'_'+this.patient_selected.last_name+".pdf");
+  });
+
+    
 }
 }

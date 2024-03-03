@@ -4,6 +4,7 @@ import { NotesComponent } from './notes.component';
 import { NoteRbtComponent } from './note-rbt/note-rbt.component';
 import { NotesByClientComponent } from './notes-by-client/notes-by-client.component';
 import { EditNoteRbtComponent } from './edit-note-rbt/edit-note-rbt.component';
+import { NoteRbtViewComponent } from './note-rbt-view/note-rbt-view.component';
 
 const routes: Routes = [
   {path:'', component:NotesComponent,
@@ -16,6 +17,9 @@ const routes: Routes = [
     },
     {
       path:'listbyclient/:id', component:NotesByClientComponent
+    },
+    {
+      path:'rbt/view/:id', component:NoteRbtViewComponent
     },
     
   ]

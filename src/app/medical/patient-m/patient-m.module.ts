@@ -11,8 +11,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ProfilePatientMComponent } from './profile-patient-m/profile-patient-m.component';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
-
+import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
 @NgModule({
   declarations: [
     PatientMComponent,
@@ -35,7 +36,9 @@ import { ProfilePatientMComponent } from './profile-patient-m/profile-patient-m.
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    PipesModule,
+    PdfViewerModule
   ]
 })
 export class PatientMModule { }

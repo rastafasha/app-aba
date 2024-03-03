@@ -4,7 +4,10 @@ import { routes } from 'src/app/shared/routes/routes';
 import { PatientMService } from '../service/patient-m.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import Swal from 'sweetalert2';
+import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 // declare function alertClose():any;
+declare var $:any;  
 @Component({
   selector: 'app-edit-patient-m',
   templateUrl: './edit-patient-m.component.html',
@@ -18,6 +21,8 @@ export class EditPatientMComponent {
   public selectedValueCode!: string;
   option_selected:number = 0;
 
+  pdfSource =  "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+  imagenSerUrl = environment.url_media;
   public patient_id: any;
   public f: string = '';
   
@@ -144,6 +149,9 @@ export class EditPatientMComponent {
   public insurances_name:any;
   public code:any;
   public insuranceiddd:any;
+  public file_selected:any;
+  public doc:any;
+  public FILE:any;
   
   // public insurance:any;
   // public insurer_name: any;
@@ -152,12 +160,16 @@ export class EditPatientMComponent {
 
   FILES:any = [];
   FilesAdded:any = [];
+  sanitizedUrl: any;
+  domSanitizer: any;
   
   constructor(
     public patientService:PatientMService,
     public router: Router,
     public ativatedRoute: ActivatedRoute,
     public insuranceService: InsuranceService,
+    private readonly sanitizer: DomSanitizer,
+    private _sanitizer: DomSanitizer,
 
   ){
 
@@ -362,14 +374,49 @@ showUser(){
   
   }
 
+  deleteDocument(i:any){
+    this.FILES.splice(i,1);
+  }
+
   deleteFile(FILE:any){
     this.FilesAdded.splice(FILE,1);
     this.patientService.deleteLaboratory(FILE.id).subscribe((resp:any)=>{
       this.showUser();
     })
   }
-  
+  selectDoc(FILE:any){
+    this.file_selected = FILE;
+  }
+
+  getDocumentIframe(url) {
+    var document, results;
+
+    if (url === null) {
+        return '';
+    }
+    results = url.match('[\\?&]v=([^&#]*)');
+    document   = (results === null) ? url : results[1];
+
+    return this._sanitizer.bypassSecurityTrustResourceUrl(document);
+}
+
+closeModalDoc(){
+
+  $('#view-doc').hide();
+      $("#view-doc").removeClass("show");
+      $("#view-doc").css("display", "none !important");
+      $(".modal").css("display", "none !important");
+      $(".modal-backdrop").remove();
+      $("body").removeClass();
+      $("body").removeAttr("style");
+      this.file_selected = null;
+}
+ 
+
+
+
 //files
+
 //update function
 
 

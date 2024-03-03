@@ -11,6 +11,7 @@ import { ComponentsModule } from '../bip/components/components.module';
 import { NotesComponent } from './notes.component';
 import { NotesByClientComponent } from './notes-by-client/notes-by-client.component';
 import { EditNoteRbtComponent } from './edit-note-rbt/edit-note-rbt.component';
+import { NoteRbtViewComponent } from './note-rbt-view/note-rbt-view.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EditNoteRbtComponent } from './edit-note-rbt/edit-note-rbt.component';
     NotesComponent,
     NoteRbtComponent,
     NotesByClientComponent,
-    EditNoteRbtComponent
+    EditNoteRbtComponent,
+    NoteRbtViewComponent
   ],
   exports: [
     NotesComponent,

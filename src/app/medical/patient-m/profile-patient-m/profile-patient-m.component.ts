@@ -115,23 +115,55 @@ getPatient(){
     this.option_selected = value;
   }
 
+  // public convertToPdf(): void {
+  //   const data = this.contentToConvert.nativeElement;
+  //   html2canvas(data).then(canvas => {
+  //     // Few necessary setting options
+  //     const imgWidth = 208;
+  //     const pageHeight = 295;
+  //     const imgHeight = canvas.height * imgWidth / canvas.width;
+  //     const heightLeft = imgHeight;
+
+  //     // Create a new PDF document
+  //     const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+
+  //     // Add an image of the canvas to the PDF
+  //     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
+
+  //     // Save the PDF
+  //     pdf.save('client_'+this.patient_selected.first_name+'_'+this.patient_selected.last_name+".pdf");
+  //   });
+  // }
+
+
   public convertToPdf(): void {
     const data = this.contentToConvert.nativeElement;
-    html2canvas(data).then(canvas => {
+  
+      html2canvas(data).then(canvas => {
       // Few necessary setting options
-      const imgWidth = 208;
+      const imgWidth = 210;
       const pageHeight = 295;
       const imgHeight = canvas.height * imgWidth / canvas.width;
-      const heightLeft = imgHeight;
-
+      var heightLeft = imgHeight;
+  
       // Create a new PDF document
-      const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-
-      // Add an image of the canvas to the PDF
-      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
-
+      const pdf = new jspdf.jsPDF('p', 'mm');
+      var position = 0;
+  
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+  
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+  
       // Save the PDF
       pdf.save('client_'+this.patient_selected.first_name+'_'+this.patient_selected.last_name+".pdf");
     });
+  
+      
   }
 }
