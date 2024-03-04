@@ -53,9 +53,14 @@ const routes: Routes = [
       import('./medical/location/location.module').then((m) => m.LocationModule),
   },
   {
-    path: 'note',
+    path: 'note-rbt',
     loadChildren: () =>
       import('./medical/notes/notes.module').then((m) => m.NotesModule),
+  },
+  {
+    path: 'note-bcba',
+    loadChildren: () =>
+      import('./medical/notes-bcba/notes-bcba.module').then((m) => m.NotesBcbaModule),
   },
   {
     path: 'error',

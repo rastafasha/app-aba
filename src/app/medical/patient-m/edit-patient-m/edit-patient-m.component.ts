@@ -5,7 +5,6 @@ import { PatientMService } from '../service/patient-m.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
 // declare function alertClose():any;
 declare var $:any;  
 @Component({
@@ -21,8 +20,6 @@ export class EditPatientMComponent {
   public selectedValueCode!: string;
   option_selected:number = 0;
 
-  pdfSource =  "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
-  imagenSerUrl = environment.url_media;
   public patient_id: any;
   public f: string = '';
   
@@ -149,9 +146,7 @@ export class EditPatientMComponent {
   public insurances_name:any;
   public code:any;
   public insuranceiddd:any;
-  public file_selected:any;
-  public doc:any;
-  public FILE:any;
+  
   
   // public insurance:any;
   // public insurer_name: any;
@@ -160,8 +155,9 @@ export class EditPatientMComponent {
 
   FILES:any = [];
   FilesAdded:any = [];
-  sanitizedUrl: any;
-  domSanitizer: any;
+  public file_selected:any;
+  public doc:any;
+  public FILE:any;
   
   constructor(
     public patientService:PatientMService,
@@ -220,7 +216,7 @@ export class EditPatientMComponent {
   
 showUser(){
     this.patientService.getPatient(this.client_id).subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.patient_selected = resp.patient;
       
       
@@ -301,7 +297,7 @@ showUser(){
         this.insuranceData(this.selectedValueInsurer);//pide el insurance guardado para el request de la lista inicial
 
         this.patientService.getLaboratoryByPatient(this.patient_id).subscribe((resp:any)=>{
-          console.log(resp);
+          // console.log(resp);
           this.FilesAdded = resp.patientFiles.data;
         })
     })

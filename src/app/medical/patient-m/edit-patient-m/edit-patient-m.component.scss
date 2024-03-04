@@ -26,8 +26,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: calc(100vh);
+    width: auto;
+    height: 80vh;
+    margin: auto;
+}
+
+@media(max-width:768px){
+    .pdf-content {
+        height: 95vh;
+    }
 }
 
 

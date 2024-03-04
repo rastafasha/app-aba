@@ -10,7 +10,7 @@ import { ComponentsModule } from './bip/components/components.module';
 
 @NgModule({
   declarations: [
-    MedicalComponent
+    MedicalComponent,
   ],
   imports: [
     CommonModule,

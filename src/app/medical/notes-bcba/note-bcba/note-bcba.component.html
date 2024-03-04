@@ -1,0 +1,338 @@
+<div class="page-wrapper">
+    <div class="content">
+    
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/patients/list">Clients List </a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item active">Create BCBA Note </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        <div class="row">
+            <!-- paciente -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form autocomplete="false">
+                            
+                            <!-- paciente -->
+                            <div class="row align-items-center py-4" >
+                                <div class="col-12 py-4">
+                                    <h4>Data Client</h4>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Location <span class="login-danger">*</span></label>
+                                        <select
+                                        class="form-control form-select-solid fw-bolder"
+                                        name="location" [(ngModel)]="location" disabled>
+                                        <option>-- Select --</option>
+                                        <option value="03">03 School</option>
+                                        <option value="12">12 Home</option>
+                                        <option value="02">02 Telehealth</option>
+                                        <option value="99">99 Other</option>
+                                          </select>
+                                        <!-- <input class="form-control" name="diagnosis_code"  disabled [(ngModel)]="diagnosis_code" type="text"  > -->
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Patient ID <span class="login-danger">*</span></label>
+                                        <input class="form-control"  name="patient_id"  disabled [(ngModel)]="patient_id" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Diagnosis Code <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="diagnosis_code"  disabled [(ngModel)]="diagnosis_code" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Birth day <span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" disabled name="birth_date" [(ngModel)]="birth_date" type="text" matInput [matDatepicker]="picker"  >
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Rendering Provider <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValueRendering" name="rendering_provider" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Aba Supervisor<span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValueAba" name="aba_supervisor" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >CPT CODE<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="cpt"  disabled [(ngModel)]="cpt" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 ">
+                                    <div class="form-group local-forms">
+                                        <label >Note Description<span class="login-danger">*</span></label>
+                                        <!-- <input class="form-control" name="rbt_modeled_and_demonstrated_to_caregiver"   [(ngModel)]="rbt_modeled_and_demonstrated_to_caregiver" type="text"  > -->
+                                        <textarea class="form-control" name="note_description" [(ngModel)]="note_description" rows="4" cols="30"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- paciente -->
+                        </form>
+                        
+                    </div>
+                </div>	
+                	
+            </div>
+            <!-- fin paciente -->
+
+            
+
+            <!-- Maladaptives -->
+            <div class="col-xs-12 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-12">
+                            <h4>Caregiver Goal</h4>
+                        </div>
+                        <div class="container">
+                            <form autocomplete="false">
+                                <!-- maladaptives -->
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Caregiver Goal  </th>
+                                                <th># of  Occurrences   </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="!maladaptiveSelected">
+                                            
+                                            <tr *ngFor="let behavior of caregivers_training_goals; let i = index">
+                                                <td>
+                                                    {{behavior.caregiver_goal}}
+                                                </td>
+                                                <td>
+                                                    {{behavior.number_of_occurrences}}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="selectMaladaptive(behavior)"><i class="fa fa-edit"></i></button>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                        <tbody *ngIf="maladaptiveSelected">
+                                            
+                                            <tr >
+                                                <td>
+                                                    {{maladaptiveSelected.caregiver_goal}}
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}"    [(ngModel)]="number_of_occurrences" type="number"  >
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="addMaladaptive()">Save</button>
+                                                
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- maladaptives -->
+                                
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>	
+                	
+            </div>
+            <!-- fin Maladaptives -->
+            <!-- replacements -->
+            <div class="col-xs-12 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-12">
+                            <h4>RBT Training goals</h4>
+                        </div>
+                        <div class="container">
+                            <form autocomplete="false">
+                                <!-- Replacements -->
+                                <div class="table-responsive" >
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Caregiver Goal  </th>
+                                                <th>Total Trials</th>
+                                                <th># of correct responses</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="!replacementSelected">
+                                            <tr *ngFor="let replacemen of rbt_training_goals; let i = index">
+                                                <td >
+                                                    {{replacemen.lto}}
+                                                </td>
+                                                <td *ngIf="replacemen.total_trials > 0">
+                                                    {{replacemen.total_trials}}
+                                                </td>
+                                                <td *ngIf="replacemen.number_of_correct_response > 0">
+                                                    {{replacemen.number_of_correct_response}}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="selectReplacement(replacemen)"><i class="fa fa-edit"></i></button>
+                                                </td>
+                                                
+                                            </tr>
+                                            
+                                        </tbody>
+                                        <tbody *ngIf="replacementSelected">
+                                            <!--  -->
+                                            <tr>
+                                                <td>
+                                                    {{replacementSelected.lto}}
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" name="total_trials " [ngModelOptions]="{standalone: true}"   [(ngModel)]="total_trials" type="number"  >
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" name="number_of_correct_response " [ngModelOptions]="{standalone: true}"   [(ngModel)]="number_of_correct_response" type="number"  >
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="addReplacement()">Save</button>
+                                                </td>
+                                                
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Replacements -->
+                                
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>	
+                	
+            </div>
+            <!-- fin replacements -->
+
+            <!-- paciente -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form autocomplete="false">
+                            
+                            <!-- paciente -->
+                            <div class="row align-items-center py-4" >
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-top-form">
+                                        <label class="local-top">Provider Signature <span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="image/*" name="provider_signature" id="file" (change)="loadFile($event)" class="hide-input">
+                                            <label for="file" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+            
+                                    <!-- previsualizacion de la foto -->
+                                    <div *ngIf="FILE_SIGNATURE_RBT">
+                                        <img [src]="IMAGE_PREVISUALIZA_SIGNATURE__RBT" style="width: 250px;" alt="">
+                                    </div>
+                                    <div *ngIf="IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED">
+                                        <img [src]="IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED" style="width: 250px;" alt="">
+                                    </div>
+                                    <!-- previsualizacion de la foto -->
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Provider name RBT <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-top-form">
+                                        <label class="local-top">Supervisor Signature <span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="image/*" name="imagenn" id="file1" (change)="loadFileSignature($event)" class="hide-input">
+                                            <label for="file1" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+            
+                                    <!-- previsualizacion de la foto -->
+                                    <div *ngIf="FILE_SIGNATURE_BCBA">
+                                        <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_BCBA" style="width: 250px;" alt="">
+                                    </div>
+                                    <div *ngIf="IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED">
+                                        <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED" style="width: 250px;" alt="">
+                                    </div>
+                                    <!-- previsualizacion de la foto -->
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <div class="form-group local-forms">
+                                            <label >Supervisor name BCBA <span class="login-danger">*</span></label>
+                                            <mat-select [(ngModel)]="selectedValueBCBA" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                                <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                                {{data.name}} {{data.surname}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </div>
+                                        <!-- <input class="form-control" name="supervisor_name"   [(ngModel)]="supervisor_name" type="text"  > -->
+                                    </div>
+
+
+                                   
+                                        <div class="col-12 col-md-3">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- paciente -->
+
+                            
+                            <div class="col-12">
+                                <div class="doctor-submit text-end">
+                                    <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                    
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>	
+                	
+            </div>
+            <!-- fin paciente -->
+           
+            					
+        </div>
+    </div>
+</div>
+ 

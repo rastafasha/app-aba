@@ -10,7 +10,7 @@ const routes: Routes = [
   {path:'', component:NotesComponent,
   children:[
     {
-      path:'rbt/:id', component:NoteRbtComponent
+      path:':id', component:NoteRbtComponent
     },
     {
       path:'edit/rbt/:id', component:EditNoteRbtComponent
@@ -19,7 +19,7 @@ const routes: Routes = [
       path:'listbyclient/:id', component:NotesByClientComponent
     },
     {
-      path:'rbt/view/:id', component:NoteRbtViewComponent
+      path:'view/:id', component:NoteRbtViewComponent
     },
     
   ]

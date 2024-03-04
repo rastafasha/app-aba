@@ -89,8 +89,10 @@
 
                                       <span *ngIf="data.status === 'active'">
                                         <button class="btn btn-outline-success" [routerLink]="['/bip/attention/', data.id]" tooltip="BIP Access"><i class="fa fa-address-book"></i></button>
-                                        <button class="btn btn-outline-success" [routerLink]="['/note/rbt/', data.id]" tooltip="RBT Note"> <i class="fa fa-bookmark"></i> </button>
-                                        <button class="btn btn-outline-success" [routerLink]="['/note/listbyclient/', data.patient_id]" tooltip="RBT Note list"> <i class="fa fa-bars"></i> </button>
+                                        <button class="btn btn-outline-success" [routerLink]="['/note-rbt/', data.id]" tooltip="Create RBT Note"> <i class="fa fa-bookmark"></i> </button>
+                                        <button class="btn btn-outline-success" [routerLink]="['/note-rbt/listbyclient/', data.patient_id]" tooltip="RBT Note list"> <i class="fa fa-bars"></i> </button>
+                                        <button class="btn btn-outline-success" [routerLink]="['/note-bcba/', data.id]" tooltip="Create BCBA Note"> <i class="fa fa-bookmark"></i> </button>
+                                        <button class="btn btn-outline-success" [routerLink]="['/note-bcba/listbyclient/', data.patient_id]" tooltip="BCBA Note list"> <i class="fa fa-bars"></i> </button>
                                       </span>
                                   </td>
                                   <td>

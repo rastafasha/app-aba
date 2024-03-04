@@ -55,7 +55,7 @@ export class ListPatientMComponent {
 
     this.patientService.listPatients().subscribe((resp:any)=>{
       
-      console.log(resp);
+      // console.log(resp);
 
       this.totalDatapatient = resp.patients.data.length;
       this.patient_generals = resp.patients.data;

@@ -5,14 +5,14 @@ import { DoctorService } from '../../doctors/service/doctor.service';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import { InsuranceService } from '../../insurance/service/insurance.service';
-import { NoteRbtService } from '../services/note-rbt.service';
 import { BipService } from '../../bip/service/bip.service';
+import { NoteBcbaService } from '../services/note-bcba.service';
 @Component({
-  selector: 'app-note-rbt-view',
-  templateUrl: './note-rbt-view.component.html',
-  styleUrls: ['./note-rbt-view.component.scss']
+  selector: 'app-note-bcba-view',
+  templateUrl: './note-bcba-view.component.html',
+  styleUrls: ['./note-bcba-view.component.scss']
 })
-export class NoteRbtViewComponent {
+export class NoteBcbaViewComponent {
   public routes = routes;
   @ViewChild('contentToConvert') contentToConvert!: ElementRef;
 public patientProfile: any[];
@@ -121,7 +121,7 @@ public selectedValueProvider!: string;
   replacementSelected:any =null;
 
 constructor(
-  public noteRbtService : NoteRbtService,
+  public noteBcbaService : NoteBcbaService,
   public activatedRoute: ActivatedRoute,
   public doctorService: DoctorService,
   public insuranceService: InsuranceService,
@@ -141,14 +141,14 @@ ngOnInit(): void {
 }
 
 getConfig(){
-  this.noteRbtService.listConfigNote().subscribe((resp:any)=>{
+  this.noteBcbaService.listConfigNote().subscribe((resp:any)=>{
     console.log(resp);
     
   })
 }
 
 getNote(){
-  this.noteRbtService.getNote(this.note_id).subscribe((resp:any)=>{
+  this.noteBcbaService.getNote(this.note_id).subscribe((resp:any)=>{
     console.log(resp);
     this.note_selected = resp.noteRbt;
     this.note_selectedId = resp.noteRbt.id;
@@ -294,3 +294,4 @@ getProfileBip(){
   //   });
   // }
 }
+

@@ -430,13 +430,19 @@ export class routes {
     return this.baseUrl + '/location/register';
   }
   public static get editNoteRbt(): string {
-    return this.baseUrl + '/note/rbt';
+    return this.baseUrl + '/note-rbt/rbt';
   }
   public static get listNoteRbt(): string {
-    return this.baseUrl + '/note/listbyclient';
+    return this.baseUrl + '/note-rbt/listbyclient';
   }
   public static get goalAdd(): string {
     return this.baseUrl + '/bip/goal/add';
+  }
+  public static get editNoteBcba(): string {
+    return this.baseUrl + '/note-bcba/bcba';
+  }
+  public static get listNoteBcba(): string {
+    return this.baseUrl + '/note-bcba/listbyclient';
   }
  
 }

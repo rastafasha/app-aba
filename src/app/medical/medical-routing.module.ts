@@ -48,9 +48,14 @@ const routes: Routes = [
         import('./location/location.module').then((m) => m.LocationModule),
     },
     {
-      path: 'note',
+      path: 'note-rbt',
       loadChildren: () =>
         import('./notes/notes.module').then((m) => m.NotesModule),
+    },
+    {
+      path: 'note-bcba',
+      loadChildren: () =>
+        import('./notes-bcba/notes-bcba.module').then((m) => m.NotesBcbaModule),
     },
   ]  
 }

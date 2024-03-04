@@ -7,6 +7,8 @@ import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import { environment } from 'src/environments/environment';
 import { InsuranceService } from '../../insurance/service/insurance.service';
+import { DomSanitizer } from '@angular/platform-browser';
+declare var $:any;  
 @Component({
   selector: 'app-profile-patient-m',
   templateUrl: './profile-patient-m.component.html',
@@ -35,6 +37,10 @@ imagenSerUrl = environment.url_media;
 public pa_assessmentgroup: any= [];
 public pa_assessmentss: any = <any>[];
 
+FILES:any = [];
+FilesAdded:any = [];
+public file_selected:any;
+
 public specialists:any = [];
   public locations:any = [];
   public insurances:any = [];
@@ -49,12 +55,14 @@ public specialists:any = [];
   public bcba_id: any;
   public bcba2_id: any;
   public clin_director_id: any;
+  public client_id: any;
 
 constructor(
   public patientService : PatientMService,
   public activatedRoute: ActivatedRoute,
   public doctorService: DoctorService,
   public insuranceService: InsuranceService,
+  private _sanitizer: DomSanitizer,
   )
 {
 }
@@ -63,7 +71,7 @@ ngOnInit(): void {
   this.doctorService.closeMenuSidebar();
   this.activatedRoute.params.subscribe((resp:any)=>{
     // console.log(resp);
-    this.patient_id = resp.id;
+    this.client_id = resp.id;
   });
   this.getPatient();
   this.getConfig();
@@ -88,13 +96,14 @@ getConfig(){
 }
 
 getPatient(){
-  this.patientService.showPatientProfile(this.patient_id).subscribe((resp:any)=>{
+  this.patientService.showPatientProfile(this.client_id).subscribe((resp:any)=>{
     console.log(resp);
     this.appointments= resp.appointments;
     this.num_appointment= resp.num_appointment;
     this.money_of_appointments= resp.money_of_appointments;
     this.num_appointment_pendings= resp.num_appointment_pendings;
     this.patient_selected= resp.patient;
+    this.patient_id= resp.patient.patient_id;
 
     this.rbt_id = resp.specialists;
     this.rbt2_id = resp.specialists;
@@ -106,7 +115,10 @@ getPatient(){
         let jsonObj = JSON.parse(this.pa_assessmentss) || '';
         this.pa_assessmentgroup = jsonObj;
 
-
+        this.patientService.getLaboratoryByPatient(this.patient_id).subscribe((resp:any)=>{
+          console.log(resp);
+          this.FilesAdded = resp.patientFiles.data;
+        })
   })
 }
 
@@ -166,4 +178,28 @@ getPatient(){
   
       
   }
+
+  getDocumentIframe(url) {
+    var document, results;
+
+    if (url === null) {
+        return '';
+    }
+    results = url.match('[\\?&]v=([^&#]*)');
+    document   = (results === null) ? url : results[1];
+
+    return this._sanitizer.bypassSecurityTrustResourceUrl(document);
+}
+
+closeModalDoc(){
+
+  $('#view-doc').hide();
+      $("#view-doc").removeClass("show");
+      $("#view-doc").css("display", "none !important");
+      $(".modal").css("display", "none !important");
+      $(".modal-backdrop").remove();
+      $("body").removeClass();
+      $("body").removeAttr("style");
+      this.file_selected = null;
+}
 }
