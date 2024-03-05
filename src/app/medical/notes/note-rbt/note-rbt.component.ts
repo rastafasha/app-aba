@@ -31,6 +31,7 @@ export class NoteRbtComponent {
   public selectedValueTimeOut2!: number;
   public selectedValueProviderName!: string;
   public selectedValueMaladaptive!: string;
+  public selectedValueProviderCredential!: string;
   option_selected:number = 0;
 
   client_id:any;
@@ -152,6 +153,12 @@ export class NoteRbtComponent {
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
       this.hours_days = resp.hours;
+      this.selectedValueProviderCredential = resp.roles_rbt.certificate_number;
+      this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = resp.roles_rbt.electronic_signature;
+      this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = resp.roles_bcba.electronic_signature;
+
+      // this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = this.note_selected.provider_signature;
+      // this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.note_selected.supervisor_signature;
       
     })
   }
@@ -164,6 +171,11 @@ export class NoteRbtComponent {
       this.first_name = this.client_selected.patient.first_name;
       this.last_name = this.client_selected.patient.last_name;
       this.patient_id = resp.patient.patient_id;
+      this.selectedValueProviderName = resp.patient.rbt_id;
+      this.selectedValueRBT = resp.patient.rbt_id;
+      this.selectedValueBCBA = resp.patient.bcba_id;
+      this.pos = resp.patient.pos_covered;
+      
       // console.log(this.patient_id);  
       this.diagnosis_code = this.client_selected.patient.diagnosis_code;  
       this.getMaladaptivesBipByPatientId();

@@ -67,12 +67,25 @@
                                     <div class="form-group local-forms">
                                         <label >Provider Credential <span class="login-danger">*</span></label>
                                         <input class="form-control" name="provider_credential"   [(ngModel)]="provider_credential" type="text"  >
+                                        <!-- <mat-select [(ngModel)]="selectedValueProviderCredential" name="provider_credential" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">{{data.certificate_number}}
+                                            </mat-option>
+                                        </mat-select> -->
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >POS <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="pos"   [(ngModel)]="pos" type="text"  >
+                                        <!-- <input class="form-control" name="pos"   [(ngModel)]="pos" type="text"  > -->
+                                        <select
+                                        class="form-control form-select-solid fw-bolder"
+                                        name="pos" [(ngModel)]="pos" disabled>
+                                        <option>-- Select --</option>
+                                        <option value="03">03 School</option>
+                                        <option value="12">12 Home</option>
+                                        <option value="02">02 Telehealth</option>
+                                        <option value="99">99 Other</option>
+                                          </select>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -518,9 +531,10 @@
                                             class="form-control form-select-solid fw-bolder"
                                             name="meet_with_client_at" [(ngModel)]="meet_with_client_at">
                                             <option>-- Select --</option>
-                                              <option value="waiting">Home</option>
-                                              <option value="requested">Shool</option>
-                                              <option value="reviewing">Community</option>
+                                            <option value="03">03 School</option>
+                                            <option value="12">12 Home</option>
+                                            <option value="02">02 Telehealth</option>
+                                            <option value="99">99 Other</option>
                                               </select>
                                     </div>
                                 </div>
@@ -541,14 +555,15 @@
                                 <div class="col-12 col-md-4">
                                     <div class="form-group local-forms">
                                         <label >as evidenced by  <span class="login-danger">*</span></label>
-                                        <select
+                                        <input class="form-control" name="as_evidenced_by"   [(ngModel)]="as_evidenced_by" type="text"  >
+                                        <!-- <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="as_evidenced_by" [(ngModel)]="as_evidenced_by">
                                             <option>-- Select --</option>
                                               <option value="waiting">Happy</option>
                                               <option value="requested">Sad</option>
                                               <option value="reviewing">Hungry</option>
-                                              </select>
+                                              </select> -->
                                     </div>
                                 </div>
                                 <div class="col-12 ">
@@ -571,7 +586,16 @@
                                    <p>Responding this session could have been affected by environmental changes above</p>
                                    <div class="form-group local-forms">
                                        <label >Progress noted this session compared to previous session  <span class="login-danger">*</span></label>
-                                       <input class="form-control" name="progress_noted_this_session_compared_to_previous_session"   [(ngModel)]="progress_noted_this_session_compared_to_previous_session" type="text"  >
+                                       <!-- <input class="form-control" name="progress_noted_this_session_compared_to_previous_session"   [(ngModel)]="progress_noted_this_session_compared_to_previous_session" type="text"  > -->
+                                       <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="progress_noted_this_session_compared_to_previous_session" [(ngModel)]="progress_noted_this_session_compared_to_previous_session">
+                                            <option>-- Select --</option>
+                                            <option value="excelent">Excelent</option>
+                                            <option value="moderate">Moderate</option>
+                                            <option value="good">Good</option>
+                                            <option value="minimal">Minimal</option>
+                                              </select>
                                    </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-5 ">

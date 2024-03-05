@@ -6,10 +6,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item active"><a routerLink="/patients/list">Client List / </a></li>
-                        <li class="breadcrumb-item"><a [routerLink]="['/note-bcba/listbyclient/', patient_id]">Note BCBA List </a></li>
+                        <li class="breadcrumb-item"><a routerLink="/patients/list">Clients List </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active"> Edit BCBA Note </li>
+                        <li class="breadcrumb-item active">Create BCBA Note </li>
                     </ul>
                 </div>
             </div>
@@ -29,23 +28,25 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Patient ID <span class="login-danger">*</span></label>
-                                        <input class="form-control"  name="patient_id"  disabled [(ngModel)]="patient_id" type="text"  >
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">  
-                                    <div class="form-group local-forms">
-                                        <label >First Name <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="first_name"  disabled [(ngModel)]="first_name" type="text"  >
+                                        <label >Location <span class="login-danger">*</span></label>
+                                        <select
+                                        class="form-control form-select-solid fw-bolder"
+                                        name="location" [(ngModel)]="location" disabled>
+                                        <option>-- Select --</option>
+                                        <option value="03">03 School</option>
+                                        <option value="12">12 Home</option>
+                                        <option value="02">02 Telehealth</option>
+                                        <option value="99">99 Other</option>
+                                          </select>
+                                        <!-- <input class="form-control" name="diagnosis_code"  disabled [(ngModel)]="diagnosis_code" type="text"  > -->
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Last Name <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="last_name"  disabled [(ngModel)]="last_name" type="text"  >
+                                        <label >Patient ID <span class="login-danger">*</span></label>
+                                        <input class="form-control"  name="patient_id"  disabled [(ngModel)]="patient_id" type="text"  >
                                     </div>
                                 </div>
-                               
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Diagnosis Code <span class="login-danger">*</span></label>
@@ -54,10 +55,17 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Provider Name <span class="login-danger">*</span></label>
-                                        <!-- <input class="form-control" name="provider_name_g"   [(ngModel)]="provider_name_g" type="text"  > -->
-                                        <mat-select [(ngModel)]="selectedValueProviderName" name="provider_name_g" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                        <label >Birth day <span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" disabled name="birth_date" [(ngModel)]="birth_date" type="text" matInput [matDatepicker]="picker"  >
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Rendering Provider <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValueRendering" name="rendering_provider" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
@@ -66,84 +74,26 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Provider Credential <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="provider_credential"   [(ngModel)]="provider_credential" type="text"  >
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >POS <span class="login-danger">*</span></label>
-                                        <input class="form-control" name="pos"   [(ngModel)]="pos" type="text"  >
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Date <span class="login-danger">*</span></label>
-                                        <input class="form-control datetimepicker" autocomplete="false" name="session_date" [(ngModel)]="session_date" type="text" matInput [matDatepicker]="pickerSesDate"  >
-                                        <mat-datepicker #pickerSesDate></mat-datepicker>
-                                        <mat-datepicker-toggle matIconSuffix [for]="pickerSesDate"></mat-datepicker-toggle>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Time In <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueTimeIn" name="time_in" [ngModelOptions]="{standalone: true}" (onChange)="hourTimeInSelected($event)" class="form-control select"  placeholder="Select Hour">
-                                            <mat-option *ngFor="let data of hours_days" [value]="data.id">
-                                            {{data.name}}
+                                        <label >Aba Supervisor<span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValueAba" name="aba_supervisor" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
-                                        <!-- <input class="form-control" name="time_in"   [(ngModel)]="time_in" type="text"  > -->
+
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Time Out <span class="login-danger">*</span></label>
-                                        <!-- <input class="form-control" name="time_out"   [(ngModel)]="time_out" type="text"  > -->
-                                        <mat-select [(ngModel)]="selectedValueTimeOut" name="time_out" [ngModelOptions]="{standalone: true}" (onChange)="hourTimeOutSelected($event)" class="form-control select"  placeholder="Select Hour">
-                                            <mat-option *ngFor="let data of hours_days" [value]="data.id">
-                                            {{data.name}}
-                                            </mat-option>
-                                        </mat-select>
+                                        <label >CPT CODE<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="cpt"  disabled [(ngModel)]="cpt" type="text"  >
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 ">
                                     <div class="form-group local-forms">
-                                        <label >Time In <span class="login-danger">*</span></label>
-                                        <!-- <input class="form-control" name="time_in2"   [(ngModel)]="time_in2" type="text"  > -->
-                                        <mat-select [(ngModel)]="selectedValueTimeIn2" name="time_in2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Hour">
-                                            <mat-option *ngFor="let data of hours_days" [value]="data.id">
-                                            {{data.name}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Time Out <span class="login-danger">*</span></label>
-                                        <!-- <input class="form-control" name="time_out2"   [(ngModel)]="time_out2" type="text"  > -->
-                                        <mat-select [(ngModel)]="selectedValueTimeOut2" name="time_out2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Hour">
-                                            <mat-option *ngFor="let data of hours_days" [value]="data.id">
-                                            {{data.name}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Session Length Total<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="session_length_total"   [(ngModel)]="session_length_total" type="text"  >
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >Session Length Total<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="session_length_total2"   [(ngModel)]="session_length_total2" type="text"  >
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <label >environmental changes<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="environmental_changes"   [(ngModel)]="environmental_changes" type="text"  >
+                                        <label >Note Description<span class="login-danger">*</span></label>
+                                        <!-- <input class="form-control" name="rbt_modeled_and_demonstrated_to_caregiver"   [(ngModel)]="rbt_modeled_and_demonstrated_to_caregiver" type="text"  > -->
+                                        <textarea class="form-control" name="note_description" [(ngModel)]="note_description" rows="4" cols="30"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -163,7 +113,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-12">
-                            <h4>Maladaptives</h4>
+                            <h4>Caregiver Goal</h4>
                         </div>
                         <div class="container">
                             <form autocomplete="false">
@@ -172,18 +122,18 @@
                                     <table class="table mb-0">
                                         <thead>
                                             <tr>
-                                                <th>Maladaptive  </th>
-                                                <th># of  Occurrences   </th>
+                                                <th>Caregiver Goal  </th>
+                                                <th>% of  Occurrences   </th>
                                             </tr>
                                         </thead>
                                         <tbody *ngIf="!maladaptiveSelected">
                                             
-                                            <tr *ngFor="let behavior of maladaptivegroup; let i = index">
+                                            <tr *ngFor="let behavior of caregivers_training_goals; let i = index">
                                                 <td>
-                                                    {{behavior.maladaptive_behavior}}
+                                                    {{behavior.caregiver_goal}}
                                                 </td>
                                                 <td>
-                                                    {{behavior.number_of_occurrences}}
+                                                    {{behavior.porcent_of_correct_response}}
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="selectMaladaptive(behavior)"><i class="fa fa-edit"></i></button>
@@ -191,15 +141,14 @@
                                             </tr>
                                             
                                         </tbody>
-                                        
                                         <tbody *ngIf="maladaptiveSelected">
                                             
                                             <tr >
                                                 <td>
-                                                    {{maladaptiveSelected.maladaptive_behavior}}
+                                                    {{maladaptiveSelected.caregiver_goal}}
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}"    [(ngModel)]="number_of_occurrences" type="number"  >
+                                                    <input class="form-control" name="porcent_of_correct_response " [ngModelOptions]="{standalone: true}"    [(ngModel)]="porcent_of_correct_response" type="number"  >
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
@@ -226,7 +175,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-12">
-                            <h4>Replacements</h4>
+                            <h4>RBT Training goals</h4>
                         </div>
                         <div class="container">
                             <form autocomplete="false">
@@ -235,21 +184,17 @@
                                     <table class="table mb-0">
                                         <thead>
                                             <tr>
-                                                <th>Replacement  </th>
-                                                <th>Total Trials</th>
-                                                <th># of correct responses</th>
+                                                <th>Caregiver Goal  </th>
+                                                <th>% of correct responses</th>
                                             </tr>
                                         </thead>
                                         <tbody *ngIf="!replacementSelected">
-                                            <tr *ngFor="let replacemen of replacementgroup; let i = index">
+                                            <tr *ngFor="let replacemen of rbt_training_goals; let i = index">
                                                 <td >
-                                                    {{replacemen.goal}}
+                                                    {{replacemen.lto}}
                                                 </td>
-                                                <td *ngIf="replacemen.total_trials > 0">
-                                                    {{replacemen.total_trials}}
-                                                </td>
-                                                <td *ngIf="replacemen.number_of_correct_response > 0">
-                                                    {{replacemen.number_of_correct_response}}
+                                                <td >
+                                                    {{replacemen.porcent_of_correct_response}}
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="selectReplacement(replacemen)"><i class="fa fa-edit"></i></button>
@@ -262,13 +207,10 @@
                                             <!--  -->
                                             <tr>
                                                 <td>
-                                                    {{replacementSelected.goal}}
+                                                    {{replacementSelected.lto}}
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" name="total_trials " [ngModelOptions]="{standalone: true}"   [(ngModel)]="total_trials" type="number"  >
-                                                </td>
-                                                <td>
-                                                    <input class="form-control" name="number_of_correct_response " [ngModelOptions]="{standalone: true}"   [(ngModel)]="number_of_correct_response" type="number"  >
+                                                    <input class="form-control" name="porcent_of_correct_response " [ngModelOptions]="{standalone: true}"   [(ngModel)]="porcent_of_correct_response" type="number"  >
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
@@ -290,180 +232,6 @@
                 	
             </div>
             <!-- fin replacements -->
-            <!-- interventions -->
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="col-12">
-                            <h4>Interventions</h4>
-                        </div>
-                        <div class="container">
-                            <form autocomplete="false">
-
-                                <div class="col-xs-12">  
-                                    <div class="row">  
-                                        
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">Pairing</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="pairing" class="check" name="pairing" [ngModelOptions]="{standalone: true}" [(ngModel)]="pairing">
-                                                        <label _ngcontent-rhp-c92="" for="pairing" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">Response Block</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="response_block" class="check" name="response_block" [ngModelOptions]="{standalone: true}" [(ngModel)]="response_block">
-                                                        <label _ngcontent-rhp-c92="" for="response_block" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">DRA</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="DRA" class="check" name="DRA" [ngModelOptions]="{standalone: true}" [(ngModel)]="DRA">
-                                                        <label _ngcontent-rhp-c92="" for="DRA" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">DRO</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="DRO" class="check" name="DRO" [ngModelOptions]="{standalone: true}" [(ngModel)]="DRO">
-                                                        <label _ngcontent-rhp-c92="" for="DRO" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">Redirection</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="redirection" class="check" name="redirection" [ngModelOptions]="{standalone: true}" [(ngModel)]="redirection">
-                                                        <label _ngcontent-rhp-c92="" for="redirection" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">Errorless Teaching</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="errorless_teaching" class="check" name="errorless_teaching" [ngModelOptions]="{standalone: true}" [(ngModel)]="errorless_teaching">
-                                                        <label _ngcontent-rhp-c92="" for="errorless_teaching" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">NCR</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="NCR" class="check" name="NCR" [ngModelOptions]="{standalone: true}" [(ngModel)]="NCR">
-                                                        <label _ngcontent-rhp-c92="" for="NCR" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">Shaping</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="shaping" class="check" name="shaping" [ngModelOptions]="{standalone: true}" [(ngModel)]="shaping">
-                                                        <label _ngcontent-rhp-c92="" for="shaping" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">Chaining</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="chaining" class="check" name="chaining" [ngModelOptions]="{standalone: true}" [(ngModel)]="chaining">
-                                                        <label _ngcontent-rhp-c92="" for="chaining" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">Token Economy</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="token_economy" class="check" name="token_economy" [ngModelOptions]="{standalone: true}" [(ngModel)]="token_economy">
-                                                        <label _ngcontent-rhp-c92="" for="token_economy" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">Extinction</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="extinction" class="check" name="extinction" [ngModelOptions]="{standalone: true}" [(ngModel)]="extinction">
-                                                        <label _ngcontent-rhp-c92="" for="extinction" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3">
-
-                                            <div class="form-group ">
-                                                <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                                    <h5 _ngcontent-rhp-c92="" class="card-title">Natural Teaching</h5>
-                                                    <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                        <input _ngcontent-rhp-c92="" type="checkbox" id="natural_teaching" class="check" name="natural_teaching" [ngModelOptions]="{standalone: true}" [(ngModel)]="natural_teaching">
-                                                        <label _ngcontent-rhp-c92="" for="natural_teaching" class="checktoggle" value="true">checkbox</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 mb-3 doctor-submit text-end">
-                                            <button class="btn btn-primary btn-sm" (click)="addInterventions()">Update Intervention</button>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <!-- Interventions -->
-                                
-                            </form>
-                        </div>
-                        
-                    </div>
-                </div>	
-                	
-            </div>
-            <!-- fin interventions -->
 
             <!-- paciente -->
             <div class="col-sm-12">
@@ -473,91 +241,6 @@
                             
                             <!-- paciente -->
                             <div class="row align-items-center py-4" >
-                                <div class="col-12">
-                                    <div class="form-group local-forms">
-                                        <h4>Summary Note</h4>
-                                        <p>Client has been diagnosed with Autism Spectrum Disorder (ASD) according to the criteria outlined in the Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition (DSM-5).</p>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">  
-                                    <div class="form-group local-forms">
-                                        <label >Met with client at  <span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="meet_with_client_at" [(ngModel)]="meet_with_client_at">
-                                            <option>-- Select --</option>
-                                              <option value="waiting">Home</option>
-                                              <option value="requested">Shool</option>
-                                              <option value="reviewing">Community</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group local-forms">
-                                        <label >Client appeared  <span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="client_appeared" [(ngModel)]="client_appeared">
-                                            <option>-- Select --</option>
-                                              <option value="waiting">Happy</option>
-                                              <option value="requested">Sad</option>
-                                              <option value="reviewing">Hungry</option>
-                                              </select>
-                                    </div>
-                                </div>
-                               
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group local-forms">
-                                        <label >as evidenced by  <span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="as_evidenced_by" [(ngModel)]="as_evidenced_by">
-                                            <option>-- Select --</option>
-                                              <option value="waiting">Happy</option>
-                                              <option value="requested">Sad</option>
-                                              <option value="reviewing">Hungry</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 ">
-                                    <p>The replacements and interventions described above are outlined in the behavior plan and were implemented throughout the session</p>
-                                </div>
-                                <div class="col-12 col-md-6 ">
-                                    <div class="form-group local-forms">
-                                        <label >RBT modeled and demonstrated to caregiver<span class="login-danger">*</span></label>
-                                        <!-- <input class="form-control" name="rbt_modeled_and_demonstrated_to_caregiver"   [(ngModel)]="rbt_modeled_and_demonstrated_to_caregiver" type="text"  > -->
-                                        <textarea class="form-control" name="rbt_modeled_and_demonstrated_to_caregiver" [(ngModel)]="rbt_modeled_and_demonstrated_to_caregiver" rows="4" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 ">
-                                    <div class="form-group local-forms">
-                                        <label >Client response to treatment this session <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" name="client_response_to_treatment_this_session" [(ngModel)]="client_response_to_treatment_this_session" rows="4" cols="30"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-7 ">
-                                   <p>Responding this session could have been affected by environmental changes above</p>
-                                   <div class="form-group local-forms">
-                                       <label >Progress noted this session compared to previous session  <span class="login-danger">*</span></label>
-                                       <input class="form-control" name="progress_noted_this_session_compared_to_previous_session"   [(ngModel)]="progress_noted_this_session_compared_to_previous_session" type="text"  >
-                                   </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-5 ">
-                                   <p>Data was collected within the session (see table above).</p>
-                                   <div class="col-12 ">
-                                       <div class="form-group local-forms">
-                                           <label >Next session is scheduled for <span class="login-danger">*</span></label>
-                                           <input class="form-control datetimepicker" autocomplete="false" name="next_session_is_scheduled_for" [(ngModel)]="next_session_is_scheduled_for" type="text" matInput [matDatepicker]="pickerNextSess"  >
-                                           <mat-datepicker #pickerNextSess></mat-datepicker>
-                                           <mat-datepicker-toggle matIconSuffix [for]="pickerNextSess"></mat-datepicker-toggle>
-                                       </div>
-                                   </div>
-                                </div>
-                                <div class="col-12">
-                                    <p>the RBT will continue working with the goals as stated in behavior plan.</p>
-                                </div>
-                                
-
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Provider Signature <span class="login-danger">*</span></label>
@@ -580,7 +263,7 @@
                                     <div class="form-group local-forms">
                                         <label >Provider name RBT <span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
@@ -609,7 +292,7 @@
                                         <div class="form-group local-forms">
                                             <label >Supervisor name BCBA <span class="login-danger">*</span></label>
                                             <mat-select [(ngModel)]="selectedValueBCBA" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                                <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                                <mat-option *ngFor="let data of specialists" [value]="data.id">
                                                 {{data.name}} {{data.surname}}
                                                 </mat-option>
                                             </mat-select>

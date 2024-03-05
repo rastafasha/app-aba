@@ -71,10 +71,8 @@ export class NoteBcbaComponent {
   public provider_name:string = '';
   public supervisor_name:string = '';
 
-  public number_of_occurrences:number = 0;
-  public number_of_correct_responses:number = 0;
-  public total_trials:number = 0;
-  public number_of_correct_response:number = 0;
+  public porcent_of_occurrences:number = 0;
+  public porcent_of_correct_response:number = 0;
   public maladaptive:string = '';
   public replacement:string = '';
   public interventions:any;
@@ -115,6 +113,7 @@ export class NoteBcbaComponent {
   public roles_bcba:any = [];
 
   public hours_days:any =[];
+  public specialists:any =[];
   public maladaptives:any =[];
   public replacementGoals:any =[];
   public intervention_added:any =[];
@@ -123,9 +122,9 @@ export class NoteBcbaComponent {
   maladaptiveSelected:any =null;
   replacementSelected:any =null;
   lto:any =null;
+  caregiver_goal:any =null;
   maladp_added:any =[];
   replacement_added:any =[];
-  caregiver_goal:any =null;
   pa_assessments:any =[];
   pa_assessmentsgroup:any =[];
   familiEnvolments:any =[];
@@ -167,6 +166,10 @@ export class NoteBcbaComponent {
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
       this.hours_days = resp.hours;
+      this.specialists = resp.specialists;
+
+      this.FILE_SIGNATURE_RBT = resp.roles_rbt.electronic_signature;
+      this.FILE_SIGNATURE_BCBA = resp.roles_bcba.electronic_signature;
       
     })
   }
@@ -184,8 +187,15 @@ export class NoteBcbaComponent {
       console.log(this.birth_date); 
       this.diagnosis_code = this.client_selected.diagnosis_code;  
 
+      this.selectedValueAba = resp.patient.clin_director_id;
+      this.selectedValueRendering = resp.patient.bcba_id;
+      this.selectedValueBCBA = resp.patient.clin_director_id;
+      this.selectedValueRBT = resp.patient.bcba_id;
+      this.pos = resp.patient.pos_covered;
+
       
       this.getReplacementsByPatientId();
+      this.getMaladaptivesBipByPatientId();
     });
   }
 
@@ -215,6 +225,14 @@ export class NoteBcbaComponent {
     })
   }
 
+  getMaladaptivesBipByPatientId(){
+    this.bipService.getBipProfilePatient_id(this.patient_id).subscribe((resp:any)=>{
+      // console.log(resp);
+      this.maladaptives = resp.bip.maladaptives;
+      this.bip_id = resp.bip.id;
+    })
+  }
+
   selectSpecialist(event:any){
     event = this.selectedValueProviderName;
     this.specialistData(this.selectedValueProviderName);
@@ -239,31 +257,30 @@ export class NoteBcbaComponent {
   }
 
   addMaladaptive(){
-    this.rbt_training_goals.push({
-      caregiver_goal: this.maladaptiveSelected.caregiver_goal,
-      number_of_occurrences: this.number_of_occurrences,
-    })
-    if(this.rbt_training_goals.length > 1){
-      this.rbt_training_goals.splice(this.rbt_training_goals,1);
-    }
-    this.maladaptiveSelected = null;
-    this.caregiver_goal = '';
-    this.number_of_occurrences = null;
-  }
-
-  addReplacement(){
     this.caregivers_training_goals.push({
-      lto: this.replacementSelected.lto,
-      total_trials: this.total_trials,
-      number_of_correct_response: this.number_of_correct_response,
+      caregiver_goal: this.maladaptiveSelected.caregiver_goal,
+      porcent_of_correct_response: this.porcent_of_correct_response,
     })
     if(this.caregivers_training_goals.length > 1){
       this.caregivers_training_goals.splice(this.caregivers_training_goals,1);
     }
+    this.maladaptiveSelected = null;
+    this.caregiver_goal = '';
+    this.porcent_of_correct_response = null;
+  }
+
+
+  addReplacement(){
+    this.rbt_training_goals.push({
+      lto: this.replacementSelected.lto,
+      porcent_of_correct_response: this.porcent_of_correct_response,
+    })
+    if(this.rbt_training_goals.length > 1){
+      this.rbt_training_goals.splice(this.rbt_training_goals,1);
+    }
     this.replacementSelected = null;
     this.lto = '';
-    this.total_trials = null;
-    this.number_of_correct_response = null;
+    this.porcent_of_correct_response = null;
   }
 
   
@@ -271,16 +288,12 @@ export class NoteBcbaComponent {
   back(){
     this.replacementSelected = null;
     this.maladaptiveSelected = null;
-    this.total_trials = null;
-    this.number_of_correct_response = null;
-    this.number_of_occurrences = null;
+    this.porcent_of_occurrences = null;
+    this.porcent_of_correct_response = null;
   }
 
   
 
-  deleteMaladaptive(i:any){
-    this.rbt_training_goals.splice(i,1);
-  }
 
 
 
@@ -336,7 +349,7 @@ export class NoteBcbaComponent {
     
     formData.append('rendering_provider', this.selectedValueRendering);
     formData.append('aba_supervisor', this.selectedValueAba);
-    formData.append('cpt', this.cpt);
+    formData.append('cpt_code', this.cpt);
     
     formData.append('provider_name', this.selectedValueRBT);
     formData.append('supervisor_name', this.selectedValueBCBA);

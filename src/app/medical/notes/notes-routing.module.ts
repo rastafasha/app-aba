@@ -13,7 +13,7 @@ const routes: Routes = [
       path:':id', component:NoteRbtComponent
     },
     {
-      path:'edit/rbt/:id', component:EditNoteRbtComponent
+      path:'edit/:id', component:EditNoteRbtComponent
     },
     {
       path:'listbyclient/:id', component:NotesByClientComponent

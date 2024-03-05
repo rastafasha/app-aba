@@ -13,7 +13,7 @@ const routes: Routes = [
       path:':id', component:NoteBcbaComponent
     },
     {
-      path:'edit/bcba/:id', component:NoteBcbaEditComponent
+      path:'edit/:id', component:NoteBcbaEditComponent
     },
     {
       path:'listbyclient/:id', component:NoteBcbaByClientComponent

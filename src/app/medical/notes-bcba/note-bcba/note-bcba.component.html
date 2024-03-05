@@ -65,7 +65,7 @@
                                     <div class="form-group local-forms">
                                         <label >Rendering Provider <span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValueRendering" name="rendering_provider" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
@@ -76,7 +76,7 @@
                                     <div class="form-group local-forms">
                                         <label >Aba Supervisor<span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValueAba" name="aba_supervisor" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
@@ -123,7 +123,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Caregiver Goal  </th>
-                                                <th># of  Occurrences   </th>
+                                                <th>% of  Occurrences   </th>
                                             </tr>
                                         </thead>
                                         <tbody *ngIf="!maladaptiveSelected">
@@ -133,7 +133,7 @@
                                                     {{behavior.caregiver_goal}}
                                                 </td>
                                                 <td>
-                                                    {{behavior.number_of_occurrences}}
+                                                    {{behavior.porcent_of_correct_response}}
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="selectMaladaptive(behavior)"><i class="fa fa-edit"></i></button>
@@ -148,7 +148,7 @@
                                                     {{maladaptiveSelected.caregiver_goal}}
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}"    [(ngModel)]="number_of_occurrences" type="number"  >
+                                                    <input class="form-control" name="porcent_of_correct_response " [ngModelOptions]="{standalone: true}"    [(ngModel)]="porcent_of_correct_response" type="number"  >
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
@@ -185,8 +185,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Caregiver Goal  </th>
-                                                <th>Total Trials</th>
-                                                <th># of correct responses</th>
+                                                <th>% of correct responses</th>
                                             </tr>
                                         </thead>
                                         <tbody *ngIf="!replacementSelected">
@@ -194,11 +193,8 @@
                                                 <td >
                                                     {{replacemen.lto}}
                                                 </td>
-                                                <td *ngIf="replacemen.total_trials > 0">
-                                                    {{replacemen.total_trials}}
-                                                </td>
-                                                <td *ngIf="replacemen.number_of_correct_response > 0">
-                                                    {{replacemen.number_of_correct_response}}
+                                                <td >
+                                                    {{replacemen.porcent_of_correct_response}}
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="selectReplacement(replacemen)"><i class="fa fa-edit"></i></button>
@@ -214,10 +210,7 @@
                                                     {{replacementSelected.lto}}
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" name="total_trials " [ngModelOptions]="{standalone: true}"   [(ngModel)]="total_trials" type="number"  >
-                                                </td>
-                                                <td>
-                                                    <input class="form-control" name="number_of_correct_response " [ngModelOptions]="{standalone: true}"   [(ngModel)]="number_of_correct_response" type="number"  >
+                                                    <input class="form-control" name="porcent_of_correct_response " [ngModelOptions]="{standalone: true}"   [(ngModel)]="porcent_of_correct_response" type="number"  >
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
@@ -270,7 +263,7 @@
                                     <div class="form-group local-forms">
                                         <label >Provider name RBT <span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
@@ -299,7 +292,7 @@
                                         <div class="form-group local-forms">
                                             <label >Supervisor name BCBA <span class="login-danger">*</span></label>
                                             <mat-select [(ngModel)]="selectedValueBCBA" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                                <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                                <mat-option *ngFor="let data of specialists" [value]="data.id">
                                                 {{data.name}} {{data.surname}}
                                                 </mat-option>
                                             </mat-select>

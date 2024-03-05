@@ -243,6 +243,10 @@ export class EditNoteRbtComponent {
       this.first_name = this.client_selected.patient.first_name;
       this.last_name = this.client_selected.patient.last_name;
       this.patient_id = resp.patient.patient_id;
+      this.pos = resp.patient.pos_covered;
+      this.selectedValueProviderName = resp.patient.rbt_id;
+      this.selectedValueRBT = resp.patient.rbt_id;
+      this.selectedValueBCBA = resp.patient.bcba_id;
       // console.log(this.patient_id);  
       this.diagnosis_code = this.client_selected.patient.diagnosis_code;  
       
@@ -468,7 +472,7 @@ export class EditNoteRbtComponent {
         // this.text_success = 'Employer created';
         // this.ngOnInit();
         Swal.fire('Updated', ` Note Rbt Updated`, 'success');
-        this.router.navigate(['/note/listbyclient/',this.patient_id]);
+        this.router.navigate(['/note-rbt/listbyclient/',this.patient_id]);
       }
     })
 

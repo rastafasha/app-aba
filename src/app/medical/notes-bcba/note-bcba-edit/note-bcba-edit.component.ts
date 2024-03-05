@@ -31,6 +31,8 @@ export class NoteBcbaEditComponent {
   public selectedValueTimeOut2!: number;
   public selectedValueProviderName!: string;
   public selectedValueMaladaptive!: string;
+  public selectedValueRendering!: string;
+  public selectedValueAba!: string;
   option_selected:number = 0;
 
   client_id:any;
@@ -112,6 +114,7 @@ export class NoteBcbaEditComponent {
   public roles_bcba:any = [];
 
   public hours_days:any =[];
+  public specialists:any =[];
   public maladaptives:any =[];
   public replacementGoals:any =[];
   public intervention_added:any =[];
@@ -123,6 +126,20 @@ export class NoteBcbaEditComponent {
 
   maladaptiveSelected:any =null;
   replacementSelected:any =null;
+  birth_date:any ;
+  cpt:any ;
+  note_description:any ;
+  caregivers_training_goals:any =[];
+  rbt_training_goals:any =[];
+  rbt_training_goalsgroup:any =[];
+  caregivers_training_goalsgroup:any =[];
+
+  public location: any;
+  public porcent_of_occurrences:number = 0;
+  public porcent_of_correct_response:number = 0;
+  lto:any =null;
+  caregiver_goal:any =null;
+  cpt_code:any =null;
 
   constructor(
     public bipService:BipService,
@@ -156,6 +173,7 @@ export class NoteBcbaEditComponent {
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
       this.hours_days = resp.hours;
+      this.specialists = resp.specialists;
       
     })
   }
@@ -163,66 +181,37 @@ export class NoteBcbaEditComponent {
   getNote(){
     this.noteBcbaService.getNote(this.note_id).subscribe((resp:any)=>{
       console.log(resp);
-      this.note_selected = resp.noteRbt;
-      this.note_selectedId = resp.noteRbt.id;
+      this.note_selected = resp.noteBcba;
+      this.note_selectedId = resp.noteBcba.id;
       this.patient_id = this.note_selected.patient_id;
       this.bip_id = this.note_selected.bip_id;
+      this.location = this.note_selected.location;
+      // this.birth_date = this.note_selected.birth_date;
+      this.birth_date = this.note_selected.birth_date ? new Date(this.note_selected.birth_date).toISOString(): '';
 
       this.provider_credential = this.note_selected.provider_credential;
       this.as_evidenced_by = this.note_selected.as_evidenced_by;
       this.client_appeared = this.note_selected.client_appeared;
+      this.diagnosis_code = this.note_selected.diagnosis_code;
+      this.cpt_code = this.note_selected.cpt_code;
+      this.note_description = this.note_selected.note_description;
       this.client_response_to_treatment_this_session = this.note_selected.client_response_to_treatment_this_session;
-      
-      this.interventions = resp.interventions;
-      let jsonObj = JSON.parse(this.interventions) || '';
-      this.interventionsgroup = jsonObj;
-      console.log(this.interventionsgroup);
-
-      this.pairing = this.interventionsgroup[0].pairing;
-      this.response_block = this.interventionsgroup[0].response_block;
-      this.DRA = this.interventionsgroup[0].DRA;
-      this.DRO = this.interventionsgroup[0].DRO;
-      this.redirection = this.interventionsgroup[0].redirection;
-      this.errorless_teaching = this.interventionsgroup[0].errorless_teaching;
-      this.NCR = this.interventionsgroup[0].NCR;
-      this.shaping = this.interventionsgroup[0].shaping;
-      this.chaining = this.interventionsgroup[0].chaining;
-      this.token_economy = this.interventionsgroup[0].token_economy;
-      this.extinction = this.interventionsgroup[0].extinction;
-      this.natural_teaching = this.interventionsgroup[0].natural_teaching;
-
-      
-      this.maladaptive = resp.maladaptives;
-      let jsonObj1 = JSON.parse(this.maladaptive) || '';
-      this.maladaptivegroup = jsonObj1;
-      // console.log(this.maladaptivegroup);
-
-      this.replacement = resp.replacements;// ?
-      let jsonObj2 = JSON.parse(this.replacement) || '';
-      this.replacementgroup = jsonObj2;
-      // console.log(this.replacementgroup);
-
       this.pos = this.note_selected.pos;
-      this.environmental_changes = this.note_selected.environmental_changes;
-      this.meet_with_client_at = this.note_selected.meet_with_client_at;
-      this.progress_noted_this_session_compared_to_previous_session = this.note_selected.progress_noted_this_session_compared_to_previous_session;
       
-      this.rbt_modeled_and_demonstrated_to_caregiver = this.note_selected.rbt_modeled_and_demonstrated_to_caregiver;
-      this.replacement = this.note_selected.replacement;
       
-      // this.session_date = this.note_selected.session_date;
-      this.session_date = this.note_selected.session_date? new Date(this.note_selected.session_date).toISOString(): '';
-      // this.next_session_is_scheduled_for = this.note_selected.next_session_is_scheduled_for;
-      this.next_session_is_scheduled_for = this.note_selected.next_session_is_scheduled_for? new Date(this.note_selected.next_session_is_scheduled_for).toISOString(): '';
+      this.caregivers_training_goalsgroup = resp.caregiver_goals;
+      let jsonObj = JSON.parse(this.caregivers_training_goalsgroup) || '';
+      this.caregivers_training_goals = jsonObj;
+      console.log(this.caregivers_training_goals);
+
       
-      this.session_length_total = this.note_selected.session_length_total;
-      this.session_length_total2 = this.note_selected.session_length_total2;
-      
-      this.selectedValueTimeIn = this.note_selected.time_in;
-      console.log(this.selectedValueTimeIn);
-      this.selectedValueTimeOut = this.note_selected.time_in2;
-      this.selectedValueTimeIn2 = this.note_selected.time_out;
-      this.selectedValueTimeOut2 = this.note_selected.time_out2;
+      this.rbt_training_goalsgroup = resp.rbt_training_goals;
+      let jsonObj1 = JSON.parse(this.rbt_training_goalsgroup) || '';
+      this.rbt_training_goals = jsonObj1;
+      console.log(this.rbt_training_goals);
+
+      this.selectedValueAba = resp.noteBcba.aba_supervisor;
+      this.selectedValueRendering = resp.noteBcba.rendering_provider;
 
       this.selectedValueProviderName = this.note_selected.provider_name_g;
       this.selectedValueRBT = this.note_selected.provider_name;
@@ -237,14 +226,12 @@ export class NoteBcbaEditComponent {
 
   getProfileBip(){
     this.bipService.getBipProfilePatient_id(this.patient_id).subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.client_selected = resp;
 
       this.first_name = this.client_selected.patient.first_name;
       this.last_name = this.client_selected.patient.last_name;
       this.patient_id = resp.patient.patient_id;
-      // console.log(this.patient_id);  
-      this.diagnosis_code = this.client_selected.patient.diagnosis_code;  
       
     });
   }
@@ -294,92 +281,46 @@ export class NoteBcbaEditComponent {
     // })
   }
 
-  back(){
-    this.replacementSelected = null;
+  
+  
+  addMaladaptive(){
+    this.caregivers_training_goals.push({
+      caregiver_goal: this.maladaptiveSelected.caregiver_goal,
+      porcent_of_correct_response: this.porcent_of_correct_response,
+    })
+    if(this.caregivers_training_goals.length > 1){
+      this.caregivers_training_goals.splice(this.caregivers_training_goals,1);
+    }
     this.maladaptiveSelected = null;
-    this.total_trials = null;
-    this.number_of_correct_response = null;
-    // this.ngOnInit();
+    this.caregiver_goal = '';
+    this.porcent_of_correct_response = null;
   }
-
-  
-  
 
 
   addReplacement(){
-    this.replacementgroup.push({
-      goal: this.replacementSelected.goal,
-      total_trials: this.total_trials,
-      number_of_correct_response: this.number_of_correct_response,
+    this.rbt_training_goals.push({
+      lto: this.replacementSelected.lto,
+      porcent_of_correct_response: this.porcent_of_correct_response,
     })
-    if(this.replacementgroup.length > 1){
-      this.replacementgroup.splice(this.replacementgroup,1);
+    if(this.rbt_training_goals.length > 1){
+      this.rbt_training_goals.splice(this.rbt_training_goals,1);
     }
     this.replacementSelected = null;
-    this.goal = '';
-    this.total_trials = null;
-    this.number_of_correct_response = null;
-  }
-
-  addMaladaptive(){
-    this.maladaptivegroup.push({
-      maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
-      number_of_occurrences: this.number_of_occurrences,
-    })
-    if(this.maladaptivegroup.length > 1){
-      this.maladaptivegroup.splice(this.maladaptivegroup,1);
-    }
-    this.maladaptiveSelected = null;
-    this.maladaptive_behavior = '';
-    this.number_of_occurrences = null;
-  }
-
-  deleteLTOGoal(i:any){
-    this.replacementGoals.splice(i,1);
-  }
-
-  cambiarStatus(goalsto:any){
-    // this.status_sto_edit = goalsto;
-    // console.log(this.status_sto_edit.status_sto);
-
-    // let data ={
-    //   goalstos: this.golsto,
-    //   goalltos: this.gollto,
-    // }
-    
-    // this.goalService.editGoal(data, this.goalmaladaptiveid).subscribe(
-    //   resp =>{
-    //     // console.log(resp);
-    //     // this.getTableData();
-    //     Swal.fire('Updated', `Goal Updated successfully!`, 'success');
-    //     this.ngOnInit();
-    //   }
-    // )
+    this.lto = '';
+    this.porcent_of_correct_response = null;
   }
 
   
 
-  addInterventions(){
-    this.intervention_added.push({
-      pairing: this.pairing,
-      response_block: this.response_block,
-      DRA: this.DRA,
-      DRO: this.DRO,
-      redirection: this.redirection,
-      errorless_teaching: this.errorless_teaching,
-      NCR: this.NCR,
-      shaping: this.shaping,
-      chaining: this.chaining,
-      token_economy: this.token_economy,
-      extinction: this.extinction,
-      natural_teaching: this.natural_teaching,
-    })
-     //si existe un elemento actualiza ese elemento en la lista
-    if(this.intervention_added.length > 1){
-      this.intervention_added.splice(this.intervention_added,1);
-    }
-    Swal.fire('Updated', ` Interventions Updated`, 'success');
+  back(){
+    this.replacementSelected = null;
+    this.maladaptiveSelected = null;
+    this.porcent_of_occurrences = null;
+    this.porcent_of_correct_response = null;
   }
+
+
+  
 
   //funcion para la primera imagen.. funciona
   loadFile($event:any){
@@ -426,35 +367,22 @@ export class NoteBcbaEditComponent {
     formData.append('patient_id', this.patient_id);
     formData.append('doctor_id', this.doctor_id);
     formData.append('bip_id', this.bip_id);
-    formData.append('first_name', this.first_name);
-    formData.append('last_name', this.last_name);
     formData.append('diagnosis_code', this.diagnosis_code);
-    formData.append('provider_credential', this.provider_credential);
-    formData.append('pos', this.pos);
-    formData.append('session_date', this.session_date);
-
+    formData.append('location', this.location);
+    formData.append('birth_date', this.birth_date);
     
     
-    formData.append('provider_name_g', this.selectedValueProviderName);
-    formData.append('time_in', this.selectedValueTimeIn+'');
-    formData.append('time_out', this.selectedValueTimeOut+'');
-    formData.append('time_in2', this.selectedValueTimeIn2+'');
-    formData.append('time_out2', this.selectedValueTimeOut2+'');
-    formData.append('environmental_changes', this.environmental_changes);
+    formData.append('rendering_provider', this.selectedValueRendering);
+    formData.append('aba_supervisor', this.selectedValueAba);
+    formData.append('cpt_code', this.cpt);
     
-
-    formData.append('provider_name_g', this.selectedValueProviderName);
     formData.append('provider_name', this.selectedValueRBT);
     formData.append('supervisor_name', this.selectedValueBCBA);
+    formData.append('note_description', this.note_description);
 
-    formData.append('replacements', JSON.stringify(this.replacementgroup));
-    formData.append('maladaptives', JSON.stringify(this.maladaptivegroup));
-    formData.append('interventions', JSON.stringify(this.intervention_added));
+    formData.append('rbt_training_goals', JSON.stringify(this.rbt_training_goals));
+    formData.append('caregiver_goals', JSON.stringify(this.caregivers_training_goals));
 
-    formData.append('as_evidenced_by', this.as_evidenced_by);
-    formData.append('client_appeared', this.client_appeared);
-    formData.append('client_response_to_treatment_this_session', this.client_response_to_treatment_this_session);
-    
     formData.append('imagen', this.FILE_SIGNATURE_RBT);
     formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
     
@@ -468,7 +396,7 @@ export class NoteBcbaEditComponent {
         // this.text_success = 'Employer created';
         // this.ngOnInit();
         Swal.fire('Updated', ` Note Rbt Updated`, 'success');
-        this.router.navigate(['/note/listbyclient/',this.patient_id]);
+        this.router.navigate(['/note-bcba/listbyclient/',this.patient_id]);
       }
     })
 
