@@ -16,13 +16,13 @@ import { CrisisPlanComponent } from './crisis-plan/crisis-plan.component';
 import { DeEscalationTecniquesComponent } from './de-escalation-tecniques/de-escalation-tecniques.component';
 import { ConsentTreatmentFormComponent } from './consent-treatment-form/consent-treatment-form.component';
 import { SustitutionListComponent } from './sustitution-list/sustitution-list.component';
+import { ChartReplacementComponent } from './charts/chart-replacement/chart-replacement.component';
 
 
 @NgModule({
   declarations: [
     BipformComponent,
     ReductionGoalFormComponent,
-    ChartReductionComponent,
     SustitutionGoalFormComponent,
     FamilyInvolvementGoalFormComponent,
     MonitoringEvaluatingComponent,
@@ -31,12 +31,13 @@ import { SustitutionListComponent } from './sustitution-list/sustitution-list.co
     CrisisPlanComponent,
     DeEscalationTecniquesComponent,
     ConsentTreatmentFormComponent,
-    SustitutionListComponent
+    SustitutionListComponent,
+    ChartReductionComponent,
+    ChartReplacementComponent,
   ],
   exports: [
     BipformComponent,
     ReductionGoalFormComponent,
-    ChartReductionComponent,
     SustitutionGoalFormComponent,
     FamilyInvolvementGoalFormComponent,
     MonitoringEvaluatingComponent,
@@ -45,7 +46,9 @@ import { SustitutionListComponent } from './sustitution-list/sustitution-list.co
     CrisisPlanComponent,
     DeEscalationTecniquesComponent,
     ConsentTreatmentFormComponent,
-    SustitutionListComponent
+    SustitutionListComponent,
+    ChartReductionComponent,
+    ChartReplacementComponent
   ],
   imports: [
     CommonModule,

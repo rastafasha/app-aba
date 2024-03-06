@@ -39,7 +39,7 @@ export class ReductionGoalFormComponent {
   //goals
   public maladaptiveSelected:any;
   public maladaptiveSelectedSon:any;
-  public goalmaladaptive:any ;
+  public goalmaladaptive:any =[];
   public goalmaladaptive_child:any = [];
   public goalReductionPatientIds:any = [];
   
@@ -156,10 +156,10 @@ export class ReductionGoalFormComponent {
       // this.goals = resp.goalReductionPatientIds;
       // console.log(this.goals);
 
-      this.golsto = this.goalReductions[0].goalstos;
-        console.log(this.golsto);
-        this.gollto = this.goalReductions[0].goalltos;
-        console.log(this.gollto);
+      // this.golsto = this.goalReductions[0].goalstos;
+        // console.log(this.golsto);
+        // this.gollto = this.goalReductions[0].goalltos;
+        // console.log(this.gollto);
       
       
     })
@@ -209,14 +209,16 @@ export class ReductionGoalFormComponent {
   //obtenemos los maladaptives iniciales para poder relacionarlos con los goals
   getGoalsMaladaptives(){
     this.goalService.listMaladaptivesGoals(this.maladaptiveSelected.maladaptive_behavior).subscribe((resp:any)=>{
-      // console.log( resp);
+     console.log(resp);
+     console.log('palabra maladaptive', resp.goalsmaladaptive.data[0].maladaptive);
+     
+      this.goalmaladaptive = resp.goalsmaladaptive.data[0];
+      this.goalmaladaptiveid = resp.goalsmaladaptive.data[0].id || null;
+      this.goalmaladaptive_clientId = resp.goalsmaladaptive.data[0].client_id || null;
       
-      console.log('palabra maladaptive', this.goalmaladaptive);
-      this.goalmaladaptive = resp.goalsmaladaptive.data;
-      this.goalmaladaptiveid = resp.goalsmaladaptive.data[0].id;
-      this.goalmaladaptive_clientId = resp.goalsmaladaptive.data[0].client_id;
-      
-      this.current_status = this.goalmaladaptive[0].current_status;
+      this.current_status = this.goalmaladaptive.current_status;
+      this.golsto = resp.goalsmaladaptive.data[0].goalstos;
+      this.gollto = resp.goalsmaladaptive.data[0].goalltos;
       
 
       console.log(this.goalmaladaptive_clientId); //devuelve el client_id guardado

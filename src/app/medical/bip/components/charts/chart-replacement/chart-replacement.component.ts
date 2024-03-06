@@ -28,7 +28,6 @@ import { DashboardService } from 'src/app/core/dashboard/service/dashboard.servi
 interface data {
   value: string ;
 }
-
 export type ChartOptions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   series: ApexAxisChartSeries | any;
@@ -62,13 +61,13 @@ export type ChartOptions = {
   legend: ApexLegend | any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 };
-@Component({
-  selector: 'app-chart-reduction',
-  templateUrl: './chart-reduction.component.html',
-  styleUrls: ['./chart-reduction.component.scss']
-})
-export class ChartReductionComponent {
 
+@Component({
+  selector: 'app-chart-replacement',
+  templateUrl: './chart-replacement.component.html',
+  styleUrls: ['./chart-replacement.component.scss']
+})
+export class ChartReplacementComponent {
   public selectedValue: string ='2024';
   @ViewChild('chart') chart!: ChartComponent;
 
@@ -332,5 +331,4 @@ export class ChartReductionComponent {
     {value: '2029'},
     {value: '2030'},
   ];
-  
 }

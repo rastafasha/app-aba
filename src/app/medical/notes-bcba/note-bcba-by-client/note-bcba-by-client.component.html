@@ -51,10 +51,8 @@
                                 <thead>
                                     <tr>
                                         
-                                      <th mat-sort-header="session_date">Session Date</th>
-                                      <th mat-sort-header="next_session">Next Session</th>
-                                      <th mat-sort-header="session_length_total">Session 1 total</th>
-                                      <th mat-sort-header="session_length_total2">Session 2 total</th>
+                                      <th mat-sort-header="diagnosis_code">diagnosis code</th>
+                                      <th mat-sort-header="cpt_code">CPT code</th>
                                       <th mat-sort-header="created">Created At</th>
                                          <th ></th> <!--acciones -->
                                     </tr>
@@ -64,12 +62,10 @@
                                         
                                       <td>
                                         <a class="dropdown-item" [routerLink]="['/note-bcba/view/', data.id]">
-                                          {{data.session_date |date}}
+                                          {{data.diagnosis_code}}
                                         </a>
                                       </td>
-                                      <td>{{data.next_session_is_scheduled_for|date}}</td>
-                                      <td>{{data.session_length_total}}</td>
-                                      <td>{{data.session_length_total2}}</td>
+                                      <td>{{data.cpt_code}}</td>
                                         <td>{{data.created_at | date }}</td>
                                         
                                         <td class="text-end">

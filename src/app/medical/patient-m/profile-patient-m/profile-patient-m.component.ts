@@ -56,6 +56,20 @@ public specialists:any = [];
   public bcba2_id: any;
   public clin_director_id: any;
   public client_id: any;
+  public avatar: any;
+
+  doctor_selected:any =null;
+  doctor_selected_full_name:any =null;
+  doctor_selected_rbt:any =null;
+  doctor_selected_full_name_rbt:any =null;
+  doctor_selected_bcba:any =null;
+  doctor_selected_full_name_bcba:any =null;
+  doctor_selected_clin_director:any =null;
+  doctor_selected_full_name_clin_director:any =null;
+  doctor_selected_bcba2:any =null;
+  doctor_selected_full_name_bcba2:any =null;
+  doctor_selected_rbt2:any =null;
+  doctor_selected_full_name_rbt2:any =null;
 
 constructor(
   public patientService : PatientMService,
@@ -95,6 +109,8 @@ getConfig(){
   })
 }
 
+
+
 getPatient(){
   this.patientService.showPatientProfile(this.client_id).subscribe((resp:any)=>{
     console.log(resp);
@@ -104,22 +120,65 @@ getPatient(){
     this.num_appointment_pendings= resp.num_appointment_pendings;
     this.patient_selected= resp.patient;
     this.patient_id= resp.patient.patient_id;
-
-    this.rbt_id = resp.specialists;
-    this.rbt2_id = resp.specialists;
-    this.bcba_id = resp.specialists;
-    this.bcba2_id = resp.specialists;
-    this.clin_director_id = resp.specialists;
+    this.avatar= resp.patient.avatar;
+    this.rbt_id = resp.patient.rbt_id;
+    this.rbt2_id = resp.patient.rbt2_id;
+    this.bcba_id = resp.patient.bcba_id;
+    this.bcba2_id = resp.patient.bcba2_id;
+    this.clin_director_id = resp.patient.clin_director_id;
     // this.appointment_pendings= resp.appointment_pendings.data;
     this.pa_assessmentss = resp.pa_assessments;
         let jsonObj = JSON.parse(this.pa_assessmentss) || '';
         this.pa_assessmentgroup = jsonObj;
 
         this.patientService.getLaboratoryByPatient(this.patient_id).subscribe((resp:any)=>{
-          console.log(resp);
+          // console.log(resp);
           this.FilesAdded = resp.patientFiles.data;
         })
+
+        this.getDoctorRbt1();
+        this.getDoctorRbt2();
+        this.getDoctorBcba();
+        this.getDoctorBcba2();
+        this.getDoctorDirector();
   })
+}
+
+getDoctorRbt1(){
+  this.doctorService.showDoctor(this.rbt_id).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected_rbt = resp.user;
+    this.doctor_selected_full_name_rbt = resp.user.full_name;
+  });
+}
+
+getDoctorRbt2(){
+  this.doctorService.showDoctor(this.rbt2_id).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected_rbt2 = resp.user;
+    this.doctor_selected_full_name_rbt2 = resp.user.full_name;
+  });
+}
+getDoctorBcba(){
+  this.doctorService.showDoctor(this.bcba_id).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected_bcba = resp.user;
+    this.doctor_selected_full_name_bcba = resp.user.full_name;
+  });
+}
+getDoctorBcba2(){
+  this.doctorService.showDoctor(this.bcba2_id).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected_bcba2 = resp.user;
+    this.doctor_selected_full_name_bcba2 = resp.user.full_name;
+  });
+}
+getDoctorDirector(){
+  this.doctorService.showDoctor(this.clin_director_id).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected_clin_director = resp.user;
+    this.doctor_selected_full_name_clin_director = resp.user.full_name;
+  });
 }
 
 

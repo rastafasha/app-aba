@@ -32,6 +32,7 @@ public selectedValueProvider!: string;
 
   client_id:any;
   doctor_id:any;
+  doctor_selected:any;
   patient_selected:any;
   client_selected:any;
   note_selected:any;
@@ -119,6 +120,11 @@ public selectedValueProvider!: string;
 
   maladaptiveSelected:any =null;
   replacementSelected:any =null;
+  doctor_selected_full_name:any =null;
+  doctor_selected_rbt:any =null;
+  doctor_selected_full_name_rbt:any =null;
+  doctor_selected_bcba:any =null;
+  doctor_selected_full_name_bcba:any =null;
 
 constructor(
   public noteRbtService : NoteRbtService,
@@ -212,6 +218,8 @@ getNote(){
     this.selectedValueTimeOut2 = this.note_selected.time_out2;
 
     this.selectedValueProviderName = this.note_selected.provider_name_g;
+    this.provider_name = this.note_selected.provider_name;
+    
     this.selectedValueRBT = this.note_selected.provider_name;
     this.selectedValueBCBA = this.note_selected.supervisor_name;
 
@@ -219,7 +227,33 @@ getNote(){
     this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.note_selected.supervisor_signature;
 
     this.getProfileBip();
+    this.getDoctor();
+    this.getDoctorBcba();
+    this.getDoctorRbt();
   })
+}
+
+getDoctor(){
+  this.doctorService.showDoctor(this.selectedValueProviderName).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected = resp.user;
+    this.doctor_selected_full_name = resp.user.full_name;
+  });
+}
+
+getDoctorRbt(){
+  this.doctorService.showDoctor(this.selectedValueRBT).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected_rbt = resp.user;
+    this.doctor_selected_full_name_rbt = resp.user.full_name;
+  });
+}
+getDoctorBcba(){
+  this.doctorService.showDoctor(this.selectedValueBCBA).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected_bcba = resp.user;
+    this.doctor_selected_full_name_bcba = resp.user.full_name;
+  });
 }
 
 getProfileBip(){

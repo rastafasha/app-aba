@@ -31,11 +31,11 @@
                                         <div class="col-lg-4 col-md-4">
                                             <div class="profile-user-box">
                                                 <div class="profile-user-img">
-                                                    <div *ngIf="!patient_selected.avatar">
+                                                    <div *ngIf="!avatar">
                                                         <img src="./assets/img/no-image.jpg" >
                                                     </div>
-                                                    <div *ngIf="patient_selected.avatar">
-                                                        <img  src="{{imagenSerUrl}}{{patient_selected.avatar}}"  [alt]="patient_selected.first_name">
+                                                    <div *ngIf="avatar">
+                                                        <img  src="{{avatar}}"  [alt]="patient_selected.first_name">
                                                     </div>
                                                 </div>
                                                 <div class="names-profiles">
@@ -304,7 +304,7 @@
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Birth Day </h2>
-                                                        <h3>{{patient_selected.birth_date | date}}</h3>
+                                                        <h3>{{patient_selected.birth_date }}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
@@ -392,31 +392,31 @@
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>RBT</h2>
-                                                        <h3>{{patient_selected.rbt_id == specialists.id }}</h3>
+                                                        <h3>{{doctor_selected_full_name_rbt}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>RBT 2 </h2>
-                                                        <h3>{{patient_selected.rbt2_id}}</h3>
+                                                        <h3>{{doctor_selected_full_name_rbt2}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>BCBA </h2>
-                                                        <h3>{{patient_selected.bcba_id}}</h3>
+                                                        <h3>{{doctor_selected_full_name_bcba}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>BCBA 2</h2>
-                                                        <h3>{{patient_selected.bcba2_id}}</h3>
+                                                        <h3>{{doctor_selected_full_name_bcba2}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Clinical Director</h2>
-                                                        <h3>{{patient_selected.clin_director_id}}</h3>
+                                                        <h3>{{doctor_selected_full_name_clin_director}}</h3>
                                                     </div>
                                                 </div>
                                                

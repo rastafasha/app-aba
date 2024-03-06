@@ -6,7 +6,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/patients/list">Notes Rbt </a></li>
+                        <li class="breadcrumb-item active"><a routerLink="/patients/list">Client List / </a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="['/note-rbt/listbyclient/', patient_id]">Note Rbt List </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">Client Note Rbt</li>
                     </ul>
@@ -61,7 +62,7 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                             <div class="follow-btn-group">
-                                                <a [routerLink]="['/note/edit/rbt/', note_id]" class="btn btn-info follow-btns">Edit</a>
+                                                <a [routerLink]="['/note-rbt/edit/', note_id]" class="btn btn-info follow-btns">Edit</a>
                                                 <button class="btn btn-info follow-btns" (click)="convertToPdf()">Save PDF</button>
                                                 <!-- <button type="submit" class="btn btn-info message-btns">Message</button> -->
                                             </div>
@@ -104,14 +105,8 @@
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
-                                                        <h2>Diagnosis code</h2>
-                                                        <h3>{{patient_selected.diagnosis_code}}</h3>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-3 col-md-6">
-                                                    <div class="detail-personal">
                                                         <h2>Provider Name</h2>
-                                                        <h3>{{note_selected.provider_name_g}}</h3>
+                                                        <h3>{{doctor_selected_full_name}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
@@ -485,25 +480,28 @@
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Provider Signature</h2>
-                                                        <h3>{{note_selected.provider_signature}}</h3>
+                                                        <!-- <h3>{{note_selected.provider_signature}}</h3> -->
+                                                        <img  src="{{note_selected.provider_signature}}" style="width: 100%;"  >
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Provider name RBT</h2>
-                                                        <h3>{{note_selected.provider_name}}</h3>
+                                                        <h3>{{doctor_selected_full_name_rbt}}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Supervisor Signature</h2>
-                                                        <h3>{{note_selected.supervisor_signature}}</h3>
+                                                        <!-- <h3>{{note_selected.supervisor_signature}}</h3> -->
+                                                        <!-- {{imagenSerUrl}} -->
+                                                        <img  src="{{note_selected.supervisor_signature}}" style="width: 100%;"  >
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Supervisor name BCBA</h2>
-                                                        <h3>{{note_selected.supervisor_name}}</h3>
+                                                        <h3>{{doctor_selected_full_name_bcba}}</h3>
                                                     </div>
                                                 </div>
                                                 

@@ -12,7 +12,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PermisionInterceptorInterceptor } from './http-interceptors/permision-interceptor.interceptor';
 import { PipesModule } from './pipes/pipes.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -29,6 +29,8 @@ public selectedValueProvider!: string;
   public selectedValueTimeOut2!: number;
   public selectedValueProviderName!: string;
   public selectedValueMaladaptive!: string;
+  public selectedValueAba!: string;
+  public selectedValueRendering!: string;
 
   client_id:any;
   doctor_id:any;
@@ -120,6 +122,27 @@ public selectedValueProvider!: string;
   maladaptiveSelected:any =null;
   replacementSelected:any =null;
 
+  note_description:any ;
+  caregivers_training_goals:any =[];
+  rbt_training_goals:any =[];
+  rbt_training_goalsgroup:any =[];
+  caregivers_training_goalsgroup:any =[];
+  aba_supervisor:any =[];
+
+  public location: any;
+  public birth_date: any;
+  public porcent_of_occurrences:number = 0;
+  public porcent_of_correct_response:number = 0;
+  lto:any =null;
+  caregiver_goal:any =null;
+  cpt_code:any =null;
+  doctor_selected:any =null;
+  doctor_selected_full_name:any =null;
+  doctor_selected_rbt:any =null;
+  doctor_selected_full_name_rbt:any =null;
+  doctor_selected_bcba:any =null;
+  doctor_selected_full_name_bcba:any =null;
+
 constructor(
   public noteBcbaService : NoteBcbaService,
   public activatedRoute: ActivatedRoute,
@@ -150,76 +173,75 @@ getConfig(){
 getNote(){
   this.noteBcbaService.getNote(this.note_id).subscribe((resp:any)=>{
     console.log(resp);
-    this.note_selected = resp.noteRbt;
-    this.note_selectedId = resp.noteRbt.id;
-    this.patient_id = this.note_selected.patient_id;
-    this.bip_id = this.note_selected.bip_id;
+    this.note_selected = resp.noteBcba;
+      this.note_selectedId = resp.noteBcba.id;
+      this.patient_id = this.note_selected.patient_id;
+      this.bip_id = this.note_selected.bip_id;
+      this.location = this.note_selected.location;
+      // this.birth_date = this.note_selected.birth_date;
+      this.birth_date = this.note_selected.birth_date ? new Date(this.note_selected.birth_date).toISOString(): '';
 
-    this.provider_credential = this.note_selected.provider_credential;
-    this.as_evidenced_by = this.note_selected.as_evidenced_by;
-    this.client_appeared = this.note_selected.client_appeared;
-    this.client_response_to_treatment_this_session = this.note_selected.client_response_to_treatment_this_session;
-    
-    this.interventions = resp.interventions;
-    let jsonObj = JSON.parse(this.interventions) || '';
-    this.interventionsgroup = jsonObj;
-    console.log(this.interventionsgroup);
+      this.provider_credential = this.note_selected.provider_credential;
+      this.as_evidenced_by = this.note_selected.as_evidenced_by;
+      this.client_appeared = this.note_selected.client_appeared;
+      this.diagnosis_code = this.note_selected.diagnosis_code;
+      this.cpt_code = this.note_selected.cpt_code;
+      this.note_description = this.note_selected.note_description;
+      this.client_response_to_treatment_this_session = this.note_selected.client_response_to_treatment_this_session;
+      this.pos = this.note_selected.pos;
+      
+      
+      this.caregivers_training_goalsgroup = resp.caregiver_goals;
+      let jsonObj = JSON.parse(this.caregivers_training_goalsgroup) || '';
+      this.caregivers_training_goals = jsonObj;
+      console.log(this.caregivers_training_goals);
 
-    this.pairing = this.interventionsgroup[0].pairing;
-    this.response_block = this.interventionsgroup[0].response_block;
-    this.DRA = this.interventionsgroup[0].DRA;
-    this.DRO = this.interventionsgroup[0].DRO;
-    this.redirection = this.interventionsgroup[0].redirection;
-    this.errorless_teaching = this.interventionsgroup[0].errorless_teaching;
-    this.NCR = this.interventionsgroup[0].NCR;
-    this.shaping = this.interventionsgroup[0].shaping;
-    this.chaining = this.interventionsgroup[0].chaining;
-    this.token_economy = this.interventionsgroup[0].token_economy;
-    this.extinction = this.interventionsgroup[0].extinction;
-    this.natural_teaching = this.interventionsgroup[0].natural_teaching;
+      
+      this.rbt_training_goalsgroup = resp.rbt_training_goals;
+      let jsonObj1 = JSON.parse(this.rbt_training_goalsgroup) || '';
+      this.rbt_training_goals = jsonObj1;
+      console.log(this.rbt_training_goals);
 
-    
-    this.maladaptive = resp.maladaptives;
-    let jsonObj1 = JSON.parse(this.maladaptive) || '';
-    this.maladaptivegroup = jsonObj1;
-    // console.log(this.maladaptivegroup);
+      this.aba_supervisor = resp.noteBcba.aba_supervisor;
+      this.selectedValueRendering = resp.noteBcba.rendering_provider;
 
-    this.replacement = resp.replacements;// ?
-    let jsonObj2 = JSON.parse(this.replacement) || '';
-    this.replacementgroup = jsonObj2;
-    // console.log(this.replacementgroup);
 
-    this.pos = this.note_selected.pos;
-    this.environmental_changes = this.note_selected.environmental_changes;
-    this.meet_with_client_at = this.note_selected.meet_with_client_at;
-    this.progress_noted_this_session_compared_to_previous_session = this.note_selected.progress_noted_this_session_compared_to_previous_session;
-    
-    this.rbt_modeled_and_demonstrated_to_caregiver = this.note_selected.rbt_modeled_and_demonstrated_to_caregiver;
-    this.replacement = this.note_selected.replacement;
-    
-    // this.session_date = this.note_selected.session_date;
-    this.session_date = this.note_selected.session_date? new Date(this.note_selected.session_date).toISOString(): '';
-    // this.next_session_is_scheduled_for = this.note_selected.next_session_is_scheduled_for;
-    this.next_session_is_scheduled_for = this.note_selected.next_session_is_scheduled_for? new Date(this.note_selected.next_session_is_scheduled_for).toISOString(): '';
-    
-    this.session_length_total = this.note_selected.session_length_total;
-    this.session_length_total2 = this.note_selected.session_length_total2;
-    
-    this.selectedValueTimeIn = this.note_selected.time_in;
-    console.log(this.selectedValueTimeIn);
-    this.selectedValueTimeOut = this.note_selected.time_in2;
-    this.selectedValueTimeIn2 = this.note_selected.time_out;
-    this.selectedValueTimeOut2 = this.note_selected.time_out2;
+      this.selectedValueProviderName = this.note_selected.provider_name_g;
+      this.selectedValueRBT = this.note_selected.provider_name;
+      this.selectedValueBCBA = this.note_selected.supervisor_name;
 
-    this.selectedValueProviderName = this.note_selected.provider_name_g;
-    this.selectedValueRBT = this.note_selected.provider_name;
-    this.selectedValueBCBA = this.note_selected.supervisor_name;
-
-    this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = this.note_selected.provider_signature;
-    this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.note_selected.supervisor_signature;
+      this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = this.note_selected.provider_signature;
+      this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.note_selected.supervisor_signature;
 
     this.getProfileBip();
+    this.getDoctor();
+    this.getDoctorRbt();
+    this.getDoctorBcba();
   })
+}
+
+
+getDoctor(){
+  this.doctorService.showDoctor(this.selectedValueRendering).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected = resp.user;
+    this.doctor_selected_full_name = resp.user.full_name;
+  });
+}
+
+getDoctorRbt(){
+  this.doctorService.showDoctor(this.aba_supervisor).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected_rbt = resp.user;
+    this.doctor_selected_full_name_rbt = resp.user.full_name;
+  });
+}
+getDoctorBcba(){
+  this.doctorService.showDoctor(this.selectedValueBCBA).subscribe((resp:any)=>{
+    console.log(resp);
+    this.doctor_selected_bcba = resp.user;
+    this.doctor_selected_full_name_bcba = resp.user.full_name;
+  });
 }
 
 getProfileBip(){
@@ -267,7 +289,7 @@ getProfileBip(){
       }
 
       // Save the PDF
-      pdf.save('note_rbt_client_'+this.patient_selected.patient_id+".pdf");
+      pdf.save('note_bcba_client_'+this.patient_selected.patient_id+".pdf");
       // pdf.save('note_rbt_client_'+this.patient_selected.patient_id+'_'+this.patient_selected.last_name+".pdf");
     });
 
