@@ -5,10 +5,30 @@
         <div class="col-12 col-md-12 col-lg-12 ">
             <div class="card">
                 <div class="card-body">
+                    
+                    <ng-container *ngFor="let item of notesRbts">
+                        <ul>
+                            <li>{{item.session_date}}</li>
+                            <li>
+                                {{item.maladaptives}}
+                            </li>
+
+                            <!-- <ng-container *ngFor="let itm of maladaptives">
+                                <li>
+                                    {{itm.maladaptive_behavior}}
+                                    {{itm.number_of_occurrences}}
+                                </li>
+                            </ng-container> -->
+                        </ul>
+                    </ng-container>
+
+                    
+
                     <div class="chart-title patient-visit mb-0">
-                        <h4>Static of your Health</h4>
+                        <h4>{{maladaptive_behavior}}</h4>
+                        <p>{{created_at|date}}</p>
                         <div class="income-value">
-                            <p><span class="passive-view"><i class="feather icon-arrow-up-right me-1"></i>40%</span> vs last month</p>
+                            <p><span class="passive-view">{{initial_interesting}}</span> Initial Interesting</p>
                         </div>
                         <!-- <div class="average-health">
                             <h5>72bmp <span>Average</span></h5>
@@ -38,46 +58,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="col-12 col-md-12 col-lg-12 col-xl-5 d-flex">
-            <div class="card">
-                <div class="card-body">
-                    <div class="chart-title patient-visit">
-                        <h4>Body Mass index</h4>
-                    </div>
-                    <div class="body-mass-blk">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="weight-blk">
-                                    <ngx-slick-carousel class="center slider carousel" [config]="slideConfig">
-                                        <div ngxSlickItem *ngFor="let slide of carousel1">
-                                            <h4>{{slide.quantity}}</h4>
-                                            <span>{{slide.units}}</span>
-                                        </div>
-                                    </ngx-slick-carousel>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="weight-blk">
-                                    <ngx-slick-carousel class="center slider carousel"  #slickModal="slick-carousel" [config]="slideConfig">
-                                        <div ngxSlickItem *ngFor="let slide of carousel2">
-                                            <h4>{{slide.quantity}}</h4>
-                                            <span>{{slide.units}}</span>
-                                        </div>
-                                    </ngx-slick-carousel>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress weight-bar">
-                            <div class="progress-bar progress-bar-success" role="progressbar" ></div>
-                        </div>
-                        <ul class="weight-checkit">
-                            <li>Underweight</li>
-                            <li>Normal (45.5)</li>
-                            <li>Overweight</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+       
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { routes } from 'src/app/shared/routes/routes';
 import {
   ChartComponent,
@@ -25,6 +25,8 @@ import { pageSelection, apiResultFormat, patientDashboard } from 'src/app/shared
 import { ActivatedRoute } from '@angular/router';
 import { DoctorService } from 'src/app/medical/doctors/service/doctor.service';
 import { DashboardService } from 'src/app/core/dashboard/service/dashboard.service';
+import { GraphicReductionService } from '../../../service/graphic-reduction.service';
+import { BipService } from '../../../service/bip.service';
 interface data {
   value: string ;
 }
@@ -71,6 +73,12 @@ export class ChartReductionComponent {
 
   public selectedValue: string ='2024';
   @ViewChild('chart') chart!: ChartComponent;
+  
+  @Input() maladaptiveSelectedSon:any;
+  @Input() maladaptive_behavior:any;
+  @Input() initial_interesting:any;
+  // @Output() cursoD: EventEmitter<any>  = new EventEmitter();// envia la data
+
 
   public chartOptionsOne: Partial<ChartOptions>;
    // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -86,29 +94,25 @@ export class ChartReductionComponent {
 
   //datos reales
   public bips:any = [];
-  public appointment_pendings:any = [];
+  public user: any;
+  public maladaptiveSelected: any;
+  public maladaptive: any;
+  public patient_id: any;
+  public client_id: any;
+  public created_at: Date;
+  public session_date: any = [];
+  public maladaptives: any = [];
+  public session_dates: any = [];
+  public number_of_occurrences: number;
+  public patient_selected: any = [];
+  public client_selected: any = [];
 
-  public num_appointments_current: number = 0;
-  public num_appointments_before: number = 0;
-  public porcentaje_d: number = 0;
-
-  public num_patients_current:number = 0;
-  public num_patients_before:number = 0;
-  public porcentaje_dp:number = 0;
-
-  public num_appointments_attention_current:number = 0;
-  public num_appointments_attention_before:number = 0;
-  public porcentaje_da:number = 0;
-
-  public num_appointments_total_current: number = 0;
-  public num_appointments_total_before: number = 0;
-  public porcentaje_dt: number = 0;
 
   public query_patient_by_genders:any = [];
   public query_patients_specialities:any = [];
   public query_patients_speciality_porcentaje:any = [];
   public query_income_year:any = [];
-  public user: any;
+  public notesRbts:any = [];
   //datos reales
 
   constructor(
@@ -116,6 +120,8 @@ export class ChartReductionComponent {
     public activatedRoute: ActivatedRoute,
     public doctorService: DoctorService,
     public dashboardService : DashboardService,
+    public graphicReductionService : GraphicReductionService,
+    public bipService:BipService,
     ) {
     this.carousel1 = this.data.carousel1;
     this.carousel2 = this.data.carousel2;
@@ -149,7 +155,7 @@ export class ChartReductionComponent {
     //   },
     //   series: [
     //     {
-    //       name: 'Health',
+    //       name: 'Number of Occurrences',
     //       color: '#00D3C7',
     //       data: [20, 40, 85, 25, 50, 30, 50, 20, 50, 40, 30, 20],
     //     },
@@ -172,45 +178,134 @@ export class ChartReductionComponent {
     //   },
     // };
 
-    this.chartOptionsOne = {
-      chart: {
-        height: 200,
-        type: 'line',
-        toolbar: {
-          show: false,
-        },
-      },
-      grid: {
-        show: true, 
-        xaxis: {
-          lines: {
-            show: false
-           }
-         },  
-        yaxis: {
-          lines: { 
-            show: true 
-           }
-         },   
-        },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: 'smooth',
-      },
-      series: [
-        {
-          name: 'Income',
-          color: '#2E37A4',
-          data:[] //[45, 60, 75, 51, 42, 42, 30],
-        },
-      ],
-      xaxis: {
-        categories: []//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-      },
-    };
   }
+
+  ngOnInit(): void {
+    
+    this.maladaptive_behavior
+    this.initial_interesting
+    console.log(this.maladaptive_behavior);
+    
+
+    this.activatedRoute.params.subscribe((resp:any)=>{
+      this.client_id = resp.id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
+      // this.patient_id= resp.id // recibe el id del paciente que se esta consultando
+      // console.log(this.client_id);
+     })
+     this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
+     this.getBip(); // se pide el perfil del paciente por el bip relacionado
+     
+  }
+
+  getBip(){
+    this.bipService.getBipByUser(this.client_id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.created_at = resp.bip.created_at;
+      console.log(this.created_at);
+    });
+
+  }
+
+  getProfileBip(){
+    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.client_selected = resp;// asignamos el objeto a nuestra variable
+      this.patient_id = resp.patient.patient_id;  
+      console.log(this.patient_id);
+
+      //traemos la info del usuario 
+      if (this.client_selected.type !== null){// si hay o no informacion del paciente
+        if (this.client_selected.eligibility == 'yes'){// si el status es positivo para proceder
+          this.patient_id = this.client_selected.patient_id;  
+        }
+      }
+      this.getGoalsMaladaptive();
+    });
+
+  }
+
+  // angular
+  getGoalsMaladaptive(){
+    this.graphicReductionService.listMaladaptivesGraphics(this.maladaptive_behavior, this.patient_id).subscribe((resp:any)=>{
+     console.log(resp);
+
+     this.notesRbts = resp.noteRbt.data;
+     console.log(this.notesRbts);
+
+     // sin usar el json parse
+    //  this.maladaptives = resp.noteRbt.data.filter((items:any) => items.maladaptives);
+    //  console.log(this.maladaptives);
+
+     this.session_date = resp.noteRbt.data[0].session_date;
+    //  this.session_dates = this.session_date.session_date ? new Date(this.notesRbts.data.session_date).toISOString(): '';
+    //  this.session_date = this.notesRbts.session_date;
+     console.log(this.session_date); // obtiene la data separada
+
+     let jsonObj = JSON.parse(resp.noteRbt.data[0].maladaptives) || ''; //debo entrar al [0]
+     this.maladaptives = jsonObj;
+     console.log(this.maladaptives); // obtiene la data separada
+
+      // deberia obtener el nombre solicitado
+      this.maladaptive = this.maladaptives[0].maladaptive_behavior 
+      console.log(this.maladaptive_behavior); //si lo obtiene pero solo 1
+
+     
+
+      // deberia obtener el numero solicitado
+      this.number_of_occurrences = this.maladaptives[0].number_of_occurrences 
+      console.log(this.number_of_occurrences);// no lo obtiene
+
+      // solo si accedo al [0] si obtiene todo
+      this.chartOptionsOne = {
+        chart: {
+          height: 170,
+          type: 'line',
+          toolbar: {
+            show: false,
+          },
+        },
+        grid: {
+          show: true, 
+          xaxis: {
+            lines: {
+              show: false
+             }
+           },  
+          yaxis: {
+            lines: { 
+              show: true 
+             }
+           },   
+          },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          curve: 'smooth',
+        },
+        series: [
+          {
+            name: 'Number of Occurrences',
+            color: '#00D3C7',
+            // data: [45, 60, 75, 51, 42, 42, 30],
+            data: [this.initial_interesting, this.number_of_occurrences]
+          },
+        ],
+        xaxis: {
+          categories: [this.created_at, this.session_date],
+          // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        },
+      };
+      
+     
+    },);
+
+    // this.getDashboardAdminYear();
+
+  }
+
+  
+
 
 
   getDashboardAdminYear(){
@@ -220,42 +315,8 @@ export class ChartReductionComponent {
     this.query_income_year = null;
     this.dashboardService.dashboardAdminYear(data).subscribe((resp:any)=>{
       // console.log(resp);
-      //start
-      this.query_patient_by_genders = resp.query_patients_by_gender;
       
-      let data_male:any = [];
-      let data_female:any = [];
-      this.query_patient_by_genders.forEach((item:any) => {
-        data_male.push(item.hombre);
-        data_female.push(item.mujer);
-      });
 
-      let Patient_by_Genders =[
-        {
-          name: 'Male',
-          color: '#2E37A4',
-          data: data_male,
-        },
-        {
-          name: 'Female',
-          color: '#00D3C7',
-          data: data_female,
-        },
-      ];
-      this.chartOptionsOne.series = Patient_by_Genders;
-      //end
-
-      //start
-      this.query_patients_specialities = resp.query_patients_speciality;
-
-      let labels_sp:any = [];
-      let series_sp:any = [];
-      this.query_patients_specialities.forEach((patients_speciality:any)=>{
-        labels_sp.push(patients_speciality.name)
-        series_sp.push(patients_speciality.count)
-      })
-      this.chartOptionsOne.labels = labels_sp;
-      //end
       //start
       this.query_patients_speciality_porcentaje = resp.query_patients_speciality_porcentaje;
       //end
@@ -305,19 +366,11 @@ export class ChartReductionComponent {
         },
       };
       
-      // this.chartOptionsThree.xaxis.categories = resp.months_name
-      // this.chartOptionsThree.series = [
-      //   {
-      //     name: 'Income',
-      //     color: '#2E37A4',
-      //     data: data_income,
-      //   },
-      // ]
       //end
     })
   }
   selectedYear(){
-    // console.log(this.selectedValue);
+    console.log(this.selectedValue);
     this.getDashboardAdminYear();
   }
     

@@ -107,9 +107,9 @@ export class BipformComponent {
 
 
   constructor(
-    public bipService:BipService,
     public patientService:PatientMService,
     public router: Router,
+    public bipService:BipService,
     public ativatedRoute: ActivatedRoute
   ){
 

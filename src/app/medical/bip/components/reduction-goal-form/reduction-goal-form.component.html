@@ -35,7 +35,7 @@
                                 <td>
                                     
                                     <button class="btn btn-outline-success btn-sm" (click)="selectedMaladaptive(maladap)"><i class="fa fa-edit"></i></button>
-                                    <button class="btn btn-outline-success btn-sm" (click)="selectedMaladaptiveSon(maladap)"><i class="fa fa-bar-chart" ></i></button>
+                                    <button class="btn btn-outline-success btn-sm" (click)="selectedMaladaptiveGraphic(maladap)"><i class="fa fa-bar-chart" ></i></button>
                                     <!-- <button class="btn btn-danger btn-sm" (click)="deleteMaladaptive(i)">x</button> -->
                                 </td>
                             </tr>
@@ -366,94 +366,8 @@
                     <div class="rbt-dashboard-table table-responsive mobile-table-750" >
                         <h3 class="card-title"><b>Graphic:</b> {{maladaptive_child}}</h3>
                         <div class="row" >
-            
-
-                            <!-- goals sto -->
-                            <!-- <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Goals STO</h3>
-                                    <div class="col-xs-12">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>STO</th>
-                                                        <th>goal</th>
-                                                        <th>decription</th>
-                                                        <th>status</th>
-                                                        <th>date</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody >
-                                                    <tr *ngFor="let goalsto of golsto_child; let i = index">
-                                                        <td>
-                                                            {{goalsto.sto}}
-                                                        </td>
-                                                        <td>
-                                                             {{goalsto.maladaptive}}
-                                                        </td>
-                                                        <td>
-                                                            {{goalsto.decription_sto}}
-                                                        </td>
-                                                        <td>
-                                                            {{goalsto.status_sto}}
-                                                        </td>
-                                                        <td>
-                                                            {{goalsto.date_sto | date}}
-                                                        </td>
-                                                    </tr>
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div> -->
-                            <!-- fin goals sto -->
-
-                            <!--  goals lto -->
-                            <!-- <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">Goals LTO</h3>
-                                    <div class="col-xs-12">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>LTO</th>
-                                                        <th>decription</th>
-                                                        <th>status</th>
-                                                        <th>date</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody >
-                                                    <tr *ngFor="let goallto of gollto_child; let i = index">
-                                                        <td>
-                                                            {{goallto.lto}}
-                                                        </td>
-                                                        <td>
-                                                            {{goallto.decription_lto}}
-                                                        </td>
-                                                        <td>
-                                                            {{goallto.status_lto}}
-                                                        </td>
-                                                        <td>
-                                                            {{goallto.date_lto | date}}
-                                                        </td>
-                                                    </tr>
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div> -->
-                            <!-- fin goals lto -->
                         </div>
-                        <!-- {{goal.goal}} -->
-                        <app-chart-reduction></app-chart-reduction>
+                        <app-chart-reduction [maladaptive_behavior]="maladaptiveSelectedSon.maladaptive_behavior" [initial_interesting]="maladaptiveSelectedSon.initial_interesting" [created_at]="created_at"></app-chart-reduction>
                     </div>
                 </div>
                 <!-- fin maladaptiveSelectedSon grafico -->

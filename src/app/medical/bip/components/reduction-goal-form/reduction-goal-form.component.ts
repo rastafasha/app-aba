@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BipService } from 'src/app/medical/bip/service/bip.service';
 import { GoalService } from 'src/app/medical/bip/service/goal.service';
@@ -15,6 +15,8 @@ export class ReductionGoalFormComponent {
   // created comments by Malcolm Cordova at 10 feb 2004
   // mercadocreativo@gmail.com
   // @malcolmcordova
+
+  @Output() cursoD: EventEmitter<any>  = new EventEmitter();// envia la data
 
   public routes = routes;
   valid_form_success: boolean = false;
@@ -94,20 +96,14 @@ export class ReductionGoalFormComponent {
   }
 
   ngOnInit(): void {
-    
-    // window.scrollTo(0, 0);//inicia la vista siempre desde arriba
-    
     //me subcribo al id recibido por el parametro de la url
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.client_id = resp.id;// la respuesta se comienza a relacionar  en este momento con un cliente especifico
       this.getProfileBip(); // se solicita la info del perfil del usuario
-      // this.getGoalbyPatient(); // se solicita la info del perfil del usuario
     })
     
     
     this.ativatedRoute.params.subscribe( ({id}) => this.getBip(id)); // se solicita la info del perfil del bip
-    // this.ativatedRoute.params.subscribe( ({id}) => this.getGoal(id)); // se solicita la info del perfil del bip
-    // this.ativatedRoute.params.subscribe( ({id}) => this.getGoal(id)); // se solicita la info del perfil del goal
     let USER = localStorage.getItem("user");// se solicita el usuario logueado
     this.user = JSON.parse(USER ? USER: '');//  si no hay un usuario en el localstorage retorna un objeto vacio
     this.doctor_id = this.user.id; //se asigna el doctor logueado a este campo para poderlo enviar en los
@@ -153,13 +149,6 @@ export class ReductionGoalFormComponent {
       this.goalReductions = resp.goalReductionPatientIds.data[0] ==""?[] : resp.goalReductionPatientIds.data;
       this.goalReductionId = resp.goalReductionPatientIds.data[0].id || undefined;
       this.client_id_goal = resp.goalReductionPatientIds.data[0].client_id;
-      // this.goals = resp.goalReductionPatientIds;
-      // console.log(this.goals);
-
-      // this.golsto = this.goalReductions[0].goalstos;
-        // console.log(this.golsto);
-        // this.gollto = this.goalReductions[0].goalltos;
-        // console.log(this.gollto);
       
       
     })
@@ -255,10 +244,10 @@ export class ReductionGoalFormComponent {
 
 
   //selectores seleccionamos el grafico del maladaptive de la lista
-  selectedMaladaptiveSon(maladap:any){
+  selectedMaladaptiveGraphic(maladap:any){
     this.maladaptiveSelectedSon = maladap
-    // console.log(this.maladaptiveSelectedSon);
-    this.getGoalsSonMaladaptives();
+    console.log(this.maladaptiveSelectedSon);
+    // this.getGoalsSonMaladaptives();
   }
 
   deleteMaladaptiveSon(goalsto:any){debugger
@@ -359,7 +348,7 @@ export class ReductionGoalFormComponent {
     this.ngOnInit();
   }
 
-  saveGoal(){debugger
+  saveGoal(){
     this.text_validation = '';
     // if(!this.maladaptive || !this.current_status || !this.golsto){
     //   this.text_validation = 'Is required this information ';

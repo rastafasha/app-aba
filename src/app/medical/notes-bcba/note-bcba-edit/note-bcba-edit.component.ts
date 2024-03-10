@@ -374,7 +374,7 @@ export class NoteBcbaEditComponent {
     
     formData.append('rendering_provider', this.selectedValueRendering);
     formData.append('aba_supervisor', this.selectedValueAba);
-    formData.append('cpt_code', this.cpt);
+    formData.append('cpt_code', this.cpt_code);
     
     formData.append('provider_name', this.selectedValueRBT);
     formData.append('supervisor_name', this.selectedValueBCBA);
