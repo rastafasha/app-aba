@@ -51,6 +51,20 @@ export class BipattentionComponent {
   public decription_goal:any;
   public goals:any = [];
   
+  public bip_selected:any;
+  public bip_selectedid:any;
+  public previus_treatment_and_result:any;
+  public current_treatment_and_progress:any;
+  public education_status:any;
+  public phisical_and_medical_status:any;
+  public assestment_conducted:any;
+  public documents:any = [];
+  public maladaptives:any = [];
+  public maladaptive_behavior:any = [];
+  public assesstments:any = [];
+  public assesstmentsDocuments:any = [];
+  public prevalent_setting_event_and_atecedents:any = [];
+  public interventions:any = [];
 
 
   constructor(
@@ -78,7 +92,6 @@ export class BipattentionComponent {
     this.doctor_id = this.user.id;
 
     
-    
   }
 
   optionSelected(value:number){
@@ -103,6 +116,6 @@ export class BipattentionComponent {
       
     });
   }
-  
+
 
 }

@@ -5,6 +5,8 @@ import { PatientMService } from '../service/patient-m.service';
 import { FileSaverService } from 'ngx-filesaver';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import * as XLSX from 'xlsx';
+import { RolesService } from '../../roles/service/roles.service';
+import { BipService } from '../../bip/service/bip.service';
 
 declare var $:any;  
 @Component({
@@ -34,13 +36,20 @@ export class ListPatientMComponent {
 
   public patient_generals:any = [];
   public patient_id:any;
+  public patientid:any;
   public patient_selected:any;
   public text_validation:any;
+  public user:any;
+  public roles:any = [];
+  public permissions:any = [];
+  public maladaptives:any = [];
 
   constructor(
     public doctorService: DoctorService,
     public patientService: PatientMService,
-    private fileSaver: FileSaverService
+    private fileSaver: FileSaverService,
+    public roleService: RolesService,
+    public bipService: BipService,
     ){
 
   }
@@ -48,6 +57,23 @@ export class ListPatientMComponent {
     window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getTableData();
+
+    let USER = localStorage.getItem("user");
+    this.user = JSON.parse(USER ? USER: '');
+    this.roles = this.user.roles[0];
+    
+    this.user = this.roleService.authService.user;
+    
+  }
+
+  isPermission(permission:string){
+    if(this.user.roles.includes('SUPERADMIN')){
+      return true;
+    }
+    if(this.user.permissions.includes(permission)){
+      return true;
+    }
+    return false;
   }
   private getTableData(): void {
     this.patientList = [];
@@ -59,11 +85,23 @@ export class ListPatientMComponent {
 
       this.totalDatapatient = resp.patients.data.length;
       this.patient_generals = resp.patients.data;
-      this.patient_id = resp.patients.id;
+      this.patientid = resp.patients.data.id;
+      this.patient_id = resp.patients.data.patient_id;
      this.getTableDataGeneral();
+     this.isMaladaptiveBip();
     })
 
   }
+
+
+  isMaladaptiveBip(){
+    this.bipService.getBipByPatient_id(this.patient_id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.maladaptives = resp.maladaptives;
+    })
+  }
+
+
 
   getTableDataGeneral(){
     this.patientList = [];

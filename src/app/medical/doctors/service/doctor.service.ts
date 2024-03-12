@@ -9,6 +9,10 @@ declare var $:any;
 })
 export class DoctorService {
 
+  user:any;
+roles :any = [];
+permissions :any = [];
+
   constructor(
     public http: HttpClient,
     public authService: AuthService,
@@ -72,6 +76,12 @@ export class DoctorService {
   closeMenuSidebar(){
     $('.sidebar').addClass("cerrar");
     $('.menu-opened').remove("menu-opened");
+  }
+  getUserRoles(){
+    let USER = localStorage.getItem("user");
+    this.user = JSON.parse(USER ? USER: '');
+    this.roles = this.user.roles[0];
+    this.permissions = this.user.permissions;
   }
 
   updateStatus(data:any, doctor_id:any){

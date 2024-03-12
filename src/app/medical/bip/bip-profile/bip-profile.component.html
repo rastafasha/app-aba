@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                             <div class="follow-btn-group">
-                                                <a [routerLink]="['/bip/attention/', patient_selected.id]" class="btn btn-info follow-btns">Edit</a>
+                                                <a [routerLink]="['/bip/attention/', patient_selected.id]" *ngIf="isPermission('edit_bip')" class="btn btn-info follow-btns">Edit</a>
                                                 <button class="btn btn-info follow-btns" (click)="convertToPdf()">Save PDF</button>
                                                 <!-- <button type="submit" class="btn btn-info message-btns">Message</button> -->
                                             </div>

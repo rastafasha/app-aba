@@ -122,10 +122,10 @@ export class LoginComponent implements OnInit {
       }
       //roles secundarios
       if(this.user.roles == 'BCBA' ){
-        this.router.navigate([routes.patientDashboard]);
+        this.router.navigate(['doctors/profile/', this.user.id]);
       }
       if(this.user.roles == 'RBT' ){
-        this.router.navigate([routes.patientDashboard]);
+        this.router.navigate(['doctors/profile/', this.user.id]);
       }
    }
  
@@ -153,9 +153,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate([routes.doctorDashboard]);
           }if(this.user.roles === 'SUPERADMIN'){
             this.router.navigate([routes.adminDashboard]);
-          }if(this.user.roles === 'PATIENT'){
-            this.router.navigate([routes.patientDashboard]);
           }
+          
         }else{
 
           this.router.navigate([routes.adminDashboard]);

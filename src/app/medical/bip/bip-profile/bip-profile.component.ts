@@ -6,6 +6,7 @@ import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import { BipService } from '../service/bip.service';
 import { environment } from 'src/environments/environment';
+import { RolesService } from '../../roles/service/roles.service';
 
 @Component({
   selector: 'app-bip-profile',
@@ -101,6 +102,9 @@ export class BipProfileComponent {
   public plan_homicidality:any;
   public means_homicidality:any;
   public prior_attempt_homicidality:any;
+  public user:any;
+  public roles:any=[];
+  public permissions:any=[];
   
 
   imagenSerUrl = environment.url_media;
@@ -109,16 +113,31 @@ export class BipProfileComponent {
     public bipService : BipService,
     public activatedRoute: ActivatedRoute,
     public doctorService: DoctorService,
+    public roleService: RolesService,
     )
   {}
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
+    // this.doctorService.getUserRoles();
     this.activatedRoute.params.subscribe((resp:any)=>{
       // console.log(resp);
       this.patient_id = resp.id;
     });
     this.getPatient();
+    this.user = this.roleService.authService.user;
+    
+  }
+
+
+  isPermission(permission:string){
+    if(this.user.roles.includes('SUPERADMIN')){
+      return true;
+    }
+    if(this.user.permissions.includes(permission)){
+      return true;
+    }
+    return false;
   }
 
   getPatient(){

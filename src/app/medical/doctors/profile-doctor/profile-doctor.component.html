@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Employeers </a></li>
+                        <li class="breadcrumb-item"><a href="/doctors/list">Employeers </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">Employeer Profile</li>
                     </ul>
@@ -55,13 +55,17 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                             <div class="follow-group">
-                                                <div class="doctor-follows">
-                                                    <h5>Notes</h5>
-                                                    <h4>{{num_appointment}}</h4>
+                                                <div class="doctor-follows" *ngIf="roles == 'SUPERADMIN'|| roles == 'LM' || roles == 'BCBA'">
+                                                    <h5>Bips</h5>
+                                                    <h4>{{total_notes_bips}}</h4>
                                                 </div>
-                                                <div class="doctor-follows">
-                                                    <h5>Notes Pending</h5>
-                                                    <h4>{{num_appointment_pendings}}</h4>
+                                                <div class="doctor-follows" *ngIf="roles == 'SUPERADMIN'|| roles == 'LM' || roles == 'BCBA'">
+                                                    <h5>Notes BCBA</h5>
+                                                    <h4>{{total_notes_bcbas}}</h4>
+                                                </div>
+                                                <div class="doctor-follows" *ngIf="roles == 'SUPERADMIN'|| roles == 'LM' || roles == 'RBT'">
+                                                    <h5>Notes RBT</h5>
+                                                    <h4>{{total_notes_rbts}}</h4>
                                                 </div>
                                                 <div class="doctor-follows">
                                                     <h5>Salary</h5>
@@ -71,7 +75,7 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                             <div class="follow-btn-group">
-                                                <a [routerLink]="['/doctors/list/edit/', doctor_id]" class="btn btn-info follow-btns">Edit</a>
+                                                <a [routerLink]="['/doctors/list/edit/', doctor_id]" *ngIf="isPermission('edit_employer')" class="btn btn-info follow-btns">Edit</a>
                                                 <button class="btn btn-info follow-btns" (click)="convertToPdf()">Save PDF</button>
                                             </div>
                                         </div>
@@ -214,10 +218,13 @@
                                             </li>
                                             
                                             <li>
-                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>List Notes </a>
+                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2" *ngIf="roles ==='SUPERADMIN' || roles ==='LM' || roles ==='RBT'"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Rbt Notes </a>
                                             </li>
                                             <li>
-                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 3}" (click)="optionSelected(3)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-16.svg" alt=""></span>Settings</a>
+                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 3}" (click)="optionSelected(3)"><span class="set-about-icon me-2" *ngIf="roles ==='SUPERADMIN' || roles ==='LM' || roles ==='BCBA'"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>BCBA Notes </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 4}" (click)="optionSelected(4)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-16.svg" alt=""></span>Settings</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -431,24 +438,25 @@
                                         <div class="activity scrooldiv">
                                             <div class="activity-box">
                                                 <ul class="activity-list">
-                                                    <ng-container *ngFor="let appointment of appointments">
+                                                    <ng-container *ngFor="let notes_rbt of notes_rbts">
                                                         <li>
                                                             <div class="activity-user">
-                                                                <a [routerLink]="routes.profile" [attr.title]="appointment.patient.full_name" data-bs-toggle="tooltip" class="avatar">
-                                                                    <img [attr.alt]="appointment.patient.full_name" [src]="appointment.patient.avatar" class="img-fluid rounded-circle">
+                                                                <a [routerLink]="routes.profile" [attr.title]="notes_rbt.patient_id" data-bs-toggle="tooltip" class="avatar">
+                                                                    <!-- <img [attr.alt]="appointment.patient_id" [src]="notes_rbt.patient.avatar" class="img-fluid rounded-circle"> -->
                                                                 </a>
                                                             </div>
                                                             <div class="activity-content timeline-group-blk">
                                                                 <div class="timeline-group flex-shrink-0">
-                                                                    <h4>{{appointment.date_appointment_format}}</h4>
-                                                                    <span class="time">{{appointment.format_hour_start+' - '+appointment.format_hour_end}}</span>
+                                                                    <h4>{{notes_rbt.session_date | date}}</h4>
+                                                                    <span class="time">{{notes_rbt.time_in /100+' - '+notes_rbt.time_out /100}}</span>
+                                                                    <span class="time">{{notes_rbt.time_in2 /100+' - '+notes_rbt.time_out2 /100}}</span>
                                                                 </div>
                                                                 <div class="comman-activitys flex-grow-1">
-                                                                    <h3>{{appointment.patient.full_name}} <span> <br>
-                                                                        Monto de la Cita: {{appointment.amount | currency}}  </span></h3>
-                                                                    <p *ngIf="appointment.appointment_attention">Diagnostico: {{appointment.appointment_attention.description}}</p>
-                                                                    <ng-container *ngIf="!appointment.appointment_attention">
-                                                                        <button class="custom-badge status-pink">Diagnostico: Pendiente</button>
+                                                                    <h3>{{notes_rbt.patient_id}} <span> <br>
+                                                                        Next Session: {{notes_rbt.next_session_is_scheduled_for | date}}  </span></h3>
+                                                                    <p *ngIf="notes_rbt.maladaptives">maladaptives: {{notes_rbt.maladaptives}}</p>
+                                                                    <ng-container *ngIf="!notes_rbt.maladaptives">
+                                                                        <button class="custom-badge status-pink">maladaptives: Pendiente</button>
                                                                     </ng-container>
                                                                     
                                                                 </div>
@@ -461,6 +469,37 @@
                                         </div>
                                     </ng-container>
                                     <ng-container *ngIf="option_selected == 3">
+                                        <div class="activity scrooldiv">
+                                            <div class="activity-box">
+                                                <ul class="activity-list">
+                                                    <ng-container *ngFor="let notes_bcba of notes_bcbas">
+                                                        <li>
+                                                            <div class="activity-user">
+                                                                <a [routerLink]="routes.profile" [attr.title]="notes_bcba.patient_id" data-bs-toggle="tooltip" class="avatar">
+                                                                    <!-- <img [attr.alt]="appointment.patient_id" [src]="notes_bcba.patient.avatar" class="img-fluid rounded-circle"> -->
+                                                                </a>
+                                                            </div>
+                                                            <div class="activity-content timeline-group-blk">
+                                                                <div class="timeline-group flex-shrink-0">
+                                                                    <h4>{{notes_bcba.created_at | date}}</h4>
+                                                                </div>
+                                                                <div class="comman-activitys flex-grow-1">
+                                                                    <h3>{{notes_bcba.patient_id}} </h3>
+                                                                    <p *ngIf="notes_bcba.note_description">note description: {{notes_bcba.note_description}}</p>
+                                                                    <ng-container *ngIf="!notes_bcba.note_description">
+                                                                        <button class="custom-badge status-pink">note description: Pendiente</button>
+                                                                    </ng-container>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ng-container>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="option_selected == 4">
                                         <div class="setting-form-blk">
                                             <form>
                                                 <div class="row">
@@ -554,7 +593,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title ">Notes Pendings</h4>
+                                    <h4 class="card-title ">Clients Asigned</h4>
                                 </div>
                                 <div class="card-body p-0 table-dash">
                                     <div class="table-responsive scrooldiv2">
@@ -562,37 +601,38 @@
                                             <thead>
                                                 <tr>
                                                     
-                                                    <th mat-sort-header="date">Date</th>
-                                                    <th mat-sort-header="doctor">Patient</th>
+                                                    <th mat-sort-header="date">Name</th>
+                                                    <th mat-sort-header="doctor">Patient Id</th>
                                                     <th mat-sort-header="status">Status</th>
                                                     <!-- <th mat-sort-header="statuspayment">Status Payment</th> -->
                                                     <!-- <th mat-sort-header="charges">Monto ($)</th> -->
                                                     <th></th>
                                                 </tr>
                                             </thead>
-                                            <!-- <tbody>
-                                                <tr *ngFor="let data of appointment_pendings">
+                                            <tbody>
+                                                <tr *ngFor="let data of patients">
                                                     
-                                                    <td >{{data.date_appointment_format}}</td>
-                                                    <td >{{data.patient.full_name}}</td>
+                                                    <td >{{data.first_name}} {{data.last_name}}</td>
+                                                    <td >{{data.patient_id}}</td>
                                                     <td>
-                                                        <button [ngClass]="{'status-green' : data.status === 2, 'status-pink' : data.status === 1}" class="custom-badge">{{data.status == 1 ? 'Pendiente' : 'Atendido'}}</button>
+                                                        <button [ngClass]="{'status-green' : data.status === 'active', 'status-pink' : data.status === 'inactive'}" class="custom-badge">{{data.status == 'inactive' ? 'Inactivo' : 'Activo'}}</button>
                                                     </td>
-                                                    <td>
-                                                        <button [ngClass]="{'status-green' : data.status_pay === 1, 'status-pink' : data.status_pay === 2}" class="custom-badge">{{data.status_pay == 1 ? 'Pagado' : 'Deuda'}}</button>
-                                                    </td>
-                                                    <td>{{data.amount }}</td>
                                                     <td class="text-end">
                                                         <div class="dropdown dropdown-action">
                                                             <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-end">
-                                                                <a class="dropdown-item" [routerLink]="['/appointments/cita-medica/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_appointment"><i class="fa fa-trash-alt m-r-5"></i> Delete</a>
+                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' || roles ==='BCBA'" [routerLink]="['/bip/attention/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Bip Access</a>
+                                                                <a class="dropdown-item" *ngIf="isPermission('view_bip')" [routerLink]="['/bip/profile/', data.patient_id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> View Bip</a>
+                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' ||  roles ==='RBT'" [routerLink]="['/note-rbt/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Create Note RBT</a>
+                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' ||  roles ==='RBT'" [routerLink]="['/note-rbt/listbyclient/', data.patient_id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> List Note RBT</a>
+                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' || roles ==='BCBA'" [routerLink]="['/note-bcba/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Create Note BCBA</a>
+                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' ||  roles ==='BCBA'" [routerLink]="['/note-bcba/listbyclient/', data.patient_id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> List Note BCBA</a>
+                                                                <!-- <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN'" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_appointment"><i class="fa fa-trash-alt m-r-5"></i> Delete</a> -->
                                                             </div>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </tbody> -->
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

@@ -8,6 +8,7 @@ import html2canvas from 'html2canvas';
 import { environment } from 'src/environments/environment';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RolesService } from '../../roles/service/roles.service';
 declare var $:any;  
 @Component({
   selector: 'app-profile-patient-m',
@@ -57,6 +58,7 @@ public specialists:any = [];
   public clin_director_id: any;
   public client_id: any;
   public avatar: any;
+  public user: any;
 
   doctor_selected:any =null;
   doctor_selected_full_name:any =null;
@@ -77,6 +79,7 @@ constructor(
   public doctorService: DoctorService,
   public insuranceService: InsuranceService,
   private _sanitizer: DomSanitizer,
+  private roleService: RolesService,
   )
 {
 }
@@ -89,6 +92,17 @@ ngOnInit(): void {
   });
   this.getPatient();
   this.getConfig();
+  this.user = this.roleService.authService.user;
+}
+
+isPermission(permission:string){
+  if(this.user.roles.includes('SUPERADMIN')){
+    return true;
+  }
+  if(this.user.permissions.includes(permission)){
+    return true;
+  }
+  return false;
 }
 
 getConfig(){

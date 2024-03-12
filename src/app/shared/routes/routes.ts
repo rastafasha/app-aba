@@ -167,6 +167,9 @@ export class routes {
   public static get doctorProfile(): string {
     return this.baseUrl + '/doctor/doctor-profile';
   }
+  // public static get doctorProfile(): string {
+  //   return this.baseUrl + '/doctor/doctor-profile';
+  // }
   public static get doctorSetting(): string {
     return this.baseUrl + '/doctor/doctor-setting';
   }

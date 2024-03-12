@@ -44,6 +44,12 @@ export class GraphicReductionService {
     return this.http.get(URL, {headers:headers});
   }
 
+  graphicPatientMonth(data){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/graphic_reduction/patient-month';
+    return this.http.post(URL,data, {headers:headers});
+  }
+
 
   
 }

@@ -28,13 +28,13 @@
                         <h4>{{maladaptive_behavior}}</h4>
                         <p>{{created_at|date}}</p>
                         <div class="income-value">
-                            <p><span class="passive-view">{{initial_interesting}}</span> Initial Interesting</p>
+                            <p>Intensity Initial <span class="passive-view">{{initial_interesting}}</span> </p>
                         </div>
                         <!-- <div class="average-health">
                             <h5>72bmp <span>Average</span></h5>
                         </div> -->
                         <div class="form-group mb-0">
-                            <mat-select [(ngModel)]="selectedValue" class="form-control select"  placeholder="2022">
+                            <mat-select [(ngModel)]="selectedValue" class="form-control select" (selectionChange)="selectedMonth()"  placeholder="2022">
                                 <mat-option *ngFor="let data of selecedList" [value]="data.value">
                                   {{data.value}}
                                 </mat-option>

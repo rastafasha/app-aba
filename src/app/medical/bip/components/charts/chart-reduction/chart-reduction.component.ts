@@ -71,7 +71,7 @@ export type ChartOptions = {
 })
 export class ChartReductionComponent {
 
-  public selectedValue: string ='2024';
+  public selectedValue: string ='03';
   @ViewChild('chart') chart!: ChartComponent;
   
   @Input() maladaptiveSelectedSon:any;
@@ -106,6 +106,9 @@ export class ChartReductionComponent {
   public number_of_occurrences: number;
   public patient_selected: any = [];
   public client_selected: any = [];
+  public sessionDates: any = [];
+  
+  public maladaptiveBehaviors: any = [];
 
 
   public query_patient_by_genders:any = [];
@@ -189,12 +192,11 @@ export class ChartReductionComponent {
 
     this.activatedRoute.params.subscribe((resp:any)=>{
       this.client_id = resp.id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
-      // this.patient_id= resp.id // recibe el id del paciente que se esta consultando
-      // console.log(this.client_id);
+    
      })
      this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
      this.getBip(); // se pide el perfil del paciente por el bip relacionado
-     
+     this.getGraphicPatientMonth();
   }
 
   getBip(){
@@ -224,37 +226,32 @@ export class ChartReductionComponent {
 
   }
 
-  // angular
+  // obtenemos todos las notas filtrandose con el nombre seleccionado traido como input.. this.maladaptive_behavior 
+  // junto con el patient_id por si existe otro paciente con el mismo maladaptive
+
   getGoalsMaladaptive(){
     this.graphicReductionService.listMaladaptivesGraphics(this.maladaptive_behavior, this.patient_id).subscribe((resp:any)=>{
      console.log(resp);
+     this.notesRbts = resp.noteRbt.data; //obtiene una lista de notas con 3 json en cada una maladaptives, interventions y replacementes
+      
+     // en esta parte solo necesito el maladaptive: el nombre: maladaptive_behavior y el numero: number_of_occurrences 
 
-     this.notesRbts = resp.noteRbt.data;
-     console.log(this.notesRbts);
-
-     // sin usar el json parse
-    //  this.maladaptives = resp.noteRbt.data.filter((items:any) => items.maladaptives);
-    //  console.log(this.maladaptives);
-
-     this.session_date = resp.noteRbt.data[0].session_date;
-    //  this.session_dates = this.session_date.session_date ? new Date(this.notesRbts.data.session_date).toISOString(): '';
-    //  this.session_date = this.notesRbts.session_date;
-     console.log(this.session_date); // obtiene la data separada
-
+     //aqui entro dentro del array pero en la posicion 0, y traigo los valores del json pero solo la posicion 0.
+     // primero quiero obtener todos los json de this.notesRbts y filtrar el nombre que se esta enviando this.maladaptive_behavior
+     // segund obtener solo la info del this.maladaptive_behavior, que es lo que se va a mostrar, serian todos los json del array, como 
+     // se muestra en el front... con el filtro
      let jsonObj = JSON.parse(resp.noteRbt.data[0].maladaptives) || ''; //debo entrar al [0]
      this.maladaptives = jsonObj;
-     console.log(this.maladaptives); // obtiene la data separada
+     console.log(this.maladaptives); 
 
-      // deberia obtener el nombre solicitado
-      this.maladaptive = this.maladaptives[0].maladaptive_behavior 
-      console.log(this.maladaptive_behavior); //si lo obtiene pero solo 1
 
-     
-
-      // deberia obtener el numero solicitado
-      this.number_of_occurrences = this.maladaptives[0].number_of_occurrences 
-      console.log(this.number_of_occurrences);// no lo obtiene
-
+     // aqui me funciona pero me trae la info en un array [1,2,3] y la necesito fuera 1,2,3 porque van unidas con otra fecha de otro documento
+     this.sessionDates = this.notesRbts.filter(note => note.session_date).map(note => note.session_date); // obtenerlas como un string ?
+     // filtrar y obtener las fechas del array ?
+     console.log(this.sessionDates);
+    
+      
+      
       // solo si accedo al [0] si obtiene todo
       this.chartOptionsOne = {
         chart: {
@@ -287,12 +284,13 @@ export class ChartReductionComponent {
           {
             name: 'Number of Occurrences',
             color: '#00D3C7',
-            // data: [45, 60, 75, 51, 42, 42, 30],
-            data: [this.initial_interesting, this.number_of_occurrences]
+            data: [45, 60, 75, 51, 42, 42, 30],
+            // data: [this.initial_interesting, this.number_of_occurrences]
           },
         ],
         xaxis: {
-          categories: [this.created_at, this.session_date],
+          //
+          categories:  [this.created_at, this.sessionDates],
           // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         },
       };
@@ -300,26 +298,21 @@ export class ChartReductionComponent {
      
     },);
 
-    // this.getDashboardAdminYear();
+    
 
   }
 
   
+  
 
-
-
-  getDashboardAdminYear(){
+  getGraphicPatientMonth(){
     let data ={
-      year: this.selectedValue,
+      month: this.selectedValue,
     }
-    this.query_income_year = null;
-    this.dashboardService.dashboardAdminYear(data).subscribe((resp:any)=>{
-      // console.log(resp);
+    this.graphicReductionService.graphicPatientMonth(data).subscribe((resp:any)=>{
+      console.log(resp);
       
 
-      //start
-      this.query_patients_speciality_porcentaje = resp.query_patients_speciality_porcentaje;
-      //end
       //start
       this.query_income_year = resp.query_income_year;
       let data_income:any = [];
@@ -369,21 +362,24 @@ export class ChartReductionComponent {
       //end
     })
   }
-  selectedYear(){
+  selectedMonth(){
     console.log(this.selectedValue);
-    this.getDashboardAdminYear();
+    this.getGraphicPatientMonth();
   }
     
   selecedList: data[] = [
-    {value: '2022'},
-    {value: '2023'},
-    {value: '2024'},
-    {value: '2025'},
-    {value: '2026'},
-    {value: '2027'},
-    {value: '2028'},
-    {value: '2029'},
-    {value: '2030'},
+    {value: '01'},
+    {value: '02'},
+    {value: '03'},
+    {value: '04'},
+    {value: '05'},
+    {value: '06'},
+    {value: '07'},
+    {value: '08'},
+    {value: '09'},
+    {value: '10'},
+    {value: '11'},
+    {value: '12'},
   ];
   
 }

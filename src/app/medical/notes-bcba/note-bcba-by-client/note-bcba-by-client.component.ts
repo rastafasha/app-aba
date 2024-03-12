@@ -6,6 +6,7 @@ import { DoctorService } from '../../doctors/service/doctor.service';
 import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { NoteBcbaService } from '../services/note-bcba.service';
+import { RolesService } from '../../roles/service/roles.service';
 declare var $:any;  
 @Component({
   selector: 'app-note-bcba-by-client',
@@ -48,6 +49,7 @@ export class NoteBcbaByClientComponent {
     public ativatedRoute: ActivatedRoute,
     public noteBcbaService: NoteBcbaService,
     public doctorService: DoctorService,
+    public roleService: RolesService,
   ){}
 
   ngOnInit(): void {
@@ -66,7 +68,19 @@ export class NoteBcbaByClientComponent {
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
+    this.user = this.roleService.authService.user;
   }
+
+  isPermission(permission:string){
+    if(this.user.roles.includes('SUPERADMIN')){
+      return true;
+    }
+    if(this.user.permissions.includes(permission)){
+      return true;
+    }
+    return false;
+  }
+
 
   getNotesByPatient(){
     this.noteBcbaService.showNotebyPatient(this.patient_id).subscribe((resp:any)=>{

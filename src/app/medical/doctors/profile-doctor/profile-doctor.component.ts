@@ -6,6 +6,7 @@ import { DoctorService } from '../service/doctor.service';
 import { ActivatedRoute } from '@angular/router';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { RolesService } from '../../roles/service/roles.service';
 @Component({
   selector: 'app-profile-doctor',
   templateUrl: './profile-doctor.component.html',
@@ -23,8 +24,15 @@ public num_appointment: number = 0;
 public money_of_appointments: number = 0;
 public num_appointment_pendings: number = 0;
 public doctor_selected: any;
+public patient_id: any;
+public total_notes_bips: number;
+public total_notes_bcbas: number;
+public total_notes_rbts: number;
 public appointment_pendings: any =[];
 public appointments: any =[];
+public notes_bcbas: any =[];
+public notes_rbts: any =[];
+public patients: any =[];
 name:string='';
 surname:string='';
 mobile:string='';
@@ -36,9 +44,12 @@ password_repeat:string='';
 public text_success:string = '';
 public text_validation:string = '';
 
+public user:any;
+  public roles:any = [];
 
 constructor(
   public doctorService: DoctorService,
+  public roleService: RolesService,
   public activatedRoute: ActivatedRoute,
   )
 {
@@ -52,6 +63,22 @@ ngOnInit(): void {
     this.doctor_id = resp.id;
   });
   this.getDoctor();
+
+  let USER = localStorage.getItem("user");
+    this.user = JSON.parse(USER ? USER: '');
+    this.roles = this.user.roles[0];
+    
+    this.user = this.roleService.authService.user;
+}
+
+isPermission(permission:string){
+  if(this.user.roles.includes('SUPERADMIN')){
+    return true;
+  }
+  if(this.user.permissions.includes(permission)){
+    return true;
+  }
+  return false;
 }
 
 getDoctor(){
@@ -69,9 +96,17 @@ getDoctor(){
     this.mobile= this.doctor_selected.mobile;
     this.email= this.doctor_selected.email;
     this.address= this.doctor_selected.address;
+    this.notes_bcbas= resp.notes_bcbas;
+    this.notes_rbts= resp.notes_rbts;
+    this.patients= resp.patients.data;
+    this.total_notes_bips= resp.total_notes_bips;
+    this.total_notes_bcbas= resp.total_notes_bcbas;
+    this.total_notes_rbts= resp.total_notes_rbts;
 
   })
 }
+
+
 
   optionSelected(value:number){
     this.option_selected = value;
@@ -115,26 +150,6 @@ getDoctor(){
     })
   }
 
-  // public convertToPdf(): void {
-  //   const data = this.contentToConvert.nativeElement;
-  //   html2canvas(data).then(canvas => {
-  //     // Few necessary setting options
-  //     const imgWidth = 208;
-  //     const pageHeight = 295;
-  //     const imgHeight = canvas.height * imgWidth / canvas.width;
-  //     const heightLeft = imgHeight;
-
-  //     // Create a new PDF document
-  //     const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-
-  //     // Add an image of the canvas to the PDF
-  //     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
-
-  //     // Save the PDF
-  //     pdf.save('employee_'+this.doctor_selected.name+'_'+this.doctor_selected.surname+".pdf");
-  //   });
-  // }
-    
 
   public convertToPdf(): void {
     const data = this.contentToConvert.nativeElement;
