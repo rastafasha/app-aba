@@ -70,7 +70,7 @@
                               <tbody>
                                   <tr *ngFor="let data of patientList">
                                       
-                                    <td><a class="dropdown-item" [routerLink]="['/patients/profile/', data.id]">
+                                    <td><a [routerLink]="['/patients/profile/', data.id]">
                                       {{data.first_name + ' ' + (data.last_name ? data.last_name: '')}}
                                     </a>
                                   </td>

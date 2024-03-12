@@ -79,27 +79,35 @@ export class AdminDashboardComponent {
   public bips:any = [];
   public appointment_pendings:any = [];
 
-  public num_appointments_current: number = 0;
-  public num_appointments_before: number = 0;
+  public num_bips_current: number = 0;
+  public num_bips_before: number = 0;
   public porcentaje_d: number = 0;
 
   public num_patients_current:number = 0;
   public num_patients_before:number = 0;
   public porcentaje_dp:number = 0;
 
-  public num_appointments_attention_current:number = 0;
-  public num_appointments_attention_before:number = 0;
+  public num_bips_attention_current:number = 0;
+  public num_bips_attention_before:number = 0;
   public porcentaje_da:number = 0;
 
-  public num_appointments_total_current: number = 0;
-  public num_appointments_total_before: number = 0;
+  public num_bips_total_current: number = 0;
+  public num_bips_total_before: number = 0;
   public porcentaje_dt: number = 0;
+  public total_patients: number = 0;
 
   public query_patient_by_genders:any = [];
   public query_patients_specialities:any = [];
   public query_patients_speciality_porcentaje:any = [];
   public query_income_year:any = [];
+  
+  public recent_patients:any = [];
+  public locations:any = [];
   public user: any;
+  public total_bips: number;
+  public total_noteRbts: number;
+  public total_noteBcbas: number;
+  public total_employees: number;
   //datos reales
 
   constructor(
@@ -285,22 +293,29 @@ export class AdminDashboardComponent {
       // console.log(resp);
 
       this.bips = resp.bips.data;
+      this.total_bips = resp.total_bips;
 
-      this.num_appointments_current = resp.num_appointments_current;
-      this.num_appointments_before = resp.num_appointments_before;
+      this.num_bips_current = resp.num_bips_current;
+      this.num_bips_before = resp.num_bips_before;
       this.porcentaje_d = resp.porcentaje_d;
 
       this.num_patients_current = resp.num_patients_current;
       this.num_patients_before = resp.num_patients_before;
       this.porcentaje_dp = resp.porcentaje_dp;
 
-      this.num_appointments_attention_current = resp.num_appointments_attention_current;
-      this.num_appointments_attention_before = resp.num_appointments_attention_before;
+      this.num_bips_attention_current = resp.num_bips_attention_current;
+      this.num_bips_attention_before = resp.num_bips_attention_before;
       this.porcentaje_da = resp.porcentaje_da;
 
-      this.num_appointments_total_current = resp.num_appointments_total_current;
-      this.num_appointments_total_before = resp.num_appointments_total_before;
+      this.num_bips_total_current = resp.num_bips_total_current;
+      this.num_bips_total_before = resp.num_bips_total_before;
       this.porcentaje_dt = resp.porcentaje_dt;
+      this.total_patients = resp.total_patients;
+      this.total_noteRbts = resp.total_noteRbts;
+      this.total_noteBcbas = resp.total_noteBcbas;
+      this.total_employees = resp.total_employees;
+      this.recent_patients = resp.recent_patients;
+      this.locations = resp.locations.data;
     })
   }
 
