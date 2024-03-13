@@ -7,6 +7,7 @@ import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { NoteRbtService } from '../services/note-rbt.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import Swal from 'sweetalert2';
+import { url_media } from 'src/app/config/config';
 
 @Component({
   selector: 'app-note-rbt',
@@ -16,6 +17,7 @@ import Swal from 'sweetalert2';
 export class NoteRbtComponent {
   public routes = routes;
 
+  public url_media:any;
   valid_form:boolean = false;
   valid_form_success:boolean = false;
 
@@ -148,15 +150,18 @@ export class NoteRbtComponent {
   
   getConfig(){
     this.noteRbtService.listConfigNote().subscribe((resp:any)=>{
-      // console.log(resp);
+      console.log(resp);
 
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
       this.hours_days = resp.hours;
       this.selectedValueProviderCredential = resp.roles_rbt.certificate_number;
-      this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = resp.roles_rbt.electronic_signature;
-      this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = resp.roles_bcba.electronic_signature;
-
+      // this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = resp.roles_rbt.electronic_signature;
+      // this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = resp.roles_bcba.electronic_signature;
+      
+      // this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = this.roles_rbt.filter(role_rbt => role_rbt.electronic_signature).map(role_rbt => role_rbt.electronic_signature);
+      // this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.roles_bcba.filter(roles_bcb => roles_bcb.electronic_signature).map(roles_bcb => roles_bcb.electronic_signature);
+      
       // this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = this.note_selected.provider_signature;
       // this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.note_selected.supervisor_signature;
       
@@ -199,7 +204,7 @@ export class NoteRbtComponent {
 
   specialistData(selectedValueInsurer){
     this.doctorService.showDoctorProfile(selectedValueInsurer).subscribe((resp:any)=>{
-      // console.log(resp);
+      console.log(resp);
       this.provider_credential = resp.doctor.certificate_number;
       // this.notes = resp.notes;
       // this.services = resp.services;
@@ -209,8 +214,43 @@ export class NoteRbtComponent {
   selectSpecialist(event:any){
     event = this.selectedValueProviderName;
     this.specialistData(this.selectedValueProviderName);
+    console.log(this.selectedValueProviderName);
     
   }
+
+  speciaFirmaDataRbt(selectedValueRBT){
+    this.doctorService.showDoctorProfile(selectedValueRBT).subscribe((resp:any)=>{
+      console.log(resp);
+      this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = resp.doctor.electronic_signature;
+      console.log(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+      // this.notes = resp.notes;
+      // this.services = resp.services;
+    })
+  }
+  selectFirmaSpecialistRbt(event:any){
+    event = this.selectedValueRBT;
+    this.speciaFirmaDataRbt(this.selectedValueRBT);
+    console.log(this.selectedValueRBT);
+    
+  }
+  
+  speciaFirmaDataBcba(selectedValueBCBA){
+    this.doctorService.showDoctorProfile(selectedValueBCBA).subscribe((resp:any)=>{
+      console.log(resp);
+      this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = resp.doctor.electronic_signature;
+      console.log(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+      // this.notes = resp.notes;
+      // this.services = resp.services;
+    })
+  }
+
+  selectFirmaSpecialistBcba(event:any){
+    event = this.selectedValueBCBA;
+    this.speciaFirmaDataBcba(this.selectedValueBCBA);
+    console.log(this.selectedValueBCBA);
+    
+  }
+  
  
 
   hourTimeInSelected(value:number){

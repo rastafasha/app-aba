@@ -238,6 +238,43 @@ export class NoteBcbaComponent {
     this.specialistData(this.selectedValueProviderName);
     
   }
+
+
+
+  speciaFirmaDataRbt(selectedValueRBT){
+    this.doctorService.showDoctorProfile(selectedValueRBT).subscribe((resp:any)=>{
+      console.log(resp);
+      this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = resp.doctor.electronic_signature;
+      console.log(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+      // this.notes = resp.notes;
+      // this.services = resp.services;
+    })
+  }
+  selectFirmaSpecialistRbt(event:any){
+    event = this.selectedValueRBT;
+    this.speciaFirmaDataRbt(this.selectedValueRBT);
+    console.log(this.selectedValueRBT);
+    
+  }
+  
+  speciaFirmaDataBcba(selectedValueBCBA){
+    this.doctorService.showDoctorProfile(selectedValueBCBA).subscribe((resp:any)=>{
+      console.log(resp);
+      this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = resp.doctor.electronic_signature;
+      console.log(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+      // this.notes = resp.notes;
+      // this.services = resp.services;
+    })
+  }
+
+  selectFirmaSpecialistBcba(event:any){
+    event = this.selectedValueBCBA;
+    this.speciaFirmaDataBcba(this.selectedValueBCBA);
+    console.log(this.selectedValueBCBA);
+    
+  }
+
+
  
 
   hourTimeInSelected(value:number){

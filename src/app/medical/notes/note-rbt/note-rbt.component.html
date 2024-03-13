@@ -635,7 +635,7 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Provider name RBT <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                        <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist" (selectionChange)="selectFirmaSpecialistRbt($event)">
                                             <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
@@ -664,7 +664,7 @@
                                     <div class="form-group local-forms">
                                         <div class="form-group local-forms">
                                             <label >Supervisor name BCBA <span class="login-danger">*</span></label>
-                                            <mat-select [(ngModel)]="selectedValueBCBA" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-select [(ngModel)]="selectedValueBCBA" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist" (selectionChange)="selectFirmaSpecialistBcba($event)">
                                                 <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                                 {{data.name}} {{data.surname}}
                                                 </mat-option>
