@@ -226,7 +226,7 @@ export class ChartReplacementComponent {
 
   }
 
-  // obtenemos todos las notas filtrandose con el nombre seleccionado traido como input.. this.maladaptive_behavior 
+  // obtenemos todos las notas filtrandose con el nombre seleccionado traido como input.. this.goal 
   // junto con el patient_id por si existe otro paciente con el mismo maladaptive
 
   getGoalsReductions(){
@@ -236,30 +236,17 @@ export class ChartReplacementComponent {
       
      // en esta parte solo necesito el replacements: el nombre: goal y el numero: number_of_occurrences 
 
-    
+    //start
     //recorremos todas las listas para extraer los json
      this.replacements = this.notesRbts.filter(note => note.replacements).map(note => note.replacements);
      console.log(this.replacements);
 
      this.replacements 
      // recorre y extrae  el nombre de la meta que se quiere mostrar ?
+      //end
 
-
-     //limpiamos los [] extras de la respuesta
-    //  this.replacements.forEach(function (replacementsExtractedGoal) {
-    //   //  this.replacementeFiltrado = replacementsExtractedGoal;
-    //    console.log(replacementsExtractedGoal);
-    // });
-
-    const goalNames = this.replacements.map(replacement => replacement.goal);
-    console.log(goalNames);// los desvuelve null
-    //recorrer extraer y filtrar el nombre que se quiere mostrar ?
-
-
-    this.replacements = this.notesRbts
-    .filter(note => note.replacements)
-    .map(note => note.replacements)
-    .flat();
+    //start
+    this.replacements = this.notesRbts.filter(note => note.replacements).map(note => note.replacements).flat();
 
       const extractedData = this.replacements
       .filter(replacement => replacement.replacements).map(replacement => ({
@@ -267,63 +254,42 @@ export class ChartReplacementComponent {
         number_of_occurrences: replacement.number_of_occurrences
       }));
 
-      console.log(extractedData);
+      console.log(extractedData); //devuelve vacio
+      //end
 
-    
-
-
-      const replacementsExtractedGoal = [];
-      
-      // const extractedData = [];
-      
-      // // Using a for loop
-      // for (let i = 0; i < replacementsExtractedGoal.length; i++) {
-      //   const innerArr = replacementsExtractedGoal[i];
-      //   extractedData.push(innerArr[i]);
-      // }
-      
-      // console.log(extractedData); // Output: [2, 5, 8]
-      
-      // // Using the forEach method
-      // replacementsExtractedGoal.forEach(innerArr => {
-      //   extractedData.push(innerArr[0]);
-      // });
-      
-      // console.log(extractedData); // Output: [2, 5, 8]
-
-
-       
-    //       let paragraph: string[] = [];
-    // let array = this.replacements;
-    // for (const item of array) {
-    //   if (item && item.goal) {
-    //     paragraph
-
+      //start
       let replacement_numbers: string[] = [] ;
-      let array = replacementsExtractedGoal;
+      let array = this.notesRbts;
       for (this.replacement of array) {
         replacement_numbers.push(this.replacement.number_of_correct_response)
-      //   if (this.replacement && this.replacement.goal) {
+      //   if (this.replacement && this.replacement.goal) { // da error
       // }
       }
-      console.log(replacement_numbers); // devuele el total  de numeros correctos que tiene una nota
-      // //pero los devuelve con valor undefinned 
+      console.log(replacement_numbers); 
+      // devuele el total que tiene una nota
+      //pero los devuelve con valor undefinned 
+      //end
 
-
-      // var replacementsExtractedGoal = this.replacements;
-      // for (var i = 0; i < replacementsExtractedGoal.length; i++) {
-      //   console.log(replacementsExtractedGoal[i]);
-      // }
-    //  this.number_of_correct_response = this.replacements.filter(replacement => replacement.number_of_correct_response).map(replacement => replacement.number_of_correct_response);
-    //  console.log(this.number_of_correct_response);
-     
-
-
-    // filtrar y obtener las fechas del array
-     // aqui me funciona pero me trae la info en un array [1,2,3]
-     this.sessionDates = this.notesRbts.filter(note => note.session_date).map(note => note.session_date); 
-     console.log('fechas',this.sessionDates);
-    
+      //start
+      this.replacementsExtractedGoal = this.replacements;
+      for (var i = 0; i < this.replacementsExtractedGoal.length; i++) {
+        console.log(this.replacementsExtractedGoal[i]); 
+        // solo quita  el /, duplica el resultado y devuelve la todos los arrays
+      }
+      //end
+      //start
+      //  this.number_of_correct_response = this.replacements.filter(replacement => replacement.number_of_correct_response).map(replacement => replacement.number_of_correct_response);
+      //  console.log(this.number_of_correct_response);
+      //end
+      
+      
+      //start
+      // filtrar y obtener las fechas del array
+      // aqui me funciona pero me trae la info en un array [1,2,3]
+      this.sessionDates = this.notesRbts.filter(note => note.session_date).map(note => note.session_date); 
+      console.log('fechas',this.sessionDates);
+      //end
+      
       
       //Chart
       this.chartOptionsOne = {
