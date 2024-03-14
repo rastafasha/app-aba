@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate([routes.adminDashboard]);
       }
       if(this.user.roles == 'LM' ){
-        this.router.navigate([routes.doctorDashboard]);
+        this.router.navigate([routes.adminDashboard]);
       }
       //roles secundarios
       if(this.user.roles == 'BCBA' ){

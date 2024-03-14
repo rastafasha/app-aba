@@ -187,7 +187,7 @@ export class ChartReductionComponent {
     
     this.maladaptive_behavior
     this.initial_interesting
-    console.log(this.maladaptive_behavior);
+    // console.log(this.maladaptive_behavior);
     
 
     this.activatedRoute.params.subscribe((resp:any)=>{
@@ -201,9 +201,9 @@ export class ChartReductionComponent {
 
   getBip(){
     this.bipService.getBipByUser(this.client_id).subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.created_at = resp.bip.created_at;
-      console.log(this.created_at);
+      // console.log(this.created_at);
     });
 
   }
@@ -240,15 +240,18 @@ export class ChartReductionComponent {
      // primero quiero obtener todos los json de this.notesRbts y filtrar el nombre que se esta enviando this.maladaptive_behavior
      // segund obtener solo la info del this.maladaptive_behavior, que es lo que se va a mostrar, serian todos los json del array, como 
      // se muestra en el front... con el filtro
-     let jsonObj = JSON.parse(resp.noteRbt.data[0].maladaptives) || ''; //debo entrar al [0]
-     this.maladaptives = jsonObj;
-     console.log(this.maladaptives); 
+    //  let jsonObj = JSON.parse(resp.noteRbt.data[0].maladaptives) || ''; //debo entrar al [0]
+    //  this.maladaptives = jsonObj;
+    //  console.log(this.maladaptives); 
 
+
+     this.maladaptives = this.notesRbts.filter(note => note.maladaptives).map(note => note.maladaptives);
+     console.log(this.maladaptives);
 
      // aqui me funciona pero me trae la info en un array [1,2,3] y la necesito fuera 1,2,3 porque van unidas con otra fecha de otro documento
      this.sessionDates = this.notesRbts.filter(note => note.session_date).map(note => note.session_date); // obtenerlas como un string ?
      // filtrar y obtener las fechas del array ?
-     console.log(this.sessionDates);
+    //  console.log(this.sessionDates);
     
       
       
@@ -363,7 +366,7 @@ export class ChartReductionComponent {
     })
   }
   selectedMonth(){
-    console.log(this.selectedValue);
+    // console.log(this.selectedValue);
     this.getGraphicPatientMonth();
   }
     

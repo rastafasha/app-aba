@@ -43,6 +43,7 @@ export class ListPatientMComponent {
   public roles:any = [];
   public permissions:any = [];
   public maladaptives:any = [];
+  public doctorPatientList:any = [];
 
   constructor(
     public doctorService: DoctorService,
@@ -63,8 +64,24 @@ export class ListPatientMComponent {
     this.roles = this.user.roles[0];
     
     this.user = this.roleService.authService.user;
+    this.getPatiensByDoctor();
     
   }
+
+  getPatiensByDoctor(){
+    this.patientService.getPatientsByDoctor(this.user.id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.doctorPatientList = resp.patients;
+    })
+  }
+
+  isMaladaptiveBip(){
+    this.bipService.getBipByPatient_id(this.patient_id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.maladaptives = resp.maladaptives;
+    })
+  }
+
 
   isPermission(permission:string){
     if(this.user.roles.includes('SUPERADMIN')){
@@ -75,6 +92,7 @@ export class ListPatientMComponent {
     }
     return false;
   }
+ 
   private getTableData(): void {
     this.patientList = [];
     this.serialNumberArray = [];
@@ -88,20 +106,10 @@ export class ListPatientMComponent {
       this.patientid = resp.patients.data.id;
       this.patient_id = resp.patients.data.patient_id;
      this.getTableDataGeneral();
-     this.isMaladaptiveBip();
+    //  this.isMaladaptiveBip();
     })
 
   }
-
-
-  isMaladaptiveBip(){
-    this.bipService.getBipByPatient_id(this.patient_id).subscribe((resp:any)=>{
-      console.log(resp);
-      this.maladaptives = resp.maladaptives;
-    })
-  }
-
-
 
   getTableDataGeneral(){
     this.patientList = [];
@@ -153,8 +161,29 @@ export class ListPatientMComponent {
     this.patientList = this.dataSource.filteredData;
   }
 
+  public searchDataDoct(value: any): void {
+    this.dataSource.filter = value.trim().toLowerCase();
+    this.doctorPatientList = this.dataSource.filteredData;
+  }
+
   public sortData(sort: any) {
     const data = this.patientList.slice();
+
+    if (!sort.active || sort.direction === '') {
+      this.patientList = data;
+    } else {
+      this.patientList = data.sort((a, b) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const aValue = (a as any)[sort.active];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const bValue = (b as any)[sort.active];
+        return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
+      });
+    }
+  }
+
+  public sortDataDoctor(sort: any) {
+    const data = this.doctorPatientList.slice();
 
     if (!sort.active || sort.direction === '') {
       this.patientList = data;

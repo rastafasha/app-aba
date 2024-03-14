@@ -92,7 +92,7 @@
                                                     <img src="./assets/img/no-image.jpg" >
                                                 </div>
                                                 <div *ngIf="specialist.avatar">
-                                                    <img  [src]="specialist.avatar"  [alt]="specialist.name">
+                                                    <img  src="{{URLMedia}}{{specialist.avatar}}" class="avatarlist"   [alt]="specialist.name">
                                                 </div>
                                             </td>
                                             <td>
@@ -164,12 +164,12 @@
                                                     <img src="./assets/img/no-image.jpg" >
                                                 </div>
                                                 <div *ngIf="patient.avatar">
-                                                    <img  [src]="patient.avatar"  [alt]="patient.name">
+                                                    <img  src="{{URLMedia}}{{patient.avatar}}" class="avatarlist"  [alt]="patient.first_name">
                                                 </div> 
                                             </td>
                                             <td>
                                               <a class="dropdown-item" [routerLink]="['/patients/profile/', patient.id]">
-                                                {{patient.name + ' ' + (patient.first_name ? patient.last_name: '')}}
+                                                {{patient.first_name + ' ' + (patient.first_name ? patient.last_name: '')}}
                                               </a>
                                             </td>
                                             <td>{{patient.email}}</td>

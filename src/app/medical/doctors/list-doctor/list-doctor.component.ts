@@ -5,6 +5,7 @@ import { routes } from 'src/app/shared/routes/routes';
 import { FileSaverService } from 'ngx-filesaver';
 import * as XLSX from 'xlsx';
 import * as jsPDF from 'jspdf';
+import { RolesService } from '../../roles/service/roles.service';
 
 declare var $:any;  
 @Component({
@@ -37,10 +38,12 @@ export class ListDoctorComponent {
   public doctor_id:any;
   public doctor_selected:any;
   public text_validation:any;
+  public user:any;
 
   constructor(
     public doctorService: DoctorService,
-    private fileSaver: FileSaverService
+    private fileSaver: FileSaverService,
+    public roleService: RolesService,
     ){
 
   }
@@ -48,7 +51,19 @@ export class ListDoctorComponent {
     window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getTableData();
+    this.user = this.roleService.authService.user;
   }
+
+  isPermission(permission:string){
+    if(this.user.roles.includes('SUPERADMIN')){
+      return true;
+    }
+    if(this.user.permissions.includes(permission)){
+      return true;
+    }
+    return false;
+  }
+
   private getTableData(): void {
     this.doctorList = [];
     this.serialNumberArray = [];

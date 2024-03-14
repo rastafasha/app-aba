@@ -4,6 +4,9 @@ import { routes } from 'src/app/shared/routes/routes';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import { Location } from '@angular/common';
 import { LocationService } from '../services/location.service';
+import { url_media } from 'src/app/config/config';
+
+
 
 @Component({
   selector: 'app-location-view',
@@ -16,7 +19,7 @@ export class LocationViewComponent {
 
   public title: string = '';
 
-
+  public  URLMedia = `${url_media}`;
   public services:any = [];
   public patients:any = [];
   public specialists:any = [];

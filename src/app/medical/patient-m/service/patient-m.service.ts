@@ -52,6 +52,11 @@ export class PatientMService {
     let URL = url_servicios+'/patients/show/'+client_id;
     return this.http.get(URL, {headers:headers});
   }
+  getPatientsByDoctor(doctor_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/patients/byDoctor/'+doctor_id;
+    return this.http.get(URL, {headers:headers});
+  }
   createPatient(data){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
     let URL = url_servicios+'/patients/store';

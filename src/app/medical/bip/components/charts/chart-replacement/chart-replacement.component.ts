@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { routes } from 'src/app/shared/routes/routes';
 import {
   ChartComponent,
@@ -25,9 +25,12 @@ import { pageSelection, apiResultFormat, patientDashboard } from 'src/app/shared
 import { ActivatedRoute } from '@angular/router';
 import { DoctorService } from 'src/app/medical/doctors/service/doctor.service';
 import { DashboardService } from 'src/app/core/dashboard/service/dashboard.service';
+import { GraphicReductionService } from '../../../service/graphic-reduction.service';
+import { BipService } from '../../../service/bip.service';
 interface data {
   value: string ;
 }
+
 export type ChartOptions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   series: ApexAxisChartSeries | any;
@@ -61,15 +64,18 @@ export type ChartOptions = {
   legend: ApexLegend | any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 };
-
 @Component({
   selector: 'app-chart-replacement',
   templateUrl: './chart-replacement.component.html',
   styleUrls: ['./chart-replacement.component.scss']
 })
 export class ChartReplacementComponent {
-  public selectedValue: string ='2024';
+  public selectedValue: string ='03';
   @ViewChild('chart') chart!: ChartComponent;
+  
+  @Input() goal:any;
+  // @Output() cursoD: EventEmitter<any>  = new EventEmitter();// envia la data
+
 
   public chartOptionsOne: Partial<ChartOptions>;
    // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -85,29 +91,32 @@ export class ChartReplacementComponent {
 
   //datos reales
   public bips:any = [];
-  public appointment_pendings:any = [];
+  public user: any;
+  public maladaptiveSelected: any;
+  public maladaptive: any;
+  public patient_id: any;
+  public client_id: any;
+  public created_at: Date;
+  public session_date: any = [];
+  public replacements: any = [];
+  public session_dates: any = [];
+  public number_of_occurrences: number;
+  public patient_selected: any = [];
+  public client_selected: any = [];
+  public sessionDates: any = [];
+  public replacement: any = [];
+  
+  public maladaptiveBehaviors: any = [];
+  public replacementsExtractedGoal: any = [] = [{}];
+  public number_of_correct_response: any ;
 
-  public num_appointments_current: number = 0;
-  public num_appointments_before: number = 0;
-  public porcentaje_d: number = 0;
-
-  public num_patients_current:number = 0;
-  public num_patients_before:number = 0;
-  public porcentaje_dp:number = 0;
-
-  public num_appointments_attention_current:number = 0;
-  public num_appointments_attention_before:number = 0;
-  public porcentaje_da:number = 0;
-
-  public num_appointments_total_current: number = 0;
-  public num_appointments_total_before: number = 0;
-  public porcentaje_dt: number = 0;
 
   public query_patient_by_genders:any = [];
   public query_patients_specialities:any = [];
   public query_patients_speciality_porcentaje:any = [];
   public query_income_year:any = [];
-  public user: any;
+  public notesRbts:any = [];
+  public replacementeFiltrado:any = [];
   //datos reales
 
   constructor(
@@ -115,6 +124,8 @@ export class ChartReplacementComponent {
     public activatedRoute: ActivatedRoute,
     public doctorService: DoctorService,
     public dashboardService : DashboardService,
+    public graphicReductionService : GraphicReductionService,
+    public bipService:BipService,
     ) {
     this.carousel1 = this.data.carousel1;
     this.carousel2 = this.data.carousel2;
@@ -148,7 +159,7 @@ export class ChartReplacementComponent {
     //   },
     //   series: [
     //     {
-    //       name: 'Health',
+    //       name: 'Number of Occurrences',
     //       color: '#00D3C7',
     //       data: [20, 40, 85, 25, 50, 30, 50, 20, 50, 40, 30, 20],
     //     },
@@ -171,93 +182,211 @@ export class ChartReplacementComponent {
     //   },
     // };
 
-    this.chartOptionsOne = {
-      chart: {
-        height: 200,
-        type: 'line',
-        toolbar: {
-          show: false,
-        },
-      },
-      grid: {
-        show: true, 
-        xaxis: {
-          lines: {
-            show: false
-           }
-         },  
-        yaxis: {
-          lines: { 
-            show: true 
-           }
-         },   
-        },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: 'smooth',
-      },
-      series: [
-        {
-          name: 'Income',
-          color: '#2E37A4',
-          data:[] //[45, 60, 75, 51, 42, 42, 30],
-        },
-      ],
-      xaxis: {
-        categories: []//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-      },
-    };
   }
 
+  ngOnInit(): void {
+    
+    this.goal;
+    // console.log(this.goal);
+    
 
-  getDashboardAdminYear(){
-    let data ={
-      year: this.selectedValue,
-    }
-    this.query_income_year = null;
-    this.dashboardService.dashboardAdminYear(data).subscribe((resp:any)=>{
+    this.activatedRoute.params.subscribe((resp:any)=>{
+      this.client_id = resp.id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
+    
+     })
+     this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
+     this.getBip(); // se pide el perfil del paciente por el bip relacionado
+     this.getGraphicPatientMonth();
+  }
+
+  getBip(){
+    this.bipService.getBipByUser(this.client_id).subscribe((resp:any)=>{
       // console.log(resp);
-      //start
-      this.query_patient_by_genders = resp.query_patients_by_gender;
+      this.created_at = resp.bip.created_at;
+      // console.log(this.created_at);
+    });
+
+  }
+
+  getProfileBip(){
+    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
+      // console.log(resp);
+      this.client_selected = resp;// asignamos el objeto a nuestra variable
+      this.patient_id = resp.patient.patient_id;  
+      // console.log(this.patient_id);
+
+      //traemos la info del usuario 
+      if (this.client_selected.type !== null){// si hay o no informacion del paciente
+        if (this.client_selected.eligibility == 'yes'){// si el status es positivo para proceder
+          this.patient_id = this.client_selected.patient_id;  
+        }
+      }
+      this.getGoalsReductions();
+    });
+
+  }
+
+  // obtenemos todos las notas filtrandose con el nombre seleccionado traido como input.. this.maladaptive_behavior 
+  // junto con el patient_id por si existe otro paciente con el mismo maladaptive
+
+  getGoalsReductions(){
+    this.graphicReductionService.listReductionGraphics(this.goal, this.patient_id).subscribe((resp:any)=>{
+     console.log(resp);
+     this.notesRbts = resp.noteRbt.data; //obtiene una lista de notas con 3 json en cada una maladaptives, interventions y replacementes
       
-      let data_male:any = [];
-      let data_female:any = [];
-      this.query_patient_by_genders.forEach((item:any) => {
-        data_male.push(item.hombre);
-        data_female.push(item.mujer);
-      });
+     // en esta parte solo necesito el replacements: el nombre: goal y el numero: number_of_occurrences 
 
-      let Patient_by_Genders =[
-        {
-          name: 'Male',
-          color: '#2E37A4',
-          data: data_male,
+    
+    //recorremos todas las listas para extraer los json
+     this.replacements = this.notesRbts.filter(note => note.replacements).map(note => note.replacements);
+     console.log(this.replacements);
+
+     this.replacements 
+     // recorre y extrae  el nombre de la meta que se quiere mostrar ?
+
+
+     //limpiamos los [] extras de la respuesta
+    //  this.replacements.forEach(function (replacementsExtractedGoal) {
+    //   //  this.replacementeFiltrado = replacementsExtractedGoal;
+    //    console.log(replacementsExtractedGoal);
+    // });
+
+    const goalNames = this.replacements.map(replacement => replacement.goal);
+    console.log(goalNames);// los desvuelve null
+    //recorrer extraer y filtrar el nombre que se quiere mostrar ?
+
+
+    this.replacements = this.notesRbts
+    .filter(note => note.replacements)
+    .map(note => note.replacements)
+    .flat();
+
+      const extractedData = this.replacements
+      .filter(replacement => replacement.replacements).map(replacement => ({
+        goal: replacement.goal,
+        number_of_occurrences: replacement.number_of_occurrences
+      }));
+
+      console.log(extractedData);
+
+    
+
+
+      const replacementsExtractedGoal = [];
+      
+      // const extractedData = [];
+      
+      // // Using a for loop
+      // for (let i = 0; i < replacementsExtractedGoal.length; i++) {
+      //   const innerArr = replacementsExtractedGoal[i];
+      //   extractedData.push(innerArr[i]);
+      // }
+      
+      // console.log(extractedData); // Output: [2, 5, 8]
+      
+      // // Using the forEach method
+      // replacementsExtractedGoal.forEach(innerArr => {
+      //   extractedData.push(innerArr[0]);
+      // });
+      
+      // console.log(extractedData); // Output: [2, 5, 8]
+
+
+       
+    //       let paragraph: string[] = [];
+    // let array = this.replacements;
+    // for (const item of array) {
+    //   if (item && item.goal) {
+    //     paragraph
+
+      let replacement_numbers: string[] = [] ;
+      let array = replacementsExtractedGoal;
+      for (this.replacement of array) {
+        replacement_numbers.push(this.replacement.number_of_correct_response)
+      //   if (this.replacement && this.replacement.goal) {
+      // }
+      }
+      console.log(replacement_numbers); // devuele el total  de numeros correctos que tiene una nota
+      // //pero los devuelve con valor undefinned 
+
+
+      // var replacementsExtractedGoal = this.replacements;
+      // for (var i = 0; i < replacementsExtractedGoal.length; i++) {
+      //   console.log(replacementsExtractedGoal[i]);
+      // }
+    //  this.number_of_correct_response = this.replacements.filter(replacement => replacement.number_of_correct_response).map(replacement => replacement.number_of_correct_response);
+    //  console.log(this.number_of_correct_response);
+     
+
+
+    // filtrar y obtener las fechas del array
+     // aqui me funciona pero me trae la info en un array [1,2,3]
+     this.sessionDates = this.notesRbts.filter(note => note.session_date).map(note => note.session_date); 
+     console.log('fechas',this.sessionDates);
+    
+      
+      //Chart
+      this.chartOptionsOne = {
+        chart: {
+          height: 170,
+          type: 'line',
+          toolbar: {
+            show: false,
+          },
         },
-        {
-          name: 'Female',
-          color: '#00D3C7',
-          data: data_female,
+        grid: {
+          show: true, 
+          xaxis: {
+            lines: {
+              show: false
+             }
+           },  
+          yaxis: {
+            lines: { 
+              show: true 
+             }
+           },   
+          },
+        dataLabels: {
+          enabled: false,
         },
-      ];
-      this.chartOptionsOne.series = Patient_by_Genders;
-      //end
+        stroke: {
+          curve: 'smooth',
+        },
+        series: [
+          {
+            name: 'Number of Occurrences',
+            color: '#00D3C7',
+            // data: this.replacements,
+            data: [45, 60, 75, 51, 42, 42],
+            // data: [this.initial_interesting, this.number_of_occurrences]
+          },
+        ],
+        xaxis: {
+          //
+          categories:  this.sessionDates,
+          // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        },
+      };
+      
+     
+    },);
 
-      //start
-      this.query_patients_specialities = resp.query_patients_speciality;
+    
 
-      let labels_sp:any = [];
-      let series_sp:any = [];
-      this.query_patients_specialities.forEach((patients_speciality:any)=>{
-        labels_sp.push(patients_speciality.name)
-        series_sp.push(patients_speciality.count)
-      })
-      this.chartOptionsOne.labels = labels_sp;
-      //end
-      //start
-      this.query_patients_speciality_porcentaje = resp.query_patients_speciality_porcentaje;
-      //end
+  }
+
+  
+  
+
+  getGraphicPatientMonth(){
+    let data ={
+      month: this.selectedValue,
+    }
+    this.graphicReductionService.graphicPatientMonth(data).subscribe((resp:any)=>{
+      console.log(resp);
+      
+
       //start
       this.query_income_year = resp.query_income_year;
       let data_income:any = [];
@@ -304,31 +433,26 @@ export class ChartReplacementComponent {
         },
       };
       
-      // this.chartOptionsThree.xaxis.categories = resp.months_name
-      // this.chartOptionsThree.series = [
-      //   {
-      //     name: 'Income',
-      //     color: '#2E37A4',
-      //     data: data_income,
-      //   },
-      // ]
       //end
     })
   }
-  selectedYear(){
+  selectedMonth(){
     // console.log(this.selectedValue);
-    this.getDashboardAdminYear();
+    this.getGraphicPatientMonth();
   }
     
   selecedList: data[] = [
-    {value: '2022'},
-    {value: '2023'},
-    {value: '2024'},
-    {value: '2025'},
-    {value: '2026'},
-    {value: '2027'},
-    {value: '2028'},
-    {value: '2029'},
-    {value: '2030'},
+    {value: '01'},
+    {value: '02'},
+    {value: '03'},
+    {value: '04'},
+    {value: '05'},
+    {value: '06'},
+    {value: '07'},
+    {value: '08'},
+    {value: '09'},
+    {value: '10'},
+    {value: '11'},
+    {value: '12'},
   ];
 }

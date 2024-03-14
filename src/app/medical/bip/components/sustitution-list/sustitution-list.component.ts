@@ -36,6 +36,7 @@ export class SustitutionListComponent {
   public goalSelected:any;
   public goalSelectedSon:any;
   public goalmaladaptive:any ;
+  public goalSelectedGraphic:any ;
   public goalmaladaptive_child:any = [];
   public goalReductionPatientIds:any = [];
   
@@ -409,14 +410,13 @@ export class SustitutionListComponent {
   
   
 
-  //listas
-
 
 
   back(){
     this.goalSelected = null;
     this.createSelected = null;
     this.goalSelectedSon = null;
+    this.goalSelectedGraphic = null;
     this.current_status = '';
     this.goal = '',
     this.current_status = '',
@@ -532,4 +532,12 @@ export class SustitutionListComponent {
     },);
 
   }
+
+
+  //selectores seleccionamos el grafico del maladaptive de la lista
+selectedReplacementGraphic(goal:any){
+  this.goalSelectedGraphic = goal
+  console.log(this.goalSelectedGraphic);
+  // this.getGoalsSonMaladaptives();
+}
 }
