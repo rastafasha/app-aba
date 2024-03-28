@@ -371,22 +371,39 @@ export class NoteBcbaEditComponent {
     formData.append('location', this.location);
     formData.append('birth_date', this.birth_date);
     
+    if(this.selectedValueRendering ){
+      formData.append('rendering_provider', this.selectedValueRendering);
+    }
+    if(this.selectedValueAba ){
+      formData.append('aba_supervisor', this.selectedValueAba);
+    }
+    if(this.cpt_code ){
+      formData.append('cpt_code', this.cpt_code);
+    }
+    if(this.selectedValueRBT ){
+      formData.append('provider_name', this.selectedValueRBT);
+    }
+    if(this.selectedValueBCBA ){
+      formData.append('supervisor_name', this.selectedValueBCBA);
+    }
+    if(this.note_description ){
+      formData.append('note_description', this.note_description);
+    }
+    if(this.rbt_training_goals ){
+      formData.append('rbt_training_goals', JSON.stringify(this.rbt_training_goals));
+    }
+    if(this.caregivers_training_goals ){
+      formData.append('caregiver_goals', JSON.stringify(this.caregivers_training_goals));
+    }
     
-    formData.append('rendering_provider', this.selectedValueRendering);
-    formData.append('aba_supervisor', this.selectedValueAba);
-    formData.append('cpt_code', this.cpt_code);
     
-    formData.append('provider_name', this.selectedValueRBT);
-    formData.append('supervisor_name', this.selectedValueBCBA);
-    formData.append('note_description', this.note_description);
+    if(this.FILE_SIGNATURE_RBT ){
+      formData.append('imagen', this.FILE_SIGNATURE_RBT);
+    }
+    if(this.FILE_SIGNATURE_BCBA ){
+      formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
+    }
 
-    formData.append('rbt_training_goals', JSON.stringify(this.rbt_training_goals));
-    formData.append('caregiver_goals', JSON.stringify(this.caregivers_training_goals));
-
-    formData.append('imagen', this.FILE_SIGNATURE_RBT);
-    formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
-    
-    
     this.noteBcbaService.editNote(formData,this.note_selectedId ).subscribe((resp:any)=>{
       // console.log(resp);
       

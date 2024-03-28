@@ -447,5 +447,9 @@ export class routes {
   public static get listNoteBcba(): string {
     return this.baseUrl + '/note-bcba/listbyclient';
   }
+
+  public static get BillingList(): string {
+    return this.baseUrl + '/billing/list';
+  }
  
 }

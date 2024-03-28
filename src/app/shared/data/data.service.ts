@@ -539,6 +539,23 @@ export class DataService {
             }
           ],
         },
+        {
+          menuValue: 'Billing',
+          hasSubRoute: true,
+          showSubRoute: false,
+          base: 'billing',
+          img: 'assets/img/icons/menu-icon-03.svg',
+          subMenus: [
+            {
+              menuValue: 'Billing List',
+              route: routes.BillingList,
+              base: routes.BillingList,
+              permision: 'list_billing',
+              show_nav: true,
+            },
+          ],
+        },
+
         // {
         //   menuValue: 'Staff',
         //   hasSubRoute: true,

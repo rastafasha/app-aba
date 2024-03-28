@@ -251,8 +251,11 @@ export class ChartReductionComponent {
      // aqui me funciona pero me trae la info en un array [1,2,3] y la necesito fuera 1,2,3 porque van unidas con otra fecha de otro documento
      this.sessionDates = this.notesRbts.filter(note => note.session_date).map(note => note.session_date); // obtenerlas como un string ?
      // filtrar y obtener las fechas del array ?
-    //  console.log(this.sessionDates);
-    
+     
+     this.sessionDates.sort();
+     console.log(this.sessionDates);
+     this.sessionDates.unshift(this.created_at);
+     
       
       
       // solo si accedo al [0] si obtiene todo
@@ -287,13 +290,13 @@ export class ChartReductionComponent {
           {
             name: 'Number of Occurrences',
             color: '#00D3C7',
-            data: [45, 60, 75, 51, 42, 42, 30],
+            data: [32, 30, 56, 56, 56, 42, 30],
             // data: [this.initial_interesting, this.number_of_occurrences]
           },
         ],
         xaxis: {
           //
-          categories:  [this.created_at, this.sessionDates],
+          categories:  this.sessionDates,
           // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         },
       };

@@ -83,6 +83,11 @@ export class PatientMService {
     let URL = url_servicios+"/patients/profile/"+client_id;
     return this.http.get(URL,{headers:headers});
   }
+  getPatientByPatientid(patient_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let URL = url_servicios+"/patients/shobypatientid/"+patient_id;
+    return this.http.get(URL,{headers:headers});
+  }
 
   listConfig(): Observable<any[]>{
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})

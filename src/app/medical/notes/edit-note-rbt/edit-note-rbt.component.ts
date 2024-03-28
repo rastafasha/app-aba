@@ -342,6 +342,28 @@ export class EditNoteRbtComponent {
     this.replacementGoals.splice(i,1);
   }
 
+  addInterventions(){
+    this.interventionsgroup.push({
+      pairing: this.pairing,
+      response_block: this.response_block,
+      DRA: this.DRA,
+      DRO: this.DRO,
+      redirection: this.redirection,
+      errorless_teaching: this.errorless_teaching,
+      NCR: this.NCR,
+      shaping: this.shaping,
+      chaining: this.chaining,
+      token_economy: this.token_economy,
+      extinction: this.extinction,
+      natural_teaching: this.natural_teaching,
+    })
+     //si existe un elemento actualiza ese elemento en la lista
+    if(this.interventionsgroup.length > 1){
+      this.interventionsgroup.splice(this.interventionsgroup,1);
+    }
+    Swal.fire('Updated', ` Interventions Updated`, 'success');
+  }
+
   cambiarStatus(goalsto:any){
     // this.status_sto_edit = goalsto;
     // console.log(this.status_sto_edit.status_sto);
@@ -363,27 +385,7 @@ export class EditNoteRbtComponent {
 
   
 
-  addInterventions(){
-    this.intervention_added.push({
-      pairing: this.pairing,
-      response_block: this.response_block,
-      DRA: this.DRA,
-      DRO: this.DRO,
-      redirection: this.redirection,
-      errorless_teaching: this.errorless_teaching,
-      NCR: this.NCR,
-      shaping: this.shaping,
-      chaining: this.chaining,
-      token_economy: this.token_economy,
-      extinction: this.extinction,
-      natural_teaching: this.natural_teaching,
-    })
-     //si existe un elemento actualiza ese elemento en la lista
-    if(this.intervention_added.length > 1){
-      this.intervention_added.splice(this.intervention_added,1);
-    }
-    Swal.fire('Updated', ` Interventions Updated`, 'success');
-  }
+
 
   //funcion para la primera imagen.. funciona
   loadFile($event:any){
@@ -412,7 +414,7 @@ export class EditNoteRbtComponent {
 
   
 
-  save(){debugger
+  save(){
     this.text_validation = '';
     // if(!this.name||!this.email ||!this.surname ){
     //   this.text_validation = 'Los campos con * son obligatorios';
@@ -437,31 +439,63 @@ export class EditNoteRbtComponent {
     formData.append('pos', this.pos);
     formData.append('session_date', this.session_date);
 
+    if(this.selectedValueProviderName ){
+      formData.append('provider_name_g', this.selectedValueProviderName);
+    }
+    if(this.selectedValueTimeIn ){
+      formData.append('time_in', this.selectedValueTimeIn+'');
+    }
+    if(this.selectedValueTimeOut ){
+      formData.append('time_out', this.selectedValueTimeOut+'');
+    }
+    if(this.selectedValueTimeIn2 ){
+      formData.append('time_in2', this.selectedValueTimeIn2+'');
+    }
+    if(this.selectedValueTimeOut2 ){
+      formData.append('time_out2', this.selectedValueTimeOut2+'');
+    }
+    if(this.selectedValueTimeOut2 ){
+      formData.append('environmental_changes', this.environmental_changes);
+    }
+    if(this.selectedValueProviderName ){
+      formData.append('provider_name_g', this.selectedValueProviderName);
+    }
+    if(this.selectedValueRBT ){
+      formData.append('provider_name', this.selectedValueRBT);
+    }
+    if(this.selectedValueRBT ){
+      formData.append('supervisor_name', this.selectedValueRBT);
+    }
+    if(this.replacementgroup ){
+      formData.append('replacements', JSON.stringify(this.replacementgroup));
+    }
+    if(this.maladaptivegroup ){
+      formData.append('maladaptives', JSON.stringify(this.maladaptivegroup));
+    }
+    if(this.interventionsgroup ){
+      formData.append('interventions', JSON.stringify(this.interventionsgroup));
+    }
+    if(this.as_evidenced_by ){
+      formData.append('as_evidenced_by', this.as_evidenced_by);
+    }
+    
+    if(this.client_appeared ){
+      formData.append('client_appeared', this.client_appeared);
+    }
+    if(this.client_response_to_treatment_this_session ){
+      formData.append('client_response_to_treatment_this_session', this.client_response_to_treatment_this_session);
+    }
+    if(this.next_session_is_scheduled_for ){
+      formData.append('next_session_is_scheduled_for', this.next_session_is_scheduled_for);
+    }
     
     
-    formData.append('provider_name_g', this.selectedValueProviderName);
-    formData.append('time_in', this.selectedValueTimeIn+'');
-    formData.append('time_out', this.selectedValueTimeOut+'');
-    formData.append('time_in2', this.selectedValueTimeIn2+'');
-    formData.append('time_out2', this.selectedValueTimeOut2+'');
-    formData.append('environmental_changes', this.environmental_changes);
-    
-
-    formData.append('provider_name_g', this.selectedValueProviderName);
-    formData.append('provider_name', this.selectedValueRBT);
-    formData.append('supervisor_name', this.selectedValueBCBA);
-
-    formData.append('replacements', JSON.stringify(this.replacementgroup));
-    formData.append('maladaptives', JSON.stringify(this.maladaptivegroup));
-    formData.append('interventions', JSON.stringify(this.intervention_added));
-
-    formData.append('as_evidenced_by', this.as_evidenced_by);
-    formData.append('client_appeared', this.client_appeared);
-    formData.append('client_response_to_treatment_this_session', this.client_response_to_treatment_this_session);
-    
-    formData.append('imagen', this.FILE_SIGNATURE_RBT);
-    formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
-    
+    if(this.FILE_SIGNATURE_RBT ){
+      formData.append('imagen', this.FILE_SIGNATURE_RBT);
+    }
+    if(this.FILE_SIGNATURE_BCBA ){
+      formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
+    }
     
     this.noteRbtService.editNote(formData,this.note_selectedId ).subscribe((resp:any)=>{
       // console.log(resp);

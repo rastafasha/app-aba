@@ -27,6 +27,7 @@ import { DoctorService } from 'src/app/medical/doctors/service/doctor.service';
 import { DashboardService } from 'src/app/core/dashboard/service/dashboard.service';
 import { GraphicReductionService } from '../../../service/graphic-reduction.service';
 import { BipService } from '../../../service/bip.service';
+import { style } from '@angular/animations';
 interface data {
   value: string ;
 }
@@ -245,6 +246,19 @@ export class ChartReplacementComponent {
      // recorre y extrae  el nombre de la meta que se quiere mostrar ?
       //end
 
+    //   const reductions = [
+    //     "[{\"goal\":\"probando Update\",\"total_trials\":23,\"number_of_correct_response\":23},{\"goal\":\"new\",\"total_trials\":34,\"number_of_correct_response\":54},{\"goal\":\"nuevo\",\"total_trials\":56,\"number_of_correct_response\":67},{\"goal\":\"dasads\",\"total_trials\":32,\"number_of_correct_response\":23},{\"goal\":\"prueba nueva\",\"total_trials\":34,\"number_of_correct_response\":21},{\"goal\":\"31\",\"total_trials\":14,\"number_of_correct_response\":34},{\"goal\":\"nuevo test\",\"total_trials\":43,\"number_of_correct_response\":43}]",
+    //     "[{\"goal\":\"probando Update\",\"total_trials\":56,\"number_of_correct_response\":54},{\"goal\":\"new\",\"total_trials\":54,\"number_of_correct_response\":65},{\"goal\":\"nuevo\",\"total_trials\":15,\"number_of_correct_response\":45},{\"goal\":\"dasads\",\"total_trials\":34,\"number_of_correct_response\":45},{\"goal\":\"prueba nueva\",\"total_trials\":32,\"number_of_correct_response\":34},{\"goal\":\"31\",\"total_trials\":54,\"number_of_correct_response\":56},{\"goal\":\"nuevo test\",\"total_trials\":6,\"number_of_correct_response\":32}]",
+    //     "[{\"goal\":\"probando Update\",\"total_trials\":56,\"number_of_correct_response\":54},{\"goal\":\"new\",\"total_trials\":54,\"number_of_correct_response\":65},{\"goal\":\"nuevo\",\"total_trials\":15,\"number_of_correct_response\":45},{\"goal\":\"dasads\",\"total_trials\":34,\"number_of_correct_response\":45},{\"goal\":\"prueba nueva\",\"total_trials\":32,\"number_of_correct_response\":34},{\"goal\":\"31\",\"total_trials\":54,\"number_of_correct_response\":56},{\"goal\":\"nuevo test\",\"total_trials\":6,\"number_of_correct_response\":32}]",
+    //     "[{\"goal\":\"probando Update\",\"total_trials\":56,\"number_of_correct_response\":54},{\"goal\":\"new\",\"total_trials\":54,\"number_of_correct_response\":65},{\"goal\":\"nuevo\",\"total_trials\":15,\"number_of_correct_response\":45},{\"goal\":\"dasads\",\"total_trials\":34,\"number_of_correct_response\":45},{\"goal\":\"prueba nueva\",\"total_trials\":32,\"number_of_correct_response\":34},{\"goal\":\"31\",\"total_trials\":54,\"number_of_correct_response\":56},{\"goal\":\"nuevo test\",\"total_trials\":6,\"number_of_correct_response\":32}]",
+    //     "[{\"goal\":\"probando Update\",\"total_trials\":56,\"number_of_correct_response\":54},{\"goal\":\"new\",\"total_trials\":54,\"number_of_correct_response\":65},{\"goal\":\"nuevo\",\"total_trials\":15,\"number_of_correct_response\":45},{\"goal\":\"dasads\",\"total_trials\":34,\"number_of_correct_response\":45},{\"goal\":\"prueba nueva\",\"total_trials\":32,\"number_of_correct_response\":34},{\"goal\":\"31\",\"total_trials\":54,\"number_of_correct_response\":56},{\"goal\":\"nuevo test\",\"total_trials\":6,\"number_of_correct_response\":32}]",
+    //     "[{\"goal\":\"probando Update\",\"total_trials\":56,\"number_of_correct_response\":54},{\"goal\":\"new\",\"total_trials\":54,\"number_of_correct_response\":65},{\"goal\":\"nuevo\",\"total_trials\":15,\"number_of_correct_response\":45},{\"goal\":\"dasads\",\"total_trials\":34,\"number_of_correct_response\":45},{\"goal\":\"prueba nueva\",\"total_trials\":32,\"number_of_correct_response\":34},{\"goal\":\"31\",\"total_trials\":54,\"number_of_correct_response\":56},{\"goal\":\"nuevo test\",\"total_trials\":6,\"number_of_correct_response\":32}]"
+    // ]
+
+      const result1 = this.replacements.filter((number_of_correct_response) => number_of_correct_response.length > 90);
+
+      console.log(result1);
+
     //start
     this.replacements = this.notesRbts.filter(note => note.replacements).map(note => note.replacements).flat();
 
@@ -294,7 +308,7 @@ export class ChartReplacementComponent {
       //Chart
       this.chartOptionsOne = {
         chart: {
-          height: 170,
+          height: 200,
           type: 'line',
           toolbar: {
             show: false,
@@ -304,7 +318,7 @@ export class ChartReplacementComponent {
           show: true, 
           xaxis: {
             lines: {
-              show: false
+              show: true
              }
            },  
           yaxis: {
@@ -314,18 +328,19 @@ export class ChartReplacementComponent {
            },   
           },
         dataLabels: {
-          enabled: false,
+          enabled: true,
         },
         stroke: {
-          curve: 'smooth',
+          // curve: 'smooth',
         },
         series: [
           {
             name: 'Number of Occurrences',
             color: '#00D3C7',
             // data: this.replacements,
-            data: [45, 60, 75, 51, 42, 42],
+            data: [45, 60, 75, 51, 42, 42,45,],
             // data: [this.initial_interesting, this.number_of_occurrences]
+            
           },
         ],
         xaxis: {

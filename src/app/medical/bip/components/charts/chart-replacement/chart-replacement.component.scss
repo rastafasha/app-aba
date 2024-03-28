@@ -1,0 +1,39 @@
+.cuadro-color{
+    width: 30px;
+    height: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+    background-color: rgb(16, 159, 184);
+    display: flex;
+
+
+}
+
+.text-vert{
+
+//     writing-mode: vertical-rl;
+// text-orientation: mixed;
+
+writing-mode: vertical-rl;
+text-orientation: upright;
+
+    height: 210px;
+    padding: 0;
+    margin: 0;
+    letter-spacing: 0;
+    font-size: smaller;
+    position: relative;
+    margin-top: -180px;
+    margin-left: -20px;
+    padding: 0;
+
+}
+.linea-vert{
+    background-color: red;
+    width: 2px;
+    height: 150px;
+    position: relative;
+    margin-left: 40px;
+    margin-top: -244px;
+    margin-bottom: 80px;
+}

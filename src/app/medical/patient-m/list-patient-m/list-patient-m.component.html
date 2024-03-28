@@ -90,12 +90,13 @@
                                           *ngIf="data.status === 'inactive'">Inactive</span>
 
                                       <span *ngIf="data.status === 'active'">
-                                        <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/bip/attention/', data.id]" tooltip="BIP Access"><i class="fa fa-address-book"></i></button>
-                                        <button class="btn btn-outline-success" *ngIf="isPermission('view_bip')" [routerLink]="['/bip/profile/', data.patient_id]" tooltip="BIP View"><i class="fa fa-address-book"></i></button>
-                                        <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' ||  roles ==='RBT'" [routerLink]="['/note-rbt/', data.id]" tooltip="Create RBT Note"> <i class="fa fa-bookmark"></i> </button>
-                                        <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' ||  roles ==='RBT'" [routerLink]="['/note-rbt/listbyclient/', data.patient_id]" tooltip="RBT Note list"> <i class="fa fa-bars"></i> </button>
-                                        <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/note-bcba/', data.id]" tooltip="Create BCBA Note"> <i class="fa fa-bookmark"></i> </button>
-                                        <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/note-bcba/listbyclient/', data.patient_id]" tooltip="BCBA Note list"> <i class="fa fa-bars"></i> </button>
+                                        <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/bip/attention/', data.id]" tooltip="BIP Create"><i class="fa fa-address-book"></i></button>
+                                        <button class="btn btn-outline-dark" *ngIf="isPermission('view_bip')" [routerLink]="['/bip/profile/', data.patient_id]" tooltip="BIP View"><i class="fa fa-eye"></i></button>
+                                        <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' ||  roles ==='RBT'" [routerLink]="['/note-rbt/', data.id]" tooltip="Create RBT Note"> <i class="fa fa-id-card "></i> </button>
+                                        <button class="btn btn-outline-primary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' ||  roles ==='RBT'" [routerLink]="['/note-rbt/listbyclient/', data.patient_id]" tooltip="RBT Note list"> <i class="fa fa-bars"></i> </button>
+                                        <button class="btn btn-outline-secondary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/note-bcba/', data.id]" tooltip="Create BCBA Note"> <i class="fa fa-id-badge"></i> </button>
+                                        <button class="btn btn-outline-primary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/note-bcba/listbyclient/', data.patient_id]" tooltip="BCBA Note list"> <i class="fa fa-bars"></i> </button>
+                                        <button class="btn btn-outline-warning" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'" [routerLink]="['/billing/byclient/', data.patient_id]" tooltip="Billing by this user"> <i class="fa fa-credit-card"></i> </button>
                                       </span>
                                   </td>
                                   <td *ngIf="roles ==='SUPERADMIN'">

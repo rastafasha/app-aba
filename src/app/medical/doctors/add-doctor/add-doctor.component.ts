@@ -124,7 +124,7 @@ export class AddDoctorComponent {
     reader2.onloadend = ()=> this.IMAGE_PREVISUALIZA_SIGNATURE = reader2.result;
   }
 
-  save(){debugger
+  save(){
     this.text_validation = '';
     if(!this.name||!this.email ||!this.surname ){
       this.text_validation = 'Los campos con * son obligatorios';

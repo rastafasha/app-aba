@@ -57,6 +57,11 @@ const routes: Routes = [
       loadChildren: () =>
         import('./notes-bcba/notes-bcba.module').then((m) => m.NotesBcbaModule),
     },
+    {
+      path: 'billing',
+      loadChildren: () =>
+        import('./billing/billing.module').then((m) => m.BillingModule),
+    },
   ]  
 }
 ];

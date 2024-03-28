@@ -70,7 +70,7 @@
                                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-6">
+                                <div class="col-12 col-md-4 col-xl-4">
                                     <div class="form-group select-gender">
                                         <label class="gen-label">Gender<span class="login-danger">*</span></label>
                                         <div class="form-check-inline">
@@ -85,7 +85,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-4 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Roles <span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Role">
@@ -95,16 +95,17 @@
                                         </mat-select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-4 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Location <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueLocation" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Location">
+                                        <mat-select multiple="multiple" [(ngModel)]="selectedValueLocation" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Location">
                                             <mat-option *ngFor="let data of locations" [value]="data.id">
                                             {{data.title}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
                                 </div>
+                                
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group local-forms">
                                         <label>Address  <span class="login-danger">*</span></label>
@@ -124,6 +125,8 @@
                                         <img [src]="IMAGE_PREVISUALIZA" style="width: 250px;" alt="">
                                     </div>
                                 </div>
+
+                                
                                 <div class="col-12" *ngIf="valid_form">
                                     <div class="form-group row" *ngIf="text_success">
                                         <div class="col-md-12">
