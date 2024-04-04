@@ -9,7 +9,7 @@
                       <li class="breadcrumb-item active"><a routerLink="/">Dashboard /</a></li>
                       <li class="breadcrumb-item active"><a routerLink="/patients/list">Client List / </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Billing by Client</li>
+                        <li class="breadcrumb-item active">Report by Client</li>
                     </ul>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="doctor-table-blk">
-                                        <h3>Billing by Client</h3>
+                                        <h3>Report By Client: {{patientID}}</h3>
                                         <div class="doctor-search-blk">
                                             <!-- <div class="top-nav-search table-search-blk">
                                                     <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
@@ -35,7 +35,7 @@
                                                     <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
                                             </div> -->
 
-                                            <div class="staff-search-table">
+                                            <!-- <div class="staff-search-table">
                                               <form>
                                                   <div class="row">
                                                       <div class="col-12 col-md-6 col-xl-4">  
@@ -72,7 +72,7 @@
                                                       </div>
                                                   </div>
                                               </form>
-                                          </div>
+                                          </div> -->
                                             <div class="add-group">
                                                 <!-- <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a> -->
                                                 <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
@@ -89,7 +89,13 @@
                         <div class="container">
                           <div class="row align-items-center py-4" >
                             <div class="col-12 py-4">
-                                <h4>Data Client</h4>
+                                <h4>Report Date: </h4>
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <div class="form-group local-forms">
+                                    <label >Patient Name <span class="login-danger">*</span></label>
+                                    <input class="form-control"  name="patientName"  disabled [(ngModel)]="patientName" type="text"  >
+                                </div>
                             </div>
                             <div class="col-12 col-md-6 col-xl-4">
                                 <div class="form-group local-forms">
@@ -121,6 +127,48 @@
                         </div>
                         </div>
                       <!-- paciente -->
+
+                      <div class="container">
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>PA Services</th>
+                                        <th>CPT</th>
+                                        <th>Units Allowed</th>
+                                        <th>Beginning</th>
+                                        <th>Expiration</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let asses of pa_assessmentsgroup; let i = index">
+                                        <td>
+                                            {{asses.pa_services}}
+                                        </td>
+                                        <td>
+                                            {{asses.cpt}}
+                                        </td>
+                                        <td>
+                                            {{asses.n_units}}
+                                        </td>
+                                        <td>
+                                             {{asses.pa_services_start_date | date}}
+                                        </td>
+                                        <td>
+                                             {{asses.pa_services_end_date | date}}
+                                        </td>
+                                        
+                                        
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+
                         
                         <div class="table-responsive">
                             <table matSort (matSortChange)="sortData($event)" class="table border-0 custom-table comman-table datatable mb-0">
@@ -132,13 +180,14 @@
                                       <th mat-sort-header="next_session">Total Hours</th>
                                       <th mat-sort-header="total_units">Total Units</th>
                                       <th mat-sort-header="billing_totals">Billing Totals</th>
+                                      <th mat-sort-header="charges">Charges</th>
                                       <!-- <th mat-sort-header="created">Created At</th> -->
                                          <th ></th> <!--acciones -->
                                     </tr>
                                 </thead>
                                 <!-- *ngIf="billing_generals?.length > 0; else noData" -->
                                 <tbody >
-                                    <tr *ngFor="let data of billingList" >
+                                    <tr *ngFor="let data of clientReportList" >
                                         
                                       <td>
                                         <a class="dropdown-item" [routerLink]="['/note-rbt/view/', data.id]">
@@ -151,6 +200,7 @@
                                       <td>{{data.total_hours}}</td>
                                       <td>{{data.total_units}}</td>
                                       <td>{{((data.total_hours * data.total_units | currency))}}</td>
+                                      <td>{{(( data.total_units * unitPrize  | currency))}}</td>
                                         <!-- <td>{{data.created_at | date }}</td> -->
                                         
                                         <td class="text-end">
@@ -207,7 +257,7 @@
                                   <div class="dataTables_info">
                                     Showing {{ serialNumberArray[0] }} to
                                     {{ serialNumberArray[serialNumberArray.length - 1] }} of
-                                    {{ totalDataBilling }} entries
+                                    {{ totalDataClientReport }} entries
                                   </div>
                                 </div>
                 
@@ -295,7 +345,7 @@
                                           disabled:
                                             currentPage ===
                                               pageNumberArray[pageNumberArray.length - 1] ||
-                                              billingList.length === 0
+                                              clientReportList.length === 0
                                         }"
                                       >
                                         <a
@@ -331,6 +381,12 @@
                               <div class="form-group local-forms">
                                   <label >Week Total Units<span class="login-danger">*</span></label>
                                   <input class="form-control"  name="week_total_units"  disabled [(ngModel)]="week_total_units" type="number"  >
+                              </div>
+                          </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                              <div class="form-group local-forms">
+                                  <label >Charges<span class="login-danger">*</span></label>
+                                  <input class="form-control"  name="charges"  disabled [(ngModel)]="charges" type="number"  >
                               </div>
                           </div>
                           </div>

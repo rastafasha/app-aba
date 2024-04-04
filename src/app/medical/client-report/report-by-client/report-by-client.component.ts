@@ -6,17 +6,16 @@ import { DoctorService } from '../../doctors/service/doctor.service';
 import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { RolesService } from '../../roles/service/roles.service';
-declare var $:any;  
-import { routes } from 'src/app/shared/routes/routes';
-import { BillingService } from '../billing.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
-@Component({
-  selector: 'app-billing-by-client',
-  templateUrl: './billing-by-client.component.html',
-  styleUrls: ['./billing-by-client.component.scss']
-})
-export class BillingByClientComponent {
+import { ClientReportService } from '../client-report.service';
+declare var $:any;  
 
+@Component({
+  selector: 'app-report-by-client',
+  templateUrl: './report-by-client.component.html',
+  styleUrls: ['./report-by-client.component.scss']
+})
+export class ReportByClientComponent {
   public searchDataDoctor = '';
   public date_start:any;
   public date_end:any;
@@ -31,14 +30,14 @@ export class BillingByClientComponent {
 
 
 
-  public billingList: any = [];
-  public billing_generals:any = [];
+  public clientReportList: any = [];
+  public clientReport_generals:any = [];
   dataSource!: MatTableDataSource<any>;
   public showFilter = false;
   public searchDataValue = '';
   public lastIndex = 0;
   public pageSize = 7;
-  public totalDataBilling = 0;
+  public totalDataClientReport = 0;
   public skip = 0;
   public limit: number = this.pageSize;
   public pageIndex = 0;
@@ -60,8 +59,11 @@ export class BillingByClientComponent {
   public insuranceiddd:any;
   public insurer_name:any;
   public sponsors:any=[];
+  public modifiers:any=[];
+  public pa_assessmentgroup:any=[];
   public patient:any;
   public patientID:any;
+  public patientName:any;
   public doctor_selected:any;
   public doctor_selected_full_name:any;
   public billing_total:number = 0;
@@ -69,11 +71,13 @@ export class BillingByClientComponent {
   public week_total_units:number = 0;
   public total_hours:number = 0;
   public total_units:number = 0;
+  public charges:number = 0;
+  public unitPrize:number = 0;
   
   constructor(
     public router: Router,
     public ativatedRoute: ActivatedRoute,
-    public billingService: BillingService,
+    public clientReportService: ClientReportService,
     public doctorService: DoctorService,
     public roleService: RolesService,
     public insuranceService: InsuranceService,
@@ -94,6 +98,7 @@ export class BillingByClientComponent {
      this.getProfileBilling();
      this.getConfig();
      this.getPatient();
+     
      
      
      this.doctorService.getUserRoles();
@@ -119,27 +124,30 @@ export class BillingByClientComponent {
       // console.log(resp);
       this.patient = resp.patient;
       this.patientID = this.patient.patient_id;
+      this.patientName = this.patient.first_name+' '+this.patient.last_name;
+
+
 
     })
   }
 
   
   // getNotesByPatient(){
-  //   this.billingService.showBillingbyPatient(this.patient_id).subscribe((resp:any)=>{
+  //   this.clientReportService.showBillingbyPatient(this.patient_id).subscribe((resp:any)=>{
   //     console.log(resp);
   //   })
   // }
 
   // trae el perfil del usuario
   getProfileBilling(){
-    this.billingService.showBillingProfile(this.patient_id).subscribe((resp:any)=>{
+    this.clientReportService.showClientReportProfile(this.patient_id).subscribe((resp:any)=>{
       console.log(resp);
       this.client_selected = resp.patient;
       //convierto la data de la coleccion json para extraer los datos
       this.pa_assessments = resp.pa_assessments;
-      let jsonObj = JSON.parse(this.pa_assessments) || '';
+      let jsonObj = JSON.parse(this.pa_assessments);
       this.pa_assessmentsgroup = jsonObj;
-      // console.log(this.pa_assessmentsgroup);
+      console.log(this.pa_assessmentsgroup);
       this.cpt = this.pa_assessmentsgroup[0].cpt;
       // console.log(this.cpt); 
       this.n_units = this.pa_assessmentsgroup[0].n_units;
@@ -148,45 +156,76 @@ export class BillingByClientComponent {
   }
 
   getConfig(){
-    this.billingService.config().subscribe((resp:any)=>{
+    this.clientReportService.config().subscribe((resp:any)=>{
       console.log(resp);
       this.insurances = resp.insurances;
       this.insurance_id = resp.insurances.length > 0 ? resp.insurances[0].id : '';
       // console.log(this.insurance_id);
       this.sponsors = resp.doctors;
 
+      //sacamos los detalles insurance seleccionado
       this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
+        console.log(resp);
         this.insuranceiddd= resp.id;
         
         this.insurer_name = resp.insurer_name;
+        this.modifiers = resp.notes;
+        console.log(this.modifiers);
+        this.unitPrize = resp.services[0].unit_prize;
+        console.log(this.unitPrize);
         
       })
-
-      // this.doctorService.showDoctor(this.sponsor_id).subscribe((resp:any)=>{
-      //   console.log(resp);
-      // })
+      
     })
   }
 
 
   private getTableData(): void {
-    this.billingList = [];
+    this.clientReportList = [];
     this.serialNumberArray = [];
 
-    this.billingService.showBillingbyPatient(this.patient_id).subscribe((resp:any)=>{
+    this.clientReportService.showClientReportbyPatient(this.patient_id).subscribe((resp:any)=>{
       
       console.log(resp);
 
-      this.totalDataBilling = resp.billings.length;
-      this.billing_generals = resp.billings;
-      this.patient_id = resp.billings.patient_id;
-      this.sponsor_id = resp.billings.sponsor_id;
+      this.totalDataClientReport = resp.clientReports.length;
+      this.clientReport_generals = resp.clientReports;
+      this.patient_id = resp.clientReports.patient_id;
+      this.sponsor_id = resp.clientReports;
+      //hacemos un recorrido por la respuesta
+      for (let i in this.clientReport_generals) {
+          let clientReportTrimestral = this.clientReport_generals[i];
+          
+          if (!this.serialNumberArray.includes(clientReportTrimestral.sponsor_id)) {
+            this.serialNumberArray.push(clientReportTrimestral.serial_number);
+            this.clientReportList.push(clientReportTrimestral);
+          }else{
+            
+            for (let j in this.clientReportList) {
+              if (this.clientReportList[j].sponsor_id == clientReportTrimestral.sponsor_id){
+                this.clientReportList[j]=clientReportTrimestral;
+              }
+              
+            }
+          }
+          
+      };
+      console.log("este es el array de seriales");
+      console.log(this.serialNumberArray);
+      console.log("Este es el array final de los reportes", this.clientReportList);
+
+    //   setTimeout(()=>{
+    //     this.dtTrigger.next();
+    //   },500);
+    // });
+      // console.log(this.sponsor_id);
 
      this.getTableDataGeneral();
     //  this.getWeekTotalHours();
     //  this.getDoctor();
      this.extractDataHours();
     //  this.extractDataUnits();
+
     })
 
   }
@@ -195,12 +234,12 @@ export class BillingByClientComponent {
     // recorrer el array de billing_general para extraer la data
     let hours_group: string[] = [] ;
     let units_group: string[] = [] ;
-      const extractedData = this.billing_generals
+      const extractedData = this.clientReport_generals
 
-      let array = this.billing_generals;
-      for (this.billing_generals of array) {
-        hours_group.push(this.billing_generals.total_hours)
-        units_group.push(this.billing_generals.total_units)
+      let array = this.clientReport_generals;
+      for (this.clientReport_generals of array) {
+        hours_group.push(this.clientReport_generals.total_hours)
+        units_group.push(this.clientReport_generals.total_units)
       }
       // console.log(hours_group);
       // console.log(units_group);
@@ -221,8 +260,19 @@ export class BillingByClientComponent {
       // this.week_total_units = sumaunit / Math.min(7, units_group.length);// saca el promedio
       this.week_total_units = sumaunit ; // saca la suma
       console.log("total semanal "+ this.week_total_units );
-  
 
+      // saco el valor de charges multiplicando el total de unidades por semana por el valor del cpt o n_units
+      // this.getCharges();
+
+      
+      
+  }
+
+  getCharges(){
+    this.charges = this.week_total_units * this.n_units;
+      console.log(this.week_total_units);
+      console.log(this.n_units);
+      console.log(this.charges);
   }
 
 
@@ -235,16 +285,24 @@ export class BillingByClientComponent {
     });
   }
 
+  // getDoctorRbt1(){
+  //   this.doctorService.showDoctor(this.rbt_id).subscribe((resp:any)=>{
+  //     console.log(resp);
+  //     this.doctor_selected_rbt = resp.user;
+  //     this.doctor_selected_full_name_rbt = resp.user.full_name;
+  //   });
+  // }
+
 
   
 
   public sortData(sort: any) {
-    const data = this.billingList.slice();
+    const data = this.clientReportList.slice();
 
     if (!sort.active || sort.direction === '') {
-      this.billingList = data;
+      this.clientReportList = data;
     } else {
-      this.billingList = data.sort((a, b) => {
+      this.clientReportList = data.sort((a, b) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const aValue = (a as any)[sort.active];
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -256,7 +314,7 @@ export class BillingByClientComponent {
 
   public searchData(value: any): void {
     this.dataSource.filter = value.trim().toLowerCase();
-    this.billingList = this.dataSource.filteredData;
+    this.clientReportList = this.dataSource.filteredData;
   }
 
   public searchDataFiltered() {
@@ -270,61 +328,61 @@ export class BillingByClientComponent {
   }
 
   getTableDataGeneral(){
-    this.billingList = [];
+    this.clientReportList = [];
   this.serialNumberArray = [];
-  this.totalDataBilling = 0;
+  this.totalDataClientReport = 0;
 
-  if (Array.isArray(this.billing_generals)) {
+  if (Array.isArray(this.clientReport_generals)) {
     //extraer la data para sumar lo que se muestra en un  paginado 
     //pero no funciona
     
     // const startIndex = this.skip;
-    // const endIndex = Math.min(startIndex + this.pageSize, this.billing_generals.length);
-    // this.billingList = this.billing_generals.slice(startIndex, endIndex);
+    // const endIndex = Math.min(startIndex + this.pageSize, this.clientReport_generals.length);
+    // this.clientReportList = this.clientReport_generals.slice(startIndex, endIndex);
     // for (let i = startIndex; i < endIndex; i++) {
     //   const serialNumber = i + 1;
     //   this.serialNumberArray.push(serialNumber);
-    //   this.totalDataBilling += this.billingList[i - startIndex].amount;
+    //   this.totalDataClientReport += this.clientReportList[i - startIndex].amount;
     // }
-    // This block will execute if the this.billing_generals is an array.
-    this.billing_generals.map((res: any, index: number) => {
+    // This block will execute if the this.clientReport_generals is an array.
+    this.clientReport_generals.map((res: any, index: number) => {
       const serialNumber = index + 1;
       if (index >= this.skip && serialNumber <= this.limit) {
-        this.billingList.push(res);
+        this.clientReportList.push(res);
         this.serialNumberArray.push(serialNumber);
       }
     });
-    this.dataSource = new MatTableDataSource<any>(this.billingList);
-    this.calculateTotalPages(this.totalDataBilling, this.pageSize);
+    this.dataSource = new MatTableDataSource<any>(this.clientReportList);
+    this.calculateTotalPages(this.totalDataClientReport, this.pageSize);
   } else {
     // Extract the array if the response is not an array.
-    if (Array.isArray(this.billing_generals)) {
-      this.billing_generals = this.billing_generals;
+    if (Array.isArray(this.clientReport_generals)) {
+      this.clientReport_generals = this.clientReport_generals;
       // this.getTableDataGeneral();
-      console.log(this.billing_generals);
+      console.log(this.clientReport_generals);
     }
   }
   }
 
   // getTableDataGeneral2() {
-  //   this.billingList = [];
+  //   this.clientReportList = [];
   //   this.serialNumberArray = [];
-  //   this.totalDataBilling = 0;
+  //   this.totalDataClientReport = 0;
   
-  //   if (Array.isArray(this.billing_generals)) {
+  //   if (Array.isArray(this.clientReport_generals)) {
   //     const startIndex = this.skip;
-  //     const endIndex = Math.min(startIndex + this.pageSize, this.billing_generals.length);
-  //     this.billingList = this.billing_generals.slice(startIndex, endIndex);
+  //     const endIndex = Math.min(startIndex + this.pageSize, this.clientReport_generals.length);
+  //     this.clientReportList = this.clientReport_generals.slice(startIndex, endIndex);
   //     for (let i = startIndex; i < endIndex; i++) {
   //       const serialNumber = i + 1;
   //       this.serialNumberArray.push(serialNumber);
-  //       this.totalDataBilling += this.billingList[i - startIndex].amount;
+  //       this.totalDataClientReport += this.clientReportList[i - startIndex].amount;
   //     }
-  //     this.dataSource = new MatTableDataSource<any>(this.billingList);
-  //     this.calculateTotalPages(this.totalDataBilling, this.pageSize);
+  //     this.dataSource = new MatTableDataSource<any>(this.clientReportList);
+  //     this.calculateTotalPages(this.totalDataClientReport, this.pageSize);
   //   } else {
-  //     if (Array.isArray(this.billing_generals.data)) {
-  //       this.billing_generals = this.billing_generals.data;
+  //     if (Array.isArray(this.clientReport_generals.data)) {
+  //       this.clientReport_generals = this.clientReport_generals.data;
   //       this.getTableDataGeneral();
   //     }
   //   }
@@ -332,13 +390,13 @@ export class BillingByClientComponent {
   
   // onPaginateChange(event: any) {
   //   this.skip = event.pageIndex * this.pageSize;
-  //   this.totalDataBilling += this.getPageTotal();
+  //   this.totalDataClientReport += this.getPageTotal();
   //   this.getTableDataGeneral();
   // }
   
   getPageTotal(): number {
-    const endIndex = Math.min(this.skip + this.pageSize, this.billingList.length);
-    return this.billingList.slice(this.skip, endIndex).reduce((acc, cur) => acc + cur.amount, 0);
+    const endIndex = Math.min(this.skip + this.pageSize, this.clientReportList.length);
+    return this.clientReportList.slice(this.skip, endIndex).reduce((acc, cur) => acc + cur.amount, 0);
   }
 
   public getMoreData(event: string): void {
@@ -379,9 +437,9 @@ export class BillingByClientComponent {
     // this.getPageTotal();
     this.searchDataValue = '';
     //traer la suma del total de lo que se ve...
-    let tableDataVisible = this.billing_generals.slice(this.skip, this.skip + this.limit);
-    // this.totalDataBilling = this.calcularSumaColumnasTabla(tableDataVisible);
-    // console.log('TOTAL DATABILLING', this.totalDataBilling);
+    let tableDataVisible = this.clientReport_generals.slice(this.skip, this.skip + this.limit);
+    // this.totalDataClientReport = this.calcularSumaColumnasTabla(tableDataVisible);
+    // console.log('TOTAL DATABILLING', this.totalDataClientReport);
     //agregar a arreglo de paginación
     this.pageSelection.push({ skip: this.skip, limit: this.limit });
   }
@@ -406,16 +464,16 @@ export class BillingByClientComponent {
     this.billing_selected = biilling;
   }
   deleteRol(){
-    this.billingService.deleteBilling(this.billing_selected.id).subscribe((resp:any)=>{
+    this.clientReportService.deleteClientReport(this.billing_selected.id).subscribe((resp:any)=>{
       // console.log(resp);
 
       if(resp.message == 403){
         this.text_validation = resp.message_text;
       }else{
 
-        let INDEX = this.billingList.findIndex((item:any)=> item.id == this.billing_selected.id);
+        let INDEX = this.clientReportList.findIndex((item:any)=> item.id == this.billing_selected.id);
       if(INDEX !=-1){
-        this.billingList.splice(INDEX,1);
+        this.clientReportList.splice(INDEX,1);
 
         $('#delete_patient').hide();
         $("#delete_patient").removeClass("show");

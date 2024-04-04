@@ -68,6 +68,11 @@ const routes: Routes = [
       import('./medical/billing/billing.module').then((m) => m.BillingModule),
   },
   {
+    path: 'client-report',
+    loadChildren: () =>
+      import('./medical/client-report/client-report.module').then((m) => m.ClientReportModule),
+  },
+  {
     path: 'error',
     loadChildren: () =>
       import('./error/error.module').then((m) => m.ErrorModule),
