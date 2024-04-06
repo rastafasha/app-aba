@@ -118,6 +118,10 @@ export class ChartReplacementComponent {
   public query_income_year:any = [];
   public notesRbts:any = [];
   public replacementeFiltrado:any = [];
+  public graphData:any = [];
+  public goals: any = [];
+  sessions_dates: any[];
+  number_of_occurrence: any[];
   //datos reales
 
   constructor(
@@ -233,56 +237,46 @@ export class ChartReplacementComponent {
   getGoalsReductions(){
     this.graphicReductionService.listReductionGraphics(this.goal, this.patient_id).subscribe((resp:any)=>{
      console.log(resp);
-     this.notesRbts = resp.noteRbt.data; //obtiene una lista de notas con 3 json en cada una maladaptives, interventions y replacementes
+    
+     //funcion de pablo alcorta
+      //se limpia y se extrae los datos de la coleccion json 
+      const data = resp;
+      const replacementsParsed = [];
+      data?.replacementsCol.forEach(goal => {
+        const replacementParsed = parsearGoalsCol(goal);
+        replacementsParsed.push(replacementParsed);
+      });
+  
+      // console.log(maladaptivesParsed);
+      data.replacementsCol = replacementsParsed;
+      // console.log(data)
       
-     // en esta parte solo necesito el replacements: el nombre: goal y el numero: number_of_occurrences 
-
-    //start
-    //recorremos todas las listas para extraer los json
-     this.replacements = this.notesRbts.filter(note => note.replacements).map(note => note.replacements);
-     console.log(this.replacements);
-
-     this.replacements 
-     // recorre y extrae  el nombre de la meta que se quiere mostrar ?
-      //end
-
-    //   const reductions = [
-    //     "[{\"goal\":\"probando Update\",\"total_trials\":23,\"number_of_correct_response\":23},{\"goal\":\"new\",\"total_trials\":34,\"number_of_correct_response\":54},{\"goal\":\"nuevo\",\"total_trials\":56,\"number_of_correct_response\":67},{\"goal\":\"dasads\",\"total_trials\":32,\"number_of_correct_response\":23},{\"goal\":\"prueba nueva\",\"total_trials\":34,\"number_of_correct_response\":21},{\"goal\":\"31\",\"total_trials\":14,\"number_of_correct_response\":34},{\"goal\":\"nuevo test\",\"total_trials\":43,\"number_of_correct_response\":43}]",
-    //     "[{\"goal\":\"probando Update\",\"total_trials\":56,\"number_of_correct_response\":54},{\"goal\":\"new\",\"total_trials\":54,\"number_of_correct_response\":65},{\"goal\":\"nuevo\",\"total_trials\":15,\"number_of_correct_response\":45},{\"goal\":\"dasads\",\"total_trials\":34,\"number_of_correct_response\":45},{\"goal\":\"prueba nueva\",\"total_trials\":32,\"number_of_correct_response\":34},{\"goal\":\"31\",\"total_trials\":54,\"number_of_correct_response\":56},{\"goal\":\"nuevo test\",\"total_trials\":6,\"number_of_correct_response\":32}]",
-    //     "[{\"goal\":\"probando Update\",\"total_trials\":56,\"number_of_correct_response\":54},{\"goal\":\"new\",\"total_trials\":54,\"number_of_correct_response\":65},{\"goal\":\"nuevo\",\"total_trials\":15,\"number_of_correct_response\":45},{\"goal\":\"dasads\",\"total_trials\":34,\"number_of_correct_response\":45},{\"goal\":\"prueba nueva\",\"total_trials\":32,\"number_of_correct_response\":34},{\"goal\":\"31\",\"total_trials\":54,\"number_of_correct_response\":56},{\"goal\":\"nuevo test\",\"total_trials\":6,\"number_of_correct_response\":32}]",
-    //     "[{\"goal\":\"probando Update\",\"total_trials\":56,\"number_of_correct_response\":54},{\"goal\":\"new\",\"total_trials\":54,\"number_of_correct_response\":65},{\"goal\":\"nuevo\",\"total_trials\":15,\"number_of_correct_response\":45},{\"goal\":\"dasads\",\"total_trials\":34,\"number_of_correct_response\":45},{\"goal\":\"prueba nueva\",\"total_trials\":32,\"number_of_correct_response\":34},{\"goal\":\"31\",\"total_trials\":54,\"number_of_correct_response\":56},{\"goal\":\"nuevo test\",\"total_trials\":6,\"number_of_correct_response\":32}]",
-    //     "[{\"goal\":\"probando Update\",\"total_trials\":56,\"number_of_correct_response\":54},{\"goal\":\"new\",\"total_trials\":54,\"number_of_correct_response\":65},{\"goal\":\"nuevo\",\"total_trials\":15,\"number_of_correct_response\":45},{\"goal\":\"dasads\",\"total_trials\":34,\"number_of_correct_response\":45},{\"goal\":\"prueba nueva\",\"total_trials\":32,\"number_of_correct_response\":34},{\"goal\":\"31\",\"total_trials\":54,\"number_of_correct_response\":56},{\"goal\":\"nuevo test\",\"total_trials\":6,\"number_of_correct_response\":32}]",
-    //     "[{\"goal\":\"probando Update\",\"total_trials\":56,\"number_of_correct_response\":54},{\"goal\":\"new\",\"total_trials\":54,\"number_of_correct_response\":65},{\"goal\":\"nuevo\",\"total_trials\":15,\"number_of_correct_response\":45},{\"goal\":\"dasads\",\"total_trials\":34,\"number_of_correct_response\":45},{\"goal\":\"prueba nueva\",\"total_trials\":32,\"number_of_correct_response\":34},{\"goal\":\"31\",\"total_trials\":54,\"number_of_correct_response\":56},{\"goal\":\"nuevo test\",\"total_trials\":6,\"number_of_correct_response\":32}]"
-    // ]
-
-      const result1 = this.replacements.filter((number_of_correct_response) => number_of_correct_response.length > 90);
-
-      console.log(result1);
-
-    //start
-    this.replacements = this.notesRbts.filter(note => note.replacements).map(note => note.replacements).flat();
-
-      const extractedData = this.replacements
-      .filter(replacement => replacement.replacements).map(replacement => ({
-        goal: replacement.goal,
-        number_of_occurrences: replacement.number_of_occurrences
-      }));
-
-      console.log(extractedData); //devuelve vacio
-      //end
-
-      //start
-      let replacement_numbers: string[] = [] ;
-      let array = this.notesRbts;
-      for (this.replacement of array) {
-        replacement_numbers.push(this.replacement.number_of_correct_response)
-      //   if (this.replacement && this.replacement.goal) { // da error
-      // }
+      //lo convierto a variable
+      this.graphData = replacementsParsed;
+      console.log(this.graphData);
+      
+      function parsearGoalsCol(goal) {
+        const replacementWithoutSlash = goal.replace(/\\"/g, '"');
+        const replacementParsed = replacementWithoutSlash.slice(1, -1);
+        // return JSON.parse(goalParsed);
+         return JSON.parse(replacementParsed)[1];
       }
-      console.log(replacement_numbers); 
-      // devuele el total que tiene una nota
-      //pero los devuelve con valor undefinned 
-      //end
+      // fin funcion de pablo alcorta
+      // recorremos el resultado del array goalsParsed para extraer los solicitados por el request
+      let number_of_correct_response: number[] = [] ;
+      let goal: string[] = [] ;
+      let array = this.graphData;
+      for (this.goals of array) {
+        number_of_correct_response.push(Number(this.goals.number_of_correct_response))
+        goal.push(String(this.goals.goal))
+      }
+      console.log(number_of_correct_response);
+      console.log(goal);
+
+
+
+
+
 
       //start
       this.replacementsExtractedGoal = this.replacements;
@@ -298,17 +292,23 @@ export class ChartReplacementComponent {
       
       
       //start
-      // filtrar y obtener las fechas del array
-      // aqui me funciona pero me trae la info en un array [1,2,3]
-      this.sessionDates = this.notesRbts.filter(note => note.session_date).map(note => note.session_date); 
-      console.log('fechas',this.sessionDates);
+      // traemos todas las fechas
+      this.sessions_dates = resp.sessions_dates;
+      this.number_of_correct_response = number_of_correct_response;
+      this.notesRbts = resp.noteRbt;
+ 
+      //fecha inicial cuando se hizo el bip
+      this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
+      // this.number_of_correct_response.unshift(this.initial_interesting); // con unshift lo unimos y colocamos de primero
+      console.log(this.sessions_dates);
+      // console.log(this.number_of_correct_response);
       //end
       
       
       //Chart
       this.chartOptionsOne = {
         chart: {
-          height: 200,
+          height: 370,
           type: 'line',
           toolbar: {
             show: false,
@@ -337,15 +337,15 @@ export class ChartReplacementComponent {
           {
             name: 'Number of Occurrences',
             color: '#00D3C7',
-            // data: this.replacements,
-            data: [45, 60, 75, 51, 42, 42,45,],
+            data: this.number_of_correct_response,
+            // data: [45, 60, 75, 51, 42, 42,45,],
             // data: [this.initial_interesting, this.number_of_occurrences]
             
           },
         ],
         xaxis: {
           //
-          categories:  this.sessionDates,
+          categories:  this.sessions_dates,
           // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         },
       };

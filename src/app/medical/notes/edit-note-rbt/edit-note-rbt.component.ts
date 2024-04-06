@@ -142,6 +142,7 @@ export class EditNoteRbtComponent {
      })
      this.getConfig();
      this.getNote();
+    //  this.countValue();
 
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
@@ -362,6 +363,51 @@ export class EditNoteRbtComponent {
       this.interventionsgroup.splice(this.interventionsgroup,1);
     }
     Swal.fire('Updated', ` Interventions Updated`, 'success');
+  }
+
+  // countValue(){
+  //   const countElement = document.querySelector('.count') as HTMLInputElement;
+  //   // const countElement = behavior;
+  //   countElement.disabled = false;
+  
+  //   document.addEventListener('click', (event) => {
+  //     const target = event.target as HTMLElement;
+  //     if (target.classList.contains('plus')) {
+  //       countElement.value = (parseInt(countElement.value, 10) + 1).toString();
+  //     } else if (target.classList.contains('minus')) {
+  //       let currentValue = parseInt(countElement.value, 10);
+  //       if (currentValue === 0) {
+  //         currentValue = 1;
+  //       } else {
+  //         currentValue -= 1;
+  //       }
+  //       countElement.value = currentValue.toString();
+  //     }
+  //   });
+  // }
+
+  countValue1(){
+    const min = 0; // Minimum of 0
+    const max = 10; // Maximum of 10
+    const countElement = document.querySelector('.count') as HTMLInputElement;
+    countElement.disabled = true;
+  
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (target.classList.contains('minus')) {
+        if (countElement.value > min.toString()) {
+          countElement.value = (parseInt(countElement.value, 10) - 1).toString();
+          const counterElement = document.querySelector('.counter') as HTMLDivElement;
+          counterElement.textContent = (parseInt(counterElement.textContent, 10) - 1).toString();
+        }
+      } else if (target.classList.contains('plus')) {
+        if (countElement.value < max.toString()) {
+          countElement.value = (parseInt(countElement.value, 10) + 1).toString();
+          const counterElement = document.querySelector('.counter') as HTMLDivElement;
+          counterElement.textContent = (parseInt(counterElement.textContent, 10) + 1).toString();
+        }
+      }
+    });
   }
 
   cambiarStatus(goalsto:any){

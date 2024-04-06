@@ -54,13 +54,16 @@ export class ReportByClientComponent {
   public pa_assessmentsgroup:any=[];
   public cpt:any;
   public n_units:any;
+  public pa_number:any;
   public insurances:any=[];
   public insurance_id:any;
   public insuranceiddd:any;
   public insurer_name:any;
   public sponsors:any=[];
   public modifiers:any=[];
+  public noteRbt:any=[];
   public pa_assessmentgroup:any=[];
+  public arraysUnidos:any=[];
   public patient:any;
   public patientID:any;
   public patientName:any;
@@ -73,6 +76,13 @@ export class ReportByClientComponent {
   public total_units:number = 0;
   public charges:number = 0;
   public unitPrize:number = 0;
+  
+  public session_date:any;
+  public time_in:any;
+  public time_out:any;
+  public time_in2:any;
+  public time_out2:any;
+  public pos:any;
   
   constructor(
     public router: Router,
@@ -89,15 +99,10 @@ export class ReportByClientComponent {
     // window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.patient_id = resp.id;
-      
-      // this.patient_id= resp.patient_id;
-      // console.log(this.client_id);
-     })
-    //  this.getNotesByPatient();
+     });
+
      this.getTableData();
-     this.getProfileBilling();
      this.getConfig();
-     this.getPatient();
      
      
      
@@ -119,41 +124,7 @@ export class ReportByClientComponent {
   }
 
 
-  getPatient(){
-    this.patientService.getPatientByPatientid(this.patient_id).subscribe((resp:any)=>{
-      // console.log(resp);
-      this.patient = resp.patient;
-      this.patientID = this.patient.patient_id;
-      this.patientName = this.patient.first_name+' '+this.patient.last_name;
 
-
-
-    })
-  }
-
-  
-  // getNotesByPatient(){
-  //   this.clientReportService.showBillingbyPatient(this.patient_id).subscribe((resp:any)=>{
-  //     console.log(resp);
-  //   })
-  // }
-
-  // trae el perfil del usuario
-  getProfileBilling(){
-    this.clientReportService.showClientReportProfile(this.patient_id).subscribe((resp:any)=>{
-      console.log(resp);
-      this.client_selected = resp.patient;
-      //convierto la data de la coleccion json para extraer los datos
-      this.pa_assessments = resp.pa_assessments;
-      let jsonObj = JSON.parse(this.pa_assessments);
-      this.pa_assessmentsgroup = jsonObj;
-      console.log(this.pa_assessmentsgroup);
-      this.cpt = this.pa_assessmentsgroup[0].cpt;
-      // console.log(this.cpt); 
-      this.n_units = this.pa_assessmentsgroup[0].n_units;
-      // console.log(this.n_units); 
-    });
-  }
 
   getConfig(){
     this.clientReportService.config().subscribe((resp:any)=>{
@@ -170,9 +141,9 @@ export class ReportByClientComponent {
         
         this.insurer_name = resp.insurer_name;
         this.modifiers = resp.notes;
-        console.log(this.modifiers);
+        console.log('modificadores',this.modifiers);
         this.unitPrize = resp.services[0].unit_prize;
-        console.log(this.unitPrize);
+        console.log('precio unidad',this.unitPrize);
         
       })
       
@@ -187,11 +158,36 @@ export class ReportByClientComponent {
     this.clientReportService.showClientReportbyPatient(this.patient_id).subscribe((resp:any)=>{
       
       console.log(resp);
+      // traemos la info necesaria del paciente
+      this.patientName = resp.full_name;
+      this.patientID = resp.patient_id;
+      this.noteRbt = resp.noteRbt;
+      
+      this.pa_assessments = resp.pa_assessments;
+      let jsonObj = JSON.parse(this.pa_assessments);
+      this.pa_assessmentsgroup = jsonObj;
+      console.log(this.pa_assessmentsgroup);
+      this.cpt = this.pa_assessmentsgroup[0].cpt;
+      // console.log(this.cpt); 
+      this.n_units = this.pa_assessmentsgroup[0].n_units;
+      this.pa_number = this.pa_assessmentsgroup[0].pa_services;
+      // console.log(this.n_units); 
+      // fin traemos la info necesaria del paciente
 
-      this.totalDataClientReport = resp.clientReports.length;
-      this.clientReport_generals = resp.clientReports;
-      this.patient_id = resp.clientReports.patient_id;
-      this.sponsor_id = resp.clientReports;
+
+      // unimos las respuestas clientReportList y  noteRbt  en una sola lista
+      // for (let i=0 ;i < this.arraysUnidos.length; i++){
+      //   this.clientReportList.push({...this.arraysUnidos[i], ...JSON.parse(this.noteRbt)});
+      //   this.serialNumberArray.push(i+1)
+      // };
+      // fin de unir las listas
+      
+      
+
+      this.totalDataClientReport = resp.noteRbt.length;
+      this.clientReport_generals = resp.noteRbt;
+      this.patient_id = resp.patient_id;
+      this.sponsor_id = resp.noteRbt.provider_name_g;
       //hacemos un recorrido por la respuesta
       for (let i in this.clientReport_generals) {
           let clientReportTrimestral = this.clientReport_generals[i];
@@ -220,10 +216,18 @@ export class ReportByClientComponent {
     // });
       // console.log(this.sponsor_id);
 
+
+      // this.arraysUnidos = [ this.clientReportList, this.noteRbt];
+      // console.log(this.arraysUnidos);
+      
+      // this.clientReportList.push(this.noteRbt);
+      // console.log(this.clientReportList);
+      
+
      this.getTableDataGeneral();
     //  this.getWeekTotalHours();
     //  this.getDoctor();
-     this.extractDataHours();
+    //  this.extractDataHours();
     //  this.extractDataUnits();
 
     })
@@ -312,14 +316,14 @@ export class ReportByClientComponent {
     }
   }
 
-  public searchData(value: any): void {
+  // public searchData(value: any): void {
+  //   this.dataSource.filter = value.trim().toLowerCase();
+  //   this.clientReportList = this.dataSource.filteredData;
+  // }
+
+  public searchDataFiltered(value: any): void {
     this.dataSource.filter = value.trim().toLowerCase();
     this.clientReportList = this.dataSource.filteredData;
-  }
-
-  public searchDataFiltered() {
-    // this.dataSource.filter = value.trim().toLowerCase();
-    // this.patientList = this.dataSource.filteredData;
     this.pageSelection = [];
     this.limit = this.pageSize;
     this.skip = 0;
@@ -332,36 +336,18 @@ export class ReportByClientComponent {
   this.serialNumberArray = [];
   this.totalDataClientReport = 0;
 
-  if (Array.isArray(this.clientReport_generals)) {
-    //extraer la data para sumar lo que se muestra en un  paginado 
-    //pero no funciona
-    
-    // const startIndex = this.skip;
-    // const endIndex = Math.min(startIndex + this.pageSize, this.clientReport_generals.length);
-    // this.clientReportList = this.clientReport_generals.slice(startIndex, endIndex);
-    // for (let i = startIndex; i < endIndex; i++) {
-    //   const serialNumber = i + 1;
-    //   this.serialNumberArray.push(serialNumber);
-    //   this.totalDataClientReport += this.clientReportList[i - startIndex].amount;
-    // }
-    // This block will execute if the this.clientReport_generals is an array.
-    this.clientReport_generals.map((res: any, index: number) => {
-      const serialNumber = index + 1;
-      if (index >= this.skip && serialNumber <= this.limit) {
-        this.clientReportList.push(res);
-        this.serialNumberArray.push(serialNumber);
-      }
-    });
-    this.dataSource = new MatTableDataSource<any>(this.clientReportList);
-    this.calculateTotalPages(this.totalDataClientReport, this.pageSize);
-  } else {
-    // Extract the array if the response is not an array.
-    if (Array.isArray(this.clientReport_generals)) {
-      this.clientReport_generals = this.clientReport_generals;
-      // this.getTableDataGeneral();
-      console.log(this.clientReport_generals);
+  this.clientReport_generals.map((res: any, index: number) => {
+    const serialNumber = index + 1;
+    if (index >= this.skip && serialNumber <= this.limit) {
+     
+      this.clientReportList.push(res);
+      this.serialNumberArray.push(serialNumber);
     }
-  }
+  });
+  this.dataSource = new MatTableDataSource<any>(this.clientReportList);
+    this.calculateTotalPages(this.totalDataClientReport, this.pageSize);
+  
+  
   }
 
   // getTableDataGeneral2() {
@@ -437,11 +423,11 @@ export class ReportByClientComponent {
     // this.getPageTotal();
     this.searchDataValue = '';
     //traer la suma del total de lo que se ve...
-    let tableDataVisible = this.clientReport_generals.slice(this.skip, this.skip + this.limit);
-    // this.totalDataClientReport = this.calcularSumaColumnasTabla(tableDataVisible);
-    // console.log('TOTAL DATABILLING', this.totalDataClientReport);
-    //agregar a arreglo de paginación
-    this.pageSelection.push({ skip: this.skip, limit: this.limit });
+    // let tableDataVisible = this.clientReport_generals.slice(this.skip, this.skip + this.limit);
+    // // this.totalDataClientReport = this.calcularSumaColumnasTabla(tableDataVisible);
+    // // console.log('TOTAL DATABILLING', this.totalDataClientReport);
+    // //agregar a arreglo de paginación
+    // this.pageSelection.push({ skip: this.skip, limit: this.limit });
   }
 
   

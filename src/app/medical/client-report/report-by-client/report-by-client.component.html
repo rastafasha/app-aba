@@ -1,13 +1,13 @@
 <div class="page-wrapper">
     <div class="content">
-    
+
         <!-- Page Header -->
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                      <li class="breadcrumb-item active"><a routerLink="/">Dashboard /</a></li>
-                      <li class="breadcrumb-item active"><a routerLink="/patients/list">Client List / </a></li>
+                        <li class="breadcrumb-item active"><a routerLink="/">Dashboard /</a></li>
+                        <li class="breadcrumb-item active"><a routerLink="/patients/list">Client List / </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">Report by Client</li>
                     </ul>
@@ -15,194 +15,230 @@
             </div>
         </div>
         <!-- /Page Header -->
-        
+
         <div class="row">
             <div class="col-sm-12">
-            
+
                 <div class="card card-table show-entire">
                     <div class="card-body">
-                    
+
                         <!-- Table Header -->
                         <div class="page-table-header mb-2">
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="doctor-table-blk">
                                         <h3>Report By Client: {{patientID}}</h3>
-                                        <div class="doctor-search-blk">
-                                            <!-- <div class="top-nav-search table-search-blk">
+                                        <!-- <div class="doctor-search-blk">
+                                            <div class="top-nav-search table-search-blk">
                                                     <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
                                                     (ngModelChange)="searchData(searchDataValue)">
                                                     <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
-                                            </div> -->
-
-                                            <!-- <div class="staff-search-table">
-                                              <form>
-                                                  <div class="row">
-                                                      <div class="col-12 col-md-6 col-xl-4">  
-                                                        <div class="top-nav-search table-search-blk">
-                                                          <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue" [ngModelOptions]="{standalone: true}"
-                                                          (ngModelChange)="searchData(searchDataValue)">
-                                                          <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
-                                                  </div>
-                                                      </div>
-                                                      <div class="col-12 col-md-6 col-xl-4">  
-                                                          <div class="form-group local-forms">
-                                                              <label >Doctor Name </label>
-                                                              <input [(ngModel)]="searchDataDoctor" [ngModelOptions]="{standalone: true}" name="searchDataDoctor" class="form-control" type="text"  >
-                                                          </div>
-                                                      </div>
-                                                      <div class="col-12 col-md-6 col-xl-4">
-                                                          <div class="form-group local-forms">
-                                                              <label >From </label>
-                                                              <input class="form-control datetimepicker" name="date_start" [(ngModel)]="date_start" [ngModelOptions]="{standalone: true}" type="date"   >
-                                                              
-                                                          </div>
-                                                      </div>
-                                                      <div class="col-12 col-md-6 col-xl-4">
-                                                          <div class="form-group local-forms">
-                                                              <label >To </label>
-                                                              <input class="form-control datetimepicker" name="date_end" [(ngModel)]="date_end" [ngModelOptions]="{standalone: true}" type="date"   >
-                                                             
-                                                          </div>
-                                                      </div>
-                                                      <div class="col-12 col-md-6 col-xl-4">
-                                                          <div class="doctor-submit">
-                                                              <button type="button" class="btn btn-primary submit-list-form me-2" (click)="searchDataFiltered()">Search</button>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </form>
-                                          </div> -->
-                                            <div class="add-group">
-                                                <!-- <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a> -->
-                                                <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
                                             </div>
-                                        </div>
+                                            <div class="staff-search-table">
+                                                <form>
+                                                    <div class="row">
+                                                        <div class="col-12 col-md-6 col-xl-4">  
+                                                          <div class="top-nav-search table-search-blk">
+                                                              (ngModelChange)="searchDataFiltered(searchDataValue)"
+                                                            <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue" [ngModelOptions]="{standalone: true}"
+                                                            >
+                                                            <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
+                                                    </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-xl-4">  
+                                                            <div class="form-group local-forms">
+                                                                <label >Doctor Name </label>
+                                                                <input [(ngModel)]="searchDataDoctor" [ngModelOptions]="{standalone: true}" name="searchDataDoctor" class="form-control" type="text"  >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-xl-4">
+                                                            <div class="form-group local-forms">
+                                                                <label >From </label>
+                                                                <input class="form-control datetimepicker" name="date_start" [(ngModel)]="date_start" [ngModelOptions]="{standalone: true}" type="date"   >
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-xl-4">
+                                                            <div class="form-group local-forms">
+                                                                <label >To </label>
+                                                                <input class="form-control datetimepicker" name="date_end" [(ngModel)]="date_end" [ngModelOptions]="{standalone: true}" type="date"   >
+                                                               
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-xl-4">
+                                                            <div class="doctor-submit">
+                                                                <button type="button" class="btn btn-primary submit-list-form me-2" (click)="searchDataFiltered(searchDataValue)">Search</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                           
+                                            <div class="add-group">
+                                                <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a>
+                                                <a href="javascript:;" (click)="PageSize()"
+                                                    class="btn btn-primary doctor-refresh ms-2"><img
+                                                        src="assets/img/icons/re-fresh.svg" alt=""></a>
+                                            </div>
+                                        </div> -->
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <!-- /Table Header -->
 
                         <!-- paciente -->
                         <div class="container">
-                          <div class="row align-items-center py-4" >
-                            <div class="col-12 py-4">
-                                <h4>Report Date: </h4>
-                            </div>
-                            <div class="col-12 col-md-6 col-xl-4">
-                                <div class="form-group local-forms">
-                                    <label >Patient Name <span class="login-danger">*</span></label>
-                                    <input class="form-control"  name="patientName"  disabled [(ngModel)]="patientName" type="text"  >
+                            <div class="row align-items-center py-4">
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label>Patient Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="patientName" disabled
+                                            [(ngModel)]="patientName" type="text">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-xl-4">
-                                <div class="form-group local-forms">
-                                    <label >Patient ID <span class="login-danger">*</span></label>
-                                    <input class="form-control"  name="patientID"  disabled [(ngModel)]="patientID" type="text"  >
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label>Patient ID <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="patientID" disabled [(ngModel)]="patientID"
+                                            type="text">
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div class="col-12 col-md-6 col-xl-4">
-                                <div class="form-group local-forms">
-                                    <label >Insurer <span class="login-danger">*</span></label>
-                                    <input class="form-control" name="insurer_name"  disabled [(ngModel)]="insurer_name" type="text"  >
-                                </div>
-                            </div>
-                           
-                            <div class="col-12 col-md-6 col-xl-4">
-                                <div class="form-group local-forms">
-                                    <label >Insurer rate <span class="login-danger">*</span></label>
-                                    <input class="form-control" name="n_units"  disabled [(ngModel)]="n_units" type="text"  >
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-xl-4">  
-                                <div class="form-group local-forms">
-                                    <label >CPT <span class="login-danger">*</span></label>
-                                    <input class="form-control" name="cpt"  disabled [(ngModel)]="cpt" type="text"  >
-                                </div>
-                            </div>
-                            
-                        </div>
-                        </div>
-                      <!-- paciente -->
 
-                      <div class="container">
-                        <div class="table-responsive">
-                            <table class="table mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>PA Services</th>
-                                        <th>CPT</th>
-                                        <th>Units Allowed</th>
-                                        <th>Beginning</th>
-                                        <th>Expiration</th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let asses of pa_assessmentsgroup; let i = index">
-                                        <td>
-                                            {{asses.pa_services}}
-                                        </td>
-                                        <td>
-                                            {{asses.cpt}}
-                                        </td>
-                                        <td>
-                                            {{asses.n_units}}
-                                        </td>
-                                        <td>
-                                             {{asses.pa_services_start_date | date}}
-                                        </td>
-                                        <td>
-                                             {{asses.pa_services_end_date | date}}
-                                        </td>
-                                        
-                                        
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label>Insurer <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="insurer_name" disabled
+                                            [(ngModel)]="insurer_name" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label>Insurer rate <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="n_units" disabled [(ngModel)]="n_units"
+                                            type="text">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label>CPT <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="cpt" disabled [(ngModel)]="cpt" type="text">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                    <br>
-                    <hr>
+                        <!-- paciente -->
 
                         
+
+                        <div class="container">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>PA Services</th>
+                                            <th>CPT</th>
+                                            <th>Units Allowed</th>
+                                            <th>Beginning</th>
+                                            <th>Expiration</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let asses of pa_assessmentsgroup; let i = index">
+                                            <td>
+                                                {{asses.pa_services}}
+                                            </td>
+                                            <td>
+                                                {{asses.cpt}}
+                                            </td>
+                                            <td>
+                                                {{asses.n_units}}
+                                            </td>
+                                            <td>
+                                                {{asses.pa_services_start_date | date}}
+                                            </td>
+                                            <td>
+                                                {{asses.pa_services_end_date | date}}
+                                            </td>
+
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+
+
                         <div class="table-responsive">
-                            <table matSort (matSortChange)="sortData($event)" class="table border-0 custom-table comman-table datatable mb-0">
+                            <table matSort (matSortChange)="sortData($event)"
+                                class="table border-0 custom-table comman-table datatable mb-0">
                                 <thead>
                                     <tr>
-                                        
-                                      <th mat-sort-header="sponsor_id">Sponsor Id</th>
-                                      <th mat-sort-header="session_date">Session Date</th>
-                                      <th mat-sort-header="next_session">Total Hours</th>
-                                      <th mat-sort-header="total_units">Total Units</th>
-                                      <th mat-sort-header="billing_totals">Billing Totals</th>
-                                      <th mat-sort-header="charges">Charges</th>
-                                      <!-- <th mat-sort-header="created">Created At</th> -->
-                                         <th ></th> <!--acciones -->
+
+                                        <th mat-sort-header="date_note">Date of Note</th>
+                                        <th mat-sort-header="pos">POS</th>
+                                        <th mat-sort-header="time_in">Time In</th>
+                                        <th mat-sort-header="time_out">Time out</th>
+                                        <th mat-sort-header="time_in2">Time In 2</th>
+                                        <th mat-sort-header="time_out2">Time out 2</th>
+                                        <th mat-sort-header="cpt">CPT</th>
+                                        <th mat-sort-header="md">Md</th>
+                                        <th mat-sort-header="charges">Charges</th>
+                                        <th mat-sort-header="units">Units</th>
+                                        <th mat-sort-header="sponsor_id">Provider</th>
+                                        <th mat-sort-header="pa_number">PA Number</th>
+                                        <th mat-sort-header="billed">Billed</th>
+                                        <th mat-sort-header="pay">Pay</th>
+                                        <!-- <th mat-sort-header="created">Created At</th> -->
+                                        <th></th> <!--acciones -->
                                     </tr>
                                 </thead>
                                 <!-- *ngIf="billing_generals?.length > 0; else noData" -->
-                                <tbody >
-                                    <tr *ngFor="let data of clientReportList" >
-                                        
-                                      <td>
-                                        <a class="dropdown-item" [routerLink]="['/note-rbt/view/', data.id]">
-                                          {{data.sponsor_id}}
-                                        </a>
-                                      </td>
-                                      <td>
-                                        {{data.date |date}}
-                                      </td>
-                                      <td>{{data.total_hours}}</td>
-                                      <td>{{data.total_units}}</td>
-                                      <td>{{((data.total_hours * data.total_units | currency))}}</td>
-                                      <td>{{(( data.total_units * unitPrize  | currency))}}</td>
+                                <tbody>
+                                    <tr *ngFor="let data of clientReportList">
+                                        <td>
+                                            {{data.session_date |date}}
+                                        </td>
+                                        <td>{{data.pos}}</td>
+                                        <td>{{data.time_in}}</td>
+                                        <td>{{data.time_out}}</td>
+                                        <td>{{data.time_in2}}</td>
+                                        <td>{{data.time_out2}}</td>
+                                        <td>{{cpt}}</td>
+                                        <td>{{data.md}}</td>
+                                        <td>{{(( data.total_units * unitPrize | currency))}}</td>
+                                        <td>{{n_units}}</td>
+                                        <td>
+                                            {{data.provider_name_g}}
+                                        </td>
+
+                                        <td>{{pa_number}}</td>
+
+                                        <td>
+                                            
+                                            <div  class="note-checkit">
+                                                <label class="custom_check"><input type="checkbox" name="billed">
+                                                    <span class="checkmark"></span>  
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div  class="note-checkit">
+                                                <label class="custom_check"><input type="checkbox" name="pay">
+                                                    <span class="checkmark"></span> 
+                                                </label>
+                                            </div>
+                                        </td>
+
                                         <!-- <td>{{data.created_at | date }}</td> -->
-                                        
+
                                         <td class="text-end">
                                             <!-- <div class="dropdown dropdown-action" >
                                                 <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -218,74 +254,68 @@
                                                 </div>
                                             </div> -->
                                         </td>
-  
+
                                         <!-- modal -->
-                                        <div [attr.id]="'delete_doctor-'+data.id" class="modal fade delete-modal" role="dialog">
-                                          <div class="modal-dialog modal-dialog-centered">
-                                              <div class="modal-content">
-                                                  <div class="modal-body text-center">
-                                                      <img src="assets/img/sent.png" alt="" width="50" height="46">
-                                                      <h3 *ngIf="note_selected">Are you sure want to delete this note rbt {{note_selected.session_date|date}}?</h3>
-                                                      <!-- validacion si esta en uso -->
-                                                      <div class="form-group row" *ngIf="text_validation">
-                                                        <div class="col-md-12">
-                                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                                <strong>!</strong> {{text_validation}}.
-                                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                                                    <span aria-hidden="true"> </span>
-                                                                </button>
+                                        <div [attr.id]="'delete_doctor-'+data.id" class="modal fade delete-modal"
+                                            role="dialog">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body text-center">
+                                                        <img src="assets/img/sent.png" alt="" width="50" height="46">
+                                                        <h3 *ngIf="note_selected">Are you sure want to delete this note
+                                                            rbt {{note_selected.session_date|date}}?</h3>
+                                                        <!-- validacion si esta en uso -->
+                                                        <div class="form-group row" *ngIf="text_validation">
+                                                            <div class="col-md-12">
+                                                                <div class="alert alert-danger alert-dismissible fade show"
+                                                                    role="alert">
+                                                                    <strong>!</strong> {{text_validation}}.
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="alert" aria-label="Close">
+                                                                        <span aria-hidden="true"> </span>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <!-- validacion si esta en uso -->
+                                                        <div class="m-t-20"> <a href="javascript:void(0);"
+                                                                class="btn btn-white me-1"
+                                                                data-bs-dismiss="modal">Close</a>
+                                                            <button type="submit" class="btn btn-danger"
+                                                                (click)="deleteRol()">Delete</button>
+                                                        </div>
                                                     </div>
-                                                      <!-- validacion si esta en uso -->
-                                                      <div class="m-t-20"> <a href="javascript:void(0);" class="btn btn-white me-1" data-bs-dismiss="modal">Close</a>
-                                                          <button type="submit" class="btn btn-danger" (click)="deleteRol()">Delete</button>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- modal -->
                                     </tr>
                                 </tbody>
                                 <ng-template #noData>
-                                  <p>No data available.</p>
+                                    <p>No data available.</p>
                                 </ng-template>
                             </table>
                             <div class="table_footer">
                                 <div class="col-sm-12 col-md-5">
-                                  <div class="dataTables_info">
-                                    Showing {{ serialNumberArray[0] }} to
-                                    {{ serialNumberArray[serialNumberArray.length - 1] }} of
-                                    {{ totalDataClientReport }} entries
-                                  </div>
+                                    <div class="dataTables_info">
+                                        Showing {{ serialNumberArray[0] }} to
+                                        {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                                        {{ totalDataClientReport }} entries
+                                    </div>
                                 </div>
-                
+
                                 <div class="col-sm-12 col-md-7">
-                                  <div class="pagination_section">
-                                    <ul class="pagination">
-                                      <li
-                                        class="page-item"
-                                        [ngClass]="{
+                                    <div class="pagination_section">
+                                        <ul class="pagination">
+                                            <li class="page-item" [ngClass]="{
                                           disabled: currentPage === 1
-                                        }"
-                                      >
-                                        <a
-                                          (click)="getMoreData('previous')"
-                                          class="page-link"
-                                          href="javascript:void(0);"
-                                          tabindex="-1"
-                                          >Previous</a
-                                        >
-                                      </li>
-                
-                                      <ng-container
-                                        *ngFor="let item of pageNumberArray; let i = index"
-                                      >
-                                        <li
-                                          class="page-item"
-                                          [class.active]="item === currentPage"
-                                          [ngClass]="
+                                        }">
+                                                <a (click)="getMoreData('previous')" class="page-link"
+                                                    href="javascript:void(0);" tabindex="-1">Previous</a>
+                                            </li>
+
+                                            <ng-container *ngFor="let item of pageNumberArray; let i = index">
+                                                <li class="page-item" [class.active]="item === currentPage" [ngClass]="
                                             (pageNumberArray[currentPage - 2] > item &&
                                               item !== 1 &&
                                               pageNumberArray.length > 6) ||
@@ -295,31 +325,22 @@
                                               pageNumberArray.length !== item)
                                               ? 'hide-page-no'
                                               : 'show-page-no'
-                                          "
-                                        >
-                                          <a
-                                            (click)="moveToPage(item)"
-                                            class="page-link"
-                                            href="javascript:void(0);"
-                                          >
-                                            {{ item }}
-                                          </a>
-                                        </li>
-                                        <li
-                                          class="page-item"
-                                          *ngIf="
+                                          ">
+                                                    <a (click)="moveToPage(item)" class="page-link"
+                                                        href="javascript:void(0);">
+                                                        {{ item }}
+                                                    </a>
+                                                </li>
+                                                <li class="page-item" *ngIf="
                                             i === 0 &&
                                             pageNumberArray.length > 6 &&
                                             currentPage > 2
-                                          "
-                                          [hidden]="currentPage === 1"
-                                          (click)="moveToPage(currentPage - 2)"
-                                        >
-                                          <a class="page-link" href="javascript:void(0);">
-                                            ...
-                                          </a>
-                                        </li>
-                                        <!-- <li
+                                          " [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)">
+                                                    <a class="page-link" href="javascript:void(0);">
+                                                        ...
+                                                    </a>
+                                                </li>
+                                                <!-- <li
                                           *ngIf="
                                             i === pageNumberArray.length - 2 &&
                                             pageNumberArray.length > 6
@@ -337,40 +358,29 @@
                                             ...
                                           </a>
                                         </li> -->
-                                      </ng-container>
-                
-                                      <li
-                                        class="page-item"
-                                        [ngClass]="{
+                                            </ng-container>
+
+                                            <li class="page-item" [ngClass]="{
                                           disabled:
                                             currentPage ===
                                               pageNumberArray[pageNumberArray.length - 1] ||
                                               clientReportList.length === 0
-                                        }"
-                                      >
-                                        <a
-                                          (click)="getMoreData('next')"
-                                          class="page-link"
-                                          href="javascript:void(0);"
-                                          >Next
-                                        </a>
-                                      </li>
-                                    </ul>
-                                  </div>
+                                        }">
+                                                <a (click)="getMoreData('next')" class="page-link"
+                                                    href="javascript:void(0);">Next
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                              </div>
+                            </div>
                         </div>
 
                         <!-- totales -->
-                        <div class="container">
+                        <!-- <div class="container">
 
                           <div class="row">
-                            <!-- <div class="col-12 col-md-6 col-xl-4">
-                              <div class="form-group local-forms">
-                                  <label >Billing Total <span class="login-danger">*</span></label>
-                                  <input class="form-control"  name="billing_total"  disabled [(ngModel)]="billing_total" type="number"  >
-                              </div>
-                          </div> -->
+                            
                             <div class="col-12 col-md-6 col-xl-4">
                               <div class="form-group local-forms">
                                   <label >Week Total Hours<span class="login-danger">*</span></label>
@@ -383,22 +393,13 @@
                                   <input class="form-control"  name="week_total_units"  disabled [(ngModel)]="week_total_units" type="number"  >
                               </div>
                           </div>
-                            <div class="col-12 col-md-6 col-xl-4">
-                              <div class="form-group local-forms">
-                                  <label >Charges<span class="login-danger">*</span></label>
-                                  <input class="form-control"  name="charges"  disabled [(ngModel)]="charges" type="number"  >
-                              </div>
                           </div>
-                          </div>
-                        </div>
+                        </div> -->
                         <!-- totales -->
-                        
+
                     </div>
-                </div>							
-            </div>					
+                </div>
+            </div>
         </div>
     </div>
-  </div>
-  
-  
-  
+</div>

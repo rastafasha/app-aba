@@ -17,23 +17,25 @@
 writing-mode: vertical-rl;
 text-orientation: upright;
 
-    height: 210px;
-    padding: 0;
-    margin: 0;
-    letter-spacing: 0;
-    font-size: smaller;
-    position: relative;
-    margin-top: -180px;
-    margin-left: -20px;
-    padding: 0;
+height: 210px;
+padding: 0;
+margin: 0;
+letter-spacing: 0;
+font-size: smaller;
+position: relative;
+margin-top: -180px;
+margin-left: -20px;
+padding: 0;
+transform: translateY(-160px);
 
 }
 .linea-vert{
     background-color: red;
     width: 2px;
-    height: 150px;
+    height: 240px;
     position: relative;
-    margin-left: 40px;
-    margin-top: -244px;
+    margin-left: 60px;
+    margin-top: -363px;
     margin-bottom: 80px;
+    transform: translateY(-30px);
 }

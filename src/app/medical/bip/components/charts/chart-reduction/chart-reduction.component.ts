@@ -114,6 +114,7 @@ export class ChartReductionComponent {
 
   maladaptivesCol: any[];
   sessions_dates: any[];
+  number_of_occurrence: any[];
   noteRbt: any[];
 
 
@@ -122,11 +123,12 @@ export class ChartReductionComponent {
   public query_patients_speciality_porcentaje:any = [];
   public query_income_year:any = [];
   public notesRbts:any = [];
+  public graphData:any = [];
   public dataChartMaladative:any = [];
   
   respuestas: any = [{}];
   dataGrafico: any = [];
-  
+  public replacementsExtractedGoal: any = [] = [{}];
   //datos reales
 
   constructor(
@@ -247,154 +249,61 @@ export class ChartReductionComponent {
 
     getGraphicMaladaptive(){
     this.graphicReductionService.listMaladaptivesGraphics(this.maladaptive_behavior, this.patient_id).subscribe((resp:any)=>{
-      //la respuesta que me da  tiene un array de objets,
+      
       console.log(resp);
-     
-
-      // recibo la data asi
-      //[
-      //     "\"[{\\\"maladaptive_behavior\\\":\\\"Negative Self talk\\\",\\\"number_of_occurrences\\\":3},{\\\"maladaptive_behavior\\\":\\\"dasdsa\\\",\\\"number_of_occurrences\\\":3}]\"",
-       //     "\"[{\\\"maladaptive_behavior\\\":\\\"Negative Self talk\\\",\\\"number_of_occurrences\\\":3},{\\\"maladaptive_behavior\\\":\\\"dasdsa\\\",\\\"number_of_occurrences\\\":4}]\""
-      // ]
-      //quiero eliminar cada \ incluyendo el  "\"
-
-      //convertimos la data a string para poder eliminar lo sobrante
-      this.maladaptives = resp.maladaptivesCol.toString();
+      //funcion de pablo alcorta
+      //se limpia y se extrae los datos de la coleccion json 
+      const data = resp;
+      const maladaptivesParsed = [];
+      data?.maladaptivesCol.forEach(maladaptive => {
+        const maladaptiveParsed = parsearMaladaptivesCol(maladaptive);
+        maladaptivesParsed.push(maladaptiveParsed);
+      });
   
-      // Remove the first and last characters of the string
-      let cleanJsonString = this.maladaptives.slice(1, -1);
+      // console.log(maladaptivesParsed);
+      data.maladaptivesCol = maladaptivesParsed;
+      // console.log(data)
+      
+      //lo convierto a variable
+      this.graphData = maladaptivesParsed;
+      // console.log(this.graphData);
+      
+      function parsearMaladaptivesCol(maladaptive) {
+        const maladaptiveWithoutSlash = maladaptive.replace(/\\"/g, '"');
+        const maladaptiveParsed = maladaptiveWithoutSlash.slice(1, -1);
+        //  return JSON.parse(maladaptiveParsed)[0];
 
+        for (var i = 0; i < maladaptiveParsed.length; i++) {
+          return JSON.parse(maladaptiveParsed)[i];
+        }
+        console.log('respuest',maladaptiveParsed); 
+          
+      }
       
-      //limpia todo pero deja 1
-      // [{\"maladaptive_behavior\":\"Negative Self talk\",\"number_of_occurrences\":3},
-      // [{\"maladaptive_behavior\":\"Negative Self talk\",\"number_of_occurrences\":3},
-      //{\"maladaptive_behavior\":\"dasdsa\",\"number_of_occurrences\":3}]",
-      //"[{\"maladaptive_behavior\":\"Negative Self talk\",\"number_of_occurrences\":5},{\"maladaptive_behavior\":\"dasdsa\",\"number_of_occurrences\":4}]","[{\"maladaptive_behavior\":\"Negative Self talk\",\"number_of_occurrences\":3},{\"maladaptive_behavior\":\"dasdsa\",\"number_of_occurrences\":2}]","[{\"maladaptive_behavior\":\"Negative Self talk\",\"number_of_occurrences\":4},{\"maladaptive_behavior\":\"dasdsa\",\"number_of_occurrences\":2}]","[{\"maladaptive_behavior\":\"Negative Self talk\",\"number_of_occurrences\":4},{\"maladaptive_behavior\":\"dasdsa\",\"number_of_occurrences\":4}]","[{\"maladaptive_behavior\":\"Negative Self talk\",\"number_of_occurrences\":3},{\"maladaptive_behavior\":\"dasdsa\",\"number_of_occurrences\":3}]","[{\"maladaptive_behavior\":\"Negative Self talk\",\"number_of_occurrences\":5},{\"maladaptive_behavior\":\"dasdsa\",\"number_of_occurrences\":5}]","[{\"maladaptive_behavior\":\"Negative Self talk\",\"number_of_occurrences\":5},{\"maladaptive_behavior\":\"dasdsa\",\"number_of_occurrences\":4}]","[{\"maladaptive_behavior\":\"Negative Self talk\",\"number_of_occurrences\":3},{\"maladaptive_behavior\":\"dasdsa\",\"number_of_occurrences\":4}]
-      
-      
-      
-      //necesito lipiar todos los \ que habian salido en la cadena json
-      const regex = /\\/g;
-      cleanJsonString= cleanJsonString.replace(regex, "");
-      // console.log(cleanJsonString); // aqui quita el "\" que me pone antes y despues de todo
-      
-      // hasta aqui ya obtengo lo que quiero, la lista completa sin basura
-      // lo igualamos a una variable para poder trabajarala en el  html
-      // this.respuestas = JSON.parse(cleanJsonString ) ;
-      //error, no reconoce como array
+      // fin funcion de pablo alcorta
+      // recorremos el resultado del array maladaptivesParsed para extraer los solicitados por el request
+      let number_of_occurrences: number[] = [] ;
+      let maladaptive_behavior: string[] = [] ;
+      let array = this.graphData;
+      for (this.maladaptives of array) {
+        number_of_occurrences.push(Number(this.maladaptives.number_of_occurrences))
+        maladaptive_behavior.push(String(this.maladaptives.maladaptive_behavior))
+      }
+      console.log(number_of_occurrences);
+      console.log(maladaptive_behavior);
 
-     
-      this.respuestas = cleanJsonString;
-      console.log(this.respuestas);
-       //aqui ya recibo la data limpia pero en string...
-      //tengo que convertirla a un arreglo de objetos
-      // aqui los recibo asi"
-      // [{"maladaptive_behavior":"Negative Self talk","number_of_occurrences":3},{"maladaptive_behavior":"dasdsa","number_of_occurrences":3}]","[{"maladaptive_behavior":"Negative Self talk","number_of_occurrences":5},{"maladaptive_behavior":"dasdsa","number_of_occurrences":4}]","[{"maladaptive_behavior":"Negative Self talk","number_of_occurrences":3},{"maladaptive_behavior":"dasdsa","number_of_occurrences":2}]","[{"maladaptive_behavior":"Negative Self talk","number_of_occurrences":4},{"maladaptive_behavior":"dasdsa","number_of_occurrences":2}]","[{"maladaptive_behavior":"Negative Self talk","number_of_occurrences":4},{"maladaptive_behavior":"dasdsa","number_of_occurrences":4}]","[{"maladaptive_behavior":"Negative Self talk","number_of_occurrences":3},{"maladaptive_behavior":"dasdsa","number_of_occurrences":3}]","[{"maladaptive_behavior":"Negative Self talk","number_of_occurrences":5},{"maladaptive_behavior":"dasdsa","number_of_occurrences":5}]","[{"maladaptive_behavior":"Negative Self talk","number_of_occurrences":5},{"maladaptive_behavior":"dasdsa","number_of_occurrences":4}]","[{"maladaptive_behavior":"Negative Self talk","number_of_occurrences":3},{"maladaptive_behavior":"dasdsa","number_of_occurrences":4}]
-      
-      //debo volver a convertir en string para continuar y sacar los demas datos
-      // this.respuestas = JSON.parse(cleanJsonString) ;
-
-      //resultado: error
-      // error Unexpected non-whitespace character after JSON at position 133 (line 1 column 134)
-  
-      // console.log(this.respuestas);
-
-      // v2
-      //recibo la respuesta como un string y ahora debo convertirla de nuevo a un array
-      // para poder recorrer y estraer la data
-      
-      // const jsonData = this.respuestas;
-      // const parsedData = JSON.parse(jsonData);
-      // console.log(parsedData);
-
-      //devuelve el siguiente error:
-      // error Unexpected non-whitespace character after JSON at position 133 (line 1 column 134)
-
-      //v3
-      //debo volver a convertirlo a en un array con que pueda trabajar
-      // this.dataGrafico = JSON.parse("[" + this.respuestas + "]") ;
-      //error con el JSON.parse , falta algo entre las comillas
-      // console.log(this.dataGrafico) ;//no funciona
-      //SyntaxError: Expected ',' or ']' after array element in JSON at position 134 (line 1 column 135)
-      
-      
-      //v4
-      var arr = "[{}]";
-      this.respuestas = JSON.parse(arr.replace(/}{/, "},{")) ;
-      console.log(this.respuestas); 
-      // se convierte en array pero lo devuelve vacio
-      
-      
-      // aqui intento agregarle el indice, funciona pero devuelve vacio el contenido
-      // const arrayOfObjects = this.respuestas;
-      // // Assuming arrayOfObjects is the variable you want to check
-      // if (!Array.isArray(arrayOfObjects)) {
-      //   console.error('arrayOfObjects is not an array');
-      // } else {
-      //   // Add an index to each object in the array
-      //   const indexedArray = arrayOfObjects.map((obj, index) => {
-      //     return {...obj, index };
-      //   });
-
-      //   console.log('Indexed array:', indexedArray);
-      // }
-       
-      // v5
-      // // Parse the JSON string into a JavaScript object
-      // const parsedJson = JSON.parse(cleanJsonString);
-      
-      // // Extract the array of values from the object
-      // const arrayOfValues = Object.values(parsedJson);
-      
-      // console.log('Array of values:', arrayOfValues);
-      // console.log(this.respuestas); 
-      
-      
-      // v6
-      // Parse the modified string into an array of JSON objects
-      // let cleanJson = cleanJsonString.split('","');
-      // console.log(cleanJson); // aqui vuelve a colocar la basura
-      
-      // Initialize an array to store the parsed JavaScript objects
-      
-      //   let cleanString = cleanJsonString.substring().split('","').map((obj) => {
-        //     return JSON.parse(obj.replace(/^"|"$/g,''));
-        // });
-        
-        //   // Iterate through the array and parse each JSON object into a JavaScript object
-        //   let myObjects = [];
-    //   for (let i=0; i<cleanJson.length; i++){
-    //     let myObject = JSON.parse(cleanJson[i].replace(/^"|"$/g, ''));
-    //     myObjects.push(myObject);
-    //   }
-      
-      // console.log(cleanString);
-      // console.log(myObjects);
-       
- 
       
       // traemos todas las fechas
       this.sessions_dates = resp.sessions_dates;
+      this.number_of_occurrence = number_of_occurrences;
       this.notesRbts = resp.noteRbt;
  
       //fecha inicial cuando se hizo el bip
       this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
-      // console.log(this.sessions_dates);
+      this.number_of_occurrence.unshift(this.initial_interesting); // con unshift lo unimos y colocamos de primero
+      console.log(this.sessions_dates);
+      console.log(this.number_of_occurrence);
  
-     //  //console.log("Estoy dentro de chartData");
-     //  for (let i = 1; i < this.sessionDates.length; i++) {
-     //    var dateA = new Date(this.sessionDates[i-1]);
-     //    var dateB = new Date(this.sessionDates[i]);
-     //    var timeDiff = Math.abs((dateB - dateA)/1000); //in seconds
-     //    // calculate days, hours, minutes and seconds
-     //    var days = Math.floor(timeDiff/86400);
-     //    var hrs = Math.floor((timeDiff%86400)/3600);
-        
-     //    if (isNaN(days)) {  
-     //      this.chartData.push([null]);
-     //    } else{
-     //      this.chartData.push([days+ "d", parseFloat((hrs/(24*days)).toFixed(2)) ]);
-     //    };
       
        
        // data filtrada para el grafico
@@ -429,8 +338,8 @@ export class ChartReductionComponent {
            {
              name: 'Number of Occurrences',
              color: '#00D3C7',
-             data: [32, 30, 56, 56, 56, 42, 30, 42, 30],
-             // data: [this.initial_interesting, this.number_of_occurrences]
+            //  data: [32, 30, 56, 56, 56, 42, 30, 42, 30],
+             data: this.number_of_occurrence
            },
          ],
          xaxis: {

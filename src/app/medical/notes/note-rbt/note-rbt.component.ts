@@ -8,7 +8,7 @@ import { NoteRbtService } from '../services/note-rbt.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import Swal from 'sweetalert2';
 import { url_media } from 'src/app/config/config';
-
+declare var $:any;  
 @Component({
   selector: 'app-note-rbt',
   templateUrl: './note-rbt.component.html',
@@ -141,6 +141,7 @@ export class NoteRbtComponent {
      })
      this.getConfig();
      this.getProfileBip();
+     this.countValue();
 
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
@@ -156,15 +157,6 @@ export class NoteRbtComponent {
       this.roles_bcba = resp.roles_bcba;
       this.hours_days = resp.hours;
       this.selectedValueProviderCredential = resp.roles_rbt.certificate_number;
-      // this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = resp.roles_rbt.electronic_signature;
-      // this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = resp.roles_bcba.electronic_signature;
-      
-      // this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = this.roles_rbt.filter(role_rbt => role_rbt.electronic_signature).map(role_rbt => role_rbt.electronic_signature);
-      // this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.roles_bcba.filter(roles_bcb => roles_bcb.electronic_signature).map(roles_bcb => roles_bcb.electronic_signature);
-      
-      // this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = this.note_selected.provider_signature;
-      // this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.note_selected.supervisor_signature;
-      
     })
   }
 
@@ -371,6 +363,28 @@ export class NoteRbtComponent {
     let reader2 = new FileReader();
     reader2.readAsDataURL(this.FILE_SIGNATURE_BCBA);
     reader2.onloadend = ()=> this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = reader2.result;
+  }
+
+  
+
+  countValue(){
+    const countElement = document.querySelector('.count') as HTMLInputElement;
+    countElement.disabled = true;
+  
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (target.classList.contains('plus')) {
+        countElement.value = (parseInt(countElement.value, 10) + 1).toString();
+      } else if (target.classList.contains('minus')) {
+        let currentValue = parseInt(countElement.value, 10);
+        if (currentValue === 0) {
+          currentValue = 1;
+        } else {
+          currentValue -= 1;
+        }
+        countElement.value = currentValue.toString();
+      }
+    });
   }
 
   
