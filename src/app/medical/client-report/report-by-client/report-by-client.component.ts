@@ -63,7 +63,7 @@ export class ReportByClientComponent {
   public modifiers:any=[];
   public noteRbt:any=[];
   public pa_assessmentgroup:any=[];
-  public arraysUnidos:any=[];
+  public noteBcba:any=[];
   public patient:any;
   public patientID:any;
   public patientName:any;

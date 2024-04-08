@@ -7,6 +7,7 @@ import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import Swal from 'sweetalert2';
 import { NoteBcbaService } from '../services/note-bcba.service';
+import { InsuranceService } from '../../insurance/service/insurance.service';
 
 @Component({
   selector: 'app-note-bcba-edit',
@@ -33,6 +34,7 @@ export class NoteBcbaEditComponent {
   public selectedValueMaladaptive!: string;
   public selectedValueRendering!: string;
   public selectedValueAba!: string;
+  public selectedValueCode!: string;
   option_selected:number = 0;
 
   client_id:any;
@@ -141,6 +143,10 @@ export class NoteBcbaEditComponent {
   caregiver_goal:any =null;
   cpt_code:any =null;
 
+  insurer_name:any ;
+  services:any ;
+  insurer_id:any ;
+
   constructor(
     public bipService:BipService,
     public patientService:PatientMService,
@@ -149,6 +155,7 @@ export class NoteBcbaEditComponent {
     public ativatedRoute: ActivatedRoute,
     public noteBcbaService: NoteBcbaService,
     public doctorService: DoctorService,
+    public insuranceService: InsuranceService,
   ){}
 
   ngOnInit(): void {
@@ -226,14 +233,24 @@ export class NoteBcbaEditComponent {
 
   getProfileBip(){
     this.bipService.getBipProfilePatient_id(this.patient_id).subscribe((resp:any)=>{
-      // console.log(resp);
+      console.log(resp);
       this.client_selected = resp;
 
       this.first_name = this.client_selected.patient.first_name;
       this.last_name = this.client_selected.patient.last_name;
       this.patient_id = resp.patient.patient_id;
-      
+      this.insurer_id = resp.patient.insurer_id;
+      this.insuranceData();
     });
+  }
+
+  insuranceData(){
+    this.insuranceService.showInsurance(this.insurer_id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.insurer_name = resp.insurer_name;
+      // this.notes = resp.notes;
+      this.services = resp.services;
+    })
   }
 
   

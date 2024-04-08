@@ -9,7 +9,7 @@
                         <li class="breadcrumb-item active"><a routerLink="/">Dashboard /</a></li>
                         <li class="breadcrumb-item active"><a routerLink="/patients/list">Client List / </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Report by Client</li>
+                        <li class="breadcrumb-item active">Log Report by Client</li>
                     </ul>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="doctor-table-blk">
-                                        <h3>Report By Client: {{patientID}}</h3>
+                                        <h3>Log Report By Client: {{patientID}}</h3>
                                         <!-- <div class="doctor-search-blk">
                                             <div class="top-nav-search table-search-blk">
                                                     <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
@@ -212,8 +212,16 @@
                                         <td>{{data.time_in2}}</td>
                                         <td>{{data.time_out2}}</td>
                                         <td>{{cpt}}</td>
-                                        <td>{{data.md}}</td>
+                                        <!-- <td>{{data.md}}</td> -->
+                                        <td>
+                                            <div class="col-12 col-md-6 col-xl-4">
+                                                <div class="form-group local-forms">
+                                                    <input class="form-control"  name="md" [(ngModel)]="md" type="number"  >
+                                                </div>
+                                            </div>    
+                                        </td>
                                         <td>{{(( data.total_units * unitPrize | currency))}}</td>
+                                        <!-- <td>{{(( data.total_units * unitPrize - md | currency))}}</td> -->
                                         <td>{{n_units}}</td>
                                         <td>
                                             {{data.provider_name_g}}

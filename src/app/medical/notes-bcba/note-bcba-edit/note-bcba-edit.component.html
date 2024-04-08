@@ -84,10 +84,14 @@
 
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-6 col-xl-4 ">
                                     <div class="form-group local-forms">
-                                        <label >CPT CODE<span class="login-danger">*</span></label>
-                                        <input class="form-control" name="cpt_code"  disabled [(ngModel)]="cpt_code" type="text"  >
+                                        <label >CPT <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValueCode" name="code" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Code">
+                                            <mat-option *ngFor="let data of services" [value]="data.code">
+                                            {{data.code}}
+                                            </mat-option>
+                                        </mat-select>
                                     </div>
                                 </div>
                                 <div class="col-12 ">

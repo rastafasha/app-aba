@@ -67,6 +67,7 @@ export class BipformComponent {
   public maladaptive_behavior: any;
   public topografical_definition: any;
   public baseline_level: any;
+  public baseline_date: any;
   public initial_interesting: any;
   
   
@@ -216,11 +217,13 @@ export class BipformComponent {
       maladaptive_behavior: this.maladaptive_behavior,
       topografical_definition: this.topografical_definition,
       baseline_level: this.baseline_level,
+      baseline_date: this.baseline_date,
       initial_interesting: this.initial_interesting,
     })
     this.maladaptive_behavior = '';
     this.topografical_definition = '';
     this.baseline_level = '';
+    this.baseline_date = '';
     this.initial_interesting = '';
   }
 

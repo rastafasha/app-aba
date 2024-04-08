@@ -197,19 +197,28 @@
                                     <div class="col-xs-12 ">
                                         <div class="row">
                                             
-                                            <div class="col-xs-12 col-sm-5">  
+                                            <div class="col-xs-12 col-sm-3">  
                                                 <div class="form-group local-forms">
                                                     <label >Maladaptives Behavior<span class="login-danger">*</span></label>
                                                     <input class="form-control" name="maladaptive_behavior"  [(ngModel)]="maladaptive_behavior" type="text"  >
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-5">  
+                                            <div class="col-xs-12 col-sm-3">  
                                                 <div class="form-group local-forms">
                                                     <label >Baseline Level<span class="login-danger">*</span></label>
                                                     <input class="form-control" name="baseline_level"  [(ngModel)]="baseline_level" type="text"  >
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-2">
+                                            
+                                            <div class="col-12 col-sm-3">
+                                                <div class="form-group local-forms">
+                                                    <label >Baseline Date <span class="login-danger">*</span></label>
+                                                    <input class="form-control datetimepicker"  name="baseline_date" [(ngModel)]="baseline_date" type="text" matInput [matDatepicker]="picker"  >
+                                                    <mat-datepicker #picker></mat-datepicker>
+                                                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-3">
                                                 <div class="form-group local-forms">
                                                     <label >Intensity Initial<span class="login-danger">*</span></label>
                                                     <input class="form-control" name="baseline_level"  [(ngModel)]="initial_interesting" type="number"  >
@@ -237,6 +246,7 @@
                                                         <th>Maladaptives Behavior</th>
                                                         <th>Topografical Definition</th>
                                                         <th>Baseline Level</th>
+                                                        <th>Baseline Date</th>
                                                         <th>Intensity Initial </th>
                                                     </tr>
                                                 </thead>
@@ -250,6 +260,9 @@
                                                         </td>
                                                         <td>
                                                              {{maladap.baseline_level}}
+                                                        </td>
+                                                        <td>
+                                                             {{maladap.baseline_date| date}}
                                                         </td>
                                                         <td>
                                                             {{maladap.initial_interesting}}
@@ -402,7 +415,7 @@
                                     
                                     <div class="form-group">
                                         <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                            <h5 _ngcontent-rhp-c92="" class="card-title">Functional assessment interview completed</h5>
+                                            <3 _ngcontent-rhp-c92="" class="card-title">Functional assessment interview completed</h5>
                                             <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
                                                 <input _ngcontent-rhp-c92="" type="checkbox" id="functional_assessment_interview_completed" class="check" name="functional_assessment_interview_completed" [ngModelOptions]="{standalone: true}" [(ngModel)]="functional_assessment_interview_completed">
                                                 <label _ngcontent-rhp-c92="" for="functional_assessment_interview_completed" class="checktoggle" value="yes">checkbox</label>

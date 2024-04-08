@@ -8,6 +8,7 @@ import { DoctorService } from '../../doctors/service/doctor.service';
 import Swal from 'sweetalert2';
 import { NoteRbtService } from '../../notes/services/note-rbt.service';
 import { NoteBcbaService } from '../services/note-bcba.service';
+import { InsuranceService } from '../../insurance/service/insurance.service';
 
 @Component({
   selector: 'app-note-bcba',
@@ -34,6 +35,7 @@ export class NoteBcbaComponent {
   public selectedValueMaladaptive!: string;
   public selectedValueRendering!: string;
   public selectedValueAba!: string;
+  public selectedValueCode!: string;
   option_selected:number = 0;
 
   client_id:any;
@@ -132,6 +134,9 @@ export class NoteBcbaComponent {
   caregivers_training_goals:any =[];
   rbt_training_goals:any =[];
   note_description:any ;
+  insurer_name:any ;
+  services:any ;
+  insurer_id:any ;
   cpt:any;
 
   constructor(
@@ -142,6 +147,7 @@ export class NoteBcbaComponent {
     public ativatedRoute: ActivatedRoute,
     public noteBcbaService: NoteBcbaService,
     public doctorService: DoctorService,
+    public insuranceService: InsuranceService,
   ){}
 
   ngOnInit(): void {
@@ -186,6 +192,7 @@ export class NoteBcbaComponent {
       this.birth_date = this.client_selected.birth_date ? new Date(this.client_selected.birth_date).toISOString(): '';
       console.log(this.birth_date); 
       this.diagnosis_code = this.client_selected.diagnosis_code;  
+      this.insurer_id = this.client_selected.insurer_id;  
 
       this.selectedValueAba = resp.patient.clin_director_id;
       this.selectedValueRendering = resp.patient.bcba_id;
@@ -196,7 +203,17 @@ export class NoteBcbaComponent {
       
       this.getReplacementsByPatientId();
       this.getMaladaptivesBipByPatientId();
+      this.insuranceData();
     });
+  }
+
+  insuranceData(){
+    this.insuranceService.showInsurance(this.insurer_id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.insurer_name = resp.insurer_name;
+      // this.notes = resp.notes;
+      this.services = resp.services;
+    })
   }
 
   getReplacementsByPatientId(){
