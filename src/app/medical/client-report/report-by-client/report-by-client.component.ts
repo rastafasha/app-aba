@@ -67,7 +67,6 @@ export class ReportByClientComponent {
   public patient:any;
   public patientID:any;
   public patientName:any;
-  public doctor_selected:any;
   public doctor_selected_full_name:any;
   public billing_total:number = 0;
   public week_total_hours:number = 0;
@@ -76,6 +75,7 @@ export class ReportByClientComponent {
   public total_units:number = 0;
   public charges:number = 0;
   public unitPrize:number = 0;
+  public xe:number = 0;
   
   public session_date:any;
   public time_in:any;
@@ -83,6 +83,12 @@ export class ReportByClientComponent {
   public time_in2:any;
   public time_out2:any;
   public pos:any;
+  public billed:boolean ;
+  public pay:boolean ;
+  public md:any;
+  public md2:any;
+
+  doctor_selected:any =null;
   
   constructor(
     public router: Router,
@@ -104,7 +110,8 @@ export class ReportByClientComponent {
      this.getTableData();
      this.getConfig();
      
-     
+     this.billed = false;
+    this.pay = false;
      
      this.doctorService.getUserRoles();
     // let USER = localStorage.getItem("user");
@@ -187,7 +194,7 @@ export class ReportByClientComponent {
       this.totalDataClientReport = resp.noteRbt.length;
       this.clientReport_generals = resp.noteRbt;
       this.patient_id = resp.patient_id;
-      this.sponsor_id = resp.noteRbt.provider_name_g;
+      this.sponsor_id = resp.noteRbt[0].provider_name_g;
       //hacemos un recorrido por la respuesta
       for (let i in this.clientReport_generals) {
           let clientReportTrimestral = this.clientReport_generals[i];
@@ -208,6 +215,7 @@ export class ReportByClientComponent {
       };
       console.log("este es el array de seriales");
       console.log(this.serialNumberArray);
+      console.log(this.sponsor_id);
       console.log("Este es el array final de los reportes", this.clientReportList);
 
     //   setTimeout(()=>{
@@ -226,7 +234,7 @@ export class ReportByClientComponent {
 
      this.getTableDataGeneral();
     //  this.getWeekTotalHours();
-    //  this.getDoctor();
+     this.getDoctor();
     //  this.extractDataHours();
     //  this.extractDataUnits();
 
@@ -274,9 +282,9 @@ export class ReportByClientComponent {
 
   getCharges(){
     this.charges = this.week_total_units * this.n_units;
-      console.log(this.week_total_units);
-      console.log(this.n_units);
-      console.log(this.charges);
+      // console.log(this.week_total_units);
+      // console.log(this.n_units);
+      // console.log(this.charges);
   }
 
 
@@ -284,18 +292,10 @@ export class ReportByClientComponent {
   getDoctor(){
     this.doctorService.showDoctor(this.sponsor_id).subscribe((resp:any)=>{
       console.log(resp);
-      // this.doctor_selected = resp.user;
-      // this.doctor_selected_full_name = resp.user.full_name;
+      this.doctor_selected = resp.user;
+      this.doctor_selected_full_name = resp.user.full_name;
     });
   }
-
-  // getDoctorRbt1(){
-  //   this.doctorService.showDoctor(this.rbt_id).subscribe((resp:any)=>{
-  //     console.log(resp);
-  //     this.doctor_selected_rbt = resp.user;
-  //     this.doctor_selected_full_name_rbt = resp.user.full_name;
-  //   });
-  // }
 
 
   
@@ -446,31 +446,52 @@ export class ReportByClientComponent {
       this.pageSelection.push({ skip: skip, limit: limit });
     }
   }
+
   selectUser(biilling:any){
     this.billing_selected = biilling;
   }
-  deleteRol(){
-    this.clientReportService.deleteClientReport(this.billing_selected.id).subscribe((resp:any)=>{
-      // console.log(resp);
 
-      if(resp.message == 403){
-        this.text_validation = resp.message_text;
-      }else{
+  addXe(value:any){
+    let VALUE = value;
+    console.log(VALUE);
+  }
 
-        let INDEX = this.clientReportList.findIndex((item:any)=> item.id == this.billing_selected.id);
-      if(INDEX !=-1){
-        this.clientReportList.splice(INDEX,1);
 
-        $('#delete_patient').hide();
-        $("#delete_patient").removeClass("show");
-        $(".modal-backdrop").remove();
-        $("body").removeClass();
-        $("body").removeAttr("style");
-        this.billing_selected = null;
-      }
-      }
 
-      
-    })
+  isCheckedBilled(billed:any){
+    this.billed = this.billed === billed ? false : billed == true ;
+    }
+
+    isCheckedPay(pay:any){
+      this.pay = this.pay === pay ? false : pay == true;
+    }
+
+  save(data:any){
+    let VALUE = {
+      sesion_date: data.session_date,
+      pos: data.pos,
+      time_in: data.time_in,
+      time_out: data.time_out,
+      time_in2: data.time_in2,
+      time_out2: data.time_out2,
+      cpt: this.cpt,
+      md: this.md,
+      md2: this.md2,
+      charges: data.total_units * this.unitPrize ,
+      n_units: this.n_units,
+      provider_name_g: data.provider_name_g,
+      pa_number: this.pa_number,
+      billed: this.billed,
+      pay: this.pay,
+
+    };
+    console.log(VALUE);
+    
+    // this.patientService.updateStatus(data, data.id).subscribe(
+    //   resp =>{
+    //     // console.log(resp);
+    //     this.getTableData();
+    //   }
+    // )
   }
 }
