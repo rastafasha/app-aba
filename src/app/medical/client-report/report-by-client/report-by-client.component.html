@@ -189,8 +189,8 @@
                                         <th mat-sort-header="time_in2">Time In 2</th>
                                         <th mat-sort-header="time_out2">Time out 2</th>
                                         <th mat-sort-header="cpt">CPT</th>
-                                        <th mat-sort-header="md">Md1</th>
-                                        <th mat-sort-header="md2">Md2</th>
+                                        <th mat-sort-header="md">Modifier </th>
+                                        <th mat-sort-header="md2">Modifier </th>
                                         <th mat-sort-header="charges">Charges</th>
                                         <th mat-sort-header="units">Units</th>
                                         <th mat-sort-header="sponsor_id">Provider</th>
@@ -219,19 +219,20 @@
                                                 <div class="form-group local-forms">
                                                     <select
                                                         class="form-control form-select-solid fw-bolder"
-                                                        name="md" [(ngModel)]="md" (onchange)="addXe(value)"  [ngModelOptions]="{standalone: true}">
+                                                        name="md" #md  (change)="isSelectedModifier(md.value)"   >
                                                         <option>-- Select --</option>
                                                         <option value="HM">HM</option>
                                                         <option value="XE">XE</option>
                                                         <option value="HO">HO</option>
                                                     </select>
+                                                    
                                                 </div>
                                             </span>
                                             <span *ngIf="insurer_name !== 'Medicare'">
                                                 <div class="form-group local-forms">
                                                     <select
                                                         class="form-control form-select-solid fw-bolder"
-                                                        name="md" [(ngModel)]="md" (onchange)="addXe(value)"  [ngModelOptions]="{standalone: true}">
+                                                        name="md" #md   (change)="isSelectedModifier(md.value)"  >
                                                         <option>-- Select --</option>
                                                         <option value="HM">HM</option>
                                                         <option value="HO">HO</option>
@@ -245,7 +246,7 @@
                                                 <div class="form-group local-forms">
                                                     <select
                                                         class="form-control form-select-solid fw-bolder"
-                                                        name="md2" [(ngModel)]="md2" (onchange)="addXe(value)"  [ngModelOptions]="{standalone: true}">
+                                                        name="md2" #md2  (change)="isSelectedModifier2(md2.value)"  >
                                                         <option>-- Select --</option>
                                                         <option value="HM">HM</option>
                                                         <option value="XE">XE</option>
@@ -257,7 +258,7 @@
                                                 <div class="form-group local-forms">
                                                     <select
                                                         class="form-control form-select-solid fw-bolder"
-                                                        name="md2" [(ngModel)]="md2" (onchange)="addXe(value)"  [ngModelOptions]="{standalone: true}">
+                                                        name="md2" #md2  (change)="isSelectedModifier2(md2.value)"  >
                                                         <option>-- Select --</option>
                                                         <option value="HM">HM</option>
                                                         <option value="HO">HO</option>
@@ -270,7 +271,7 @@
                                             <!-- <span *ngIf="!md == 'XE'">
                                             </span> -->
                                             <span *ngIf="md == 'XE' || md2 == 'XE'">
-                                                {{(( data.total_units * unitPrize * xe | currency))}}
+                                               xe:{{(( data.total_units * unitPrize * xe | currency))}}
                                             </span>
                                         </td>
                                         <!-- <td>{{(( data.total_units * unitPrize - md | currency))}}</td> -->
@@ -285,16 +286,16 @@
                                             
                                             <div  class="note-checkit">
                                                 <label class="custom_check">
-                                                    <input type="checkbox" name="billed"  (click)="isCheckedBilled(billed)"   >
-                                                    <span class="checkmark" value="true"></span>  
+                                                    <input type="checkbox" name="billed" (change)="isCheckedBilled()"    >
+                                                    <span class="checkmark" ></span>  
                                                 </label>
                                             </div>
                                         </td>
                                         <td>
                                             <div  class="note-checkit">
                                                 <label class="custom_check">
-                                                    <input type="checkbox" name="pay"  [click]="isCheckedPay(pay)"   >
-                                                    <span class="checkmark" value="true"></span> 
+                                                    <input type="checkbox" name="pay"  (change)="isCheckedPay()"    >
+                                                    <span class="checkmark" ></span> 
                                                 </label>
                                             </div>
                                         </td>

@@ -262,7 +262,7 @@
                                     <div class="form-group local-forms">
                                         <label>Insurer <span class="login-danger">*</span></label>
                                         <!-- name="insurer" -->
-                                        <mat-select [(ngModel)]="selectedValueInsurer" name="insurer_name" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectInsurance($event)"  placeholder="Select Insurer">
+                                        <mat-select [(ngModel)]="selectedValueInsurer" name="insurer_id" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectInsurance($event)"  placeholder="Select Insurer">
                                             <mat-option *ngFor="let insuran of insurances" [value]="insuran.id">
                                                 {{insuran.insurer_name}}
                                             </mat-option>

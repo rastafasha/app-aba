@@ -87,6 +87,8 @@ export class ReportByClientComponent {
   public pay:boolean ;
   public md:any;
   public md2:any;
+  public pay_selected:any;
+  public billed_selected:any;
 
   doctor_selected:any =null;
   
@@ -137,22 +139,10 @@ export class ReportByClientComponent {
     this.clientReportService.config().subscribe((resp:any)=>{
       console.log(resp);
       this.insurances = resp.insurances;
-      this.insurance_id = resp.insurances.length > 0 ? resp.insurances[0].id : '';
-      // console.log(this.insurance_id);
+      
       this.sponsors = resp.doctors;
 
-      //sacamos los detalles insurance seleccionado
-      this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
-        console.log(resp);
-        this.insuranceiddd= resp.id;
-        
-        this.insurer_name = resp.insurer_name;
-        this.modifiers = resp.notes;
-        console.log('modificadores',this.modifiers);
-        this.unitPrize = resp.services[0].unit_prize;
-        console.log('precio unidad',this.unitPrize);
-        
-      })
+      
       
     })
   }
@@ -169,11 +159,12 @@ export class ReportByClientComponent {
       this.patientName = resp.full_name;
       this.patientID = resp.patient_id;
       this.noteRbt = resp.noteRbt;
+      this.insurance_id = resp.insurer_id;
       
       this.pa_assessments = resp.pa_assessments;
       let jsonObj = JSON.parse(this.pa_assessments);
       this.pa_assessmentsgroup = jsonObj;
-      console.log(this.pa_assessmentsgroup);
+      // console.log(this.pa_assessmentsgroup);
       this.cpt = this.pa_assessmentsgroup[0].cpt;
       // console.log(this.cpt); 
       this.n_units = this.pa_assessmentsgroup[0].n_units;
@@ -218,28 +209,30 @@ export class ReportByClientComponent {
       console.log(this.sponsor_id);
       console.log("Este es el array final de los reportes", this.clientReportList);
 
-    //   setTimeout(()=>{
-    //     this.dtTrigger.next();
-    //   },500);
-    // });
-      // console.log(this.sponsor_id);
-
-
-      // this.arraysUnidos = [ this.clientReportList, this.noteRbt];
-      // console.log(this.arraysUnidos);
-      
-      // this.clientReportList.push(this.noteRbt);
-      // console.log(this.clientReportList);
-      
-
      this.getTableDataGeneral();
     //  this.getWeekTotalHours();
-     this.getDoctor();
+    this.getInsurer();
+    this.getDoctor();
     //  this.extractDataHours();
     //  this.extractDataUnits();
 
     })
 
+  }
+
+  getInsurer(){
+    //sacamos los detalles insurance seleccionado
+    this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
+      console.log(resp);
+      this.insuranceiddd= resp.id;
+      
+      this.insurer_name = resp.insurer_name;
+      this.modifiers = resp.notes;
+      console.log('modificadores',this.modifiers);
+      this.unitPrize = resp.services[0].unit_prize;
+      console.log('precio unidad',this.unitPrize);
+      
+    })
   }
 
   extractDataHours(){
@@ -456,15 +449,32 @@ export class ReportByClientComponent {
     console.log(VALUE);
   }
 
+  
+  isSelectedModifier(value:string){
+    this.md = value;
+    console.log(this.md);
+  }
+
+  isSelectedModifier2(value:string){
+    this.md2 = value;
+    console.log(this.md2);
+  }
 
 
-  isCheckedBilled(billed:any){
-    this.billed = this.billed === billed ? false : billed == true ;
+
+  isCheckedBilled(){
+    this.billed = !this.billed;
+    // if ( event.target.checked ) {
+    // }
+  }
+
+    isCheckedPay(){
+      this.pay = !this.pay;
+      // if ( event.target.checked ) {
+      // }
     }
 
-    isCheckedPay(pay:any){
-      this.pay = this.pay === pay ? false : pay == true;
-    }
+
 
   save(data:any){
     let VALUE = {
