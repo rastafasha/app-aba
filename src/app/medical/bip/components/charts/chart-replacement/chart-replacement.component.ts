@@ -243,7 +243,7 @@ export class ChartReplacementComponent {
       const data = resp;
       const replacementsParsed = [];
       data?.replacementsCol.forEach(goal => {
-        const replacementParsed = parsearGoalsCol(goal);
+        const replacementParsed = parsearGoalsCol(goal, this.goal);
         replacementsParsed.push(replacementParsed);
       });
   
@@ -253,13 +253,14 @@ export class ChartReplacementComponent {
       
       //lo convierto a variable
       this.graphData = replacementsParsed;
-      console.log(this.graphData);
+      // console.log(this.graphData);
       
-      function parsearGoalsCol(goal) {
+      function parsearGoalsCol(goal, goalSelected) {
         const replacementWithoutSlash = goal.replace(/\\"/g, '"');
-        const replacementParsed = replacementWithoutSlash.slice(1, -1);
+        const replacementParsed =JSON.parse(replacementWithoutSlash.slice(1, -1));
         // return JSON.parse(goalParsed);
-         return JSON.parse(replacementParsed)[1];
+        const index = replacementParsed.findIndex(item => item.goal === goalSelected)
+        return (replacementParsed[index]);
       }
       // fin funcion de pablo alcorta
       // recorremos el resultado del array goalsParsed para extraer los solicitados por el request
@@ -270,9 +271,8 @@ export class ChartReplacementComponent {
         number_of_correct_response.push(Number(this.goals.number_of_correct_response))
         goal.push(String(this.goals.goal))
       }
-      console.log(number_of_correct_response);
-      console.log(goal);
-
+      // console.log(number_of_correct_response);
+      // console.log(goal);
 
 
 
@@ -301,8 +301,38 @@ export class ChartReplacementComponent {
       this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
       // this.number_of_correct_response.unshift(this.initial_interesting); // con unshift lo unimos y colocamos de primero
       console.log(this.sessions_dates);
+      this.sessions_dates?.shift()
       // console.log(this.number_of_correct_response);
       //end
+
+      if(
+        this.sessions_dates?.length > 1 && 
+        this.sessions_dates?.length === this.number_of_correct_response?.length
+      ) {
+        let acumulador = 0;
+        const acumuladorDeSemanas = [];
+        let cantidadDeDias = 0;
+        let labelSemanal = '';
+        const arrayLabelSemanal = [];
+        this.sessions_dates.forEach((date,index) => {
+            if (cantidadDeDias == 0) {
+              labelSemanal = date;
+            }
+            acumulador = acumulador+this.number_of_correct_response[index];
+            cantidadDeDias += 1;
+
+            if (cantidadDeDias == 7 || index+1 == this.sessions_dates.length) {
+              labelSemanal += ' - '+date;
+              acumuladorDeSemanas.push(acumulador);
+              arrayLabelSemanal.push(labelSemanal);
+              cantidadDeDias = 0;
+              acumulador = 0;
+              labelSemanal = '';
+            }
+        });
+        this.sessions_dates = [this.sessionDates[0]].concat(arrayLabelSemanal);
+        this.number_of_correct_response = [this.number_of_correct_response[0]].concat(acumuladorDeSemanas);
+      }
       
       
       //Chart
