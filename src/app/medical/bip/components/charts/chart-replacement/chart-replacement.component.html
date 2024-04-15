@@ -43,7 +43,7 @@
                             </mat-select>
                         </div> -->
                     </div>	
-                    <div id="health-chart">
+                    <div id="health-chart" *ngIf="chartOptionsOne?.series">
                         <apx-chart
                         [series]="chartOptionsOne.series"
                         [chart]="chartOptionsOne.chart"

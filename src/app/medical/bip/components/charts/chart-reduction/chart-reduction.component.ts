@@ -256,7 +256,7 @@ export class ChartReductionComponent {
       const data = resp;
       const maladaptivesParsed = [];
       data?.maladaptivesCol.forEach(maladaptive => {
-        const maladaptiveParsed = parsearMaladaptivesCol(maladaptive);
+        const maladaptiveParsed = parsearMaladaptivesCol(maladaptive, this.maladaptive_behavior);
         maladaptivesParsed.push(maladaptiveParsed);
       });
   
@@ -268,15 +268,11 @@ export class ChartReductionComponent {
       this.graphData = maladaptivesParsed;
       // console.log(this.graphData);
       
-      function parsearMaladaptivesCol(maladaptive) {
+      function parsearMaladaptivesCol(maladaptive, maladaptiveSelected) {
         const maladaptiveWithoutSlash = maladaptive.replace(/\\"/g, '"');
-        const maladaptiveParsed = maladaptiveWithoutSlash.slice(1, -1);
-        //  return JSON.parse(maladaptiveParsed)[0];
+        const maladaptiveParsed = JSON.parse(maladaptiveWithoutSlash.slice(1, -1));
 
-        for (var i = 0; i < maladaptiveParsed.length; i++) {
-          return JSON.parse(maladaptiveParsed)[i];
-        }
-        console.log('respuest',maladaptiveParsed); 
+        return maladaptiveParsed.find(item => item?.maladaptive_behavior == maladaptiveSelected)
           
       }
       
@@ -303,6 +299,37 @@ export class ChartReductionComponent {
       this.number_of_occurrence.unshift(this.initial_interesting); // con unshift lo unimos y colocamos de primero
       console.log(this.sessions_dates);
       console.log(this.number_of_occurrence);
+
+      if(
+        this.sessions_dates?.length > 1 && 
+        this.sessions_dates?.length === this.number_of_occurrence?.length
+      ) {
+        let acumulador = 0;
+        const acumuladorDeSemanas = [];
+        let cantidadDeDias = 0;
+        let labelSemanal = '';
+        const arrayLabelSemanal = [];
+        this.sessions_dates.forEach((date,index) => {
+          if(index > 0) {
+            if (cantidadDeDias == 0) {
+              labelSemanal = date;
+            }
+            acumulador = acumulador+this.number_of_occurrence[index];
+            cantidadDeDias += 1;
+
+            if (cantidadDeDias == 7 || index+1 == this.sessions_dates.length) {
+              labelSemanal += ' - '+date;
+              acumuladorDeSemanas.push(acumulador);
+              arrayLabelSemanal.push(labelSemanal);
+              cantidadDeDias = 0;
+              acumulador = 0;
+              labelSemanal = '';
+            }
+          }
+        });
+        this.sessions_dates = [this.sessionDates[0]].concat(arrayLabelSemanal);
+        this.number_of_occurrence = [this.number_of_occurrence[0]].concat(acumuladorDeSemanas);
+      }
  
       
        

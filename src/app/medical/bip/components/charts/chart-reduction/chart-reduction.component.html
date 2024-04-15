@@ -19,7 +19,7 @@
                             <!-- <p>Intensity Initial <span class="passive-view">{{initial_interesting}}</span> </p> -->
                         </div>
                     </div>	
-                    <div id="health-chart">
+                    <div id="health-chart" *ngIf="chartOptionsOne?.series">
                         <apx-chart
                         [series]="chartOptionsOne.series"
                         [chart]="chartOptionsOne.chart"
