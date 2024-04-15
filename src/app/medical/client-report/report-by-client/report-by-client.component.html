@@ -192,6 +192,7 @@
                                         <th mat-sort-header="md">Modifier </th>
                                         <th mat-sort-header="md2">Modifier </th>
                                         <th mat-sort-header="charges">Charges</th>
+                                        <th mat-sort-header="total">Total</th>
                                         <th mat-sort-header="units">Units</th>
                                         <th mat-sort-header="sponsor_id">Provider</th>
                                         <th mat-sort-header="pa_number">PA Number</th>
@@ -208,10 +209,10 @@
                                             {{data.session_date |date}}
                                         </td>
                                         <td>{{data.pos}}</td>
-                                        <td>{{data.time_in}}</td>
-                                        <td>{{data.time_out}}</td>
-                                        <td>{{data.time_in2}}</td>
-                                        <td>{{data.time_out2}}</td>
+                                        <td>{{data.time_in }}</td>
+                                        <td>{{data.time_out }}</td>
+                                        <td>{{data.time_in2 }}</td>
+                                        <td>{{data.time_out2 }}</td>
                                         <td>{{cpt}}</td>
                                         <!-- <td>{{data.md}}</td> -->
                                         <td>
@@ -276,6 +277,7 @@
                                         </td>
                                         <!-- <td>{{(( data.total_units * unitPrize - md | currency))}}</td> -->
                                         <td>{{n_units}}</td>
+                                        <td>{{100*60*24}}</td>
                                         <td>
                                             {{data.provider_name_g}}
                                         </td>

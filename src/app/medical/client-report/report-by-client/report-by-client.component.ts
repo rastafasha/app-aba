@@ -89,6 +89,12 @@ export class ReportByClientComponent {
   public md2:any;
   public pay_selected:any;
   public billed_selected:any;
+  public total:any;
+  public totalPorPagar:any;
+  public resultconFactor:any;
+  public unidades:any;
+  public porPagar:any;
+  public factorPorcentual: number =  1.66666666666667
 
   doctor_selected:any =null;
   
@@ -120,7 +126,10 @@ export class ReportByClientComponent {
     // this.user = JSON.parse(USER ? USER: '');
     // this.doctor_id = this.user.id;
     this.user = this.roleService.authService.user;
+    
   }
+
+  
 
   isPermission(permission:string){
     if(this.user.roles.includes('SUPERADMIN')){
@@ -213,12 +222,16 @@ export class ReportByClientComponent {
     //  this.getWeekTotalHours();
     this.getInsurer();
     this.getDoctor();
+    
     //  this.extractDataHours();
     //  this.extractDataUnits();
-
     })
 
   }
+
+  
+
+ 
 
   getInsurer(){
     //sacamos los detalles insurance seleccionado
@@ -231,9 +244,29 @@ export class ReportByClientComponent {
       console.log('modificadores',this.modifiers);
       this.unitPrize = resp.services[0].unit_prize;
       console.log('precio unidad',this.unitPrize);
+      this.convertir();
       
     })
   }
+
+  convertir() {
+    var hora = 3600;
+    var minutos = Math.round((hora) / 60); // da 60
+    this.factorPorcentual; // 1.66666666667
+
+    this.resultconFactor = (minutos * this.factorPorcentual)/100; // resultado 1,00000
+    this.unidades = this.resultconFactor * 4;
+    this.porPagar = this.unitPrize * this.unidades;
+    
+    console.log("hora",hora);
+    console.log("minutos",minutos);
+    console.log("factorPorcentual",this.factorPorcentual);
+    console.log("resultado factor",this.resultconFactor);
+    console.log("unidades",this.unidades);
+    console.log("precio",this.unitPrize);
+    console.log("esto es lo que se tiene que pagar",this.porPagar );
+
+    }
 
   extractDataHours(){
     // recorrer el array de billing_general para extraer la data
@@ -487,14 +520,18 @@ export class ReportByClientComponent {
       cpt: this.cpt,
       md: this.md,
       md2: this.md2,
+      xe: this.xe,
       charges: data.total_units * this.unitPrize ,
       n_units: this.n_units,
       provider_name_g: data.provider_name_g,
       pa_number: this.pa_number,
       billed: this.billed,
       pay: this.pay,
-
+      
     };
+    // if(this.md2.value === 'XE' ||this.md.value ==='XE')
+    //   this.xe= data.total_units * this.unitPrize * this.xe,
+    
     console.log(VALUE);
     
     // this.patientService.updateStatus(data, data.id).subscribe(
