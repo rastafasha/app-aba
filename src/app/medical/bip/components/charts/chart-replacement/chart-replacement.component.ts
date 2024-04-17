@@ -76,7 +76,6 @@ export class ChartReplacementComponent {
   
   @Input() goal:any;
   @Input() baseline_d:string;
-  @Input() initial_interesting:any;
   // @Output() cursoD: EventEmitter<any>  = new EventEmitter();// envia la data
 
 
@@ -303,8 +302,8 @@ export class ChartReplacementComponent {
       this.notesRbts = resp.noteRbt;
  
       //fecha inicial cuando se hizo el bip
-      this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
-      console.log(this.sessions_dates);
+      // this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
+      // console.log(this.sessions_dates);
       this.sessions_dates?.shift()
       // console.log(this.number_of_correct_response);
       //end
