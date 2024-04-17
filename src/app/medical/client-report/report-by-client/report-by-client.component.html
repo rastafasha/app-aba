@@ -184,15 +184,11 @@
 
                                         <th mat-sort-header="date_note">Date of Note</th>
                                         <th mat-sort-header="pos">POS</th>
-                                        <th mat-sort-header="time_in">Time In</th>
-                                        <th mat-sort-header="time_out">Time out</th>
-                                        <th mat-sort-header="time_in2">Time In 2</th>
-                                        <th mat-sort-header="time_out2">Time out 2</th>
+                                        <th mat-sort-header="time_in">Total Hours</th>
                                         <th mat-sort-header="cpt">CPT</th>
                                         <th mat-sort-header="md">Modifier </th>
                                         <th mat-sort-header="md2">Modifier </th>
                                         <th mat-sort-header="charges">Charges</th>
-                                        <th mat-sort-header="total">Total</th>
                                         <th mat-sort-header="units">Units</th>
                                         <th mat-sort-header="sponsor_id">Provider</th>
                                         <th mat-sort-header="pa_number">PA Number</th>
@@ -209,10 +205,9 @@
                                             {{data.session_date |date}}
                                         </td>
                                         <td>{{data.pos}}</td>
-                                        <td>{{data.time_in }}</td>
-                                        <td>{{data.time_out }}</td>
-                                        <td>{{data.time_in2 }}</td>
-                                        <td>{{data.time_out2 }}</td>
+                                        <!-- | transformToDate -->
+                                        <td>{{data.total_hours   }}</td>
+
                                         <td>{{cpt}}</td>
                                         <!-- <td>{{data.md}}</td> -->
                                         <td>
@@ -269,17 +264,15 @@
                                         </td>
                                         <td>
                                             {{(( data.total_units * unitPrize  | currency))}}
-                                            <!-- <span *ngIf="!md == 'XE'">
-                                            </span> -->
                                             <span *ngIf="md == 'XE' || md2 == 'XE'">
                                                xe:{{(( data.total_units * unitPrize * xe | currency))}}
                                             </span>
                                         </td>
                                         <!-- <td>{{(( data.total_units * unitPrize - md | currency))}}</td> -->
                                         <td>{{n_units}}</td>
-                                        <td>{{100*60*24}}</td>
                                         <td>
-                                            {{data.provider_name_g}}
+                                            {{data.provider_name_g}}|
+                                            {{doctor_selected_full_name}}
                                         </td>
 
                                         <td>{{pa_number}}</td>
@@ -288,7 +281,7 @@
                                             
                                             <div  class="note-checkit">
                                                 <label class="custom_check">
-                                                    <input type="checkbox" name="billed" (change)="isCheckedBilled()"    >
+                                                    <input type="checkbox" name="billed"  (change)="isCheckedBilled()"    >
                                                     <span class="checkmark" ></span>  
                                                 </label>
                                             </div>
@@ -296,7 +289,7 @@
                                         <td>
                                             <div  class="note-checkit">
                                                 <label class="custom_check">
-                                                    <input type="checkbox" name="pay"  (change)="isCheckedPay()"    >
+                                                    <input type="checkbox" name="pay"   (change)="isCheckedPay()"    >
                                                     <span class="checkmark" ></span> 
                                                 </label>
                                             </div>

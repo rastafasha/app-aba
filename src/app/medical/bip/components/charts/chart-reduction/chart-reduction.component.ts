@@ -77,6 +77,7 @@ export class ChartReductionComponent {
   @Input() maladaptiveSelectedSon:any;
   @Input() maladaptive_behavior:any;
   @Input() initial_interesting:any;
+  @Input() baseline_date:Date | 'shortTime';
   // @Output() cursoD: EventEmitter<any>  = new EventEmitter();// envia la data
 
 
@@ -99,7 +100,7 @@ export class ChartReductionComponent {
   public maladaptive: any;
   public patient_id: any;
   public client_id: any;
-  public created_at: Date;
+  public created_at: any;
   public session_date: any = [];
   public maladaptives: any = [];
   public session_dates: any = [];
@@ -200,7 +201,8 @@ export class ChartReductionComponent {
     
     this.maladaptive_behavior
     this.initial_interesting
-    // console.log(this.maladaptive_behavior);
+    this.baseline_date
+    console.log('baseline_date',this.baseline_date);
     
 
     this.activatedRoute.params.subscribe((resp:any)=>{
@@ -217,7 +219,7 @@ export class ChartReductionComponent {
     this.bipService.getBipByUser(this.client_id).subscribe((resp:any)=>{
       // console.log(resp);
       this.created_at = resp.bip.created_at;
-      console.log(this.created_at);
+      console.log('creacion bip',this.created_at);
     });
 
   }
@@ -295,7 +297,7 @@ export class ChartReductionComponent {
       this.notesRbts = resp.noteRbt;
  
       //fecha inicial cuando se hizo el bip
-      this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
+      this.sessions_dates.unshift(this.baseline_date); // con unshift lo unimos y colocamos de primero
       this.number_of_occurrence.unshift(this.initial_interesting); // con unshift lo unimos y colocamos de primero
       console.log(this.sessions_dates);
       console.log(this.number_of_occurrence);
@@ -327,7 +329,7 @@ export class ChartReductionComponent {
             }
           }
         });
-        this.sessions_dates = [this.sessionDates[0]].concat(arrayLabelSemanal);
+        this.sessions_dates = [this.baseline_date].concat(arrayLabelSemanal);
         this.number_of_occurrence = [this.number_of_occurrence[0]].concat(acumuladorDeSemanas);
       }
  

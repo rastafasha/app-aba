@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RolesService } from '../../roles/service/roles.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import { ClientReportService } from '../client-report.service';
+import Swal from 'sweetalert2';
 declare var $:any;  
 
 @Component({
@@ -21,11 +22,9 @@ export class ReportByClientComponent {
   public date_end:any;
 
   patient_id:any;
-  doctor_id:any;
-  patient_selected:any;
-  client_selected:any;
   billing_selected:any;
   sponsor_id:any;
+  noterbt_id:any;
   user:any;
 
 
@@ -50,6 +49,7 @@ export class ReportByClientComponent {
 
   public roles:any=[];
   public permissions:any=[];
+
   public pa_assessments:any=[];
   public pa_assessmentsgroup:any=[];
   public cpt:any;
@@ -76,6 +76,7 @@ export class ReportByClientComponent {
   public charges:number = 0;
   public unitPrize:number = 0;
   public xe:number = 0;
+  public is_xe:boolean;
   
   public session_date:any;
   public time_in:any;
@@ -83,8 +84,8 @@ export class ReportByClientComponent {
   public time_in2:any;
   public time_out2:any;
   public pos:any;
-  public billed:boolean ;
-  public pay:boolean ;
+  public billed:any ;
+  public pay:any ;
   public md:any;
   public md2:any;
   public pay_selected:any;
@@ -94,6 +95,14 @@ export class ReportByClientComponent {
   public resultconFactor:any;
   public unidades:any;
   public porPagar:any;
+  public horaTrabajada:any;
+  public factHoras:any;
+  public totalHoras:any;
+  public totalUnidades:any;
+  public units:any;
+  public hoursPerUnit:any;
+  public timePerUnit:any;
+  public providersSponsorsList:any;
   public factorPorcentual: number =  1.66666666666667
 
   doctor_selected:any =null;
@@ -122,9 +131,6 @@ export class ReportByClientComponent {
     this.pay = false;
      
      this.doctorService.getUserRoles();
-    // let USER = localStorage.getItem("user");
-    // this.user = JSON.parse(USER ? USER: '');
-    // this.doctor_id = this.user.id;
     this.user = this.roleService.authService.user;
     
   }
@@ -150,8 +156,6 @@ export class ReportByClientComponent {
       this.insurances = resp.insurances;
       
       this.sponsors = resp.doctors;
-
-      
       
     })
   }
@@ -169,60 +173,46 @@ export class ReportByClientComponent {
       this.patientID = resp.patient_id;
       this.noteRbt = resp.noteRbt;
       this.insurance_id = resp.insurer_id;
+      this.billed = resp.noteRbt;
+      this.pay = resp.noteRbt;
+      
       
       this.pa_assessments = resp.pa_assessments;
       let jsonObj = JSON.parse(this.pa_assessments);
       this.pa_assessmentsgroup = jsonObj;
-      // console.log(this.pa_assessmentsgroup);
+      
       this.cpt = this.pa_assessmentsgroup[0].cpt;
-      // console.log(this.cpt); 
+      
       this.n_units = this.pa_assessmentsgroup[0].n_units;
       this.pa_number = this.pa_assessmentsgroup[0].pa_services;
-      // console.log(this.n_units); 
-      // fin traemos la info necesaria del paciente
-
-
-      // unimos las respuestas clientReportList y  noteRbt  en una sola lista
-      // for (let i=0 ;i < this.arraysUnidos.length; i++){
-      //   this.clientReportList.push({...this.arraysUnidos[i], ...JSON.parse(this.noteRbt)});
-      //   this.serialNumberArray.push(i+1)
-      // };
-      // fin de unir las listas
       
       
 
       this.totalDataClientReport = resp.noteRbt.length;
       this.clientReport_generals = resp.noteRbt;
       this.patient_id = resp.patient_id;
-      this.sponsor_id = resp.noteRbt[0].provider_name_g;
-      //hacemos un recorrido por la respuesta
-      for (let i in this.clientReport_generals) {
-          let clientReportTrimestral = this.clientReport_generals[i];
-          
-          if (!this.serialNumberArray.includes(clientReportTrimestral.sponsor_id)) {
-            this.serialNumberArray.push(clientReportTrimestral.serial_number);
-            this.clientReportList.push(clientReportTrimestral);
-          }else{
-            
-            for (let j in this.clientReportList) {
-              if (this.clientReportList[j].sponsor_id == clientReportTrimestral.sponsor_id){
-                this.clientReportList[j]=clientReportTrimestral;
-              }
-              
-            }
-          }
-          
-      };
-      console.log("este es el array de seriales");
-      console.log(this.serialNumberArray);
-      console.log(this.sponsor_id);
-      console.log("Este es el array final de los reportes", this.clientReportList);
+      // this.sponsor_id = resp.noteRbt[0].provider_name_g;
+      // Get all unique sponsor_id values
+      const sponsorIds = [...new Set(resp.noteRbt.map(item => item.provider_name_g))];
+      
+      // Use the getDoctor() function to retrieve the name for each sponsor_id
+      const sponsorNames = sponsorIds.map(sponsorId => this.getDoctor(sponsorId));
+      
+      console.log('doctor',sponsorIds);
+      // Assign the resulting array of sponsor names to this.sponsor_names
+      this.doctor_selected_full_name = sponsorNames;
+      console.log('doctor',sponsorNames);
+      
+      
+      console.log('doctor',this.doctor_selected_full_name);
+      // console.log('doctor',this.sponsor_id);
+      // console.log("Este es el array final de los reportes", this.clientReportList);
 
      this.getTableDataGeneral();
-    //  this.getWeekTotalHours();
-    this.getInsurer();
-    this.getDoctor();
-    
+     this.getInsurer();
+    //  this.getDoctor();
+     
+     //  this.getWeekTotalHours();
     //  this.extractDataHours();
     //  this.extractDataUnits();
     })
@@ -244,22 +234,77 @@ export class ReportByClientComponent {
       console.log('modificadores',this.modifiers);
       this.unitPrize = resp.services[0].unit_prize;
       console.log('precio unidad',this.unitPrize);
-      this.convertir();
+      this.convertirHOra();
       
     })
   }
-
-  convertir() {
-    var hora = 3600;
-    var minutos = Math.round((hora) / 60); // da 60
+  convertirHOra() {
+    
     this.factorPorcentual; // 1.66666666667
+    
+    this.horaTrabajada = this.clientReportList[0].total_hours; 
+    
+    this.resultconFactor = this.clientReportList[0].total_hoursFactor; 
+    this.unidades = this.clientReportList[0].total_units; 
+    
+    this.porPagar = this.unitPrize * this.unidades;
+    
+    console.log("hora trabajada",this.horaTrabajada);
+    console.log("factorPorcentual",this.factorPorcentual);
+    console.log("resultado factor",this.resultconFactor);
+    console.log("unidades",this.unidades);
+    console.log("precio",this.unitPrize);
+    console.log("esto es lo que se tiene que pagar",this.porPagar );
 
-    this.resultconFactor = (minutos * this.factorPorcentual)/100; // resultado 1,00000
-    this.unidades = this.resultconFactor * 4;
+    }
+  convertir() {
+    var hora = 3600;//segundos
+    var unidad = 900; //15 min 1-unidad  900 segundos
+    var minutos = Math.round((hora) / 60); // da 60
+    console.log("minutos ", minutos);
+    // horaensegudos  / unidadensegundos = 4 
+
+    var unidadminutos =  (minutos * unidad) / hora ; //da 4
+    console.log("Minutos en Unidades", unidadminutos );// 15 
+    // entonces si 1 es igual a 60  minutos, 1/60 =  1/60*4 = 1
+    //  por lo tanto para pasar de minutos a unidades hay que multiplicar entre 1/60 y por el numero de veces que/120 = 1/12/120 2 
+    this.hoursPerUnit = 1 / minutos;
+    console.log("horas por unidad ", this.hoursPerUnit);
+    this.timePerUnit = this.hoursPerUnit * 60;
+    console.log("Tiempo por unidad ", this.timePerUnit);
+    
+    // 4 unidades es 1 hora 900 x4 = 3600
+    // para pasar a horas dividimos entre la cantidad de unidades por una hora (en este caso 15)
+    this.totalUnidades = Math.round((minutos / unidad));
+    this.totalHoras = Math.round((minutos / unidad));
+    console.log("unidades totales ", this.totalUnidades);
+    
+    this.factorPorcentual; // 1.66666666667
+    
+    this.horaTrabajada = this.clientReportList[0].total_hours; // resultado 1.45 , llevarla a hora 14500
+    // si una hora son 3600 segundos , cuanto es 1:45  ???
+    // son 5400 segundos
+    //  por tanto, 1/5400 * 100 = 1.8925 .......
+    // para redondear a dos decimales se usa toFixed(2)
+    // como llevo 145 a 5400 segundos ?
+    this.factHoras = (1/minutos*5400)*100 ;
+    console.log("el factor de conversión",this.factorPorcentual);
+
+
+    let seconds: number = this.horaTrabajada;
+    let totalSeconds: number = seconds * 5400 / this.horaTrabajada;
+    console.log("Total horas trabajadas: " + totalSeconds); 
+
+
+    this.resultconFactor = (totalSeconds * this.factorPorcentual)/100; // resultado 1,00000
+    // this.unidades = this.resultconFactor * 4;
+    // this.unidades = this.resultconFactor * this.totalUnidades ;
+    this.unidades = this.horaTrabajada / hora;
     this.porPagar = this.unitPrize * this.unidades;
     
     console.log("hora",hora);
     console.log("minutos",minutos);
+    console.log("hora trabajada",this.horaTrabajada);
     console.log("factorPorcentual",this.factorPorcentual);
     console.log("resultado factor",this.resultconFactor);
     console.log("unidades",this.unidades);
@@ -315,11 +360,15 @@ export class ReportByClientComponent {
 
 
   //trae el nombre del doctor quien hizo la nota rbt
-  getDoctor(){
-    this.doctorService.showDoctor(this.sponsor_id).subscribe((resp:any)=>{
+  getDoctor(sponsorId:any){
+
+    
+    
+    this.doctorService.showDoctor(sponsorId).subscribe((resp:any)=>{
       console.log(resp);
       this.doctor_selected = resp.user;
       this.doctor_selected_full_name = resp.user.full_name;
+      console.log(this.doctor_selected_full_name);
     });
   }
 
@@ -509,24 +558,25 @@ export class ReportByClientComponent {
 
 
 
-  save(data:any){
+  save(data:any){debugger
     let VALUE = {
-      sesion_date: data.session_date,
+      session_date: data.session_date,
       pos: data.pos,
-      time_in: data.time_in,
-      time_out: data.time_out,
-      time_in2: data.time_in2,
-      time_out2: data.time_out2,
-      cpt: this.cpt,
+      total_hours:data.total_hours,
+      cpt_code: this.cpt,
       md: this.md,
       md2: this.md2,
       xe: this.xe,
+      total_units: data.total_units,
       charges: data.total_units * this.unitPrize ,
-      n_units: this.n_units,
-      provider_name_g: data.provider_name_g,
+      // n_units: this.n_units,
       pa_number: this.pa_number,
       billed: this.billed,
       pay: this.pay,
+      sponsor_id: data.provider_name_g,
+      patient_id: this.patient_id,
+      insurer_id: this.insurance_id,
+      noterbt_id: data.id,
       
     };
     // if(this.md2.value === 'XE' ||this.md.value ==='XE')
@@ -534,11 +584,24 @@ export class ReportByClientComponent {
     
     console.log(VALUE);
     
-    // this.patientService.updateStatus(data, data.id).subscribe(
-    //   resp =>{
-    //     // console.log(resp);
-    //     this.getTableData();
-    //   }
-    // )
+    if(this.billing_selected){//si  tiene bip se agrega a la informacion de la consulta
+
+      this.clientReportService.udpate(VALUE, this.billing_selected).subscribe((resp:any)=>{
+        // console.log(resp);
+        // this.text_success = 'Bip Updated'
+        Swal.fire('Updated', `Bip Updated successfully!`, 'success');
+        this.ngOnInit();
+      })
+      
+    }else{ 
+      
+      //crear
+      this.clientReportService.create(VALUE).subscribe((resp:any)=>{
+        // console.log(resp);
+        // this.text_success = 'Se guardó la informacion de la cita médica'
+        Swal.fire('Created', `Created successfully!`, 'success');
+        this.ngOnInit();
+      })
+    }
   }
 }

@@ -305,7 +305,7 @@ export class BipformComponent {
 //fin listados
 
 
-  save(){debugger
+  save(){
     this.text_validation = '';
     // if(!this.type_of_assessment || !this.maladaptives || !this.client_id){
     //   this.text_validation = 'Is required this information ';

@@ -75,6 +75,7 @@ export class ChartReplacementComponent {
   @ViewChild('chart') chart!: ChartComponent;
   
   @Input() goal:any;
+  @Input() baseline_d:string;
   // @Output() cursoD: EventEmitter<any>  = new EventEmitter();// envia la data
 
 
@@ -192,6 +193,8 @@ export class ChartReplacementComponent {
   ngOnInit(): void {
     
     this.goal;
+    this.baseline_d
+    console.log('baseline_date',this.baseline_d);
     // console.log(this.goal);
     
 
@@ -201,7 +204,7 @@ export class ChartReplacementComponent {
      })
      this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
      this.getBip(); // se pide el perfil del paciente por el bip relacionado
-     this.getGraphicPatientMonth();
+    //  this.getGraphicPatientMonth();
   }
 
   getBip(){
@@ -298,8 +301,7 @@ export class ChartReplacementComponent {
       this.notesRbts = resp.noteRbt;
  
       //fecha inicial cuando se hizo el bip
-      this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
-      // this.number_of_correct_response.unshift(this.initial_interesting); // con unshift lo unimos y colocamos de primero
+      this.sessions_dates.unshift(this.baseline_d); // con unshift lo unimos y colocamos de primero
       console.log(this.sessions_dates);
       this.sessions_dates?.shift()
       // console.log(this.number_of_correct_response);
@@ -330,6 +332,7 @@ export class ChartReplacementComponent {
               labelSemanal = '';
             }
         });
+        
         this.sessions_dates = [this.sessionDates[0]].concat(arrayLabelSemanal);
         this.number_of_correct_response = [this.number_of_correct_response[0]].concat(acumuladorDeSemanas);
       }
@@ -390,67 +393,67 @@ export class ChartReplacementComponent {
   
   
 
-  getGraphicPatientMonth(){
-    let data ={
-      month: this.selectedValue,
-    }
-    this.graphicReductionService.graphicPatientMonth(data).subscribe((resp:any)=>{
-      console.log(resp);
+  // getGraphicPatientMonth(){
+  //   let data ={
+  //     month: this.selectedValue,
+  //   }
+  //   this.graphicReductionService.graphicPatientMonth(data).subscribe((resp:any)=>{
+  //     console.log(resp);
       
 
-      //start
-      this.query_income_year = resp.query_income_year;
-      let data_income:any = [];
-      this.query_income_year.forEach((element:any) => {
-        data_income.push(element.income);
-      });
+  //     //start
+  //     this.query_income_year = resp.query_income_year;
+  //     let data_income:any = [];
+  //     this.query_income_year.forEach((element:any) => {
+  //       data_income.push(element.income);
+  //     });
 
-      this.chartOptionsOne = {
-        chart: {
-          height: 200,
-          type: 'line',
-          toolbar: {
-            show: false,
-          },
-        },
-        grid: {
-          show: true, 
-          xaxis: {
-            lines: {
-              show: false
-             }
-           },  
-          yaxis: {
-            lines: { 
-              show: true 
-             }
-           },   
-          },
-        dataLabels: {
-          enabled: false,
-        },
-        stroke: {
-          curve: 'smooth',
-        },
-        series: [
-            {
-              name: 'Income',
-              color: '#2E37A4',
-              data: data_income,
-            },
-          ],
-        xaxis: {
-          categories: resp.months_name,
-        },
-      };
+  //     this.chartOptionsOne = {
+  //       chart: {
+  //         height: 200,
+  //         type: 'line',
+  //         toolbar: {
+  //           show: false,
+  //         },
+  //       },
+  //       grid: {
+  //         show: true, 
+  //         xaxis: {
+  //           lines: {
+  //             show: false
+  //            }
+  //          },  
+  //         yaxis: {
+  //           lines: { 
+  //             show: true 
+  //            }
+  //          },   
+  //         },
+  //       dataLabels: {
+  //         enabled: false,
+  //       },
+  //       stroke: {
+  //         curve: 'smooth',
+  //       },
+  //       series: [
+  //           {
+  //             name: 'Income',
+  //             color: '#2E37A4',
+  //             data: data_income,
+  //           },
+  //         ],
+  //       xaxis: {
+  //         categories: resp.months_name,
+  //       },
+  //     };
       
-      //end
-    })
-  }
-  selectedMonth(){
-    // console.log(this.selectedValue);
-    this.getGraphicPatientMonth();
-  }
+  //     //end
+  //   })
+  // }
+  // selectedMonth(){
+  //   // console.log(this.selectedValue);
+  //   // this.getGraphicPatientMonth();
+  // }
     
   selecedList: data[] = [
     {value: '01'},

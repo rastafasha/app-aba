@@ -141,11 +141,12 @@ export class NoteRbtComponent {
      })
      this.getConfig();
      this.getProfileBip();
-     this.countValue();
+    //  this.countValue();
 
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
+    console.log(this.doctor_id);
   }
 
   
@@ -283,11 +284,12 @@ export class NoteRbtComponent {
   
 
 
-  addReplacement(){
+  addReplacement(replacemen){
+    this.replacementSelected = replacemen;
     this.replacementGoals.push({
       goal: this.replacementSelected.goal,
-      total_trials: this.total_trials,
-      number_of_correct_response: this.number_of_correct_response,
+      total_trials: this.replacementSelected.total_trials,
+      number_of_correct_response: this.replacementSelected.number_of_correct_response,
     })
     if(this.replacementGoals.length > 1){
       this.replacementGoals.splice(this.replacementGoals,1);
@@ -298,10 +300,11 @@ export class NoteRbtComponent {
     this.number_of_correct_response = null;
   }
 
-  addMaladaptive(){
+  addMaladaptive(behavior){
+    this.maladaptiveSelected = behavior;
     this.maladaptives.push({
       maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
-      number_of_occurrences: this.number_of_occurrences,
+      number_of_occurrences: this.maladaptiveSelected.number_of_occurrences,
     })
     if(this.maladaptives.length > 1){
       this.maladaptives.splice(this.maladaptives,1);
@@ -319,6 +322,7 @@ export class NoteRbtComponent {
   
 
   addInterventions(){
+    
     this.intervention_added.push({
       pairing: this.pairing,
       response_block: this.response_block,

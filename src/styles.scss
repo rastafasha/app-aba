@@ -262,4 +262,20 @@ p{
   border: 3px solid orange;
 }
 
+// timepicker
+
+
+// $my-theme: mat.define-light-theme(...);
+
+// timepicker uses these component
+@include mat.form-field-theme($aba-angular-theme);
+@include mat.input-theme($aba-angular-theme);
+@include mat.button-theme($aba-angular-theme);
+@include mat.fab-theme($aba-angular-theme);
+@include mat.icon-button-theme($aba-angular-theme);
+@include mat.divider-theme($aba-angular-theme);
+
+// timepicker theme
+// @include mat-timepicker.timepicker-theme($aba-angular-theme)
+
 

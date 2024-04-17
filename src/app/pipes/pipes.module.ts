@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SecureResourceUrlPipe } from './secure-resource-url.pipe';
+import { TransformToDatePipe } from './transform-to-date.pipe';
 
 
 
 @NgModule({
   declarations: [
-    SecureResourceUrlPipe
+    SecureResourceUrlPipe,
+    TransformToDatePipe
   ],
   exports: [
-    SecureResourceUrlPipe
+    SecureResourceUrlPipe,
+    TransformToDatePipe
   ],
   imports: [
     CommonModule

@@ -59,13 +59,12 @@
                                     <div class="form-group local-forms">
                                         <label>Provider Name <span class="login-danger">*</span></label>
                                         <!-- <input class="form-control" name="provider_name_g"   [(ngModel)]="provider_name_g" type="text"  > -->
-                                        <mat-select [(ngModel)]="selectedValueProviderName" name="provider_name_g"
-                                            [ngModelOptions]="{standalone: true}" class="form-control select"
-                                            (selectionChange)="selectSpecialist($event)"
-                                            placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
-                                                {{data.name}} {{data.surname}}
-                                            </mat-option>
+                                        <mat-select [(ngModel)]="selectedValueProviderName" 
+                                        name="provider_name_g" [ngModelOptions]="{standalone: true}" 
+                                        class="form-control select" (selectionChange)="selectSpecialist($event)" 
+                                        placeholder="Select Specialist" value="select">
+                                         <mat-option value="select">--Select-</mat-option> 
+                                         <mat-option *ngFor="let data of roles_rbt" [value]="data.id"> {{data.name}} {{data.surname}} </mat-option> 
                                         </mat-select>
 
                                     </div>
@@ -109,14 +108,18 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label>Time In <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueTimeIn" name="time_in"
+                                        <!-- <mat-select [(ngModel)]="selectedValueTimeIn" name="time_in"
                                             [ngModelOptions]="{standalone: true}"
                                             (onChange)="hourTimeInSelected($event)" class="form-control select"
                                             placeholder="Select Hour">
                                             <mat-option *ngFor="let data of hours_days" [value]="data.id">
                                                 {{data.name}}
                                             </mat-option>
-                                        </mat-select>
+                                        </mat-select> -->
+                                        <input [ngxTimepicker]="toggleTimepicker" [disableClick]="true" readonly  
+                                        [(ngModel)]="selectedValueTimeIn" name="time_in" [format]="24"  (onChange)="hourTimeInSelected($event)" [ngModelOptions]="{standalone: true}">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
                                         <!-- <input class="form-control" name="time_in"   [(ngModel)]="time_in" type="text"  > -->
                                     </div>
                                 </div>
@@ -124,40 +127,52 @@
                                     <div class="form-group local-forms">
                                         <label>Time Out <span class="login-danger">*</span></label>
                                         <!-- <input class="form-control" name="time_out"   [(ngModel)]="time_out" type="text"  > -->
-                                        <mat-select [(ngModel)]="selectedValueTimeOut" name="time_out"
+                                        <!-- <mat-select [(ngModel)]="selectedValueTimeOut" name="time_out"
                                             [ngModelOptions]="{standalone: true}"
                                             (onChange)="hourTimeOutSelected($event)" class="form-control select"
                                             placeholder="Select Hour">
                                             <mat-option *ngFor="let data of hours_days" [value]="data.id">
                                                 {{data.name}}
                                             </mat-option>
-                                        </mat-select>
+                                        </mat-select> -->
+                                        <input [ngxTimepicker]="toggleTimepicker2" [disableClick]="true" readonly  
+                                        [(ngModel)]="selectedValueTimeOut" name="time_out" [format]="24"  (onChange)="hourTimeOutSelected($event)" [ngModelOptions]="{standalone: true}">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker2"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker2></ngx-material-timepicker>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label>Time In <span class="login-danger">*</span></label>
                                         <!-- <input class="form-control" name="time_in2"   [(ngModel)]="time_in2" type="text"  > -->
-                                        <mat-select [(ngModel)]="selectedValueTimeIn2" name="time_in2"
+                                        <!-- <mat-select [(ngModel)]="selectedValueTimeIn2" name="time_in2"
                                             [ngModelOptions]="{standalone: true}" class="form-control select"
                                             placeholder="Select Hour">
                                             <mat-option *ngFor="let data of hours_days" [value]="data.id">
                                                 {{data.name}}
                                             </mat-option>
-                                        </mat-select>
+                                        </mat-select> -->
+                                        <input [ngxTimepicker]="toggleTimepicker3" [disableClick]="true" readonly  
+                                        [(ngModel)]="selectedValueTimeIn2" name="time_in2" [format]="24"  (onChange)="hourTimeInSelected($event)" [ngModelOptions]="{standalone: true}">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker3"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker3></ngx-material-timepicker>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label>Time Out <span class="login-danger">*</span></label>
                                         <!-- <input class="form-control" name="time_out2"   [(ngModel)]="time_out2" type="text"  > -->
-                                        <mat-select [(ngModel)]="selectedValueTimeOut2" name="time_out2"
+                                        <!-- <mat-select [(ngModel)]="selectedValueTimeOut2" name="time_out2"
                                             [ngModelOptions]="{standalone: true}" class="form-control select"
                                             placeholder="Select Hour">
                                             <mat-option *ngFor="let data of hours_days" [value]="data.id">
                                                 {{data.name}}
                                             </mat-option>
-                                        </mat-select>
+                                        </mat-select> -->
+                                        <input [ngxTimepicker]="toggleTimepicker4" [disableClick]="true" readonly  
+                                        [(ngModel)]="selectedValueTimeOut2" name="time_out2" [format]="24"  (onChange)="hourTimeInSelected($event)" [ngModelOptions]="{standalone: true}">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker4"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker4></ngx-material-timepicker>
                                     </div>
                                 </div>
                                 <!-- <div class="col-12 col-md-6 col-xl-4">
@@ -215,7 +230,7 @@
                                             <span class="plus bg-dark">+</span> -->
                                         </div>
 
-                                        <button class="btn btn-outline-success btn-sm" (click)="addMaladaptive()">Save</button>
+                                        <button class="btn btn-outline-success btn-sm" (click)="addMaladaptive(behavior)">Save</button>
                                     </div>
                                 </ng-container>
                             </div>
@@ -338,7 +353,7 @@
                                             <span class="plus bg-dark">+</span> -->
                                         </div>
 
-                                        <button class="btn btn-outline-success btn-sm" (click)="addReplacement()">Save</button>
+                                        <button class="btn btn-outline-success btn-sm" (click)="addReplacement(replacemen)">Save</button>
                                     </div>
                                 </ng-container>
                             </div>
@@ -833,7 +848,8 @@
                                         <mat-select [(ngModel)]="selectedValueRBT" name="rbt"
                                             [ngModelOptions]="{standalone: true}" class="form-control select"
                                             placeholder="Select Specialist"
-                                            (selectionChange)="selectFirmaSpecialistRbt($event)">
+                                            (selectionChange)="selectFirmaSpecialistRbt($event)" value="select">
+                                            <mat-option value="select">--Select-</mat-option> 
                                             <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
                                                 {{data.name}} {{data.surname}}
                                             </mat-option>
@@ -868,7 +884,8 @@
                                             <mat-select [(ngModel)]="selectedValueBCBA" name="bcba"
                                                 [ngModelOptions]="{standalone: true}" class="form-control select"
                                                 placeholder="Select Specialist"
-                                                (selectionChange)="selectFirmaSpecialistBcba($event)">
+                                                (selectionChange)="selectFirmaSpecialistBcba($event)" value="select">
+                                                <mat-option value="select">--Select-</mat-option> 
                                                 <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                                     {{data.name}} {{data.surname}}
                                                 </mat-option>

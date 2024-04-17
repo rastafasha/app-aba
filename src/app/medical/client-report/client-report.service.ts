@@ -54,4 +54,15 @@ export class ClientReportService {
     let URL = url_servicios+"/client_report/profile/"+patient_id;
     return this.http.get(URL,{headers:headers});
   }
+
+  create(data){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/client_report/store';
+    return this.http.post(URL,data, {headers:headers});
+  }
+  udpate( data:any, client_id:any,){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/client_report/update/'+client_id;
+    return this.http.post(URL,data,{headers:headers});
+  }
 }
