@@ -58,13 +58,12 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label>Provider Name <span class="login-danger">*</span></label>
-                                        <!-- <input class="form-control" name="provider_name_g"   [(ngModel)]="provider_name_g" type="text"  > -->
-                                        <mat-select [(ngModel)]="selectedValueProviderName" 
-                                        name="provider_name_g" [ngModelOptions]="{standalone: true}" 
-                                        class="form-control select" (selectionChange)="selectSpecialist($event)" 
-                                        placeholder="Select Specialist" value="select">
-                                         <mat-option value="select">--Select-</mat-option> 
-                                         <mat-option *ngFor="let data of roles_rbt" [value]="data.id"> {{data.name}} {{data.surname}} </mat-option> 
+                                        
+
+                                        <mat-select [(ngModel)]="selectedValueProviderName" name="provider_name_g" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist" (selectionChange)="selectSpecialist($event)">
+                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
+                                            </mat-option>
                                         </mat-select>
 
                                     </div>

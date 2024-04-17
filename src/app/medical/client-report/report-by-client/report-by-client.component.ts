@@ -172,7 +172,7 @@ export class ReportByClientComponent {
       this.patientName = resp.full_name;
       this.patientID = resp.patient_id;
       this.noteRbt = resp.noteRbt;
-      this.insurance_id = resp.insurer_id;
+      this.insurance_id = resp.patient.insurer_id;
       this.billed = resp.noteRbt;
       this.pay = resp.noteRbt;
       

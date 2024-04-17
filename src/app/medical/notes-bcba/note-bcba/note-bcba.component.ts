@@ -244,15 +244,22 @@ export class NoteBcbaComponent {
 
   getMaladaptivesBipByPatientId(){
     this.bipService.getBipProfilePatient_id(this.patient_id).subscribe((resp:any)=>{
-      // console.log(resp);
-      this.maladaptives = resp.bip.maladaptives;
-      this.bip_id = resp.bip.id;
+      console.log(resp);
+      // this.maladaptives = resp.bip.maladaptives;
+      this.bip_id = resp.id;
     })
   }
 
   selectSpecialist(event:any){
-    event = this.selectedValueProviderName;
-    this.specialistData(this.selectedValueProviderName);
+    event = this.selectedValueRendering;
+    this.specialistData(this.selectedValueRendering);
+    console.log(this.selectedValueRendering);
+    
+  }
+  selectSpecialistab(event:any){
+    event = this.selectedValueAba;
+    this.specialistData(this.selectedValueAba);
+    console.log(this.selectedValueAba);
     
   }
 
