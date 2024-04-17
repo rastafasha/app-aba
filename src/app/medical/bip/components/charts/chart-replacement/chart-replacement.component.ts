@@ -302,10 +302,10 @@ export class ChartReplacementComponent {
       this.notesRbts = resp.noteRbt;
  
       //fecha inicial cuando se hizo el bip
-      // this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
+      this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
       // console.log(this.sessions_dates);
-      this.sessions_dates?.shift()
-      // console.log(this.number_of_correct_response);
+      // this.sessions_dates?.shift()
+      this.number_of_correct_response.unshift(0)
       //end
 
       if(
@@ -319,13 +319,13 @@ export class ChartReplacementComponent {
         const arrayLabelSemanal = [];
         this.sessions_dates.forEach((date,index) => {
             if (cantidadDeDias == 0) {
-              labelSemanal = date;
+              labelSemanal = date.substr(0,10);
             }
             acumulador = acumulador+this.number_of_correct_response[index];
             cantidadDeDias += 1;
 
             if (cantidadDeDias == 7 || index+1 == this.sessions_dates.length) {
-              labelSemanal += ' - '+date;
+              labelSemanal += ' - '+date.substr(0,10);
               acumuladorDeSemanas.push(acumulador);
               arrayLabelSemanal.push(labelSemanal);
               cantidadDeDias = 0;
@@ -334,7 +334,7 @@ export class ChartReplacementComponent {
             }
         });
         
-        this.sessions_dates = [this.sessionDates[0]].concat(arrayLabelSemanal);
+        this.sessions_dates = [this.sessions_dates[0].substr(0,10)].concat(arrayLabelSemanal);
         this.number_of_correct_response = [this.number_of_correct_response[0]].concat(acumuladorDeSemanas);
       }
       
