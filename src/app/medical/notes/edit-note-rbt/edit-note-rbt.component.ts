@@ -107,6 +107,7 @@ export class EditNoteRbtComponent {
   public goal: any;
   public note_id: any;
   public note_selectedId: any;
+  public porcentage_diario: any;
 
   public roles_rbt:any = [];
   public roles_bcba:any = [];
@@ -316,6 +317,7 @@ export class EditNoteRbtComponent {
       goal: this.replacementSelected.goal,
       total_trials: this.total_trials,
       number_of_correct_response: this.number_of_correct_response,
+      // porcentage_diario: this.number_of_correct_response * 100 / this.total_trials,
     })
     if(this.replacementgroup.length > 1){
       this.replacementgroup.splice(this.replacementgroup,1);
@@ -324,6 +326,7 @@ export class EditNoteRbtComponent {
     this.goal = '';
     this.total_trials = null;
     this.number_of_correct_response = null;
+    // this.porcentage_diario = null;
   }
 
   addMaladaptive(){

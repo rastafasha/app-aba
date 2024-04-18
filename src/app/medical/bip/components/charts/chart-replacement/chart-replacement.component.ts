@@ -123,6 +123,12 @@ export class ChartReplacementComponent {
   public goals: any = [];
   sessions_dates: any[];
   number_of_occurrence: any[];
+  // este es la porcentage_diario  de <h4> {{(replacemen.number_of_correct_response * 100 / replacemen.total_trials)}}%</h4>
+  // debo guardarlo desde la nota rbt como sumatoria_porcentage_diario: este se suma la semana y se divide entre 7 o dias de la semana
+  porcentage_diario = null;
+  sumatoria_porcentage_diario: any[];
+  promedio_porcentual_semanal: any[];
+  
   //datos reales
 
   constructor(
@@ -369,7 +375,7 @@ export class ChartReplacementComponent {
         },
         series: [
           {
-            name: 'Number of Occurrences',
+            name: '% Week',
             color: '#00D3C7',
             data: this.number_of_correct_response,
             // data: [45, 60, 75, 51, 42, 42,45,],

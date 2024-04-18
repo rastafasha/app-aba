@@ -292,6 +292,7 @@
                                         </div>
                                         <div class="title">
                                             <h4 class="label">{{replacemen.goal}}</h4>
+                                            <h4> {{(replacemen.number_of_correct_response * 100 / replacemen.total_trials)}}%</h4>
                                         </div>
                                         <label for="">Total Trials:</label>
                                         <input class="form-control" name="total_trials " [ngModelOptions]="{standalone: true}" [(ngModel)]="replacemen.total_trials" type="number"  >

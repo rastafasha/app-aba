@@ -107,6 +107,7 @@ export class NoteRbtComponent {
   public note_rbt_id: any;
   public goal: any;
   public note_id: any;
+  public porcentage_diario: any;
 
   public roles_rbt:any = [];
   public roles_bcba:any = [];
@@ -290,6 +291,7 @@ export class NoteRbtComponent {
       goal: this.replacementSelected.goal,
       total_trials: this.replacementSelected.total_trials,
       number_of_correct_response: this.replacementSelected.number_of_correct_response,
+      // porcentage_diario: this.number_of_correct_response * 100 / this.total_trials,
     })
     if(this.replacementGoals.length > 1){
       this.replacementGoals.splice(this.replacementGoals,1);
@@ -298,7 +300,9 @@ export class NoteRbtComponent {
     this.goal = '';
     this.total_trials = null;
     this.number_of_correct_response = null;
+    // this.porcentage_diario = null;
   }
+
 
   addMaladaptive(behavior){
     this.maladaptiveSelected = behavior;
@@ -443,6 +447,7 @@ export class NoteRbtComponent {
     formData.append('rbt_modeled_and_demonstrated_to_caregiver', this.rbt_modeled_and_demonstrated_to_caregiver);
     formData.append('progress_noted_this_session_compared_to_previous_session', this.progress_noted_this_session_compared_to_previous_session);
     formData.append('next_session_is_scheduled_for', this.next_session_is_scheduled_for);
+    // formData.append('porcentage_diario', this.number_of_correct_response * 100 / this.total_trials,);
     
     // formData.append('imagen', this.FILE_SIGNATURE_RBT  );
     // formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);

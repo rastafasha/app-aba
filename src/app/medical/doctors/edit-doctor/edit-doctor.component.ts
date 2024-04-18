@@ -196,7 +196,7 @@ export class EditDoctorComponent {
 
   
 
-  save(){debugger
+  save(){
     this.text_validation = '';
     this.text_success = '';
     if(!this.name||!this.email ||!this.surname ){
