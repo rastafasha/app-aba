@@ -98,7 +98,7 @@ getDoctor(){
     this.address= this.doctor_selected.address;
     this.notes_bcbas= resp.notes_bcbas;
     this.notes_rbts= resp.notes_rbts;
-    this.patients= resp.patients.data;
+    this.patients= resp.patients;
     this.total_notes_bips= resp.total_notes_bips;
     this.total_notes_bcbas= resp.total_notes_bcbas;
     this.total_notes_rbts= resp.total_notes_rbts;

@@ -539,10 +539,16 @@ export class EditNoteRbtComponent {
     if(this.FILE_SIGNATURE_RBT ){
       formData.append('imagen', this.FILE_SIGNATURE_RBT);
     }
-    if(this.FILE_SIGNATURE_BCBA ){
-      formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
+    if(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED ){
+      formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
     }
-    
+    if(this.FILE_SIGNATURE_RBT ){
+      formData.append('imagenn', this.FILE_SIGNATURE_RBT);
+    }
+    if(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED ){
+      formData.append('imagenn', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+    }
+
     this.noteRbtService.editNote(formData,this.note_selectedId ).subscribe((resp:any)=>{
       // console.log(resp);
       

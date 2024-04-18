@@ -330,11 +330,11 @@ export class BillingByClientComponent {
   //   }
   // }
   
-  // onPaginateChange(event: any) {
-  //   this.skip = event.pageIndex * this.pageSize;
-  //   this.totalDataBilling += this.getPageTotal();
-  //   this.getTableDataGeneral();
-  // }
+  onPaginateChange(event: any) {
+    this.skip = event.pageIndex * this.pageSize;
+    this.totalDataBilling += this.getPageTotal();
+    this.getTableDataGeneral();
+  }
   
   getPageTotal(): number {
     const endIndex = Math.min(this.skip + this.pageSize, this.billingList.length);

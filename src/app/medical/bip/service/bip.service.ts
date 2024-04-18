@@ -39,6 +39,12 @@ export class BipService {
     let URL = url_servicios+'/bip/profileBip/'+patient_id;
     return this.http.get(URL, {headers:headers});
   }
+
+  getBipProfilePatientPdf_id(patient_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+    let URL = url_servicios+'/bip/profileBipPdf/'+patient_id;
+    return this.http.get(URL, {headers:headers});
+  }
   createBip(data){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
     let URL = url_servicios+'/bip/store';

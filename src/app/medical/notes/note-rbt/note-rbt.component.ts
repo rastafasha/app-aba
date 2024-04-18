@@ -183,9 +183,9 @@ export class NoteRbtComponent {
 
   getMaladaptivesBipByPatientId(){
     this.bipService.getBipProfilePatient_id(this.patient_id).subscribe((resp:any)=>{
-      // console.log(resp);
-      this.maladaptives = resp.bip.maladaptives;
-      this.bip_id = resp.bip.id;
+      console.log(resp);
+      this.maladaptives = resp.maladaptives;
+      this.bip_id = resp.id;
     })
   }
   getReplacementsByPatientId(){
@@ -444,9 +444,22 @@ export class NoteRbtComponent {
     formData.append('progress_noted_this_session_compared_to_previous_session', this.progress_noted_this_session_compared_to_previous_session);
     formData.append('next_session_is_scheduled_for', this.next_session_is_scheduled_for);
     
-    formData.append('imagen', this.FILE_SIGNATURE_RBT);
-    formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
-    
+    // formData.append('imagen', this.FILE_SIGNATURE_RBT  );
+    // formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+    // formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
+    // formData.append('imagenn', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+    if(this.FILE_SIGNATURE_RBT ){
+      formData.append('imagen', this.FILE_SIGNATURE_RBT);
+    }
+    if(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED ){
+      formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+    }
+    if(this.FILE_SIGNATURE_RBT ){
+      formData.append('imagenn', this.FILE_SIGNATURE_RBT);
+    }
+    if(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED ){
+      formData.append('imagenn', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+    }
     
     this.noteRbtService.createNote(formData).subscribe((resp:any)=>{
       // console.log(resp);

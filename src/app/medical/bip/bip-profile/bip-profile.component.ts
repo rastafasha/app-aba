@@ -141,7 +141,7 @@ export class BipProfileComponent {
   }
 
   getPatient(){
-    this.bipService.getBipProfilePatient_id(this.patient_id).subscribe((resp:any)=>{
+    this.bipService.getBipProfilePatientPdf_id(this.patient_id).subscribe((resp:any)=>{
       console.log(resp);
       this.bip_selected= resp.bip;
       this.patient_selected= resp.patient;

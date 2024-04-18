@@ -9,6 +9,7 @@ import { RolesService } from '../../roles/service/roles.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import { ClientReportService } from '../client-report.service';
 import Swal from 'sweetalert2';
+import { NoteRbtService } from '../../notes/services/note-rbt.service';
 declare var $:any;  
 
 @Component({
@@ -84,8 +85,8 @@ export class ReportByClientComponent {
   public time_in2:any;
   public time_out2:any;
   public pos:any;
-  public billed:any ;
-  public pay:any ;
+  public billed:boolean ;
+  public pay:boolean ;
   public md:any;
   public md2:any;
   public pay_selected:any;
@@ -115,6 +116,7 @@ export class ReportByClientComponent {
     public roleService: RolesService,
     public insuranceService: InsuranceService,
     public patientService: PatientMService,
+    public noteRbtService: NoteRbtService,
   ){}
 
   ngOnInit(): void {
@@ -126,9 +128,8 @@ export class ReportByClientComponent {
 
      this.getTableData();
      this.getConfig();
-     
      this.billed = false;
-    this.pay = false;
+     this.pay = false;
      
      this.doctorService.getUserRoles();
     this.user = this.roleService.authService.user;
@@ -425,35 +426,12 @@ export class ReportByClientComponent {
   
   }
 
-  // getTableDataGeneral2() {
-  //   this.clientReportList = [];
-  //   this.serialNumberArray = [];
-  //   this.totalDataClientReport = 0;
-  
-  //   if (Array.isArray(this.clientReport_generals)) {
-  //     const startIndex = this.skip;
-  //     const endIndex = Math.min(startIndex + this.pageSize, this.clientReport_generals.length);
-  //     this.clientReportList = this.clientReport_generals.slice(startIndex, endIndex);
-  //     for (let i = startIndex; i < endIndex; i++) {
-  //       const serialNumber = i + 1;
-  //       this.serialNumberArray.push(serialNumber);
-  //       this.totalDataClientReport += this.clientReportList[i - startIndex].amount;
-  //     }
-  //     this.dataSource = new MatTableDataSource<any>(this.clientReportList);
-  //     this.calculateTotalPages(this.totalDataClientReport, this.pageSize);
-  //   } else {
-  //     if (Array.isArray(this.clientReport_generals.data)) {
-  //       this.clientReport_generals = this.clientReport_generals.data;
-  //       this.getTableDataGeneral();
-  //     }
-  //   }
-  // }
-  
-  // onPaginateChange(event: any) {
-  //   this.skip = event.pageIndex * this.pageSize;
-  //   this.totalDataClientReport += this.getPageTotal();
-  //   this.getTableDataGeneral();
-  // }
+
+  onPaginateChange(event: any) {
+    this.skip = event.pageIndex * this.pageSize;
+    this.totalDataClientReport += this.getPageTotal();
+    this.getTableDataGeneral();
+  }
   
   getPageTotal(): number {
     const endIndex = Math.min(this.skip + this.pageSize, this.clientReportList.length);
@@ -546,19 +524,21 @@ export class ReportByClientComponent {
 
   isCheckedBilled(){
     this.billed = !this.billed;
+    console.log(this.billed);
     // if ( event.target.checked ) {
     // }
   }
 
     isCheckedPay(){
       this.pay = !this.pay;
+      console.log(this.pay);
       // if ( event.target.checked ) {
       // }
     }
 
 
 
-  save(data:any){debugger
+  save(data:any){
     let VALUE = {
       session_date: data.session_date,
       pos: data.pos,
@@ -579,6 +559,13 @@ export class ReportByClientComponent {
       noterbt_id: data.id,
       
     };
+    let VALUE2 = {
+      pa_number: this.pa_number,
+      billed: this.billed,
+      pay: this.pay,
+      // noterbt_id: data.id,
+      
+    };
     // if(this.md2.value === 'XE' ||this.md.value ==='XE')
     //   this.xe= data.total_units * this.unitPrize * this.xe,
     
@@ -592,6 +579,9 @@ export class ReportByClientComponent {
         Swal.fire('Updated', `Bip Updated successfully!`, 'success');
         this.ngOnInit();
       })
+      this.noteRbtService.editNote(VALUE2,data.id).subscribe((resp:any)=>{
+        console.log(resp);
+      })
       
     }else{ 
       
@@ -601,6 +591,12 @@ export class ReportByClientComponent {
         // this.text_success = 'Se guardó la informacion de la cita médica'
         Swal.fire('Created', `Created successfully!`, 'success');
         this.ngOnInit();
+      })
+
+      this.noteRbtService.editNote(VALUE2,data.id ).subscribe((resp:any)=>{
+        console.log(resp);
+        
+        
       })
     }
   }
