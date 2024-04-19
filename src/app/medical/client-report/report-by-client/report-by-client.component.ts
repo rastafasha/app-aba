@@ -170,12 +170,12 @@ export class ReportByClientComponent {
       
       console.log(resp);
       // traemos la info necesaria del paciente
-      this.patientName = resp.full_name;
-      this.patientID = resp.patient_id;
-      this.noteRbt = resp.noteRbt;
+      this.patientName = resp.patient.full_name;
+      this.patientID = resp.patient.patient_id;
+      this.noteRbt = resp.noteRbts;
       this.insurance_id = resp.patient.insurer_id;
-      this.billed = resp.noteRbt;
-      this.pay = resp.noteRbt;
+      this.billed = resp.noteRbts;
+      this.pay = resp.noteRbts;
       
       
       this.pa_assessments = resp.pa_assessments;
@@ -189,12 +189,12 @@ export class ReportByClientComponent {
       
       
 
-      this.totalDataClientReport = resp.noteRbt.length;
-      this.clientReport_generals = resp.noteRbt;
+      this.totalDataClientReport = resp.noteRbts.length;
+      this.clientReport_generals = resp.noteRbts;
       this.patient_id = resp.patient_id;
       // this.sponsor_id = resp.noteRbt[0].provider_name_g;
       // Get all unique sponsor_id values
-      const sponsorIds = [...new Set(resp.noteRbt.map(item => item.provider_name_g))];
+      const sponsorIds = [...new Set(resp.noteRbts.map(item => item.provider_name_g))];
       
       // Use the getDoctor() function to retrieve the name for each sponsor_id
       const sponsorNames = sponsorIds.map(sponsorId => this.getDoctor(sponsorId));

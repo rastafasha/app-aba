@@ -188,8 +188,10 @@
                                         <th mat-sort-header="cpt">CPT</th>
                                         <th mat-sort-header="md">Modifier </th>
                                         <th mat-sort-header="md2">Modifier </th>
+                                        <th mat-sort-header="totalunits">Total Units</th>
+                                        <th mat-sort-header="units">Units Price</th>
                                         <th mat-sort-header="charges">Charges</th>
-                                        <th mat-sort-header="units">Units</th>
+                                        <th mat-sort-header="charges">Total</th>
                                         <th mat-sort-header="sponsor_id">Provider</th>
                                         <th mat-sort-header="pa_number">PA Number</th>
                                         <th mat-sort-header="billed">Billed</th>
@@ -262,14 +264,16 @@
                                                 </div>
                                             </span>
                                         </td>
+                                        
+                                        <!-- <td>{{(( data.total_units * unitPrize - md | currency))}}</td> -->
+                                        <td>{{data.session_units_total}}</td>
+                                        <td>{{unitPrize | currency}}</td>
                                         <td>
-                                            {{(( data.total_units * unitPrize  | currency))}}
+                                            {{(( data.session_units_total * unitPrize  | currency))}}
                                             <span *ngIf="md == 'XE' || md2 == 'XE'">
-                                               xe:{{(( data.total_units * unitPrize * xe | currency))}}
+                                               xe:{{(( data.session_units_total * unitPrize * xe | currency))}}
                                             </span>
                                         </td>
-                                        <!-- <td>{{(( data.total_units * unitPrize - md | currency))}}</td> -->
-                                        <td>{{n_units}}</td>
                                         <td>
                                             {{data.provider_name_g}}|
                                             {{doctor_selected_full_name}}
