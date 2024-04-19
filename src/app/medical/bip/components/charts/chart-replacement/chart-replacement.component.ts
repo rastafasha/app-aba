@@ -281,6 +281,10 @@ export class ChartReplacementComponent {
         number_of_correct_response.push(Number(this.goals.number_of_correct_response))
         goal.push(String(this.goals.goal))
       }
+      const number_of_trials:number[] = [];
+      array.forEach(element => {
+        number_of_trials.push(element.total_trials)
+      });
       // console.log(number_of_correct_response);
       // console.log(goal);
 
@@ -312,6 +316,7 @@ export class ChartReplacementComponent {
       // console.log(this.sessions_dates);
       // this.sessions_dates?.shift()
       this.number_of_correct_response.unshift(0)
+      number_of_trials.unshift(0)
       //end
 
       if(
@@ -319,16 +324,21 @@ export class ChartReplacementComponent {
         this.sessions_dates?.length === this.number_of_correct_response?.length
       ) {
         let acumulador = 0;
+        let sumadorDeTrials = 0;
         const acumuladorDeSemanas = [];
+        const acumuladorDeTrials = [];
         let cantidadDeDias = 0;
         let labelSemanal = '';
         const arrayLabelSemanal = [];
         this.sessions_dates.forEach((date,index) => {
+          if(index > 0) {
             if (cantidadDeDias == 0) {
               labelSemanal = date.substr(0,10);
             }
             acumulador = acumulador+this.number_of_correct_response[index];
             cantidadDeDias += 1;
+            sumadorDeTrials += number_of_trials[index];
+            console.log(sumadorDeTrials, index)
 
             if (cantidadDeDias == 7 || index+1 == this.sessions_dates.length) {
               labelSemanal += ' - '+date.substr(0,10);
@@ -337,11 +347,20 @@ export class ChartReplacementComponent {
               cantidadDeDias = 0;
               acumulador = 0;
               labelSemanal = '';
+              acumuladorDeTrials.push(sumadorDeTrials);
+              sumadorDeTrials =0 ;
             }
+          }
         });
+        const porcentajes:number[] = [];
+        if(acumuladorDeSemanas.length === acumuladorDeTrials.length) {
+          acumuladorDeSemanas.forEach((ac,index) => {
+            porcentajes.push(+(ac/acumuladorDeTrials[index]).toFixed(2)*100)
+          })
+        }
         
         this.sessions_dates = [this.sessions_dates[0].substr(0,10)].concat(arrayLabelSemanal);
-        this.number_of_correct_response = [this.number_of_correct_response[0]].concat(acumuladorDeSemanas);
+        this.number_of_correct_response = [this.number_of_correct_response[0]].concat(porcentajes);
       }
       
       
