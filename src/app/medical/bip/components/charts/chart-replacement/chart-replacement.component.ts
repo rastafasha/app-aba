@@ -335,9 +335,9 @@ export class ChartReplacementComponent {
             if (cantidadDeDias == 0) {
               labelSemanal = date.substr(0,10);
             }
-            acumulador = acumulador+this.number_of_correct_response[index];
+            acumulador = acumulador+(+this.number_of_correct_response[index]);
             cantidadDeDias += 1;
-            sumadorDeTrials += number_of_trials[index];
+            sumadorDeTrials += +number_of_trials[index];
             console.log(sumadorDeTrials, index)
 
             if (cantidadDeDias == 7 || index+1 == this.sessions_dates.length) {
