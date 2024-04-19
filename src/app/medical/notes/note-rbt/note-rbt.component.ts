@@ -27,10 +27,10 @@ export class NoteRbtComponent {
   public selectedValueProvider!: string;
   public selectedValueRBT!: string;
   public selectedValueBCBA!: string;
-  public selectedValueTimeIn!: number;
-  public selectedValueTimeOut!: number;
-  public selectedValueTimeIn2!: number;
-  public selectedValueTimeOut2!: number;
+  public selectedValueTimeIn: number = 0;
+  public selectedValueTimeOut: number = 0;
+  public selectedValueTimeIn2: number = 0;
+  public selectedValueTimeOut2: number = 0;
   public selectedValueProviderName!: string;
   public selectedValueMaladaptive!: string;
   public selectedValueProviderCredential!: string;
@@ -285,38 +285,77 @@ export class NoteRbtComponent {
   
 
 
-  addReplacement(replacemen){
-    this.replacementSelected = replacemen;
+  
+
+  addMaladaptive(behavior:any){
+    if(this.maladaptiveSelected !== null ){
+      this.maladaptiveSelected = behavior;
+      this.maladaptives.push({
+        maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
+        number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ? this.maladaptiveSelected.number_of_occurrences : '0',
+      })
+      if(this.maladaptives.length > 1){
+        this.maladaptives.splice(this.maladaptives,1);
+      }
+      this.maladaptiveSelected = behavior.maladaptive_behavior;
+      this.maladaptive_behavior = '';
+      this.number_of_occurrences = 0;
+    
+  }else{
+    // alert("if you didn't have any reaction, enter :0");
+    this.maladaptiveSelected =  behavior  ;
+      this.maladaptive_behavior = behavior.maladaptive_behavior 
+      this.number_of_occurrences = 0;
+      this.maladaptives.push({
+        maladaptive_behavior: behavior.maladaptive_behavior,
+        number_of_occurrences: '0' ,
+      })
+      if(this.maladaptives.length > 1){
+        this.maladaptives.splice(this.maladaptives,1);
+      }
+  }
+  
+    
+  }
+  
+  addReplacement(replacemen:any){
+    
+    if(this.replacementSelected !== null ){
+      this.total_trials = 0;
+    this.number_of_correct_response = 0;
     this.replacementGoals.push({
       goal: this.replacementSelected.goal,
-      total_trials: this.replacementSelected.total_trials,
-      number_of_correct_response: this.replacementSelected.number_of_correct_response,
-      // porcentage_diario: this.number_of_correct_response * 100 / this.total_trials,
+      total_trials: this.total_trials ? this.total_trials  : "0",
+      number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response : '0' ,
+      
     })
     if(this.replacementGoals.length > 1){
       this.replacementGoals.splice(this.replacementGoals,1);
     }
-    this.replacementSelected = null;
+    this.replacementSelected = replacemen.goal;
     this.goal = '';
-    this.total_trials = null;
-    this.number_of_correct_response = null;
-    // this.porcentage_diario = null;
+    this.total_trials = 0;
+    this.number_of_correct_response = 0;
+    }else{
+      // alert("if you didn't have any reaction, enter :0");
+      this.goal = replacemen.goal;
+      this.total_trials = 0;
+      this.number_of_correct_response = 0;
+
+      this.replacementGoals.push({
+        goal: replacemen.goal,
+        total_trials:  "0",
+        number_of_correct_response:  '0' ,
+      
+      })
+      if(this.replacementGoals.length > 1){
+        this.replacementGoals.splice(this.replacementGoals,1);
+      }
+      }
+
+    
   }
 
-
-  addMaladaptive(behavior){
-    this.maladaptiveSelected = behavior;
-    this.maladaptives.push({
-      maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
-      number_of_occurrences: this.maladaptiveSelected.number_of_occurrences,
-    })
-    if(this.maladaptives.length > 1){
-      this.maladaptives.splice(this.maladaptives,1);
-    }
-    this.maladaptiveSelected = null;
-    this.maladaptive_behavior = '';
-    this.number_of_occurrences = null;
-  }
 
   deleteMaladaptive(i:any){
     this.replacementGoals.splice(i,1);
@@ -424,10 +463,23 @@ export class NoteRbtComponent {
     
     
     formData.append('provider_name_g', this.selectedValueProviderName);
-    formData.append('time_in', this.selectedValueTimeIn+'');
-    formData.append('time_out', this.selectedValueTimeOut+'');
-    formData.append('time_in2', this.selectedValueTimeIn2+'');
-    formData.append('time_out2', this.selectedValueTimeOut2+'');
+
+    if(this.selectedValueTimeIn ){
+      formData.append('time_in', this.selectedValueTimeIn+'' ? this.selectedValueTimeIn+'' : "0");
+    }
+    if(this.selectedValueTimeOut ){
+      formData.append('time_out', this.selectedValueTimeOut+''? this.selectedValueTimeOut+'' : "0");
+    }
+    if(this.selectedValueTimeIn2 ){
+      formData.append('time_in2', this.selectedValueTimeIn2+''? this.selectedValueTimeIn2+'' : "0");
+    }
+    if(this.selectedValueTimeOut2 ){
+      formData.append('time_out2', this.selectedValueTimeOut2+''? this.selectedValueTimeOut2+'' : "0");
+    }
+    
+    
+    
+    
     
     formData.append('environmental_changes', this.environmental_changes);
     

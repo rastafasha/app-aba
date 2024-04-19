@@ -77,6 +77,7 @@ export class ChartReductionComponent {
   @Input() maladaptiveSelectedSon:any;
   @Input() maladaptive_behavior:any;
   @Input() initial_interesting:any;
+  @Input() baseline_level:any;
   @Input() baseline_date:Date | 'shortTime';
   // @Output() cursoD: EventEmitter<any>  = new EventEmitter();// envia la data
 
@@ -199,10 +200,12 @@ export class ChartReductionComponent {
 
   ngOnInit(): void {
     
-    this.maladaptive_behavior
-    this.initial_interesting
-    this.baseline_date
-    console.log('baseline_date',this.baseline_date);
+    this.maladaptive_behavior;
+    this.initial_interesting;
+    this.baseline_date;
+    this.baseline_level;
+    console.log('baseline_level',this.baseline_level);
+    // console.log('baseline_date',this.baseline_date);
     
 
     this.activatedRoute.params.subscribe((resp:any)=>{
@@ -298,7 +301,7 @@ export class ChartReductionComponent {
  
       //fecha inicial cuando se hizo el bip
       this.sessions_dates.unshift(this.baseline_date); // con unshift lo unimos y colocamos de primero
-      this.number_of_occurrence.unshift(this.initial_interesting); // con unshift lo unimos y colocamos de primero
+      this.number_of_occurrence.unshift(this.baseline_level); // con unshift lo unimos y colocamos de primero
       console.log(this.sessions_dates);
       console.log(this.number_of_occurrence);
 

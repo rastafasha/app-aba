@@ -208,6 +208,7 @@
                     <div class="card-body">
                         <div class="col-12">
                             <h4>Maladaptives</h4>
+                            <p class="text-danger">Note: Please fill out all fields and save each Maladaptive, if you didn't have any reaction, enter "0"</p>
                         </div>
                         <div class="container">
                             <form autocomplete="false">
@@ -215,16 +216,16 @@
                                 <ng-container *ngFor="let behavior of maladaptives; let i = index">
                                     <div class="col-xs-12 col-sm-3  graphic-value" >
                                         
-                                        <div  class="circle-bar circle-bar2">
+                                        <!-- <div  class="circle-bar circle-bar2">
                                             <circle-progress class="circle-progress-bar" [percent]="behavior.number_of_occurrences" [clockwise]="true"
                                             innerStrokeColor=#dee2e6 outerStrokeColor=#2E37A4></circle-progress>
                                             {{behavior.number_of_occurrences}}
-                                        </div>
+                                        </div> -->
                                         <div class="title">
                                             <h4 class="label">{{behavior.maladaptive_behavior}}</h4>
                                             
                                         </div>
-                                        <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}" [(ngModel)]="behavior.number_of_occurrences" type="number"  >
+                                        <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}" [(ngModel)]="behavior.number_of_occurrences" type="number" value="0"  >
                                         <div class="qty">
                                             <!-- <span class="minus bg-dark">-</span>
                                             <input type="number" class="count" onchange="countValue1()" [ngModelOptions]="{standalone: true}" [(ngModel)]="number_of_occurrences"  name="number_of_occurrences" [value]="behavior.number_of_occurrences">
@@ -247,86 +248,20 @@
             <!-- pruba grafica -->
 
 
-            <!-- Maladaptives -->
-            <!-- <div class="col-xs-12 col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="col-12">
-                            <h4>Maladaptives</h4>
-                        </div>
-                        <div class="container">
-                            <form autocomplete="false">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Maladaptive </th>
-                                                <th># of Occurrences </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody *ngIf="!maladaptiveSelected">
-
-                                            <tr *ngFor="let behavior of maladaptives; let i = index">
-                                                <td>
-                                                    {{behavior.maladaptive_behavior}}
-                                                </td>
-                                                <td>
-                                                    {{behavior.number_of_occurrences}}
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-outline-success btn-sm"
-                                                        (click)="selectMaladaptive(behavior)"><i
-                                                            class="fa fa-edit"></i></button>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                        <tbody *ngIf="maladaptiveSelected">
-
-                                            <tr>
-                                                <td>
-                                                    {{maladaptiveSelected.maladaptive_behavior}}
-                                                </td>
-                                                <td>
-                                                    <input class="form-control" name="number_of_occurrences "
-                                                        [ngModelOptions]="{standalone: true}"
-                                                        [(ngModel)]="number_of_occurrences" type="number">
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-outline-success btn-sm"
-                                                        (click)="back()">Back</button>
-                                                    <button class="btn btn-outline-success btn-sm"
-                                                        (click)="addMaladaptive()">Save</button>
-
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div> -->
-            <!-- fin Maladaptives -->
-
 
             <div class="col-xs-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="col-12">
                             <h4>Replacements</h4>
+                            <p class="text-danger">Note: Please fill out all fields and save each STO. If the treatment has not started, enter "0"</p>
                         </div>
                         <div class="container">
                             <form autocomplete="false">
                             <div class="row">
                                 <ng-container *ngFor="let replacemen of replacementGoals; let i = index">
                                     <div class="col-xs-12 col-sm-3  graphic-value" >
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div class="col-6 minigr">
                                                 <div  class="circle-bar circle-bar2">
                                                     <circle-progress class="circle-progress-bar" [percent]="replacemen.total_trials" [clockwise]="true"
@@ -342,15 +277,15 @@
                                                     
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="title">
                                             <h4 class="label">{{replacemen.goal}}</h4>
-                                            <h4> {{(replacemen.number_of_correct_response * 100 / replacemen.total_trials)}}%</h4>
+                                            <p class="text-center"> {{(replacemen.number_of_correct_response * 100 / replacemen.total_trials)}}%</p>
                                         </div>
                                         <label for="">Total Trials:</label>
-                                        <input class="form-control" name="total_trials " [ngModelOptions]="{standalone: true}" [(ngModel)]="replacemen.total_trials" type="number"  >
+                                        <input class="form-control" name="total_trials " [ngModelOptions]="{standalone: true}" [(ngModel)]="replacemen.total_trials" type="number" [valueAsNumber]="0"  >
                                         <label for="">Correct response</label>
-                                        <input class="form-control" name="number_of_correct_response " [ngModelOptions]="{standalone: true}" [(ngModel)]="replacemen.number_of_correct_response" type="number"  >
+                                        <input class="form-control" name="number_of_correct_response " [ngModelOptions]="{standalone: true}" [(ngModel)]="replacemen.number_of_correct_response" type="number" [valueAsNumber]="0"   >
                                         <div class="qty">
                                             <!-- <span class="minus bg-dark">-</span>
                                             <input type="number" class="count" onchange="countValue1()" [ngModelOptions]="{standalone: true}" [(ngModel)]="number_of_occurrences"  name="number_of_occurrences" [value]="behavior.number_of_occurrences">
@@ -369,79 +304,6 @@
                 </div>
             </div>
             <!-- replacements -->
-            <!-- <div class="col-xs-12 col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="col-12">
-                            <h4>Replacements</h4>
-                        </div>
-                        <div class="container">
-                            <form autocomplete="false">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Replacement </th>
-                                                <th>Total Trials</th>
-                                                <th># of correct responses</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody *ngIf="!replacementSelected">
-                                            <tr *ngFor="let replacemen of replacementGoals; let i = index">
-                                                <td>
-                                                    {{replacemen.goal}}
-                                                </td>
-                                                <td *ngIf="replacemen.total_trials > 0">
-                                                    {{replacemen.total_trials}}
-                                                </td>
-                                                <td *ngIf="replacemen.number_of_correct_response > 0">
-                                                    {{replacemen.number_of_correct_response}}
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-outline-success btn-sm"
-                                                        (click)="selectReplacement(replacemen)"><i
-                                                            class="fa fa-edit"></i></button>
-                                                </td>
-
-                                            </tr>
-
-                                        </tbody>
-                                        <tbody *ngIf="replacementSelected">
-                                            <tr>
-                                                <td>
-                                                    {{replacementSelected.goal}}
-                                                </td>
-                                                <td>
-                                                    <input class="form-control" name="total_trials "
-                                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="total_trials"
-                                                        type="number">
-                                                </td>
-                                                <td>
-                                                    <input class="form-control" name="number_of_correct_response "
-                                                        [ngModelOptions]="{standalone: true}"
-                                                        [(ngModel)]="number_of_correct_response" type="number">
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-outline-success btn-sm"
-                                                        (click)="back()">Back</button>
-                                                    <button class="btn btn-outline-success btn-sm"
-                                                        (click)="addReplacement()">Save</button>
-                                                </td>
-
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div> -->
-            <!-- fin replacements -->
             <!-- interventions -->
             <div class="col-12">
                 <div class="card">
