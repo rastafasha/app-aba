@@ -287,74 +287,108 @@ export class NoteRbtComponent {
 
   
 
-  addMaladaptive(behavior:any){
-    if(this.maladaptiveSelected !== null ){
-      this.maladaptiveSelected = behavior;
-      this.maladaptives.push({
-        maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
-        number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ? this.maladaptiveSelected.number_of_occurrences : '0',
-      })
-      if(this.maladaptives.length > 1){
-        this.maladaptives.splice(this.maladaptives,1);
-      }
-      this.maladaptiveSelected = behavior.maladaptive_behavior;
-      this.maladaptive_behavior = '';
-      this.number_of_occurrences = 0;
-    
-  }else{
-    // alert("if you didn't have any reaction, enter :0");
-    this.maladaptiveSelected =  behavior  ;
-      this.maladaptive_behavior = behavior.maladaptive_behavior 
-      this.number_of_occurrences = 0;
-      this.maladaptives.push({
-        maladaptive_behavior: behavior.maladaptive_behavior,
-        number_of_occurrences: '0' ,
-      })
-      if(this.maladaptives.length > 1){
-        this.maladaptives.splice(this.maladaptives,1);
-      }
-  }
-  
+  addMaladaptive(){
+    this.maladaptives.push({
+      maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
+      number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ? this.maladaptiveSelected.number_of_occurrences : 0,
+    })
+    if(this.maladaptives.length > 1){
+      this.maladaptives.splice(this.maladaptives,1);
+    }
+    this.maladaptiveSelected = null;
+    this.maladaptive_behavior = '';
+    this.number_of_occurrences = 0;
     
   }
-  
-  addReplacement(replacemen:any){
+
+  // addMaladaptive(behavior:any){
+  //   if(this.maladaptiveSelected !== null ){
+  //     this.maladaptiveSelected = behavior;
+  //     this.maladaptives.push({
+  //       maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
+  //       number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ? this.maladaptiveSelected.number_of_occurrences : '0',
+  //     })
+  //     if(this.maladaptives.length > 1){
+  //       this.maladaptives.splice(this.maladaptives,1);
+  //     }
+  //     this.maladaptiveSelected = behavior.maladaptive_behavior;
+  //     this.maladaptive_behavior = '';
+  //     this.number_of_occurrences = 0;
     
-    if(this.replacementSelected !== null ){
-      this.total_trials = 0;
-    this.number_of_correct_response = 0;
+  // }else{
+  //   // alert("if you didn't have any reaction, enter :0");
+  //   this.maladaptiveSelected =  behavior  ;
+  //     this.maladaptive_behavior = behavior.maladaptive_behavior 
+  //     this.number_of_occurrences = 0;
+  //     this.maladaptives.push({
+  //       maladaptive_behavior: behavior.maladaptive_behavior,
+  //       number_of_occurrences: '0' ,
+  //     })
+  //     if(this.maladaptives.length > 1){
+  //       this.maladaptives.splice(this.maladaptives,1);
+  //     }
+  // }
+  
+    
+  // }
+  
+  addReplacement(){
+    
+    
     this.replacementGoals.push({
       goal: this.replacementSelected.goal,
-      total_trials: this.total_trials ? this.total_trials  : "0",
-      number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response : '0' ,
+      total_trials: this.total_trials ? this.total_trials  : 0,
+      number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response :0 ,
       
     })
     if(this.replacementGoals.length > 1){
       this.replacementGoals.splice(this.replacementGoals,1);
     }
-    this.replacementSelected = replacemen.goal;
+    this.replacementSelected = null;
     this.goal = '';
     this.total_trials = 0;
     this.number_of_correct_response = 0;
-    }else{
-      // alert("if you didn't have any reaction, enter :0");
-      this.goal = replacemen.goal;
-      this.total_trials = 0;
-      this.number_of_correct_response = 0;
-
-      this.replacementGoals.push({
-        goal: replacemen.goal,
-        total_trials:  "0",
-        number_of_correct_response:  '0' ,
-      
-      })
-      if(this.replacementGoals.length > 1){
-        this.replacementGoals.splice(this.replacementGoals,1);
-      }
-      }
 
     
   }
+
+  // addReplacement(replacemen:any){
+    
+  //   if(this.replacementSelected !== null ){
+  //     this.total_trials = 0;
+  //   this.number_of_correct_response = 0;
+  //   this.replacementGoals.push({
+  //     goal: this.replacementSelected.goal,
+  //     total_trials: this.total_trials ? this.total_trials  : "0",
+  //     number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response : '0' ,
+      
+  //   })
+  //   if(this.replacementGoals.length > 1){
+  //     this.replacementGoals.splice(this.replacementGoals,1);
+  //   }
+  //   this.replacementSelected = replacemen.goal;
+  //   this.goal = '';
+  //   this.total_trials = 0;
+  //   this.number_of_correct_response = 0;
+  //   }else{
+  //     // alert("if you didn't have any reaction, enter :0");
+  //     this.goal = replacemen.goal;
+  //     this.total_trials = 0;
+  //     this.number_of_correct_response = 0;
+
+  //     this.replacementGoals.push({
+  //       goal: replacemen.goal,
+  //       total_trials:  "0",
+  //       number_of_correct_response:  '0' ,
+      
+  //     })
+  //     if(this.replacementGoals.length > 1){
+  //       this.replacementGoals.splice(this.replacementGoals,1);
+  //     }
+  //     }
+
+    
+  // }
 
 
   deleteMaladaptive(i:any){
