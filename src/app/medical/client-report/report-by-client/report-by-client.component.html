@@ -27,10 +27,10 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="doctor-table-blk">
-                                        <h3 class="col-12">Client Report : {{patient_id}}</h3>
+                                        <!-- <h3 class="col-12">Client Report</h3> -->
                                         <div class="doctor-search-blk">
                                             <div class="top-nav-search table-search-blk">
-                                                    <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
+                                                    <input  class="form-control " placeholder="Search here" [(ngModel)]="searchDataValue"
                                                     (ngModelChange)="searchData()">
                                                     <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
                                             </div>
@@ -39,23 +39,23 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col">
+                                <div class="col pt-3">
                                   <div class="form-group local-forms">
                                     <label >from <span class="login-danger">*</span></label>
-                                    <input class="form-control datetimepicker" name="date_start" [(ngModel)]="date_start" type="date"   >
+                                    <input class="form-control datetimepicker " name="date_start" [(ngModel)]="date_start" type="date"   >
                                   </div>
                                 </div>
-                                <div class="col">
+                                <div class="col pt-3">
                                   <div class="form-group local-forms">
                                     <label >to<span class="login-danger">*</span></label>
-                                    <input class="form-control datetimepicker" name="date_end" [(ngModel)]="date_end" type="date"   >
+                                    <input class="form-control datetimepicker " name="date_end" [(ngModel)]="date_end" type="date"   >
                                   </div>
                                 </div>
                                 <div class="col">
                                     <div class="add-group">
-                                      <a href="#" onclick="return false" (click)="searchData()" class="btn btn-primay add-pluss ms-2">Search</a>
-                                      <!-- <a routerLink="/appointments/add" class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a> -->
-                                      <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
+                                      <a href="#" onclick="return false" (click)="searchData()" class="btn btn-primay add-pluss ">Search</a>
+                                      <!-- <a routerLink="/appointments/add" class="btn btn-primary add-pluss "><img src="assets/img/icons/plus.svg" alt=""></a> -->
+                                      <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh "><img src="assets/img/icons/re-fresh.svg" alt=""></a>
                                   </div>
                                 </div>
                             </div>
@@ -192,7 +192,7 @@
                                                 <div class="form-group local-forms">
                                                     <select
                                                         class="form-control form-select-solid fw-bolder"
-                                                        name="md" #md  (change)="isSelectedModifier(md.value)"   >
+                                                        name="md" #md [(ngModel)]="data.md" (change)="isSelectedModifier(md.value)"   >
                                                         <option>-- Select --</option>
                                                         <option value="HM">HM</option>
                                                         <option value="XE">XE</option>
@@ -205,7 +205,7 @@
                                                 <div class="form-group local-forms">
                                                     <select
                                                         class="form-control form-select-solid fw-bolder"
-                                                        name="md" #md   (change)="isSelectedModifier(md.value)"  >
+                                                        name="md" #md  [(ngModel)]="data.md" (change)="isSelectedModifier(md.value)"  >
                                                         <option>-- Select --</option>
                                                         <option value="HM">HM</option>
                                                         <option value="HO">HO</option>
@@ -219,7 +219,7 @@
                                                 <div class="form-group local-forms">
                                                     <select
                                                         class="form-control form-select-solid fw-bolder"
-                                                        name="md2" #md2  (change)="isSelectedModifier2(md2.value)"  >
+                                                        name="md2" #md2 [(ngModel)]="data.md2"  (change)="isSelectedModifier2(md2.value)"  >
                                                         <option>-- Select --</option>
                                                         <option value="HM">HM</option>
                                                         <option value="XE">XE</option>
@@ -231,7 +231,7 @@
                                                 <div class="form-group local-forms">
                                                     <select
                                                         class="form-control form-select-solid fw-bolder"
-                                                        name="md2" #md2  (change)="isSelectedModifier2(md2.value)"  >
+                                                        name="md2" #md2 [(ngModel)]="data.md2"  (change)="isSelectedModifier2(md2.value)"  >
                                                         <option>-- Select --</option>
                                                         <option value="HM">HM</option>
                                                         <option value="HO">HO</option>
@@ -261,7 +261,7 @@
                                             
                                             <div  class="note-checkit">
                                                 <label class="custom_check">
-                                                    <input type="checkbox" name="billed" [(ngModel)]="billed"  (change)="isCheckedBilled()"    >
+                                                    <input type="checkbox" name="billed" [(ngModel)]="data.billed"  (change)="isCheckedBilled()"    >
                                                     <span class="checkmark" value="false"></span>  
                                                 </label>
                                             </div>
@@ -279,7 +279,7 @@
                                         <td>
                                             <div  class="note-checkit">
                                                 <label class="custom_check">
-                                                    <input type="checkbox" name="pay" [(ngModel)]="pay" (change)="isCheckedPay()"    >
+                                                    <input type="checkbox" name="pay" [(ngModel)]="data.pay" (change)="isCheckedPay()"    >
                                                     <span class="checkmark" value="false"></span> 
                                                 </label>
                                             </div>

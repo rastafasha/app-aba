@@ -35,10 +35,29 @@ export class PatientMService {
   }
 
 
-  listPatients(){
-    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/patients';
+  // listPatients(){
+  //   let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
+  //   let URL = url_servicios+'/patients';
+  //   return this.http.get(URL, {headers:headers});
+  // }
+
+  listPatients(search:any, status: any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+
+    let LINK = "?T=";
+    if(search){
+      LINK += "&search="+search;
+    }
+    if(status){
+      LINK += "&state="+status;
+
+    }
+
+    let URL = url_servicios+'/patients'+LINK;
     return this.http.get(URL, {headers:headers});
+    // return this.http.get(URL, {headers: headers}).pipe(
+    //   finalize(()=> this.isLoadingSubject.next(false))
+    // )
   }
 
   configPatients(page:number=1, search:string=''){

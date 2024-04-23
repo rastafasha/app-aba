@@ -157,11 +157,11 @@ export class EditNoteRbtComponent {
  
   getConfig(){
     this.noteRbtService.listConfigNote().subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
 
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
-      this.hours_days = resp.hours;
+      // this.hours_days = resp.hours;
       
     })
   }
@@ -176,7 +176,7 @@ export class EditNoteRbtComponent {
 
       this.provider_credential = this.note_selected.provider_credential;
       this.as_evidenced_by = this.note_selected.as_evidenced_by;
-      this.client_appeared = this.note_selected.client_appeared;
+      this.client_appeared = resp.noteRbt.client_appeared;
       this.client_response_to_treatment_this_session = this.note_selected.client_response_to_treatment_this_session;
       
       this.interventions = resp.interventions;
@@ -225,12 +225,12 @@ export class EditNoteRbtComponent {
       this.session_length_total2 = this.note_selected.session_length_total2;
       
       this.selectedValueTimeIn = this.note_selected.time_in;
-      console.log(this.selectedValueTimeIn);
+      
       this.selectedValueTimeOut = this.note_selected.time_in2;
       this.selectedValueTimeIn2 = this.note_selected.time_out;
       this.selectedValueTimeOut2 = this.note_selected.time_out2;
 
-      this.selectedValueProviderName = this.note_selected.provider_name_g;
+      this.selectedValueProviderName = resp.noteRbt.provider_name_g;
       this.selectedValueRBT = this.note_selected.provider_name;
       this.selectedValueBCBA = this.note_selected.supervisor_name;
 
@@ -312,15 +312,47 @@ export class EditNoteRbtComponent {
     // this.ngOnInit();
   }
 
-  
+  speciaFirmaDataRbt(selectedValueRBT){
+    this.doctorService.showDoctorProfile(selectedValueRBT).subscribe((resp:any)=>{
+      console.log(resp);
+      this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = resp.doctor.electronic_signature;
+      console.log(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+      // this.notes = resp.notes;
+      // this.services = resp.services;
+    })
+  }
+  selectFirmaSpecialistRbt(event:any){
+    event = this.selectedValueRBT;
+    this.speciaFirmaDataRbt(this.selectedValueRBT);
+    console.log(this.selectedValueRBT);
+    
+  }
+
+  speciaFirmaDataBcba(selectedValueBCBA){
+    this.doctorService.showDoctorProfile(selectedValueBCBA).subscribe((resp:any)=>{
+      console.log(resp);
+      this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = resp.doctor.electronic_signature;
+      console.log(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+      // this.notes = resp.notes;
+      // this.services = resp.services;
+    })
+  }
+
+  selectFirmaSpecialistBcba(event:any){
+    event = this.selectedValueBCBA;
+    this.speciaFirmaDataBcba(this.selectedValueBCBA);
+    console.log(this.selectedValueBCBA);
+    
+  }
   
 
 
-  addMaladaptive(){
+  addMaladaptive(behavior:any){
+    this.maladaptiveSelected = behavior;
     
     this.maladaptivegroup.push({
       maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
-      number_of_occurrences: this.number_of_occurrences ? this.number_of_occurrences : 0 ,
+      number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ,
     })
     if(this.maladaptivegroup.length > 1){
       this.maladaptivegroup.splice(this.maladaptivegroup,1);
@@ -367,12 +399,13 @@ export class EditNoteRbtComponent {
   // }
 
 
-  addReplacement(){
+  addReplacement(replacemen:any){
+    this.replacementSelected = replacemen;
 
     this.replacementgroup.push({
       goal: this.replacementSelected.goal,
-      total_trials: this.total_trials ? this.total_trials  : 0,
-      number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response : 0 ,
+      total_trials: this.replacementSelected.total_trials ,
+      number_of_correct_response: this.replacementSelected.number_of_correct_response  ,
       
     })
     if(this.replacementgroup.length > 1){

@@ -113,6 +113,8 @@ export class ReportByClientComponent {
   public bcba2_id: any;
   public doctor_selected_bcba: any;
   public full_name: any;
+  public doctors: any;
+  public tecnicoDoctorNames: any;
 
   public providersSponsorsList:any;
   public factorPorcentual: number =  1.66666666666667
@@ -183,13 +185,35 @@ export class ReportByClientComponent {
       // traemos la info necesaria del paciente
       this.patientName = resp.patient.full_name;
       this.patientID = resp.patient.patient_id;
-      this.noteRbt = resp.noteRbts;
       this.insurance_id = resp.patient.insurer_id;
       this.billed = resp.noteRbts;
       this.pay = resp.noteRbts;
-      
+
+      // obtengo la info resumida de las notas rbt
+      this.noteRbt = resp.noteRbts;
+      // aqui traigo los nombres de los doctores relacionados al paciente
+      this.doctors = resp.doctors;
       this.supervisor = resp.noteRbts.supervisor;
       this.tecnicoRbts = resp.noteRbts.tecnicoRbts;
+
+      // de this.noteRbt extraer los nombres de los doctores  que estan en el array y guardarlos
+      // for (let i=0;i<this.noteRbt.length;i++){
+      //   let doctor = this.noteRbt[i];
+      //   if (!this.tecnicoDoctorNames.includes(doctor.tecnicoRbts)){
+      //     this.doctors.push(doctor.name)
+      //   }
+      //   console.log(this.tecnicoDoctorNames);
+        
+      // };
+
+
+      // let INDEX = this.noteRbt.findIndex((tecnicoRbts:any)=> tecnicoRbts);
+      // if(INDEX != -1){
+      //   this.noteRbt.splice(INDEX,1);
+      //   console.log(this.tecnicoRbts);
+      // }
+      
+      
 
       this.rbt_id = resp.patient.rbt_id;
       this.rbt2_id = resp.patient.rbt2_id;
@@ -257,7 +281,7 @@ export class ReportByClientComponent {
 
   //trae el nombre del doctor quien hizo la nota rbt
   getDoctorRBT(){
-    this.doctorService.showDoctor(this.tecnicoRbts).subscribe((resp:any)=>{
+    this.doctorService.showDoctor(this.rbt_id).subscribe((resp:any)=>{
       console.log('rbt',resp);
       this.doctor_selected = resp.user;
       this.full_name = resp.user.full_name;
@@ -558,21 +582,22 @@ export class ReportByClientComponent {
       md2: this.md2,
       xe: this.xe,
       total_units: data.total_units,
-      charges: data.total_units * this.unitPrize ,
+      charges: data.session_units_total * this.unitPrize,
       // n_units: this.n_units,
       pa_number: this.pa_number,
-      billed: this.billed,
-      pay: this.pay,
+      billed: data.billed,
+      pay: data.pay,
       sponsor_id: data.provider_name_g,
       patient_id: this.patient_id,
       insurer_id: this.insurance_id,
       noterbt_id: data.id,
+      npi: this.npi,
       
     };
     let VALUE2 = {
       pa_number: this.pa_number,
-      billed: this.billed,
-      pay: this.pay,
+      billed: data.billed,
+      pay: data.pay,
       // noterbt_id: data.id,
       
     };

@@ -71,10 +71,10 @@ export class NoteRbtComponent {
   public provider_name:string = '';
   public supervisor_name:string = '';
 
-  public number_of_occurrences:number = 0;
-  public number_of_correct_responses:number = 0;
-  public total_trials:number = 0;
-  public number_of_correct_response:number = 0;
+  public number_of_occurrences:number;
+  public number_of_correct_responses:number;
+  public total_trials:number;
+  public number_of_correct_response:number;
   public maladaptive:string = '';
   public replacement:string = '';
   public interventions:any;
@@ -287,17 +287,19 @@ export class NoteRbtComponent {
 
   
 
-  addMaladaptive(){
+  addMaladaptive(behavior){
+    this.maladaptiveSelected = behavior;
     this.maladaptives.push({
       maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
-      number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ? this.maladaptiveSelected.number_of_occurrences : 0,
+      number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ,
+      // number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ? this.maladaptiveSelected.number_of_occurrences : 0,
     })
     if(this.maladaptives.length > 1){
       this.maladaptives.splice(this.maladaptives,1);
     }
     this.maladaptiveSelected = null;
     this.maladaptive_behavior = '';
-    this.number_of_occurrences = 0;
+    this.number_of_occurrences = null;
     
   }
 
@@ -332,13 +334,14 @@ export class NoteRbtComponent {
     
   // }
   
-  addReplacement(){
+  addReplacement(replacemen){
     
-    
+    this.replacementSelected = replacemen;
     this.replacementGoals.push({
       goal: this.replacementSelected.goal,
-      total_trials: this.total_trials ? this.total_trials  : 0,
-      number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response :0 ,
+      total_trials: this.replacementSelected.total_trials,
+      number_of_correct_response: this.replacementSelected.number_of_correct_response ,
+      // number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response :0 ,
       
     })
     if(this.replacementGoals.length > 1){
@@ -346,8 +349,8 @@ export class NoteRbtComponent {
     }
     this.replacementSelected = null;
     this.goal = '';
-    this.total_trials = 0;
-    this.number_of_correct_response = 0;
+    this.total_trials = null;
+    this.number_of_correct_response = null;
 
     
   }

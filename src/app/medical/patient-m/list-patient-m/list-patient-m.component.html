@@ -37,6 +37,20 @@
                                           <div class="add-group">
                                               <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2" *ngIf="isPermission('register_patient')"><img src="assets/img/icons/plus.svg" alt=""></a>
                                               <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
+                                              <div class="px-7 py-5" data-kt-user-table-filter="form">
+                                                <!--begin::Input group-->
+                                                <div class="mb-10">
+                                                    
+                                                    <select [(ngModel)]="status" (change)="getTableData()" class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
+                                                        
+                                                        <option value="0">All</option>
+                                                        <option value="incoming">incoming</option>
+                                                        <option value="active">active</option>
+                                                        <option value="inactive">inactive</option>
+                                                    </select>
+                                                </div>
+                                                <!--end::Input group-->
+                                            </div>
                                           </div>
                                       </div>
                                   </div>

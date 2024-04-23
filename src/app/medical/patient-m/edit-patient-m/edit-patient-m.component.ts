@@ -185,11 +185,11 @@ export class EditPatientMComponent {
 
   getConfig(){
     this.patientService.listConfig().subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
       this.insurance_id = resp.insurances.length > 0 ? resp.insurances[0].id : '';
-      console.log(this.insurance_id);
+      // console.log(this.insurance_id);
       // this.insurances_name = resp.insurances[0].insurer_name;
       // console.log(this.insurances_name);
       this.locations = resp.locations;
@@ -198,12 +198,12 @@ export class EditPatientMComponent {
 
 
       this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
-        console.log(resp);
+        // console.log(resp);
         this.insuranceiddd= resp.id;
         
-        console.log(this.insuranceiddd);
+        // console.log(this.insuranceiddd);
         this.insurer_name = resp.insurer_name;
-        console.log(this.insurer_name);
+        // console.log(this.insurer_name);
         // this.notes = resp.notes;
         // this.services = resp.services;
   
@@ -216,7 +216,7 @@ export class EditPatientMComponent {
   
 showUser(){
     this.patientService.getPatient(this.client_id).subscribe((resp:any)=>{
-      // console.log(resp);
+      console.log(resp);
       this.patient_selected = resp.patient;
       
       
@@ -250,7 +250,8 @@ showUser(){
         this.school_name = this.patient_selected.school_name;
         this.school_number = this.patient_selected.school_number;
         this.age = this.patient_selected.age;
-        this.birth_date = this.patient_selected.birth_date ? new Date(this.patient_selected.birth_date).toISOString(): '';       
+        this.birth_date = new Date(this.patient_selected.birth_date).toISOString();    
+        // this.birth_date = this.patient_selected.birth_date ;       
         this.gender = this.patient_selected.gender;
         this.patient_id = this.patient_selected.patient_id;
         this.address = this.patient_selected.address;
@@ -289,6 +290,7 @@ showUser(){
 
         //valores de la imagen y archivos
         this.IMAGE_PREVISUALIZA = this.patient_selected.avatar;
+         console.log(this.IMAGE_PREVISUALIZA);;
 
         this.pa_assessmentss = resp.pa_assessments;// ?
         let jsonObj = JSON.parse(this.pa_assessmentss) || '';
@@ -452,7 +454,7 @@ saveFiles(){
 
 }
 
-  save(){debugger
+  save(){
     this.text_validation = '';
     if(!this.first_name ||!this.last_name || !this.client_id ){
       this.text_validation = 'Los campos con * son obligatorios';

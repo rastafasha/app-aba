@@ -463,14 +463,33 @@
                                 <div class="col-12 col-md-4">
                                     <div class="form-group local-forms">
                                         <label >Client appeared  <span class="login-danger">*</span></label>
-                                        <select
-                                            class="form-control form-select-solid fw-bolder"
-                                            name="client_appeared" [(ngModel)]="client_appeared">
+                                        <select class="form-control form-select-solid fw-bolder" [(ngModel)]="client_appeared" name="client_appeared"
+                                            [(ngModel)]="client_appeared">
                                             <option>-- Select --</option>
-                                              <option value="waiting">Happy</option>
-                                              <option value="requested">Sad</option>
-                                              <option value="reviewing">Hungry</option>
-                                              </select>
+                                            <option value="happy">Happy</option>
+                                            <option value="sad">Sad</option>
+                                            <option value="excited">Excited</option>
+                                            <option value="tired">Tired</option>
+                                            <option value="agressive">Agressive</option>
+                                            <option value="distracted">Distracted</option>
+                                            <option value="calm">Calm</option>
+                                            <option value="angry">Angry</option>
+                                            <option value="suprised">Suprised</option>
+                                            <option value="fearful">Fearful</option>
+                                            <option value="disgusted">Disgusted</option>
+                                            <option value="content">Content</option>
+                                            <option value="nervous">nervous</option>
+                                            <option value="confused">Confused</option>
+                                            <option value="relieved">Relieved</option>
+                                            <option value="frustrated">frustrated</option>
+                                            <option value="amused">Amused</option>
+                                            <option value="bored">Bored</option>
+                                            <option value="proud">proud</option>
+                                            <option value="insecure">Insecure</option>
+                                            <option value="anxios">Anxios</option>
+                                            <option value="curious">Curious</option>
+                                            <option value="enthusiastic">Enthusiastic</option>
+                                        </select>
                                     </div>
                                 </div>
                                
@@ -494,7 +513,6 @@
                                 <div class="col-12 col-md-6 ">
                                     <div class="form-group local-forms">
                                         <label >RBT modeled and demonstrated to caregiver<span class="login-danger">*</span></label>
-                                        <!-- <input class="form-control" name="rbt_modeled_and_demonstrated_to_caregiver"   [(ngModel)]="rbt_modeled_and_demonstrated_to_caregiver" type="text"  > -->
                                         <textarea class="form-control" name="rbt_modeled_and_demonstrated_to_caregiver" [(ngModel)]="rbt_modeled_and_demonstrated_to_caregiver" rows="4" cols="30"></textarea>
                                     </div>
                                 </div>
@@ -508,7 +526,6 @@
                                    <p>Responding this session could have been affected by environmental changes above</p>
                                    <div class="form-group local-forms">
                                        <label >Progress noted this session compared to previous session  <span class="login-danger">*</span></label>
-                                       <!-- <input class="form-control" name="progress_noted_this_session_compared_to_previous_session"   [(ngModel)]="progress_noted_this_session_compared_to_previous_session" type="text"  > -->
                                        <select
                                             class="form-control form-select-solid fw-bolder"
                                             name="progress_noted_this_session_compared_to_previous_session" [(ngModel)]="progress_noted_this_session_compared_to_previous_session">
@@ -540,7 +557,8 @@
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Provider Signature <span class="login-danger">*</span></label>
                                         <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="image/*" name="provider_signature" id="file" (change)="loadFile($event)" class="hide-input">
+                                            <input type="file" accept="image/*" name="provider_signature" id="file" 
+                                            (change)="loadFile($event)" class="hide-input">
                                             <label for="file" class="upload">Choose File</label>
                                         </div>
                                     </div>
@@ -554,31 +572,42 @@
                                     </div>
                                     <!-- previsualizacion de la foto -->
                                 </div>
+
+
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Provider name RBT <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                        <label>Provider name RBT <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValueRBT" name="rbt"
+                                            [ngModelOptions]="{standalone: true}" class="form-control select"
+                                            placeholder="Select Specialist"
+                                            (selectionChange)="selectFirmaSpecialistRbt($event)" value="select">
+                                            <mat-option value="select">--Select-</mat-option> 
                                             <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
-                                            {{data.name}} {{data.surname}}
+                                                {{data.name}} {{data.surname}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
                                 </div>
+
+
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-top-form">
-                                        <label class="local-top">Supervisor Signature <span class="login-danger">*</span></label>
+                                        <label class="local-top">Supervisor Signature <span
+                                                class="login-danger">*</span></label>
                                         <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="image/*" name="imagenn" id="file1" (change)="loadFileSignature($event)" class="hide-input">
+                                            <input type="file" accept="image/*" name="imagenn" id="file1"
+                                                (change)="loadFileSignature($event)" class="hide-input">
                                             <label for="file1" class="upload">Choose File</label>
                                         </div>
                                     </div>
-            
+
                                     <!-- previsualizacion de la foto -->
                                     <div *ngIf="FILE_SIGNATURE_BCBA">
                                         <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_BCBA" style="width: 250px;" alt="">
                                     </div>
                                     <div *ngIf="IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED">
-                                        <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED" style="width: 250px;" alt="">
+                                        <img [src]="IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED" style="width: 250px;"
+                                            alt="">
                                     </div>
                                     <!-- previsualizacion de la foto -->
                                 </div>
@@ -586,19 +615,16 @@
                                     <div class="form-group local-forms">
                                         <div class="form-group local-forms">
                                             <label >Supervisor name BCBA <span class="login-danger">*</span></label>
-                                            <mat-select [(ngModel)]="selectedValueBCBA" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                                <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                            <mat-select [(ngModel)]="selectedValueBCBA" name="bcba"
+                                            [ngModelOptions]="{standalone: true}" class="form-control select"
+                                            placeholder="Select Specialist"
+                                            (selectionChange)="selectFirmaSpecialistBcba($event)" value="select">
+                                            <mat-option value="select">--Select-</mat-option> 
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                                 {{data.name}} {{data.surname}}
-                                                </mat-option>
-                                            </mat-select>
+                                            </mat-option>
+                                        </mat-select>
                                         </div>
-                                        <!-- <input class="form-control" name="supervisor_name"   [(ngModel)]="supervisor_name" type="text"  > -->
-                                    </div>
-
-
-                                   
-                                        <div class="col-12 col-md-3">
-                                        
                                     </div>
                                 </div>
                             </div>

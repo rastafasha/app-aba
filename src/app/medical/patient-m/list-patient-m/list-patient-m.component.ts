@@ -44,6 +44,8 @@ export class ListPatientMComponent {
   public permissions:any = [];
   public maladaptives:any = [];
   public doctorPatientList:any = [];
+  search:any= null;
+  status:any= null;
 
   constructor(
     public doctorService: DoctorService,
@@ -97,7 +99,7 @@ export class ListPatientMComponent {
     this.patientList = [];
     this.serialNumberArray = [];
 
-    this.patientService.listPatients().subscribe((resp:any)=>{
+    this.patientService.listPatients(this.search, this.status).subscribe((resp:any)=>{
       
       // console.log(resp);
 
