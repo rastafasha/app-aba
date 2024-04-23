@@ -103,6 +103,17 @@ export class ReportByClientComponent {
   public units:any;
   public hoursPerUnit:any;
   public timePerUnit:any;
+  
+  public tecnicoRbts:any;
+  public supervisor:any;
+  public npi:any;
+  public rbt_id: any;
+  public rbt2_id: any;
+  public bcba_id: any;
+  public bcba2_id: any;
+  public doctor_selected_bcba: any;
+  public full_name: any;
+
   public providersSponsorsList:any;
   public factorPorcentual: number =  1.66666666666667
 
@@ -177,14 +188,24 @@ export class ReportByClientComponent {
       this.billed = resp.noteRbts;
       this.pay = resp.noteRbts;
       
-      
+      this.supervisor = resp.noteRbts.supervisor;
+      this.tecnicoRbts = resp.noteRbts.tecnicoRbts;
+
+      this.rbt_id = resp.patient.rbt_id;
+      this.rbt2_id = resp.patient.rbt2_id;
+      this.bcba_id = resp.patient.bcba_id;
+      this.bcba2_id = resp.patient.bcba2_id;
+
       this.pa_assessments = resp.pa_assessments;
       let jsonObj = JSON.parse(this.pa_assessments);
       this.pa_assessmentsgroup = jsonObj;
       
+      // aqui deberia ser el mas reciente.. 
+      //quizas se pueda cambiar de desc a asc para que agarre el mas reciente
       this.cpt = this.pa_assessmentsgroup[0].cpt;
-      
+      //igual aqui
       this.n_units = this.pa_assessmentsgroup[0].n_units;
+      // igual aqui
       this.pa_number = this.pa_assessmentsgroup[0].pa_services;
       
       
@@ -192,30 +213,22 @@ export class ReportByClientComponent {
       this.totalDataClientReport = resp.noteRbts.length;
       this.clientReport_generals = resp.noteRbts;
       this.patient_id = resp.patient_id;
-      // this.sponsor_id = resp.noteRbt[0].provider_name_g;
-      // Get all unique sponsor_id values
-      const sponsorIds = [...new Set(resp.noteRbts.map(item => item.provider_name_g))];
+
+      for (let i=0;i<this.pa_assessmentsgroup.length;i++){
+        if (!this.serialNumberArray.includes(this.pa_assessmentsgroup[i].serial_number)) {
+          this.serialNumberArray.push(this.pa_assessmentsgroup[i].serial_number)
+        }
+        
+        this.clientReportList.push(this.pa_assessmentsgroup[i]);
+      };
+
       
-      // Use the getDoctor() function to retrieve the name for each sponsor_id
-      const sponsorNames = sponsorIds.map(sponsorId => this.getDoctor(sponsorId));
-      
-      console.log('doctor',sponsorIds);
-      // Assign the resulting array of sponsor names to this.sponsor_names
-      this.doctor_selected_full_name = sponsorNames;
-      console.log('doctor',sponsorNames);
-      
-      
-      console.log('doctor',this.doctor_selected_full_name);
-      // console.log('doctor',this.sponsor_id);
-      // console.log("Este es el array final de los reportes", this.clientReportList);
 
      this.getTableDataGeneral();
      this.getInsurer();
-    //  this.getDoctor();
-     
-     //  this.getWeekTotalHours();
+     this.getDoctorRBT();
+     this.getDoctorBcba();
     //  this.extractDataHours();
-    //  this.extractDataUnits();
     })
 
   }
@@ -227,18 +240,38 @@ export class ReportByClientComponent {
   getInsurer(){
     //sacamos los detalles insurance seleccionado
     this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.insuranceiddd= resp.id;
       
       this.insurer_name = resp.insurer_name;
       this.modifiers = resp.notes;
-      console.log('modificadores',this.modifiers);
+      // console.log('modificadores',this.modifiers);
       this.unitPrize = resp.services[0].unit_prize;
-      console.log('precio unidad',this.unitPrize);
-      this.convertirHOra();
+      // console.log('precio unidad',this.unitPrize);
+      // this.convertirHOra();
       
     })
   }
+ 
+
+
+  //trae el nombre del doctor quien hizo la nota rbt
+  getDoctorRBT(){
+    this.doctorService.showDoctor(this.tecnicoRbts).subscribe((resp:any)=>{
+      console.log('rbt',resp);
+      this.doctor_selected = resp.user;
+      this.full_name = resp.user.full_name;
+    });
+  }
+
+  getDoctorBcba(){
+    this.doctorService.showDoctor(this.bcba_id).subscribe((resp:any)=>{
+      console.log('bcba',resp);
+      this.npi = resp.user.npi;
+    });
+  }
+
+
   convertirHOra() {
     
     this.factorPorcentual; // 1.66666666667
@@ -354,25 +387,7 @@ export class ReportByClientComponent {
 
   getCharges(){
     this.charges = this.week_total_units * this.n_units;
-      // console.log(this.week_total_units);
-      // console.log(this.n_units);
-      // console.log(this.charges);
   }
-
-
-  //trae el nombre del doctor quien hizo la nota rbt
-  getDoctor(sponsorId:any){
-
-    
-    
-    this.doctorService.showDoctor(sponsorId).subscribe((resp:any)=>{
-      console.log(resp);
-      this.doctor_selected = resp.user;
-      this.doctor_selected_full_name = resp.user.full_name;
-      console.log(this.doctor_selected_full_name);
-    });
-  }
-
 
   
 
@@ -392,21 +407,16 @@ export class ReportByClientComponent {
     }
   }
 
-  // public searchData(value: any): void {
-  //   this.dataSource.filter = value.trim().toLowerCase();
-  //   this.clientReportList = this.dataSource.filteredData;
-  // }
-
-  public searchDataFiltered(value: any): void {
-    this.dataSource.filter = value.trim().toLowerCase();
-    this.clientReportList = this.dataSource.filteredData;
+  public searchData() {
+    // this.dataSource.filter = value.trim().toLowerCase();
+    // this.patientList = this.dataSource.filteredData;
     this.pageSelection = [];
     this.limit = this.pageSize;
     this.skip = 0;
     this.currentPage = 1;
     this.getTableData();
   }
-
+ 
   getTableDataGeneral(){
     this.clientReportList = [];
   this.serialNumberArray = [];

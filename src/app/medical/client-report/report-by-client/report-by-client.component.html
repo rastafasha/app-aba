@@ -27,63 +27,37 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="doctor-table-blk">
-                                        <h3>Log Report By Client: {{patientID}}</h3>
-                                        <!-- <div class="doctor-search-blk">
+                                        <h3 class="col-12">Client Report : {{patient_id}}</h3>
+                                        <div class="doctor-search-blk">
                                             <div class="top-nav-search table-search-blk">
                                                     <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
-                                                    (ngModelChange)="searchData(searchDataValue)">
+                                                    (ngModelChange)="searchData()">
                                                     <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
                                             </div>
-                                            <div class="staff-search-table">
-                                                <form>
-                                                    <div class="row">
-                                                        <div class="col-12 col-md-6 col-xl-4">  
-                                                          <div class="top-nav-search table-search-blk">
-                                                              (ngModelChange)="searchDataFiltered(searchDataValue)"
-                                                            <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue" [ngModelOptions]="{standalone: true}"
-                                                            >
-                                                            <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
-                                                    </div>
-                                                        </div>
-                                                        <div class="col-12 col-md-6 col-xl-4">  
-                                                            <div class="form-group local-forms">
-                                                                <label >Doctor Name </label>
-                                                                <input [(ngModel)]="searchDataDoctor" [ngModelOptions]="{standalone: true}" name="searchDataDoctor" class="form-control" type="text"  >
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-md-6 col-xl-4">
-                                                            <div class="form-group local-forms">
-                                                                <label >From </label>
-                                                                <input class="form-control datetimepicker" name="date_start" [(ngModel)]="date_start" [ngModelOptions]="{standalone: true}" type="date"   >
-                                                                
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-md-6 col-xl-4">
-                                                            <div class="form-group local-forms">
-                                                                <label >To </label>
-                                                                <input class="form-control datetimepicker" name="date_end" [(ngModel)]="date_end" [ngModelOptions]="{standalone: true}" type="date"   >
-                                                               
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-md-6 col-xl-4">
-                                                            <div class="doctor-submit">
-                                                                <button type="button" class="btn btn-primary submit-list-form me-2" (click)="searchDataFiltered(searchDataValue)">Search</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                           
-                                            <div class="add-group">
-                                                <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a>
-                                                <a href="javascript:;" (click)="PageSize()"
-                                                    class="btn btn-primary doctor-refresh ms-2"><img
-                                                        src="assets/img/icons/re-fresh.svg" alt=""></a>
-                                            </div>
-                                        </div> -->
+                                            
+                                        </div>
                                     </div>
                                 </div>
-
+                                
+                                <div class="col">
+                                  <div class="form-group local-forms">
+                                    <label >from <span class="login-danger">*</span></label>
+                                    <input class="form-control datetimepicker" name="date_start" [(ngModel)]="date_start" type="date"   >
+                                  </div>
+                                </div>
+                                <div class="col">
+                                  <div class="form-group local-forms">
+                                    <label >to<span class="login-danger">*</span></label>
+                                    <input class="form-control datetimepicker" name="date_end" [(ngModel)]="date_end" type="date"   >
+                                  </div>
+                                </div>
+                                <div class="col">
+                                    <div class="add-group">
+                                      <a href="#" onclick="return false" (click)="searchData()" class="btn btn-primay add-pluss ms-2">Search</a>
+                                      <!-- <a routerLink="/appointments/add" class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a> -->
+                                      <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
+                                  </div>
+                                </div>
                             </div>
                         </div>
                         <!-- /Table Header -->
@@ -276,12 +250,12 @@
                                             </span>
                                         </td>
                                         <td>
-                                            {{data.provider_name_g}}|
-                                            {{doctor_selected_full_name}}
+                                            {{data.tecnicoRbts}}|
+                                            {{full_name}}
                                         </td>
 
                                         <td>{{pa_number}}</td>
-                                        <td>Npi del bcba </td>
+                                        <td>{{npi}} </td>
 
                                         <td>
                                             
@@ -416,25 +390,30 @@
                         </div>
 
                         <!-- totales -->
-                        <!-- <div class="container">
+                        <div class="container">
 
-                          <div class="row">
-                            
-                            <div class="col-12 col-md-6 col-xl-4">
-                              <div class="form-group local-forms">
-                                  <label >Week Total Hours<span class="login-danger">*</span></label>
-                                  <input class="form-control"  name="week_total_hours"  disabled [(ngModel)]="week_total_hours" type="number"  >
-                              </div>
+                            <div class="row">
+                              <!-- <div class="col-12 col-md-6 col-xl-4">
+                                <div class="form-group local-forms">
+                                    <label >Billing Total <span class="login-danger">*</span></label>
+                                    <input class="form-control"  name="billing_total"  disabled [(ngModel)]="billing_total" type="number"  >
+                                </div>
+                            </div> -->
+                              <div class="col-12 col-md-6 col-xl-4">
+                                <div class="form-group local-forms">
+                                    <label >Week Total Hours<span class="login-danger">*</span></label>
+                                    <input class="form-control"  name="week_total_hours"  disabled [(ngModel)]="week_total_hours" type="number"  >
+                                </div>
+                            </div>
+                              <div class="col-12 col-md-6 col-xl-4">
+                                <div class="form-group local-forms">
+                                    <label >Week Total Units<span class="login-danger">*</span></label>
+                                    <input class="form-control"  name="week_total_units"  disabled [(ngModel)]="week_total_units" type="number"  >
+                                </div>
+                            </div>
+                            </div>
                           </div>
-                            <div class="col-12 col-md-6 col-xl-4">
-                              <div class="form-group local-forms">
-                                  <label >Week Total Units<span class="login-danger">*</span></label>
-                                  <input class="form-control"  name="week_total_units"  disabled [(ngModel)]="week_total_units" type="number"  >
-                              </div>
-                          </div>
-                          </div>
-                        </div> -->
-                        <!-- totales -->
+                          <!-- totales -->
 
                     </div>
                 </div>

@@ -306,29 +306,6 @@ export class BillingByClientComponent {
   }
   }
 
-  // getTableDataGeneral2() {
-  //   this.billingList = [];
-  //   this.serialNumberArray = [];
-  //   this.totalDataBilling = 0;
-  
-  //   if (Array.isArray(this.billing_generals)) {
-  //     const startIndex = this.skip;
-  //     const endIndex = Math.min(startIndex + this.pageSize, this.billing_generals.length);
-  //     this.billingList = this.billing_generals.slice(startIndex, endIndex);
-  //     for (let i = startIndex; i < endIndex; i++) {
-  //       const serialNumber = i + 1;
-  //       this.serialNumberArray.push(serialNumber);
-  //       this.totalDataBilling += this.billingList[i - startIndex].amount;
-  //     }
-  //     this.dataSource = new MatTableDataSource<any>(this.billingList);
-  //     this.calculateTotalPages(this.totalDataBilling, this.pageSize);
-  //   } else {
-  //     if (Array.isArray(this.billing_generals.data)) {
-  //       this.billing_generals = this.billing_generals.data;
-  //       this.getTableDataGeneral();
-  //     }
-  //   }
-  // }
   
   onPaginateChange(event: any) {
     this.skip = event.pageIndex * this.pageSize;

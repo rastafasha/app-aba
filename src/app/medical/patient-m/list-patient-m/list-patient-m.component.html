@@ -97,7 +97,7 @@
                                         <button class="btn btn-outline-secondary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/note-bcba/', data.id]" tooltip="Create BCBA Note"> <i class="fa fa-id-badge"></i> </button>
                                         <button class="btn btn-outline-primary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/note-bcba/listbyclient/', data.patient_id]" tooltip="BCBA Note list"> <i class="fa fa-bars"></i> </button>
                                         <button class="btn btn-outline-warning" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'" [routerLink]="['/client-report/byclient/', data.patient_id]" tooltip="Client Report"> <i class="fa fa-check-circle"></i> </button>
-                                        <button class="btn btn-outline-warning" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'" [routerLink]="['/billing/byclient/', data.patient_id]" tooltip="Billing by this user"> <i class="fa fa-credit-card"></i> </button>
+                                        <!-- <button class="btn btn-outline-warning" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'" [routerLink]="['/billing/byclient/', data.patient_id]" tooltip="Billing by this user"> <i class="fa fa-credit-card"></i> </button> -->
                                       </span>
                                   </td>
                                   <td *ngIf="roles ==='SUPERADMIN'">
