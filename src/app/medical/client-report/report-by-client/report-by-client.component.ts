@@ -193,13 +193,15 @@ export class ReportByClientComponent {
       this.noteRbt = resp.noteRbts;
       // aqui traigo los nombres de los doctores relacionados al paciente
       this.doctors = resp.doctors;
-      this.supervisor = resp.noteRbts.supervisor;
-      this.tecnicoRbts = resp.noteRbts.tecnicoRbts;
+      this.supervisor = resp.noteRbts.length > 0 ? resp.noteRbts[0].supervisor : '';
+      this.tecnicoRbts = resp.noteRbts.length > 0 ? resp.noteRbts[0].tecnicoRbts : '';
+      
+      // this.tecnicoRbts = resp.noteRbts[0].tecnicoRbts;
 
       // de this.noteRbt extraer los nombres de los doctores  que estan en el array y guardarlos
       // for (let i=0;i<this.noteRbt.length;i++){
-      //   let doctor = this.noteRbt[i];
-      //   if (!this.tecnicoDoctorNames.includes(doctor.tecnicoRbts)){
+      //   let doctor = this.noteRbt[i].tecnicoRbts;
+      //   if (this.tecnicoDoctorNames &&!this.tecnicoDoctorNames.includes(doctor.tecnicoRbts)){
       //     this.doctors.push(doctor.name)
       //   }
       //   console.log(this.tecnicoDoctorNames);
@@ -212,7 +214,6 @@ export class ReportByClientComponent {
       //   this.noteRbt.splice(INDEX,1);
       //   console.log(this.tecnicoRbts);
       // }
-      
       
 
       this.rbt_id = resp.patient.rbt_id;
@@ -281,95 +282,20 @@ export class ReportByClientComponent {
 
   //trae el nombre del doctor quien hizo la nota rbt
   getDoctorRBT(){
-    this.doctorService.showDoctor(this.rbt_id).subscribe((resp:any)=>{
+    this.doctorService.showDoctor(this.tecnicoRbts).subscribe((resp:any)=>{
       console.log('rbt',resp);
       this.doctor_selected = resp.user;
       this.full_name = resp.user.full_name;
     });
   }
-
+  // supervisor del tecnico solo sacamos el npi
   getDoctorBcba(){
-    this.doctorService.showDoctor(this.bcba_id).subscribe((resp:any)=>{
+    this.doctorService.showDoctor(this.supervisor).subscribe((resp:any)=>{
       console.log('bcba',resp);
       this.npi = resp.user.npi;
     });
   }
 
-
-  convertirHOra() {
-    
-    this.factorPorcentual; // 1.66666666667
-    
-    this.horaTrabajada = this.clientReportList[0].total_hours; 
-    
-    this.resultconFactor = this.clientReportList[0].total_hoursFactor; 
-    this.unidades = this.clientReportList[0].total_units; 
-    
-    this.porPagar = this.unitPrize * this.unidades;
-    
-    console.log("hora trabajada",this.horaTrabajada);
-    console.log("factorPorcentual",this.factorPorcentual);
-    console.log("resultado factor",this.resultconFactor);
-    console.log("unidades",this.unidades);
-    console.log("precio",this.unitPrize);
-    console.log("esto es lo que se tiene que pagar",this.porPagar );
-
-    }
-  convertir() {
-    var hora = 3600;//segundos
-    var unidad = 900; //15 min 1-unidad  900 segundos
-    var minutos = Math.round((hora) / 60); // da 60
-    console.log("minutos ", minutos);
-    // horaensegudos  / unidadensegundos = 4 
-
-    var unidadminutos =  (minutos * unidad) / hora ; //da 4
-    console.log("Minutos en Unidades", unidadminutos );// 15 
-    // entonces si 1 es igual a 60  minutos, 1/60 =  1/60*4 = 1
-    //  por lo tanto para pasar de minutos a unidades hay que multiplicar entre 1/60 y por el numero de veces que/120 = 1/12/120 2 
-    this.hoursPerUnit = 1 / minutos;
-    console.log("horas por unidad ", this.hoursPerUnit);
-    this.timePerUnit = this.hoursPerUnit * 60;
-    console.log("Tiempo por unidad ", this.timePerUnit);
-    
-    // 4 unidades es 1 hora 900 x4 = 3600
-    // para pasar a horas dividimos entre la cantidad de unidades por una hora (en este caso 15)
-    this.totalUnidades = Math.round((minutos / unidad));
-    this.totalHoras = Math.round((minutos / unidad));
-    console.log("unidades totales ", this.totalUnidades);
-    
-    this.factorPorcentual; // 1.66666666667
-    
-    this.horaTrabajada = this.clientReportList[0].total_hours; // resultado 1.45 , llevarla a hora 14500
-    // si una hora son 3600 segundos , cuanto es 1:45  ???
-    // son 5400 segundos
-    //  por tanto, 1/5400 * 100 = 1.8925 .......
-    // para redondear a dos decimales se usa toFixed(2)
-    // como llevo 145 a 5400 segundos ?
-    this.factHoras = (1/minutos*5400)*100 ;
-    console.log("el factor de conversión",this.factorPorcentual);
-
-
-    let seconds: number = this.horaTrabajada;
-    let totalSeconds: number = seconds * 5400 / this.horaTrabajada;
-    console.log("Total horas trabajadas: " + totalSeconds); 
-
-
-    this.resultconFactor = (totalSeconds * this.factorPorcentual)/100; // resultado 1,00000
-    // this.unidades = this.resultconFactor * 4;
-    // this.unidades = this.resultconFactor * this.totalUnidades ;
-    this.unidades = this.horaTrabajada / hora;
-    this.porPagar = this.unitPrize * this.unidades;
-    
-    console.log("hora",hora);
-    console.log("minutos",minutos);
-    console.log("hora trabajada",this.horaTrabajada);
-    console.log("factorPorcentual",this.factorPorcentual);
-    console.log("resultado factor",this.resultconFactor);
-    console.log("unidades",this.unidades);
-    console.log("precio",this.unitPrize);
-    console.log("esto es lo que se tiene que pagar",this.porPagar );
-
-    }
 
   extractDataHours(){
     // recorrer el array de billing_general para extraer la data
@@ -409,9 +335,6 @@ export class ReportByClientComponent {
       
   }
 
-  getCharges(){
-    this.charges = this.week_total_units * this.n_units;
-  }
 
   
 

@@ -448,8 +448,8 @@ export class routes {
     return this.baseUrl + '/note-bcba/listbyclient';
   }
 
-  public static get BillingList(): string {
-    return this.baseUrl + '/billing/list';
-  }
+  // public static get BillingList(): string {
+  //   return this.baseUrl + '/billing/list';
+  // }
  
 }

@@ -448,8 +448,12 @@
                                                             <div class="activity-content timeline-group-blk">
                                                                 <div class="timeline-group flex-shrink-0">
                                                                     <h4>{{notes_rbt.session_date | date}}</h4>
-                                                                    <span class="time">{{notes_rbt.time_in /100+' - '+notes_rbt.time_out /100}}</span>
-                                                                    <span class="time">{{notes_rbt.time_in2 /100+' - '+notes_rbt.time_out2 /100}}</span>
+                                                                    <span class="time">{{notes_rbt.time_in +' - '+notes_rbt.time_out }}</span>
+                                                                    <span class="time">{{notes_rbt.time_in2 +' - '+notes_rbt.time_out2 }}</span>
+                                                                    <span class="badge bg-danger" *ngIf="notes_rbt.billed === 0">Pending</span>
+                                                                    <span class="badge bg-success" *ngIf="notes_rbt.billed === 1">Billed</span>
+                                                                    <span class="badge bg-danger" *ngIf="notes_rbt.pay === 0">Pending</span>
+                                                                    <span class="badge bg-success" *ngIf="notes_rbt.pay === 1">Pay</span>
                                                                 </div>
                                                                 <div class="comman-activitys flex-grow-1">
                                                                     <h3>{{notes_rbt.patient_id}} <span> <br>

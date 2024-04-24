@@ -107,7 +107,6 @@ isPermission(permission:string){
 
 getConfig(){
   this.patientService.listConfig().subscribe((resp:any)=>{
-    console.log(resp);
     this.specialists = resp.specialists;
     this.insurances = resp.insurances;
     this.insurance_id = resp.insurances.length > 0 ? resp.insurances[0].id : '';
@@ -136,9 +135,9 @@ getPatient(){
     this.patient_id= resp.patient.patient_id;
     this.avatar= resp.patient.avatar;
     this.rbt_id = resp.patient.rbt_id;
-    this.rbt2_id = resp.patient.rbt2_id;
-    this.bcba_id = resp.patient.bcba_id;
-    this.bcba2_id = resp.patient.bcba2_id;
+    this.rbt2_id = resp.patient.rbt2;
+    this.bcba_id = resp.patient.bcba;
+    this.bcba2_id = resp.patient.bcba2;
     this.clin_director_id = resp.patient.clin_director_id;
     // this.appointment_pendings= resp.appointment_pendings.data;
     this.pa_assessmentss = resp.pa_assessments;
@@ -160,7 +159,6 @@ getPatient(){
 
 getDoctorRbt1(){
   this.doctorService.showDoctor(this.rbt_id).subscribe((resp:any)=>{
-    console.log(resp);
     this.doctor_selected_rbt = resp.user;
     this.doctor_selected_full_name_rbt = resp.user.full_name;
   });
@@ -168,28 +166,28 @@ getDoctorRbt1(){
 
 getDoctorRbt2(){
   this.doctorService.showDoctor(this.rbt2_id).subscribe((resp:any)=>{
-    console.log(resp);
+    // console.log(resp);
     this.doctor_selected_rbt2 = resp.user;
     this.doctor_selected_full_name_rbt2 = resp.user.full_name;
   });
 }
 getDoctorBcba(){
   this.doctorService.showDoctor(this.bcba_id).subscribe((resp:any)=>{
-    console.log(resp);
+    // console.log(resp);
     this.doctor_selected_bcba = resp.user;
     this.doctor_selected_full_name_bcba = resp.user.full_name;
   });
 }
 getDoctorBcba2(){
   this.doctorService.showDoctor(this.bcba2_id).subscribe((resp:any)=>{
-    console.log(resp);
+    // console.log(resp);
     this.doctor_selected_bcba2 = resp.user;
     this.doctor_selected_full_name_bcba2 = resp.user.full_name;
   });
 }
 getDoctorDirector(){
   this.doctorService.showDoctor(this.clin_director_id).subscribe((resp:any)=>{
-    console.log(resp);
+    // console.log(resp);
     this.doctor_selected_clin_director = resp.user;
     this.doctor_selected_full_name_clin_director = resp.user.full_name;
   });

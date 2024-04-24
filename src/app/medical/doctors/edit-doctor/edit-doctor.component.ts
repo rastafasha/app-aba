@@ -221,7 +221,9 @@ export class EditDoctorComponent {
     formData.append('birth_date', this.birth_date);
     formData.append('gender', this.gender+'');
 
-    this.FILE_AVATAR  = this.IMAGE_PREVISUALIZA;
+    // this.FILE_AVATAR  = this.IMAGE_PREVISUALIZA;
+    
+
     if(this.FILE_AVATAR ){
       formData.append('imagen', this.FILE_AVATAR);
     }

@@ -63,11 +63,6 @@ const routes: Routes = [
       import('./medical/notes-bcba/notes-bcba.module').then((m) => m.NotesBcbaModule),
   },
   {
-    path: 'billing',
-    loadChildren: () =>
-      import('./medical/billing/billing.module').then((m) => m.BillingModule),
-  },
-  {
     path: 'client-report',
     loadChildren: () =>
       import('./medical/client-report/client-report.module').then((m) => m.ClientReportModule),
@@ -77,6 +72,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./error/error.module').then((m) => m.ErrorModule),
   },
+  // {
+  //   path: 'billing',
+  //   loadChildren: () =>
+  //     import('./medical/billing/billing.module').then((m) => m.BillingModule),
+  // },
   {
     path: '**',
     redirectTo: 'error/error404',

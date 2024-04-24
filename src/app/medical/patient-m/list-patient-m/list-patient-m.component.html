@@ -37,8 +37,7 @@
                                           <div class="add-group">
                                               <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2" *ngIf="isPermission('register_patient')"><img src="assets/img/icons/plus.svg" alt=""></a>
                                               <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
-                                              <div class="px-7 py-5" data-kt-user-table-filter="form">
-                                                <!--begin::Input group-->
+                                              <!-- <div class="px-7 py-5" data-kt-user-table-filter="form">
                                                 <div class="mb-10">
                                                     
                                                     <select [(ngModel)]="status" (change)="getTableData()" class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
@@ -49,8 +48,7 @@
                                                         <option value="inactive">inactive</option>
                                                     </select>
                                                 </div>
-                                                <!--end::Input group-->
-                                            </div>
+                                            </div> -->
                                           </div>
                                       </div>
                                   </div>
@@ -110,7 +108,7 @@
                                         <button class="btn btn-outline-primary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' ||  roles ==='RBT'" [routerLink]="['/note-rbt/listbyclient/', data.patient_id]" tooltip="RBT Note list"> <i class="fa fa-bars"></i> </button>
                                         <button class="btn btn-outline-secondary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/note-bcba/', data.id]" tooltip="Create BCBA Note"> <i class="fa fa-id-badge"></i> </button>
                                         <button class="btn btn-outline-primary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/note-bcba/listbyclient/', data.patient_id]" tooltip="BCBA Note list"> <i class="fa fa-bars"></i> </button>
-                                        <button class="btn btn-outline-warning" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'" [routerLink]="['/client-report/byclient/', data.patient_id]" tooltip="Client Report"> <i class="fa fa-check-circle"></i> </button>
+                                        <button class="btn btn-outline-warning" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'" [routerLink]="['/client-report/byclient/', data.patient_id]" tooltip="Log Report"> <i class="fa fa-check-circle"></i> </button>
                                         <!-- <button class="btn btn-outline-warning" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'" [routerLink]="['/billing/byclient/', data.patient_id]" tooltip="Billing by this user"> <i class="fa fa-credit-card"></i> </button> -->
                                       </span>
                                   </td>
