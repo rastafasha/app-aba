@@ -216,17 +216,11 @@ export class EditPatientMComponent {
   
 showUser(){
     this.patientService.getPatient(this.client_id).subscribe((resp:any)=>{
-      // console.log(resp);
+      console.log(resp);
       this.patient_selected = resp.patient;
       
       
-      //valores de los selectores
-        this.selectedValueLocation = this.patient_selected.location_id;
-        this.selectedValue_rbt = this.patient_selected.rbt_id;
-        this.selectedValue_rbt2 = this.patient_selected.rbt2;
-        this.selectedValue_bcba = this.patient_selected.bcba;
-        this.selectedValue_bcba2 = this.patient_selected.bcba2;
-        this.selectedValue_clind = this.patient_selected.clin_director_id;
+      
 
         //traemos el valor del id del insurer  y lo asignamos a la variable de clase para que sea global
         this.selectedValueInsurer = this.patient_selected.insurer_id;
@@ -292,12 +286,21 @@ showUser(){
         this.IMAGE_PREVISUALIZA = this.patient_selected.avatar;
         //  console.log(this.IMAGE_PREVISUALIZA);;
 
-        this.pa_assessmentss = resp.pa_assessments;// ?
+        this.pa_assessmentss = resp.pa_assessments ? resp.pa_assessments : null;// ?
         let jsonObj = JSON.parse(this.pa_assessmentss) || '';
         this.pa_assessmentgroup = jsonObj;
 
+        //valores de los selectores
+        this.selectedValueLocation = this.patient_selected.location_id;
+        this.selectedValue_rbt = this.patient_selected.rbt_id ? this.patient_selected.rbt_id : null;
+        this.selectedValue_rbt2 = this.patient_selected.rbt2 ? this.patient_selected.rbt2 : null;
+        this.selectedValue_bcba = this.patient_selected.bcba ? this.patient_selected.bcba: null;
+        this.selectedValue_bcba2 = this.patient_selected.bcba2 ? this.patient_selected.bcba2 : null;
+        this.selectedValue_clind = this.patient_selected.clin_director_id ? this.patient_selected.clin_director_id: null;
+
         this.insuranceData(this.selectedValueInsurer);//pide el insurance guardado para el request de la lista inicial
 
+        
         this.patientService.getLaboratoryByPatient(this.patient_id).subscribe((resp:any)=>{
           // console.log(resp);
           this.FilesAdded = resp.patientFiles.data;

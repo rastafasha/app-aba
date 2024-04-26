@@ -287,6 +287,9 @@ export class routes {
   public static get patientsList(): string {
     return this.baseUrl + '/patients/list';
   }
+  public static get patientsLogReport(): string {
+    return this.baseUrl + '/patients/clientlogreport';
+  }
   public static get addSalary(): string {
     return this.baseUrl + '/payroll/add-salary';
   }

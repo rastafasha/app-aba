@@ -25,6 +25,9 @@ public money_of_appointments: number = 0;
 public num_appointment_pendings: number = 0;
 public doctor_selected: any;
 public patient_id: any;
+public maladaptive_behavior: any;
+public graphData: any;
+public maladaptives: any;
 public total_notes_bips: number;
 public total_notes_bcbas: number;
 public total_notes_rbts: number;
@@ -103,8 +106,10 @@ getDoctor(){
     this.total_notes_bcbas= resp.total_notes_bcbas;
     this.total_notes_rbts= resp.total_notes_rbts;
 
+
   })
 }
+
 
 
 

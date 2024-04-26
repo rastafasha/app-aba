@@ -89,15 +89,16 @@
                                             
                                             <td>
                                                 <div *ngIf="!specialist.avatar">
-                                                    <img src="./assets/img/no-image.jpg" >
+                                                    <img src="./assets/img/no-image.jpg"  class="avatarlist" >
                                                 </div>
                                                 <div *ngIf="specialist.avatar">
-                                                    <img  src="{{URLMedia}}{{specialist.avatar}}" class="avatarlist"   [alt]="specialist.name">
+                                                    <img  src="{{specialist.avatar}}" class="avatarlist"   [alt]="specialist.name">
                                                 </div>
                                             </td>
                                             <td>
                                               <a class="dropdown-item" [routerLink]="['/doctors/profile/', specialist.id]">
-                                                {{specialist.name + ' ' + (specialist.surname ? specialist.surname: '')}}
+                                                <!-- {{specialist.name + ' ' + (specialist.surname ? specialist.surname: '')}} -->
+                                                {{specialist.full_name }}
                                               </a>
                                             </td>
                                             <td>{{specialist.email}}</td>
@@ -164,7 +165,7 @@
                                                     <img src="./assets/img/no-image.jpg" >
                                                 </div>
                                                 <div *ngIf="patient.avatar">
-                                                    <img  src="{{URLMedia}}{{patient.avatar}}" class="avatarlist"  [alt]="patient.first_name">
+                                                    <img  src="{{patient.avatar}}" class="avatarlist"  [alt]="patient.first_name">
                                                 </div> 
                                             </td>
                                             <td>
@@ -178,7 +179,7 @@
                                               <span class="badge bg-danger"
                                                   *ngIf="patient.eligibility === 'no'">No</span>
                                               <span class="badge bg-success"
-                                                  *ngIf="patient.eligibility === 'active'">Yes</span>
+                                                  *ngIf="patient.eligibility === 'yes'">Yes</span>
                                               <span class="badge bg-primary"
                                                   *ngIf="patient.eligibility === 'pending'">Pending</span>
     

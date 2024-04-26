@@ -69,6 +69,7 @@
                               <thead>
                                   <tr>
                                       
+                                    <th mat-sort-header="photo">Photo</th>
                                     <th mat-sort-header="name">Full Name</th>
                                     <th mat-sort-header="email">email</th>
                                     <th mat-sort-header="phonec">Phone</th>
@@ -82,6 +83,14 @@
                               </thead>
                               <tbody >
                                   <tr *ngFor="let data of patientList">
+                                    <td>
+                                      <div *ngIf="!data.avatar">
+                                          <img src="./assets/img/no-image.jpg" class="avatarlist"  >
+                                      </div>
+                                      <div *ngIf="data.avatar">
+                                          <img  src="{{data.avatar}}" class="avatarlist"   [alt]="data.name">
+                                      </div>
+                                  </td>
                                       
                                     <td >
                                       <a [routerLink]="['/patients/profile/', data.id]">

@@ -6,7 +6,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item" *ngIf="isPermission('list_employers')" ><a href="/doctors/list">Employeers </a></li>
+                        <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item" *ngIf="isPermission('list_employers')" ><a routerLink="/doctors/list">Employees </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">Employeer Profile</li>
                     </ul>
@@ -32,10 +34,10 @@
                                             <div class="profile-user-box">
                                                 <div class="profile-user-img">
                                                     <div *ngIf="!doctor_selected.avatar">
-                                                        <img src="./assets/img/no-image.jpg" >
+                                                        <img src="./assets/img/no-image.jpg" class="shadow"  >
                                                     </div>
                                                     <div *ngIf="doctor_selected.avatar">
-                                                        <img  [src]="doctor_selected.avatar"  [alt]="doctor_selected.name">
+                                                        <img  [src]="doctor_selected.avatar" class="shadow"  [alt]="doctor_selected.name">
                                                     </div>
                                                     
                                                 </div>
@@ -441,8 +443,9 @@
                                                     <ng-container *ngFor="let notes_rbt of notes_rbts">
                                                         <li>
                                                             <div class="activity-user">
-                                                                <a [routerLink]="routes.profile" [attr.title]="notes_rbt.patient_id" data-bs-toggle="tooltip" class="avatar">
-                                                                    <!-- <img [attr.alt]="appointment.patient_id" [src]="notes_rbt.patient.avatar" class="img-fluid rounded-circle"> -->
+                                                                <a [attr.title]="notes_rbt.patient_id" data-bs-toggle="tooltip" >
+                                                                    <img src="assets/webp/aba-logo-new.webp" width="35" height="27" alt="" class="img-fluid rounded-circle">
+                                                                    <!-- <img [attr.alt]="appointment.patient_id" [src]="notes_bcba.patient.avatar" class="img-fluid rounded-circle"> -->
                                                                 </a>
                                                             </div>
                                                             <div class="activity-content timeline-group-blk">
@@ -458,10 +461,8 @@
                                                                 <div class="comman-activitys flex-grow-1">
                                                                     <h3>{{notes_rbt.patient_id}} <span> <br>
                                                                         Next Session: {{notes_rbt.next_session_is_scheduled_for | date}}  </span></h3>
-                                                                    <p *ngIf="notes_rbt.maladaptives">maladaptives: {{notes_rbt.maladaptives}}</p>
-                                                                    <ng-container *ngIf="!notes_rbt.maladaptives">
-                                                                        <button class="custom-badge status-pink">maladaptives: Pendiente</button>
-                                                                    </ng-container>
+                                                                    <p>Supervisor Name: {{notes_rbt.supervisor.name}} {{notes_rbt.supervisor.surname}}</p>
+                                                                    <p>meet with client at: {{notes_rbt.meet_with_client_at}}</p>
                                                                     
                                                                 </div>
                                                             </div>
@@ -479,7 +480,8 @@
                                                     <ng-container *ngFor="let notes_bcba of notes_bcbas">
                                                         <li>
                                                             <div class="activity-user">
-                                                                <a [routerLink]="routes.profile" [attr.title]="notes_bcba.patient_id" data-bs-toggle="tooltip" class="avatar">
+                                                                <a [attr.title]="notes_bcba.patient_id" data-bs-toggle="tooltip" >
+                                                                    <img src="assets/webp/aba-logo-new.webp" width="35" height="27" alt="" class="img-fluid rounded-circle">
                                                                     <!-- <img [attr.alt]="appointment.patient_id" [src]="notes_bcba.patient.avatar" class="img-fluid rounded-circle"> -->
                                                                 </a>
                                                             </div>
@@ -488,8 +490,14 @@
                                                                     <h4>{{notes_bcba.created_at | date}}</h4>
                                                                 </div>
                                                                 <div class="comman-activitys flex-grow-1">
-                                                                    <h3>{{notes_bcba.patient_id}} </h3>
-                                                                    <p *ngIf="notes_bcba.note_description">note description: {{notes_bcba.note_description}}</p>
+                                                                    <h3>PatientId:{{notes_bcba.patient_id}} </h3>
+                                                                    <p><b>Bip id:</b> {{notes_bcba.bip_id}} </p>
+                                                                    <p><b>location:</b> {{notes_bcba.location}} </p>
+                                                                    <p><b>provider name:</b> {{notes_bcba.provider_name.name}} {{notes_bcba.provider_name.surname}} </p>
+                                                                    <p><b>provider npi:</b> {{notes_bcba.provider_name.npi}}  </p>
+                                                                    <p><b>Supervisor name:</b> {{notes_bcba.aba_supervisor.name}} {{notes_bcba.aba_supervisor.surname}} </p>
+                                                                    <p><b>Supervisor npi:</b> {{notes_bcba.aba_supervisor.npi}}  </p>
+                                                                    <p *ngIf="notes_bcba.note_description"><b>note description:</b> {{notes_bcba.note_description}}</p>
                                                                     <ng-container *ngIf="!notes_bcba.note_description">
                                                                         <button class="custom-badge status-pink">note description: Pendiente</button>
                                                                     </ng-container>

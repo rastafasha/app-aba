@@ -6,6 +6,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item"><a routerLink="/patients/list">Clients </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">Client Profile</li>
@@ -32,10 +34,10 @@
                                             <div class="profile-user-box">
                                                 <div class="profile-user-img">
                                                     <div *ngIf="!avatar">
-                                                        <img src="./assets/img/no-image.jpg" >
+                                                        <img src="./assets/img/no-image.jpg" class="shadow"  >
                                                     </div>
                                                     <div *ngIf="avatar">
-                                                        <img  src="{{avatar}}"  [alt]="patient_selected.first_name">
+                                                        <img  src="{{avatar}}" class="shadow"   [alt]="patient_selected.first_name">
                                                     </div>
                                                 </div>
                                                 <div class="names-profiles">

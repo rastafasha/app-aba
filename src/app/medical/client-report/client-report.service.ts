@@ -19,6 +19,24 @@ export class ClientReportService {
     let URL = url_servicios+'/client_report';
     return this.http.get(URL, {headers:headers});
   }
+
+
+  listClientReportsSearch(page:number=1, search:string='', provider_name_g:number=0,session_date:string= ''){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let LINK = "";
+    if(search){
+      LINK+="&search="+search;
+    }
+    if(provider_name_g){
+      LINK+="&provider_name_g="+provider_name_g;
+    }
+    if(session_date){
+      LINK+="&session_date="+session_date;
+    }
+    let URL = url_servicios+'/client_report?page='+page+LINK;
+    return this.http.get(URL, {headers:headers});
+  }
+
   config(){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
     let URL = url_servicios+'/client_report/config';

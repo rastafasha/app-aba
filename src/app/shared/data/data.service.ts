@@ -315,6 +315,13 @@ export class DataService {
               show_nav: true,
             },
             {
+              menuValue: 'Clients Log Report',
+              route: routes.patientsLogReport,
+              base: routes.patientsLogReport,
+              permision: 'list_patient_log_report',
+              show_nav: true,
+            },
+            {
               menuValue: 'Add Clients',
               route: routes.addPatient,
               base: routes.addPatient,

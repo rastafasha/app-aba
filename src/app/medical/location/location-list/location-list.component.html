@@ -71,7 +71,7 @@
                                     <tr *ngFor="let data of locationList">
                                         
                                         <td>
-                                          <a class="dropdown-item" [routerLink]="['/location/view/', data.id]">
+                                          <a [routerLink]="['/location/view/', data.id]">
                                             {{data.title}}
                                           </a>
                                         </td>

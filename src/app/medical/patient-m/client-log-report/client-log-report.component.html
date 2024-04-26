@@ -1,0 +1,408 @@
+<div class="page-wrapper">
+    <div class="content">
+    
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                      <li class="breadcrumb-item"><a routerLink="/">Dashboard </a></li>
+                      <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                      <li class="breadcrumb-item active"><a routerLink="/patients/list">Client List </a></li>
+                      <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item active">Clients Log Report</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        
+        <!-- table patients all -->
+        <div class="row" *ngIf="roles === 'SUPERADMIN' || roles === 'LM' || roles === 'MANAGER'">
+            <div class="col-sm-12">
+            
+                <div class="card card-table show-entire">
+                    <div class="card-body">
+                    
+                        <!-- Table Header -->
+                        <div class="page-table-header mb-2">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="doctor-table-blk">
+                                        <h3>Clients Log Report</h3>
+                                        <div class="doctor-search-blk">
+                                            <div class="top-nav-search table-search-blk">
+                                                    <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
+                                                    (ngModelChange)="searchData(searchDataValue)">
+                                                    <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
+                                            </div>
+                                            <div class="add-group">
+                                                <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2" *ngIf="isPermission('register_patient')"><img src="assets/img/icons/plus.svg" alt=""></a>
+                                                <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
+                                                <!-- <div class="px-7 py-5" data-kt-user-table-filter="form">
+                                                  <div class="mb-10">
+                                                      
+                                                      <select [(ngModel)]="status" (change)="getTableData()" class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
+                                                          
+                                                          <option value="0">All</option>
+                                                          <option value="incoming">incoming</option>
+                                                          <option value="active">active</option>
+                                                          <option value="inactive">inactive</option>
+                                                      </select>
+                                                  </div>
+                                              </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto text-end float-end ms-auto download-grp">
+                                     <!-- <a type="button" (click)="pdfExport()" class=" me-2"><img src="assets/img/icons/pdf-icon-01.svg"   alt="Export to Pdf"  title="Export to Pdf"></a> -->
+                                     <a type="button" (click)="txtExport()" class=" me-2"><img src="assets/img/icons/pdf-icon-02.svg"   alt="Export to TXT" title="Export to TXT"></a>
+                                     <a type="button" (click)="csvExport()" class=" me-2"><img src="assets/img/icons/pdf-icon-03.svg"    alt="Export to CSV" title="Export to CSV"></a>
+                                     <a type="button" (click)="excelExport()" ><img src="assets/img/icons/pdf-icon-04.svg"   alt="Export to XLS" title="Export to XLS"></a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Table Header -->
+                        
+                        <div class="table-responsive" >
+                            <table matSort (matSortChange)="sortData($event)" class="table border-0 custom-table comman-table datatable mb-0">
+                                <thead>
+                                    <tr>
+                                        
+                                      <th mat-sort-header="agency">Agency</th>
+                                      <th mat-sort-header="ops" *ngIf="roles ==='SUPERADMIN'">Options</th>
+                                      <th mat-sort-header="status">Status</th>
+                                      <th mat-sort-header="avatarmanager"> Avatar Manager</th>
+                                      <th mat-sort-header="manager">Manager</th>
+                                      <th mat-sort-header="avatar">Avatar</th>
+                                      <th mat-sort-header="name">F Name</th>
+                                      <th mat-sort-header="lastname">L Name</th>
+                                      <th mat-sort-header="birth_date">birth_date</th>
+                                      <th mat-sort-header="address">Address</th>
+                                      <th mat-sort-header="codes">codes</th>
+                                      <th mat-sort-header="insurer">insurer</th>
+                                      <th mat-sort-header="telehealth">telehealth</th>
+                                      <th mat-sort-header="pay">pay</th>
+                                      <th mat-sort-header="oop">oop</th>
+                                      <th mat-sort-header="benefits">benefits</th>
+                                      <th mat-sort-header="eligibility">eligibility</th>
+                                      <th mat-sort-header="eqhid">Eqhl ID</th>
+                                      <th mat-sort-header="patient_id">Patient Id</th>
+                                      <th mat-sort-header="pa_assestment">Pa Assestment</th>
+                                      <th mat-sort-header="pa_service">Pa Service</th>
+                                      <th mat-sort-header="pa_startdate">Pa Start Date</th>
+                                      <th mat-sort-header="city">city</th>
+                                      <th mat-sort-header="schedule">schedule</th>
+                                      <th mat-sort-header="average">average</th>
+                                      <th mat-sort-header="53">53</th>
+                                      <th mat-sort-header="rbt name">rbt name</th>
+                                      <th mat-sort-header="55">55</th>
+                                      <th mat-sort-header="56">56</th>
+                                      <th mat-sort-header="school bca">school bca</th>
+                                      <th mat-sort-header="home bca">home bca</th>
+                                      <th mat-sort-header="note report">note report</th>
+                                      <th mat-sort-header="parent communication">parent communication</th>
+                                      <th mat-sort-header="case notes">case notes</th>
+                                      <th mat-sort-header="phonec">Phone</th>
+                                      <th mat-sort-header="email">email</th>
+                                      <th mat-sort-header="welcome">welcome</th>
+                                      <th mat-sort-header="consent">consent</th>
+                                      <th mat-sort-header="insurance card">insurance card</th>
+                                      <th mat-sort-header="eligibility">eligibility</th>
+                                      <th mat-sort-header="interview">interview</th>
+                                      <th mat-sort-header="mnl">mnl</th>
+                                      <th mat-sort-header="referral">referral</th>
+                                      <th mat-sort-header="ados">ados</th>
+                                      <th mat-sort-header="iep">iep</th>
+                                      <th mat-sort-header="asd diagnosis">asd diagnosis</th>
+                                      <th mat-sort-header="cde">cde</th>
+                                      <th mat-sort-header="submited">submited</th>
+                                      <th mat-sort-header="aditional note">aditional note</th>
+                                      <th mat-sort-header="short address">short address</th>
+                                      <th mat-sort-header="city">city</th>
+                                      <th mat-sort-header="zip">zip</th>
+                                      <th mat-sort-header="Country">Country</th>
+                                      <th mat-sort-header="created">Created At</th>
+                                         
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr *ngFor="let data of patientList">
+                                        <td>{{data.location_id}}</td>
+                                        <td *ngIf="roles ==='SUPERADMIN'">
+                                            <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            
+                                            name="state" [(ngModel)]="data.status" (change)="cambiarStatus(data)"
+                                            placeholder="state">
+                                            <option>-- Select --</option>
+                                            <option value="incoming">Incoming</option>
+                                              <option value="active">Active</option>
+                                              <option value="inactive">Inactive</option>
+                                              </select>
+                                          </td>
+                                        
+                                        <td>
+                                            <span class="badge bg-primary"
+                                                *ngIf="data.status === 'incoming'">Incoming</span>
+                                            <span class="badge bg-success"
+                                                *ngIf="data.status === 'active'">Active</span>
+                                            <span class="badge bg-danger"
+                                                *ngIf="data.status === 'inactive'">Inactive</span>
+      
+                                            
+                                        </td>
+                                        <td>
+                                            <div *ngIf="!data.avatar">
+                                                <img src="./assets/img/no-image.jpg" >
+                                            </div>
+                                            <div *ngIf="data.avatar">
+                                                <img  src="{{data.avatar}}" class="avatarlist"   [alt]="data.first_name">
+                                            </div>
+                                        </td>
+                                        <td>{{data.rbt_id}}</td>
+                                        
+                                        <td>
+                                            <div *ngIf="!data.avatar">
+                                                <img src="./assets/img/no-image.jpg" >
+                                            </div>
+                                            <div *ngIf="data.avatar">
+                                                <img  src="{{data.avatar}}" class="avatarlist"   [alt]="data.first_name">
+                                            </div>
+                                        </td>
+                                      <td >
+                                        <a [routerLink]="['/patients/profile/', data.id]">
+                                        <!-- {{data.first_name + ' ' + (data.last_name ? data.last_name: '')}} -->
+                                        {{data.first_name }}
+                                      </a>
+                                      <td > {{data.last_name }} </td>
+                                      <td>{{data.birth_date}}</td>
+                                      <td>{{data.address}}</td>
+                                      <td>{{data.diagnosis_code}}</td>
+                                      <td>{{data.insurer_id}}</td>
+                                      <td>telehealth ??</td>
+                                      <td>pay ??</td>
+                                      <td>{{data.oop}}</td>
+                                      <td>benefits ??</td>
+                                      <td>
+                                        <!-- {{data.eligibility}} -->
+                                        <span class="badge bg-danger"
+                                        *ngIf="data.eligibility === 'no'">No</span>
+                                    <span class="badge bg-success"
+                                        *ngIf="data.eligibility === 'yes'">Yes</span>
+                                    <span class="badge bg-primary"
+                                        *ngIf="data.eligibility === 'pending'">Pending</span>
+                                    </td>
+                                    <td>eqh id ??</td>
+                                      <td>{{data.patient_id}}</td>
+                                      <td>
+                                        <!-- {{data.pa_assestment}} -->
+                                        <ng-container *ngFor=" let pa of data.paAssestment">
+                                            <ul>
+                                                <li>{{pa.pa_assessment}}</li>
+                                            </ul>
+                                        </ng-container>
+                                        
+                                    </td>
+                                      <td>
+                                        <!-- {{data.pa_assestment}} -->
+                                        <ng-container *ngFor=" let pas of data.paAssestment">
+                                            <ul>
+                                                <li>{{pas.pa_services}}</li>
+                                            </ul>
+                                        </ng-container>
+                                        
+                                    </td>
+                                      <td>
+                                        <!-- {{data.pa_assestment}} -->
+                                        <ng-container *ngFor=" let pasd of data.paAssestment">
+                                            <ul>
+                                                <li>{{pasd.pa_services_start_date}}</li>
+                                            </ul>
+                                        </ng-container>
+                                        
+                                    </td>
+                                      <td>
+                                        <!-- {{data.pa_assestment}} -->
+                                        <ng-container *ngFor=" let paed of data.paAssestment">
+                                            <ul>
+                                                <li>{{paed.pa_services_end_date}}</li>
+                                            </ul>
+                                        </ng-container>
+                                        
+                                    </td>
+                                    <td>{{data.city}}</td>
+                                    <td>{{data.schedule}}</td>
+                                    <td>average ??</td>
+                                    <td>53 ??</td>
+                                    <td>{{data.rbt}}</td>
+                                    <td>55 ??</td>
+                                    <td>56 ??</td>
+                                    <td>School bca ??</td>
+                                    <td>home bca ??</td>
+                                    <td>note Report ??</td>
+                                    <td>parent communication ??</td>
+                                    <td>case notes ??</td>
+                                    <td>{{data.phone}}</td>
+                                      <td>{{data.email}}</td>
+                                      <td>{{data.welcome}}</td>
+                                      <td>{{data.consent}}</td>
+                                      <td>{{data.insurance_card}}</td>
+                                      <td>
+                                        <!-- {{data.eligibility}} -->
+                                        <span class="badge bg-danger"
+                                        *ngIf="data.eligibility === 'no'">No</span>
+                                    <span class="badge bg-success"
+                                        *ngIf="data.eligibility === 'yes'">Yes</span>
+                                    <span class="badge bg-primary"
+                                        *ngIf="data.eligibility === 'pending'">Pending</span>
+                                    </td>
+                                    <td>interview ??</td>
+                                    <td>{{data.mnl}}</td>
+                                    <td>{{data.referral}}</td>
+                                    <td>{{data.ados}}</td>
+                                    <td>{{data.iep}}</td>
+                                    <td>{{data.asd_diagnosis}}</td>
+                                    <td>{{data.cde}}</td>
+                                    <td>{{data.submited}}</td>
+                                    <td>{{data.special_note}}</td>
+                                    <td>short Address ??</td>
+                                    <td>{{data.city}}</td>
+                                    <td>{{data.zip}}</td>
+                                    <td>{{data.country}}</td>
+                                      
+                                        
+                                      
+                                    
+                                        <!-- <td>{{data.permision_pluck.length > 0 ? data.permision_pluck: 'TODOS LOS PERMISOS' }}</td> -->
+                                        <td>{{data.created_at | date }}</td>
+                                        
+                                        
+  
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="table_footer">
+                                <div class="col-sm-12 col-md-5">
+                                  <div class="dataTables_info">
+                                    Showing {{ serialNumberArray[0] }} to
+                                    {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                                    {{ totalDatapatient }} entries
+                                  </div>
+                                </div>
+                
+                                <div class="col-sm-12 col-md-7">
+                                  <div class="pagination_section">
+                                    <ul class="pagination">
+                                      <li
+                                        class="page-item"
+                                        [ngClass]="{
+                                          disabled: currentPage === 1
+                                        }"
+                                      >
+                                        <a
+                                          (click)="getMoreData('previous')"
+                                          class="page-link"
+                                          href="javascript:void(0);"
+                                          tabindex="-1"
+                                          >Previous</a
+                                        >
+                                      </li>
+                
+                                      <ng-container
+                                        *ngFor="let item of pageNumberArray; let i = index"
+                                      >
+                                        <li
+                                          class="page-item"
+                                          [class.active]="item === currentPage"
+                                          [ngClass]="
+                                            (pageNumberArray[currentPage - 2] > item &&
+                                              item !== 1 &&
+                                              pageNumberArray.length > 6) ||
+                                            (pageNumberArray[currentPage] < item &&
+                                              item !== 1 &&
+                                              pageNumberArray.length > 6 &&
+                                              pageNumberArray.length !== item)
+                                              ? 'hide-page-no'
+                                              : 'show-page-no'
+                                          "
+                                        >
+                                          <a
+                                            (click)="moveToPage(item)"
+                                            class="page-link"
+                                            href="javascript:void(0);"
+                                          >
+                                            {{ item }}
+                                          </a>
+                                        </li>
+                                        <li
+                                          class="page-item"
+                                          *ngIf="
+                                            i === 0 &&
+                                            pageNumberArray.length > 6 &&
+                                            currentPage > 2
+                                          "
+                                          [hidden]="currentPage === 1"
+                                          (click)="moveToPage(currentPage - 2)"
+                                        >
+                                          <a class="page-link" href="javascript:void(0);">
+                                            ...
+                                          </a>
+                                        </li>
+                                        <li
+                                          *ngIf="
+                                            i === pageNumberArray.length - 2 &&
+                                            pageNumberArray.length > 6
+                                          "
+                                          [hidden]="
+                                            currentPage >=
+                                              pageNumberArray[pageNumberArray.length - 2] ||
+                                            totalData <
+                                              serialNumberArray[serialNumberArray.length - 1]
+                                          "
+                                          class="page-item"
+                                          (click)="moveToPage(currentPage + 2)"
+                                        >
+                                          <a class="page-link" href="javascript:void(0);">
+                                            ...
+                                          </a>
+                                        </li>
+                                      </ng-container>
+                
+                                      <li
+                                        class="page-item"
+                                        [ngClass]="{
+                                          disabled:
+                                            currentPage ===
+                                              pageNumberArray[pageNumberArray.length - 1] ||
+                                              patientList.length === 0
+                                        }"
+                                      >
+                                        <a
+                                          (click)="getMoreData('next')"
+                                          class="page-link"
+                                          href="javascript:void(0);"
+                                          >Next
+                                        </a>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+  
+                        
+                        
+                    </div>
+                </div>							
+            </div>					
+        </div>
+        <!--  end table patients all -->
+    </div>
+  </div>
+  
+  
+  

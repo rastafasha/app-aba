@@ -14,20 +14,23 @@ import { ProfilePatientMComponent } from './profile-patient-m/profile-patient-m.
 import { PipesModule } from 'src/app/pipes/pipes.module';
 
 import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
+import { ClientLogReportComponent } from './client-log-report/client-log-report.component';
 @NgModule({
   declarations: [
     PatientMComponent,
     AddPatientMComponent,
     ListPatientMComponent,
     EditPatientMComponent,
-    ProfilePatientMComponent
+    ProfilePatientMComponent,
+    ClientLogReportComponent
   ],
   exports: [
     PatientMComponent,
     AddPatientMComponent,
     ListPatientMComponent,
     EditPatientMComponent,
-    ProfilePatientMComponent
+    ProfilePatientMComponent,
+    ClientLogReportComponent
   ],
   imports: [
     CommonModule,

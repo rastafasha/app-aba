@@ -28,6 +28,7 @@ export class ReportByClientComponent {
   noterbt_id:any;
   user:any;
 
+  
 
 
   public clientReportList: any = [];

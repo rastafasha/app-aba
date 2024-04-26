@@ -60,22 +60,13 @@
                                         <label>Provider Name <span class="login-danger">*</span></label>
                                         
 
-                                        <!-- <mat-select [(ngModel)]="selectedValueProviderName" name="provider_name_g" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist" (selectionChange)="selectSpecialist($event)">
+                                        <mat-select [(ngModel)]="selectedValueProviderName" name="provider_name_g" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist" (selectionChange)="selectSpecialist($event)">
                                             <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
-                                        </mat-select> -->
+                                        </mat-select>
 
-                                        <select
-                                        class="form-control form-select-solid fw-bolder"
-                                        name="selectedValueProviderName"
-                                        [(ngModel)]="selectedValueProviderName"
                                         
-                                        placeholder="Selec. Idioma">
-                                        <ng-container *ngFor="let data of roles_rbt">
-                                            <option [value]="data.id">{{data.name}} {{data.surname}}</option>
-                                        </ng-container>
-                                    </select>
 
                                     </div>
                                 </div>
@@ -84,16 +75,12 @@
                                         <label>Provider Credential <span class="login-danger">*</span></label>
                                         <input class="form-control" name="provider_credential"
                                             [(ngModel)]="provider_credential" type="text">
-                                        <!-- <mat-select [(ngModel)]="selectedValueProviderCredential" name="provider_credential" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">{{data.certificate_number}}
-                                            </mat-option>
-                                        </mat-select> -->
+                                        
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label>POS <span class="login-danger">*</span></label>
-                                        <!-- <input class="form-control" name="pos"   [(ngModel)]="pos" type="text"  > -->
                                         <select class="form-control form-select-solid fw-bolder" name="pos"
                                             [(ngModel)]="pos" disabled>
                                             <option>-- Select --</option>
@@ -130,7 +117,7 @@
                                         [(ngModel)]="selectedValueTimeIn" name="time_in" [format]="24"  (onChange)="hourTimeInSelected($event)" [ngModelOptions]="{standalone: true}">
                                         <ngx-material-timepicker-toggle [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
                                         <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
-                                        <!-- <input class="form-control" name="time_in"   [(ngModel)]="time_in" type="text"  > -->
+                                        
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -245,7 +232,7 @@
                                            
                                         </div>
 
-                                        <button class="btn btn-outline-success btn-sm" (click)="addMaladaptive(behavior)">Save</button>
+                                        <button class="btn btn-outline-success btn-sm" [disable] (click)="addMaladaptive(behavior)">Save</button>
                                     </div>
                                 </ng-container>
                             </div>
