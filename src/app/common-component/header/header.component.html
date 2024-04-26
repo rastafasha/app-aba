@@ -1,8 +1,15 @@
 <div class="header">
     <div class="header-left">
-        <a [routerLink]="routes.adminDashboard" class="logo">
-            <img src="assets/webp/aba-logo-new.webp" width="35" height="27" alt=""> <span>ABA Therapy</span>
-        </a>
+        <span  *ngIf="roles === 'SUPERADMIN' || roles === 'LM' || roles === 'MANAGER'">
+            <a [routerLink]="routes.adminDashboard" class="logo">
+                <img src="assets/webp/aba-logo-new.webp" width="35" height="27" alt=""> <span>ABA Therapy</span>
+            </a>
+        </span>
+        <span  *ngIf="roles === 'RBT' || roles === 'BCBA'">
+            <a [routerLink]="['/doctors/profile/', user.id]" class="logo">
+                <img src="assets/webp/aba-logo-new.webp" width="35" height="27" alt=""> <span>ABA Therapy</span>
+            </a>
+        </span>
     </div>
     <a (click)="toggleSideBar()" id="toggle_btn" href="javascript:void(0);"><img src="assets/img/icons/bar-icon.svg"  alt=""></a>
     <a (click)="toggleMobileSideBar()" id="mobile_btn" class="mobile_btn float-start" ><img src="assets/img/icons/bar-icon.svg"  alt=""></a>
@@ -95,12 +102,12 @@
                     <span>{{user.roles}}</span>
                 </div>
                 <span class="user-img">
-                    <div *ngIf="usuario">
-                        <div *ngIf="!usuario.avatar">
+                    <div *ngIf="user">
+                        <div *ngIf="!user.avatar">
                             <img  src="assets/img/user-06.jpg" >
                         </div>
-                        <div *ngIf="usuario.avatar">
-                            <img  src="{{imagenSerUrl}}/{{usuario.avatar}}">
+                        <div *ngIf="user.avatar">
+                            <img  src="{{imagenSerUrl}}/{{user.avatar}}">
                         </div>
                     </div>
                 </span>

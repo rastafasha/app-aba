@@ -138,6 +138,7 @@ export class NoteBcbaComponent {
   services:any ;
   insurer_id:any ;
   cpt:any;
+  public roles:any = [];
 
   constructor(
     public bipService:BipService,
@@ -161,6 +162,7 @@ export class NoteBcbaComponent {
 
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
+    this.roles = this.user.roles[0];
     this.doctor_id = this.user.id;
   }
 

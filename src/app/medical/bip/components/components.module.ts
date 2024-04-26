@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
 import { ChartReductionComponent } from './charts/chart-reduction/chart-reduction.component';
-import { SustitutionGoalFormComponent } from './sustitution-goal-form/sustitution-goal-form.component';
 import { FamilyInvolvementGoalFormComponent } from './family-involvement-goal-form/family-involvement-goal-form.component';
 import { MonitoringEvaluatingComponent } from './monitoring-evaluating/monitoring-evaluating.component';
 import { BehaviorAssistantComponent } from './behavior-assistant/behavior-assistant.component';
@@ -23,7 +22,6 @@ import { ChartReplacementComponent } from './charts/chart-replacement/chart-repl
   declarations: [
     BipformComponent,
     ReductionGoalFormComponent,
-    SustitutionGoalFormComponent,
     FamilyInvolvementGoalFormComponent,
     MonitoringEvaluatingComponent,
     BehaviorAssistantComponent,
@@ -38,7 +36,6 @@ import { ChartReplacementComponent } from './charts/chart-replacement/chart-repl
   exports: [
     BipformComponent,
     ReductionGoalFormComponent,
-    SustitutionGoalFormComponent,
     FamilyInvolvementGoalFormComponent,
     MonitoringEvaluatingComponent,
     BehaviorAssistantComponent,

@@ -6,8 +6,14 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
-                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <span  *ngIf="roles === 'SUPERADMIN' || roles === 'LM' || roles === 'MANAGER'">
+                            <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item" ><i class="feather icon-chevron-right"></i></li>
+                        </span>
+                        <span  *ngIf="roles === 'RBT' || roles === 'BCBA'">
+                            <li class="breadcrumb-item"><a [routerLink]="['/doctors/profile/', user.id]">Dashboard</a></li>
+                            <!-- <li class="breadcrumb-item" ><i class="feather icon-chevron-right"></i></li> -->
+                        </span>
                         <li class="breadcrumb-item" *ngIf="isPermission('list_employers')" ><a routerLink="/doctors/list">Employees </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">Employeer Profile</li>
@@ -88,129 +94,55 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="doctor-personals-grp">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="heading-detail ">
-                                        <h4 class="mb-3">About me</h4>
-                                        <!-- <p>Hello I am Smith Bruklin a Gynaecologist in Sanjivni Hospital Surat. I love to work with all my hospital staff and seniour doctors.</p> -->
-                                    </div>
-                                    <div class="about-me-list">
-                                        <ul class="list-space">
-                                            <li>
-                                                <h4>Gender</h4>
-                                                <span *ngIf="doctor_selected.gender == 2" >Female</span>
-                                                <span *ngIf="doctor_selected.gender == 1" >Male</span>
-                                            </li>
-                                            <li>
-                                                <h4>Birth Day</h4>
-                                                <span>{{doctor_selected.birth_date}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Languages</h4>
-                                                <span>{{doctor_selected.languages}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Phone</h4>
-                                                <span>{{doctor_selected.phone}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Role</h4>
-                                                <span>{{doctor_selected.roles.name}}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="doctor-personals-grp">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="heading-detail ">
-                                        <h4 class="mb-3">CEU</h4>
-                                        <!-- <p>Hello I am Smith Bruklin a Gynaecologist in Sanjivni Hospital Surat. I love to work with all my hospital staff and seniour doctors.</p> -->
-                                    </div>
-                                    <div class="about-me-list">
-                                        <ul class="list-space">
-                                            <li>
-                                                <h4>CEU HIPPA Annually</h4>
-                                                <span>{{doctor_selected.ceu_hippa_annually}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>CEU Domestic Violence (no expiration )</h4>
-                                                <span>{{doctor_selected.ceu_domestic_violence_no_expiration}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>CEU Security Awarence Annually</h4>
-                                                <span>{{doctor_selected.ceu_security_awareness_annually}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>CEU Zero Tolerance (every 3 years)</h4>
-                                                <span>{{doctor_selected.ceu_zero_tolerance_every_3_years}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>CEU- HIV/bloodborne pathogens/infection control (no expiration)</h4>
-                                                <span>{{doctor_selected.ceu_hiv_bloodborne_pathogens_infection_control_no_expiration}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>CEU Civil Rights (no expiration)</h4>
-                                                <span>{{doctor_selected.ceu_civil_rights_no_expiration}}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="doctor-personals-grp">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="heading-detail ">
-                                        <h4 class="mb-3">Others</h4>
-                                        <!-- <p>Hello I am Smith Bruklin a Gynaecologist in Sanjivni Hospital Surat. I love to work with all my hospital staff and seniour doctors.</p> -->
-                                    </div>
-                                    <div class="about-me-list">
-                                        <ul class="list-space">
-                                            <li>
-                                                <h4>School Badge</h4>
-                                                <span>{{doctor_selected.school_badge}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>W-9/W-4 form</h4>
-                                                <span>{{doctor_selected.w_9_w_4_form}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Contract</h4>
-                                                <span>{{doctor_selected.contract}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>2/4 Week Notice Agreement</h4>
-                                                <span>{{doctor_selected.two_four_week_notice_agreement}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Credentialing package (BCBAs only)</h4>
-                                                <span>{{doctor_selected.credentialing_package_bcbas_only}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>CAQH# (BCBAs only)</h4>
-                                                <span>{{doctor_selected.caqh_bcbas_only}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Contract Type</h4>
-                                                <span>{{doctor_selected.contract_type}}</span>
-                                            </li>
-                                            <li>
-                                                <h4>Salary</h4>
-                                                <span>{{doctor_selected.salary}}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-lg-8">
                         <div class="doctor-personals-grp">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title ">Clients Asigned</h4>
+                                </div>
+                                <div class="card-body p-0 table-dash">
+                                    <div class="table-responsive scrooldiv2">
+                                        <table matSort  class="table mb-0 border-0 datatable custom-table patient-profile-table">
+                                            <thead>
+                                                <tr>
+                                                    
+                                                    <th mat-sort-header="date">Name</th>
+                                                    <th mat-sort-header="doctor">Patient Id</th>
+                                                    <th mat-sort-header="status">Status</th>
+                                                    <th mat-sort-header="viewall"><a [routerLink]="['/patients/list'] ">View All</a></th>
+                                                    <!-- <th mat-sort-header="statuspayment">Status Payment</th> -->
+                                                    <!-- <th mat-sort-header="charges">Monto ($)</th> -->
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of patients">
+                                                    
+                                                    <td >{{data.first_name}} {{data.last_name}}</td>
+                                                    <td >{{data.patient_id}}</td>
+                                                    <td>
+                                                        <button [ngClass]="{'status-green' : data.status === 'active', 'status-pink' : data.status === 'inactive'}" class="custom-badge">{{data.status == 'inactive' ? 'Inactivo' : 'Activo'}}</button>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <div class="dropdown dropdown-action">
+                                                            <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' || roles ==='BCBA'" [routerLink]="['/bip/attention/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Bip Access</a>
+                                                                <a class="dropdown-item" *ngIf="isPermission('view_bip')" [routerLink]="['/bip/profile/', data.patient_id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> View Bip</a>
+                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' ||  roles ==='RBT'" [routerLink]="['/note-rbt/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Create Note RBT</a>
+                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' ||  roles ==='RBT'" [routerLink]="['/note-rbt/listbyclient/', data.patient_id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> List Note RBT</a>
+                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' || roles ==='BCBA'" [routerLink]="['/note-bcba/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Create Note BCBA</a>
+                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' ||  roles ==='BCBA'" [routerLink]="['/note-bcba/listbyclient/', data.patient_id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> List Note BCBA</a>
+                                                                <!-- <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN'" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_appointment"><i class="fa fa-trash-alt m-r-5"></i> Delete</a> -->
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card">
                                 <div class="card-body">
                                     <div class="tab-content-set">
@@ -323,7 +255,13 @@
                                                             <div class="col-xl-3 col-md-6">
                                                                 <div class="detail-personal">
                                                                     <h2>Electronic Signature</h2>
-                                                                    <h3>{{doctor_selected.electronic_signature}}</h3>
+                                                                    <div *ngIf="!doctor_selected.electronic_signature">
+                                                                        <img src="./assets/img/no-image.jpg" class="shadow"  >
+                                                                    </div>
+                                                                    <div *ngIf="doctor_selected.electronic_signature">
+                                                                        <img  [src]="doctor_selected.electronic_signature" class="shadow " style="width:100%; height:70px"  [alt]="doctor_selected.name">
+                                                                    </div>
+                                                                    <!-- <h3>{{doctor_selected.electronic_signature}}</h3> -->
                                                                 </div>
                                                             </div>
                                                             <div class="col-xl-3 col-md-6">
@@ -341,7 +279,7 @@
                                                             <div class="col-xl-3 col-md-6">
                                                                 <div class="detail-personal">
                                                                     <h2>DOB</h2>
-                                                                    <h3>{{doctor_selected.dob}}</h3>
+                                                                    <h3>{{doctor_selected.birth_date}}</h3>
                                                                 </div>
                                                             </div>
                                                             <div class="col-xl-3 col-md-6">
@@ -603,55 +541,131 @@
                                     
                                 </div>
                             </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="doctor-personals-grp">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title ">Clients Asigned</h4>
+                                <div class="card-body">
+                                    <div class="heading-detail ">
+                                        <h4 class="mb-3">About me</h4>
+                                        <!-- <p>Hello I am Smith Bruklin a Gynaecologist in Sanjivni Hospital Surat. I love to work with all my hospital staff and seniour doctors.</p> -->
+                                    </div>
+                                    <div class="about-me-list">
+                                        <ul class="list-space">
+                                            <li>
+                                                <h4>Gender</h4>
+                                                <span *ngIf="doctor_selected.gender == 2" >Female</span>
+                                                <span *ngIf="doctor_selected.gender == 1" >Male</span>
+                                            </li>
+                                            <li>
+                                                <h4>Birth Day</h4>
+                                                <span>{{doctor_selected.birth_date}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Languages</h4>
+                                                <span>{{doctor_selected.languages}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Phone</h4>
+                                                <span>{{doctor_selected.phone}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Role</h4>
+                                                <span>{{doctor_selected.roles.name}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="card-body p-0 table-dash">
-                                    <div class="table-responsive scrooldiv2">
-                                        <table matSort  class="table mb-0 border-0 datatable custom-table patient-profile-table">
-                                            <thead>
-                                                <tr>
-                                                    
-                                                    <th mat-sort-header="date">Name</th>
-                                                    <th mat-sort-header="doctor">Patient Id</th>
-                                                    <th mat-sort-header="status">Status</th>
-                                                    <th mat-sort-header="viewall"><a [routerLink]="['/patients/list'] ">View All</a></th>
-                                                    <!-- <th mat-sort-header="statuspayment">Status Payment</th> -->
-                                                    <!-- <th mat-sort-header="charges">Monto ($)</th> -->
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let data of patients">
-                                                    
-                                                    <td >{{data.first_name}} {{data.last_name}}</td>
-                                                    <td >{{data.patient_id}}</td>
-                                                    <td>
-                                                        <button [ngClass]="{'status-green' : data.status === 'active', 'status-pink' : data.status === 'inactive'}" class="custom-badge">{{data.status == 'inactive' ? 'Inactivo' : 'Activo'}}</button>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="dropdown dropdown-action">
-                                                            <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                                            <div class="dropdown-menu dropdown-menu-end">
-                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' || roles ==='BCBA'" [routerLink]="['/bip/attention/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Bip Access</a>
-                                                                <a class="dropdown-item" *ngIf="isPermission('view_bip')" [routerLink]="['/bip/profile/', data.patient_id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> View Bip</a>
-                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' ||  roles ==='RBT'" [routerLink]="['/note-rbt/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Create Note RBT</a>
-                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' ||  roles ==='RBT'" [routerLink]="['/note-rbt/listbyclient/', data.patient_id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> List Note RBT</a>
-                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' || roles ==='BCBA'" [routerLink]="['/note-bcba/', data.id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> Create Note BCBA</a>
-                                                                <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN' ||  roles ==='BCBA'" [routerLink]="['/note-bcba/listbyclient/', data.patient_id]"><i class="fa-solid fa-pen-to-square m-r-5"></i> List Note BCBA</a>
-                                                                <!-- <a class="dropdown-item" *ngIf="roles ==='SUPERADMIN'" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_appointment"><i class="fa fa-trash-alt m-r-5"></i> Delete</a> -->
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            </div>
+                        </div>
+                        <div class="doctor-personals-grp">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="heading-detail ">
+                                        <h4 class="mb-3">CEU</h4>
+                                        <!-- <p>Hello I am Smith Bruklin a Gynaecologist in Sanjivni Hospital Surat. I love to work with all my hospital staff and seniour doctors.</p> -->
+                                    </div>
+                                    <div class="about-me-list">
+                                        <ul class="list-space">
+                                            <li>
+                                                <h4>CEU HIPPA Annually</h4>
+                                                <span>{{doctor_selected.ceu_hippa_annually}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CEU Domestic Violence (no expiration )</h4>
+                                                <span>{{doctor_selected.ceu_domestic_violence_no_expiration}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CEU Security Awarence Annually</h4>
+                                                <span>{{doctor_selected.ceu_security_awareness_annually}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CEU Zero Tolerance (every 3 years)</h4>
+                                                <span>{{doctor_selected.ceu_zero_tolerance_every_3_years}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CEU- HIV/bloodborne pathogens/infection control (no expiration)</h4>
+                                                <span>{{doctor_selected.ceu_hiv_bloodborne_pathogens_infection_control_no_expiration}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CEU Civil Rights (no expiration)</h4>
+                                                <span>{{doctor_selected.ceu_civil_rights_no_expiration}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doctor-personals-grp">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="heading-detail ">
+                                        <h4 class="mb-3">Others</h4>
+                                        <!-- <p>Hello I am Smith Bruklin a Gynaecologist in Sanjivni Hospital Surat. I love to work with all my hospital staff and seniour doctors.</p> -->
+                                    </div>
+                                    <div class="about-me-list">
+                                        <ul class="list-space">
+                                            <li>
+                                                <h4>School Badge</h4>
+                                                <span>{{doctor_selected.school_badge}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>W-9/W-4 form</h4>
+                                                <span>{{doctor_selected.w_9_w_4_form}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Contract</h4>
+                                                <span>{{doctor_selected.contract}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>2/4 Week Notice Agreement</h4>
+                                                <span>{{doctor_selected.two_four_week_notice_agreement}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Credentialing package (BCBAs only)</h4>
+                                                <span>{{doctor_selected.credentialing_package_bcbas_only}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>CAQH# (BCBAs only)</h4>
+                                                <span>{{doctor_selected.caqh_bcbas_only}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Contract Type</h4>
+                                                <span>{{doctor_selected.contract_type}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Salary</h4>
+                                                <span>{{doctor_selected.salary}}</span>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

@@ -6,7 +6,12 @@
           <div class="row">
               <div class="col-sm-12">
                   <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+                    <span  *ngIf="roles === 'SUPERADMIN' || roles === 'LM' || roles === 'MANAGER'">
+                      <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+                  </span>
+                  <span  *ngIf="roles === 'RBT' || roles === 'BCBA'">
+                      <li class="breadcrumb-item"><a [routerLink]="['/doctors/profile/', user.id]">Dashboard</a></li>
+                  </span>
                       <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                       <li class="breadcrumb-item active">Clients List</li>
                   </ul>

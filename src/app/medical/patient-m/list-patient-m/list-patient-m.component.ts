@@ -73,7 +73,7 @@ export class ListPatientMComponent {
   getPatiensByDoctor(){
     this.patientService.getPatientsByDoctor(this.user.id).subscribe((resp:any)=>{
       // console.log(resp);
-      this.doctorPatientList = resp.patients;
+      this.doctorPatientList = resp.patients.data;
     })
   }
 
