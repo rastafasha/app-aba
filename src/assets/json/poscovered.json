@@ -1,0 +1,19 @@
+{
+    "data": [
+       
+        {
+            "value" : "03 School"
+        },
+          {
+            "value" : "12 Home"
+        },
+          {
+            "value" : "02 Telehealth"
+        },
+        {
+            "value" : "99 Other"
+        }
+    ],
+    "totalData":4
+}
+

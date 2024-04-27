@@ -18,6 +18,7 @@ export class EditPatientMComponent {
   public selectedValueLocation!: string;
   public selectedValueInsurer!: string;
   public selectedValueCode!: string;
+  public selectedValuePosCovered!: string;
   option_selected:number = 0;
 
   public patient_id: any;
@@ -62,6 +63,7 @@ export class EditPatientMComponent {
   public coinsurance: any;
   public copayments: any;
   public oop: any;
+  public eqhlid: any;
   
 
   public pa_assessmentss: any = <any>[];
@@ -90,6 +92,7 @@ export class EditPatientMComponent {
   public cde: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public submitted: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public eligibility: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public interview: 'pending'|'send' | 'receive' | 'no apply';
 
   
 
@@ -138,6 +141,7 @@ export class EditPatientMComponent {
   public services_code: any= [];
   public services: any= [];
   public pa_assessmentgroup: any= [];
+  public poscoveredList: any = [];
 
   public roles_rbt:any = [];
   public roles_bcba:any = [];
@@ -146,7 +150,8 @@ export class EditPatientMComponent {
   public insurances_name:any;
   public code:any;
   public insuranceiddd:any;
-  
+  public telehealth:boolean;
+  public pay:boolean ;
   
   // public insurance:any;
   // public insurer_name: any;
@@ -178,9 +183,18 @@ export class EditPatientMComponent {
      })
      this.getConfig();
      this.showUser();
+     this.getPoscoveredList();
     //  setTimeout(()=>{
     //   alertClose();
     // }, 50)
+  }
+
+  getPoscoveredList(){
+    this.patientService.getPosCovered().subscribe((res:any)=> {
+        console.log("pos covered list", res);
+        this.poscoveredList = res.data;
+        
+    });
   }
 
   getConfig(){
@@ -262,7 +276,7 @@ showUser(){
         this.insurer_secundary = this.patient_selected.insurer_secundary;
         this.insuranceId_secundary = this.patient_selected.insuranceId_secundary;
         this.elegibility_date = this.patient_selected.elegibility_date? new Date(this.patient_selected.elegibility_date).toISOString(): '';   
-        this.pos_covered = this.patient_selected.pos_covered;
+        // this.pos_covered = this.patient_selected.pos_covered;
         this.deductible_individual_I_F = this.patient_selected.deductible_individual_I_F;
         this.balance = this.patient_selected.balance;
         this.coinsurance = this.patient_selected.coinsurance;
@@ -291,7 +305,8 @@ showUser(){
         this.pa_assessmentgroup = jsonObj;
 
         //valores de los selectores
-        this.selectedValueLocation = this.patient_selected.location_id;
+        this.selectedValuePosCovered = this.patient_selected.location_id;
+        this.selectedValueLocation = this.patient_selected.pos_covered;
         this.selectedValue_rbt = this.patient_selected.rbt_id ? this.patient_selected.rbt_id : null;
         this.selectedValue_rbt2 = this.patient_selected.rbt2 ? this.patient_selected.rbt2 : null;
         this.selectedValue_bcba = this.patient_selected.bcba ? this.patient_selected.bcba: null;
@@ -544,22 +559,22 @@ saveFiles(){
 
       formData.append('insuranceId', this.insuranceId);
     }
-    if(this.insurer_secundary){
+    // if(this.insurer_secundary){
 
-      formData.append('insurer_secundary', this.insurer_secundary);
-    }
-    if(this.insuranceId_secundary){
+    //   formData.append('insurer_secundary', this.insurer_secundary);
+    // }
+    // if(this.insuranceId_secundary){
 
-      formData.append('insuranceId_secundary', this.insuranceId_secundary);
-    }
+    //   formData.append('insuranceId_secundary', this.insuranceId_secundary);
+    // }
     
     if(this.elegibility_date){
 
       formData.append('elegibility_date', this.elegibility_date);
     }
     
-    if(this.pos_covered){
-      formData.append('pos_covered', this.pos_covered);
+    if(this.selectedValuePosCovered){
+      formData.append('pos_covered', this.selectedValuePosCovered);
     
     }
     if(this.deductible_individual_I_F){
@@ -650,4 +665,19 @@ saveFiles(){
 
   }
 //update function
+
+
+isCheckedTelehealth(){
+  this.telehealth = !this.telehealth;
+  console.log(this.telehealth);
+  // if ( event.target.checked ) {
+  // }
+}
+
+  isCheckedPay(){
+    this.pay = !this.pay;
+    console.log(this.pay);
+    // if ( event.target.checked ) {
+    // }
+  }
 }

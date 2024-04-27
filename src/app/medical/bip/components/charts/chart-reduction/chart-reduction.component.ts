@@ -222,7 +222,7 @@ export class ChartReductionComponent {
     this.bipService.getBipByUser(this.client_id).subscribe((resp:any)=>{
       // console.log(resp);
       this.created_at = resp.bip.created_at;
-      console.log('creacion bip',this.created_at);
+      // console.log('creacion bip',this.created_at);
     });
 
   }
@@ -255,7 +255,7 @@ export class ChartReductionComponent {
     getGraphicMaladaptive(){
     this.graphicReductionService.listMaladaptivesGraphics(this.maladaptive_behavior, this.patient_id).subscribe((resp:any)=>{
       
-      console.log(resp);
+      // console.log(resp);
       //funcion de pablo alcorta
       //se limpia y se extrae los datos de la coleccion json 
       const data = resp;
@@ -290,8 +290,8 @@ export class ChartReductionComponent {
         number_of_occurrences.push(Number(this.maladaptives.number_of_occurrences))
         maladaptive_behavior.push(String(this.maladaptives.maladaptive_behavior))
       }
-      console.log(number_of_occurrences);
-      console.log(maladaptive_behavior);
+      // console.log(number_of_occurrences);
+      // console.log(maladaptive_behavior);
 
       
       // traemos todas las fechas
@@ -302,8 +302,8 @@ export class ChartReductionComponent {
       //fecha inicial cuando se hizo el bip
       this.sessions_dates.unshift(this.baseline_date); // con unshift lo unimos y colocamos de primero
       this.number_of_occurrence.unshift(this.baseline_level); // con unshift lo unimos y colocamos de primero
-      console.log(this.sessions_dates);
-      console.log(this.number_of_occurrence);
+      // console.log(this.sessions_dates);
+      // console.log(this.number_of_occurrence);
 
       if(
         this.sessions_dates?.length > 1 && 

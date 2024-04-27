@@ -279,6 +279,12 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
+                                        <label >Equhl Id<span class="login-danger">*</span></label>
+                                        <input class="form-control" autocomplete="false" name="eqhlid" [(ngModel)]="eqhlid" type="text"  >
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
                                         <label >Insurer Secundary</label>
                                         <input class="form-control" autocomplete="false" name="insurer_secundary" [(ngModel)]="insurer_secundary" type="text"  >
                                     </div>
@@ -288,7 +294,7 @@
                                         <label >Insurance Id Secundary</label>
                                         <input class="form-control" autocomplete="false" name="insuranceId_secundary" [(ngModel)]="insuranceId_secundary" type="text"  >
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Elegibility date<span class="login-danger">*</span></label>
@@ -301,15 +307,12 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >POS Covered<span class="login-danger">*</span></label>
-                                        <select
-                                        class="form-control form-select-solid fw-bolder"
-                                        name="pos_covered" [(ngModel)]="pos_covered">
-                                        <option>-- Select --</option>
-                                          <option value="03">03 School</option>
-                                          <option value="12">12 Home</option>
-                                          <option value="02">02 Telehealth</option>
-                                          <option value="99">99 Other</option>
-                                          </select>
+                                        <mat-select multiple="multiple" [(ngModel)]="selectedValuePosCovered" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select">
+                                            <mat-option *ngFor="let data of poscoveredList" [value]="data.value">
+                                            {{data.value}}
+                                            </mat-option>
+                                            
+                                        </mat-select>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -593,6 +596,20 @@
                                             <option value="2 insurance">2 insurance</option>
                                             <option value="yes">Yes</option>
                                             <option value="no">No</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group local-forms">
+                                        <label>Interview<span class="login-danger">*</span></label>
+                                        <select
+                                            class="form-control form-select-solid fw-bolder"
+                                            name="interview" [(ngModel)]="interview">
+                                            <option>-- Select --</option>
+                                            <option value="pending">Pending</option>
+                                            <option value="send">Send</option>
+                                            <option value="receive">Receive</option>
+                                            <option value="no apply">No Apply</option>
                                               </select>
                                     </div>
                                 </div>

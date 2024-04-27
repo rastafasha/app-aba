@@ -86,8 +86,8 @@
                                       <th mat-sort-header="telehealth">telehealth</th>
                                       <th mat-sort-header="pay">pay</th>
                                       <th mat-sort-header="oop">oop</th>
-                                      <th mat-sort-header="benefits">benefits</th>
-                                      <th mat-sort-header="eligibility">eligibility</th>
+                                      <th mat-sort-header="benefits">Edit Benefits</th>
+                                      <th mat-sort-header="eligibility">Eligibility Date</th>
                                       <th mat-sort-header="eqhid">Eqhl ID</th>
                                       <th mat-sort-header="patient_id">Patient Id</th>
                                       <th mat-sort-header="pa_assestment">Pa Assestment</th>
@@ -141,6 +141,15 @@
                                             <option value="incoming">Incoming</option>
                                               <option value="active">Active</option>
                                               <option value="inactive">Inactive</option>
+                                              <option value="incoming">Incoming</option>
+                                              <option value="onHold">On Hold</option>
+                                              <option value="onDischarge">On Discharge</option>
+                                              <option value="waitintOnPa">Waiting on PA</option>
+                                              <option value="waitintOnPaIa">Waiting on PA IA</option>
+                                              <option value="waitintOnIa">Waiting on IA</option>
+                                              <option value="waitintOnServices">Waiting on Services</option>
+                                              <option value="waitintOnStaff">Waiting on Staff</option>
+                                              <option value="waitintOnSchool">Waiting on School</option>
                                               </select>
                                           </td>
                                         
@@ -151,6 +160,22 @@
                                                 *ngIf="data.status === 'active'">Active</span>
                                             <span class="badge bg-danger"
                                                 *ngIf="data.status === 'inactive'">Inactive</span>
+                                                <span class="badge bg-primary"
+                                                *ngIf="data.status === 'onDischarge'">On Discharge</span>
+                                                <span class="badge bg-primary"
+                                                *ngIf="data.status === 'onHold'">On Hold</span>
+                                            <span class="badge bg-primary"
+                                                *ngIf="data.status === 'waitintOnPa'">Waiting on PA</span>
+                                            <span class="badge bg-primary"
+                                                *ngIf="data.status === 'waitintOnPaIa'">Waiting on PA IA</span>
+                                            <span class="badge bg-primary"
+                                                *ngIf="data.status === 'waitintOnIa'">Waiting on School</span>
+                                            <span class="badge bg-primary"
+                                                *ngIf="data.status === 'waitintOnServices'">Waiting on Services</span>
+                                            <span class="badge bg-primary"
+                                                *ngIf="data.status === 'waitintOnStaff'">Waiting on Staff</span>
+                                            <span class="badge bg-primary"
+                                                *ngIf="data.status === 'waitintOnSchool'">Waiting on School</span>
       
                                             
                                         </td>
@@ -185,15 +210,14 @@
                                       <td>telehealth ??</td>
                                       <td>pay ??</td>
                                       <td>{{data.oop}}</td>
-                                      <td>benefits ??</td>
                                       <td>
-                                        <!-- {{data.eligibility}} -->
-                                        <span class="badge bg-danger"
-                                        *ngIf="data.eligibility === 'no'">No</span>
-                                    <span class="badge bg-success"
-                                        *ngIf="data.eligibility === 'yes'">Yes</span>
-                                    <span class="badge bg-primary"
-                                        *ngIf="data.eligibility === 'pending'">Pending</span>
+                                        <a [routerLink]="['/patients/list/edit/', data.id]">
+                                          benefits
+                                        </a>
+                                        </td>
+                                      <td>
+                                        {{data.elegibility_date}}
+                                        
                                     </td>
                                     <td>eqh id ??</td>
                                       <td>{{data.patient_id}}</td>

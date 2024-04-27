@@ -15,6 +15,7 @@ export class AddPatientMComponent {
   public patient_id: any;
   public selectedValueLocation!: string;
   public selectedValueCode!: string;
+  public selectedValuePosCovered!: string;
   public selectedValueUnitPrize!: string;
   option_selected:number = 0;
   
@@ -57,6 +58,7 @@ export class AddPatientMComponent {
   public coinsurance: any;
   public copayments: any;
   public oop: any;
+  public eqhlid: any;
 
   public pa_assessments: any = [];
   public pa_assessment: any;
@@ -79,6 +81,7 @@ export class AddPatientMComponent {
   public cde: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public submitted: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
   public eligibility: 'waiting' | 'reviewing' | 'psycho eval'| 'requested'| 'need new'| 'yes'|'no'|'2 insurance';
+  public interview: 'pending'|'send' | 'receive' | 'no apply';
 
   public specialists:any = [];
   public locations:any = [];
@@ -126,6 +129,7 @@ export class AddPatientMComponent {
   public notes: any= [];
   public services: any= [];
   public services_code: any= [];
+  public poscoveredList: any= [];
   
 
   valid_form:boolean = false;
@@ -145,7 +149,15 @@ export class AddPatientMComponent {
     // window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getConfig();
+    this.getPoscoveredList();
     // this.insuranceData();
+  }
+  getPoscoveredList(){
+    this.patientService.getPosCovered().subscribe((res:any)=> {
+        console.log("pos covered list", res);
+        this.poscoveredList = res.data;
+        
+    });
   }
 
   getConfig(){
@@ -312,8 +324,8 @@ export class AddPatientMComponent {
     
     formData.append('insurer', this.selectedValueInsurer);
     formData.append('insuranceId', this.insuranceId);
-    formData.append('insurer_secundary', this.insurer_secundary);
-    formData.append('insuranceId_secundary', this.insuranceId_secundary);
+    // formData.append('insurer_secundary', this.insurer_secundary);
+    // formData.append('insuranceId_secundary', this.insuranceId_secundary);
     formData.append('elegibility_date', this.elegibility_date);
     formData.append('pos_covered', this.pos_covered);
     formData.append('deductible_individual_I_F', this.deductible_individual_I_F);
@@ -324,15 +336,6 @@ export class AddPatientMComponent {
 
     formData.append('location_id', this.selectedValueLocation);
 
-    
-
-    // formData.append('pa_assessments', this.pa_assessments);
-    // formData.append('pa_assessment_start_date', this.pa_assessment_start_date);
-    // formData.append('pa_assessment_end_date', this.pa_assessment_end_date);
-    // formData.append('pa_services', this.pa_services);
-    // formData.append('pa_services_start_date', this.pa_services_start_date);
-    // formData.append('pa_services_end_date', this.pa_services_end_date);
-    
     
     formData.append('welcome', this.welcome);
     formData.append('consent', this.consent);

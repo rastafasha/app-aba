@@ -170,7 +170,7 @@ export class SustitutionListComponent {
   //si existe enviamos el client_id_goal para actualizar el goal del paciente
   getPatientGoalSustitutions(patient_id){
     this.goalSustitutionService.getGoalSustitutionbyPatientId(patient_id).subscribe((resp:any)=>{
-      console.log('goals sustition by patientid',resp);
+      // console.log('goals sustition by patientid',resp);
       this.goalSustitutions = resp.sustitutiongoalPatientIds.data[0] ==""?[] : resp.sustitutiongoalPatientIds.data ;
       this.goalSustitutionId = resp.sustitutiongoalPatientIds.data[0].id || undefined;
       this.client_id_goalSustitution = resp.sustitutiongoalPatientIds.data[0].client_id;
@@ -216,7 +216,7 @@ export class SustitutionListComponent {
   //obtenemos informacion de la seleccion
   selectedGoal(goal:any){
     this.goalSelected = goal
-    console.log(this.goalSelected);
+    // console.log(this.goalSelected);
 
       this.goal = this.goalSelected.goal;
       this.goals = this.goalSelected.data;
@@ -391,7 +391,7 @@ export class SustitutionListComponent {
   }
   cambiarStatusCreatedSto(goalsto:any){
     this.createdgoal_status_sto_edit2 = goalsto;
-    console.log(this.createdgoal_status_sto_edit2.status_sto);
+    // console.log(this.createdgoal_status_sto_edit2.status_sto);
 
     let data ={
       goalstos: this.golstoSustiutions,
@@ -516,18 +516,18 @@ export class SustitutionListComponent {
   //obtenemos los goals del maladaptive por nombre  para el grafico 
   getGoalsSonMaladaptives(){
     this.goalSustitutionService.listMaladaptivesGoalSustitutions(this.goalSelectedSon.maladaptive_behavior).subscribe((resp:any)=>{
-      console.log( resp);
+      // console.log( resp);
       
       this.goalmaladaptive_child = resp.goalsmaladaptive.data;
 
       this.maladaptive_child = resp.goalsmaladaptive.data[0].maladaptive;
-      console.log(this.maladaptive_child);
+      // console.log(this.maladaptive_child);
 
       this.golsto_child = this.goalmaladaptive_child[0].goalstos;
-      console.log(this.golsto_child);
+      // console.log(this.golsto_child);
 
       this.gollto_child = this.goalmaladaptive_child[0].goalltos;
-      console.log(this.gollto_child);
+      // console.log(this.gollto_child);
       // this.ngOnInit();
     },);
 
@@ -535,9 +535,9 @@ export class SustitutionListComponent {
 
 
   //selectores seleccionamos el grafico del maladaptive de la lista
-selectedReplacementGraphic(goal:any){
-  this.goalSelectedGraphic = goal
-  console.log(this.goalSelectedGraphic);
-  // this.getGoalsSonMaladaptives();
-}
+  selectedReplacementGraphic(goal:any){
+    this.goalSelectedGraphic = goal
+    // console.log(this.goalSelectedGraphic);
+    // this.getGoalsSonMaladaptives();
+  }
 }

@@ -154,4 +154,13 @@ export class PatientMService {
     return this.http.delete(URL, {headers:headers});
   }
   
+  getPosCovered(){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let URL = "/assets/json/poscovered.json";
+    return this.http.get(URL,{headers:headers});
+  }
+
+
+
+ 
 }

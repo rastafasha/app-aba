@@ -201,7 +201,7 @@ export class ChartReplacementComponent {
     this.goal;
     this.baseline_d;
     // this.initial_interesting;
-    console.log('baseline_date',this.baseline_d);
+    // console.log('baseline_date',this.baseline_d);
     // console.log(this.goal);
     
 
@@ -246,7 +246,7 @@ export class ChartReplacementComponent {
 
   getGoalsReductions(){
     this.graphicReductionService.listReductionGraphics(this.goal, this.patient_id).subscribe((resp:any)=>{
-     console.log(resp);
+    //  console.log(resp);
     
      //funcion de pablo alcorta
       //se limpia y se extrae los datos de la coleccion json 
@@ -295,7 +295,7 @@ export class ChartReplacementComponent {
       //start
       this.replacementsExtractedGoal = this.replacements;
       for (var i = 0; i < this.replacementsExtractedGoal.length; i++) {
-        console.log(this.replacementsExtractedGoal[i]); 
+        // console.log(this.replacementsExtractedGoal[i]); 
         // solo quita  el /, duplica el resultado y devuelve la todos los arrays
       }
       //end

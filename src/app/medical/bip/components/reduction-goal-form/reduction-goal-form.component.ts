@@ -246,7 +246,7 @@ export class ReductionGoalFormComponent {
   //selectores seleccionamos el grafico del maladaptive de la lista
   selectedMaladaptiveGraphic(maladap:any){
     this.maladaptiveSelectedSon = maladap
-    console.log(this.maladaptiveSelectedSon);
+    // console.log(this.maladaptiveSelectedSon);
     // this.getGoalsSonMaladaptives();
   }
 
@@ -302,7 +302,7 @@ export class ReductionGoalFormComponent {
 
   cambiarStatus(goalsto:any){
     this.status_sto_edit = goalsto;
-    console.log(this.status_sto_edit.status_sto);
+    // console.log(this.status_sto_edit.status_sto);
 
     let data ={
       goalstos: this.golsto,
@@ -320,7 +320,7 @@ export class ReductionGoalFormComponent {
   }
   cambiarStatusLto(goallto:any){
     this.status_sto_edit = goallto;
-    console.log(this.status_lto_edit.status_lto);
+    // console.log(this.status_lto_edit.status_lto);
 
     let data ={
       goalstos: this.golsto,
@@ -400,18 +400,18 @@ export class ReductionGoalFormComponent {
   //obtenemos los goals del maladaptive por nombre  para el grafico 
   getGoalsSonMaladaptives(){
     this.goalService.listMaladaptivesGoals(this.maladaptiveSelectedSon.maladaptive_behavior).subscribe((resp:any)=>{
-      console.log( resp);
+      // console.log( resp);
       
       this.goalmaladaptive_child = resp.goalsmaladaptive.data;
 
       this.maladaptive_child = resp.goalsmaladaptive.data[0].maladaptive;
-      console.log(this.maladaptive_child);
+      // console.log(this.maladaptive_child);
 
       this.golsto_child = this.goalmaladaptive_child[0].goalstos;
-      console.log(this.golsto_child);
+      // console.log(this.golsto_child);
 
       this.gollto_child = this.goalmaladaptive_child[0].goalltos;
-      console.log(this.gollto_child);
+      // console.log(this.gollto_child);
       // this.ngOnInit();
     },);
 
