@@ -282,6 +282,9 @@ showUser(){
         this.coinsurance = this.patient_selected.coinsurance;
         this.copayments = this.patient_selected.copayments;
         this.oop = this.patient_selected.oop;
+        this.eqhlid = this.patient_selected.eqhlid;
+        this.telehealth = this.patient_selected.telehealth;
+        this.pay = this.patient_selected.pay;
 
         //valores de welcome
         this.welcome = this.patient_selected.welcome;
@@ -295,6 +298,7 @@ showUser(){
         this.cde = this.patient_selected.cde;
         this.submitted = this.patient_selected.submitted;
         this.eligibility = this.patient_selected.eligibility;
+        this.interview = this.patient_selected.interview;
 
         //valores de la imagen y archivos
         this.IMAGE_PREVISUALIZA = this.patient_selected.avatar;
@@ -305,8 +309,8 @@ showUser(){
         this.pa_assessmentgroup = jsonObj;
 
         //valores de los selectores
-        this.selectedValuePosCovered = this.patient_selected.location_id;
-        this.selectedValueLocation = this.patient_selected.pos_covered;
+        this.selectedValueLocation = this.patient_selected.location_id;
+        this.selectedValuePosCovered = this.patient_selected.pos_covered;
         this.selectedValue_rbt = this.patient_selected.rbt_id ? this.patient_selected.rbt_id : null;
         this.selectedValue_rbt2 = this.patient_selected.rbt2 ? this.patient_selected.rbt2 : null;
         this.selectedValue_bcba = this.patient_selected.bcba ? this.patient_selected.bcba: null;
@@ -505,6 +509,8 @@ saveFiles(){
     formData.append('bcba_id', this.selectedValue_bcba);
     formData.append('bcba2_id', this.selectedValue_bcba2);
     formData.append('clin_director_id', this.selectedValue_clind);
+    formData.append('pay', this.pay+'');
+    formData.append('telehealth', this.telehealth+'');
     // formData.append('insurer', this.selectedValueInsurer);
 
 
@@ -577,6 +583,12 @@ saveFiles(){
       formData.append('pos_covered', this.selectedValuePosCovered);
     
     }
+    if(this.eqhlid){
+      formData.append('eqhlid', this.eqhlid);
+    
+    }
+    
+    
     if(this.deductible_individual_I_F){
       formData.append('deductible_individual_I_F', this.deductible_individual_I_F);
     }
@@ -632,6 +644,9 @@ saveFiles(){
     if(this.submitted){
       formData.append('submitted', this.submitted);
     }
+    if(this.interview){
+      formData.append('interview', this.interview);
+    }
     if(this.birth_date){
       formData.append('birth_date', this.birth_date);
     }
@@ -667,17 +682,17 @@ saveFiles(){
 //update function
 
 
-isCheckedTelehealth(){
-  this.telehealth = !this.telehealth;
-  console.log(this.telehealth);
-  // if ( event.target.checked ) {
-  // }
-}
+// isCheckedTelehealth(){
+//   this.telehealth = !this.telehealth;
+//   console.log(this.telehealth);
+//   // if ( event.target.checked ) {
+//   // }
+// }
 
-  isCheckedPay(){
-    this.pay = !this.pay;
-    console.log(this.pay);
-    // if ( event.target.checked ) {
-    // }
-  }
+//   isCheckedPay(){
+//     this.pay = !this.pay;
+//     console.log(this.pay);
+//     // if ( event.target.checked ) {
+//     // }
+//   }
 }

@@ -50,23 +50,67 @@
                             <table matSort (matSortChange)="sortData($event)" class="table border-0 custom-table comman-table datatable mb-0">
                                 <thead>
                                     <tr>
-                                        
+                                      <th mat-sort-header="session_date">Session Date</th>
+                                      <th mat-sort-header="session_length_total">Session 1 total</th>
+                                      <th mat-sort-header="session_length_total2">Session 2 total</th>
                                       <th mat-sort-header="diagnosis_code">diagnosis code</th>
                                       <th mat-sort-header="cpt_code">CPT code</th>
+                                      <th mat-sort-header="status">Status</th>
+                                      <th mat-sort-header="options">Options</th>
                                       <th mat-sort-header="created">Created At</th>
+                                      <th mat-sort-header="updated">Updated At</th>
                                          <th ></th> <!--acciones -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let data of notesPatientList">
-                                        
                                       <td>
                                         <a class="dropdown-item" [routerLink]="['/note-bcba/view/', data.id]">
-                                          {{data.diagnosis_code}}
+                                          {{data.session_date |date}}
                                         </a>
                                       </td>
+                                      <td>{{data.session_length_total  }}</td>
+                                      <td>{{data.session_length_total2  }}</td>
+                                      <td>{{data.diagnosis_code}} </td>
                                       <td>{{data.cpt_code}}</td>
+                                      
+                                      <td>
+                                        <span class="badge bg-primary"
+                                            *ngIf="data.status === 'pending'">Pending</span>
+                                        <span class="badge bg-success"
+                                            *ngIf="data.status === 'ok'">Ok</span>
+                                        <span class="badge bg-warning"
+                                            *ngIf="data.status === 'review'">Review</span>
+                                            <span class="badge bg-danger"
+                                            *ngIf="data.status === 'no'">No</span>
+                                           
+  
+                                        <span *ngIf="data.status === 'active'">
+                                          <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/bip/attention/', data.id]" tooltip="BIP Create"><i class="fa fa-address-book"></i></button>
+                                          <button class="btn btn-outline-dark" *ngIf="isPermission('view_bip')" [routerLink]="['/bip/profile/', data.patient_id]" tooltip="BIP View"><i class="fa fa-eye"></i></button>
+                                          <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' ||  roles ==='RBT'" [routerLink]="['/note-rbt/', data.id]" tooltip="Create RBT Note"> <i class="fa fa-id-card "></i> </button>
+                                          <button class="btn btn-outline-primary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' ||  roles ==='RBT'" [routerLink]="['/note-rbt/listbyclient/', data.patient_id]" tooltip="RBT Note list"> <i class="fa fa-bars"></i> </button>
+                                          <button class="btn btn-outline-secondary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/note-bcba/', data.id]" tooltip="Create BCBA Note"> <i class="fa fa-id-badge"></i> </button>
+                                          <button class="btn btn-outline-primary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/note-bcba/listbyclient/', data.patient_id]" tooltip="BCBA Note list"> <i class="fa fa-bars"></i> </button>
+                                          <button class="btn btn-outline-warning" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'" [routerLink]="['/client-report/byclient/', data.patient_id]" tooltip="Log Report"> <i class="fa fa-check-circle"></i> </button>
+                                          <!-- <button class="btn btn-outline-warning" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'" [routerLink]="['/billing/byclient/', data.patient_id]" tooltip="Billing by this user"> <i class="fa fa-credit-card"></i> </button> -->
+                                        </span>
+                                    </td>
+                                    <!-- *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM'" -->
+                                    <td  >
+                                      <select
+                                      class="form-control form-select-solid fw-bolder"
+                                      
+                                      name="state" [(ngModel)]="data.status" (change)="cambiarStatus(data)"placeholder="state">
+                                      <option>-- Select --</option>
+                                      <option value="pending">Pending</option>
+                                        <option value="ok">Ok</option>
+                                        <option value="review">Review</option>
+                                        <option value="no">No</option>
+                                        </select>
+                                    </td>
                                         <td>{{data.created_at | date }}</td>
+                                        <td>{{data.updated_at | date }}</td>
                                         
                                         <td class="text-end">
                                             <div class="dropdown dropdown-action" >

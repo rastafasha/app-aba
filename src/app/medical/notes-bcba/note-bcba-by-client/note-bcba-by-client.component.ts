@@ -222,4 +222,16 @@ export class NoteBcbaByClientComponent {
     })
   }
 
+  cambiarStatus(data:any){
+    let VALUE = data.status;
+    console.log(VALUE);
+    
+    this.noteBcbaService.updateStatus(data, data.id).subscribe(
+      resp =>{
+        // console.log(resp);
+        this.ngOnInit();
+      }
+    )
+  }
+
 }

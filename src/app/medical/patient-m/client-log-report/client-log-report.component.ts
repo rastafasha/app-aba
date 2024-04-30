@@ -68,7 +68,7 @@ export class ClientLogReportComponent {
     this.roles = this.user.roles[0];
     
     this.user = this.roleService.authService.user;
-    this.getPatiensByDoctor();
+    // this.getPatiensByDoctor();
     
   }
 

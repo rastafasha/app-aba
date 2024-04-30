@@ -72,7 +72,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    // RouterModule.forChild(routes)
+    RouterModule.forRoot(routes,{
+      anchorScrolling: 'enabled'
+    })
+  ],
   exports: [RouterModule]
 })
 export class MedicalRoutingModule { }

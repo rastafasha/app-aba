@@ -27,10 +27,10 @@ export class NoteBcbaComponent {
   public selectedValueProvider!: string;
   public selectedValueRBT!: string;
   public selectedValueBCBA!: string;
-  public selectedValueTimeIn!: number;
-  public selectedValueTimeOut!: number;
-  public selectedValueTimeIn2!: number;
-  public selectedValueTimeOut2!: number;
+  public selectedValueTimeIn: number = 0;
+  public selectedValueTimeOut: number = 0;
+  public selectedValueTimeIn2: number = 0;
+  public selectedValueTimeOut2: number = 0;
   public selectedValueProviderName!: string;
   public selectedValueMaladaptive!: string;
   public selectedValueRendering!: string;
@@ -388,10 +388,10 @@ export class NoteBcbaComponent {
   
   save(){
     this.text_validation = '';
-    // if(!this.name||!this.email ||!this.surname ){
-    //   this.text_validation = 'Los campos con * son obligatorios';
-    //   return;
-    // }
+    if(!this.selectedValueRendering||!this.rbt_training_goals ||!this.caregivers_training_goals ){
+      this.text_validation = 'Los campos con * son obligatorios';
+      return;
+    }
 
     // if(this.password != this.password_confirmation  ){
     //   this.text_validation = 'Las contraseña debe ser igual';
@@ -421,9 +421,26 @@ export class NoteBcbaComponent {
     formData.append('rbt_training_goals', JSON.stringify(this.rbt_training_goals));
     formData.append('caregiver_goals', JSON.stringify(this.caregivers_training_goals));
 
-    
+    formData.append('session_date', this.session_date);
+
+    if(this.selectedValueTimeIn ){
+      formData.append('time_in', this.selectedValueTimeIn+'' ? this.selectedValueTimeIn+'' : "0");
+    }
+    if(this.selectedValueTimeOut ){
+      formData.append('time_out', this.selectedValueTimeOut+''? this.selectedValueTimeOut+'' : "0");
+    }
+    if(this.selectedValueTimeIn2 ){
+      formData.append('time_in2', this.selectedValueTimeIn2+''? this.selectedValueTimeIn2+'' : "0");
+    }
+    if(this.selectedValueTimeOut2 ){
+      formData.append('time_out2', this.selectedValueTimeOut2+''? this.selectedValueTimeOut2+'' : "0");
+    }
+
+
     // formData.append('imagen', this.FILE_SIGNATURE_RBT);
     // formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
+
+
 
     if(this.FILE_SIGNATURE_RBT ){
       formData.append('imagen', this.FILE_SIGNATURE_RBT);

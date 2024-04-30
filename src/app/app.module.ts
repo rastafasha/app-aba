@@ -11,6 +11,8 @@ import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PermisionInterceptorInterceptor } from './http-interceptors/permision-interceptor.interceptor';
 import { PipesModule } from './pipes/pipes.module';
+import { RouterModule } from '@angular/router';
+import { routes } from './shared/routes/routes';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { PipesModule } from './pipes/pipes.module';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    
   ],
   providers: [
     {

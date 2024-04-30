@@ -130,6 +130,9 @@ export class AddPatientMComponent {
   public services: any= [];
   public services_code: any= [];
   public poscoveredList: any= [];
+
+  public telehealth:boolean;
+  public pay:boolean ;
   
 
   valid_form:boolean = false;
@@ -354,6 +357,23 @@ export class AddPatientMComponent {
     formData.append('bcba_id', this.selectedValue_bcba);
     formData.append('bcba2_id', this.selectedValue_bcba2);
     formData.append('clin_director_id', this.selectedValue_clind);
+
+    if(this.eqhlid){
+      formData.append('eqhlid', this.eqhlid);
+    
+    }
+    if(this.pay){
+      formData.append('pay', this.pay+'');
+    
+    }
+    if(this.telehealth){
+      formData.append('telehealth', this.telehealth+'');
+    
+    }
+
+    if(this.interview){
+      formData.append('interview', this.interview);
+    }
     
     if(this.birth_date){
       formData.append('birth_date', this.birth_date);

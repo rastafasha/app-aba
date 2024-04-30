@@ -76,5 +76,12 @@ export class NoteRbtService {
     
   }
 
+  updateStatus(data:any, client_id:any){
+    let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+    let URL = url_servicios+"/note_rbt/update/status/"+client_id;
+    return this.http.put(URL,data,{headers:headers});
+  }
+
+
 
 }

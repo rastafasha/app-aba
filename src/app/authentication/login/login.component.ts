@@ -115,10 +115,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate([routes.adminDashboard]);
       }
       if(this.user.roles == 'MANAGER' ){
-        this.router.navigate([routes.adminDashboard]);
+        // this.router.navigate([routes.adminDashboard]);
+        this.router.navigate(['location/view/', this.user.location_id]);
       }
       if(this.user.roles == 'LM' ){
-        this.router.navigate([routes.adminDashboard]);
+        // this.router.navigate([routes.adminDashboard]);
+        this.router.navigate(['location/view/', this.user.location_id]);
       }
       //roles secundarios
       if(this.user.roles == 'BCBA' ){

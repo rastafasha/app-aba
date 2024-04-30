@@ -474,10 +474,10 @@ export class NoteRbtComponent {
   
   save(){
     this.text_validation = '';
-    // if(!this.name||!this.email ||!this.surname ){
-    //   this.text_validation = 'Los campos con * son obligatorios';
-    //   return;
-    // }
+    if(!this.replacementGoals||!this.maladaptives ||!this.provider_credential ){
+      this.text_validation = 'Los campos con * son obligatorios';
+      return;
+    }
 
     // if(this.password != this.password_confirmation  ){
     //   this.text_validation = 'Las contraseña debe ser igual';

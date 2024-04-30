@@ -147,6 +147,8 @@ export class NoteBcbaEditComponent {
   services:any ;
   insurer_id:any ;
 
+  
+
   constructor(
     public bipService:BipService,
     public patientService:PatientMService,
@@ -223,6 +225,18 @@ export class NoteBcbaEditComponent {
       this.selectedValueProviderName = this.note_selected.provider_name_g;
       this.selectedValueRBT = this.note_selected.provider_name;
       this.selectedValueBCBA = this.note_selected.supervisor_name;
+
+      this.session_date = this.note_selected.session_date? new Date(this.note_selected.session_date).toISOString(): '';
+      
+      this.session_length_total = this.note_selected.session_length_total;
+      this.session_length_total2 = this.note_selected.session_length_total2;
+      
+      this.selectedValueTimeIn = this.note_selected.time_in;
+      
+      this.selectedValueTimeOut = this.note_selected.time_in2;
+      this.selectedValueTimeIn2 = this.note_selected.time_out;
+      this.selectedValueTimeOut2 = this.note_selected.time_out2;
+
 
       this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = this.note_selected.provider_signature;
       this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.note_selected.supervisor_signature;
@@ -387,6 +401,20 @@ export class NoteBcbaEditComponent {
     formData.append('diagnosis_code', this.diagnosis_code);
     formData.append('location', this.location);
     formData.append('birth_date', this.birth_date);
+    formData.append('session_date', this.session_date);
+
+    if(this.selectedValueTimeIn ){
+      formData.append('time_in', this.selectedValueTimeIn+'' ? this.selectedValueTimeIn+'' : "0");
+    }
+    if(this.selectedValueTimeOut ){
+      formData.append('time_out', this.selectedValueTimeOut+''? this.selectedValueTimeOut+'' : "0");
+    }
+    if(this.selectedValueTimeIn2 ){
+      formData.append('time_in2', this.selectedValueTimeIn2+''? this.selectedValueTimeIn2+'' : "0");
+    }
+    if(this.selectedValueTimeOut2 ){
+      formData.append('time_out2', this.selectedValueTimeOut2+''? this.selectedValueTimeOut2+'' : "0");
+    }
     
     if(this.selectedValueRendering ){
       formData.append('rendering_provider', this.selectedValueRendering);

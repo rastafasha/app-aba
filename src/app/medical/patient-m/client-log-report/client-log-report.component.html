@@ -37,7 +37,7 @@
                                                     <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
                                             </div>
                                             <div class="add-group">
-                                                <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2" *ngIf="isPermission('register_patient')"><img src="assets/img/icons/plus.svg" alt=""></a>
+                                                <!-- <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2" *ngIf="isPermission('register_patient')"><img src="assets/img/icons/plus.svg" alt=""></a> -->
                                                 <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
                                                 <!-- <div class="px-7 py-5" data-kt-user-table-filter="form">
                                                   <div class="mb-10">
@@ -79,51 +79,53 @@
                                       <th mat-sort-header="avatar">Avatar</th>
                                       <th mat-sort-header="name">F Name</th>
                                       <th mat-sort-header="lastname">L Name</th>
-                                      <th mat-sort-header="birth_date">birth_date</th>
+                                      <th mat-sort-header="birth_date">Birth Date</th>
                                       <th mat-sort-header="address">Address</th>
-                                      <th mat-sort-header="codes">codes</th>
-                                      <th mat-sort-header="insurer">insurer</th>
-                                      <th mat-sort-header="telehealth">telehealth</th>
-                                      <th mat-sort-header="pay">pay</th>
-                                      <th mat-sort-header="oop">oop</th>
+                                      <th mat-sort-header="city">City</th>
+                                      <th mat-sort-header="zip">ZIP</th>
+                                      <th mat-sort-header="phonec">Phone</th>
+                                      <th mat-sort-header="email">email</th>
+                                      <th mat-sort-header="codes">Diagnosis codes</th>
+                                      <th mat-sort-header="insurer">Insurer</th>
+                                      <th mat-sort-header="telehealth">Telehealth</th>
+                                      <th mat-sort-header="pay">Pay</th>
+                                      <th mat-sort-header="oop">OOP</th>
                                       <th mat-sort-header="benefits">Edit Benefits</th>
-                                      <th mat-sort-header="eligibility">Eligibility Date</th>
+                                      <th mat-sort-header="eligibility date">Eligibility Date</th>
                                       <th mat-sort-header="eqhid">Eqhl ID</th>
                                       <th mat-sort-header="patient_id">Patient Id</th>
+
                                       <th mat-sort-header="pa_assestment">Pa Assestment</th>
                                       <th mat-sort-header="pa_service">Pa Service</th>
                                       <th mat-sort-header="pa_startdate">Pa Start Date</th>
-                                      <th mat-sort-header="city">city</th>
-                                      <th mat-sort-header="schedule">schedule</th>
-                                      <th mat-sort-header="average">average</th>
+                                      
+                                      <th mat-sort-header="schedule">Schedule</th>
+                                      <th mat-sort-header="average">Average</th>
                                       <th mat-sort-header="53">53</th>
-                                      <th mat-sort-header="rbt name">rbt name</th>
+                                      <th mat-sort-header="rbt name">Home RBT</th>
+                                      <th mat-sort-header="school bca">School BCBA</th>
+                                      <th mat-sort-header="home bca">Home BCBA</th>
+                                      <th mat-sort-header="school bca">School bca</th>
                                       <th mat-sort-header="55">55</th>
                                       <th mat-sort-header="56">56</th>
-                                      <th mat-sort-header="school bca">school bca</th>
-                                      <th mat-sort-header="home bca">home bca</th>
-                                      <th mat-sort-header="note report">note report</th>
-                                      <th mat-sort-header="parent communication">parent communication</th>
-                                      <th mat-sort-header="case notes">case notes</th>
-                                      <th mat-sort-header="phonec">Phone</th>
-                                      <th mat-sort-header="email">email</th>
-                                      <th mat-sort-header="welcome">welcome</th>
-                                      <th mat-sort-header="consent">consent</th>
-                                      <th mat-sort-header="insurance card">insurance card</th>
-                                      <th mat-sort-header="eligibility">eligibility</th>
-                                      <th mat-sort-header="interview">interview</th>
-                                      <th mat-sort-header="mnl">mnl</th>
-                                      <th mat-sort-header="referral">referral</th>
-                                      <th mat-sort-header="ados">ados</th>
-                                      <th mat-sort-header="iep">iep</th>
-                                      <th mat-sort-header="asd diagnosis">asd diagnosis</th>
-                                      <th mat-sort-header="cde">cde</th>
-                                      <th mat-sort-header="submited">submited</th>
-                                      <th mat-sort-header="aditional note">aditional note</th>
-                                      <th mat-sort-header="short address">short address</th>
-                                      <th mat-sort-header="city">city</th>
-                                      <th mat-sort-header="zip">zip</th>
-                                      <th mat-sort-header="Country">Country</th>
+                                      <th mat-sort-header="note report">Note Report</th>
+                                      <th mat-sort-header="parent communication">Parent Communication</th>
+                                      <th mat-sort-header="case notes">Case Notes</th>
+                                      
+                                      
+                                      <th mat-sort-header="welcome">Welcome</th>
+                                      <th mat-sort-header="consent">Consent</th>
+                                      <th mat-sort-header="insurance card">Insurance Card</th>
+                                      <th mat-sort-header="eligibility">Eligibility</th>
+                                      <th mat-sort-header="mnl">MNL</th>
+                                      <th mat-sort-header="referral">Referral</th>
+                                      <th mat-sort-header="ados">ADOS</th>
+                                      <th mat-sort-header="iep">IEP</th>
+                                      <th mat-sort-header="asd diagnosis">ASD Diagnosis</th>
+                                      <th mat-sort-header="cde">CDE</th>
+                                      <th mat-sort-header="submitted">Submited</th>
+                                      <th mat-sort-header="interview">Interview</th>
+                                      
                                       <th mat-sort-header="created">Created At</th>
                                          
                                     </tr>
@@ -205,25 +207,37 @@
                                       <td > {{data.last_name }} </td>
                                       <td>{{data.birth_date}}</td>
                                       <td>{{data.address}}</td>
+                                      <td>{{data.city}}</td>
+                                      <td>{{data.zip}}</td>
+                                      <td>{{data.phone}}</td>
+                                      <td>{{data.email}}</td>
                                       <td>{{data.diagnosis_code}}</td>
                                       <td>{{data.insurer_id}}</td>
-                                      <td>telehealth ??</td>
-                                      <td>pay ??</td>
+                                      <td>
+                                        <!-- {{data.telehealth}} -->
+                                        <span class="badge bg-success"
+                                        *ngIf="data.telehealth === 'true'">True</span>
+                                        <span class="badge bg-danger"
+                                        *ngIf="data.telehealth === 'false'">False</span>
+                                      </td>
+                                      <td>
+                                        <span class="badge bg-success"
+                                        *ngIf="data.pay === 'true'">True</span>
+                                        <span class="badge bg-danger"
+                                        *ngIf="data.pay === 'false'">False</span>
+                                      </td>
                                       <td>{{data.oop}}</td>
                                       <td>
-                                        <a [routerLink]="['/patients/list/edit/', data.id]">
+                                        <a [routerLink]="['/patients/list/edit/', data.id]" fragment="benefits">
                                           benefits
                                         </a>
                                         </td>
-                                      <td>
-                                        {{data.elegibility_date}}
-                                        
-                                    </td>
-                                    <td>eqh id ??</td>
+                                      <td>{{data.elegibility_date}}</td>
+                                      <td>{{data.eqhlid}}</td>
                                       <td>{{data.patient_id}}</td>
                                       <td>
                                         <!-- {{data.pa_assestment}} -->
-                                        <ng-container *ngFor=" let pa of data.paAssestment">
+                                        <ng-container *ngFor=" let pa of paAssestment">
                                             <ul>
                                                 <li>{{pa.pa_assessment}}</li>
                                             </ul>
@@ -232,7 +246,7 @@
                                     </td>
                                       <td>
                                         <!-- {{data.pa_assestment}} -->
-                                        <ng-container *ngFor=" let pas of data.paAssestment">
+                                        <ng-container *ngFor=" let pas of paAssestment">
                                             <ul>
                                                 <li>{{pas.pa_services}}</li>
                                             </ul>
@@ -241,36 +255,27 @@
                                     </td>
                                       <td>
                                         <!-- {{data.pa_assestment}} -->
-                                        <ng-container *ngFor=" let pasd of data.paAssestment">
+                                        <ng-container *ngFor=" let pasd of paAssestment">
                                             <ul>
                                                 <li>{{pasd.pa_services_start_date}}</li>
                                             </ul>
                                         </ng-container>
                                         
                                     </td>
-                                      <td>
-                                        <!-- {{data.pa_assestment}} -->
-                                        <ng-container *ngFor=" let paed of data.paAssestment">
-                                            <ul>
-                                                <li>{{paed.pa_services_end_date}}</li>
-                                            </ul>
-                                        </ng-container>
-                                        
-                                    </td>
-                                    <td>{{data.city}}</td>
+                                    
                                     <td>{{data.schedule}}</td>
                                     <td>average ??</td>
                                     <td>53 ??</td>
-                                    <td>{{data.rbt}}</td>
+                                    <td>{{data.rbt_home.name}}</td>
+                                    <td>{{data.rbt2_school.name}}</td>
+                                    <td>{{data.bcba_home.name}}</td>
+                                    <td>{{data.bcba2_school.name}}</td>
                                     <td>55 ??</td>
                                     <td>56 ??</td>
-                                    <td>School bca ??</td>
-                                    <td>home bca ??</td>
                                     <td>note Report ??</td>
-                                    <td>parent communication ??</td>
+                                    <td>{{data.special_note}}</td>
                                     <td>case notes ??</td>
-                                    <td>{{data.phone}}</td>
-                                      <td>{{data.email}}</td>
+                                    
                                       <td>{{data.welcome}}</td>
                                       <td>{{data.consent}}</td>
                                       <td>{{data.insurance_card}}</td>
@@ -278,27 +283,19 @@
                                         <!-- {{data.eligibility}} -->
                                         <span class="badge bg-danger"
                                         *ngIf="data.eligibility === 'no'">No</span>
-                                    <span class="badge bg-success"
-                                        *ngIf="data.eligibility === 'yes'">Yes</span>
-                                    <span class="badge bg-primary"
-                                        *ngIf="data.eligibility === 'pending'">Pending</span>
+                                        <span class="badge bg-success"
+                                            *ngIf="data.eligibility === 'yes'">Yes</span>
+                                        <span class="badge bg-primary"
+                                            *ngIf="data.eligibility === 'pending'">Pending</span>
                                     </td>
-                                    <td>interview ??</td>
                                     <td>{{data.mnl}}</td>
                                     <td>{{data.referral}}</td>
                                     <td>{{data.ados}}</td>
                                     <td>{{data.iep}}</td>
                                     <td>{{data.asd_diagnosis}}</td>
                                     <td>{{data.cde}}</td>
-                                    <td>{{data.submited}}</td>
-                                    <td>{{data.special_note}}</td>
-                                    <td>short Address ??</td>
-                                    <td>{{data.city}}</td>
-                                    <td>{{data.zip}}</td>
-                                    <td>{{data.country}}</td>
-                                      
-                                        
-                                      
+                                    <td>{{data.submitted}}</td>
+                                    <td>{{data.interview}}</td>
                                     
                                         <!-- <td>{{data.permision_pluck.length > 0 ? data.permision_pluck: 'TODOS LOS PERMISOS' }}</td> -->
                                         <td>{{data.created_at | date }}</td>

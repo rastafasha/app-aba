@@ -94,6 +94,63 @@
                                         </mat-select>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Date <span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" autocomplete="false" name="session_date" [(ngModel)]="session_date" type="text" matInput [matDatepicker]="pickerSesDate"  >
+                                        <mat-datepicker #pickerSesDate></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="pickerSesDate"></mat-datepicker-toggle>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Time In <span class="login-danger">*</span></label>
+                                        
+                                        <input [ngxTimepicker]="toggleTimepicker" [disableClick]="true" readonly  
+                                        [(ngModel)]="selectedValueTimeIn" name="time_in" [format]="24"  (onChange)="hourTimeInSelected($event)" [ngModelOptions]="{standalone: true}">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Time Out <span class="login-danger">*</span></label>
+                                        <input [ngxTimepicker]="toggleTimepicker2" [disableClick]="true" readonly  
+                                        [(ngModel)]="selectedValueTimeOut" name="time_out" [format]="24"  (onChange)="hourTimeOutSelected($event)" [ngModelOptions]="{standalone: true}">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker2"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker2></ngx-material-timepicker>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Time In <span class="login-danger">*</span></label>
+                                        <input [ngxTimepicker]="toggleTimepicker3" [disableClick]="true" readonly  
+                                        [(ngModel)]="selectedValueTimeIn2" name="time_in2" [format]="24"  (onChange)="hourTimeInSelected($event)" [ngModelOptions]="{standalone: true}">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker3"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker3></ngx-material-timepicker>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Time Out <span class="login-danger">*</span></label>
+                                        <input [ngxTimepicker]="toggleTimepicker4" [disableClick]="true" readonly  
+                                        [(ngModel)]="selectedValueTimeOut2" name="time_out2" [format]="24"  (onChange)="hourTimeInSelected($event)" [ngModelOptions]="{standalone: true}">
+                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker4"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #toggleTimepicker4></ngx-material-timepicker>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Session Length Total<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="session_length_total"   [(ngModel)]="session_length_total" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Session Length Total<span class="login-danger">*</span></label>
+                                        <input class="form-control" name="session_length_total2"   [(ngModel)]="session_length_total2" type="text"  >
+                                    </div>
+                                </div>
                                 <div class="col-12 ">
                                     <div class="form-group local-forms">
                                         <label >Note Description<span class="login-danger">*</span></label>

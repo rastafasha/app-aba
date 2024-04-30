@@ -225,4 +225,16 @@ export class NotesByClientComponent {
     })
   }
 
+  cambiarStatus(data:any){
+    let VALUE = data.status;
+    console.log(VALUE);
+    
+    this.noteRbtService.updateStatus(data, data.id).subscribe(
+      resp =>{
+        // console.log(resp);
+        this.ngOnInit();
+      }
+    )
+  }
+
 }
