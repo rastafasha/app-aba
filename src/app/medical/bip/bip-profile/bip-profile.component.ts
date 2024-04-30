@@ -103,6 +103,7 @@ export class BipProfileComponent {
   public means_homicidality:any;
   public prior_attempt_homicidality:any;
   public user:any;
+  public patientId:any;
   public roles:any=[];
   public permissions:any=[];
   
@@ -121,10 +122,10 @@ export class BipProfileComponent {
     this.doctorService.closeMenuSidebar();
     // this.doctorService.getUserRoles();
     this.activatedRoute.params.subscribe((resp:any)=>{
-      // console.log(resp);
-      this.patient_id = resp.id;
+      this.patient_id = resp.patient_id;
+      console.log(this.patient_id);
+      this.getPatient();
     });
-    this.getPatient();
     this.user = this.roleService.authService.user;
     
   }
@@ -145,6 +146,7 @@ export class BipProfileComponent {
       console.log(resp);
       this.bip_selected= resp.bip;
       this.patient_selected= resp.patient;
+      this.patientId= resp.patient.patient_id;
 
 
       this.type_of_assessment =this.bip_selected.type_of_assessment;

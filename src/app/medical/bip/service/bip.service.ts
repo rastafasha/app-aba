@@ -61,9 +61,9 @@ export class BipService {
     return this.http.delete(URL, {headers:headers});
   }
 
-  showBipProfile(client_id:any){
+  showBipProfile(patient_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
-    let URL = url_servicios+"/bip/profile/"+client_id;
+    let URL = url_servicios+"/bip/profile/"+patient_id;
     return this.http.get(URL,{headers:headers});
   }
   showBipPatientId(patient_id:any){

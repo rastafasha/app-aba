@@ -40,12 +40,14 @@ export class ClientLogReportComponent {
   public patient_selected:any;
   public text_validation:any;
   public user:any;
+  public insurer_id:any;
   public roles:any = [];
   public permissions:any = [];
   public maladaptives:any = [];
   public doctorPatientList:any = [];
   public pa_assessmentgroup:any = [];
   public paAssestment:any = [];
+  public insurances:any = [];
   search:any= null;
   status:any= null;
 
@@ -100,13 +102,10 @@ export class ClientLogReportComponent {
   private getTableData(): void {
     this.patientList = [];
     this.serialNumberArray = [];
-
-    this.patientService.listPatients(this.search, this.status).subscribe((resp:any)=>{
+    // this.search, this.status
+    this.patientService.configPatientsLogReport().subscribe((resp:any)=>{
       
-      // console.log(resp);
-      this.paAssestment= resp.patients.data.pa_assessments;
-        // let jsonObj = JSON.parse(this.paAssestment) || '';
-        // this.pa_assessmentgroup = jsonObj;
+      console.log(resp);
 
       this.totalDatapatient = resp.patients.data.length;
       this.patient_generals = resp.patients.data;

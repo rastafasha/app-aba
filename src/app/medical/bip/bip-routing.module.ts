@@ -14,10 +14,10 @@ const routes: Routes = [
     //   path:'list', component:ListAppointmentsComponent
     // },
     {
-      path:'profile/:id', component:BipProfileComponent
+      path:'profile/:patient_id', component:BipProfileComponent
     },
     {
-      path:'attention/:id', component:BipattentionComponent
+      path:'attention/:patient_id', component:BipattentionComponent
     },
     
   ]

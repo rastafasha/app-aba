@@ -206,7 +206,7 @@ export class ChartReplacementComponent {
     
 
     this.activatedRoute.params.subscribe((resp:any)=>{
-      this.client_id = resp.id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
+      this.patient_id = resp.patient_id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
     
      })
      this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
@@ -215,7 +215,7 @@ export class ChartReplacementComponent {
   }
 
   getBip(){
-    this.bipService.getBipByUser(this.client_id).subscribe((resp:any)=>{
+    this.bipService.getBipByUser(this.patient_id).subscribe((resp:any)=>{
       // console.log(resp);
       this.created_at = resp.bip.created_at;
       // console.log(this.created_at);
@@ -224,10 +224,10 @@ export class ChartReplacementComponent {
   }
 
   getProfileBip(){
-    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
+    this.bipService.showBipProfile(this.patient_id).subscribe((resp:any)=>{
       // console.log(resp);
       this.client_selected = resp;// asignamos el objeto a nuestra variable
-      this.patient_id = resp.patient.patient_id;  
+      // this.patient_id = resp.patient.patient_id;  
       // console.log(this.patient_id);
 
       //traemos la info del usuario 
@@ -338,7 +338,7 @@ export class ChartReplacementComponent {
             acumulador = acumulador+(+this.number_of_correct_response[index]);
             cantidadDeDias += 1;
             sumadorDeTrials += +number_of_trials[index];
-            console.log(sumadorDeTrials, index)
+            // console.log(sumadorDeTrials, index)
 
             if (cantidadDeDias == 7 || index+1 == this.sessions_dates.length) {
               labelSemanal += ' - '+date.substr(0,10);

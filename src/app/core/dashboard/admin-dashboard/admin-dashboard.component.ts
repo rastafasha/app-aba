@@ -356,22 +356,22 @@ export class AdminDashboardComponent {
 
       let labels_sp:any = [];
       let series_sp:any = [];
-      this.query_patients_specialities.forEach((patients_speciality:any)=>{
-        labels_sp.push(patients_speciality.name)
-        series_sp.push(patients_speciality.count)
-      })
+      // this.query_patients_specialities.forEach((patients_speciality:any)=>{
+      //   labels_sp.push(patients_speciality.name)
+      //   series_sp.push(patients_speciality.count)
+      // })
       this.chartOptionsTwo.labels = labels_sp;
       this.chartOptionsTwo.series = series_sp;
       //end
       //start
-      this.query_patients_speciality_porcentaje = resp.query_patients_speciality_porcentaje;
+      // this.query_patients_speciality_porcentaje = resp.query_patients_speciality_porcentaje;
       //end
       //start
       this.query_income_year = resp.query_income_year;
       let data_income:any = [];
-      this.query_income_year.forEach((element:any) => {
-        data_income.push(element.income);
-      });
+      // this.query_income_year.forEach((element:any) => {
+      //   data_income.push(element.income);
+      // });
 
       this.chartOptionsThree = {
         chart: {

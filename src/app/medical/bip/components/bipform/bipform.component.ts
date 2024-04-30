@@ -121,13 +121,13 @@ export class BipformComponent {
     // window.scrollTo(0, 0);//inicia la vista siempre desde arriba
     //me subcribo al id recibido por el parametro de la url
     this.ativatedRoute.params.subscribe((resp:any)=>{
-      this.client_id = resp.id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
+      this.patient_id = resp.patient_id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
       // this.patient_id= resp.id // recibe el id del paciente que se esta consultando
       // console.log(this.client_id);
      })
      this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
      
-    this.ativatedRoute.params.subscribe( ({id}) => this.getBip(id));//se pide el id del bip creado para traer la info necesaria
+    this.ativatedRoute.params.subscribe( ({id}) => this.getBip());//se pide el id del bip creado para traer la info necesaria
     let USER = localStorage.getItem("user");// se solicita el usuario logueado
     this.user = JSON.parse(USER ? USER: ''); //  si no hay un usuario en el localstorage retorna un objeto vacio
     this.doctor_id = this.user.id;  //se asigna el doctor logueado a este campo para poderlo enviar en los
@@ -141,7 +141,7 @@ export class BipformComponent {
   
   //se obtiene el perfil del usuario, por el cliente_id  que seria igual al id de la url
   getProfileBip(){
-    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
+    this.bipService.showBipProfile(this.patient_id).subscribe((resp:any)=>{
       // console.log(resp);
       this.client_selected = resp;// asignamos el objeto a nuestra variable
 
@@ -164,9 +164,9 @@ export class BipformComponent {
 
   }
   //obtenemos el bip por el id..
-  getBip(id){
-    if (id !== null && id !== undefined) {
-      this.bipService.getBipByUser(+id).subscribe((resp:any)=>{
+  getBip(){
+    if (this.patient_id !== null && this.patient_id !== undefined) {
+      this.bipService.getBipByUser(this.patient_id).subscribe((resp:any)=>{
         console.log(resp);
   
         this.bip_selected = resp; //asigamos una variable a la respuesta

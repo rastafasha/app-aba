@@ -209,17 +209,17 @@ export class ChartReductionComponent {
     
 
     this.activatedRoute.params.subscribe((resp:any)=>{
-      this.client_id = resp.id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
-    
+      this.patient_id = resp.patient_id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
+      console.log(this.patient_id);
+      this.getBip(); // se pide el perfil del paciente por el bip relacionado
+      this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
      })
-     this.getBip(); // se pide el perfil del paciente por el bip relacionado
-     this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
     //  this.getGraphicPatientMonth();
   }
 
 // traemos la fecha inicial que viene de la creacion del bip
   getBip(){
-    this.bipService.getBipByUser(this.client_id).subscribe((resp:any)=>{
+    this.bipService.getBipByUser(this.patient_id).subscribe((resp:any)=>{
       // console.log(resp);
       this.created_at = resp.bip.created_at;
       // console.log('creacion bip',this.created_at);
@@ -229,7 +229,7 @@ export class ChartReductionComponent {
 
 //traemos la info del paciente o cliente
   getProfileBip(){
-    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
+    this.bipService.showBipProfile(this.patient_id).subscribe((resp:any)=>{
       // console.log(resp);
       this.client_selected = resp;// asignamos el objeto a nuestra variable
       this.patient_id = resp.patient.patient_id;  

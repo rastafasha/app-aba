@@ -103,7 +103,7 @@
                                       <th mat-sort-header="average">Average</th>
                                       <th mat-sort-header="53">53</th>
                                       <th mat-sort-header="rbt name">Home RBT</th>
-                                      <th mat-sort-header="school bca">School BCBA</th>
+                                      <th mat-sort-header="school rbt">School RBT</th>
                                       <th mat-sort-header="home bca">Home BCBA</th>
                                       <th mat-sort-header="school bca">School bca</th>
                                       <th mat-sort-header="55">55</th>
@@ -212,7 +212,7 @@
                                       <td>{{data.phone}}</td>
                                       <td>{{data.email}}</td>
                                       <td>{{data.diagnosis_code}}</td>
-                                      <td>{{data.insurer_id}}</td>
+                                      <td>{{data.insurances.insurer_name}}</td>
                                       <td>
                                         <!-- {{data.telehealth}} -->
                                         <span class="badge bg-success"
@@ -235,33 +235,18 @@
                                       <td>{{data.elegibility_date}}</td>
                                       <td>{{data.eqhlid}}</td>
                                       <td>{{data.patient_id}}</td>
+                                      <!-- <td>{{data.pa_assessments? data.pa_assessments.pa_assessment : ''}}</td> -->
                                       <td>
-                                        <!-- {{data.pa_assestment}} -->
-                                        <ng-container *ngFor=" let pa of paAssestment">
-                                            <ul>
-                                                <li>{{pa.pa_assessment}}</li>
-                                            </ul>
+                                        <ng-container *ngFor="let pa of data.pa_assessments">
+                                          <ul>
+                                            <li>{{pa.pa_assessment}}</li>
+                                          </ul>
                                         </ng-container>
-                                        
-                                    </td>
-                                      <td>
-                                        <!-- {{data.pa_assestment}} -->
-                                        <ng-container *ngFor=" let pas of paAssestment">
-                                            <ul>
-                                                <li>{{pas.pa_services}}</li>
-                                            </ul>
-                                        </ng-container>
-                                        
-                                    </td>
-                                      <td>
-                                        <!-- {{data.pa_assestment}} -->
-                                        <ng-container *ngFor=" let pasd of paAssestment">
-                                            <ul>
-                                                <li>{{pasd.pa_services_start_date}}</li>
-                                            </ul>
-                                        </ng-container>
-                                        
-                                    </td>
+                                      </td>
+                                      
+                                      <td>{{data.pa_assessments? data.pa_assessments.pa_services : ''}}</td>
+                                      <td>{{data.pa_assessments? data.pa_assessments.pa_services_end_date : ''}}</td>
+                                      
                                     
                                     <td>{{data.schedule}}</td>
                                     <td>average ??</td>

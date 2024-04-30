@@ -132,7 +132,7 @@
                                           *ngIf="data.status === 'waitintOnSchool'">Waiting on School</span>
 
                                       <span *ngIf="data.status === 'active'">
-                                        <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/bip/attention/', data.id]" tooltip="BIP Create"><i class="fa fa-address-book"></i></button>
+                                        <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' || roles ==='BCBA'" [routerLink]="['/bip/attention/', data.patient_id]" tooltip="BIP Create"><i class="fa fa-address-book"></i></button>
                                         <button class="btn btn-outline-dark" *ngIf="isPermission('view_bip')" [routerLink]="['/bip/profile/', data.patient_id]" tooltip="BIP View"><i class="fa fa-eye"></i></button>
                                         <button class="btn btn-outline-success" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' ||  roles ==='RBT'" [routerLink]="['/note-rbt/', data.id]" tooltip="Create RBT Note"> <i class="fa fa-id-card "></i> </button>
                                         <button class="btn btn-outline-primary" *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM' ||  roles ==='RBT'" [routerLink]="['/note-rbt/listbyclient/', data.patient_id]" tooltip="RBT Note list"> <i class="fa fa-bars"></i> </button>

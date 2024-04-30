@@ -81,9 +81,9 @@ export class BipattentionComponent {
     
     window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
-      this.client_id = resp.id;
+      this.patient_id = resp.patient_id;
       // this.patient_id= resp.id
-      // console.log(this.client_id);
+      console.log(this.patient_id);
      })
      this.getProfileBip();
 
@@ -99,8 +99,8 @@ export class BipattentionComponent {
   }
 
   getProfileBip(){
-    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
-      // console.log(resp);
+    this.bipService.showBipProfile(this.patient_id).subscribe((resp:any)=>{
+      console.log(resp);
       this.client_selected = resp;
 
       this.first_name = this.client_selected.patient.first_name;

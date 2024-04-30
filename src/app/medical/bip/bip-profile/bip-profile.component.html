@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                             <div class="follow-btn-group">
-                                                <a [routerLink]="['/bip/attention/', patient_selected.id]" *ngIf="isPermission('edit_bip')" class="btn btn-info follow-btns">Edit</a>
+                                                <a [routerLink]="['/bip/attention/', patientId]" *ngIf="isPermission('edit_bip')" class="btn btn-info follow-btns">Edit</a>
                                                 <button class="btn btn-info follow-btns" (click)="convertToPdf()">Save PDF</button>
                                                 <!-- <button type="submit" class="btn btn-info message-btns">Message</button> -->
                                             </div>
@@ -245,11 +245,23 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-4">
                                                 <div class="detail-personal">
-                                                    <h2>Initial Baseline</h2>
+                                                    <h2>Baseline level</h2>
+                                                    <h3>{{malad.baseline_level}}</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4">
+                                                <div class="detail-personal">
+                                                    <h2>Intensity Initial</h2>
                                                     <h3>{{malad.initial_interesting}}</h3>
                                                 </div>
                                             </div>
-
+                                            <div class="col-xs-12 col-sm-4">
+                                                <div class="detail-personal">
+                                                    <h2>Baseline Date</h2>
+                                                    <h3>{{malad.baseline_date|date}}</h3>
+                                                </div>
+                                            </div>
+                                            <app-chart-reduction [maladaptive_behavior]="malad.maladaptive_behavior"  [baseline_date]="malad.baseline_date" [baseline_level]="malad.baseline_level" [initial_interesting]="malad.initial_interesting"></app-chart-reduction>
                                         </ng-container>
                                     </div>
                                 </div>
@@ -386,7 +398,7 @@
                                                     </div>
                                                 </div>
                                             </ng-container>
-                                            <app-chart-reduction [maladaptive_behavior]="item.maladaptive"  [baseline_date]="item.baseline_date" [baseline_level]="item.baseline_level" [initial_interesting]="item.initial_interesting"></app-chart-reduction>
+                                            <!-- <app-chart-reduction [maladaptive_behavior]="item.maladaptive"  [baseline_date]="item.baseline_date" [baseline_level]="item.baseline_level" [initial_interesting]="item.initial_interesting"></app-chart-reduction> -->
                                         </ng-container>
                                         
                                     </div>

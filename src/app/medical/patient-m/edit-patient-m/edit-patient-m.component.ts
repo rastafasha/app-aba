@@ -112,18 +112,7 @@ export class EditPatientMComponent {
   public FILE_AVATAR:any;
   public IMAGE_PREVISUALIZA:any = 'assets/img/user-06.jpg';
 
-  public FILE_DOCTOR_REFERAL:any;
-  public IMAGE_PREVISUALIZA_DOCTOR_REFERAL:any = 'assets/img/user-06.jpg';
-  public FILE_MEDICAL_NOTES:any;
-  public IMAGE_PREVISUALIZA_MEDICAL_NOTES:any = 'assets/img/user-06.jpg';
-  public FILE_CDE:any;
-  public IMAGE_PREVISUALIZA_CDE:any = 'assets/img/user-06.jpg';
-  public FILE_IEP:any;
-  public IMAGE_PREVISUALIZA_IEP:any = 'assets/img/user-06.jpg';
-  public FILE_MNL:any;
-  public IMAGE_PREVISUALIZA_MNL:any = 'assets/img/user-06.jpg';
-  public FILE_REFERAL:any;
-  public IMAGE_PREVISUALIZA_REFERAL:any = 'assets/img/user-06.jpg';
+  
 
   valid_form:boolean = false;
   valid_form_success:boolean = false;
@@ -233,14 +222,9 @@ showUser(){
       console.log(resp);
       this.patient_selected = resp.patient;
       
-      
-      
-
         //traemos el valor del id del insurer  y lo asignamos a la variable de clase para que sea global
         this.selectedValueInsurer = this.patient_selected.insurer_id;
         // console.log(this.selectedValueInsurer);
-
-        
       
         //valore iniciales
         this.first_name = this.patient_selected.first_name;
@@ -311,18 +295,20 @@ showUser(){
         //valores de los selectores
         this.selectedValueLocation = this.patient_selected.location_id;
         this.selectedValuePosCovered = this.patient_selected.pos_covered;
-        this.selectedValue_rbt = this.patient_selected.rbt_id ? this.patient_selected.rbt_id : null;
-        this.selectedValue_rbt2 = this.patient_selected.rbt2 ? this.patient_selected.rbt2 : null;
-        this.selectedValue_bcba = this.patient_selected.bcba ? this.patient_selected.bcba: null;
-        this.selectedValue_bcba2 = this.patient_selected.bcba2 ? this.patient_selected.bcba2 : null;
+        this.selectedValue_rbt = this.patient_selected.rbt_home_id ? this.patient_selected.rbt_home_id : null;
+        this.selectedValue_rbt2 = this.patient_selected.rbt2_school_id ? this.patient_selected.rbt2_school_id : null;
+        this.selectedValue_bcba = this.patient_selected.bcba_home_id ? this.patient_selected.bcba_home_id: null;
+        this.selectedValue_bcba2 = this.patient_selected.bcba2_school_id ? this.patient_selected.bcba2_school_id : null;
         this.selectedValue_clind = this.patient_selected.clin_director_id ? this.patient_selected.clin_director_id: null;
+
+        console.log(this.selectedValue_rbt);
 
         this.insuranceData(this.selectedValueInsurer);//pide el insurance guardado para el request de la lista inicial
 
         
         this.patientService.getLaboratoryByPatient(this.patient_id).subscribe((resp:any)=>{
-          // console.log(resp);
-          this.FilesAdded = resp.patientFiles.data;
+          console.log(resp);
+          this.FilesAdded = resp.patientFiles.data ? resp.patientFiles.data : null;
         })
     })
   }
@@ -337,7 +323,7 @@ showUser(){
   //recibe el id y muestra la lista 
   insuranceData(selectedValueInsurer){
     this.insuranceService.showInsurance(selectedValueInsurer).subscribe((resp:any)=>{
-      console.log('desde el insurer seleccionado',resp);
+      // console.log('desde el insurer seleccionado',resp);
       this.services = resp.services;
     })
   }
@@ -442,10 +428,10 @@ closeModalDoc(){
 
 saveFiles(){
   this.text_validation = '';
-  // if(!this.first_name ||!this.last_name || !this.client_id ){
-  //   this.text_validation = 'Los campos con * son obligatorios';
-  //   return;
-  // }
+  if(!this.first_name ||!this.last_name || !this.client_id ){
+    this.text_validation = 'Los campos con * son obligatorios';
+    return;
+  }
 
 
   // this.valid_form = false;
@@ -478,10 +464,10 @@ saveFiles(){
 
   save(){
     this.text_validation = '';
-    if(!this.first_name ||!this.last_name || !this.client_id ){
-      this.text_validation = 'Los campos con * son obligatorios';
-      return;
-    }
+    // if(!this.first_name ||!this.last_name || !this.client_id ){
+    //   this.text_validation = 'Los campos con * son obligatorios';
+    //   return;
+    // }
 
 
     // this.valid_form = false;
