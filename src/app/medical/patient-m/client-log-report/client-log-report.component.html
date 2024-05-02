@@ -237,15 +237,15 @@
                                       <td>{{data.patient_id}}</td>
                                       <!-- <td>{{data.pa_assessments? data.pa_assessments.pa_assessment : ''}}</td> -->
                                       <td>
-                                        <ng-container *ngFor="let pa of data.pa_assessments">
+                                        <ng-container *ngFor="let pa of paAssestments">
                                           <ul>
                                             <li>{{pa.pa_assessment}}</li>
                                           </ul>
                                         </ng-container>
                                       </td>
                                       
-                                      <td>{{data.pa_assessments? data.pa_assessments.pa_services : ''}}</td>
-                                      <td>{{data.pa_assessments? data.pa_assessments.pa_services_end_date : ''}}</td>
+                                      <td>{{data.paAssestments? data.paAssestments.pa_services : ''}}</td>
+                                      <td>{{data.paAssestments? data.paAssestments.pa_services_end_date : ''}}</td>
                                       
                                     
                                     <td>{{data.schedule}}</td>

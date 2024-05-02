@@ -46,10 +46,15 @@ export class ClientLogReportComponent {
   public maladaptives:any = [];
   public doctorPatientList:any = [];
   public pa_assessmentgroup:any = [];
-  public paAssestment:any = [];
+  public paAssestment:any;
+  public paAssestments:any = [];
   public insurances:any = [];
+
+  public graphData:any = [];
+
   search:any= null;
   status:any= null;
+
 
   constructor(
     public doctorService: DoctorService,
@@ -103,14 +108,26 @@ export class ClientLogReportComponent {
     this.patientList = [];
     this.serialNumberArray = [];
     // this.search, this.status
-    this.patientService.configPatientsLogReport().subscribe((resp:any)=>{
+    this.patientService.listPatientLogReport(this.search, this.status).subscribe((resp:any)=>{
       
       console.log(resp);
 
-      this.totalDatapatient = resp.patients.data.length;
-      this.patient_generals = resp.patients.data;
-      this.patientid = resp.patients.data.id;
-      this.patient_id = resp.patients.data.patient_id;
+      // if (resp.patients.data.pa_assessments) {
+      //   this.paAssestments = JSON.parse(resp.patients.data.pa_assessments);
+      // } else {
+      //   this.paAssestments = []; // or some other default value
+      // }
+      // var i = resp.patients.length - 1;
+      // this.paAssestments = resp.patients.data[i]?.pa_assessments? JSON.parse(resp.patients.data[i].pa_assessments) : [];
+      // this.paAssestments = JSON.parse(resp.patients.data.pa_assessments);
+      // this.paAssestments = resp.patients.data.pa_assessments;
+      // console.log(this.paAssestments);
+     
+
+      this.totalDatapatient = resp.patients.length;
+      this.patient_generals = resp.patients;
+      this.patientid = resp.patients.id;
+      this.patient_id = resp.patients.patient_id;
      this.getTableDataGeneral();
     //  this.isMaladaptiveBip();
     })
