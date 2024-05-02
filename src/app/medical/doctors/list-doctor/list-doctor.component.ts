@@ -35,10 +35,13 @@ export class ListDoctorComponent {
   public totalPages = 0;
 
   public doctor_generals:any = [];
+  public doctorEmployeesList:any = [];
+  public roles:any = [];
   public doctor_id:any;
   public doctor_selected:any;
   public text_validation:any;
   public user:any;
+  public locationId:any;
 
   constructor(
     public doctorService: DoctorService,
@@ -51,6 +54,13 @@ export class ListDoctorComponent {
     window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getTableData();
+  
+
+    let USER = localStorage.getItem("user");
+    this.user = JSON.parse(USER ? USER: '');
+    this.roles = this.user.roles[0];
+    this.locationId = this.user.location_id;
+    
     this.user = this.roleService.authService.user;
   }
 
@@ -62,6 +72,14 @@ export class ListDoctorComponent {
       return true;
     }
     return false;
+  }
+
+  
+  getPatiensByLocation(){
+    this.doctorService.getEmployeesByLocation(this.locationId).subscribe((resp:any)=>{
+      // console.log(resp);
+      this.doctorEmployeesList = resp.patients.data;
+    })
   }
 
   private getTableData(): void {

@@ -133,6 +133,9 @@ export class AddPatientMComponent {
 
   public telehealth:boolean;
   public pay:boolean ;
+  public user:any ;
+  public doctor_id:any ;
+  public locationId:any ;
   
 
   valid_form:boolean = false;
@@ -151,9 +154,16 @@ export class AddPatientMComponent {
   ngOnInit(): void {
     // window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
-    this.getConfig();
+    
     this.getPoscoveredList();
     // this.insuranceData();
+    let USER = localStorage.getItem("user");
+    this.user = JSON.parse(USER ? USER: '');
+    this.doctor_id = this.user.id;
+    this.locationId = this.user.location_id;
+    console.log(this.locationId);
+
+    this.getConfig();
   }
   getPoscoveredList(){
     this.patientService.getPosCovered().subscribe((res:any)=> {
@@ -164,7 +174,7 @@ export class AddPatientMComponent {
   }
 
   getConfig(){
-    this.patientService.listConfig().subscribe((resp:any)=>{
+    this.patientService.listConfig(this.locationId).subscribe((resp:any)=>{
       console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
@@ -337,7 +347,8 @@ export class AddPatientMComponent {
     formData.append('copayments', this.copayments);
     formData.append('oop', this.oop);
 
-    formData.append('location_id', this.selectedValueLocation);
+    // formData.append('location_id', this.selectedValueLocation);
+    formData.append('location_id', this.user.location_id);
 
     
     formData.append('welcome', this.welcome);

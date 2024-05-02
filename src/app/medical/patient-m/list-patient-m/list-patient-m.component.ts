@@ -44,8 +44,10 @@ export class ListPatientMComponent {
   public permissions:any = [];
   public maladaptives:any = [];
   public doctorPatientList:any = [];
+  public locationPatientList:any = [];
   search:any= null;
   status:any= null;
+  location_id:any;
 
   constructor(
     public doctorService: DoctorService,
@@ -64,6 +66,7 @@ export class ListPatientMComponent {
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
     this.roles = this.user.roles[0];
+    this.location_id = this.user.location_id;
     
     this.user = this.roleService.authService.user;
     this.getPatiensByDoctor();
@@ -74,6 +77,13 @@ export class ListPatientMComponent {
     this.patientService.getPatientsByDoctor(this.user.id).subscribe((resp:any)=>{
       // console.log(resp);
       this.doctorPatientList = resp.patients.data;
+    })
+    this.getPatiensByLocation();
+  }
+  getPatiensByLocation(){
+    this.patientService.getPatientByLocations(this.location_id).subscribe((resp:any)=>{
+      // console.log(resp);
+      this.locationPatientList = resp.patients.data;
     })
   }
 
@@ -99,7 +109,7 @@ export class ListPatientMComponent {
     this.patientList = [];
     this.serialNumberArray = [];
 
-    this.patientService.listPatients(this.search, this.status).subscribe((resp:any)=>{
+    this.patientService.listPatients(this.search, this.status, this.location_id).subscribe((resp:any)=>{
       
       // console.log(resp);
 
@@ -167,6 +177,10 @@ export class ListPatientMComponent {
     this.dataSource.filter = value.trim().toLowerCase();
     this.doctorPatientList = this.dataSource.filteredData;
   }
+  public searchDataLocation(value: any): void {
+    this.dataSource.filter = value.trim().toLowerCase();
+    this.locationPatientList = this.dataSource.filteredData;
+  }
 
   public sortData(sort: any) {
     const data = this.patientList.slice();
@@ -186,6 +200,22 @@ export class ListPatientMComponent {
 
   public sortDataDoctor(sort: any) {
     const data = this.doctorPatientList.slice();
+
+    if (!sort.active || sort.direction === '') {
+      this.patientList = data;
+    } else {
+      this.patientList = data.sort((a, b) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const aValue = (a as any)[sort.active];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const bValue = (b as any)[sort.active];
+        return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
+      });
+    }
+  }
+
+  public sortDataDoctorLocation(sort: any) {
+    const data = this.locationPatientList.slice();
 
     if (!sort.active || sort.direction === '') {
       this.patientList = data;
@@ -234,6 +264,7 @@ export class ListPatientMComponent {
     this.skip = 0;
     this.currentPage = 1;
     this.getTableDataGeneral();
+    this.getPatiensByLocation();
     this.searchDataValue = '';
   }
 
@@ -323,25 +354,7 @@ export class ListPatientMComponent {
 
   }
 
-  pdfExport(){
-    // var doc = new jspdf(); 
-    
-    // const worksheet = XLSX.utils.json_to_sheet(this.patient_generals);
-
-    // const workbook = {
-    //   Sheets:{
-    //     'testingSheet': worksheet
-    //   },
-    //   SheetNames:['testingSheet']
-    // }
-
-    // doc.html(document.body, {
-    //   callback: function (doc) {
-    //     doc.save('clients_db_aba_therapy.pdf');
-    //   }
-    // });
-
-  }
+  
 
   cambiarStatus(data:any){
     let VALUE = data.status;

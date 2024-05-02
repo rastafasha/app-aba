@@ -73,6 +73,9 @@ public specialists:any = [];
   doctor_selected_rbt2:any =null;
   doctor_selected_full_name_rbt2:any =null;
 
+  public doctor_id:any ;
+  public location_id:any ;
+
 constructor(
   public patientService : PatientMService,
   public activatedRoute: ActivatedRoute,
@@ -93,6 +96,11 @@ ngOnInit(): void {
   this.getPatient();
   this.getConfig();
   this.user = this.roleService.authService.user;
+
+  let USER = localStorage.getItem("user");
+    this.user = JSON.parse(USER ? USER: '');
+    this.doctor_id = this.user.id;
+    this.location_id = this.user.location_id;
 }
 
 isPermission(permission:string){
@@ -106,7 +114,7 @@ isPermission(permission:string){
 }
 
 getConfig(){
-  this.patientService.listConfig().subscribe((resp:any)=>{
+  this.patientService.listConfig(this.location_id).subscribe((resp:any)=>{
     this.specialists = resp.specialists;
     this.insurances = resp.insurances;
     this.insurance_id = resp.insurances.length > 0 ? resp.insurances[0].id : '';

@@ -134,6 +134,8 @@ export class EditPatientMComponent {
 
   public roles_rbt:any = [];
   public roles_bcba:any = [];
+  public roles_manager:any = [];
+  public role_localmanager:any = [];
   public insurance_codes:any = [];
   public insurance:any;
   public insurances_name:any;
@@ -146,6 +148,10 @@ export class EditPatientMComponent {
   // public insurer_name: any;
   public insurance_id:any;
   public id:any;
+
+  public user:any ;
+  public doctor_id:any ;
+  public location_id:any ;
 
   FILES:any = [];
   FilesAdded:any = [];
@@ -176,6 +182,10 @@ export class EditPatientMComponent {
     //  setTimeout(()=>{
     //   alertClose();
     // }, 50)
+    let USER = localStorage.getItem("user");
+    this.user = JSON.parse(USER ? USER: '');
+    this.doctor_id = this.user.id;
+    this.location_id = this.user.location_id;
   }
 
   getPoscoveredList(){
@@ -187,7 +197,7 @@ export class EditPatientMComponent {
   }
 
   getConfig(){
-    this.patientService.listConfig().subscribe((resp:any)=>{
+    this.patientService.listConfig(this.location_id).subscribe((resp:any)=>{
       // console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
@@ -198,6 +208,8 @@ export class EditPatientMComponent {
       this.locations = resp.locations;
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
+      this.roles_manager = resp.roles_manager;
+      this.role_localmanager = resp.role_localmanager;
 
 
       this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{

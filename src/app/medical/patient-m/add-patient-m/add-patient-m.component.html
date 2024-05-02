@@ -201,7 +201,7 @@
                                         <img [src]="IMAGE_PREVISUALIZA" style="width: 250px;" alt="">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <!-- <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Location <span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValueLocation" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Location">
@@ -210,7 +210,7 @@
                                             </mat-option>
                                         </mat-select>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- <div class="col-12" *ngIf="valid_form">
                                     <div class="form-group row" *ngIf="valid_form_success">
                                         <div class="col-md-12">
@@ -909,7 +909,7 @@
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
-                                        <label >Clinical Director<span class="login-danger">*</span></label>
+                                        <label >Local Manager<span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValue_clind" name="clinical_director" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of specialists" [value]="data.id">
                                             {{data.name}} {{data.surname}}
