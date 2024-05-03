@@ -322,6 +322,13 @@ export class DataService {
               show_nav: true,
             },
             {
+              menuValue: 'Edit Client (role)',
+              route: routes.patientsList,
+              base: routes.patientsList,
+              permision: 'edit_patient',
+              show_nav: false,
+            },
+            {
               menuValue: 'Add Clients',
               route: routes.addPatient,
               base: routes.addPatient,

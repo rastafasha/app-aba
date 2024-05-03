@@ -155,7 +155,7 @@ export class NoteBcbaComponent {
     
     // window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
-      this.client_id = resp.id;
+      this.patient_id = resp.patient_id;
      })
      this.getConfig();
      this.getProfileBip();
@@ -183,7 +183,7 @@ export class NoteBcbaComponent {
   }
 
   getProfileBip(){
-    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
+    this.bipService.showBipProfile(this.patient_id).subscribe((resp:any)=>{
       console.log(resp);
       this.client_selected = resp.patient;
 

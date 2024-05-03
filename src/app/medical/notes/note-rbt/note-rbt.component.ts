@@ -138,7 +138,7 @@ export class NoteRbtComponent {
     
     // window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
-      this.client_id = resp.id;
+      this.patient_id = resp.patient_id;
      })
      this.getConfig();
      this.getProfileBip();
@@ -163,7 +163,7 @@ export class NoteRbtComponent {
   }
 
   getProfileBip(){
-    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
+    this.bipService.showBipProfile(this.patient_id).subscribe((resp:any)=>{
       // console.log(resp);
       this.client_selected = resp;
 
@@ -513,11 +513,6 @@ export class NoteRbtComponent {
     if(this.selectedValueTimeOut2 ){
       formData.append('time_out2', this.selectedValueTimeOut2+''? this.selectedValueTimeOut2+'' : "0");
     }
-    
-    
-    
-    
-    
     formData.append('environmental_changes', this.environmental_changes);
     
 
@@ -535,7 +530,11 @@ export class NoteRbtComponent {
     formData.append('client_response_to_treatment_this_session', this.client_response_to_treatment_this_session);
     formData.append('rbt_modeled_and_demonstrated_to_caregiver', this.rbt_modeled_and_demonstrated_to_caregiver);
     formData.append('progress_noted_this_session_compared_to_previous_session', this.progress_noted_this_session_compared_to_previous_session);
-    formData.append('next_session_is_scheduled_for', this.next_session_is_scheduled_for);
+    
+    if(this.next_session_is_scheduled_for){
+      formData.append('next_session_is_scheduled_for', this.next_session_is_scheduled_for);
+    }
+    // formData.append('next_session_is_scheduled_for', this.next_session_is_scheduled_for);
     // formData.append('porcentage_diario', this.number_of_correct_response * 100 / this.total_trials,);
     
     // formData.append('imagen', this.FILE_SIGNATURE_RBT  );

@@ -502,16 +502,29 @@ saveFiles(){
     formData.append('school_number', this.school_number);
     formData.append('diagnosis_code', this.diagnosis_code);
     formData.append('age', this.age+'');
-    formData.append('rbt_id', this.selectedValue_rbt);
-    formData.append('rbt2_id', this.selectedValue_rbt2);
-    formData.append('bcba_id', this.selectedValue_bcba);
-    formData.append('bcba2_id', this.selectedValue_bcba2);
+    // formData.append('rbt_home_id', this.selectedValue_rbt);
+    // formData.append('rbt2_school_id', this.selectedValue_rbt2);
+    // formData.append('bcba_home_id', this.selectedValue_bcba);
+    // formData.append('bcba2_school_id', this.selectedValue_bcba2);
     formData.append('clin_director_id', this.selectedValue_clind);
     formData.append('pay', this.pay+'');
     formData.append('telehealth', this.telehealth+'');
     // formData.append('insurer', this.selectedValueInsurer);
 
 
+    
+    if(this.selectedValue_rbt ){
+      formData.append('rbt_home_id', this.selectedValue_rbt);
+    }
+    if(this.selectedValue_rbt2 ){
+      formData.append('rbt2_school_id', this.selectedValue_rbt2);
+    }
+    if(this.selectedValue_bcba ){
+      formData.append('bcba_home_id', this.selectedValue_bcba);
+    }
+    if(this.selectedValue_bcba2 ){
+      formData.append('bcba2_school_id', this.selectedValue_bcba2);
+    }
     
     if(this.pa_assessmentgroup ){
       formData.append('pa_assessments', JSON.stringify(this.pa_assessmentgroup));

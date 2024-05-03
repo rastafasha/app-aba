@@ -335,7 +335,7 @@ export class AddPatientMComponent {
     formData.append('patient_control', this.patient_control);
     formData.append('special_note', this.special_note);
     
-    formData.append('insurer', this.selectedValueInsurer);
+    formData.append('insurer_id', this.selectedValueInsurer);
     formData.append('insuranceId', this.insuranceId);
     // formData.append('insurer_secundary', this.insurer_secundary);
     // formData.append('insuranceId_secundary', this.insuranceId_secundary);
@@ -348,7 +348,7 @@ export class AddPatientMComponent {
     formData.append('oop', this.oop);
 
     // formData.append('location_id', this.selectedValueLocation);
-    formData.append('location_id', this.user.location_id);
+    formData.append('location_id', this.locationId);
 
     
     formData.append('welcome', this.welcome);
@@ -363,10 +363,10 @@ export class AddPatientMComponent {
     formData.append('submitted', this.submitted);
     formData.append('eligibility', this.eligibility);
 
-    formData.append('rbt_id', this.selectedValue_rbt);
-    formData.append('rbt2_id', this.selectedValue_rbt2);
-    formData.append('bcba_id', this.selectedValue_bcba);
-    formData.append('bcba2_id', this.selectedValue_bcba2);
+    formData.append('rbt_home_id', this.selectedValue_rbt);
+    formData.append('rbt2_school_id', this.selectedValue_rbt2);
+    formData.append('bcba_home_id', this.selectedValue_bcba);
+    formData.append('bcba2_school_id', this.selectedValue_bcba2);
     formData.append('clin_director_id', this.selectedValue_clind);
 
     if(this.eqhlid){

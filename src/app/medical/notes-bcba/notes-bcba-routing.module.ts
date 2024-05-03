@@ -10,7 +10,7 @@ const routes: Routes = [
   {path:'', component:NotesBcbaComponent,
   children:[
     {
-      path:':id', component:NoteBcbaComponent
+      path:':patient_id', component:NoteBcbaComponent
     },
     {
       path:'edit/:id', component:NoteBcbaEditComponent
