@@ -315,24 +315,29 @@
                                         <h4>Prevalent Setting Events & Antecedents</h4>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-12 col-sm-4">
-                                            <div class="detail-personal">
-                                                <h2>Prevalent Setting Events & Antecedents</h2>
-                                                <h3>{{patient_selected.birth_date}}</h3>
+                                        <ng-container *ngFor="let prevalent of prevalent_setting_event_and_atecedents">
+
+                                            <div class="col-xs-12 col-sm-4">
+                                                <div class="detail-personal">
+                                                    <h2>Prevalent Setting Events & Antecedents</h2>
+                                                    <h3>{{prevalent.prevalent_setting_event_and_atecedent}}</h3>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-4">
-                                            <div class="detail-personal">
-                                                <h2>Behavior </h2>
-                                                <h3>{{patient_selected.age}}</h3>
+                                            <div class="col-xs-12 col-sm-4">
+                                                <div class="detail-personal">
+                                                    <h2>Behavior </h2>
+                                                    <h3>{{prevalent.behavior}}</h3>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-4">
-                                            <div class="detail-personal">
-                                                <h2>Hypothesized Function(s)</h2>
-                                                <h3>{{patient_selected.email}}</h3>
+                                            <div class="col-xs-12 col-sm-4">
+                                                <div class="detail-personal">
+                                                    <h2>Hypothesized Function(s) </h2>
+                                                    <h3>{{prevalent.hypothesized_functions}}</h3>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </ng-container>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -351,19 +356,19 @@
                                     </div>
                                     <div class="row">
                                         <ng-container *ngFor="let item of reduction_goals">
-                                            <div class="col-xs-12 col-sm-6">
+                                            <div class="col-xs-12 col-sm-4">
                                                 <div class="detail-personal">
                                                     <h2>Goal</h2>
                                                     <h3>{{item.maladaptive}}</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-6">
+                                            <div class="col-xs-12 col-sm-4">
                                                 <div class="detail-personal">
                                                     <h2>Current Status  </h2>
                                                     <h3>{{item.current_status }}</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12 col-sm-4">
                                                 <div class="detail-personal">
                                                     <h2>Created at</h2>
                                                     <h3>{{item.created_at|date}}</h3>
@@ -541,40 +546,40 @@
                                 
                                     </div>
                                     <ng-container *ngFor="let item of family_envolment">
-                                    <div class="row">
-                                            <div class="col-xs-12 col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-4">
                                                 <div class="detail-personal">
                                                     <h2>Criteria</h2>
                                                     <h3>{{item.criteria}}</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12 col-sm-4">
                                                 <div class="detail-personal">
                                                     <h2>caregiver goal</h2>
                                                     <h3>{{item.caregiver_goal}}</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12 col-sm-4">
                                                 <div class="detail-personal">
                                                     <h2>current status</h2>
                                                     <h3>{{item.current_status}}</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12 col-sm-6">
                                                 <div class="detail-personal">
                                                     <h2>outcome measure</h2>
                                                     <h3>{{item.outcome_measure}}</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12 col-sm-6">
                                                 <div class="detail-personal">
                                                     <h2>initiation  </h2>
                                                     <h3>{{item.initiation | date }}</h3>
                                                 </div>
                                             </div>
-                                            
-                                            
                                         </div>
+                                        <br>
+                                        <br>
                                     </ng-container>
                                 </div>
                             </div>
@@ -602,8 +607,8 @@
                                             <li>Use of reinforcement</li>
                                         </ol>
                                     </div>
-                                    <ng-container *ngFor="let item of monitoring_evalutating">
-                                    <div class="row">
+                                    <!-- <ng-container *ngFor="let item of monitoring_evalutating">
+                                        <div class="row">
                                             <div class="col-xs-12 col-sm-3">
                                                 <div class="detail-personal">
                                                     <h2>treatment fidelity</h2>
@@ -619,10 +624,10 @@
                                             
                                             
                                         </div>
-                                    </ng-container>
+                                    </ng-container> -->
                                      <ng-container *ngFor="let item of monitoring_evalutating_goals">
                                         <div class="row">
-                                            <h3>Goal lto</h3>
+                                            <h3>RBT Training Goals</h3>
                                             <div class="col-xs-12">
                                                 <div class="detail-personal">
                                                     <h2>lto</h2>
@@ -631,25 +636,25 @@
                                             </div>
                                             
                                             
-                                            <div class="col-xs-12 col-sm-3">
+                                            <!-- <div class="col-xs-12 col-sm-3">
                                                 <div class="detail-personal">
                                                     <h2>goal</h2>
                                                     <h3>{{item.goal}}</h3>
                                                 </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            </div> -->
+                                            <div class="col-xs-12 col-sm-6">
                                                 <div class="detail-personal">
                                                     <h2>status</h2>
                                                     <h3>{{item.status}}</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            <!-- <div class="col-xs-12 col-sm-3">
                                                 <div class="detail-personal">
                                                     <h2>current status</h2>
                                                     <h3>{{item.current_status}}</h3>
                                                 </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            </div> -->
+                                            <div class="col-xs-12 col-sm-6">
                                                 <div class="detail-personal">
                                                     <h2>date</h2>
                                                     <h3>{{item.date |date}}</h3>
@@ -1001,20 +1006,12 @@
                                     </div>
                                     <ng-container *ngFor="let item of generalization_training">
                                     <div class="row">
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12">
                                                 <div class="detail-personal">
                                                     <h2>discharge plan</h2>
                                                     <h3>{{item.discharge_plan}}</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-3">
-                                                <div class="detail-personal">
-                                                    <h2>created_at  </h2>
-                                                    <h3>{{item.created_at | date }}</h3>
-                                                </div>
-                                            </div>
-                                            
-                                            
                                         </div>
                                     </ng-container>
                                     <ng-container *ngFor="let item of transition_fading_plans">
@@ -1052,19 +1049,19 @@
                                         <h4>Crisis Plan</h4>
                                     </div>
                                     <div class="row">
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12">
                                                 <div class="detail-personal">
                                                     <h2>crisis description</h2>
                                                     <h3>{{crisis_description}}</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12">
                                                 <div class="detail-personal">
                                                     <h2>crisis note</h2>
                                                     <h3>{{crisis_note}}</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12">
                                                 <div class="detail-personal">
                                                     <h2>Caregiver Requirements for Prevention of Crisis</h2>
                                                     <h3>{{caregiver_requirements_for_prevention_of_crisis}}</h3>
@@ -1073,6 +1070,8 @@
                                             
                                             
                                         </div>
+                                        <br>
+                                        <br>
                                         <h3 class="card-title">Please check risk factors as applicable.</h3>
                                         <div class="col-xs-12">  
                                             <div class="row">  
@@ -1083,7 +1082,7 @@
                                                         <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
                                                             <h5 _ngcontent-rhp-c92="" class="card-title">Does Not Apply</h5>
                                                             <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                                <input disabled _ngcontent-rhp-c92="" type="checkbox" id="do_not_apply"  class="check" name="do_not_apply" [checked]="do_not_apply== true" [ngModelOptions]="{standalone: true}" [(ngModel)]="do_not_apply">
+                                                                <input disabled _ngcontent-rhp-c92="" type="checkbox" id="do_not_apply"  class="check" name="do_not_apply" disabled="true" [checked]="do_not_apply== true" [ngModelOptions]="{standalone: true}" [(ngModel)]="do_not_apply">
                                                                 <label _ngcontent-rhp-c92="" for="do_not_apply" class="checktoggle" value="true">checkbox</label>
                                                             </div>
                                                         </div>
@@ -1095,7 +1094,7 @@
                                                         <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
                                                             <h5 _ngcontent-rhp-c92="" class="card-title">Elopement</h5>
                                                             <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                                <input disabled _ngcontent-rhp-c92="" type="checkbox" id="elopement" class="check" name="elopement" [ngModelOptions]="{standalone: true}" [(ngModel)]="elopement">
+                                                                <input disabled _ngcontent-rhp-c92="" type="checkbox" id="elopement" class="check" name="elopement" disabled="true" [ngModelOptions]="{standalone: true}" [(ngModel)]="elopement">
                                                                 <label _ngcontent-rhp-c92="" for="elopement" class="checktoggle" value="true">checkbox</label>
                                                             </div>
                                                         </div>
@@ -1107,7 +1106,7 @@
                                                         <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
                                                             <h5 _ngcontent-rhp-c92="" class="card-title">Assaultive behavior</h5>
                                                             <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                                <input disabled _ngcontent-rhp-c92="" type="checkbox" id="assaultive_behavior" class="check" name="assaultive_behavior" [ngModelOptions]="{standalone: true}" [(ngModel)]="assaultive_behavior">
+                                                                <input disabled _ngcontent-rhp-c92="" type="checkbox" id="assaultive_behavior" class="check" name="assaultive_behavior" disabled="true" [ngModelOptions]="{standalone: true}" [(ngModel)]="assaultive_behavior">
                                                                 <label _ngcontent-rhp-c92="" for="assaultive_behavior" class="checktoggle" value="true">checkbox</label>
                                                             </div>
                                                         </div>
@@ -1119,7 +1118,7 @@
                                                         <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
                                                             <h5 _ngcontent-rhp-c92="" class="card-title">Aggression</h5>
                                                             <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                                <input disabled _ngcontent-rhp-c92="" type="checkbox" id="aggression" class="check" name="aggression" [ngModelOptions]="{standalone: true}" [(ngModel)]="aggression">
+                                                                <input disabled _ngcontent-rhp-c92="" type="checkbox" id="aggression" class="check" name="aggression"  disabled="true"[ngModelOptions]="{standalone: true}" [(ngModel)]="aggression">
                                                                 <label _ngcontent-rhp-c92="" for="aggression" class="checktoggle" value="true">checkbox</label>
                                                             </div>
                                                         </div>
@@ -1251,7 +1250,7 @@
                                                         <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
                                                             <h5 _ngcontent-rhp-c92="" class="card-title">Prior psychiatric inpatient admission</h5>
                                                             <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                                <input disabled _ngcontent-rhp-c92="" type="checkbox" id="prior_psychiatric_inpatient_admission" class="check" name="prior_psychiatric_inpatient_admission" [ngModelOptions]="{standalone: true}" [(ngModel)]="prior_psychiatric_inpatient_admission">
+                                                                <input disabled _ngcontent-rhp-c92="" type="checkbox" id="prior_psychiatric_inpatient_admission" disabled="true" class="check" name="prior_psychiatric_inpatient_admission" [ngModelOptions]="{standalone: true}" [(ngModel)]="prior_psychiatric_inpatient_admission">
                                                                 <label _ngcontent-rhp-c92="" for="prior_psychiatric_inpatient_admission" class="checktoggle" value="true">checkbox</label>
                                                             </div>
                                                         </div>
@@ -1278,7 +1277,7 @@
                                                         <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
                                                             <h5 _ngcontent-rhp-c92="" class="card-title">Not Present</h5>
                                                             <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                                <input _ngcontent-rhp-c92="" type="checkbox" id="not_present" class="check" name="not_present" [ngModelOptions]="{standalone: true}" [(ngModel)]="not_present">
+                                                                <input _ngcontent-rhp-c92="" type="checkbox" id="not_present" class="check" name="not_present" disabled="true" [ngModelOptions]="{standalone: true}" [(ngModel)]="not_present">
                                                                 <label _ngcontent-rhp-c92="" for="not_present" class="checktoggle" value="true">checkbox</label>
                                                             </div>
                                                         </div>
@@ -1382,7 +1381,7 @@
                                                         <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
                                                             <h5 _ngcontent-rhp-c92="" class="card-title">Means</h5>
                                                             <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                                <input _ngcontent-rhp-c92="" type="checkbox" id="means_homicidality" class="check" name="means_homicidality" [ngModelOptions]="{standalone: true}" [(ngModel)]="means_homicidality">
+                                                                <input _ngcontent-rhp-c92="" type="checkbox" id="means_homicidality" class="check" disabled="true" name="means_homicidality" [ngModelOptions]="{standalone: true}" [(ngModel)]="means_homicidality">
                                                                 <label _ngcontent-rhp-c92="" for="means_homicidality" class="checktoggle" value="true">checkbox</label>
                                                             </div>
                                                         </div>
@@ -1394,7 +1393,7 @@
                                                         <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
                                                             <h5 _ngcontent-rhp-c92="" class="card-title">Prior attempt (last 12 months)</h5>
                                                             <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                                <input _ngcontent-rhp-c92="" type="checkbox" id="prior_attempt_homicidality" class="check" name="prior_attempt_homicidality" [ngModelOptions]="{standalone: true}" [(ngModel)]="prior_attempt_homicidality">
+                                                                <input _ngcontent-rhp-c92="" type="checkbox" id="prior_attempt_homicidality" class="check" disabled="true" name="prior_attempt_homicidality" [ngModelOptions]="{standalone: true}" [(ngModel)]="prior_attempt_homicidality">
                                                                 <label _ngcontent-rhp-c92="" for="prior_attempt_homicidality" class="checktoggle" value="true">checkbox</label>
                                                             </div>
                                                         </div>
@@ -1456,7 +1455,7 @@
                                         
                                     </div>
                                     <ng-container *ngFor="let item of de_escalation_techniques">
-                                    <div class="row">
+                                        <div class="row">
                                             <div class="col-xs-12 col-sm-3">
                                                 <div class="detail-personal">
                                                     <h2>cpt</h2>
@@ -1487,9 +1486,9 @@
                                                     <h3>{{item.description_service}}</h3>
                                                 </div>
                                             </div>
-                                            
-                                            
                                         </div>
+                                        <br>
+                                        <br>
                                     </ng-container>
                                 </div>
                             </div>
@@ -1519,7 +1518,7 @@
                                         <div class="col-xs-12 col-sm-3">
                                             <div class="detail-personal">
                                                 <h2>Analyst Signature date</h2>
-                                                <h3>{{analyst_signature_date}}</h3>
+                                                <h3>{{analyst_signature_date | date}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-3">
@@ -1532,7 +1531,7 @@
                                         <div class="col-xs-12 col-sm-3">
                                             <div class="detail-personal">
                                                 <h2>Guardian Signature day</h2>
-                                                <h3>{{parent_guardian_signature_date}}</h3>
+                                                <h3>{{parent_guardian_signature_date | date}}</h3>
                                             </div>
                                         </div>
                                             

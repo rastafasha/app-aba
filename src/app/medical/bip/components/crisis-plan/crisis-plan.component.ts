@@ -170,6 +170,7 @@ export class CrisisPlanComponent {
       this.prior_attempt_homicidality = resp.crisiPlanPatientIds.data[0].homicidalities[0].prior_attempt_homicidality;
 
       this.crisis_description = resp.crisiPlanPatientIds.data[0].crisis_description;
+      this.caregiver_requirements_for_prevention_of_crisis = resp.crisiPlanPatientIds.data[0].caregiver_requirements_for_prevention_of_crisis;
       this.crisis_note = resp.crisiPlanPatientIds.data[0].crisis_note;
       this.client_id_crisisPlans = resp.crisiPlanPatientIds.data[0].client_id;
       // this.goals = resp.goalReductionPatientIds;
@@ -261,6 +262,7 @@ save(){
     client_id: this.client_id,
     crisis_description: this.crisis_description,
     crisis_note: this.crisis_note,
+    caregiver_requirements_for_prevention_of_crisis: this.caregiver_requirements_for_prevention_of_crisis,
     risk_factors: this.risk_added,
     suicidalities: this.suicidality_added,
     homicidalities: this.homicidality_added,

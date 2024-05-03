@@ -100,6 +100,7 @@ export class ReductionGoalFormComponent {
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.patient_id = resp.patient_id;// la respuesta se comienza a relacionar  en este momento con un cliente especifico
       this.getProfileBip(); // se solicita la info del perfil del usuario
+      console.log(this.patient_id);
     })
     
     
@@ -190,14 +191,20 @@ export class ReductionGoalFormComponent {
     this.maladaptiveSelected = maladap
     // console.log(this.maladaptiveSelected);
     //llamamos la funcion del  servicio para obtener la informacion adicional que se va a mostrar en la ventana
+    
     this.getGoalsMaladaptives();
+    // setTimeout(() => {
+    //   // this.router.navigate([routes.adminDashboard]);
+    // }, 50);
+    
     
   }
 
   //obtenemos los goals del maladaptive por nombre
   //obtenemos los maladaptives iniciales para poder relacionarlos con los goals
   getGoalsMaladaptives(){
-    this.goalService.listMaladaptivesGoals(this.maladaptiveSelected.maladaptive_behavior).subscribe((resp:any)=>{
+    this.patient_id = this.patient_id;
+    this.goalService.listMaladaptivesGoals(this.maladaptiveSelected.maladaptive_behavior, this.patient_id).subscribe((resp:any)=>{
      console.log(resp);
      console.log('palabra maladaptive', resp.goalsmaladaptive.data[0].maladaptive);
      
@@ -399,7 +406,7 @@ export class ReductionGoalFormComponent {
   //grafico
   //obtenemos los goals del maladaptive por nombre  para el grafico 
   getGoalsSonMaladaptives(){
-    this.goalService.listMaladaptivesGoals(this.maladaptiveSelectedSon.maladaptive_behavior).subscribe((resp:any)=>{
+    this.goalService.listMaladaptivesGoals(this.maladaptiveSelectedSon.maladaptive_behavior, this.patient_id).subscribe((resp:any)=>{
       // console.log( resp);
       
       this.goalmaladaptive_child = resp.goalsmaladaptive.data;

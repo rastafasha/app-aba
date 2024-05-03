@@ -101,6 +101,8 @@ export class SustitutionListComponent {
   createdgoal_decription_lto :any;
   createdgoal_status_lto_edit2 :any;
   createdgoal_status_sto_edit2 :any;
+  goalSelectedId :any;
+  newGoaladd :any;
 
   constructor(
     public bipService:BipService,
@@ -121,7 +123,7 @@ export class SustitutionListComponent {
       this.patient_id = resp.patient_id;// la respuesta se comienza a relacionar  en este momento con un cliente especifico
       this.getProfileBip(); // se solicita la info del perfil del usuario
       // this.getGoalbyPatient(); // se solicita la info del perfil del usuario
-      console.log(this.client_id);
+      console.log(this.patient_id);
     })
     
     
@@ -170,28 +172,20 @@ export class SustitutionListComponent {
   //si existe enviamos el client_id_goal para actualizar el goal del paciente
   getPatientGoalSustitutions(patient_id){
     this.goalSustitutionService.getGoalSustitutionbyPatientId(patient_id).subscribe((resp:any)=>{
-      // console.log('goals sustition by patientid',resp);
-      this.goalSustitutions = resp.sustitutiongoalPatientIds.data[0] ==""?[] : resp.sustitutiongoalPatientIds.data ;
-      this.goalSustitutionId = resp.sustitutiongoalPatientIds.data[0].id || undefined;
-      this.client_id_goalSustitution = resp.sustitutiongoalPatientIds.data[0].client_id;
+      console.log('goals sustition by patientid',resp);
+      // this.goalSustitutions = resp.sustitutiongoalPatientIds.data[0] ==""?[] : resp.sustitutiongoalPatientIds.data ;
+      // this.goalSustitutionId = resp.sustitutiongoalPatientIds.data[0].id || undefined;
+      // this.client_id_goalSustitution = resp.sustitutiongoalPatientIds.data[0].client_id;
+      // this.goalSelected = resp.sustitutiongoalPatientIds.data[0].id;
       // this.goal = resp.sustitutiongoalPatientIds.data[0].goal;
       this.goals = resp.sustitutiongoalPatientIds.data;
-      // this.description = resp.sustitutiongoalPatientIds.data[0].description;
-      // this.current_sustitution = resp.sustitutiongoalPatientIds.data[0].current_sustitution;
-      // // this.goals = resp.goalReductionPatientIds;
-      // // console.log(this.goals);
-
-      // this.golstoSustiutions = this.goalSustitutions[0].goalstos;
-      // this.golltoSustiution = this.goalSustitutions[0].goalltos;
-      
-      
     })
   }
 
 
   //selectores 
 
-  createGoal(){
+  createGoal(){debugger
     this.createSelected = true;
 
     this.goal = '',
@@ -209,6 +203,7 @@ export class SustitutionListComponent {
     this.sustitution_status_lto = '';
     this.sustitution_date_lto = null;
     this.sustitution_decription_lto = '';
+    this.newGoaladd = '';
     
   }
 
@@ -222,11 +217,12 @@ export class SustitutionListComponent {
       this.goals = this.goalSelected.data;
       this.description = this.goalSelected.description;
       this.current_status = this.goalSelected.current_status;
+      this.goalSelectedId = this.goalSelected.id;
       // this.goals = resp.goalReductionPatientIds;
       // console.log(this.goals);
 
       this.golstoSustiutions = this.goalSelected.goalstos;
-        this.golltoSustiution = this.goalSelected.goalltos;
+      this.golltoSustiution = this.goalSelected.goalltos;
 
     //llamamos la funcion del  servicio para obtener la informacion adicional que se va a mostrar en la ventana
     // this.getGoalsMaladaptives();
@@ -436,7 +432,7 @@ export class SustitutionListComponent {
     this.ngOnInit();
   }
 
-  saveGoal(){
+  saveGoal(){debugger
     this.text_validation = '';
     // if(!this.maladaptive || !this.current_sustitution || !this.golsto){
     //   this.text_validation = 'Is required this information ';
@@ -444,7 +440,7 @@ export class SustitutionListComponent {
     // }
 
     let data ={
-      id:this.goalsustitid,
+      id:this.goalSelectedId,
       bip_id: this.bip_selectedIdd,
       patient_id: this.patient_id,
       goal: this.goal,
@@ -455,9 +451,9 @@ export class SustitutionListComponent {
       description: this.description,
     }
 
-    if(this.client_id_goalSustitution && this.goalSustitutionId){
+    if(this.goalSelectedId  ){
 
-      this.goalSustitutionService.editGoalSustitution(data, this.goalSustitutionId).subscribe((resp:any)=>{
+      this.goalSustitutionService.editGoalSustitution(data, this.goalSelectedId).subscribe((resp:any)=>{
         // console.log(resp);
         // this.text_success = 'Goal Updated'
         Swal.fire('Updated', `Goal Sustitution Updated successfully!`, 'success');

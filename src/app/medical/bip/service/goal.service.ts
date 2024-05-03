@@ -18,9 +18,9 @@ export class GoalService {
     let URL = url_servicios+'/goal';
     return this.http.get(URL, {headers:headers});
   }
-  listMaladaptivesGoals(maladaptive:any){
+  listMaladaptivesGoals(maladaptive:any, patient_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
-    let URL = url_servicios+'/goal/show/goalsmaladaptives/'+maladaptive;
+    let URL = url_servicios+'/goal/show/goalsmaladaptives/'+maladaptive+'/'+patient_id;
     return this.http.get(URL, {headers:headers});
   }
   // listMaladaptivesGoals(maladaptive:any, patient_id:any){

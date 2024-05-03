@@ -63,7 +63,7 @@ export class FamilyInvolvementGoalFormComponent {
     })
     
     
-    this.ativatedRoute.params.subscribe( ({id}) => this.getBip()); // se solicita la info del perfil del bip
+    this.getBip(); // se solicita la info del perfil del bip
     // this.ativatedRoute.params.subscribe( ({id}) => this.getGoal(id)); // se solicita la info del perfil del bip
     // this.ativatedRoute.params.subscribe( ({id}) => this.getGoal(id)); // se solicita la info del perfil del goal
     let USER = localStorage.getItem("user");// se solicita el usuario logueado
@@ -74,7 +74,7 @@ export class FamilyInvolvementGoalFormComponent {
 
   //obtenemos el perfil  del paciente por el id de la ruta
   getProfileBip(){
-    this.bipService.showBipProfile(this.client_id).subscribe((resp:any)=>{
+    this.bipService.showBipProfile(this.patient_id).subscribe((resp:any)=>{
       // console.log('profilebip', resp);
       this.client_selected = resp;//convertimos la respuesta en un variable
 
@@ -89,7 +89,7 @@ export class FamilyInvolvementGoalFormComponent {
   //obtenemos el bip por el id 
   getBip(){
     if (this.patient_id !== null && this.patient_id !== undefined) {
-      this.bipService.getBipByUser(+this.patient_id).subscribe((resp:any)=>{
+      this.bipService.getBipByUser(this.patient_id).subscribe((resp:any)=>{
         // console.log('bip',resp);
   
         this.bip_selected = resp; //convertimos la respuesta en un variable
