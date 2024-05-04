@@ -132,7 +132,7 @@
                                 </thead>
                                 <tbody >
                                     <tr *ngFor="let data of patientList">
-                                        <td>{{data.location_id}}</td>
+                                        <td>{{data.locals.title}}</td>
                                         <td *ngIf="roles ==='SUPERADMIN'">
                                             <select
                                             class="form-control form-select-solid fw-bolder"
@@ -186,10 +186,10 @@
                                                 <img src="./assets/img/no-image.jpg" >
                                             </div>
                                             <div *ngIf="data.avatar">
-                                                <img  src="{{data.avatar}}" class="avatarlist"   [alt]="data.first_name">
+                                                <img  src="{{data.clin_director.avatar}}" class="avatarlist"   [alt]="data.clin_director.name">
                                             </div>
                                         </td>
-                                        <td>{{data.rbt_id}}</td>
+                                        <td>{{data.clin_director.name}}</td>
                                         
                                         <td>
                                             <div *ngIf="!data.avatar">

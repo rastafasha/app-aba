@@ -78,7 +78,7 @@
                                             <th mat-sort-header="names">Full Name</th>
                                             <th mat-sort-header="emails">Email</th>
                                             <th mat-sort-header="telefonos">Phone</th>
-                                            <!-- <th mat-sort-header="role">Role</th> -->
+                                            <th mat-sort-header="role">Role</th>
                                             <th mat-sort-header="status">Status</th>
                                             <th mat-sort-header="createds">Created At</th>
                                              <th ></th> <!--acciones -->
@@ -103,7 +103,7 @@
                                             </td>
                                             <td>{{specialist.email}}</td>
                                             <td>{{specialist.phone}}</td>
-                                            <!-- <td>{{specialist.roles.name}}</td> -->
+                                            <td>{{specialist.roles[0].name}}</td>
                                             <td>
                                               <span class="badge bg-danger"
                                                   *ngIf="specialist.status === 'inactive'">Inactive</span>
