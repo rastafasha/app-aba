@@ -1,12 +1,17 @@
 <div class="header">
     <div class="header-left">
-        <span  *ngIf="roles === 'SUPERADMIN' || roles === 'LM' || roles === 'MANAGER'">
+        <span  *ngIf="roles === 'SUPERADMIN' ">
             <a [routerLink]="routes.adminDashboard" class="logo">
                 <img src="assets/webp/aba-logo-new.webp" width="35" height="27" alt=""> <span>ABA Therapy</span>
             </a>
         </span>
         <span  *ngIf="roles === 'RBT' || roles === 'BCBA'">
             <a [routerLink]="['/doctors/profile/', user.id]" class="logo">
+                <img src="assets/webp/aba-logo-new.webp" width="35" height="27" alt=""> <span>ABA Therapy</span>
+            </a>
+        </span>
+        <span  *ngIf="roles === 'MANAGER' ">
+            <a [routerLink]="['/location/view/', user.location_id]" class="logo">
                 <img src="assets/webp/aba-logo-new.webp" width="35" height="27" alt=""> <span>ABA Therapy</span>
             </a>
         </span>

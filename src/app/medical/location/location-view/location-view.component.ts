@@ -16,6 +16,7 @@ import { url_media } from 'src/app/config/config';
 export class LocationViewComponent {
   public routes = routes;
   public selectedValue!: string;
+  option_selected:number = 1;
 
   public title: string = '';
 
@@ -33,6 +34,8 @@ export class LocationViewComponent {
   public max_allowed: any;
 
   public location_id: any;
+  public user: any;
+  public roles:any = [];
   public location_selected: any;
 
 
@@ -56,6 +59,10 @@ export class LocationViewComponent {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    let USER = localStorage.getItem("user");
+    this.user = JSON.parse(USER ? USER: '');
+    this.roles = this.user.roles[0];
+
     this.doctorService.closeMenuSidebar();
     this.activatedRoute.params.subscribe((resp:any)=>{
       // console.log(resp);
@@ -65,6 +72,9 @@ export class LocationViewComponent {
     this.getLocation();
   }
 
+  optionSelected(value:number){
+    this.option_selected = value;
+  }
   
   getLocation(){
     this.locationService.getLocation(this.location_id).subscribe((resp:any)=>{

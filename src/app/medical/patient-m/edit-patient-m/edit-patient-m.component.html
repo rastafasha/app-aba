@@ -209,12 +209,13 @@
                                             {{data.title}}
                                             </mat-option>
                                         </mat-select> -->
-                                        <select class="form-control form-select-solid fw-bolder" name="location_id"
-                                        placeholder="Selec. Categoria" [(ngModel)]="selectedValueLocation" (change)="selectCategory($event)">
-                                        <ng-container *ngFor="let data of locations?.slice()">
-                                            <option [value]="data.id">{{data.title}}</option>
-                                        </ng-container>
-                                    </select>
+
+                                        <mat-select [(ngModel)]="selectedValueLocation" name="location" [ngModelOptions]="{standalone: true}" class="form-control select" (ngModelChange)="selectCategory($event)"  placeholder="Select Location">
+                                            <mat-option *ngFor="let data of locations" [value]="data.id">
+                                            {{data.title}}
+                                            </mat-option>
+                                        </mat-select>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-12" *ngIf="valid_form">

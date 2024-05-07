@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/location/list">Locations </a></li>
-                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item" *ngIf="roles === 'SUPERADMIN' "><a routerLink="/location/list">Locations </a></li>
+                        <li class="breadcrumb-item" *ngIf="roles === 'SUPERADMIN' "><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">View Location </li>
                     </ul>
                 </div>
@@ -38,12 +38,13 @@
                                     <p><b>Phone 2:</b>&nbsp;{{location_selected.phone2}}</p>
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
-                                    <img [src]="location_selected.avatar" style="width: 100%; margin-bottom: 20px;" alt="">
                                     <p><b>Address:</b><br>
                                         {{location_selected.address}}</p>
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
-                                    <p>mapa</p>
+                                    <!-- <p>mapa</p> -->
+                                    <img [src]="location_selected.avatar" style="width: 100%; margin-bottom: 20px;" alt="">
+                                    
                                 </div>
                                 
                             </div>
@@ -56,8 +57,20 @@
             </div>
             <!-- fin basico					 -->
         </div>
-        <div class="row">
-            <div class="col-xs-12">
+
+        <div class="tab-content-set">
+            <ul class="nav">
+                <li>
+                    <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 1}" (click)="optionSelected(1)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Specialists</a>
+                </li>
+                <li>
+                    <a href="#" onclick="return false;" [ngClass]="{'active': option_selected == 2}" (click)="optionSelected(2)"><span class="set-about-icon me-2"><img src="assets/img/icons/menu-icon-02.svg" alt=""></span>Clients</a>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="row" >
+            <div class="col-xs-12" *ngIf="option_selected == 1">
             
                 <div class="card">
                     <div class="card-body">
@@ -69,7 +82,7 @@
                             </div>
                             
                             
-                            <div class="row align-items-center" >
+                            <div class="row align-items-center table-responsive" >
                                 <table matSort  class="table border-0 custom-table comman-table datatable mb-0">
                                     <thead>
                                         <tr>
@@ -129,7 +142,7 @@
                     </div>
                 </div>							
             </div>
-            <div class="col-xs-12">
+            <div class="col-xs-12" *ngIf="option_selected == 2">
             
                 <div class="card">
                     <div class="card-body">
@@ -181,7 +194,17 @@
                                               <span class="badge bg-success"
                                                   *ngIf="patient.eligibility === 'yes'">Yes</span>
                                               <span class="badge bg-primary"
-                                                  *ngIf="patient.eligibility === 'pending'">Pending</span>
+                                                  *ngIf="patient.eligibility === 'waiting'">Waiting</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="patient.eligibility === 'requested'">Requested</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="patient.eligibility === 'reviewing'">Reviewing</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="patient.eligibility === 'psycho eval'">Psycho eval</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="patient.eligibility === 'need new'">Need new</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="patient.eligibility === '2 insurance'">2 insurance</span>
     
                                           </td>
                                             <td>{{patient.created_at | date }}</td>

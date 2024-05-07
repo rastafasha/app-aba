@@ -6,7 +6,12 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+                      <span  *ngIf="roles === 'SUPERADMIN' ">
+                        <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+                    </span>
+                      <span  *ngIf="roles === 'MANAGER'">
+                        <li class="breadcrumb-item"><a [routerLink]="['/location/view/', user.location_id]">Dashboard</a></li>
+                    </span>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">Employees List</li>
                     </ul>

@@ -142,10 +142,10 @@ getPatient(){
     this.patient_selected= resp.patient;
     this.patient_id= resp.patient.patient_id;
     this.avatar= resp.patient.avatar;
-    this.rbt_id = resp.patient.rbt_id;
-    this.rbt2_id = resp.patient.rbt2;
-    this.bcba_id = resp.patient.bcba;
-    this.bcba2_id = resp.patient.bcba2;
+    this.rbt_id = resp.patient.rbt_home_id;
+    this.rbt2_id = resp.patient.rbt2_school_id;
+    this.bcba_id = resp.patient.bcba_home_id;
+    this.bcba2_id = resp.patient.bcba2_school_id;
     this.clin_director_id = resp.patient.clin_director_id;
     // this.appointment_pendings= resp.appointment_pendings.data;
     this.pa_assessmentss = resp.pa_assessments;

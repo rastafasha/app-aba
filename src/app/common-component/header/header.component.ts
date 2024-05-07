@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit{
   public usuario:any;
   public user_id:any;
   public avatar:any;
+  public locationId:any;
   public roles:any = [];
 
   imagenSerUrl = environment.url_media;
@@ -40,6 +41,7 @@ export class HeaderComponent implements OnInit{
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
     this.roles = this.user.roles[0];
+    this.locationId = this.user.location_id;
   }
 
   openBoxFunc() {

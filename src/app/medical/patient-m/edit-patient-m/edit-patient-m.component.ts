@@ -228,7 +228,7 @@ export class EditPatientMComponent {
   }
 
   selectCategory(event: any){
-    let VALUE = event.target.value;
+    let VALUE = event;
     this.selectedValueLocation = VALUE;
     // console.log(this.selectedValueLocation);
     this.getConfig();

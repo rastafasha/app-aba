@@ -134,6 +134,7 @@ export class AddPatientMComponent {
   public telehealth:boolean;
   public pay:boolean ;
   public user:any ;
+  public roles:any = [];
   public doctor_id:any ;
   public locationId:any ;
   
@@ -161,6 +162,7 @@ export class AddPatientMComponent {
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
     this.locationId = this.user.location_id;
+    this.roles = this.user.roles[0];
     // console.log(this.locationId);
 
     this.getConfig();
@@ -175,7 +177,7 @@ export class AddPatientMComponent {
 
   getConfig(){
     this.patientService.listConfig(this.selectedValueLocation).subscribe((resp:any)=>{
-      // console.log(resp);
+      console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
       this.locations = resp.locations;
@@ -187,9 +189,9 @@ export class AddPatientMComponent {
   }
 
   selectCategory(event: any){
-    let VALUE = event.target.value;
+    let VALUE = event;
     this.selectedValueLocation = VALUE;
-    // console.log(this.selectedValueLocation);
+    console.log(this.selectedValueLocation);
     this.getConfig();
    
   }
