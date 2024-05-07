@@ -204,11 +204,17 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Location <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueLocation" name="location" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Location">
+                                        <!-- <mat-select [(ngModel)]="selectedValueLocation" name="location_id" [ngModelOptions]="{standalone: true}" (change)="selectCategory($event)" class="form-control select"  placeholder="Select Location">
                                             <mat-option *ngFor="let data of locations?.slice()" [value]="data.id">
                                             {{data.title}}
                                             </mat-option>
-                                        </mat-select>
+                                        </mat-select> -->
+                                        <select class="form-control form-select-solid fw-bolder" name="location_id"
+                                        placeholder="Selec. Categoria" [(ngModel)]="selectedValueLocation" (change)="selectCategory($event)">
+                                        <ng-container *ngFor="let data of locations?.slice()">
+                                            <option [value]="data.id">{{data.title}}</option>
+                                        </ng-container>
+                                    </select>
                                     </div>
                                 </div>
                                 <div class="col-12" *ngIf="valid_form">

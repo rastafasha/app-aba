@@ -161,7 +161,7 @@ export class AddPatientMComponent {
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
     this.locationId = this.user.location_id;
-    console.log(this.locationId);
+    // console.log(this.locationId);
 
     this.getConfig();
   }
@@ -174,8 +174,8 @@ export class AddPatientMComponent {
   }
 
   getConfig(){
-    this.patientService.listConfig(this.locationId).subscribe((resp:any)=>{
-      console.log(resp);
+    this.patientService.listConfig(this.selectedValueLocation).subscribe((resp:any)=>{
+      // console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
       this.locations = resp.locations;
@@ -184,6 +184,14 @@ export class AddPatientMComponent {
       // this.insurance_id = resp.insurances[0].id;
       // console.log(this.insurance_codes);
     })
+  }
+
+  selectCategory(event: any){
+    let VALUE = event.target.value;
+    this.selectedValueLocation = VALUE;
+    // console.log(this.selectedValueLocation);
+    this.getConfig();
+   
   }
   // insuranceData(){
   //   this.option_selected=this.option_selected
@@ -347,8 +355,8 @@ export class AddPatientMComponent {
     formData.append('copayments', this.copayments);
     formData.append('oop', this.oop);
 
-    // formData.append('location_id', this.selectedValueLocation);
-    formData.append('location_id', this.locationId);
+    formData.append('location_id', this.selectedValueLocation);
+    // formData.append('location_id', this.locationId);
 
     
     formData.append('welcome', this.welcome);

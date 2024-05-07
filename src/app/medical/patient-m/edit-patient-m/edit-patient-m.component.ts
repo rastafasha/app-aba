@@ -197,7 +197,7 @@ export class EditPatientMComponent {
   }
 
   getConfig(){
-    this.patientService.listConfig(this.location_id).subscribe((resp:any)=>{
+    this.patientService.listConfig(this.selectedValueLocation).subscribe((resp:any)=>{
       // console.log(resp);
       this.specialists = resp.specialists;
       this.insurances = resp.insurances;
@@ -225,6 +225,14 @@ export class EditPatientMComponent {
         
       })
     })
+  }
+
+  selectCategory(event: any){
+    let VALUE = event.target.value;
+    this.selectedValueLocation = VALUE;
+    // console.log(this.selectedValueLocation);
+    this.getConfig();
+   
   }
 
   
@@ -313,7 +321,7 @@ showUser(){
         this.selectedValue_bcba2 = this.patient_selected.bcba2_school_id ? this.patient_selected.bcba2_school_id : null;
         this.selectedValue_clind = this.patient_selected.clin_director_id ? this.patient_selected.clin_director_id: null;
 
-        console.log(this.selectedValue_rbt);
+        // console.log(this.selectedValue_rbt);
 
         this.insuranceData(this.selectedValueInsurer);//pide el insurance guardado para el request de la lista inicial
 
