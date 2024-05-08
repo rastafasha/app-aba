@@ -255,7 +255,7 @@ export class ChartReductionComponent {
     getGraphicMaladaptive(){
     this.graphicReductionService.listMaladaptivesGraphics(this.maladaptive_behavior, this.patient_id).subscribe((resp:any)=>{
       
-      // console.log(resp);
+      console.log(resp);
       //funcion de pablo alcorta
       //se limpia y se extrae los datos de la coleccion json 
       const data = resp;
@@ -295,7 +295,7 @@ export class ChartReductionComponent {
 
       
       // traemos todas las fechas
-      this.sessions_dates = resp.sessions_dates;
+      this.sessions_dates = resp.sessions_dates.session_date;
       this.number_of_occurrence = number_of_occurrences;
       this.notesRbts = resp.noteRbt;
  

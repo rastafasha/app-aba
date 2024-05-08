@@ -307,7 +307,7 @@ export class ChartReplacementComponent {
       
       //start
       // traemos todas las fechas
-      this.sessions_dates = resp.sessions_dates;
+      this.sessions_dates = resp.sessions_dates.session_date;
       this.number_of_correct_response = number_of_correct_response;
       this.notesRbts = resp.noteRbt;
  
