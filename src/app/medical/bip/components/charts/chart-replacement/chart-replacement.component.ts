@@ -312,6 +312,7 @@ export class ChartReplacementComponent {
       this.notesRbts = resp.noteRbt;
  
       //fecha inicial cuando se hizo el bip
+      this.sessions_dates = [{}];
       this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
       // console.log(this.sessions_dates);
       // this.sessions_dates?.shift()

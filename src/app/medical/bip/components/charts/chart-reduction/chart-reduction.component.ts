@@ -115,9 +115,10 @@ export class ChartReductionComponent {
 
 
   maladaptivesCol: any[];
-  sessions_dates: any[];
+  public sessions_dates: any = [];
   number_of_occurrence: any[];
   noteRbt: any[];
+  dates: any[];
 
 
   public query_patient_by_genders:any = [];
@@ -256,6 +257,7 @@ export class ChartReductionComponent {
     this.graphicReductionService.listMaladaptivesGraphics(this.maladaptive_behavior, this.patient_id).subscribe((resp:any)=>{
       
       console.log(resp);
+      
       //funcion de pablo alcorta
       //se limpia y se extrae los datos de la coleccion json 
       const data = resp;
@@ -299,10 +301,15 @@ export class ChartReductionComponent {
       this.number_of_occurrence = number_of_occurrences;
       this.notesRbts = resp.noteRbt;
  
-      //fecha inicial cuando se hizo el bip
+      //fechas junto con la baseline del maladaptive
+      this.sessions_dates = [];
+      // recorremos la respuesta para traer todos
+      resp.sessions_dates.forEach((element) => {
+        this.sessions_dates.push(element)
+      });
       this.sessions_dates.unshift(this.baseline_date); // con unshift lo unimos y colocamos de primero
       this.number_of_occurrence.unshift(this.baseline_level); // con unshift lo unimos y colocamos de primero
-      // console.log(this.sessions_dates);
+      console.log(this.sessions_dates);
       // console.log(this.number_of_occurrence);
 
       if(
@@ -314,7 +321,7 @@ export class ChartReductionComponent {
         let cantidadDeDias = 0;
         let labelSemanal = '';
         const arrayLabelSemanal = [];
-        this.sessions_dates.forEach((date,index) => {
+        resp.sessions_dates.forEach((date,index) => {
           if(index > 0) {
             if (cantidadDeDias == 0) {
               labelSemanal = date.substr(0,10);
@@ -322,7 +329,7 @@ export class ChartReductionComponent {
             acumulador = acumulador+this.number_of_occurrence[index];
             cantidadDeDias += 1;
 
-            if (cantidadDeDias == 7 || index+1 == this.sessions_dates.length) {
+            if (cantidadDeDias == 7 || index+1 == resp.sessions_dates.length) {
               labelSemanal += ' - '+date.substr(0,10);
               acumuladorDeSemanas.push(acumulador);
               arrayLabelSemanal.push(labelSemanal);
@@ -497,24 +504,10 @@ export class ChartReductionComponent {
       //end
     })
   }
-  selectedMonth(){
-    // console.log(this.selectedValue);
-    this.getGraphicPatientMonth();
-  }
+  // selectedMonth(){
+  //   // console.log(this.selectedValue);
+  //   this.getGraphicPatientMonth();
+  // }
     
-  selecedList: data[] = [
-    {value: '01'},
-    {value: '02'},
-    {value: '03'},
-    {value: '04'},
-    {value: '05'},
-    {value: '06'},
-    {value: '07'},
-    {value: '08'},
-    {value: '09'},
-    {value: '10'},
-    {value: '11'},
-    {value: '12'},
-  ];
   
 }
