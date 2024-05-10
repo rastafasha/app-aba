@@ -176,11 +176,13 @@ export class ReportByClientComponent {
   }
 
 
-  private getTableData(): void {
+  private getTableData(page=1): void {
     this.clientReportList = [];
     this.serialNumberArray = [];
 
-    this.clientReportService.showClientReportbyPatient(this.patient_id).subscribe((resp:any)=>{
+    // this.clientReportService.showClientReportbyPatient(this.patient_id).subscribe((resp:any)=>{
+    this.clientReportService.listClientReportsSearch(page, this.searchDataDoctor, this.searchDataValue, 
+       this.date_start,this.date_end).subscribe((resp:any)=>{
       
       console.log(resp);
       // traemos la info necesaria del paciente
@@ -433,12 +435,8 @@ export class ReportByClientComponent {
     this.getTableDataGeneral();
     // this.getPageTotal();
     this.searchDataValue = '';
-    //traer la suma del total de lo que se ve...
-    // let tableDataVisible = this.clientReport_generals.slice(this.skip, this.skip + this.limit);
-    // // this.totalDataClientReport = this.calcularSumaColumnasTabla(tableDataVisible);
-    // // console.log('TOTAL DATABILLING', this.totalDataClientReport);
-    // //agregar a arreglo de paginación
-    // this.pageSelection.push({ skip: this.skip, limit: this.limit });
+    this.date_start = '';
+    this.date_end = '';
   }
 
   

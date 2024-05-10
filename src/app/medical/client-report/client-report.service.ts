@@ -21,21 +21,51 @@ export class ClientReportService {
   }
 
 
-  listClientReportsSearch(page:number=1, search:string='', provider_name_g:number=0,session_date:string= ''){
+  // listClientReportsSearch(page:number=1, search:string='', provider_name_g:number=0,session_date:string= ''){
+  //   let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
+  //   let LINK = "";
+  //   if(search){
+  //     LINK+="&search="+search;
+  //   }
+  //   if(provider_name_g){
+  //     LINK+="&provider_name_g="+provider_name_g;
+  //   }
+  //   if(session_date){
+  //     LINK+="&session_date="+session_date;
+  //   }
+  //   let URL = url_servicios+'/client_report?page='+page+LINK;
+  //   return this.http.get(URL, {headers:headers});
+  // }
+
+
+
+  listClientReportsSearch(page:number=1, 
+    search_doctor:string='', 
+    search_patient:string='', 
+    // speciality_id:number=0, 
+    date_start:string= '',
+    date_end:string= '',
+    ){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
     let LINK = "";
-    if(search){
-      LINK+="&search="+search;
+    if(search_doctor){
+    LINK+="&search_doctor="+search_doctor;
     }
-    if(provider_name_g){
-      LINK+="&provider_name_g="+provider_name_g;
+    if(search_patient){
+    LINK+="&search_patient="+search_patient;
     }
-    if(session_date){
-      LINK+="&session_date="+session_date;
+    // if(speciality_id){
+    // LINK+="&speciality_id="+speciality_id;
+    // }
+    if(date_start){
+    LINK+="&date_start="+date_start;
     }
-    let URL = url_servicios+'/client_report?page='+page+LINK;
+    if(date_end){
+    LINK+="&date_end="+date_end;
+    }
+    let URL = url_servicios+'/client_report/?page='+page+LINK;
     return this.http.get(URL, {headers:headers});
-  }
+    }
 
   config(){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})

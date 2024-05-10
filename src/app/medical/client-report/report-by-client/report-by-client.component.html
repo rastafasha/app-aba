@@ -24,42 +24,58 @@
                     <div class="card-body">
 
                         <!-- Table Header -->
-                        <div class="page-table-header mb-2">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="doctor-table-blk">
-                                        <!-- <h3 class="col-12">Client Report</h3> -->
-                                        <div class="doctor-search-blk">
-                                            <div class="top-nav-search table-search-blk">
-                                                    <input  class="form-control " placeholder="Search here" [(ngModel)]="searchDataValue"
-                                                    (ngModelChange)="searchData()">
-                                                    <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
-                                            </div>
+                        <div class="staff-search-table">
+                            <form>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-xl-4">  
+                                        <div class="form-group local-forms">
+                                            <label >Doctor Name </label>
+                                            <input [(ngModel)]="searchDataDoctor" name="searchDataDoctor" class="form-control" type="text"  >
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-12 col-md-6 col-xl-4">  
+                                        <div class="form-group local-forms">
+                                            <label >Patient Name </label>
+                                            <input [(ngModel)]="searchDataValue" name="searchDataValue" class="form-control" type="text"  >
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="col-12 col-md-6 col-xl-4">
+                                        <div class="form-group local-forms">
+                                            <label >Specialities </label>
+                                            <mat-select [(ngModel)]="speciality_id" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Speciality">
+                                              <mat-option *ngFor="let data of specialities" [value]="data.id">
+                                              {{data.name}}
+                                              </mat-option>
+                                          </mat-select>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-12 col-md-6 col-xl-4">
+                                        <div class="form-group local-forms">
+                                            <label >From </label>
+                                            <input class="form-control datetimepicker" name="date_start" [(ngModel)]="date_start" type="date"   >
                                             
                                         </div>
                                     </div>
+                                    <div class="col-12 col-md-6 col-xl-4">
+                                        <div class="form-group local-forms">
+                                            <label >To </label>
+                                            <input class="form-control datetimepicker" name="date_end" [(ngModel)]="date_end" type="date"   >
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-xl-4">
+                                        <div class="doctor-submit">
+                                            <button type="button" class="btn btn-primary submit-list-form me-2" (click)="searchData()">Search</button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <div class="doctor-submit">
+                                            <button type="button" class="btn btn-outline-primary submit-list-form me-2" (click)="PageSize()"><img src="assets/img/icons/re-fresh.svg" alt=""></button>
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                                <div class="col pt-3">
-                                  <div class="form-group local-forms">
-                                    <label >from <span class="login-danger">*</span></label>
-                                    <input class="form-control datetimepicker " name="date_start" [(ngModel)]="date_start" type="date"   >
-                                  </div>
-                                </div>
-                                <div class="col pt-3">
-                                  <div class="form-group local-forms">
-                                    <label >to<span class="login-danger">*</span></label>
-                                    <input class="form-control datetimepicker " name="date_end" [(ngModel)]="date_end" type="date"   >
-                                  </div>
-                                </div>
-                                <div class="col">
-                                    <div class="add-group">
-                                      <a href="#" onclick="return false" (click)="searchData()" class="btn btn-primay add-pluss ">Search</a>
-                                      <!-- <a routerLink="/appointments/add" class="btn btn-primary add-pluss "><img src="assets/img/icons/plus.svg" alt=""></a> -->
-                                      <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh "><img src="assets/img/icons/re-fresh.svg" alt=""></a>
-                                  </div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                         <!-- /Table Header -->
 
