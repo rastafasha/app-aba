@@ -29,16 +29,9 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Location <span class="login-danger">*</span></label>
-                                        <select
-                                        class="form-control form-select-solid fw-bolder"
-                                        name="location" [(ngModel)]="location" disabled>
-                                        <option>-- Select --</option>
-                                        <option value="03">03 School</option>
-                                        <option value="12">12 Home</option>
-                                        <option value="02">02 Telehealth</option>
-                                        <option value="99">99 Other</option>
-                                          </select>
+                                        <label >POS  <span class="login-danger">*</span></label>
+                                        <input class="form-control" name="pos" disabled
+                                            [(ngModel)]="pos" type="text">
                                         <!-- <input class="form-control" name="diagnosis_code"  disabled [(ngModel)]="diagnosis_code" type="text"  > -->
                                     </div>
                                 </div>
@@ -176,6 +169,7 @@
                     <div class="card-body">
                         <div class="col-12">
                             <h4>Caregiver Goal</h4>
+                            <p class="text-danger">Note: Please fill out all fields and save each Goal, if you didn't have any reaction, enter "0"</p>
                         </div>
                         <div class="container">
                             <form autocomplete="false">
@@ -238,6 +232,7 @@
                     <div class="card-body">
                         <div class="col-12">
                             <h4>RBT Training goals</h4>
+                            <p class="text-danger">Note: Please fill out all fields and save each RBT Training Goal, if you didn't have any reaction, enter "0"</p>
                         </div>
                         <div class="container">
                             <form autocomplete="false">
@@ -303,6 +298,16 @@
                             
                             <!-- paciente -->
                             <div class="row align-items-center py-4" >
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Provider name RBT <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Provider Signature <span class="login-danger">*</span></label>
@@ -321,14 +326,18 @@
                                     </div>
                                     <!-- previsualizacion de la foto -->
                                 </div>
+                                
+
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Provider name RBT <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
-                                            {{data.name}} {{data.surname}}
-                                            </mat-option>
-                                        </mat-select>
+                                        <div class="form-group local-forms">
+                                            <label >Supervisor name BCBA <span class="login-danger">*</span></label>
+                                            <mat-select [(ngModel)]="selectedValueBCBA" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                                <mat-option *ngFor="let data of specialists" [value]="data.id">
+                                                {{data.name}} {{data.surname}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">
@@ -349,25 +358,7 @@
                                     </div>
                                     <!-- previsualizacion de la foto -->
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-forms">
-                                        <div class="form-group local-forms">
-                                            <label >Supervisor name BCBA <span class="login-danger">*</span></label>
-                                            <mat-select [(ngModel)]="selectedValueBCBA" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                                <mat-option *ngFor="let data of specialists" [value]="data.id">
-                                                {{data.name}} {{data.surname}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </div>
-                                        <!-- <input class="form-control" name="supervisor_name"   [(ngModel)]="supervisor_name" type="text"  > -->
-                                    </div>
-
-
-                                   
-                                        <div class="col-12 col-md-3">
-                                        
-                                    </div>
-                                </div>
+                                
                             </div>
                             <!-- paciente -->
 

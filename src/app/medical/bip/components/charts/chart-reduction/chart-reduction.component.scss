@@ -32,10 +32,11 @@ text-orientation: upright;
 .linea-vert{
     background-color: red;
     width: 2px;
-    height: 240px;
+    // height: 240px;
+    height: calc(300px);
     position: relative;
     margin-left: 60px;
     margin-top: -363px;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
     transform: translateY(-30px);
 }

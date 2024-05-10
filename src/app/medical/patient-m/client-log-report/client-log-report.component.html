@@ -108,9 +108,7 @@
                                       <th mat-sort-header="school bca">School bca</th>
                                       <th mat-sort-header="55">55</th>
                                       <th mat-sort-header="56">56</th>
-                                      <th mat-sort-header="note report">Note Report</th>
                                       <th mat-sort-header="parent communication">Parent Communication</th>
-                                      <th mat-sort-header="case notes">Case Notes</th>
                                       
                                       
                                       <th mat-sort-header="welcome">Welcome</th>
@@ -131,7 +129,7 @@
                                     </tr>
                                 </thead>
                                 <tbody >
-                                    <tr *ngFor="let data of patientList">
+                                    <tr *ngFor="let data of patientList, let i= index;">
                                         <td>{{data.locals.title}}</td>
                                         <td *ngIf="roles ==='SUPERADMIN'">
                                             <select
@@ -189,7 +187,9 @@
                                                 <img  src="{{data.clin_director.avatar}}" class="avatarlist"   [alt]="data.clin_director.name">
                                             </div>
                                         </td>
-                                        <td>{{data.clin_director.name}}</td>
+                                        <td>
+                                          {{data.clin_director.name + ' ' + (data.clin_director.surname ? data.clin_director.surname: '')}}
+                                        </td>
                                         
                                         <td>
                                             <div *ngIf="!data.avatar">
@@ -237,41 +237,69 @@
                                       <td>{{data.patient_id}}</td>
                                       <!-- <td>{{data.pa_assessments? data.pa_assessments.pa_assessment : ''}}</td> -->
                                       <td>
-                                        <ng-container *ngFor="let pa of paAssestments">
-                                          <ul>
-                                            <li>{{pa.pa_assessment}}</li>
-                                          </ul>
-                                        </ng-container>
+                                        <!-- {{pa_assessments.pa_assessment}} -->
+                                        <!-- {{paAssestments[i][i].pa_assessment}} -->
+                                        {{paAssestments[i][i]?.pa_assessment}}
+                                        <!-- <ng-container *ngFor="let pa of paAssestments[i], let i= index">
+                                          <li>{{pa.pa_assessment}}</li>
+                                          
+                                        </ng-container> -->
                                       </td>
-                                      
-                                      <td>{{data.paAssestments? data.paAssestments.pa_services : ''}}</td>
+                                      <td>
+                                        {{paAssestments[i][i]?.pa_services}}
+                                        <!-- <ng-container *ngFor="let pa of pa_services_by_date, let i= index">
+                                          <li>{{pa.pa_services}}</li>
+                                        </ng-container> -->
+                                      </td>
+                                      <td>
+                                        {{paAssestments[i][i]?.pa_services_start_date| date}}
+                                        <!-- <ng-container *ngFor="let pa of pa_services_start_date_by_date, let i= index">
+                                          <li>{{pa.pa_services_start_date | date}}</li>
+                                        </ng-container> -->
+                                      </td>
+                                      <!-- <td>{{data.paAssestments? data.paAssestments.pa_services : ''}}</td>
                                       <td>{{data.paAssestments? data.paAssestments.pa_services_end_date : ''}}</td>
-                                      
+                                       -->
                                     
                                     <td>{{data.schedule}}</td>
                                     <td>average ??</td>
                                     <td>53 ??</td>
-                                    <td>{{data.rbt_home.name}}</td>
-                                    <td>{{data.rbt2_school.name}}</td>
-                                    <td>{{data.bcba_home.name}}</td>
-                                    <td>{{data.bcba2_school.name}}</td>
+                                    <td>
+                                      {{data.rbt_home.name + ' ' + (data.rbt_home.surname ? data.rbt_home.surname: '')}}
+                                    </td>
+                                    <td>
+                                      {{data.rbt2_school.name + ' ' + (data.rbt2_school.surname ? data.rbt2_school.surname: '')}}
+                                      </td>
+                                    <td>
+                                      {{data.bcba_home.name + ' ' + (data.bcba_home.surname ? data.bcba_home.surname: '')}}
+                                      </td>
+                                    <td>
+                                      {{data.bcba2_school.name + ' ' + (data.bcba2_school.surname ? data.bcba2_school.surname: '')}}
+                                        </td>
                                     <td>55 ??</td>
                                     <td>56 ??</td>
-                                    <td>note Report ??</td>
                                     <td>{{data.special_note}}</td>
-                                    <td>case notes ??</td>
                                     
                                       <td>{{data.welcome}}</td>
                                       <td>{{data.consent}}</td>
                                       <td>{{data.insurance_card}}</td>
                                       <td>
-                                        <!-- {{data.eligibility}} -->
                                         <span class="badge bg-danger"
-                                        *ngIf="data.eligibility === 'no'">No</span>
-                                        <span class="badge bg-success"
-                                            *ngIf="data.eligibility === 'yes'">Yes</span>
-                                        <span class="badge bg-primary"
-                                            *ngIf="data.eligibility === 'pending'">Pending</span>
+                                                  *ngIf="data.eligibility === 'no'">No</span>
+                                              <span class="badge bg-success"
+                                                  *ngIf="data.eligibility === 'yes'">Yes</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="data.eligibility === 'waiting'">Waiting</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="data.eligibility === 'requested'">Requested</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="data.eligibility === 'reviewing'">Reviewing</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="data.eligibility === 'psycho eval'">Psycho eval</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="data.eligibility === 'need new'">Need new</span>
+                                              <span class="badge bg-primary"
+                                                  *ngIf="data.eligibility === '2 insurance'">2 insurance</span>
                                     </td>
                                     <td>{{data.mnl}}</td>
                                     <td>{{data.referral}}</td>

@@ -254,6 +254,7 @@ export class NoteBcbaEditComponent {
       this.last_name = this.client_selected.patient.last_name;
       this.patient_id = resp.patient.patient_id;
       this.insurer_id = resp.patient.insurer_id;
+      this.pos = JSON.parse(resp.patient.pos_covered) ;
       this.insuranceData();
     });
   }

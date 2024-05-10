@@ -207,8 +207,8 @@ export class EditNoteRbtComponent {
       let jsonObj2 = JSON.parse(this.replacement) || '';
       this.replacementgroup = jsonObj2;
       // console.log(this.replacementgroup);
-
-      this.pos = this.note_selected.pos;
+      
+      // this.pos = this.note_selected.pos;
       this.environmental_changes = this.note_selected.environmental_changes;
       this.meet_with_client_at = this.note_selected.meet_with_client_at;
       this.progress_noted_this_session_compared_to_previous_session = this.note_selected.progress_noted_this_session_compared_to_previous_session;
@@ -249,7 +249,7 @@ export class EditNoteRbtComponent {
       this.first_name = this.client_selected.patient.first_name;
       this.last_name = this.client_selected.patient.last_name;
       this.patient_id = resp.patient.patient_id;
-      this.pos = resp.patient.pos_covered;
+      this.pos = JSON.parse(resp.patient.pos_covered) ;
       this.selectedValueProviderName = resp.patient.rbt_id;
       this.selectedValueRBT = resp.patient.rbt_id;
       this.selectedValueBCBA = resp.patient.bcba_id;

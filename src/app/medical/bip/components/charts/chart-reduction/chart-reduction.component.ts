@@ -321,16 +321,18 @@ export class ChartReductionComponent {
         let cantidadDeDias = 0;
         let labelSemanal = '';
         const arrayLabelSemanal = [];
-        resp.sessions_dates.forEach((date,index) => {
+        resp.sessions_dates.forEach((sessions_date,index) => {
           if(index > 0) {
             if (cantidadDeDias == 0) {
-              labelSemanal = date.substr(0,10);
+              // labelSemanal = sessions_date.substr(0,10);
+              labelSemanal = sessions_date.toString();
             }
             acumulador = acumulador+this.number_of_occurrence[index];
             cantidadDeDias += 1;
 
             if (cantidadDeDias == 7 || index+1 == resp.sessions_dates.length) {
-              labelSemanal += ' - '+date.substr(0,10);
+              // labelSemanal += ' - '+sessions_date.substr(0,10);
+              labelSemanal += ' - '+sessions_date.toString();
               acumuladorDeSemanas.push(acumulador);
               arrayLabelSemanal.push(labelSemanal);
               cantidadDeDias = 0;

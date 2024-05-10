@@ -173,9 +173,9 @@ export class NoteRbtComponent {
       this.selectedValueProviderName = resp.patient.rbt_id;
       this.selectedValueRBT = resp.patient.rbt_id;
       this.selectedValueBCBA = resp.patient.bcba_id;
-      this.pos = resp.patient.pos_covered;
+      this.pos = JSON.parse(resp.patient.pos_covered) ;
       
-      // console.log(this.patient_id);  
+      console.log( this.pos);  
       this.diagnosis_code = this.client_selected.patient.diagnosis_code;  
       this.getMaladaptivesBipByPatientId();
       this.getReplacementsByPatientId();

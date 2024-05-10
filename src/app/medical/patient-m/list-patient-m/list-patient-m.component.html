@@ -392,6 +392,7 @@
                                     <th mat-sort-header="email">email</th>
                                     <th mat-sort-header="phonec">Phone</th>
                                     <th mat-sort-header="city">city</th>
+                                    <th mat-sort-header="location">location</th>
                                     <th mat-sort-header="patient_id">Patient Id</th>
                                     <th mat-sort-header="elegible">Status</th>
                                     <th mat-sort-header="ops" *ngIf="roles ==='SUPERADMIN'">Options</th>
@@ -418,6 +419,7 @@
                                     <td>{{data.email}}</td>
                                     <td>{{data.phone}}</td>
                                     <td>{{data.city}}</td>
+                                    <td>{{data.locals.title}}</td>
                                     <td>{{data.patient_id}}</td>
                                       
                                     <td>

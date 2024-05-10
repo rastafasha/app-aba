@@ -541,7 +541,7 @@ saveFiles(){
       formData.append('location_id', this.selectedValueLocation);
     }
     
-    if(this.selectedValueLocation){
+    if(this.selectedValueInsurer){
 
       formData.append('insurer_id', this.selectedValueInsurer);
     }

@@ -190,7 +190,7 @@ export class NoteBcbaComponent {
       this.first_name = this.client_selected.first_name;
       this.last_name = this.client_selected.last_name;
       this.patient_id = this.client_selected.patient_id;
-      this.location = this.client_selected.pos_covered;
+      this.pos = JSON.parse(resp.patient.pos_covered) ;
       this.birth_date = this.client_selected.birth_date ? new Date(this.client_selected.birth_date).toISOString(): '';
       console.log(this.birth_date); 
       this.diagnosis_code = this.client_selected.diagnosis_code;  
@@ -200,7 +200,6 @@ export class NoteBcbaComponent {
       this.selectedValueRendering = resp.patient.bcba_id;
       this.selectedValueBCBA = resp.patient.clin_director_id;
       this.selectedValueRBT = resp.patient.bcba_id;
-      this.pos = resp.patient.pos_covered;
 
       
       this.getReplacementsByPatientId();
