@@ -71,7 +71,7 @@ export class ReportByClientComponent {
   public patientName:any;
   public doctor_selected_full_name:any;
   public billing_total:number = 0;
-  public week_total_hours:number = 0;
+  public week_total_hours:string;
   public week_total_units:number = 0;
   public total_hours:number = 0;
   public total_units:number = 0;
@@ -225,6 +225,13 @@ export class ReportByClientComponent {
 
       this.pa_assessments = resp.pa_assessments;
       let jsonObj = JSON.parse(this.pa_assessments);
+
+      jsonObj.sort((a, b) => {
+        const dateA = new Date(a.pa_services_start_date);
+        const dateB = new Date(b.pa_services_start_date);
+        return (dateA.getTime() - dateB.getTime());
+      });
+
       this.pa_assessmentsgroup = jsonObj;
       
       // aqui deberia ser el mas reciente.. 
@@ -318,7 +325,7 @@ export class ReportByClientComponent {
           suma += parseInt(hours_group[i], 10) || 0;  
       }
       // this.week_total_hours = suma / Math.min(7, hours_group.length);// saca el promedio
-      this.week_total_hours = suma ; // saca la suma
+      // this.week_total_hours = suma ; // saca la suma
       console.log("total semanal "+ this.week_total_hours );
 
       // obtenemos el total de las unidades en un rango de 7 dias  atras
@@ -382,7 +389,31 @@ export class ReportByClientComponent {
   this.dataSource = new MatTableDataSource<any>(this.clientReportList);
     this.calculateTotalPages(this.totalDataClientReport, this.pageSize);
   
-  
+    this.calculateUnitsAndHours();
+  }
+
+  calculateUnitsAndHours() {
+    console.log(this.clientReportList)
+    const totalUnits = this.clientReportList.reduce((total, objeto) => total + objeto.session_units_total, 0);
+    let minutes = 0;
+    this.clientReportList.forEach(element => {
+      const [horas, minutos] = element.total_hours.split(':').map(Number);
+      minutes += horas * 60 + minutos;
+    });
+    const horasTotales = Math.floor(minutes / 60);
+    const minutosTotales = minutes % 60;
+    let stringMinutos: string;
+    console.log(horasTotales, minutosTotales)
+    if(minutosTotales === 0)
+      stringMinutos = '00'
+    else if(minutosTotales < 10)
+      stringMinutos = `0${minutosTotales}`
+    else
+      stringMinutos = minutosTotales.toString();
+    
+    
+    this.week_total_hours = `${horasTotales} : ${stringMinutos}`;
+    this.week_total_units = totalUnits;
   }
 
 

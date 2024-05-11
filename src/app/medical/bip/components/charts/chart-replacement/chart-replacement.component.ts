@@ -294,10 +294,10 @@ export class ChartReplacementComponent {
 
       //start
       this.replacementsExtractedGoal = this.replacements;
-      for (var i = 0; i < this.replacementsExtractedGoal.length; i++) {
+      // for (var i = 0; i < this.replacementsExtractedGoal.length; i++) {
         // console.log(this.replacementsExtractedGoal[i]); 
         // solo quita  el /, duplica el resultado y devuelve la todos los arrays
-      }
+      // }
       //end
       //start
       //  this.number_of_correct_response = this.replacements.filter(replacement => replacement.number_of_correct_response).map(replacement => replacement.number_of_correct_response);
@@ -312,7 +312,7 @@ export class ChartReplacementComponent {
       this.notesRbts = resp.noteRbt;
  
       //fecha inicial cuando se hizo el bip
-      this.sessions_dates = [{}];
+      this.sessions_dates = resp.sessions_dates.map(item => item.session_date);
       this.sessions_dates.unshift(this.created_at); // con unshift lo unimos y colocamos de primero
       // console.log(this.sessions_dates);
       // this.sessions_dates?.shift()

@@ -305,12 +305,13 @@ export class ChartReductionComponent {
       this.sessions_dates = [];
       // recorremos la respuesta para traer todos
       resp.sessions_dates.forEach((element) => {
-        this.sessions_dates.push(element)
+        this.sessions_dates.push(element.session_date)
       });
       this.sessions_dates.unshift(this.baseline_date); // con unshift lo unimos y colocamos de primero
       this.number_of_occurrence.unshift(this.baseline_level); // con unshift lo unimos y colocamos de primero
       console.log(this.sessions_dates);
-      // console.log(this.number_of_occurrence);
+      console.log(this.number_of_occurrence);
+      console.log(resp)
 
       if(
         this.sessions_dates?.length > 1 && 
@@ -325,14 +326,14 @@ export class ChartReductionComponent {
           if(index > 0) {
             if (cantidadDeDias == 0) {
               // labelSemanal = sessions_date.substr(0,10);
-              labelSemanal = sessions_date.toString();
+              labelSemanal = sessions_date.session_date.toString().substr(0,10);
             }
             acumulador = acumulador+this.number_of_occurrence[index];
             cantidadDeDias += 1;
 
             if (cantidadDeDias == 7 || index+1 == resp.sessions_dates.length) {
               // labelSemanal += ' - '+sessions_date.substr(0,10);
-              labelSemanal += ' - '+sessions_date.toString();
+              labelSemanal += ' - '+sessions_date.session_date.toString().substr(0,10);
               acumuladorDeSemanas.push(acumulador);
               arrayLabelSemanal.push(labelSemanal);
               cantidadDeDias = 0;
