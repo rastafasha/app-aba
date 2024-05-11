@@ -192,7 +192,7 @@
                                                     {{behavior.porcent_of_correct_response}}
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-outline-success btn-sm" (click)="selectMaladaptive(behavior)"><i class="fa fa-edit"></i></button>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="selectMaladaptive(behavior,i)"><i class="fa fa-edit"></i></button>
                                                 </td>
                                             </tr>
                                             
@@ -204,11 +204,13 @@
                                                     {{maladaptiveSelected.caregiver_goal}}
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" name="porcent_of_correct_response " [ngModelOptions]="{standalone: true}"    [(ngModel)]="porcent_of_correct_response" type="number"  >
+                                                    <input class="form-control" name="porcent_of_correct_response " 
+                                                    [ngModelOptions]="{standalone: true}"    
+                                                    [(ngModel)]="maladaptiveSelected.porcent_of_correct_response" type="number"  >
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
-                                                    <button class="btn btn-outline-success btn-sm" (click)="addMaladaptive()">Save</button>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="addMaladaptive(maladaptiveSelected,i)">Save</button>
                                                 
                                                 </td>
                                             </tr>
@@ -254,7 +256,7 @@
                                                     {{replacemen.porcent_of_correct_response}}
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-outline-success btn-sm" (click)="selectReplacement(replacemen)"><i class="fa fa-edit"></i></button>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="selectReplacement(replacemen,i)"><i class="fa fa-edit"></i></button>
                                                 </td>
                                                 
                                             </tr>
@@ -267,11 +269,13 @@
                                                     {{replacementSelected.lto}}
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" name="porcent_of_correct_response " [ngModelOptions]="{standalone: true}"   [(ngModel)]="porcent_of_correct_response" type="number"  >
+                                                    <input class="form-control" name="porcent_of_correct_response " 
+                                                    [ngModelOptions]="{standalone: true}"  
+                                                     [(ngModel)]="replacementSelected.porcent_of_correct_response" type="number"  >
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
-                                                    <button class="btn btn-outline-success btn-sm" (click)="addReplacement()">Save</button>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="addReplacement(replacementSelected,i)">Save</button>
                                                 </td>
                                                 
                                             </tr>

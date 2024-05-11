@@ -351,9 +351,9 @@ export class EditNoteRbtComponent {
     this.maladaptiveSelected = behavior;
     this.maladaptives[i]= behavior
     
-    // if(this.maladaptives.length > 1){
-    //   this.maladaptives.splice(this.maladaptives,1);
-    // }
+    if(this.maladaptives.length > 1){
+      this.maladaptives.splice(this.maladaptives,1);
+    }
     this.maladaptiveSelected = null;
     this.maladaptive_behavior = '';
     this.number_of_occurrences = null;
@@ -363,11 +363,34 @@ export class EditNoteRbtComponent {
 
 
 
-  addReplacement(replacemen, i){
+  // addReplacement(replacemen, i){
+    
+  //   this.replacementSelected = replacemen;
+  //   this.replacementGoals[i] = replacemen;
+  //   if(this.maladaptives.length > 1){
+  //     this.maladaptives.splice(this.maladaptives,1);
+  //   }
+  //   this.replacementSelected = null;
+  //   this.goal = '';
+  //   this.total_trials = null;
+  //   this.number_of_correct_response = null;
+
+    
+  // }
+
+  addReplacement(replacemen){
     
     this.replacementSelected = replacemen;
-    this.replacementGoals[i] = replacemen
-    
+    this.replacementGoals.push({
+      goal: this.replacementSelected.goal,
+      total_trials: this.replacementSelected.total_trials,
+      number_of_correct_response: this.replacementSelected.number_of_correct_response ,
+      // number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response :0 ,
+      
+    })
+    if(this.replacementGoals.length > 1){
+      this.replacementGoals.splice(this.replacementGoals,1);
+    }
     this.replacementSelected = null;
     this.goal = '';
     this.total_trials = null;
@@ -377,42 +400,6 @@ export class EditNoteRbtComponent {
   }
 
   
-  // addReplacement(replacemen:any){debugger
-
-  //   if(this.replacementSelected !== null ){
-  //     this.total_trials = 0;
-  //   this.number_of_correct_response = 0;
-  //   this.replacementgroup.push({
-  //     goal: this.replacementSelected.goal,
-  //     total_trials: this.total_trials ? this.total_trials  : "0",
-  //     number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response : '0' ,
-      
-  //   })
-  //   if(this.replacementgroup.length > 1){
-  //     this.replacementgroup.splice(this.replacementgroup,1);
-  //   }
-  //   this.replacementSelected = replacemen.goal;
-  //   this.goal = '';
-  //   this.total_trials = 0;
-  //   this.number_of_correct_response = 0;
-  //   }else{
-  //     // alert("if you didn't have any reaction, enter :0");
-  //     this.goal = replacemen.goal;
-  //     this.total_trials = 0;
-  //     this.number_of_correct_response = 0;
-
-  //     this.replacementgroup.push({
-  //       goal: replacemen.goal,
-  //       total_trials:  "0",
-  //       number_of_correct_response:  '0' ,
-      
-  //     })
-  //     if(this.replacementgroup.length > 1){
-  //       this.replacementgroup.splice(this.replacementgroup,1);
-  //     }
-  //   }
-    
-  // }
 
   addInterventions(){
     this.interventionsgroup.push({
@@ -535,7 +522,7 @@ export class EditNoteRbtComponent {
 
   
 
-  save(){debugger
+  save(){
     this.text_validation = '';
     // if(!this.name||!this.email ||!this.surname ){
     //   this.text_validation = 'Los campos con * son obligatorios';

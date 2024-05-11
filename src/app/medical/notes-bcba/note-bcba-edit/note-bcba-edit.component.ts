@@ -297,43 +297,45 @@ export class NoteBcbaEditComponent {
 
   }
 
-  selectMaladaptive(behavior:any){
+  selectMaladaptive(behavior:any,i){
     this.maladaptiveSelected = behavior;
-    console.log(behavior);
-    // this.maladp_added.push({
-    //   maladaptive : behavior
-    // })
+    this.caregivers_training_goals[i]= behavior
   }
 
-  selectReplacement(replacemen:any){
-    this.replacementSelected = replacemen;
-    console.log(this.replacementSelected);
-    // this.replacement_added.push({
-    //   replacement : replacemen
-    // })
-  }
+  addMaladaptive(maladaptiveSelected:any,i){
+    this.maladaptiveSelected = maladaptiveSelected;
+    this.caregivers_training_goals[i]= maladaptiveSelected
 
-  
-  
-  addMaladaptive(){
-    this.caregivers_training_goals.push({
-      caregiver_goal: this.maladaptiveSelected.caregiver_goal,
-      porcent_of_correct_response: this.porcent_of_correct_response,
-    })
+    // this.caregivers_training_goals.push({
+    //   caregiver_goal: this.maladaptiveSelected.caregiver_goal,
+    //   porcent_of_correct_response: this.porcent_of_correct_response,
+    // })
+
+    //si existe un elemento actualiza ese elemento en la lista
     if(this.caregivers_training_goals.length > 1){
       this.caregivers_training_goals.splice(this.caregivers_training_goals,1);
     }
+
     this.maladaptiveSelected = null;
     this.caregiver_goal = '';
     this.porcent_of_correct_response = null;
   }
 
+  selectReplacement(replacemen:any,i){
+    this.replacementSelected = replacemen;
+    this.rbt_training_goals[i]= replacemen;
+  }
 
-  addReplacement(){
-    this.rbt_training_goals.push({
-      lto: this.replacementSelected.lto,
-      porcent_of_correct_response: this.porcent_of_correct_response,
-    })
+  addReplacement(replacementSelected:any,i){
+    this.replacementSelected = replacementSelected;
+    this.rbt_training_goals[i]= replacementSelected;
+
+    // this.rbt_training_goals.push({
+    //   lto: this.replacementSelected.lto,
+    //   porcent_of_correct_response: this.porcent_of_correct_response,
+    // })
+
+    //si existe un elemento actualiza ese elemento en la lista
     if(this.rbt_training_goals.length > 1){
       this.rbt_training_goals.splice(this.rbt_training_goals,1);
     }

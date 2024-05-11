@@ -262,38 +262,26 @@
                             <div class="row">
                                 <ng-container *ngFor="let replacemen of replacementGoals; let i = index">
                                     <div class="col-xs-12 col-sm-3  graphic-value" >
-                                        <!-- <div class="row">
-                                            <div class="col-6 minigr">
-                                                <div  class="circle-bar circle-bar2">
-                                                    <circle-progress class="circle-progress-bar" [percent]="replacemen.total_trials" [clockwise]="true"
-                                                    innerStrokeColor=#dee2e6 outerStrokeColor=#2E37A4></circle-progress>
-                                                    <h4 class="text-center">{{replacemen.total_trials}}</h4>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 minigr">
-                                                <div  class="circle-bar circle-bar2">
-                                                    <circle-progress class="circle-progress-bar" [percent]="replacemen.number_of_correct_response" [clockwise]="true"
-                                                    innerStrokeColor=#dee2e6 outerStrokeColor=#2E37A4></circle-progress>
-                                                    <h4 class="text-center">{{replacemen.number_of_correct_response}}</h4>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div> -->
+                                        
                                         <div class="title">
                                             <h4 class="label">{{replacemen.goal}}</h4>
-                                            <p class="text-center"> {{(replacemen.number_of_correct_response * 100 / replacemen.total_trials)}}%</p>
+                                            <p class="text-center"> 
+                                                {{(replacemen.number_of_correct_response * 100 / replacemen.total_trials)}}%
+                                            </p>
                                         </div>
                                         <label for="">Total Trials:</label>
                                         <input class="form-control" name="total_trials " [ngModelOptions]="{standalone: true}" [(ngModel)]="replacemen.total_trials" type="number"   >
                                         <label for="">Correct response</label>
-                                        <input class="form-control" name="number_of_correct_response " [ngModelOptions]="{standalone: true}" [(ngModel)]="replacemen.number_of_correct_response" type="number"    >
+                                        <input class="form-control" name="number_of_correct_response " 
+                                        [ngModelOptions]="{standalone: true}" 
+                                        [(ngModel)]="replacemen.number_of_correct_response" type="number"    >
                                         <div class="qty">
                                             <!-- <span class="minus bg-dark">-</span>
                                             <input type="number" class="count" onchange="countValue1()" [ngModelOptions]="{standalone: true}" [(ngModel)]="number_of_occurrences"  name="number_of_occurrences" [value]="behavior.number_of_occurrences">
                                             <span class="plus bg-dark">+</span> -->
                                         </div>
 
-                                        <button class="btn btn-outline-success btn-sm" (click)="addReplacement(replacemen, i)">Save</button>
+                                        <button class="btn btn-outline-success btn-sm" (click)="addReplacement(replacemen)">Save</button>
                                     </div>
                                 </ng-container>
                             </div>
