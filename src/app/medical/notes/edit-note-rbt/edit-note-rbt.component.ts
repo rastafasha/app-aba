@@ -347,74 +347,32 @@ export class EditNoteRbtComponent {
   
 
 
-  addMaladaptive(behavior:any){
+  addMaladaptive(behavior:any, i){
     this.maladaptiveSelected = behavior;
+    this.maladaptives[i]= behavior
     
-    this.maladaptivegroup.push({
-      maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
-      number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ,
-    })
-    if(this.maladaptivegroup.length > 1){
-      this.maladaptivegroup.splice(this.maladaptivegroup,1);
-    }
-    this.maladaptiveSelected = null ;
+    // if(this.maladaptives.length > 1){
+    //   this.maladaptives.splice(this.maladaptives,1);
+    // }
+    this.maladaptiveSelected = null;
     this.maladaptive_behavior = '';
-    this.number_of_occurrences = 0;
+    this.number_of_occurrences = null;
     
     
   }
 
-  // addMaladaptive(behavior:any){
+
+
+  addReplacement(replacemen, i){
     
-  //   if(this.maladaptiveSelected !== null ){
-  //     this.number_of_occurrences ? this.number_of_occurrences : '0' ;
-  //     // this.maladaptiveSelected.number_of_occurrences = 0;
-
-  //     this.maladaptivegroup.push({
-  //       maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
-  //       number_of_occurrences: this.number_of_occurrences ? this.number_of_occurrences : '0' ,
-  //     })
-  //     if(this.maladaptivegroup.length > 1){
-  //       this.maladaptivegroup.splice(this.maladaptivegroup,1);
-  //     }
-  //     this.maladaptiveSelected = behavior.maladaptive_behavior ;
-  //     this.maladaptive_behavior = '';
-  //     this.number_of_occurrences = 0;
-  //   }else{
-  //     // alert("if you didn't have any reaction, enter :0");
-  //     this.maladaptiveSelected =  behavior  ;
-  //     this.maladaptive_behavior = behavior.maladaptive_behavior 
-  //     this.number_of_occurrences = 0;
-  //     this.maladaptivegroup.push({
-  //       maladaptive_behavior: behavior.maladaptive_behavior,
-  //       number_of_occurrences: '0' ,
-  //     })
-  //     if(this.maladaptivegroup.length > 1){
-  //       this.maladaptivegroup.splice(this.maladaptivegroup,1);
-  //     }
-  //   }
-
-    
-    
-  // }
-
-
-  addReplacement(replacemen:any){
     this.replacementSelected = replacemen;
-
-    this.replacementgroup.push({
-      goal: this.replacementSelected.goal,
-      total_trials: this.replacementSelected.total_trials ,
-      number_of_correct_response: this.replacementSelected.number_of_correct_response  ,
-      
-    })
-    if(this.replacementgroup.length > 1){
-      this.replacementgroup.splice(this.replacementgroup,1);
-    }
+    this.replacementGoals[i] = replacemen
+    
     this.replacementSelected = null;
     this.goal = '';
-    this.total_trials = 0;
-    this.number_of_correct_response = 0;
+    this.total_trials = null;
+    this.number_of_correct_response = null;
+
     
   }
 

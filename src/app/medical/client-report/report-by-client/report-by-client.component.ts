@@ -176,13 +176,12 @@ export class ReportByClientComponent {
   }
 
 
-  private getTableData(page=1): void {
+  private getTableData(): void {
     this.clientReportList = [];
     this.serialNumberArray = [];
 
     // this.clientReportService.showClientReportbyPatient(this.patient_id).subscribe((resp:any)=>{
-    this.clientReportService.listClientReportsSearch(page, this.searchDataDoctor, this.searchDataValue, 
-       this.date_start,this.date_end).subscribe((resp:any)=>{
+    this.clientReportService.showClientReportbyPatient(this.patient_id).subscribe((resp:any)=>{
       
       console.log(resp);
       // traemos la info necesaria del paciente

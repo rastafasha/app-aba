@@ -203,7 +203,7 @@
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
-                                                    <button class="btn btn-outline-success btn-sm" (click)="addMaladaptive()">Save</button>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="addMaladaptive(behavior, i)">Save</button>
                                                 
                                                 </td>
                                             </tr>
@@ -262,11 +262,12 @@
                                                     {{replacementSelected.lto}}
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" name="porcent_of_correct_response " [ngModelOptions]="{standalone: true}"   [(ngModel)]="porcent_of_correct_response" type="number"  >
+                                                    <input class="form-control" name="porcent_of_correct_response " 
+                                                    [ngModelOptions]="{standalone: true}"   [(ngModel)]="porcent_of_correct_response" type="number"  >
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-success btn-sm" (click)="back()">Back</button>
-                                                    <button class="btn btn-outline-success btn-sm" (click)="addReplacement()">Save</button>
+                                                    <button class="btn btn-outline-success btn-sm" (click)="addReplacement(replacemen,i)">Save</button>
                                                 </td>
                                                 
                                             </tr>

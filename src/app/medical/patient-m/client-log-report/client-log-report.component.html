@@ -23,6 +23,69 @@
             
                 <div class="card card-table show-entire">
                     <div class="card-body">
+                      <!-- <div class="staff-search-table">
+                        <form>
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-xl-4">  
+                                    <div class="form-group local-forms">
+                                        <label >Doctor Name </label>
+                                        <input [(ngModel)]="searchDataDoctor" name="searchDataDoctor" class="form-control" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">  
+                                    <div class="form-group local-forms">
+                                        <label >Patient Name </label>
+                                        <input [(ngModel)]="searchDataValue" name="searchDataValue" class="form-control" type="text"  >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Agency </label>
+                                        <mat-select [(ngModel)]="speciality_id" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Speciality">
+                                          <mat-option *ngFor="let data of specialities" [value]="data.id">
+                                          {{data.name}}
+                                          </mat-option>
+                                      </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >Status </label>
+                                        <mat-select [(ngModel)]="speciality_id" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Speciality">
+                                          <mat-option *ngFor="let data of specialities" [value]="data.id">
+                                          {{data.name}}
+                                          </mat-option>
+                                      </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >From </label>
+                                        <input class="form-control datetimepicker" name="date_start" [(ngModel)]="date_start" type="date"   >
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label >To </label>
+                                        <input class="form-control datetimepicker" name="date_end" [(ngModel)]="date_end" type="date"   >
+                                       
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="doctor-submit">
+                                        <button type="button" class="btn btn-primary submit-list-form me-2" (click)="searchData()">Search</button>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="doctor-submit">
+                                        <button type="button" class="btn btn-outline-primary submit-list-form me-2" (click)="PageSize()"><img src="assets/img/icons/re-fresh.svg" alt=""></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div> -->
                     
                         <!-- Table Header -->
                         <div class="page-table-header mb-2">
@@ -235,31 +298,15 @@
                                       <td>{{data.elegibility_date}}</td>
                                       <td>{{data.eqhlid}}</td>
                                       <td>{{data.patient_id}}</td>
-                                      <!-- <td>{{data.pa_assessments? data.pa_assessments.pa_assessment : ''}}</td> -->
                                       <td>
-                                        <!-- {{pa_assessments.pa_assessment}} -->
-                                        <!-- {{paAssestments[i][i].pa_assessment}} -->
-                                        {{paAssestments[i][i]?.pa_assessment}}
-                                        <!-- <ng-container *ngFor="let pa of paAssestments[i], let i= index">
-                                          <li>{{pa.pa_assessment}}</li>
-                                          
-                                        </ng-container> -->
+                                        {{data.pa_assessments[0]?.pa_assessment}}
                                       </td>
                                       <td>
-                                        {{paAssestments[i][i]?.pa_services}}
-                                        <!-- <ng-container *ngFor="let pa of pa_services_by_date, let i= index">
-                                          <li>{{pa.pa_services}}</li>
-                                        </ng-container> -->
+                                        {{data.pa_assessments[0]?.pa_services}}
                                       </td>
                                       <td>
-                                        {{paAssestments[i][i]?.pa_services_start_date| date}}
-                                        <!-- <ng-container *ngFor="let pa of pa_services_start_date_by_date, let i= index">
-                                          <li>{{pa.pa_services_start_date | date}}</li>
-                                        </ng-container> -->
+                                        {{data.pa_assessments[0]?.pa_services_start_date| date}}
                                       </td>
-                                      <!-- <td>{{data.paAssestments? data.paAssestments.pa_services : ''}}</td>
-                                      <td>{{data.paAssestments? data.paAssestments.pa_services_end_date : ''}}</td>
-                                       -->
                                     
                                     <td>{{data.schedule}}</td>
                                     <td>average ??</td>

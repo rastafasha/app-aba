@@ -179,7 +179,7 @@ export class PatientMService {
     return this.http.get(URL, {headers:headers});
   }
 
-  listPatientLogReport(search:any, status: any){
+  listPatientLogReport(search:any, status: any): Observable <any>{
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
 
     let LINK = "?T=";
@@ -191,13 +191,19 @@ export class PatientMService {
 
     }
 
-    // if(status){
-    //   LINK += "&state="+status;
-
-    // }
-
     let URL = url_servicios+'/clientlogreport'+LINK;
-    return this.http.get(URL, {headers:headers});
+    return this.http.get<any>(URL, {headers:headers})
+    .pipe(
+			map((value) => {
+				return value.patients.map((item) => {
+					return {
+            
+						...item,
+						pa_assessments: JSON.parse(item['pa_assessments'])
+					}
+				})
+			})
+		)
     // return this.http.get(URL, {headers: headers}).pipe(
     //   finalize(()=> this.isLoadingSubject.next(false))
     // )

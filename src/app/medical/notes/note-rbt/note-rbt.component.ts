@@ -287,66 +287,25 @@ export class NoteRbtComponent {
 
   
 
-  addMaladaptive(behavior){
+  addMaladaptive(behavior, i){
     this.maladaptiveSelected = behavior;
-    this.maladaptives.push({
-      maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
-      number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ,
-      // number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ? this.maladaptiveSelected.number_of_occurrences : 0,
-    })
-    if(this.maladaptives.length > 1){
-      this.maladaptives.splice(this.maladaptives,1);
-    }
+    this.maladaptives[i]= behavior
+    
+    // if(this.maladaptives.length > 1){
+    //   this.maladaptives.splice(this.maladaptives,1);
+    // }
     this.maladaptiveSelected = null;
     this.maladaptive_behavior = '';
     this.number_of_occurrences = null;
     
   }
 
-  // addMaladaptive(behavior:any){
-  //   if(this.maladaptiveSelected !== null ){
-  //     this.maladaptiveSelected = behavior;
-  //     this.maladaptives.push({
-  //       maladaptive_behavior: this.maladaptiveSelected.maladaptive_behavior,
-  //       number_of_occurrences: this.maladaptiveSelected.number_of_occurrences ? this.maladaptiveSelected.number_of_occurrences : '0',
-  //     })
-  //     if(this.maladaptives.length > 1){
-  //       this.maladaptives.splice(this.maladaptives,1);
-  //     }
-  //     this.maladaptiveSelected = behavior.maladaptive_behavior;
-  //     this.maladaptive_behavior = '';
-  //     this.number_of_occurrences = 0;
-    
-  // }else{
-  //   // alert("if you didn't have any reaction, enter :0");
-  //   this.maladaptiveSelected =  behavior  ;
-  //     this.maladaptive_behavior = behavior.maladaptive_behavior 
-  //     this.number_of_occurrences = 0;
-  //     this.maladaptives.push({
-  //       maladaptive_behavior: behavior.maladaptive_behavior,
-  //       number_of_occurrences: '0' ,
-  //     })
-  //     if(this.maladaptives.length > 1){
-  //       this.maladaptives.splice(this.maladaptives,1);
-  //     }
-  // }
-  
-    
-  // }
-  
-  addReplacement(replacemen){
+ 
+  addReplacement(replacemen, i){
     
     this.replacementSelected = replacemen;
-    this.replacementGoals.push({
-      goal: this.replacementSelected.goal,
-      total_trials: this.replacementSelected.total_trials,
-      number_of_correct_response: this.replacementSelected.number_of_correct_response ,
-      // number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response :0 ,
-      
-    })
-    if(this.replacementGoals.length > 1){
-      this.replacementGoals.splice(this.replacementGoals,1);
-    }
+    this.replacementGoals[i] = replacemen
+    
     this.replacementSelected = null;
     this.goal = '';
     this.total_trials = null;
@@ -355,43 +314,6 @@ export class NoteRbtComponent {
     
   }
 
-  // addReplacement(replacemen:any){
-    
-  //   if(this.replacementSelected !== null ){
-  //     this.total_trials = 0;
-  //   this.number_of_correct_response = 0;
-  //   this.replacementGoals.push({
-  //     goal: this.replacementSelected.goal,
-  //     total_trials: this.total_trials ? this.total_trials  : "0",
-  //     number_of_correct_response: this.number_of_correct_response ? this.number_of_correct_response : '0' ,
-      
-  //   })
-  //   if(this.replacementGoals.length > 1){
-  //     this.replacementGoals.splice(this.replacementGoals,1);
-  //   }
-  //   this.replacementSelected = replacemen.goal;
-  //   this.goal = '';
-  //   this.total_trials = 0;
-  //   this.number_of_correct_response = 0;
-  //   }else{
-  //     // alert("if you didn't have any reaction, enter :0");
-  //     this.goal = replacemen.goal;
-  //     this.total_trials = 0;
-  //     this.number_of_correct_response = 0;
-
-  //     this.replacementGoals.push({
-  //       goal: replacemen.goal,
-  //       total_trials:  "0",
-  //       number_of_correct_response:  '0' ,
-      
-  //     })
-  //     if(this.replacementGoals.length > 1){
-  //       this.replacementGoals.splice(this.replacementGoals,1);
-  //     }
-  //     }
-
-    
-  // }
 
 
   deleteMaladaptive(i:any){
@@ -541,6 +463,7 @@ export class NoteRbtComponent {
     // formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
     // formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
     // formData.append('imagenn', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+    
     if(this.FILE_SIGNATURE_RBT ){
       formData.append('imagen', this.FILE_SIGNATURE_RBT);
     }

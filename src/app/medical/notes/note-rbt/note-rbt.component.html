@@ -225,7 +225,8 @@
                                             <h4 class="label">{{behavior.maladaptive_behavior}}</h4>
                                             
                                         </div>
-                                        <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}" [(ngModel)]="behavior.number_of_occurrences" type="number"  >
+                                        <input class="form-control" name="number_of_occurrences " [ngModelOptions]="{standalone: true}" 
+                                        [(ngModel)]="behavior.number_of_occurrences" type="number"  >
                                         <div class="qty">
                                             <!-- <span class="minus bg-dark">-</span>
                                             <input type="number" class="count" onchange="countValue1()" [ngModelOptions]="{standalone: true}" [(ngModel)]="number_of_occurrences"  name="number_of_occurrences" [value]="behavior.number_of_occurrences">
@@ -234,7 +235,7 @@
                                            
                                         </div>
 
-                                        <button class="btn btn-outline-success btn-sm" [disable] (click)="addMaladaptive(behavior)">Save</button>
+                                        <button class="btn btn-outline-success btn-sm" [disable] (click)="addMaladaptive(behavior, i)">Save</button>
                                     </div>
                                 </ng-container>
                             </div>
@@ -292,7 +293,7 @@
                                             <span class="plus bg-dark">+</span> -->
                                         </div>
 
-                                        <button class="btn btn-outline-success btn-sm" (click)="addReplacement(replacemen)">Save</button>
+                                        <button class="btn btn-outline-success btn-sm" (click)="addReplacement(replacemen, i)">Save</button>
                                     </div>
                                 </ng-container>
                             </div>
@@ -737,7 +738,6 @@
                                                 </mat-option>
                                             </mat-select>
                                         </div>
-                                        <!-- <input class="form-control" name="supervisor_name"   [(ngModel)]="supervisor_name" type="text"  > -->
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">

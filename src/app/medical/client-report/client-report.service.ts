@@ -45,6 +45,7 @@ export class ClientReportService {
     // speciality_id:number=0, 
     date_start:string= '',
     date_end:string= '',
+    patient_id:any
     ){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
     let LINK = "";
@@ -63,7 +64,7 @@ export class ClientReportService {
     if(date_end){
     LINK+="&date_end="+date_end;
     }
-    let URL = url_servicios+'/client_report/?page='+page+LINK;
+    let URL = url_servicios+'/client_report/byprofile/?page='+page+LINK+'/';
     return this.http.get(URL, {headers:headers});
     }
 

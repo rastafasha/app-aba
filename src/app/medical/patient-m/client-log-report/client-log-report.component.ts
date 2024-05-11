@@ -129,53 +129,52 @@ export class ClientLogReportComponent {
       // }
 
       //fechas junto con la baseline del maladaptive
-      this.paAssestments = [];
+      this.paAssestments = resp.map((patient)=> patient.pa_assessments);
 
-      for (var i = 0; i < resp.patients.length; i++) {
-        if (resp.patients[i].pa_assessments) {
-          const parsedAssessments = JSON.parse(resp.patients[i].pa_assessments);
-          this.paAssestments.push(parsedAssessments);
-        }
-      }
-
+      // for (var i = 0; i < resp.patients.length; i++) {
+      //   if (resp.patients[i].pa_assessments) {
+      //     const parsedAssessments = JSON.parse(resp.patients[i].pa_assessments);
+      //     this.paAssestments.push(parsedAssessments);
+      //   }
+      // }
       console.log(this.paAssestments);
 
       // Assuming `data.pa_assessments` is a JSON string
       // const parsedAssessments = JSON.parse(resp.patients[i].pa_assessments);
-      let pa_assessments: any = {};
-      pa_assessments.pa_assessment = this.paAssestments[0].pa_assessment;
-      console.log('pa_assessments:', pa_assessments);
-      let assessment = pa_assessments.pa_assessment;
+      // let pa_assessments: any = {};
+      // pa_assessments.pa_assessment = this.paAssestments[0].pa_assessment;
+      // console.log('pa_assessments:', pa_assessments);
+      // let assessment = pa_assessments.pa_assessment;
 
-      let pa_assessment_by_date = {};
-      let pa_services_by_date = {};
-      let pa_services_start_date_by_date = {};
-      let cpt_by_date = {};
-      for (let assessments of this.paAssestments) {
-          for (let assessment of assessments) {
-              let date = assessment['pa_assessment_start_date'].split('T')[0];
-              if (!pa_assessment_by_date[date]) {
-                  pa_assessment_by_date[date] = [];
-                  pa_services_by_date[date] = [];
-                  pa_services_start_date_by_date[date] = [];
-                  cpt_by_date[date] = [];
-              }
-              pa_assessment_by_date[date].push(assessment['pa_assessment']);
-              pa_services_by_date[date].push(assessment['pa_services']);
-              pa_services_start_date_by_date[date].push(assessment['pa_services_start_date']);
-              cpt_by_date[date].push(assessment['cpt']);
-          }
-      }
-      console.log( 'pa_assessment',pa_assessment_by_date);
-      console.log( 'pa_services',pa_services_by_date);
-      console.log( 'pa_services_start_date',pa_services_start_date_by_date);
-      console.log( 'cpt',cpt_by_date);
+      // let pa_assessment_by_date = {};
+      // let pa_services_by_date = {};
+      // let pa_services_start_date_by_date = {};
+      // let cpt_by_date = {};
+      // for (let assessments of this.paAssestments) {
+      //     for (let assessment of assessments) {
+      //         let date = assessment['pa_assessment_start_date'].split('T')[0];
+      //         if (!pa_assessment_by_date[date]) {
+      //             pa_assessment_by_date[date] = [];
+      //             pa_services_by_date[date] = [];
+      //             pa_services_start_date_by_date[date] = [];
+      //             cpt_by_date[date] = [];
+      //         }
+      //         pa_assessment_by_date[date].push(assessment['pa_assessment']);
+      //         pa_services_by_date[date].push(assessment['pa_services']);
+      //         pa_services_start_date_by_date[date].push(assessment['pa_services_start_date']);
+      //         cpt_by_date[date].push(assessment['cpt']);
+      //     }
+      // }
+      // console.log( 'pa_assessment',pa_assessment_by_date);
+      // console.log( 'pa_services',pa_services_by_date);
+      // console.log( 'pa_services_start_date',pa_services_start_date_by_date);
+      // console.log( 'cpt',cpt_by_date);
 
       
-      this.totalDatapatient = resp.patients.length;
-      this.patient_generals = resp.patients;
-      this.patientid = resp.patients.id;
-      this.patient_id = resp.patients.patient_id;
+      this.totalDatapatient = resp.length;
+      this.patient_generals = resp;
+      this.patientid = resp.id;
+      this.patient_id = resp.patient_id;
      this.getTableDataGeneral();
     //  this.isMaladaptiveBip();
     })
