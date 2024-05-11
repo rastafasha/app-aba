@@ -139,37 +139,7 @@ export class ClientLogReportComponent {
       // }
       console.log(this.paAssestments);
 
-      // Assuming `data.pa_assessments` is a JSON string
-      // const parsedAssessments = JSON.parse(resp.patients[i].pa_assessments);
-      // let pa_assessments: any = {};
-      // pa_assessments.pa_assessment = this.paAssestments[0].pa_assessment;
-      // console.log('pa_assessments:', pa_assessments);
-      // let assessment = pa_assessments.pa_assessment;
-
-      // let pa_assessment_by_date = {};
-      // let pa_services_by_date = {};
-      // let pa_services_start_date_by_date = {};
-      // let cpt_by_date = {};
-      // for (let assessments of this.paAssestments) {
-      //     for (let assessment of assessments) {
-      //         let date = assessment['pa_assessment_start_date'].split('T')[0];
-      //         if (!pa_assessment_by_date[date]) {
-      //             pa_assessment_by_date[date] = [];
-      //             pa_services_by_date[date] = [];
-      //             pa_services_start_date_by_date[date] = [];
-      //             cpt_by_date[date] = [];
-      //         }
-      //         pa_assessment_by_date[date].push(assessment['pa_assessment']);
-      //         pa_services_by_date[date].push(assessment['pa_services']);
-      //         pa_services_start_date_by_date[date].push(assessment['pa_services_start_date']);
-      //         cpt_by_date[date].push(assessment['cpt']);
-      //     }
-      // }
-      // console.log( 'pa_assessment',pa_assessment_by_date);
-      // console.log( 'pa_services',pa_services_by_date);
-      // console.log( 'pa_services_start_date',pa_services_start_date_by_date);
-      // console.log( 'cpt',cpt_by_date);
-
+     
       
       this.totalDatapatient = resp.length;
       this.patient_generals = resp;

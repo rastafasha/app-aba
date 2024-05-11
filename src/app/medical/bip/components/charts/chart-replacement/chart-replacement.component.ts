@@ -246,7 +246,7 @@ export class ChartReplacementComponent {
 
   getGoalsReductions(){
     this.graphicReductionService.listReductionGraphics(this.goal, this.patient_id).subscribe((resp:any)=>{
-    //  console.log(resp);
+     console.log(resp);
     
      //funcion de pablo alcorta
       //se limpia y se extrae los datos de la coleccion json 

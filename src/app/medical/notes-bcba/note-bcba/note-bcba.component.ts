@@ -310,36 +310,42 @@ export class NoteBcbaComponent {
 
   }
 
-  selectMaladaptive(behavior:any){
+  selectMaladaptive(behavior:any,i){
     this.maladaptiveSelected = behavior;
+    this.caregivers_training_goals[i]= behavior
   }
 
-  selectReplacement(replacemen:any){
-    this.replacementSelected = replacemen;
-  }
+  
 
-  addMaladaptive(){
-    this.caregivers_training_goals.push({
-      caregiver_goal: this.maladaptiveSelected.caregiver_goal,
-      porcent_of_correct_response: this.porcent_of_correct_response,
-    })
-    if(this.caregivers_training_goals.length > 1){
-      this.caregivers_training_goals.splice(this.caregivers_training_goals,1);
-    }
+  addMaladaptive(maladaptiveSelected:any,i){
+    this.maladaptiveSelected = maladaptiveSelected;
+    this.caregivers_training_goals[i]= maladaptiveSelected
+    // this.caregivers_training_goals.push({
+    //   caregiver_goal: this.maladaptiveSelected.caregiver_goal,
+    //   porcent_of_correct_response: this.porcent_of_correct_response,
+    // })
+    // if(this.caregivers_training_goals.length > 1){
+    //   this.caregivers_training_goals.splice(this.caregivers_training_goals,1);
+    // }
     this.maladaptiveSelected = null;
     this.caregiver_goal = '';
     this.porcent_of_correct_response = null;
   }
+  selectReplacement(replacemen:any,i){
+    this.replacementSelected = replacemen;
+    this.rbt_training_goals[i]= replacemen;
+  }
 
-
-  addReplacement(){
-    this.rbt_training_goals.push({
-      lto: this.replacementSelected.lto,
-      porcent_of_correct_response: this.porcent_of_correct_response,
-    })
-    if(this.rbt_training_goals.length > 1){
-      this.rbt_training_goals.splice(this.rbt_training_goals,1);
-    }
+  addReplacement(replacementSelected:any,i){
+    this.replacementSelected = replacementSelected;
+    this.rbt_training_goals[i]= replacementSelected;
+    // this.rbt_training_goals.push({
+    //   lto: this.replacementSelected.lto,
+    //   porcent_of_correct_response: this.porcent_of_correct_response,
+    // })
+    // if(this.rbt_training_goals.length > 1){
+    //   this.rbt_training_goals.splice(this.rbt_training_goals,1);
+    // }
     this.replacementSelected = null;
     this.lto = '';
     this.porcent_of_correct_response = null;

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { url_servicios } from 'src/app/config/config';
 import { AuthService } from 'src/app/shared/auth/auth.service';
-
+import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,10 +30,10 @@ export class GraphicReductionService {
     let URL = url_servicios+'/graphic_reduction/showbyMaladaptive/'+maladaptive+'/'+patient_id;
     return this.http.get(URL, {headers:headers});
   }
-  listReductionGraphics(replacement:any, patient_id:any){
+  listReductionGraphics(replacement:any, patient_id:any): Observable <any>{
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token})
     let URL = url_servicios+'/graphic_reduction/showbyReplacement/'+replacement+'/'+patient_id;
-    return this.http.get(URL, {headers:headers});
+    return this.http.get<any>(URL, {headers:headers});
   }
   
 
