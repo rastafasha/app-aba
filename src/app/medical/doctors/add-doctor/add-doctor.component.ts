@@ -77,6 +77,7 @@ export class AddDoctorComponent {
 
   public text_success:string = '';
   public text_validation:string = '';
+  public locations_selected: number[] = [];
 
   
   constructor(

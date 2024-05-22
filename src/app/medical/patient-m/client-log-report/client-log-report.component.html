@@ -310,7 +310,11 @@
                                     
                                     <td>{{data.schedule}}</td>
                                     <td>average ??</td>
-                                    <td>53 ??</td>
+                                    <td>
+                                      <span *ngIf="data.pa_assessments[0]?.cpt == '97153'">
+                                        {{data.pa_assessments[0]?.cpt}}
+                                      </span>
+                                    </td>
                                     <td>
                                       {{data.rbt_home.name + ' ' + (data.rbt_home.surname ? data.rbt_home.surname: '')}}
                                     </td>
@@ -323,8 +327,16 @@
                                     <td>
                                       {{data.bcba2_school.name + ' ' + (data.bcba2_school.surname ? data.bcba2_school.surname: '')}}
                                         </td>
-                                    <td>55 ??</td>
-                                    <td>56 ??</td>
+                                        <td>
+                                          <span *ngIf="data.pa_assessments[0]?.cpt == '97155'">
+                                            {{data.pa_assessments[0]?.cpt}}
+                                          </span>
+                                        </td>
+                                    <td>
+                                      <span *ngIf="data.pa_assessments[0]?.cpt == '97156'">
+                                        {{data.pa_assessments[0]?.cpt}}
+                                      </span>
+                                    </td>
                                     <td>{{data.special_note}}</td>
                                     
                                       <td>{{data.welcome}}</td>

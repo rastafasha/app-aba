@@ -116,11 +116,13 @@ export class ReportByClientComponent {
   public full_name: any;
   public doctors: any;
   public tecnicoDoctorNames: any;
+  public patientId: any;
 
   public providersSponsorsList:any;
   public factorPorcentual: number =  1.66666666666667
 
   doctor_selected:any =null;
+
   
   constructor(
     public router: Router,
@@ -137,16 +139,18 @@ export class ReportByClientComponent {
     
     // window.scrollTo(0, 0);
     this.ativatedRoute.params.subscribe((resp:any)=>{
-      this.patient_id = resp.id;
+      this.patient_id = resp.patient_id;
+      this.patientId = resp.patient_id;
+      console.log(this.patient_id);
      });
 
-     this.getTableData();
      this.getConfig();
      this.billed = false;
      this.pay = false;
      
      this.doctorService.getUserRoles();
     this.user = this.roleService.authService.user;
+     this.getTableData();
     
   }
 
@@ -163,25 +167,26 @@ export class ReportByClientComponent {
   }
 
 
-
-
   getConfig(){
     this.clientReportService.config().subscribe((resp:any)=>{
       console.log(resp);
       this.insurances = resp.insurances;
-      
       this.sponsors = resp.doctors;
       
     })
   }
 
 
-  private getTableData(): void {
+  private getTableData(page=1): void {
     this.clientReportList = [];
     this.serialNumberArray = [];
 
+    // this.patientId = patient_id
+    // // this.patientId = 'cliente3243';
+
     // this.clientReportService.showClientReportbyPatient(this.patient_id).subscribe((resp:any)=>{
-    this.clientReportService.showClientReportbyPatient(this.patient_id).subscribe((resp:any)=>{
+    this.clientReportService.getAllClientReportByPatient(this.patientId, page, 
+      this.date_start,this.date_end).subscribe((resp:any)=>{
       
       console.log(resp);
       // traemos la info necesaria del paciente
@@ -363,13 +368,14 @@ export class ReportByClientComponent {
     }
   }
 
-  public searchData() {
+  public searchData(patientId:any) {
     // this.dataSource.filter = value.trim().toLowerCase();
     // this.patientList = this.dataSource.filteredData;
     this.pageSelection = [];
     this.limit = this.pageSize;
     this.skip = 0;
     this.currentPage = 1;
+    patientId;
     this.getTableData();
   }
  
@@ -462,9 +468,8 @@ export class ReportByClientComponent {
     this.limit = this.pageSize;
     this.skip = 0;
     this.currentPage = 1;
-    this.getTableDataGeneral();
+    this.ngOnInit();
     // this.getPageTotal();
-    this.searchDataValue = '';
     this.date_start = '';
     this.date_end = '';
   }

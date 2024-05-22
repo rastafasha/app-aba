@@ -11,7 +11,7 @@ const routes: Routes = [
     //   path:'list', component:BillingListComponent
     // },
     {
-      path:'byclient/:id', component:ReportByClientComponent
+      path:'byclient/:patient_id', component:ReportByClientComponent
     },
     // {
     //   path:'attention/:id', component:BipattentionComponent
