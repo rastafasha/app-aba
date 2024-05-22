@@ -79,6 +79,7 @@ export class EditDoctorComponent {
 
   public text_success:string = '';
   public text_validation:string = '';
+  public locations_selected: number[] = [];
 
  
   public doctor_id:any;
@@ -110,6 +111,7 @@ export class EditDoctorComponent {
 
       this.doctorService.showDoctor(this.doctor_id).subscribe((resp:any)=>{
         // console.log(resp);
+        this.locations_selected = resp.locations || [];
         this.doctor_selected = resp.user;
         this.selectedValueLocation = this.doctor_selected.location_id;
 
@@ -352,10 +354,7 @@ export class EditDoctorComponent {
       formData.append('salary', this.salary+'');
     }    
     
-  
-    
-
-    this.doctorService.editDoctor(formData, this.doctor_id).subscribe((resp:any)=>{
+    this.doctorService.editDoctor(formData, this.doctor_id, this.locations_selected).subscribe((resp:any)=>{
       // console.log(resp);
       
       if(resp.message == 403){
