@@ -98,7 +98,7 @@
                                 <div class="col-12 col-md-4 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Location <span class="login-danger">*</span></label>
-                                        <mat-select multiple="multiple" [(ngModel)]="selectedValueLocation" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Location">
+                                        <mat-select multiple="multiple" [(ngModel)]="locations_selected" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Location">
                                             <mat-option *ngFor="let data of locations" [value]="data.id">
                                             {{data.title}}
                                             </mat-option>
