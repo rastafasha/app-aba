@@ -213,13 +213,13 @@ export class EditDoctorComponent {
       }
     }
 
-    let formData = new FormData();
-    formData.append('name', this.name);
-    formData.append('surname', this.surname);
-    formData.append('phone', this.phone);
-    formData.append('email', this.email);
-    formData.append('birth_date', this.birth_date);
-    formData.append('gender', this.gender+'');
+    // let formData = new FormData();
+    // formData.append('name', this.name);
+    // formData.append('surname', this.surname);
+    // formData.append('phone', this.phone);
+    // formData.append('email', this.email);
+    // formData.append('birth_date', this.birth_date);
+    // formData.append('gender', this.gender+'');
 
     // this.FILE_AVATAR  = this.IMAGE_PREVISUALIZA;
     
