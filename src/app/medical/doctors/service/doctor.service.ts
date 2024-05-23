@@ -41,10 +41,11 @@ permissions :any = [];
     let URL = url_servicios+"/doctors/show/"+doctor_id;
     return this.http.get(URL,{headers:headers});
   }
-  editDoctor(data:any, doctor_id:any, locations_selected?: number[]){
+  
+  editDoctor(data:any, doctor_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer'+this.authService.token});
     let URL = url_servicios+"/doctors/update/"+doctor_id;
-    return this.http.post(URL,{data, locations_selected: locations_selected},{headers:headers});
+    return this.http.post(URL,data,{headers:headers});
   }
   
   showDoctorProfile(doctor_id:any){
