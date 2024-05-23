@@ -55,8 +55,8 @@
                                       <th mat-sort-header="next_session">Next Session</th>
                                       <th mat-sort-header="session_length_total">Session 1 total</th>
                                       <th mat-sort-header="session_length_total2">Session 2 total</th>
-                                      <th mat-sort-header="status">Status</th>
-                                      <th mat-sort-header="options">Options</th>
+                                      <th mat-sort-header="status" >Status</th>
+                                      <th mat-sort-header="options" *ngIf="isPermission('edit_noterbt')">Options</th>
                                       <th mat-sort-header="created">Created At</th>
                                       <th mat-sort-header="updated_at">Updated At</th>
                                          <th ></th> <!--acciones -->
@@ -96,7 +96,7 @@
                                         </span>
                                     </td>
                                     <!-- *ngIf="roles ==='SUPERADMIN' || roles === 'MANAGER'|| roles === 'LM'" -->
-                                    <td  >
+                                    <td  *ngIf="isPermission('edit_noterbt')">
                                       <select
                                       class="form-control form-select-solid fw-bolder"
                                       

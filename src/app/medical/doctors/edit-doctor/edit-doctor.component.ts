@@ -198,7 +198,7 @@ export class EditDoctorComponent {
 
   
 
-  save(){
+  save(){debugger
     this.text_validation = '';
     this.text_success = '';
     if(!this.name||!this.email ||!this.surname ){
@@ -212,8 +212,6 @@ export class EditDoctorComponent {
         return;
       }
     }
-
-    console.log(this.selectedValue);
 
     let formData = new FormData();
     formData.append('name', this.name);
