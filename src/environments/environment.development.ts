@@ -6,8 +6,8 @@ export const environment = {
     // url_media: 'http://127.0.0.1:8000/storage/',
     
     //remoto v2
-    // url_backend: 'https://abatheraphy.malcolmcordova.com/backend-api-aba/',
-    // url_servicios: 'https://abatheraphy.malcolmcordova.com/backend-api-aba/public/api',
-    // url_frontend: 'https://abatheraphy.malcolmcordova.com/',
-    // url_media: 'https://abatheraphy.malcolmcordova.com/backend-api-aba/public/storage/',
+    url_backend: 'https://abatherapy.malcolmcordova.com/backend-api-aba/',
+    url_servicios: 'https://abatherapy.malcolmcordova.com/backend-api-aba/public/api',
+    url_frontend: 'https://abatherapy.malcolmcordova.com/',
+    url_media: 'https://abatherapy.malcolmcordova.com/backend-api-aba/public/storage/',
 };

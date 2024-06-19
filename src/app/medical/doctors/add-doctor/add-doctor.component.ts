@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from 'src/app/shared/routes/routes';
 import { DoctorService } from '../service/doctor.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-doctor',
@@ -201,8 +202,9 @@ export class AddDoctorComponent {
       if(resp.message == 403){
         this.text_validation = resp.message_text;
       }else{
-        this.text_success = 'Employer created';
+        // this.text_success = 'Employer created';
         // this.ngOnInit();
+        Swal.fire('Created', `Employee Created successfully!`, 'success');
         this.router.navigate(['/doctors/list']);
       }
     })

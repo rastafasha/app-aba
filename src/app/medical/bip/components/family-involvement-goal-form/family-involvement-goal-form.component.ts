@@ -112,6 +112,7 @@ export class FamilyInvolvementGoalFormComponent {
       this.goalFamilyEnvolments = resp.familiEnvolmentPatientIds.data;
       this.goalFamilyEnvolmentid = resp.familiEnvolmentPatientIds.data[0].id;
       this.caregivers = resp.familiEnvolmentPatientIds.data[0].caregivers_training_goals;
+      // this.client_id_goalFamilyEnvolments = resp.familiEnvolmentPatientIds.data[0].caregivers_training_goals.client_id;
       this.client_id_goalFamilyEnvolments = resp.familiEnvolmentPatientIds.data[0].client_id;
       // this.goals = resp.goalReductionPatientIds;
       // console.log(this.goals);
@@ -121,7 +122,7 @@ export class FamilyInvolvementGoalFormComponent {
   }
 
 
-  addDocument(){
+  addDocument(){debugger
     this.caregivers.push({
       caregiver_goal: this.caregiver_goal,
       outcome_measure: this.outcome_measure,

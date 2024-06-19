@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PatientMService } from '../service/patient-m.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-patient-m',
@@ -416,9 +417,9 @@ export class AddPatientMComponent {
       if(resp.message == 403){
         this.text_validation = resp.message_text;
       }else{
-        this.valid_form_success = true;
+        // this.valid_form_success = true;
         // this.ngOnInit();
-        
+        Swal.fire('Created', `Client Created successfully!`, 'success');
         this.router.navigate(['/patients/list']);
         // this.ngOnInit();
       }

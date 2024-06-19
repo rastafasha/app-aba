@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                             <div class="follow-btn-group">
-                                                <a [routerLink]="['/bip/attention/', patientId]" *ngIf="isPermission('edit_bip')" class="btn btn-info follow-btns">Edit</a>
+                                                <a [routerLink]="['/bip/attention/', patient_id]" *ngIf="isPermission('edit_bip')" class="btn btn-info follow-btns">Edit</a>
                                                 <button class="btn btn-info follow-btns" (click)="convertToPdf()">Save PDF</button>
                                                 <!-- <button type="submit" class="btn btn-info message-btns">Message</button> -->
                                             </div>
@@ -123,9 +123,11 @@
                                                 <h2>Type of Assessment</h2>
                                                 <h3>
                                                     <span 
-                                                        *ngIf="bip_selected.type_of_assessment === 1">Innitial</span>
+                                                        *ngIf="bip_selected.type_of_assessment === 1">Assestment</span>
                                                     <span 
                                                         *ngIf="bip_selected.type_of_assessment === 2">Reassestment</span>
+                                                    <span 
+                                                        *ngIf="bip_selected.type_of_assessment === 3">Initial</span>
                                                 </h3>
                                             </div>
                                         </div>

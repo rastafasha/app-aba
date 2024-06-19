@@ -169,7 +169,7 @@ export class BipProfileComponent {
       this.assesstments =this.bip_selected.assestment_conducted_options;
       this.assesstmentsDocuments =this.bip_selected.assestment_conducted_options;
       this.prevalent_setting_event_and_atecedents =this.bip_selected.prevalent_setting_event_and_atecedents;
-      this.interventions =this.bip_selected.interventions;
+      // this.interventions =this.bip_selected.interventions;
       this.reduction_goals =this.bip_selected.reduction_goal;
       this.reduction_goals_goalltos =this.bip_selected.reduction_goal[0].goalltos;
       this.reduction_goals_goalstos =this.bip_selected.reduction_goal[0].goalstos;
@@ -177,6 +177,7 @@ export class BipProfileComponent {
       this.sustitution_goal_ltos =this.bip_selected.sustitution_goal[0].goalltos;
       this.sustitution_goal_stos =this.bip_selected.sustitution_goal[0].goalstos;
       this.family_envolment =this.bip_selected.family_envolment[0].caregivers_training_goals;
+
       this.monitoring_evalutating =this.bip_selected.monitoring_evalutating;
       this.monitoring_evalutating_goals =this.bip_selected.monitoring_evalutating[0].rbt_training_goals;
       this.generalization_training =this.bip_selected.generalization_training;
