@@ -10,7 +10,7 @@
                       <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
                   </span>
                     <span  *ngIf="roles === 'MANAGER'">
-                      <li class="breadcrumb-item"><a [routerLink]="['/location/view/', user.location_id]">Dashboard</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="['/location/view/', location_id]">Dashboard</a></li>
                   </span>
                   <li class="breadcrumb-item" ><i class="feather icon-chevron-right"></i></li>
                   <span  *ngIf="roles === 'RBT' || roles === 'BCBA'">

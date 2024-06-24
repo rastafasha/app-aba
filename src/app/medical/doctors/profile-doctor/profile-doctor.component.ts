@@ -36,6 +36,7 @@ public appointments: any =[];
 public notes_bcbas: any =[];
 public notes_rbts: any =[];
 public patients: any =[];
+public locations: any =[];
 name:string='';
 surname:string='';
 mobile:string='';
@@ -88,6 +89,8 @@ getDoctor(){
   this.doctorService.showDoctorProfile(this.doctor_id).subscribe((resp:any)=>{
     console.log(resp);
     this.doctor_selected= resp.doctor;
+    this.locations= resp.doctor.locations.data;
+    console.log(this.locations);
     // this.num_appointment= resp.num_appointment;
     // this.money_of_appointments= resp.money_of_appointments;
     // this.num_appointment_pendings= resp.num_appointment_pendings;

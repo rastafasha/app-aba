@@ -8,12 +8,13 @@
                     <ul class="breadcrumb">
                         <span  *ngIf="roles === 'SUPERADMIN' || roles === 'LM' || roles === 'MANAGER'">
                             <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item" ><i class="feather icon-chevron-right"></i></li>
+                            <!-- <li class="breadcrumb-item" ><i class="feather icon-chevron-right"></i></li> -->
                         </span>
                         <span  *ngIf="roles === 'RBT' || roles === 'BCBA'">
                             <li class="breadcrumb-item"><a [routerLink]="['/doctors/profile/', user.id]">Dashboard</a></li>
-                            <!-- <li class="breadcrumb-item" ><i class="feather icon-chevron-right"></i></li> -->
+                            <li class="breadcrumb-item" ><i class="feather icon-chevron-right"></i></li>
                         </span>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item" *ngIf="isPermission('list_employers')" ><a routerLink="/doctors/list">Employees </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">Employeer Profile</li>
@@ -545,6 +546,24 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
+                        <!-- <div class="doctor-personals-grp">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="heading-detail ">
+                                        <h4 class="mb-3">Locations</h4>
+                                    </div>
+                                    <div class="about-me-list">
+                                        <ul class="list-space" *ngFor="let location of locations">
+                                            <li>
+                                                <h4>{{location.title}}</h4>
+                                                <span>{{location.state}}</span>
+                                            </li>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
                         <div class="doctor-personals-grp">
                             <div class="card">
                                 <div class="card-body">

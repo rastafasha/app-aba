@@ -249,6 +249,104 @@
                 	
             </div>
             <!-- fin paciente -->
+             <!-- Specialists -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form autocomplete="false">
+                            <div class="row" >
+                                <div class="col-12">
+                                    <div class="form-heading">
+                                        <h4>Add Specialist</h4>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group local-forms">
+                                        <label >RBT <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValue_rbt" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group local-forms">
+                                        <label >RBT 2 <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValue_rbt2" name="rbt2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group local-forms">
+                                        <label >BCBA <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValue_bcba" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group local-forms">
+                                        <label >BCBA 2<span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValue_bcba2" name="bcba2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group local-forms">
+                                        <label >Local Manager<span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedValue_clind" name="clinical_director" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
+                                            {{data.name}} {{data.surname}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12" *ngIf="valid_form">
+                                    <div class="form-group row" *ngIf="valid_form_success">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>Success!</strong> The Patient has been registered.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" *ngIf="text_validation">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <strong>!</strong> {{text_validation}}.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"> </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                                    </div>
+                                </div> -->
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+                	
+            </div>
+            <!-- fin Specialist -->
             <!-- benefits -->
             <div class="col-sm-12">
                 <div class="card">
@@ -808,6 +906,11 @@
                                 
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="doctor-submit text-end">
+                                <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
+                            </div>
+                        </div>
                     </div>
                     <!-- pas -->
                                 
@@ -856,200 +959,6 @@
             </div>
             <!-- fin PAs -->
 
-            <!-- Specialists -->
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form autocomplete="false">
-                            <div class="row" >
-                                <div class="col-12">
-                                    <div class="form-heading">
-                                        <h4>Add Specialist</h4>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group local-forms">
-                                        <label >RBT <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValue_rbt" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
-                                            {{data.name}} {{data.surname}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group local-forms">
-                                        <label >RBT 2 <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValue_rbt2" name="rbt2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
-                                            {{data.name}} {{data.surname}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group local-forms">
-                                        <label >BCBA <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValue_bcba" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
-                                            {{data.name}} {{data.surname}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group local-forms">
-                                        <label >BCBA 2<span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValue_bcba2" name="bcba2" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
-                                            {{data.name}} {{data.surname}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group local-forms">
-                                        <label >Local Manager<span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValue_clind" name="clinical_director" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
-                                            <mat-option *ngFor="let data of specialists" [value]="data.id">
-                                            {{data.name}} {{data.surname}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                </div>
-                                <div class="col-12" *ngIf="valid_form">
-                                    <div class="form-group row" *ngIf="valid_form_success">
-                                        <div class="col-md-12">
-                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                <strong>Success!</strong> The Patient has been registered.
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true"> </span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row" *ngIf="text_validation">
-                                        <div class="col-md-12">
-                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                <strong>!</strong> {{text_validation}}.
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true"> </span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="doctor-submit text-end">
-                                        <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </form>
-                        
-                    </div>
-                </div>
-                	
-            </div>
-            <!-- fin Specialist -->
-            <!-- Files -->
-            <!-- <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form autocomplete="false">
-                            <div class="row" >
-                                <div class="col-12">
-                                    <div class="form-heading">
-                                        <h4>Add Files</h4>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-top-form">
-                                        <label class="local-top">Medical Notes <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileMedicalNote($event)" class="hide-input">
-                                            <label for="signature" class="upload">Choose File</label>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="FILE_MEDICAL_NOTES">
-                                        <img [src]="IMAGE_PREVISUALIZA_MEDICAL_NOTES" style="width: 250px;" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-top-form">
-                                        <label class="local-top">CDE <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileMedicalNote($event)" class="hide-input">
-                                            <label for="signature" class="upload">Choose File</label>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="FILE_CDE">
-                                        <img [src]="IMAGE_PREVISUALIZA_CDE" style="width: 250px;" alt="">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-top-form">
-                                        <label class="local-top">IEP<span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileMedicalNote($event)" class="hide-input">
-                                            <label for="signature" class="upload">Choose File</label>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="FILE_IEP">
-                                        <img [src]="IMAGE_PREVISUALIZA_IEP" style="width: 250px;" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-top-form">
-                                        <label class="local-top">MNL<span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileMedicalNote($event)" class="hide-input">
-                                            <label for="signature" class="upload">Choose File</label>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="FILE_MNL">
-                                        <img [src]="IMAGE_PREVISUALIZA_MNL" style="width: 250px;" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-top-form">
-                                        <label class="local-top">Referral <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileMedicalNote($event)" class="hide-input">
-                                            <label for="signature" class="upload">Choose File</label>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="FILE_REFERAL">
-                                        <img [src]="IMAGE_PREVISUALIZA_REFERAL" style="width: 250px;" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <div class="form-group local-top-form">
-                                        <label class="local-top">Aditional Docs <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="pdf/*" name="signature" id="signature" (change)="loadFileDoctorR($event)" class="hide-input">
-                                            <label for="signature" class="upload">Choose File</label>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="FILE_ADITIONAL_DOCS">
-                                        <img [src]="IMAGE_PREVISUALIZA_ADITIONAL_DOCS" style="width: 250px;" alt="">
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            
-                        </form>
-                        
-                    </div>
-                </div>
-                	
-            </div> -->
-            <!-- fin Files -->
             
             				
         </div>

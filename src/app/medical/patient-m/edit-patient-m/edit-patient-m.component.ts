@@ -274,6 +274,20 @@ showUser(){
         this.schedule = this.patient_selected.schedule;
         this.summer_schedule = this.patient_selected.summer_schedule;
         this.diagnosis_code = this.patient_selected.diagnosis_code;
+
+        //valores de los selectores
+        this.selectedValuePosCovered = this.patient_selected.pos_covered;
+        
+        setTimeout(()=>{
+          this.selectedValueLocation = this.patient_selected.location_id;
+          this.selectedValue_rbt = this.patient_selected.rbt_home_id ? this.patient_selected.rbt_home_id : null;
+          this.selectedValue_rbt2 = this.patient_selected.rbt2_school_id ? this.patient_selected.rbt2_school_id : null;
+
+          this.selectedValue_bcba = this.patient_selected.bcba_home_id ? this.patient_selected.bcba_home_id: null;
+          this.selectedValue_bcba2 = this.patient_selected.bcba2_school_id ? this.patient_selected.bcba2_school_id : null;
+
+          this.selectedValue_clind = this.patient_selected.clin_director_id ? this.patient_selected.clin_director_id: null;
+       }, 50)
         
         //valores de isurance
         this.insuranceId = this.patient_selected.insuranceId;
@@ -312,14 +326,10 @@ showUser(){
         let jsonObj = JSON.parse(this.pa_assessmentss) || '';
         this.pa_assessmentgroup = jsonObj;
 
-        //valores de los selectores
-        this.selectedValueLocation = this.patient_selected.location_id;
-        this.selectedValuePosCovered = this.patient_selected.pos_covered;
-        this.selectedValue_rbt = this.patient_selected.rbt_home_id ? this.patient_selected.rbt_home_id : null;
-        this.selectedValue_rbt2 = this.patient_selected.rbt2_school_id ? this.patient_selected.rbt2_school_id : null;
-        this.selectedValue_bcba = this.patient_selected.bcba_home_id ? this.patient_selected.bcba_home_id: null;
-        this.selectedValue_bcba2 = this.patient_selected.bcba2_school_id ? this.patient_selected.bcba2_school_id : null;
-        this.selectedValue_clind = this.patient_selected.clin_director_id ? this.patient_selected.clin_director_id: null;
+        
+
+         
+
 
         // console.log(this.selectedValue_rbt);
 
