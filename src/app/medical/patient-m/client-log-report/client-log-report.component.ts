@@ -7,6 +7,7 @@ import { DoctorService } from '../../doctors/service/doctor.service';
 import * as XLSX from 'xlsx';
 import { RolesService } from '../../roles/service/roles.service';
 import { BipService } from '../../bip/service/bip.service';
+import { Location } from '@angular/common';
 
 declare var $:any;  
 @Component({
@@ -63,6 +64,8 @@ export class ClientLogReportComponent {
     private fileSaver: FileSaverService,
     public roleService: RolesService,
     public bipService: BipService,
+    public location: Location,
+
     ){
 
   }
@@ -77,6 +80,11 @@ export class ClientLogReportComponent {
     
     this.user = this.roleService.authService.user;
     // this.getPatiensByDoctor();
+    
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
     
   }
 

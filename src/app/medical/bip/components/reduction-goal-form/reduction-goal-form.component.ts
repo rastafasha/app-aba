@@ -205,8 +205,8 @@ export class ReductionGoalFormComponent {
   getGoalsMaladaptives(){
     this.patient_id = this.patient_id;
     this.goalService.listMaladaptivesGoals(this.maladaptiveSelected.maladaptive_behavior, this.patient_id).subscribe((resp:any)=>{
-     console.log(resp);
-     console.log('palabra maladaptive', resp.goalsmaladaptive.data[0].maladaptive);
+    //  console.log(resp);
+    //  console.log('palabra maladaptive', resp.goalsmaladaptive.data[0].maladaptive);
      
       this.goalmaladaptive = resp.goalsmaladaptive.data[0];
       this.goalmaladaptiveid = resp.goalsmaladaptive.data[0].id || null;
@@ -217,7 +217,7 @@ export class ReductionGoalFormComponent {
       this.gollto = resp.goalsmaladaptive.data[0].goalltos;
       
 
-      console.log(this.goalmaladaptive_clientId); //devuelve el client_id guardado
+      // console.log(this.goalmaladaptive_clientId); //devuelve el client_id guardado
 
       //si el client_id guardado no es igual al que se esta viendo en este momento, 
       //debe traer su informacion     

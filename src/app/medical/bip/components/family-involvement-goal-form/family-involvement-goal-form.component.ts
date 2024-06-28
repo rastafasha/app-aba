@@ -108,7 +108,7 @@ export class FamilyInvolvementGoalFormComponent {
   //si existe enviamos el client_id_goal para actualizar el goal del paciente
   getPatientGoalFamilyEnvolments(patient_id){
     this.goalFamilyEnvolmentService.getGoalFamilyEnvolmentbyPatientId(patient_id).subscribe((resp:any)=>{
-      console.log('goals sustition by patientid',resp);
+      // console.log('goals sustition by patientid',resp);
       this.goalFamilyEnvolments = resp.familiEnvolmentPatientIds.data;
       this.goalFamilyEnvolmentid = resp.familiEnvolmentPatientIds.data[0].id;
       this.caregivers = resp.familiEnvolmentPatientIds.data[0].caregivers_training_goals;
@@ -168,7 +168,7 @@ export class FamilyInvolvementGoalFormComponent {
     }else{
       
       this.goalFamilyEnvolmentService.createGoalFamilyEnvolment(data).subscribe((resp:any)=>{
-        console.log(resp);
+        // console.log(resp);
         this.goalFamilyid = resp.id;
         // this.text_success = 'Goal created successfully!'
         Swal.fire('Created', `Goal Sustitution Created successfully!`, 'success');

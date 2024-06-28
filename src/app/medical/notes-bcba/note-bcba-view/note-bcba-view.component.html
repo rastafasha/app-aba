@@ -12,6 +12,9 @@
                         <li class="breadcrumb-item active">Client Note Bcba</li>
                     </ul>
                 </div>
+                <div class=" doctor-submit text-end">
+                    <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                </div>
             </div>
         </div>
         <!-- /Page Header -->
@@ -111,22 +114,60 @@
                                                         <h3>{{patient_selected.diagnosis_code}}</h3>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-3 col-md-6">
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
                                                     <div class="detail-personal">
                                                         <h2>Rendering Provider</h2>
                                                         <h3>{{doctor_selected_full_name}}</h3>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-3 col-md-6">
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
                                                     <div class="detail-personal">
                                                         <h2>Aba Supervisor</h2>
                                                         <h3>{{doctor_selected_full_name_rbt}}</h3>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-3 col-md-6">
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
                                                     <div class="detail-personal">
                                                         <h2>CPT Code</h2>
                                                         <h3>{{note_selected.cpt_code}}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
+                                                    <div class="detail-personal">
+                                                        <h2>Time In</h2>
+                                                        <h3>{{note_selected.time_in | transformToDate }}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
+                                                    <div class="detail-personal">
+                                                        <h2>Time Out</h2>
+                                                        <h3>{{note_selected.time_out | transformToDate }}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
+                                                    <div class="detail-personal">
+                                                        <h2>Total First Session</h2>
+                                                        <h3>{{note_selected.session_length_total | transformToDate }}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
+                                                    <div class="detail-personal">
+                                                        <h2>Time In 2</h2>
+                                                        <h3>{{note_selected.time_in2 | transformToDate }}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
+                                                    <div class="detail-personal">
+                                                        <h2>Time Out 2</h2>
+                                                        <h3>{{note_selected.time_out2 | transformToDate }}</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
+                                                    <div class="detail-personal">
+                                                        <h2>Total First Session 2</h2>
+                                                        <h3>{{note_selected.session_length_total2 | transformToDate }}</h3>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-12">

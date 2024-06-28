@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { routes } from 'src/app/shared/routes/routes';
 import { DoctorService } from '../service/doctor.service';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-edit-doctor',
   templateUrl: './edit-doctor.component.html',
@@ -87,7 +88,8 @@ export class EditDoctorComponent {
   constructor(
     public doctorService:DoctorService,
     public router: Router,
-    public activatedRoute:ActivatedRoute
+    public activatedRoute:ActivatedRoute,
+    public location: Location,
   ){
 
   }
@@ -100,6 +102,9 @@ export class EditDoctorComponent {
     });
 
     this.getConfig();
+  }
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
   getConfig(){

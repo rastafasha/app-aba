@@ -11,6 +11,9 @@
                         <li class="breadcrumb-item active">Edit Client </li>
                     </ul>
                 </div>
+                <div class=" doctor-submit text-end">
+                    <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                </div>
             </div>
         </div>
         <!-- /Page Header -->
@@ -309,7 +312,7 @@
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <div class="form-group local-forms">
-                                        <label >Clinical Director<span class="login-danger">*</span></label>
+                                        <label >Manager<span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValue_clind" name="selectedValue_clind" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of specialists" [value]="data.id">
                                             {{data.name}} {{data.surname}}

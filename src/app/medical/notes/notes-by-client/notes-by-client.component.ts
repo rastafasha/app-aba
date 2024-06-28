@@ -7,6 +7,7 @@ import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { NoteRbtService } from '../services/note-rbt.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { RolesService } from '../../roles/service/roles.service';
+import { Location } from '@angular/common';
 declare var $:any;  
 @Component({
   selector: 'app-notes-by-client',
@@ -54,6 +55,7 @@ export class NotesByClientComponent {
     public noteRbtService: NoteRbtService,
     public doctorService: DoctorService,
     public roleService: RolesService,
+    public location: Location,
   ){}
 
   ngOnInit(): void {
@@ -74,6 +76,10 @@ export class NotesByClientComponent {
     // this.doctor_id = this.user.id;
     this.user = this.roleService.authService.user;
   }
+
+goBack() {
+  this.location.back(); // <-- go back to previous location on cancel
+}
 
   isPermission(permission:string){
     if(this.user.roles.includes('SUPERADMIN')){

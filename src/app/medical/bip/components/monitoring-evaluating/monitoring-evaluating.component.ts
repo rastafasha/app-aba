@@ -146,7 +146,7 @@ export class MonitoringEvaluatingComponent {
 
   cambiarStatusSto(goalsto:any){
     this.monitoring_status_sto_edit = goalsto;
-    console.log(this.monitoring_status_sto_edit.status_sto);
+    // console.log(this.monitoring_status_sto_edit.status_sto);
 
     let data ={
       rbt_training_goals: this.training_goals,
@@ -163,8 +163,7 @@ export class MonitoringEvaluatingComponent {
   }
   cambiarLTO(goalsto:any){
     this.lto_edit = goalsto;
-    console.log(this.lto_edit.lto);
-    console.log(this.lto_edit.lto);
+    
 
     let data ={
       rbt_training_goals: this.training_goals,
@@ -208,7 +207,7 @@ export class MonitoringEvaluatingComponent {
     }else{
       
       this.monitoringEvaluatingService.createMonitoringEvaluating(data).subscribe((resp:any)=>{
-        console.log(resp);
+        // console.log(resp);
         this.monitorid = resp.id;
         // this.text_success = 'Goal created successfully!'
         Swal.fire('Created', ` Monitoring Evaluating Created successfully!`, 'success');

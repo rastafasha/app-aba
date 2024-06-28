@@ -131,7 +131,7 @@ export class CrisisPlanComponent {
   //si existe enviamos el client_id_goal para actualizar el goal del paciente
   getPatientGoalFamilyEnvolments(patient_id){
     this.crisisPlanService.getCrisisPlanbyPatientId(patient_id).subscribe((resp:any)=>{
-      console.log('goals sustition by patientid',resp);
+      // console.log('goals sustition by patientid',resp);
       this.crisisPlans = resp.crisiPlanPatientIds.data;
       this.crisisplanId = resp.crisiPlanPatientIds.data[0].id;
       //risk list
@@ -280,7 +280,7 @@ save(){
   }else{
     
     this.crisisPlanService.createCrisisPlan(data).subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.crisisid = resp.id;
       // this.text_success = 'Goal created successfully!'
       Swal.fire('Created', `Crisis Plan Created successfully!`, 'success');

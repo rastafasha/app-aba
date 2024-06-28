@@ -7,6 +7,7 @@ import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { NoteBcbaService } from '../services/note-bcba.service';
 import { RolesService } from '../../roles/service/roles.service';
+import { Location } from '@angular/common';
 declare var $:any;  
 @Component({
   selector: 'app-note-bcba-by-client',
@@ -50,6 +51,7 @@ export class NoteBcbaByClientComponent {
     public noteBcbaService: NoteBcbaService,
     public doctorService: DoctorService,
     public roleService: RolesService,
+    public locations: Location,
   ){}
 
   ngOnInit(): void {
@@ -69,6 +71,10 @@ export class NoteBcbaByClientComponent {
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
     this.user = this.roleService.authService.user;
+  }
+
+  goBack() {
+    this.locations.back(); // <-- go back to previous location on cancel
   }
 
   isPermission(permission:string){

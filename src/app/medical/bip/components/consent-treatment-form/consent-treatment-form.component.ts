@@ -107,7 +107,7 @@ export class ConsentTreatmentFormComponent {
   //si existe enviamos el client_id_goal para actualizar el goal del paciente
   getPatientConsentToTreatment(patient_id){
     this.consentToTreatmentService.getConsentToTreatmentbyPatientId(patient_id).subscribe((resp:any)=>{
-      console.log('goals sustition by patientid',resp);
+      // console.log('goals sustition by patientid',resp);
       this.consentToTreatments = resp.consentToTreatmentPatientIds.data[0];
       this.consentToTreatmentid = resp.consentToTreatmentPatientIds.data[0].id;
       // console.log(this.consentToTreatments);
@@ -116,13 +116,13 @@ export class ConsentTreatmentFormComponent {
 
       // this.parent_guardian_signature_date = this.consentToTreatments.parent_guardian_signature_date ? new Date(this.consentToTreatments.parent_guardian_signature_date).toISOString(): ''; 
       this.parent_guardian_signature_date = this.consentToTreatments.parent_guardian_signature_date; 
-      console.log(this.parent_guardian_signature_date);
+      // console.log(this.parent_guardian_signature_date);
       
       this.IMAGE_PREVISUALIZA_SIGNATURE_ANAYST_CREATED = this.consentToTreatments.analyst_signature;
       
       // this.analyst_signature_date = this.consentToTreatments.analyst_signature_date ? new Date(this.consentToTreatments.analyst_signature_date).toISOString(): ''; 
       this.analyst_signature_date = this.consentToTreatments.analyst_signature_date ; 
-      console.log(this.analyst_signature_date);
+      // console.log(this.analyst_signature_date);
       
       this.IMAGE_PREVISUALIZA_SIGNATURE_PARENT_CREATED = this.consentToTreatments.parent_guardian_signature;
 
@@ -153,7 +153,7 @@ export class ConsentTreatmentFormComponent {
     }
     this.text_validation = '';
     this.FILE_SIGNATURE_PARENT = $event.target.files[0];
-    console.log(this.FILE_SIGNATURE_PARENT);
+    // console.log(this.FILE_SIGNATURE_PARENT);
     let reader2 = new FileReader();
     reader2.readAsDataURL(this.FILE_SIGNATURE_PARENT);
     reader2.onloadend = ()=> this.IMAGE_PREVISUALIZA_SIGNATURE_PARENT = reader2.result;

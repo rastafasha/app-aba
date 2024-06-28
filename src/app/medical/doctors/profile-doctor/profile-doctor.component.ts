@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import { RolesService } from '../../roles/service/roles.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-profile-doctor',
   templateUrl: './profile-doctor.component.html',
@@ -55,6 +56,7 @@ constructor(
   public doctorService: DoctorService,
   public roleService: RolesService,
   public activatedRoute: ActivatedRoute,
+  public location: Location,
   )
 {
 }
@@ -73,6 +75,10 @@ ngOnInit(): void {
     this.roles = this.user.roles[0];
     
     this.user = this.roleService.authService.user;
+}
+
+goBack() {
+  this.location.back(); // <-- go back to previous location on cancel
 }
 
 isPermission(permission:string){

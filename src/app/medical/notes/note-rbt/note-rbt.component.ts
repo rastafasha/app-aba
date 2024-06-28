@@ -8,6 +8,7 @@ import { NoteRbtService } from '../services/note-rbt.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import Swal from 'sweetalert2';
 import { url_media } from 'src/app/config/config';
+import { Location } from '@angular/common';
 declare var $:any;  
 @Component({
   selector: 'app-note-rbt',
@@ -132,6 +133,7 @@ export class NoteRbtComponent {
     public ativatedRoute: ActivatedRoute,
     public noteRbtService: NoteRbtService,
     public doctorService: DoctorService,
+    public location: Location,
   ){}
 
   ngOnInit(): void {
@@ -148,6 +150,10 @@ export class NoteRbtComponent {
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
     console.log(this.doctor_id);
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
   
@@ -436,7 +442,7 @@ export class NoteRbtComponent {
   }
 
   
-  save(){
+  save(){debugger
     this.text_validation = '';
     if(!this.replacementGoals||!this.maladaptives ||!this.provider_credential ){
       this.text_validation = 'Los campos con * son obligatorios';
@@ -509,13 +515,13 @@ export class NoteRbtComponent {
       formData.append('imagen', this.FILE_SIGNATURE_RBT);
     }
     if(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED ){
-      formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+      formData.append('provider_signature', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
     }
     if(this.FILE_SIGNATURE_RBT ){
       formData.append('imagenn', this.FILE_SIGNATURE_RBT);
     }
     if(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED ){
-      formData.append('imagenn', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+      formData.append('supervisor_signature', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
     }
     
     this.noteRbtService.createNote(formData).subscribe((resp:any)=>{

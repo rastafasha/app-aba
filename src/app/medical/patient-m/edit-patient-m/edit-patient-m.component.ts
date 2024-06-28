@@ -5,6 +5,7 @@ import { PatientMService } from '../service/patient-m.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Location } from '@angular/common';
 // declare function alertClose():any;
 declare var $:any;  
 @Component({
@@ -166,6 +167,7 @@ export class EditPatientMComponent {
     public insuranceService: InsuranceService,
     private readonly sanitizer: DomSanitizer,
     private _sanitizer: DomSanitizer,
+    private location: Location,
 
   ){
 
@@ -176,7 +178,7 @@ export class EditPatientMComponent {
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.client_id = resp.id;
      })
-     this.getConfig();
+     
      this.showUser();
      this.getPoscoveredList();
     //  setTimeout(()=>{
@@ -186,6 +188,13 @@ export class EditPatientMComponent {
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
     this.location_id = this.user.location_id;
+
+    
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
+    
   }
 
   getPoscoveredList(){
@@ -226,6 +235,8 @@ export class EditPatientMComponent {
       })
     })
   }
+
+  
 
   selectCategory(event: any){
     let VALUE = event;
@@ -277,9 +288,7 @@ showUser(){
 
         //valores de los selectores
         this.selectedValuePosCovered = this.patient_selected.pos_covered;
-        
-        setTimeout(()=>{
-          this.selectedValueLocation = this.patient_selected.location_id;
+        this.selectedValueLocation = this.patient_selected.location_id;
           this.selectedValue_rbt = this.patient_selected.rbt_home_id ? this.patient_selected.rbt_home_id : null;
           this.selectedValue_rbt2 = this.patient_selected.rbt2_school_id ? this.patient_selected.rbt2_school_id : null;
 
@@ -287,7 +296,7 @@ showUser(){
           this.selectedValue_bcba2 = this.patient_selected.bcba2_school_id ? this.patient_selected.bcba2_school_id : null;
 
           this.selectedValue_clind = this.patient_selected.clin_director_id ? this.patient_selected.clin_director_id: null;
-       }, 50)
+        
         
         //valores de isurance
         this.insuranceId = this.patient_selected.insuranceId;
@@ -327,10 +336,6 @@ showUser(){
         this.pa_assessmentgroup = jsonObj;
 
         
-
-         
-
-
         // console.log(this.selectedValue_rbt);
 
         this.insuranceData(this.selectedValueInsurer);//pide el insurance guardado para el request de la lista inicial
@@ -340,6 +345,8 @@ showUser(){
           console.log(resp);
           this.FilesAdded = resp.patientFiles.data ? resp.patientFiles.data : null;
         })
+
+        this.getConfig();
     })
   }
 

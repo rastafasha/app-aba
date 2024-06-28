@@ -5,7 +5,7 @@ import { PatientMService } from '../service/patient-m.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import Swal from 'sweetalert2';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-add-patient-m',
   templateUrl: './add-patient-m.component.html',
@@ -149,6 +149,7 @@ export class AddPatientMComponent {
     public doctorService:DoctorService,
     public insuranceService:InsuranceService,
     public router: Router,
+    public location: Location,
   ){
 
   }
@@ -167,6 +168,11 @@ export class AddPatientMComponent {
     // console.log(this.locationId);
 
     this.getConfig();
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
+    
   }
   getPoscoveredList(){
     this.patientService.getPosCovered().subscribe((res:any)=> {

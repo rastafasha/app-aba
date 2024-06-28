@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { NoteRbtService } from '../../notes/services/note-rbt.service';
 import { NoteBcbaService } from '../services/note-bcba.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-note-bcba',
@@ -149,6 +150,7 @@ export class NoteBcbaComponent {
     public noteBcbaService: NoteBcbaService,
     public doctorService: DoctorService,
     public insuranceService: InsuranceService,
+    public locations: Location,
   ){}
 
   ngOnInit(): void {
@@ -164,6 +166,10 @@ export class NoteBcbaComponent {
     this.user = JSON.parse(USER ? USER: '');
     this.roles = this.user.roles[0];
     this.doctor_id = this.user.id;
+  }
+
+  goBack() {
+    this.locations.back(); // <-- go back to previous location on cancel
   }
 
   

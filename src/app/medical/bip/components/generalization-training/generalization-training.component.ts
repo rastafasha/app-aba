@@ -109,7 +109,7 @@ export class GeneralizationTrainingComponent {
   //si existe enviamos el client_id_goal para actualizar el goal del paciente
   getPatientGoalFamilyEnvolments(patient_id){
     this.generalizationTrainingService.getGeneralizationTrainingbyPatientId(patient_id).subscribe((resp:any)=>{
-      console.log('goals sustition by patientid',resp);
+      // console.log('goals sustition by patientid',resp);
       this.generalizationTrainings = resp.generalizationTrainingPatientIds.data;
       this.generalizationTrainingid = resp.generalizationTrainingPatientIds.data[0].id;
       this.caregivers = resp.generalizationTrainingPatientIds.data[0].recomendation_lists;

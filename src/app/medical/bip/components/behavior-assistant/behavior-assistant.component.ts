@@ -171,7 +171,7 @@ export class BehaviorAssistantComponent {
     }else{
       
       this.behaviorAsistantService.createBehaviorAsistat(data).subscribe((resp:any)=>{
-        console.log(resp);
+        // console.log(resp);
         this.goalFamilyid = resp.id;
         // this.text_success = 'Goal created successfully!'
         Swal.fire('Created', `Behavior Asistant Created successfully!`, 'success');

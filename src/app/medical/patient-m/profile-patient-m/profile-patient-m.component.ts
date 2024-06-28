@@ -9,7 +9,11 @@ import { environment } from 'src/environments/environment';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RolesService } from '../../roles/service/roles.service';
+import { Location } from '@angular/common';
+
 declare var $:any;  
+
+
 @Component({
   selector: 'app-profile-patient-m',
   templateUrl: './profile-patient-m.component.html',
@@ -83,6 +87,7 @@ constructor(
   public insuranceService: InsuranceService,
   private _sanitizer: DomSanitizer,
   private roleService: RolesService,
+  private location: Location,
   )
 {
 }
@@ -101,6 +106,11 @@ ngOnInit(): void {
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
     this.location_id = this.user.location_id;
+}
+
+goBack() {
+  this.location.back(); // <-- go back to previous location on cancel
+  
 }
 
 isPermission(permission:string){

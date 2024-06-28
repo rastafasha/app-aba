@@ -72,6 +72,17 @@ export class LocationViewComponent {
     this.getLocation();
   }
 
+  isPermission(permission:string){
+    if(this.user.roles.includes('SUPERADMIN')){
+      return true;
+    }
+    if(this.user.permissions.includes(permission)){
+      return true;
+    }
+    return false;
+  }
+
+
   optionSelected(value:number){
     this.option_selected = value;
   }

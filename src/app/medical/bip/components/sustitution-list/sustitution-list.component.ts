@@ -463,7 +463,7 @@ export class SustitutionListComponent {
     }else{
       
       this.goalSustitutionService.createGoalSustitution(data).subscribe((resp:any)=>{
-        console.log(resp);
+        // console.log(resp);
         this.goalsustitid = resp.id;
         // this.text_success = 'Goal created successfully!'
         Swal.fire('Created', `Goal Sustitution Created successfully!`, 'success');

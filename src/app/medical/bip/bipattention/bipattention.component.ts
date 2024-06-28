@@ -4,6 +4,7 @@ import { routes } from 'src/app/shared/routes/routes';
 import { BipService } from '../service/bip.service';
 import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { GoalService } from '../service/goal.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-bipattention',
@@ -72,7 +73,8 @@ export class BipattentionComponent {
     public patientService:PatientMService,
     public goalService:GoalService,
     public router: Router,
-    public ativatedRoute: ActivatedRoute
+    public ativatedRoute: ActivatedRoute,
+    public location: Location
   ){
 
   }
@@ -94,13 +96,17 @@ export class BipattentionComponent {
     
   }
 
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
+
   optionSelected(value:number){
     this.option_selected = value;
   }
 
   getProfileBip(){
     this.bipService.showBipProfile(this.patient_id).subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.client_selected = resp;
 
       this.first_name = this.client_selected.patient.first_name;

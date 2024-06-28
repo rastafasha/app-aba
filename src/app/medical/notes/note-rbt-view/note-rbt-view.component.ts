@@ -7,6 +7,7 @@ import html2canvas from 'html2canvas';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import { NoteRbtService } from '../services/note-rbt.service';
 import { BipService } from '../../bip/service/bip.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-note-rbt-view',
   templateUrl: './note-rbt-view.component.html',
@@ -132,6 +133,7 @@ constructor(
   public doctorService: DoctorService,
   public insuranceService: InsuranceService,
   public bipService:BipService,
+  public location:Location,
   )
 {
 }
@@ -146,6 +148,10 @@ ngOnInit(): void {
   });
   this.getConfig();
   this.getNote();
+}
+
+goBack() {
+  this.location.back(); // <-- go back to previous location on cancel
 }
 
 getConfig(){
@@ -171,7 +177,7 @@ getNote(){
     this.interventions = resp.interventions;
     let jsonObj = JSON.parse(this.interventions) || '';
     this.interventionsgroup = jsonObj;
-    console.log(this.interventionsgroup);
+    // console.log(this.interventionsgroup);
 
     this.pairing = this.interventionsgroup[0].pairing;
     this.response_block = this.interventionsgroup[0].response_block;
@@ -214,7 +220,6 @@ getNote(){
     this.session_length_total2 = this.note_selected.session_length_total2;
     
     this.selectedValueTimeIn = this.note_selected.time_in;
-    console.log(this.selectedValueTimeIn);
     this.selectedValueTimeOut = this.note_selected.time_in2;
     this.selectedValueTimeIn2 = this.note_selected.time_out;
     this.selectedValueTimeOut2 = this.note_selected.time_out2;
@@ -227,6 +232,8 @@ getNote(){
 
     this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = this.note_selected.provider_signature;
     this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.note_selected.supervisor_signature;
+    console.log(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+    console.log(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
 
     this.getProfileBip();
     this.getDoctor();

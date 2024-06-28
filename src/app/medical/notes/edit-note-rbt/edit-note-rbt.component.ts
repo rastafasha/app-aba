@@ -7,6 +7,7 @@ import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { NoteRbtService } from '../services/note-rbt.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-note-rbt',
@@ -95,7 +96,7 @@ export class EditNoteRbtComponent {
   public natural_teaching:any;
 
   public FILE_SIGNATURE_RBT:any;
-  public IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED:any = 'assets/img/user-06.jpg';
+  public IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED:any;
   public FILE_SIGNATURE_BCBA:any;
   public IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED:any = 'assets/img/user-06.jpg';
 
@@ -133,6 +134,7 @@ export class EditNoteRbtComponent {
     public ativatedRoute: ActivatedRoute,
     public noteRbtService: NoteRbtService,
     public doctorService: DoctorService,
+    public location: Location,
   ){}
 
   ngOnInit(): void {
@@ -141,8 +143,7 @@ export class EditNoteRbtComponent {
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.note_id = resp.id;
      })
-     this.getConfig();
-     this.getNote();
+     
     //  this.countValue();
 
     this.total_trials = 0;
@@ -152,6 +153,12 @@ export class EditNoteRbtComponent {
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
+    this.getConfig();
+     
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
  
@@ -162,6 +169,8 @@ export class EditNoteRbtComponent {
       this.roles_rbt = resp.roles_rbt;
       this.roles_bcba = resp.roles_bcba;
       // this.hours_days = resp.hours;
+
+      this.getNote();
       
     })
   }
@@ -176,9 +185,14 @@ export class EditNoteRbtComponent {
 
       this.provider_credential = this.note_selected.provider_credential;
       this.as_evidenced_by = this.note_selected.as_evidenced_by;
-      this.client_appeared = resp.noteRbt.client_appeared;
+      this.client_appeared = this.note_selected.client_appeared;
       this.client_response_to_treatment_this_session = this.note_selected.client_response_to_treatment_this_session;
       
+      this.selectedValueProviderName = this.note_selected.provider_name_g ? this.note_selected.provider_name_g : null;
+      this.selectedValueRBT = this.note_selected.provider_name;
+      this.selectedValueBCBA = this.note_selected.supervisor_name;
+
+
       this.interventions = resp.interventions;
       let jsonObj = JSON.parse(this.interventions) || '';
       this.interventionsgroup = jsonObj;
@@ -225,18 +239,14 @@ export class EditNoteRbtComponent {
       this.session_length_total2 = this.note_selected.session_length_total2;
       
       this.selectedValueTimeIn = this.note_selected.time_in;
-      
       this.selectedValueTimeOut = this.note_selected.time_in2;
       this.selectedValueTimeIn2 = this.note_selected.time_out;
       this.selectedValueTimeOut2 = this.note_selected.time_out2;
 
-      this.selectedValueProviderName = resp.noteRbt.provider_name_g;
-      this.selectedValueRBT = this.note_selected.provider_name;
-      this.selectedValueBCBA = this.note_selected.supervisor_name;
-
+      
       this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = this.note_selected.provider_signature;
       this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = this.note_selected.supervisor_signature;
-
+      console.log(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
       this.getProfileBip();
     })
   }
@@ -522,7 +532,7 @@ export class EditNoteRbtComponent {
 
   
 
-  save(){
+  save(){debugger
     this.text_validation = '';
     // if(!this.name||!this.email ||!this.surname ){
     //   this.text_validation = 'Los campos con * son obligatorios';
@@ -598,17 +608,30 @@ export class EditNoteRbtComponent {
     }
     
     
+    // if(this.FILE_SIGNATURE_RBT ){
+    //   formData.append('imagen', this.FILE_SIGNATURE_RBT);
+    // }
+    // if(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED ){
+    //   formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+    // }
+    // if(this.FILE_SIGNATURE_RBT ){
+    //   formData.append('imagenn', this.FILE_SIGNATURE_RBT);
+    // }
+    // if(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED ){
+    //   formData.append('imagenn', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+    // }
+
     if(this.FILE_SIGNATURE_RBT ){
       formData.append('imagen', this.FILE_SIGNATURE_RBT);
     }
     if(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED ){
-      formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+      formData.append('provider_signature', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
     }
     if(this.FILE_SIGNATURE_RBT ){
       formData.append('imagenn', this.FILE_SIGNATURE_RBT);
     }
     if(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED ){
-      formData.append('imagenn', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+      formData.append('supervisor_signature', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
     }
 
     this.noteRbtService.editNote(formData,this.note_selectedId ).subscribe((resp:any)=>{

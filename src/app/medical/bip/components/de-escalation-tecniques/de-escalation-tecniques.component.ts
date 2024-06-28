@@ -112,7 +112,7 @@ export class DeEscalationTecniquesComponent {
   //si existe enviamos el client_id_goal para actualizar el goal del paciente
   getPatientGoalFamilyEnvolments(patient_id){
     this.deEscalationTechniqueService.getDeEscalationTechniquebyPatientId(patient_id).subscribe((resp:any)=>{
-      console.log('goals sustition by patientid',resp);
+      // console.log('goals sustition by patientid',resp);
       this.deEscalalationsTechs = resp.deEscalationTechniquePatientIds.data;
       this.deEscalalationsTechid = resp.deEscalationTechniquePatientIds.data[0].id;
       this.description = resp.deEscalationTechniquePatientIds.data[0].description;
@@ -175,7 +175,7 @@ export class DeEscalationTecniquesComponent {
     }else{
       
       this.deEscalationTechniqueService.createDeEscalationTechnique(data).subscribe((resp:any)=>{
-        console.log(resp);
+        // console.log(resp);
         this.goalFamilyid = resp.id;
         // this.text_success = 'Goal created successfully!'
         Swal.fire('Created', `De Escalation Technique Created successfully!`, 'success');
@@ -190,7 +190,7 @@ export class DeEscalationTecniquesComponent {
 
   cambiarStatus(escalation:any){
     this.location_edit = escalation;
-    console.log(this.location_edit.location);
+    // console.log(this.location_edit.location);
 
     let data ={
       recomendation_lists: this.deEscalationopts,

@@ -7,6 +7,7 @@ import html2canvas from 'html2canvas';
 import { BipService } from '../service/bip.service';
 import { environment } from 'src/environments/environment';
 import { RolesService } from '../../roles/service/roles.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-bip-profile',
@@ -115,6 +116,7 @@ export class BipProfileComponent {
     public activatedRoute: ActivatedRoute,
     public doctorService: DoctorService,
     public roleService: RolesService,
+    public location: Location,
     )
   {}
   ngOnInit(): void {
@@ -130,6 +132,10 @@ export class BipProfileComponent {
     
   }
 
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
+
 
   isPermission(permission:string){
     if(this.user.roles.includes('SUPERADMIN')){
@@ -143,7 +149,7 @@ export class BipProfileComponent {
 
   getPatient(){
     this.bipService.getBipProfilePatientPdf_id(this.patient_id).subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.bip_selected= resp.bip;
       this.patient_selected= resp.patient;
       this.patientId= resp.patient.patient_id;
@@ -228,10 +234,10 @@ export class BipProfileComponent {
 
       let jsonObj7 = JSON.parse(this.risk_factors) || '';
       this.risk_factors = jsonObj7;
-      console.log(this.risk_factors);
+      // console.log(this.risk_factors);
       
       this.other = this.risk_factors[0].other;
-      console.log(this.other);
+      // console.log(this.other);
       this.do_not_apply = this.risk_factors[0].do_not_apply;
       this.elopement = this.risk_factors[0].elopement;
       this.assaultive_behavior = this.risk_factors[0].assaultive_behavior;
@@ -252,7 +258,7 @@ export class BipProfileComponent {
       this.suicidality_added = resp.bip.crisis_plan[0].suicidalities;
       let jsonObj8 = JSON.parse(this.suicidality_added) || '';
       this.suicidality_added = jsonObj8;
-      console.log(this.suicidality_added);
+      // console.log(this.suicidality_added);
 
       this.not_present = this.suicidality_added[0].not_present;
       this.ideation = this.suicidality_added[0].ideation;
@@ -264,7 +270,7 @@ export class BipProfileComponent {
       this.homicidality_added = resp.bip.crisis_plan[0].homicidalities;
       let jsonObj9 = JSON.parse(this.homicidality_added) || '';
       this.homicidality_added = jsonObj9;
-      console.log(this.homicidality_added);
+      // console.log(this.homicidality_added);
 
       this.not_present_homicidality = this.homicidality_added[0].not_present_homicidality;
       this.ideation_homicidality = this.homicidality_added[0].ideation_homicidality;

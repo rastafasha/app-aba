@@ -7,6 +7,7 @@ import html2canvas from 'html2canvas';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import { BipService } from '../../bip/service/bip.service';
 import { NoteBcbaService } from '../services/note-bcba.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-note-bcba-view',
   templateUrl: './note-bcba-view.component.html',
@@ -149,6 +150,7 @@ constructor(
   public doctorService: DoctorService,
   public insuranceService: InsuranceService,
   public bipService:BipService,
+  public locations:Location,
   )
 {
 }
@@ -161,6 +163,10 @@ ngOnInit(): void {
   });
   this.getConfig();
   this.getNote();
+}
+
+goBack() {
+  this.locations.back(); // <-- go back to previous location on cancel
 }
 
 getConfig(){
@@ -189,6 +195,14 @@ getNote(){
       this.note_description = this.note_selected.note_description;
       this.client_response_to_treatment_this_session = this.note_selected.client_response_to_treatment_this_session;
       this.pos = this.note_selected.pos;
+
+      this.session_length_total = this.note_selected.session_length_total;
+    this.session_length_total2 = this.note_selected.session_length_total2;
+    
+    this.selectedValueTimeIn = this.note_selected.time_in;
+    this.selectedValueTimeOut = this.note_selected.time_in2;
+    this.selectedValueTimeIn2 = this.note_selected.time_out;
+    this.selectedValueTimeOut2 = this.note_selected.time_out2;
       
       
       this.caregivers_training_goalsgroup = resp.caregiver_goals;

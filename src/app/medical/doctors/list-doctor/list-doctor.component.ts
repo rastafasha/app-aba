@@ -6,7 +6,7 @@ import { FileSaverService } from 'ngx-filesaver';
 import * as XLSX from 'xlsx';
 import * as jsPDF from 'jspdf';
 import { RolesService } from '../../roles/service/roles.service';
-
+import { Location } from '@angular/common';
 declare var $:any;  
 @Component({
   selector: 'app-list-doctor',
@@ -47,6 +47,7 @@ export class ListDoctorComponent {
     public doctorService: DoctorService,
     private fileSaver: FileSaverService,
     public roleService: RolesService,
+    public location: Location,
     ){
 
   }
@@ -64,6 +65,9 @@ export class ListDoctorComponent {
     this.user = this.roleService.authService.user;
   }
 
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
   isPermission(permission:string){
     if(this.user.roles.includes('SUPERADMIN')){
       return true;

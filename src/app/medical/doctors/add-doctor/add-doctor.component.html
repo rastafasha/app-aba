@@ -11,6 +11,9 @@
                         <li class="breadcrumb-item active">Add Employe </li>
                     </ul>
                 </div>
+                <div class=" doctor-submit text-end">
+                    <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                </div>
             </div>
         </div>
         <!-- /Page Header -->
@@ -95,7 +98,8 @@
                                         </mat-select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-4 col-xl-4">
+                                <!-- *ngIf="selectedValue == '2'" -->
+                                <div class="col-12 col-md-4 col-xl-4" *ngIf="user.roles == 'SUPERADMIN'" >
                                     <div class="form-group local-forms">
                                         <label >Location <span class="login-danger">*</span></label>
                                         <mat-select multiple="multiple" [(ngModel)]="locations_selected" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Location">
@@ -105,6 +109,13 @@
                                         </mat-select>
                                     </div>
                                 </div>
+                                <!-- <div class="col-12 col-md-4 col-xl-4" *ngIf="user.roles == 'LM' || user.roles == 'MANAGER'" >
+                                    <div class="form-group local-forms">
+                                        <label >Location <span class="login-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-sm" name="location_id" [(ngModel)]="location_id" id=""  [value]="user.location_id" >
+                                        
+                                    </div>
+                                </div> -->
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group local-forms">
                                         <label>Address  <span class="login-danger">*</span></label>

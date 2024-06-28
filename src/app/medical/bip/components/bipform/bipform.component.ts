@@ -167,7 +167,7 @@ export class BipformComponent {
   getBip(){
     if (this.patient_id !== null && this.patient_id !== undefined) {
       this.bipService.getBipByUser(this.patient_id).subscribe((resp:any)=>{
-        console.log(resp);
+        // console.log(resp);
   
         this.bip_selected = resp; //asigamos una variable a la respuesta
         this.bip_selectedid = resp.bip.id;//obtenemos de nuevo el bip pero para verificar si es actualizar o crear en la funcion

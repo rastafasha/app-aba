@@ -12,6 +12,7 @@ import { NoteBcbaViewComponent } from './note-bcba-view/note-bcba-view.component
 import { NotesBcbaRoutingModule } from './notes-bcba-routing.module';
 import { NotesBcbaComponent } from './notes-bcba.component';
 import { NoteBcbaComponent } from './note-bcba/note-bcba.component';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { NoteBcbaComponent } from './note-bcba/note-bcba.component';
     HttpClientModule,
     RouterModule,
     SharedModule,
-    ComponentsModule
+    ComponentsModule,
+    PipesModule
   ]
 })
 export class NotesBcbaModule { }

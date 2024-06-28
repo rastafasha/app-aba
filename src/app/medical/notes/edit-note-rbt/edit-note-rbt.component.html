@@ -12,6 +12,9 @@
                         <li class="breadcrumb-item active"> Edit RBT Note </li>
                     </ul>
                 </div>
+                <div class=" doctor-submit text-end">
+                    <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                </div>
             </div>
         </div>
         <!-- /Page Header -->
@@ -52,10 +55,10 @@
                                         <input class="form-control" name="diagnosis_code"  disabled [(ngModel)]="diagnosis_code" type="text"  >
                                     </div>
                                 </div>
+                              
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Provider Name <span class="login-danger">*</span></label>
-                                        <!-- <input class="form-control" name="provider_name_g"   [(ngModel)]="provider_name_g" type="text"  > -->
+                                        <label >Provider Name  <span class="login-danger">*</span></label>
                                         <mat-select [(ngModel)]="selectedValueProviderName" name="provider_name_g" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of roles_rbt" [value]="data.id">
                                             {{data.name}} {{data.surname}}
@@ -94,7 +97,8 @@
                                         <mat-datepicker-toggle matIconSuffix [for]="pickerSesDate"></mat-datepicker-toggle>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="clear"></div>
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label >Time In <span class="login-danger">*</span></label>
                                         
@@ -104,7 +108,7 @@
                                         <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label >Time Out <span class="login-danger">*</span></label>
                                         <input [ngxTimepicker]="toggleTimepicker2" [disableClick]="true" readonly  
@@ -113,7 +117,7 @@
                                         <ngx-material-timepicker #toggleTimepicker2></ngx-material-timepicker>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label >Time In <span class="login-danger">*</span></label>
                                         <input [ngxTimepicker]="toggleTimepicker3" [disableClick]="true" readonly  
@@ -122,7 +126,7 @@
                                         <ngx-material-timepicker #toggleTimepicker3></ngx-material-timepicker>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label >Time Out <span class="login-danger">*</span></label>
                                         <input [ngxTimepicker]="toggleTimepicker4" [disableClick]="true" readonly  
@@ -570,11 +574,11 @@
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Provider Signature <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
+                                        <!-- <div class="settings-btn upload-files-avator">
                                             <input type="file" accept="image/*" name="provider_signature" id="file" 
                                             (change)="loadFile($event)" class="hide-input">
                                             <label for="file" class="upload">Choose File</label>
-                                        </div>
+                                        </div> -->
                                     </div>
             
                                     <!-- previsualizacion de la foto -->
@@ -610,11 +614,11 @@
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Supervisor Signature <span
                                                 class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
+                                        <!-- <div class="settings-btn upload-files-avator">
                                             <input type="file" accept="image/*" name="imagenn" id="file1"
                                                 (change)="loadFileSignature($event)" class="hide-input">
                                             <label for="file1" class="upload">Choose File</label>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <!-- previsualizacion de la foto -->

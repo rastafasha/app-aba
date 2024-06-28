@@ -205,13 +205,13 @@ export class ChartReductionComponent {
     this.initial_interesting;
     this.baseline_date;
     this.baseline_level;
-    console.log('baseline_level',this.baseline_level);
+    // console.log('baseline_level',this.baseline_level);
     // console.log('baseline_date',this.baseline_date);
     
 
     this.activatedRoute.params.subscribe((resp:any)=>{
       this.patient_id = resp.patient_id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
-      console.log(this.patient_id);
+      // console.log(this.patient_id);
       this.getBip(); // se pide el perfil del paciente por el bip relacionado
       this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
      })
@@ -256,7 +256,7 @@ export class ChartReductionComponent {
     getGraphicMaladaptive(){
     this.graphicReductionService.listMaladaptivesGraphics(this.maladaptive_behavior, this.patient_id).subscribe((resp:any)=>{
       
-      console.log(resp);
+      // console.log(resp);
       
       //funcion de pablo alcorta
       //se limpia y se extrae los datos de la coleccion json 
@@ -309,9 +309,9 @@ export class ChartReductionComponent {
       });
       this.sessions_dates.unshift(this.baseline_date); // con unshift lo unimos y colocamos de primero
       this.number_of_occurrence.unshift(this.baseline_level); // con unshift lo unimos y colocamos de primero
-      console.log(this.sessions_dates);
-      console.log(this.number_of_occurrence);
-      console.log(resp)
+      // console.log(this.sessions_dates);
+      // console.log(this.number_of_occurrence);
+      // console.log(resp)
 
       if(
         this.sessions_dates?.length > 1 && 
@@ -424,8 +424,8 @@ export class ChartReductionComponent {
       //   if (this.replacement && this.replacement.goal) { // da error
       // }
       }
-      console.log(hours_group);
-      console.log(units_group);
+      // console.log(hours_group);
+      // console.log(units_group);
       // // obtenemos el total de las horas en un rango de 7 dias  atras
       // var suma=0;
       // for (var i = hours_group.length - 1; i >= Math.max(0, hours_group.length - 7) ; i--) {

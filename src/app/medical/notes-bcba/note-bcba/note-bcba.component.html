@@ -12,6 +12,9 @@
                         <li class="breadcrumb-item active">Create BCBA Note </li>
                     </ul>
                 </div>
+                <div class=" doctor-submit text-end">
+                    <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                </div>
             </div>
         </div>
         <!-- /Page Header -->
@@ -97,8 +100,8 @@
                                             [for]="pickerSesDate"></mat-datepicker-toggle>
                                     </div>
                                 </div>
-
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="clear"></div>
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label>Time In <span class="login-danger">*</span></label>
                                         
@@ -109,7 +112,7 @@
                                         
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label>Time Out <span class="login-danger">*</span></label>
                                         
@@ -119,7 +122,7 @@
                                         <ngx-material-timepicker #toggleTimepicker2></ngx-material-timepicker>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label>Time In <span class="login-danger">*</span></label>
                                         
@@ -129,7 +132,7 @@
                                         <ngx-material-timepicker #toggleTimepicker3></ngx-material-timepicker>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label>Time Out <span class="login-danger">*</span></label>
                                         

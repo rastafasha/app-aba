@@ -12,6 +12,9 @@
                         <li class="breadcrumb-item active">Create BCBA Note </li>
                     </ul>
                 </div>
+                <div class=" doctor-submit text-end">
+                    <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                </div>
             </div>
         </div>
         <!-- /Page Header -->
@@ -80,7 +83,7 @@
                                 <div class="col-12 col-md-6 col-xl-4 ">
                                     <div class="form-group local-forms">
                                         <label >CPT <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueCode" name="code" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Code">
+                                        <mat-select [(ngModel)]="selectedValueCode" name="cpt_code" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Code">
                                             <mat-option *ngFor="let data of services" [value]="data.code">
                                             {{data.code}}
                                             </mat-option>
@@ -95,7 +98,8 @@
                                         <mat-datepicker-toggle matIconSuffix [for]="pickerSesDate"></mat-datepicker-toggle>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="clear"></div>
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label >Time In <span class="login-danger">*</span></label>
                                         
@@ -105,7 +109,7 @@
                                         <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label >Time Out <span class="login-danger">*</span></label>
                                         <input [ngxTimepicker]="toggleTimepicker2" [disableClick]="true" readonly  
@@ -114,7 +118,7 @@
                                         <ngx-material-timepicker #toggleTimepicker2></ngx-material-timepicker>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label >Time In <span class="login-danger">*</span></label>
                                         <input [ngxTimepicker]="toggleTimepicker3" [disableClick]="true" readonly  
@@ -123,7 +127,7 @@
                                         <ngx-material-timepicker #toggleTimepicker3></ngx-material-timepicker>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label >Time Out <span class="login-danger">*</span></label>
                                         <input [ngxTimepicker]="toggleTimepicker4" [disableClick]="true" readonly  
@@ -305,7 +309,11 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Provider name RBT <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                        <mat-select [(ngModel)]="selectedValueRBT" name="rbt" 
+                                        [ngModelOptions]="{standalone: true}" 
+                                        class="form-control select"  
+                                        (selectionChange)="selectFirmaSpecialistRbt($event)"
+                                        placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
@@ -315,10 +323,10 @@
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Provider Signature <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
+                                        <!-- <div class="settings-btn upload-files-avator">
                                             <input type="file" accept="image/*" name="provider_signature" id="file" (change)="loadFile($event)" class="hide-input">
                                             <label for="file" class="upload">Choose File</label>
-                                        </div>
+                                        </div> -->
                                     </div>
             
                                     <!-- previsualizacion de la foto -->
@@ -336,7 +344,8 @@
                                     <div class="form-group local-forms">
                                         <div class="form-group local-forms">
                                             <label >Supervisor name BCBA <span class="login-danger">*</span></label>
-                                            <mat-select [(ngModel)]="selectedValueBCBA" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
+                                            <mat-select [(ngModel)]="selectedValueBCBA"
+                                            (selectionChange)="selectFirmaSpecialistBcba($event)" name="bcba" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist">
                                                 <mat-option *ngFor="let data of specialists" [value]="data.id">
                                                 {{data.name}} {{data.surname}}
                                                 </mat-option>
@@ -347,10 +356,10 @@
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Supervisor Signature <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
+                                        <!-- <div class="settings-btn upload-files-avator">
                                             <input type="file" accept="image/*" name="imagenn" id="file1" (change)="loadFileSignature($event)" class="hide-input">
                                             <label for="file1" class="upload">Choose File</label>
-                                        </div>
+                                        </div> -->
                                     </div>
             
                                     <!-- previsualizacion de la foto -->

@@ -8,6 +8,7 @@ import { DoctorService } from '../../doctors/service/doctor.service';
 import Swal from 'sweetalert2';
 import { NoteBcbaService } from '../services/note-bcba.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-note-bcba-edit',
@@ -158,6 +159,7 @@ export class NoteBcbaEditComponent {
     public noteBcbaService: NoteBcbaService,
     public doctorService: DoctorService,
     public insuranceService: InsuranceService,
+    public locations: Location,
   ){}
 
   ngOnInit(): void {
@@ -172,6 +174,10 @@ export class NoteBcbaEditComponent {
     let USER = localStorage.getItem("user");
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
+  }
+
+  goBack() {
+    this.locations.back(); // <-- go back to previous location on cancel
   }
 
  
@@ -203,6 +209,7 @@ export class NoteBcbaEditComponent {
       this.client_appeared = this.note_selected.client_appeared;
       this.diagnosis_code = this.note_selected.diagnosis_code;
       this.cpt_code = this.note_selected.cpt_code;
+      console.log(this.cpt_code);
       this.note_description = this.note_selected.note_description;
       this.client_response_to_treatment_this_session = this.note_selected.client_response_to_treatment_this_session;
       this.pos = this.note_selected.pos;
@@ -381,6 +388,38 @@ export class NoteBcbaEditComponent {
     reader2.onloadend = ()=> this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = reader2.result;
   }
 
+  speciaFirmaDataRbt(selectedValueRBT){
+    this.doctorService.showDoctorProfile(selectedValueRBT).subscribe((resp:any)=>{
+      console.log(resp);
+      this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = resp.doctor.electronic_signature;
+      console.log(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+      // this.notes = resp.notes;
+      // this.services = resp.services;
+    })
+  }
+  selectFirmaSpecialistRbt(event:any){
+    event = this.selectedValueRBT;
+    this.speciaFirmaDataRbt(this.selectedValueRBT);
+    console.log(this.selectedValueRBT);
+    
+  }
+
+  speciaFirmaDataBcba(selectedValueBCBA){
+    this.doctorService.showDoctorProfile(selectedValueBCBA).subscribe((resp:any)=>{
+      console.log(resp);
+      this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED = resp.doctor.electronic_signature;
+      console.log(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+      // this.notes = resp.notes;
+      // this.services = resp.services;
+    })
+  }
+
+  selectFirmaSpecialistBcba(event:any){
+    event = this.selectedValueBCBA;
+    this.speciaFirmaDataBcba(this.selectedValueBCBA);
+    console.log(this.selectedValueBCBA);
+    
+  }
   
 
   save(){debugger
@@ -444,17 +483,18 @@ export class NoteBcbaEditComponent {
       formData.append('caregiver_goals', JSON.stringify(this.caregivers_training_goals));
     }
     
+
     if(this.FILE_SIGNATURE_RBT ){
       formData.append('imagen', this.FILE_SIGNATURE_RBT);
     }
     if(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED ){
-      formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+      formData.append('provider_signature', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
     }
     if(this.FILE_SIGNATURE_RBT ){
       formData.append('imagenn', this.FILE_SIGNATURE_RBT);
     }
     if(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED ){
-      formData.append('imagenn', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+      formData.append('supervisor_signature', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
     }
 
     this.noteBcbaService.editNote(formData,this.note_selectedId ).subscribe((resp:any)=>{

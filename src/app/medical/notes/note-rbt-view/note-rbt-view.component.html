@@ -12,6 +12,9 @@
                         <li class="breadcrumb-item active">Client Note Rbt</li>
                     </ul>
                 </div>
+                <div class=" doctor-submit text-end">
+                    <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                </div>
             </div>
         </div>
         <!-- /Page Header -->
@@ -109,24 +112,25 @@
                                                         <h3>{{doctor_selected_full_name}}</h3>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-3 col-md-6">
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
                                                     <div class="detail-personal">
                                                         <h2>Provider Credential</h2>
                                                         <h3>{{note_selected.provider_credential}}</h3>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-3 col-md-6">
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
                                                     <div class="detail-personal">
                                                         <h2>POS</h2>
                                                         <h3>{{note_selected.pos}}</h3>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-3 col-md-6">
+                                                <div class="col-xl-3 col-md-6 col-xl-4">
                                                     <div class="detail-personal">
                                                         <h2>Date Session</h2>
                                                         <h3>{{note_selected.session_date|date}}</h3>
                                                     </div>
                                                 </div>
+                                                <div class="clear"></div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Time In</h2>
@@ -145,6 +149,7 @@
                                                         <h3>{{note_selected.session_length_total | transformToDate }}</h3>
                                                     </div>
                                                 </div>
+                                                <div class="clear"></div>
                                                 <div class="col-xl-3 col-md-6">
                                                     <div class="detail-personal">
                                                         <h2>Time In 2</h2>
@@ -481,7 +486,7 @@
                                                     <div class="detail-personal">
                                                         <h2>Provider Signature</h2>
                                                         <!-- <h3>{{note_selected.provider_signature}}</h3> -->
-                                                        <img  src="{{note_selected.provider_signature}}" style="width: 100%;"  >
+                                                        <img  src="{{IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED}}" style="width: 100%;"  >
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">
@@ -495,7 +500,7 @@
                                                         <h2>Supervisor Signature</h2>
                                                         <!-- <h3>{{note_selected.supervisor_signature}}</h3> -->
                                                         <!-- {{imagenSerUrl}} -->
-                                                        <img  src="{{note_selected.supervisor_signature}}" style="width: 100%;"  >
+                                                        <img  src="{{IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED}}" style="width: 100%;"  >
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-6">

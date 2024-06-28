@@ -78,6 +78,17 @@
                             <div class="col-12 ">
                                 <div class="form-heading">
                                     <h4>Specialists: </h4>
+                                    <div class="doctor-search-blk">
+                                        <div class="top-nav-search table-search-blk">
+                                                <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
+                                                (ngModelChange)="searchData(searchDataValue)">
+                                                <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
+                                        </div>
+                                        <div class="add-group">
+                                            <a routerLink="/doctors/add" *ngIf="isPermission('register_employer')"  class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt=""></a>
+                                            <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -150,6 +161,18 @@
                             <div class="col-12">
                                 <div class="form-heading">
                                     <h4>Clients: </h4>
+                                    <div class="doctor-search-blk">
+                                        <div class="top-nav-search table-search-blk">
+                                                <input  class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
+                                                (ngModelChange)="searchDataLocation(searchDataValue)">
+                                                <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
+                                        </div>
+                                        <div class="add-group">
+                                            <a routerLink="/patients/add" class="btn btn-primary add-pluss ms-2" *ngIf="isPermission('register_patient')"><img src="assets/img/icons/plus.svg" alt=""></a>
+                                            <a href="javascript:;" (click)="PageSize()" class="btn btn-primary doctor-refresh ms-2"><img src="assets/img/icons/re-fresh.svg" alt=""></a>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
