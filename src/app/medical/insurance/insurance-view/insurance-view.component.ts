@@ -60,6 +60,10 @@ export class InsuranceViewComponent {
     this.getConfig();
   }
 
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
+
   getConfig(){
     this.insuranceService.showInsurance(this.insurance_id).subscribe((resp:any)=>{
       // console.log(resp);
@@ -134,7 +138,4 @@ export class InsuranceViewComponent {
 
   }
 
-  goBack() {
-    this.location.back(); // <-- go back to previous location on cancel
-  }
 }

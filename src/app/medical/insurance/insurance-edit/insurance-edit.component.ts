@@ -4,6 +4,7 @@ import { routes } from 'src/app/shared/routes/routes';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import { InsuranceService } from '../service/insurance.service';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-insurance-edit',
   templateUrl: './insurance-edit.component.html',
@@ -43,6 +44,7 @@ export class InsuranceEditComponent {
     public insuranceService:InsuranceService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
+    public location: Location,
     
   ){
 
@@ -57,6 +59,10 @@ export class InsuranceEditComponent {
     });
 
     this.getConfig();
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
   getConfig(){

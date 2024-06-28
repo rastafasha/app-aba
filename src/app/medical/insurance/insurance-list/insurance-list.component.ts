@@ -5,6 +5,7 @@ import { routes } from 'src/app/shared/routes/routes';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import * as XLSX from 'xlsx';
 import { InsuranceService } from '../service/insurance.service';
+import { Location } from '@angular/common';
 declare var $:any; 
 
 @Component({
@@ -41,6 +42,7 @@ export class InsuranceListComponent {
     public doctorService: DoctorService,
     private fileSaver: FileSaverService,
     public insuranceService:InsuranceService,
+    public location:Location,
     ){
 
   }
@@ -48,6 +50,10 @@ export class InsuranceListComponent {
     window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getTableData();
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
   private getTableData(): void {
     this.insuranceList = [];

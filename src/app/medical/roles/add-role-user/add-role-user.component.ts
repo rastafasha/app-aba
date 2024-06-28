@@ -4,6 +4,7 @@ import {DataService} from 'src/app/shared/data/data.service';
 import { RolesService } from '../service/roles.service';
 import { Router } from '@angular/router';
 import { DoctorService } from '../../doctors/service/doctor.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-add-role-user',
   templateUrl: './add-role-user.component.html',
@@ -24,6 +25,7 @@ export class AddRoleUserComponent  {
     public roleService: RolesService,
     public doctorService: DoctorService,
     public router: Router,
+    public location: Location,
   ){
 
   }
@@ -33,6 +35,10 @@ export class AddRoleUserComponent  {
     this.doctorService.closeMenuSidebar();
    this.sideBar = this.dataService.sideBar[0].menu;
   }
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
+  
 
   addPermission(subMenu:any){
     if(subMenu.permision){

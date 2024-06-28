@@ -7,6 +7,7 @@ import * as jsPDF from 'jspdf';
 import { RolesService } from '../../roles/service/roles.service';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import { BillingService } from '../billing.service';
+import { Location } from '@angular/common';
 
 declare var $:any; 
 @Component({
@@ -45,6 +46,7 @@ export class BillingListComponent {
     public doctorService: DoctorService,
     private fileSaver: FileSaverService,
     public roleService: RolesService,
+    public location: Location,
     ){
 
   }
@@ -53,6 +55,10 @@ export class BillingListComponent {
     this.doctorService.closeMenuSidebar();
     this.getTableData();
     this.user = this.roleService.authService.user;
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
   isPermission(permission:string){

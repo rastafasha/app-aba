@@ -6,6 +6,7 @@ import * as XLSX from 'xlsx';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { LocationService } from '../services/location.service';
+import { Location } from '@angular/common';
 
 declare var $:any; 
 @Component({
@@ -41,7 +42,8 @@ export class LocationListComponent {
   constructor(
     public locationService: LocationService,
     public doctorService: DoctorService,
-    private fileSaver: FileSaverService
+    private fileSaver: FileSaverService,
+    private location: Location,
     ){
 
   }
@@ -49,6 +51,10 @@ export class LocationListComponent {
     window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getTableData();
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
   private getTableData(page=1): void {

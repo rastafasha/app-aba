@@ -5,6 +5,7 @@ import { DoctorService } from '../../doctors/service/doctor.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import { PatientMService } from '../../patient-m/service/patient-m.service';
 import { LocationService } from '../services/location.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-location-add',
@@ -42,6 +43,7 @@ export class LocationAddComponent {
     public doctorService:DoctorService,
     public insuranceService:InsuranceService,
     public router: Router,
+    public location: Location,
   ){
 
   }
@@ -50,6 +52,10 @@ export class LocationAddComponent {
     window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
     this.getConfig();
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
   getConfig(){

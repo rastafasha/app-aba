@@ -5,14 +5,14 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-12">
-                    <ul class="breadcrumb">
+                    <!-- <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a routerLink="/doctors/list">Employees </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">Add Employe </li>
-                    </ul>
-                </div>
-                <div class=" doctor-submit text-end">
-                    <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                    </ul> -->
+                    <div class=" doctor-submit text-start">
+                        <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,13 +109,16 @@
                                         </mat-select>
                                     </div>
                                 </div>
-                                <!-- <div class="col-12 col-md-4 col-xl-4" *ngIf="user.roles == 'LM' || user.roles == 'MANAGER'" >
+                                <div class="col-12 col-md-4 col-xl-4" *ngIf="user.roles == 'MANAGER'" >
                                     <div class="form-group local-forms">
                                         <label >Location <span class="login-danger">*</span></label>
-                                        <input type="text" class="form-control form-control-sm" name="location_id" [(ngModel)]="location_id" id=""  [value]="user.location_id" >
-                                        
+                                        <mat-select  [(ngModel)]="locations_selected" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Location">
+                                            <mat-option [value]="user.location_id">
+                                            {{user.location_id}}
+                                            </mat-option>
+                                        </mat-select>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group local-forms">
                                         <label>Address  <span class="login-danger">*</span></label>

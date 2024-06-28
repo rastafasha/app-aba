@@ -267,7 +267,7 @@ export class ChartReplacementComponent {
       
       function parsearGoalsCol(goal, goalSelected) {
         const replacementWithoutSlash = goal.replace(/\\"/g, '"');
-        const replacementParsed =JSON.parse(replacementWithoutSlash.slice(1, -1));
+        const replacementParsed = JSON.parse(replacementWithoutSlash.slice(1,-1));
         // return JSON.parse(goalParsed);
         const index = replacementParsed.findIndex(item => item.goal === goalSelected)
         return (replacementParsed[index]);

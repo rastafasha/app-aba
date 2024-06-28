@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { routes } from 'src/app/shared/routes/routes';
 import { DoctorService } from '../../doctors/service/doctor.service';
 import { InsuranceService } from '../service/insurance.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-insurance-add',
@@ -37,7 +38,8 @@ export class InsuranceAddComponent {
   constructor(
     public doctorService:DoctorService,
     public insuranceService:InsuranceService,
-    public router: Router
+    public router: Router,
+    public location: Location,
   ){
 
   }
@@ -45,6 +47,10 @@ export class InsuranceAddComponent {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.doctorService.closeMenuSidebar();
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
   addService(){

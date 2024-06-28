@@ -5,10 +5,9 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-12">
-                    <ul class="breadcrumb">
+                    <!-- <ul class="breadcrumb">
                         <span  *ngIf="roles === 'SUPERADMIN' || roles === 'LM' || roles === 'MANAGER'">
                             <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
-                            <!-- <li class="breadcrumb-item" ><i class="feather icon-chevron-right"></i></li> -->
                         </span>
                         <span  *ngIf="roles === 'RBT' || roles === 'BCBA'">
                             <li class="breadcrumb-item"><a [routerLink]="['/doctors/profile/', user.id]">Dashboard</a></li>
@@ -18,10 +17,10 @@
                         <li class="breadcrumb-item" *ngIf="isPermission('list_employers')" ><a routerLink="/doctors/list">Employees </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
                         <li class="breadcrumb-item active">Employeer Profile</li>
-                    </ul>
-                </div>
-                <div class=" doctor-submit text-end">
-                    <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                    </ul> -->
+                    <div class=" doctor-submit text-start">
+                        <button class="btn btn-primary btn-sm " (click)="goBack() ">Back</button>
+                    </div>
                 </div>
             </div>
         </div>

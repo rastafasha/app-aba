@@ -10,6 +10,7 @@ import { InsuranceService } from '../../insurance/service/insurance.service';
 import { ClientReportService } from '../client-report.service';
 import Swal from 'sweetalert2';
 import { NoteRbtService } from '../../notes/services/note-rbt.service';
+import { Location } from '@angular/common';
 declare var $:any;  
 
 @Component({
@@ -133,6 +134,7 @@ export class ReportByClientComponent {
     public insuranceService: InsuranceService,
     public patientService: PatientMService,
     public noteRbtService: NoteRbtService,
+    public location: Location,
   ){}
 
   ngOnInit(): void {
@@ -154,6 +156,9 @@ export class ReportByClientComponent {
     
   }
 
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
   
 
   isPermission(permission:string){

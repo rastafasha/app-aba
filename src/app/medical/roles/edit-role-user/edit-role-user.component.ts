@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/shared/data/data.service';
 import { routes } from 'src/app/shared/routes/routes';
 import { RolesService } from '../service/roles.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-role-user',
@@ -24,7 +25,9 @@ export class EditRoleUserComponent {
     public dataService: DataService,
     public roleService: RolesService,
     public router: Router,
-    public ativatedRoute:ActivatedRoute
+    public ativatedRoute:ActivatedRoute,
+    public location:Location,
+
   ){
 
   }
@@ -38,6 +41,11 @@ export class EditRoleUserComponent {
    this.showRole();
     
   }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
+  
 
   showRole(){
     this.roleService.getRole(this.role_id).subscribe((resp:any)=>{

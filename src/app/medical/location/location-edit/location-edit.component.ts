@@ -4,6 +4,7 @@ import { routes } from 'src/app/shared/routes/routes';
 import { InsuranceService } from '../../insurance/service/insurance.service';
 import { LocationService } from '../services/location.service';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-location-edit',
@@ -44,6 +45,7 @@ export class LocationEditComponent {
     public router: Router,
     public ativatedRoute: ActivatedRoute,
     public insuranceService: InsuranceService,
+    public location: Location,
 
   ){
 
@@ -56,6 +58,10 @@ export class LocationEditComponent {
      })
      this.showLocation();
      this.getConfig();
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
   getConfig(){

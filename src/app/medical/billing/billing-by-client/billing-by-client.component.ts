@@ -10,6 +10,7 @@ declare var $:any;
 import { routes } from 'src/app/shared/routes/routes';
 import { BillingService } from '../billing.service';
 import { InsuranceService } from '../../insurance/service/insurance.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-billing-by-client',
   templateUrl: './billing-by-client.component.html',
@@ -78,6 +79,7 @@ export class BillingByClientComponent {
     public roleService: RolesService,
     public insuranceService: InsuranceService,
     public patientService: PatientMService,
+    public location: Location,
   ){}
 
   ngOnInit(): void {
@@ -102,7 +104,9 @@ export class BillingByClientComponent {
     // this.doctor_id = this.user.id;
     this.user = this.roleService.authService.user;
   }
-
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
   isPermission(permission:string){
     if(this.user.roles.includes('SUPERADMIN')){
       return true;

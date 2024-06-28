@@ -214,7 +214,7 @@ export class AddDoctorComponent {
       formData['locations_selected'] = this.locations_selected;
 
     }
-    if(this.user.roles === 'MANAGER' || this.user.roles === 'LM'){
+    if(this.user.roles === 'MANAGER' ){
       formData.append('location_id', this.user.location_id)
     }
     
