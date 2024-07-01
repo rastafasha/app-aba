@@ -112,7 +112,8 @@
                             <img  src="assets/img/user-06.jpg" >
                         </div>
                         <div *ngIf="user.avatar">
-                            <img  src="{{imagenSerUrl}}/{{user.avatar}}">
+                            <!-- <img  src="{{imagenSerUrl}}{{user.avatar}}"> -->
+                            <img  src="{{user.avatar}}">
                         </div>
                     </div>
                 </span>

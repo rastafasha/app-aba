@@ -208,7 +208,7 @@ export class NoteBcbaEditComponent {
       this.as_evidenced_by = this.note_selected.as_evidenced_by;
       this.client_appeared = this.note_selected.client_appeared;
       this.diagnosis_code = this.note_selected.diagnosis_code;
-      this.cpt_code = this.note_selected.cpt_code;
+      this.selectedValueCode = this.note_selected.cpt_code;
       console.log(this.cpt_code);
       this.note_description = this.note_selected.note_description;
       this.client_response_to_treatment_this_session = this.note_selected.client_response_to_treatment_this_session;
@@ -464,8 +464,8 @@ export class NoteBcbaEditComponent {
     if(this.selectedValueAba ){
       formData.append('aba_supervisor', this.selectedValueAba);
     }
-    if(this.cpt_code ){
-      formData.append('cpt_code', this.cpt_code);
+    if(this.selectedValueCode ){
+      formData.append('cpt_code', this.selectedValueCode);
     }
     if(this.selectedValueRBT ){
       formData.append('provider_name', this.selectedValueRBT);

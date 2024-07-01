@@ -124,6 +124,9 @@ export class NoteRbtComponent {
   maladp_added:any =[];
   replacement_added:any =[];
   maladaptive_behavior:any =null;
+  electronic_signature:any ;
+  doctor:any ;
+  full_name:any ;
 
   constructor(
     public bipService:BipService,
@@ -150,12 +153,22 @@ export class NoteRbtComponent {
     this.user = JSON.parse(USER ? USER: '');
     this.doctor_id = this.user.id;
     console.log(this.doctor_id);
+    this.getDoctor();
+    this.specialistData();
+
   }
 
   goBack() {
     this.location.back(); // <-- go back to previous location on cancel
   }
 
+  getDoctor(){
+    this.doctorService.showDoctor(this.doctor_id).subscribe((resp:any)=>{
+      this.doctor = resp.user;
+      this.electronic_signature = resp.user.electronic_signature;
+      this.full_name = resp.user.full_name;
+    })
+  }
   
   getConfig(){
     this.noteRbtService.listConfigNote().subscribe((resp:any)=>{
@@ -165,6 +178,7 @@ export class NoteRbtComponent {
       this.roles_bcba = resp.roles_bcba;
       this.hours_days = resp.hours;
       this.selectedValueProviderCredential = resp.roles_rbt.certificate_number;
+      
     })
   }
 
@@ -202,8 +216,8 @@ export class NoteRbtComponent {
     })
   }
 
-  specialistData(selectedValueInsurer){
-    this.doctorService.showDoctorProfile(selectedValueInsurer).subscribe((resp:any)=>{
+  specialistData(){
+    this.doctorService.showDoctorProfile(this.doctor_id).subscribe((resp:any)=>{
       console.log(resp);
       this.provider_credential = resp.doctor.certificate_number;
       // this.notes = resp.notes;
@@ -211,12 +225,12 @@ export class NoteRbtComponent {
     })
   }
 
-  selectSpecialist(event:any){
-    event = this.selectedValueProviderName;
-    this.specialistData(this.selectedValueProviderName);
-    console.log(this.selectedValueProviderName);
+  // selectSpecialist(event:any){
+  //   event = this.selectedValueProviderName;
+  //   this.specialistData(this.selectedValueProviderName);
+  //   console.log(this.selectedValueProviderName);
     
-  }
+  // }
 
   speciaFirmaDataRbt(selectedValueRBT){
     this.doctorService.showDoctorProfile(selectedValueRBT).subscribe((resp:any)=>{
@@ -288,11 +302,6 @@ export class NoteRbtComponent {
   }
 
   
-  
-
-
-  
-
   addMaladaptive(behavior, i){
     this.maladaptiveSelected = behavior;
     this.maladaptives[i]= behavior
@@ -444,15 +453,13 @@ export class NoteRbtComponent {
   
   save(){debugger
     this.text_validation = '';
-    if(!this.replacementGoals||!this.maladaptives ||!this.provider_credential ){
-      this.text_validation = 'Los campos con * son obligatorios';
+    if(!this.replacementGoals||!this.maladaptives ||!this.provider_credential 
+      || !this.supervisor_name
+    ){
+      this.text_validation = 'All Fields (*) are required';
       return;
     }
 
-    // if(this.password != this.password_confirmation  ){
-    //   this.text_validation = 'Las contraseña debe ser igual';
-    //   return;
-    // }
     
 
 
@@ -469,7 +476,12 @@ export class NoteRbtComponent {
 
     
     
-    formData.append('provider_name_g', this.selectedValueProviderName);
+    // formData.append('provider_name_g', this.selectedValueProviderName);
+    // formData.append('provider_name', this.selectedValueRBT);
+    formData.append('provider_name_g', this.doctor_id);
+    formData.append('provider_name', this.doctor_id);
+    formData.append('supervisor_name', this.selectedValueBCBA);
+    
 
     if(this.selectedValueTimeIn ){
       formData.append('time_in', this.selectedValueTimeIn+'' ? this.selectedValueTimeIn+'' : "0");
@@ -486,9 +498,7 @@ export class NoteRbtComponent {
     formData.append('environmental_changes', this.environmental_changes);
     
 
-    formData.append('provider_name_g', this.selectedValueProviderName);
-    formData.append('provider_name', this.selectedValueRBT);
-    formData.append('supervisor_name', this.selectedValueBCBA);
+    
 
     formData.append('replacements', JSON.stringify(this.replacementGoals));
     formData.append('maladaptives', JSON.stringify(this.maladaptives));
@@ -514,9 +524,11 @@ export class NoteRbtComponent {
     if(this.FILE_SIGNATURE_RBT ){
       formData.append('imagen', this.FILE_SIGNATURE_RBT);
     }
-    if(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED ){
-      formData.append('provider_signature', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
-    }
+    // if(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED ){
+      //   formData.append('provider_signature', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+      // }
+    formData.append('provider_signature', this.doctor.electronic_signature);
+    
     if(this.FILE_SIGNATURE_RBT ){
       formData.append('imagenn', this.FILE_SIGNATURE_RBT);
     }
@@ -529,6 +541,7 @@ export class NoteRbtComponent {
       
       if(resp.message == 403){
         this.text_validation = resp.message_text;
+        Swal.fire('Warning', resp.message_text, 'warning');
       }else{
         this.text_success = 'Employer created';
         // this.ngOnInit();

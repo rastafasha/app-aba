@@ -60,18 +60,21 @@
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Rendering Provider <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueRendering" name="rendering_provider" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
+                                        <p style="padding:10px">{{doctor.full_name}}</p>
+                                        <!-- <mat-select [(ngModel)]="selectedValueRendering" name="rendering_provider" [ngModelOptions]="{standalone: true}" class="form-control select" 
+                                        (selectionChange)="selectSpecialist($event)"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
-                                        </mat-select>
+                                        </mat-select> -->
 
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label >Aba Supervisor<span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueAba" name="aba_supervisor" [ngModelOptions]="{standalone: true}" class="form-control select" (selectionChange)="selectSpecialistab($event)"  placeholder="Select Specialist">
+                                        <mat-select [(ngModel)]="selectedValueAba" name="aba_supervisor" [ngModelOptions]="{standalone: true}" class="form-control select"
+                                         (selectionChange)="selectSpecialistab($event)"  placeholder="Select Specialist">
                                             <mat-option *ngFor="let data of specialists" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
@@ -300,29 +303,30 @@
                             <div class="row align-items-center py-4" >
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
-                                        <label >Provider name RBT <span class="login-danger">*</span></label>
-                                        <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist" (selectionChange)="selectFirmaSpecialistRbt($event)">
+                                        <label >Provider name BCBA </label>
+                                        <p style="padding:10px">{{doctor.full_name}}</p>
+                                        <!-- <mat-select [(ngModel)]="selectedValueRBT" name="rbt" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Specialist" (selectionChange)="selectFirmaSpecialistRbt($event)">
                                             <mat-option *ngFor="let data of roles_bcba" [value]="data.id">
                                             {{data.name}} {{data.surname}}
                                             </mat-option>
-                                        </mat-select>
+                                        </mat-select> -->
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Provider Signature <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
+                                        <!-- <div class="settings-btn upload-files-avator">
                                             <input type="file" accept="image/*" name="provider_signature" id="file" (change)="loadFile($event)" class="hide-input">
                                             <label for="file" class="upload">Choose File</label>
-                                        </div>
+                                        </div> -->
                                     </div>
             
                                     <!-- previsualizacion de la foto -->
                                     <div *ngIf="FILE_SIGNATURE_RBT">
-                                        <img [src]="IMAGE_PREVISUALIZA_SIGNATURE__RBT" style="width: 250px;" alt="">
+                                        <img [src]="electronic_signature" style="width: 250px;" alt="">
                                     </div>
                                     <div *ngIf="IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED">
-                                        <img [src]="IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED" style="width: 250px;" alt="">
+                                        <img [src]="electronic_signature" style="width: 250px;" alt="">
                                     </div>
                                     <!-- previsualizacion de la foto -->
                                 </div>
@@ -344,10 +348,10 @@
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-top-form">
                                         <label class="local-top">Supervisor Signature <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
+                                        <!-- <div class="settings-btn upload-files-avator">
                                             <input type="file" accept="image/*" name="imagenn" id="file1" (change)="loadFileSignature($event)" class="hide-input">
                                             <label for="file1" class="upload">Choose File</label>
-                                        </div>
+                                        </div> -->
                                     </div>
             
                                     <!-- previsualizacion de la foto -->
@@ -363,7 +367,16 @@
                             </div>
                             <!-- paciente -->
 
-                            
+                            <div class="form-group row" *ngIf="text_validation">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>!</strong> {{text_validation}}.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true"> </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <div class="doctor-submit text-end">
                                     <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>

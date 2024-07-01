@@ -57,9 +57,9 @@ export class BipProfileComponent {
   public generalization_training: any =[];
   public transition_fading_plans: any =[];
   public de_escalation_techniques: any =[];
-  public analyst_signature:string = '';
+  public analyst_signature:any = '';
   public analyst_signature_date:string = '';
-  public parent_guardian_signature:string = '';
+  public parent_guardian_signature:any = '';
   public parent_guardian_signature_date:string = '';
   
   public caregiver_requirements_for_prevention_of_crisis:string = '';
@@ -176,6 +176,12 @@ export class BipProfileComponent {
       this.assesstmentsDocuments =this.bip_selected.assestment_conducted_options;
       this.prevalent_setting_event_and_atecedents =this.bip_selected.prevalent_setting_event_and_atecedents;
       // this.interventions =this.bip_selected.interventions;
+
+      this.analyst_signature =this.bip_selected.consent_to_treatment[0].analyst_signature;
+      this.analyst_signature_date =this.bip_selected.consent_to_treatment[0].analyst_signature_date;
+      this.parent_guardian_signature =this.bip_selected.consent_to_treatment[0].parent_guardian_signature;
+      this.parent_guardian_signature_date =this.bip_selected.consent_to_treatment[0].parent_guardian_signature_date;
+      
       this.reduction_goals =this.bip_selected.reduction_goal;
       this.reduction_goals_goalltos =this.bip_selected.reduction_goal[0].goalltos;
       this.reduction_goals_goalstos =this.bip_selected.reduction_goal[0].goalstos;
@@ -190,11 +196,8 @@ export class BipProfileComponent {
       this.transition_fading_plans =this.bip_selected.generalization_training[0].transition_fading_plans;
       this.de_escalation_techniques =this.bip_selected.de_escalation_technique[0].recomendation_lists;
       
-      this.analyst_signature =this.bip_selected.consent_to_treatment[0].analyst_signature;
-      this.analyst_signature_date =this.bip_selected.consent_to_treatment[0].analyst_signature_date;
-      this.parent_guardian_signature =this.bip_selected.consent_to_treatment[0].parent_guardian_signature;
-      this.parent_guardian_signature_date =this.bip_selected.consent_to_treatment[0].parent_guardian_signature_date;
       
+
       this.caregiver_requirements_for_prevention_of_crisis =this.bip_selected.crisis_plan[0].caregiver_requirements_for_prevention_of_crisis;
       this.crisis_description =this.bip_selected.crisis_plan[0].crisis_description;
       this.crisis_note =this.bip_selected.crisis_plan[0].crisis_note;

@@ -140,6 +140,9 @@ export class NoteBcbaComponent {
   insurer_id:any ;
   cpt:any;
   public roles:any = [];
+  electronic_signature:any ;
+  doctor:any ;
+  full_name:any ;
 
   constructor(
     public bipService:BipService,
@@ -166,11 +169,22 @@ export class NoteBcbaComponent {
     this.user = JSON.parse(USER ? USER: '');
     this.roles = this.user.roles[0];
     this.doctor_id = this.user.id;
+    this.getDoctor();
+    this.specialistData();
   }
 
   goBack() {
     this.locations.back(); // <-- go back to previous location on cancel
   }
+
+  getDoctor(){
+    this.doctorService.showDoctor(this.doctor_id).subscribe((resp:any)=>{
+      this.doctor = resp.user;
+      this.electronic_signature = resp.user.electronic_signature;
+      this.full_name = resp.user.full_name;
+    })
+  }
+  
 
   
   getConfig(){
@@ -235,13 +249,22 @@ export class NoteBcbaComponent {
       let jsonObj = JSON.parse(this.pa_assessments) || '';
       this.pa_assessmentsgroup = jsonObj;
       console.log(this.pa_assessmentsgroup);
-      this.cpt = this.pa_assessmentsgroup[0].cpt;
+      // this.cpt = this.pa_assessmentsgroup[0].cpt;
       console.log(this.cpt);  
     })
   }
 
-  specialistData(selectedValueInsurer){
-    this.doctorService.showDoctorProfile(selectedValueInsurer).subscribe((resp:any)=>{
+  specialistData(){
+    this.doctorService.showDoctorProfile(this.doctor_id).subscribe((resp:any)=>{
+      // console.log(resp);
+      this.provider_credential = resp.doctor.certificate_number;
+      // this.notes = resp.notes;
+      // this.services = resp.services;
+    })
+  }
+
+  specialistDataSupervisor(selectedValueAba){
+    this.doctorService.showDoctorProfile(selectedValueAba).subscribe((resp:any)=>{
       // console.log(resp);
       this.provider_credential = resp.doctor.certificate_number;
       // this.notes = resp.notes;
@@ -257,33 +280,32 @@ export class NoteBcbaComponent {
     })
   }
 
-  selectSpecialist(event:any){
-    event = this.selectedValueRendering;
-    this.specialistData(this.selectedValueRendering);
-    console.log(this.selectedValueRendering);
+  // selectSpecialist(event:any){
+  //   event = this.selectedValueRendering;
+  //   this.specialistData(this.selectedValueRendering);
+  //   console.log(this.selectedValueRendering);
     
-  }
+  // }
   selectSpecialistab(event:any){
     event = this.selectedValueAba;
-    this.specialistData(this.selectedValueAba);
+    this.specialistDataSupervisor(this.selectedValueAba);
     console.log(this.selectedValueAba);
     
   }
 
 
 
-  speciaFirmaDataRbt(selectedValueRBT){
+  speciaFirmaData(selectedValueRBT){
     this.doctorService.showDoctorProfile(selectedValueRBT).subscribe((resp:any)=>{
       console.log(resp);
       this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED = resp.doctor.electronic_signature;
-      console.log(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
       // this.notes = resp.notes;
       // this.services = resp.services;
     })
   }
   selectFirmaSpecialistRbt(event:any){
     event = this.selectedValueRBT;
-    this.speciaFirmaDataRbt(this.selectedValueRBT);
+    this.speciaFirmaData(this.selectedValueRBT);
     console.log(this.selectedValueRBT);
     
   }
@@ -397,10 +419,11 @@ export class NoteBcbaComponent {
   }
 
   
-  save(){
+  save(){debugger
     this.text_validation = '';
-    if(!this.selectedValueRendering||!this.rbt_training_goals ||!this.caregivers_training_goals ){
-      this.text_validation = 'Los campos con * son obligatorios';
+    if(!this.rbt_training_goals 
+      ||!this.caregivers_training_goals ){
+      this.text_validation = 'All Fields (*) are required';
       return;
     }
 
@@ -421,11 +444,11 @@ export class NoteBcbaComponent {
     formData.append('birth_date', this.birth_date);
     
     
-    formData.append('rendering_provider', this.selectedValueRendering);
+    formData.append('rendering_provider', this.doctor_id);
     formData.append('aba_supervisor', this.selectedValueAba);
-    formData.append('cpt_code', this.cpt);
+    formData.append('cpt_code', this.selectedValueCode);
     
-    formData.append('provider_name', this.selectedValueRBT);
+    formData.append('provider_name', this.doctor_id);
     formData.append('supervisor_name', this.selectedValueBCBA);
     formData.append('note_description', this.note_description);
 
@@ -451,20 +474,24 @@ export class NoteBcbaComponent {
     // formData.append('imagen', this.FILE_SIGNATURE_RBT);
     // formData.append('imagenn', this.FILE_SIGNATURE_BCBA);
 
-
-
-    if(this.FILE_SIGNATURE_RBT ){
-      formData.append('imagen', this.FILE_SIGNATURE_RBT);
-    }
-    if(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED ){
-      formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
-    }
-    if(this.FILE_SIGNATURE_RBT ){
-      formData.append('imagenn', this.FILE_SIGNATURE_RBT);
-    }
+    formData.append('provider_signature', this.doctor.electronic_signature);
+    
     if(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED ){
-      formData.append('imagenn', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+      formData.append('supervisor_signature', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
     }
+
+    // if(this.FILE_SIGNATURE_RBT ){
+    //   formData.append('imagen', this.FILE_SIGNATURE_RBT);
+    // }
+    // if(this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED ){
+    //   formData.append('imagen', this.IMAGE_PREVISUALIZA_SIGNATURE__RBT_CREATED);
+    // }
+    // if(this.FILE_SIGNATURE_RBT ){
+    //   formData.append('imagenn', this.FILE_SIGNATURE_RBT);
+    // }
+    // if(this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED ){
+    //   formData.append('imagenn', this.IMAGE_PREVISUALIZA_SIGNATURE_BCBA_CREATED);
+    // }
     
     
     this.noteBcbaService.createNote(formData).subscribe((resp:any)=>{
