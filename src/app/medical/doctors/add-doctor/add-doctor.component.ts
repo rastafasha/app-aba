@@ -139,7 +139,7 @@ export class AddDoctorComponent {
     reader2.onloadend = ()=> this.IMAGE_PREVISUALIZA_SIGNATURE = reader2.result;
   }
 
-  save(){debugger
+  save(){
     this.text_validation = '';
     if(!this.name||!this.email ||!this.surname ||!this.phone 
       ||!this.birth_date ||!this.address
@@ -245,6 +245,8 @@ export class AddDoctorComponent {
 
 
   }
+
+  
 
 
  

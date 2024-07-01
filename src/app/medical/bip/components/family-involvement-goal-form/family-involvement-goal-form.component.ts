@@ -59,13 +59,10 @@ export class FamilyInvolvementGoalFormComponent {
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.patient_id = resp.patient_id;// la respuesta se comienza a relacionar  en este momento con un cliente especifico
       this.getProfileBip(); // se solicita la info del perfil del usuario
-      // this.getGoalbyPatient(); // se solicita la info del perfil del usuario
     })
     
     
     this.getBip(); // se solicita la info del perfil del bip
-    // this.ativatedRoute.params.subscribe( ({id}) => this.getGoal(id)); // se solicita la info del perfil del bip
-    // this.ativatedRoute.params.subscribe( ({id}) => this.getGoal(id)); // se solicita la info del perfil del goal
     let USER = localStorage.getItem("user");// se solicita el usuario logueado
     this.user = JSON.parse(USER ? USER: '');//  si no hay un usuario en el localstorage retorna un objeto vacio
     this.doctor_id = this.user.id; //se asigna el doctor logueado a este campo para poderlo enviar en los
@@ -114,8 +111,7 @@ export class FamilyInvolvementGoalFormComponent {
       this.caregivers = resp.familiEnvolmentPatientIds.data[0].caregivers_training_goals;
       // this.client_id_goalFamilyEnvolments = resp.familiEnvolmentPatientIds.data[0].caregivers_training_goals.client_id;
       this.client_id_goalFamilyEnvolments = resp.familiEnvolmentPatientIds.data[0].client_id;
-      // this.goals = resp.goalReductionPatientIds;
-      // console.log(this.goals);
+     
       
       
     })
@@ -141,12 +137,14 @@ export class FamilyInvolvementGoalFormComponent {
     this.caregivers.splice(i,1);
   }
 
-  save(){
+  save(){debugger
     this.text_validation = '';
-    // if(!this.maladaptive || !this.current_sustitution || !this.golsto){
-    //   this.text_validation = 'Is required this information ';
-    //   return;
-    // }
+    if(!this.goalFamilyEnvolmentid 
+      || !this.caregivers
+    ){
+        this.text_validation = 'All Fields (*) are required';
+      return;
+    }
 
     let data ={
       id:this.goalFamilyEnvolmentid,

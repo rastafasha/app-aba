@@ -122,8 +122,7 @@ export class BipformComponent {
     //me subcribo al id recibido por el parametro de la url
     this.ativatedRoute.params.subscribe((resp:any)=>{
       this.patient_id = resp.patient_id; // la respuesta se comienza a relacionar  en este momento con un cliente especifico
-      // this.patient_id= resp.id // recibe el id del paciente que se esta consultando
-      // console.log(this.client_id);
+      
      })
      this.getProfileBip(); // se pide el perfil del paciente por el bip relacionado
      
@@ -184,8 +183,6 @@ export class BipformComponent {
         this.documents =this.bip_selected.documents_reviewed;
         this.maladaptives =this.bip_selected.maladaptives;
         this.maladaptive_behavior =this.bip_selected.maladaptives[0].title;
-        // console.log(this.maladaptives);
-        // console.log(this.maladaptive_behavior);
 
         this.assesstments =this.bip_selected.assestment_conducted_options;
         this.assesstmentsDocuments =this.bip_selected.assestment_conducted_options;
@@ -307,10 +304,15 @@ export class BipformComponent {
 
   save(){
     this.text_validation = '';
-    // if(!this.type_of_assessment || !this.maladaptives || !this.client_id){
-    //   this.text_validation = 'Is required this information ';
-    //   return;
-    // }
+    if(!this.type_of_assessment
+      ||!this.background_information 
+      ||!this.previus_treatment_and_result 
+      || !this.education_status
+      || !this.phisical_and_medical_status
+    ){
+      this.text_validation = 'All Fields (*) are required';
+      // return;
+    }
 
     let data ={
       id:this.bip_selectedid,
@@ -319,25 +321,27 @@ export class BipformComponent {
       doctor_id: this.doctor_id,
       
       type_of_assessment: this.type_of_assessment,
+
+      documents_reviewed: this.documents,
+      
       background_information: this.background_information,
       previus_treatment_and_result: this.previus_treatment_and_result,
       current_treatment_and_progress: this.current_treatment_and_progress,
       education_status: this.education_status,
       phisical_and_medical_status: this.phisical_and_medical_status,
-      assestment_conducted: this.assestment_conducted,
 
-      documents_reviewed: this.documents,
       maladaptives: this.maladaptives,
+
+      assestment_conducted: this.assestment_conducted,
       assestment_conducted_options  : this.assesstmentsDocuments,
+
       prevalent_setting_event_and_atecedents: this.prevalent_setting_event_and_atecedents,
-      interventions: this.interventions,
+      
     }
 
     if(this.bip_selected){//si  tiene bip se agrega a la informacion de la consulta
 
       this.bipService.update(data, this.bip_selectedid).subscribe((resp:any)=>{
-        // console.log(resp);
-        // this.text_success = 'Bip Updated'
         Swal.fire('Updated', `Bip Updated successfully!`, 'success');
         this.ngOnInit();
       })

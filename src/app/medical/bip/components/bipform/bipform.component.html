@@ -143,16 +143,7 @@
                         
                     </div>
                     <!-- validaciones -->
-                    <div class="form-group row" *ngIf="text_success">
-                        <div class="col-12">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Exito!</strong>{{text_success}}.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"> </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <div class="form-group row" *ngIf="text_validation">
                         <div class="col-12">
@@ -283,24 +274,12 @@
                         </div>
                     </div>
                     <!-- maladaptives -->
-                    
-                    
                     <!-- validaciones -->
-                    <div class="form-group row" *ngIf="text_success">
-                        <div class="col-12">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Exito!</strong>{{text_success}}.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"> </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
+                   
                     <div class="form-group row" *ngIf="text_validation">
-                        <div class="col-12">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>!</strong> {{ text_validation }}.
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>!</strong> {{text_validation}}.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"> </span>
                                 </button>
@@ -406,107 +385,14 @@
                                 </div>
                         
                     </div>
-                    <!-- checkbox -->
-                    <!-- <div class="row align-items-center" >
-                        <div class="col-xs-12">
-                            <div class="row">
-                                
-                                <div class="col-xs-6 col-sm-4">  
-                                    
-                                    <div class="form-group">
-                                        <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                            <3 _ngcontent-rhp-c92="" class="card-title">Functional assessment interview completed</h5>
-                                            <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                <input _ngcontent-rhp-c92="" type="checkbox" id="functional_assessment_interview_completed" class="check" name="functional_assessment_interview_completed" [ngModelOptions]="{standalone: true}" [(ngModel)]="functional_assessment_interview_completed">
-                                                <label _ngcontent-rhp-c92="" for="functional_assessment_interview_completed" class="checktoggle" value="yes">checkbox</label>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-4">  
-                                    
-                                    <div class="form-group">
-                                        <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                            <h5 _ngcontent-rhp-c92="" class="card-title">Vineland behavior rating scale</h5>
-                                            <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                <input _ngcontent-rhp-c92="" type="checkbox" id="vineland_behavior_rating_scale" class="check" name="vineland_behavior_rating_scale" [ngModelOptions]="{standalone: true}" [(ngModel)]="vineland_behavior_rating_scale">
-                                                <label _ngcontent-rhp-c92="" for="vineland_behavior_rating_scale" class="checktoggle" value="yes">checkbox</label>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-4">  
-                                    
-                                    <div class="form-group">
-                                        <div _ngcontent-rhp-c92="" class="card-header d-flex justify-content-between align-items-center">
-                                            <h5 _ngcontent-rhp-c92="" class="card-title">ADOS</h5>
-                                            <div _ngcontent-rhp-c92="" class="status-toggle d-flex justify-content-between align-items-center">
-                                                <input _ngcontent-rhp-c92="" type="checkbox" id="ados" class="check" name="ados" [ngModelOptions]="{standalone: true}" [(ngModel)]="ados">
-                                                <label _ngcontent-rhp-c92="" for="ados" class="checktoggle" value="yes">checkbox</label>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                
-                                
-                                <div class="col-12 mb-3 doctor-submit text-end">
-                                    <button class="btn btn-primary btn-sm" (click)="addAssesstmentOption()">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 ">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Functional assessment interview completed</th>
-                                            <th>Vineland behavior rating scale</th>
-                                            <th>ADOS</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let assessmentopt of assesstmentsOptions; let i = index">
-                                            <td>
-                                                {{assessmentopt.functional_assessment_interview_completed}}
-                                            </td>
-                                            <td>
-                                                 {{assessmentopt.vineland_behavior_rating_scale}}
-                                            </td>
-                                            <td>
-                                                {{assessmentopt.ados}}
-                                            </td>
-                                            
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        
-                    </div> -->
-                    <!-- fin checkbox -->
-                    
                     
                     
                     <!-- validaciones -->
-                    <div class="form-group row" *ngIf="text_success">
-                        <div class="col-12">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Exito!</strong>{{text_success}}.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"> </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
+                   
                     <div class="form-group row" *ngIf="text_validation">
-                        <div class="col-12">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>!</strong> {{ text_validation }}.
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>!</strong> {{text_validation}}.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"> </span>
                                 </button>
@@ -616,21 +502,11 @@
                     
                     
                     <!-- validaciones -->
-                    <div class="form-group row" *ngIf="text_success">
-                        <div class="col-12">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Exito!</strong>{{text_success}}.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"> </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
+                   
                     <div class="form-group row" *ngIf="text_validation">
-                        <div class="col-12">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>!</strong> {{ text_validation }}.
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>!</strong> {{text_validation}}.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"> </span>
                                 </button>
@@ -749,205 +625,4 @@
     </div>
         
 </div>
-<!-- fin interventions -->			
-<!-- interventions -->
-<!-- <div class="col-sm-12">
-    <div class="card">
-        <div class="card-body">
-            <form>
-                <div class="row" >
-                    <div class="row align-items-center" >
-                    <div class="col-12">
-                        <div class="card-box">
-                            <div class="card-block">
-                                <h3 class="card-title">Interventions</h3>
-                                
-                                <div class="row align-items-center" >
-                                    <div class="col-xs-12 ">
-                                        <div class="row">
-                                            
-                                            <div class="col-xs-12 col-sm-6">  
-                                                <div class="form-group local-forms">
-                                                    <label >Pairing<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="pairing" [(ngModel)]="pairing" rows="3" cols="30"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                <div class="form-group local-forms">
-                                                    <label >Premack principal<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="premack_principal" [(ngModel)]="premack_principal" rows="3" cols="30"></textarea>
-                                                    
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-xs-12 col-sm-6">
-                                                <div class="form-group local-forms">
-                                                    <label >response block<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="response_block" [(ngModel)]="response_block" rows="3" cols="30"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                <div class="form-group local-forms">
-                                                    <label >DRO<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="dro" [(ngModel)]="dro" rows="3" cols="30"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                <div class="form-group local-forms">
-                                                    <label >DRA<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="dra" [(ngModel)]="dra" rows="3" cols="30"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                <div class="form-group local-forms">
-                                                    <label >errorless teaching<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="errorless_teaching" [(ngModel)]="errorless_teaching" rows="3" cols="30"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                <div class="form-group local-forms">
-                                                    <label >Redirection<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="redirection" [(ngModel)]="redirection" rows="3" cols="30"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                <div class="form-group local-forms">
-                                                    <label >NCR<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="ncr" [(ngModel)]="ncr" rows="3" cols="30"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                <div class="form-group local-forms">
-                                                    <label >shaping<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="shaping" [(ngModel)]="shaping" rows="3" cols="30"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                <div class="form-group local-forms">
-                                                    <label >chaining<span class="login-danger">*</span></label>
-                                                    <textarea class="form-control" name="chaining" [(ngModel)]="chaining" rows="3" cols="30"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 mb-3 doctor-submit text-end">
-                                                <button class="btn btn-primary btn-sm" (click)="addIntervention()">Add</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Pairing</th>
-                                                        <th>Premack principal</th>
-                                                        <th>response block</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let intervention of interventions; let i = index">
-                                                        <td>
-                                                            {{intervention.pairing}}
-                                                        </td>
-                                                        <td>
-                                                             {{intervention.premack_principal}}
-                                                        </td>
-                                                        <td>
-                                                            {{intervention.response_block}}
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-success btn-sm" (click)="selectedIntervention(intervention)"><i class="fa fa-eye"></i></button>
-                                                            <button class="btn btn-danger btn-sm" (click)="deleteIntervention(i)">x</button>
-                                                        </td>
-                                                    </tr>
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div *ngIf="inteventionSelected" class=" doctor-submit text-end">
-                                            <button class="btn btn-primary btn-sm" (click)="inteventionSelected = null">Back</button>
-                                        </div>
-                                            <div class="rbt-dashboard-table table-responsive mobile-table-750 shadow" *ngIf="inteventionSelected">
-                                                
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <p><b>Pairing:</b><br>
-                                                            {{inteventionSelected.pairing}}
-                                                        </p>
-                                                        <p><b>Premack principal:</b><br>
-                                                            {{inteventionSelected.premack_principal}}
-                                                        </p>
-                                                        <p><b>Response Block:</b><br>
-                                                            {{inteventionSelected.response_block}}
-                                                        </p>
-                                                        <p><b>DRO:</b><br>
-                                                            {{inteventionSelected.dro}}
-                                                        </p>
-                                                        <p><b>DRA:</b><br>
-                                                            {{inteventionSelected.dra}}
-                                                        </p>
-                                                        <p><b>Errorless Teaching:</b><br>
-                                                            {{inteventionSelected.errorless_teaching}}
-                                                        </p>
-                                                        <p><b>Redirection:</b><br>
-                                                            {{inteventionSelected.redirection}}
-                                                        </p>
-                                                        <p><b>NCR:</b><br>
-                                                            {{inteventionSelected.ncr}}
-                                                        </p>
-                                                        <p><b>Shaping:</b><br>
-                                                            {{inteventionSelected.shaping}}
-                                                        </p>
-                                                        <p><b>Chaining:</b><br>
-                                                            {{inteventionSelected.chaining}}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                    </div>
-                                    
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                        
-                    </div>
-                    
-                    
-                    <div class="form-group row" *ngIf="text_success">
-                        <div class="col-12">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Exito!</strong>{{text_success}}.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"> </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group row" *ngIf="text_validation">
-                        <div class="col-12">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>!</strong> {{ text_validation }}.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"> </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-12">
-                        <div class="doctor-submit text-end">
-                            <button type="button" class="btn btn-primary submit-form me-2" (click)="save()">Save</button>
-                        </div>
-                    </div>
-                </div>
-                
-            </form>
-            
-        </div>
-    </div>
-        
-</div> -->
-<!-- fin interventions -->
+<!-- fin interventions -->		

@@ -451,7 +451,7 @@ export class NoteRbtComponent {
   }
 
   
-  save(){debugger
+  save(){
     this.text_validation = '';
     if(!this.replacementGoals||!this.maladaptives ||!this.provider_credential 
       || !this.supervisor_name

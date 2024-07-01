@@ -12,13 +12,19 @@
                             <div class="card-block">
                                 <h3 class="card-title">Monitoring and Evaluating the Effectiveness of the plan/
                                     Treatment Fidelity </h3>
-                                <p>Ongoing training and monitoring of the RBT will occur on a weekly basis to ensure proper implementation of the behavior program. The BCBA/lead analyst   will conduct weekly competency checks to ensure proper program implementation. The BCBA/lead analyst   will graph the data, depicting the results of the competency checks on monthly progress reports. Also, the BCBA/lead analyst will collect IOA data at least once a month to ensure proper data collection. 
+                                <p>Ongoing training and monitoring of the RBT will occur on a weekly basis to ensure
+                                    proper implementation of the behavior program. The BCBA/lead analyst will conduct
+                                    weekly competency checks to ensure proper program implementation. The BCBA/lead
+                                    analyst will graph the data, depicting the results of the competency checks on
+                                    monthly progress reports. Also, the BCBA/lead analyst will collect IOA data at least
+                                    once a month to ensure proper data collection.
                                 </p>
                                 <p> Objectives included in assistant competency checks:</p>
                                 <ol>
                                     <li>Data collection</li>
                                     <li>Interventions/Environmental manipulations.</li>
-                                    <li>Replacement goals used to teach the proper alternative to the maladaptive behavior targeted.</li>
+                                    <li>Replacement goals used to teach the proper alternative to the maladaptive
+                                        behavior targeted.</li>
                                     <li>Use of reinforcement</li>
                                 </ol>
                                 <h4 class="card-title">RBT Training Goals </h4>
@@ -31,29 +37,48 @@
                                                     <select class="form-control form-select-solid fw-bolder" name="lto"
                                                         [(ngModel)]="lto" [ngModelOptions]="{standalone: true}">
                                                         <option>-- Select --</option>
-                                                        <option value="RBT will independently demonstrate appropriate data collection, near 100% of opportunities, across two consecutive observations.">RBT will independently demonstrate appropriate data collection, near 100% of opportunities, across two consecutive
+                                                        <option
+                                                            value="RBT will independently demonstrate appropriate data collection, near 100% of opportunities, across two consecutive observations.">
+                                                            RBT will independently demonstrate appropriate data
+                                                            collection, near 100% of opportunities, across two
+                                                            consecutive
                                                             observations.
                                                         </option>
-                                                        <option value="RBT will independently demonstrate DRA procedure, near 100% of opportunities, across two consecutive observations.">RBT will independently demonstrate DRA procedure, near 100% of opportunities, across two consecutive observations.
+                                                        <option
+                                                            value="RBT will independently demonstrate DRA procedure, near 100% of opportunities, across two consecutive observations.">
+                                                            RBT will independently demonstrate DRA procedure, near 100%
+                                                            of opportunities, across two consecutive observations.
                                                         </option>
-                                                        <option value="RBT will independently demonstrate Premack Principle procedure, near 100% of opportunities, across two consecutive observations.">RBT will independently demonstrate Premack Principle procedure, near 100% of opportunities, across two consecutive
+                                                        <option
+                                                            value="RBT will independently demonstrate Premack Principle procedure, near 100% of opportunities, across two consecutive observations.">
+                                                            RBT will independently demonstrate Premack Principle
+                                                            procedure, near 100% of opportunities, across two
+                                                            consecutive
                                                             observations.
                                                         </option>
-                                                        <option value="RBT will independently demonstrate Redirection procedure, near 100% of opportunities, across two consecutive observations.">RBT will independently demonstrate Redirection procedure, near 100% of opportunities, across two consecutive
+                                                        <option
+                                                            value="RBT will independently demonstrate Redirection procedure, near 100% of opportunities, across two consecutive observations.">
+                                                            RBT will independently demonstrate Redirection procedure,
+                                                            near 100% of opportunities, across two consecutive
                                                             observations.
                                                         </option>
-                                                        <option value="RBT will independently demonstrate Errorless teaching, near 100% of opportunities, across two consecutive observations.">RBT will independently demonstrate Errorless teaching, near 100% of opportunities, across two consecutive
+                                                        <option
+                                                            value="RBT will independently demonstrate Errorless teaching, near 100% of opportunities, across two consecutive observations.">
+                                                            RBT will independently demonstrate Errorless teaching, near
+                                                            100% of opportunities, across two consecutive
                                                             observations.
                                                         </option>
                                                         <option
                                                             value="RBT will independently demonstrate Shaping procedure, near 100% of opportunities, across two consecutive observations">
-                                                            RBT will independently demonstrate Shaping procedure, near 100%
-                                                            of opportunities, across two consecutive observations</option>
-    
+                                                            RBT will independently demonstrate Shaping procedure, near
+                                                            100%
+                                                            of opportunities, across two consecutive observations
+                                                        </option>
+
                                                     </select>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-xs-12 col-md-4">
                                                 <div class="form-group local-forms">
                                                     <label>Status<span class="login-danger">*</span></label>
@@ -81,7 +106,7 @@
                                                         [for]="pickerDateLTO"></mat-datepicker-toggle>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
 
 
@@ -106,7 +131,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let caregiver of training_goals; let i = index">
-                                                    
+
                                                     <td>
                                                         {{caregiver.lto}}
                                                     </td>
@@ -118,24 +143,46 @@
                                                                 [(ngModel)]="caregiver.lto"
                                                                 (change)="cambiarLTO(caregiver)">
                                                                 <option>-- Select --</option>
-                                                                <option value="RBT will independently demonstrate appropriate data collection, near 100% of opportunities, across two consecutive observations.">RBT will independently demonstrate appropriate data collection, near 100% of opportunities, across two consecutive
+                                                                <option
+                                                                    value="RBT will independently demonstrate appropriate data collection, near 100% of opportunities, across two consecutive observations.">
+                                                                    RBT will independently demonstrate appropriate data
+                                                                    collection, near 100% of opportunities, across two
+                                                                    consecutive
                                                                     observations.
                                                                 </option>
-                                                                <option value="RBT will independently demonstrate DRA procedure, near 100% of opportunities, across two consecutive observations.">RBT will independently demonstrate DRA procedure, near 100% of opportunities, across two consecutive observations.
-                                                                </option>
-                                                                <option value="RBT will independently demonstrate Premack Principle procedure, near 100% of opportunities, across two consecutive observations.">RBT will independently demonstrate Premack Principle procedure, near 100% of opportunities, across two consecutive
+                                                                <option
+                                                                    value="RBT will independently demonstrate DRA procedure, near 100% of opportunities, across two consecutive observations.">
+                                                                    RBT will independently demonstrate DRA procedure,
+                                                                    near 100% of opportunities, across two consecutive
                                                                     observations.
                                                                 </option>
-                                                                <option value="RBT will independently demonstrate Redirection procedure, near 100% of opportunities, across two consecutive observations.">RBT will independently demonstrate Redirection procedure, near 100% of opportunities, across two consecutive
+                                                                <option
+                                                                    value="RBT will independently demonstrate Premack Principle procedure, near 100% of opportunities, across two consecutive observations.">
+                                                                    RBT will independently demonstrate Premack Principle
+                                                                    procedure, near 100% of opportunities, across two
+                                                                    consecutive
                                                                     observations.
                                                                 </option>
-                                                                <option value="RBT will independently demonstrate Errorless teaching, near 100% of opportunities, across two consecutive observations.">RBT will independently demonstrate Errorless teaching, near 100% of opportunities, across two consecutive
+                                                                <option
+                                                                    value="RBT will independently demonstrate Redirection procedure, near 100% of opportunities, across two consecutive observations.">
+                                                                    RBT will independently demonstrate Redirection
+                                                                    procedure, near 100% of opportunities, across two
+                                                                    consecutive
+                                                                    observations.
+                                                                </option>
+                                                                <option
+                                                                    value="RBT will independently demonstrate Errorless teaching, near 100% of opportunities, across two consecutive observations.">
+                                                                    RBT will independently demonstrate Errorless
+                                                                    teaching, near 100% of opportunities, across two
+                                                                    consecutive
                                                                     observations.
                                                                 </option>
                                                                 <option
                                                                     value="RBT will independently demonstrate Shaping procedure, near 100% of opportunities, across two consecutive observations">
-                                                                    RBT will independently demonstrate Shaping procedure, near 100%
-                                                                    of opportunities, across two consecutive observations</option>
+                                                                    RBT will independently demonstrate Shaping
+                                                                    procedure, near 100%
+                                                                    of opportunities, across two consecutive
+                                                                    observations</option>
 
                                                             </select>
                                                         </div>
@@ -195,23 +242,12 @@
                 </div>
                 <!-- documents -->
 
-
                 <!-- validaciones -->
-                <div class="form-group row" *ngIf="text_success">
-                    <div class="col-12">
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Exito!</strong>{{text_success}}.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true"> </span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
+                                
                 <div class="form-group row" *ngIf="text_validation">
-                    <div class="col-12">
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>!</strong> {{ text_validation }}.
+                    <div class="col-md-12">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>!</strong> {{text_validation}}.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true"> </span>
                             </button>

@@ -142,10 +142,10 @@ export class GeneralizationTrainingComponent {
 
   save(){
     this.text_validation = '';
-    // if(!this.maladaptive || !this.current_sustitution || !this.golsto){
-    //   this.text_validation = 'Is required this information ';
-    //   return;
-    // }
+    if(!this.discharge_plan || !this.generalizations ){
+      this.text_validation = 'All Fields (*) are required';
+      return;
+    }
 
     let data ={
       id:this.generalizationTrainingid,

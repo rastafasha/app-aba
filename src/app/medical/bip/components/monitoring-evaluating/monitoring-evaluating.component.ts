@@ -71,8 +71,6 @@ export class MonitoringEvaluatingComponent {
     
     
     this.ativatedRoute.params.subscribe( ({id}) => this.getBip()); // se solicita la info del perfil del bip
-    // this.ativatedRoute.params.subscribe( ({id}) => this.getGoal(id)); // se solicita la info del perfil del bip
-    // this.ativatedRoute.params.subscribe( ({id}) => this.getGoal(id)); // se solicita la info del perfil del goal
     let USER = localStorage.getItem("user");// se solicita el usuario logueado
     this.user = JSON.parse(USER ? USER: '');//  si no hay un usuario en el localstorage retorna un objeto vacio
     this.doctor_id = this.user.id; //se asigna el doctor logueado a este campo para poderlo enviar en los
@@ -116,13 +114,12 @@ export class MonitoringEvaluatingComponent {
   //si existe enviamos el client_id_goal para actualizar el goal del paciente
   getPatientGoalFamilyEnvolments(patient_id){
     this.monitoringEvaluatingService.getMonitoringEvaluatingbyPatientId(patient_id).subscribe((resp:any)=>{
-      console.log('goals sustition by patientid',resp);
+      // console.log('goals sustition by patientid',resp);
       this.monitorings = resp.monitoringEvaluatingPatientIds.data;
       this.monitoringtid = resp.monitoringEvaluatingPatientIds.data[0].id;
       this.training_goals = resp.monitoringEvaluatingPatientIds.data[0].rbt_training_goals;
       this.client_id_monitorings = resp.monitoringEvaluatingPatientIds.data[0].client_id;
-      // this.goals = resp.goalReductionPatientIds;
-      // console.log(this.goals);
+      
       
       
     })
@@ -182,10 +179,10 @@ export class MonitoringEvaluatingComponent {
 
   save(){
     this.text_validation = '';
-    // if(!this.maladaptive || !this.current_sustitution || !this.golsto){
-    //   this.text_validation = 'Is required this information ';
-    //   return;
-    // }
+    if(!this.training_goals ){
+      this.text_validation = 'Is required this information ';
+      return;
+    }
 
     let data ={
       id:this.monitoringtid,

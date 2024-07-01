@@ -250,10 +250,10 @@ deleteHomicidality(i:any){
   
 save(){
   this.text_validation = '';
-  // if(!this.maladaptive || !this.current_sustitution || !this.golsto){
-  //   this.text_validation = 'Is required this information ';
-  //   return;
-  // }
+  if(!this.crisis_description || !this.crisis_note || !this.caregiver_requirements_for_prevention_of_crisis){
+    this.text_validation = 'All Fields (*) are required';
+    return;
+  }
 
   let data ={
     id:this.crisisplanId,

@@ -191,7 +191,7 @@ export class EditNoteRbtComponent {
       this.selectedValueProviderName = this.note_selected.provider_name_g ? this.note_selected.provider_name_g : null;
       this.selectedValueRBT = this.note_selected.provider_name;
       this.selectedValueBCBA = this.note_selected.supervisor_name;
-
+      console.log(this.selectedValueRBT);
 
       this.interventions = resp.interventions;
       let jsonObj = JSON.parse(this.interventions) || '';
@@ -260,10 +260,6 @@ export class EditNoteRbtComponent {
       this.last_name = this.client_selected.patient.last_name;
       this.patient_id = resp.patient.patient_id;
       this.pos = JSON.parse(resp.patient.pos_covered) ;
-      this.selectedValueProviderName = resp.patient.rbt_id;
-      this.selectedValueRBT = resp.patient.rbt_id;
-      this.selectedValueBCBA = resp.patient.bcba_id;
-      // console.log(this.patient_id);  
       this.diagnosis_code = this.client_selected.patient.diagnosis_code;  
       
     });

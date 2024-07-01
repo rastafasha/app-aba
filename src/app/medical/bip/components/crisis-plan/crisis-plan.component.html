@@ -376,33 +376,6 @@
                                         </div>
                                             
                                     </div>
-                                    <!-- <div class="col-xs-12 ">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Document Title</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let document of documents; let i = index">
-                                                        <td>
-                                                            {{document.document_title}}
-                                                        </td>
-                                                        <td>
-                                                             {{document.document_status}}
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-danger btn-sm" (click)="deleteDocument(i)">x</button>
-                                                        </td>
-                                                        
-                                                    </tr>
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div> -->
                                     
                                 </div>
                                 
@@ -413,21 +386,11 @@
                     
                     
                     <!-- validaciones -->
-                    <div class="form-group row" *ngIf="text_success">
-                        <div class="col-12">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Exito!</strong>{{text_success}}.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"> </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
+                   
                     <div class="form-group row" *ngIf="text_validation">
-                        <div class="col-12">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>!</strong> {{ text_validation }}.
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>!</strong> {{text_validation}}.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"> </span>
                                 </button>
