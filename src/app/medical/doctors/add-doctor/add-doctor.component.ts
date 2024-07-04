@@ -207,17 +207,17 @@ export class AddDoctorComponent {
     formData.append('caqh_bcbas_only', this.caqh_bcbas_only);
     formData.append('contract_type', this.contract_type);
     formData.append('salary', this.salary+'');
-    // formData.append('location_id', this.selectedValueLocation);
-    formData.append('location_id', this.user.location_id);
+    let locations = '';
+    this.locations_selected.forEach((location,index) => {
+      if(index != 0) {
+        locations += `,${location.toString()}`
+      }
+      else {
+        locations += location.toString();
+      }
+    })
+    formData.append('locations_selected', locations);
 
-    if(this.user.roles === 'SUPERADMIN'){
-      formData['locations_selected'] = this.locations_selected;
-
-    }
-    if(this.user.roles === 'MANAGER' ){
-      formData.append('location_id', this.user.location_id)
-    }
-    
     this.doctorService.storeDoctor(formData).subscribe((resp:any)=>{
       // console.log(resp);
       
